@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_HBHL.SCM_HBHL">  
+      <FIELD attrname="S_VALUE" format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="String" allownull="Y" name="供应商" />
+      <FIELD attrname="GSXX01" format='{"GSXX.key":"#GSXX01#"}' fieldtype="String" allownull="Y" name="公司信息" />
+      <FIELD attrname="CXTJ" format='{"$or":[{"GSXX":{"$regex":"#CXTJ#"}},{"HBBM":{"$regex":"#CXTJ#"}},{"HBMC":{"$regex":"#CXTJ#"}},{"HBHL":{"$regex":"#CXTJ#"}}]}' fieldtype="String" allownull="Y" name="联系电话" />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_HBHL.SCM_HBHL1">  
+      <FIELD attrname="S_VALUE" format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="String" allownull="Y" name="供应商" />
+      <FIELD attrname="CXTJ" format='{"$or":[{"GSXX":{"$regex":"#CXTJ#"}},{"HBBM":{"$regex":"#CXTJ#"}},{"HBMC":{"$regex":"#CXTJ#"}},{"HBHL":{"$regex":"#CXTJ#"}}]}' fieldtype="String" allownull="Y" name="联系电话" />
+	  <FIELD qx='GSXX.key|CZGS_CZ|in' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_HBHL.SCM_HBHL2">  
+      <FIELD attrname="S_VALUE" format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="String" allownull="Y" name="供应商" />
+      <FIELD attrname="CXTJ" format='{"$or":[{"GSXX":{"$regex":"#CXTJ#"}},{"HBBM":{"$regex":"#CXTJ#"}},{"HBMC":{"$regex":"#CXTJ#"}},{"HBHL":{"$regex":"#CXTJ#"}}]}' fieldtype="String" allownull="Y" name="联系电话" />
+	</JLConfig>
+</root>   

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="form.ccgl.getJHD_JQM.do" description="借还单扫码接口查询" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fxgl.yhd.select_jhd_jqm" method="GetJHD_JQM"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

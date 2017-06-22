@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.fygl.fybm">
+	  <Nested id="GSMC">
+            <FIELD attrname="key" fieldtype="String" allownull="N" name="所属公司" />
+            <FIELD attrname="value" fieldtype="String" allownull="N" name="所属公司" />
+      </Nested> 
+      <FIELD attrname="FYBMDM" fieldtype="string" allownull="N" name="费用部门编码" />
+      <FIELD attrname="FYBMMC" fieldtype="string" allownull="N" name="费用部门名称" />
+      <Nested id="YWBMMC">
+            <FIELD attrname="key" fieldtype="String" allownull="N" name="对应业务部门" />
+            <FIELD attrname="value" fieldtype="String" allownull="N" name="对应业务部门" />
+      </Nested> 
+	</JLConfig>	 
+</root>

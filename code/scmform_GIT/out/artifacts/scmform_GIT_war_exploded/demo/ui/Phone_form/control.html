@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_css.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_form.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_list.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_table.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_control.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_page.css" />
+<title>控件</title>
+<head>
+</head>
+
+<body>
+<header class="jl_header">
+<div class="header_nav nav_left" onclick="javascript:history.go(-1)">
+  <i class="fa fa-angle-left"></i>
+  <span>控件</span>
+</div>
+</header>
+<div class="jl_main">
+<div class="w12 jl_form">
+  <div class="jl_form_01">
+  <ul>
+    <li>
+      <dl>
+        <dt class="w04">            
+          <label for="theme">主题</label>
+          </dt>
+          <dd class="w08">
+            <select name="theme" id="theme" class="settings">
+                <option value="">Default / Auto</option>
+                <option value="mobiscroll">Mobiscroll</option>
+            </select>
+          </dd>
+      </dl>
+    </li>
+    <li>
+      <dl>
+        <dt class="w04">            
+          <label for="theme">模式</label>
+          </dt>
+          <dd class="w08">
+            <select name="mode" id="mode" class="settings">
+                <option value="scroller">Scroller</option>
+                <option value="clickpick">Clickpick</option>
+                <option value="mixed">Mixed</option>
+            </select>
+          </dd>
+      </dl>
+    </li>
+    <li>
+      <dl>
+        <dt class="w04">显示</dt>
+        <dd class="w08">
+            <select name="display" id="display" class="settings">
+                <option value="bottom">Bottom</option>
+                <option value="inline">Inline</option>
+                <option value="bubble">Bubble</option>
+                <option value="top">Top</option>
+                <option value="modal">Modal</option>
+            </select>
+        </dd>
+      </dl>
+    </li>
+    </li>
+    <li>
+      <dl>
+        <dt class="w04">语言</dt>
+        <dd class="w08">
+            <select name="language" id="language" class="settings">
+                <option value="zh">Chinese</option>
+                <option value="">English</option>
+            </select>
+        </dd>
+      </dl>
+    </li>
+    <li>
+      <dl>
+        <dt class="w04">控件</dt>
+        <dd class="w08">
+        <select name="demo" id="demo" class="settings">
+                <option value="select" selected>Select</option>
+                <option value="date" >Date</option>
+                <option value="datetime" >Date & Time</option>
+                <option value="time" >Time</option>
+                <option value="rating" >Rating</option>
+                <option value="ratingtext" >Rating With Text</option>
+                <option value="image_text" >Image & text</option>
+                <option value="image_icon" >Icon & text</option>
+                <option value="image" >Image</option>
+                <option value="treelist" >Treelist</option>
+                <option value="distance" >Distance</option>
+                <option value="speed" >Speed</option>
+                <option value="temperature" >Temperature</option>
+                <option value="mass" >Mass</option>
+                <option value="force" >Force</option>
+                <option value="calendar" >Calendar</option>
+                <option value="calendar_date" >Calandar & Date</option>
+                <option value="calendar_datetime" >Calendar & Date & Time</option>
+                <option value="timespan" >Timespan</option>
+                <option value="countdown" >Countdown</option>
+                <option value="color" >Color</option>
+                <option value="range" >Date Range</option>
+                <option value="range_time" >Time Range</option>
+                <option value="range_datetime" >Date & Time Range</option>
+                <option value="scroller" >Scroller</option>
+                <option value="listview" >Listview</option>
+                <option value="number" >Number</option>
+                <option value="numpad1" >Decimal Numpad</option>
+                <option value="numpad2" >Timespan Numpad</option>
+                <option value="menustrip" >Menustrip options</option>
+                <option value="menustrip_tab" >Menustrip tab</option>
+                <option value="menustrip_menu" >Menustrip menu</option>
+                <option value="widget" >Widget confirm</option>
+            </select>
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_select">
+      <dl>
+        <dt class="w04">Try Select</dt>
+        <dd class="w08">
+            <select name="Cities" id="demo_select" data-role="none">
+                <option value="">Please Select</option>
+                <option value="1">Atlanta</option>
+                <option value="2">Berlin</option>
+                <option value="3">Boston</option>
+                <option value="4">Chicago</option>
+                <option value="5">London</option>
+                <option value="6">Los Angeles</option>
+                <option value="7">New York</option>
+                <option value="8">Paris</option>
+                <option value="9">San Francisco</option>
+            </select>   
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_date">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_date" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_datetime">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_datetime" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_time">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_time" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_rating">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_rating" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_ratingtext">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_ratingtext" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_image_text">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <ul id="demo_image_text" >
+                <li><img src="http://demo.mobiscroll.com/Content/img/BMW_logo.png" /><p>BMW</p></li>
+                <li><img src="http://demo.mobiscroll.com/Content/img/Dacia_logo.png" /><p>Dacia</p></li>
+                <li><img src="http://demo.mobiscroll.com/Content/img/Ferrari_logo.png" /><p>Ferrari</p></li>
+                <li><img src="http://demo.mobiscroll.com/Content/img/Mercedes_logo.png" /><p>Mercedes</p></li>
+            </ul> 
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_image_icon">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <ul id="demo_icon_text"  >
+                <li data-val="Share" data-icon="share"><p>Share</p></li>
+                <li data-val="Bookmark" data-icon="star"><p>Bookmark</p></li>
+                <li data-val="Flag" data-icon="flag"><p>Flag</p></li>
+                <li data-val="Download" data-icon="download"><p>Download</p></li>
+                <li data-val="Delete" data-icon="remove"><p>Delete</p></li>
+            </ul>  
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_image">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <ul id="demo_image" >
+                <li data-val="BMW"><img src="http://demo.mobiscroll.com/Content/img/BMW_logo.png" /></li>
+                <li data-val="Dacia"><img src="http://demo.mobiscroll.com/Content/img/Dacia_logo.png" /></li>
+                <li data-val="Ferrari"><img src="http://demo.mobiscroll.com/Content/img/Ferrari_logo.png" /></li>
+                <li data-val="Mercedes"><img src="http://demo.mobiscroll.com/Content/img/Mercedes_logo.png" /></li>
+            </ul>  
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_treelist">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+<ul id="demo_treelist">
+                <li>America
+                    <ul>
+                        <li>USA
+                            <ul>
+                                <li>Washington</li>
+                                <li>Florida</li>
+                                <li>Los Angeles</li>
+                                <li>San Francisco</li>
+                            </ul>
+                        </li>
+                        <li>Canada
+                            <ul>
+                                <li>Vancouver</li>
+                                <li>Winnipeg</li>
+                                <li>Calgary</li>
+                            </ul>
+                        </li>
+                        <li>Brazil
+                            <ul>
+                                <li>Rio de Janeiro</li>
+                                <li>Sao Paolo</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Europe
+                    <ul>
+                        <li>France
+                            <ul>
+                                <li>Paris</li>
+                                <li>Toulouse</li>
+                                <li>Marseille</li>
+                                <li>Lyon</li>
+                            </ul>
+                        </li>
+                        <li>Germany
+                            <ul>
+                                <li>Berlin</li>
+                                <li>Frankfurt</li>
+                                <li>Hamburg</li>
+                            </ul>
+                        </li>
+                        <li>Spain
+                            <ul>
+                                <li>Madrid</li>
+                                <li>Barcelona</li>
+                                <li>Saragosa</li>
+                            </ul>
+                        </li>
+                        <li>Italy
+                            <ul>
+                                <li>Rome</li>
+                                <li>Palermo</li>
+                                <li>Genoa</li>
+                                <li>Torino</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Asia
+                    <ul>
+                        <li>China
+                            <ul>
+                                <li>Shanghai</li>
+                                <li>Hong Kong</li>
+                                <li>Beijing</li>
+                            </ul>
+                        </li>
+                        <li>Japan
+                            <ul>
+                                <li>Tokyo</li>
+                                <li>Kagoshima</li>
+                                <li>Osaka</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>    
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_distance">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_distance" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_speed">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_speed" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_temperature">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_temperature" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_mass">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_mass" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_force">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_force" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_calendar">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_calendar" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_calendar_date">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_calendar_date" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_calendar_datetime">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_calendar_datetime" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_timespan">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_timespan" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_countdown">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_countdown" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_color">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_color" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_range">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_range" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_range_time">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_range_time" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_range_datetime">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_range_datetime" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_scroller">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_scroller" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_listview">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <ul id="demo_listview" class="listview">
+                <li>Take out the trash</li>
+                <li>Buy flowers</li>
+                <li>Implement listview component</li>
+            </ul>  
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_number">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_number" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_numpad1">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_numpad1" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_numpad2">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08"><input type="text" id="demo_numpad2" /></dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_menustrip">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <ul id="demo_menustrip">
+                <li data-selected="true" data-icon="connection">Wi-Fi</li>
+                <li data-icon="ion-bluetooth">Bluetooth</li>
+                <li data-icon="location">Location</li>
+                <li data-icon="fa-rotate-left"><span>Screen<br/>rotation</span></li>
+                <li data-selected="true" data-icon="volume-medium">Sound</li>
+                <li data-icon="download">Data</li>
+                <li data-icon="foundation-minus-circle"><span>Blocking<br/>mode</span></li>
+                <li data-icon="airplane"><span>Airplane<br />mode</span></li>
+                <li data-selected="true" data-icon="fa-leaf"><span>Power<br/>saving</span></li>
+                <li data-icon="alarm2">Alarm</li>
+                <li data-icon="ion-android-system-windows"><span>Multi<br/>window</span></li>
+            </ul> 
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_menustrip_tab">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <ul id="demo_menustrip_tab" style="display:none;">
+                <li data-selected="true" data-icon="calendar"></li>
+                <li data-icon="newspaper"></li>
+                <li data-icon="image2"></li>
+                <li data-icon="camera"></li>
+                <li data-icon="map"></li>
+                <li data-icon="download"></li>
+                <li data-icon="alarm2"></li>
+                <li data-icon="play"></li>
+                <li data-icon="mobile"></li>
+                <li data-icon="drawer"></li>
+            </ul> 
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_menustrip_menu">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <ul id="demo_image_menu" style="display:none;">
+                <li>Location</li>
+                <li>Sound</li>
+                <li>Screen rotation</li>
+                <li>Bluetooth</li>
+                <li>Settings</li>
+                <li>Reading mode</li>
+                <li>Mobile data</li>
+                <li>Blocking mode</li>
+                <li>Power saving</li>
+                <li>Multi window</li>
+            </ul> 
+        </dd>
+      </dl>
+    </li>
+    <li data-role="fieldcontain" class="demo-cont" id="demo_cont_widget">
+      <dl>
+        <dt class="w04">Try Date</dt>
+        <dd class="w08">
+            <div id="demo_widget">
+                <h3 class="md-text-center" style="text-align: center">Title</h3>
+                <p class="md-text-center">Are you feeling good today?</p>
+            </div> 
+            <button id="show-widget">Show widget</button>  
+        </dd>
+      </dl>
+    </li>
+  </ul>
+  </div>
+</div>
+</div>
+</body>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/jquery.mobile-1.3.2.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/ui.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/control.js"></script>
+</html>

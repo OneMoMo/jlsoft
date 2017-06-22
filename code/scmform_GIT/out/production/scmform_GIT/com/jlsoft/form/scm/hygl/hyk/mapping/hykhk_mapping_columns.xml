@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.hygl.hykhk">
+		 <FIELD attrname="SJHM" fieldtype="string" allownull="N" name="手机号码" />
+		 <FIELD attrname="HYKH" fieldtype="string" allownull="N" name="会员卡号" />
+		 <Nested id="HYLX" allownull="N" name="会员类型">
+	            <FIELD attrname="key" fieldtype="int" allownull="N" name="会员类型" />
+		        <FIELD attrname="value" fieldtype="string" allownull="N" name="会员类型" />
+	     </Nested>
+		 <FIELD attrname="XM" fieldtype="string" allownull="N" name="姓名" />
+		 <FIELD attrname="XB" fieldtype="string" allownull="N" name="姓别" />
+		 <FIELD attrname="CSRQ" fieldtype="string" allownull="N" name="出生日期" />
+ 		 <FIELD attrname="XFZJE" fieldtype="string" allownull="N" name="消费总金额" />
+ 		 <FIELD attrname="JFYE" fieldtype="string" allownull="N" name="积分余额" />
+ 		 <FIELD attrname="CZYE" fieldtype="string" allownull="N" name="储值余额" />
+ 		 <FIELD attrname="MCXFRQ" fieldtype="string" allownull="N" name="末次消费日期" />
+		 <FIELD attrname="YXFJE" fieldtype="string" allownull="N" name="月消费金额" />
+		 <FIELD attrname="NXFJE" fieldtype="string" allownull="N" name="年消费金额" />
+		 <Nested id="XKLX" allownull="N" name="新卡类型">
+	            <FIELD attrname="key" fieldtype="int" allownull="N" name="新卡类型" />
+		        <FIELD attrname="value" fieldtype="string" allownull="N" name="新卡类型" />
+	     </Nested>
+		 <FIELD attrname="XHYKH" fieldtype="string" allownull="N" name="新会员卡号" />
+		 
+		<!-- <Nested id="SPLB" allownull="N" name="商品价格明细">
+	            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+	    </Nested> -->
+	</JLConfig>
+</root>

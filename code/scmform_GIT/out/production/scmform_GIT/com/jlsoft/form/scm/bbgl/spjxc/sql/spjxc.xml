@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPJXC">
+	<select id="querySPJXC" parameterType="Map" resultType="java.util.Map">
+	  SELECT A.GSXX01, (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSXX02, 
+        A.BM01, C.BM02, A.WLDW01, D.WLDW02, A.SPXX01, F.SPFL01, F.SPFL02, 
+        E.SPXX02, E.SPXX04, E.SPXX23, E.GGB01, E.PPB01, E.PPB02, A.SPJXC02, 
+        GET_HZFS(A.SPJXC02) HZFS, get_spsx_v10(A.SPJXC08) SPJXC08, SUM(A.JHSL) JHSL, 
+        ROUND(SUM(A.JHJE)) JHJE, ROUND(SUM(A.JHJE) * (1 + D.JXSL01)) HSJHJE, 
+        SUM(A.FCSL) FCSL, SUM(A.FCJE) FCJE, 
+        SUM(A.FCJE * (1 + D.JXSL01)) HSFCJE, SUM(A.FCBJCB) FCBJCB, 
+        SUM(A.FCBJCB * (1 + D.JXSL01)) HSFCBJCB, SUM(A.SYSL) SYSL, 
+        SUM(A.SYJE) SYJE, SUM(A.SYJE * (1 + D.JXSL01)) HSSYJE, 
+        SUM(A.BJSL) BJSL, SUM(A.BJJE) BJJE, SUM(A.HSBJJE) HSBJJE, 
+        SUM(A.BJCB) BJCB, SUM(A.HSBJCB) HSBJCB, 
+        (SUM(A.BJJE) - SUM(A.BJCB)) BJJC, 
+        (SUM(A.HSBJJE) - SUM((A.HSBJCB))) HSBJJC, SUM(A.PFSL) PFSL, 
+        SUM(A.PFJE) PFJE, SUM(A.PFJE / (1 + E.SPXX08)) WSPFJE, 
+        SUM(A.PFCB) PFCB, SUM(A.PFCB * (1 + D.JXSL01)) HSPFCB, 
+        SUM(A.CYJE * (1 + D.JXSL01)) HSCYJE, SUM(A.PFZK) PFZK, 
+        SUM(A.PFZK / (1 + E.SPXX08)) WSPFZK, SUM(A.PFML) PFML, 
+        (SUM(A.PFJE) - SUM(A.PFCB * (1 + D.JXSL01))) HSPFML, SUM(A.LSSL) LSSL, 
+        SUM(A.LSJE) LSJE, SUM(A.LSJE / (1 + E.SPXX08)) WSLSJE, 
+        SUM(A.LSCB) LSCB, SUM(A.LSCB * (1 + D.JXSL01)) HSLSCB, 
+        SUM(A.LSML) LSML, (SUM(A.LSJE) - SUM(A.LSCB * (1 + D.JXSL01))) HSLSML, 
+        SUM(A.YJJE) YJJE, SUM(A.YJJE / (1 + E.SPXX08)) WSYJJE, 
+        SUM(A.LSJE - A.YJJE) JLSJE, 
+        SUM((A.LSJE - A.YJJE) / (1 + E.SPXX08)) WSJLSJE, 
+        SUM(A.LSML - (A.YJJE / (1 + E.SPXX08))) JLSML, 
+        (SUM(A.LSJE) - SUM(A.LSCB * (1 + D.JXSL01)) - SUM(A.YJJE)) HSJLSML, 
+        SUM(A.PFSL + A.LSSL) XSSL, SUM(A.PFJE + A.LSJE) XSJE, 
+        SUM((A.PFJE + A.LSJE) / (1 + E.SPXX08)) WSXSJE, 
+        SUM(((A.PFJE + A.LSJE) / (1 + E.SPXX08)) - (A.LSCB + A.PFCB)) WSXSML, 
+        SUM(A.PFJE - A.PFCB * (1 + D.JXSL01) + A.LSJE - 
+            A.LSCB * (1 + D.JXSL01)) HSXSML, 
+        SUM(A.PFJE + A.LSJE - A.YJJE) JXSJE, 
+        SUM((A.PFJE + A.LSJE - A.YJJE) / (1 + E.SPXX08)) WSJXSJE, 
+        SUM(A.PFML + A.LSML - A.YJJE / (1 + E.SPXX08)) WSJXSML, 
+        SUM(A.PFJE - A.PFCB * (1 + D.JXSL01) + A.LSJE - 
+            A.LSCB * (1 + D.JXSL01) - A.YJJE) HSJXSML, 
+        SUM(A.BJCB + A.FCBJCB + A.PFCB + A.LSCB) ZHCB, 
+        SUM(A.HSBJCB + A.FCBJCB * (1 + D.JXSL01) + A.PFCB * (1 + D.JXSL01) + 
+            A.LSCB * (1 + D.JXSL01)) HSZHCB, 
+        (SUM(((A.PFJE + A.LSJE) / (1 + E.SPXX08)) - 
+              (A.PFCB + A.LSCB + A.BJCB + A.FCBJCB) + 
+              (A.PFBJJE / (1 + E.SPXX08) + (A.XSYFJE / (1 + E.SPXX08))))) ZHML, 
+        SUM(A.PFJE - A.PFCB * (1 + D.JXSL01) + A.LSJE - 
+            A.LSCB * (1 + D.JXSL01) - A.HSBJCB - A.FCBJCB * (1 + D.JXSL01) + 
+            A.XSYFJE + A.PFBJJE) HSZHML, 
+        CASE 
+           WHEN SUM((A.PFJE + A.LSJE) / (1 + E.SPXX08)) = 0 THEN 
+            0 
+           ELSE 
+            (SUM(((A.PFJE + A.LSJE) / (1 + E.SPXX08)) - 
+                 (A.PFCB + A.LSCB + A.BJCB + A.FCBJCB) + 
+                 (A.PFBJJE / (1 + E.SPXX08) + (A.XSYFJE / (1 + E.SPXX08)))) / 
+            SUM((A.PFJE + A.LSJE) / (1 + E.SPXX08))) 
+        END WSZHMLV, 
+        CASE 
+           WHEN SUM(A.PFJE + A.LSJE) = 0 THEN 
+            0 
+           ELSE 
+            SUM(A.PFJE - A.PFCB * (1 + D.JXSL01) + A.LSJE - 
+                A.LSCB * (1 + D.JXSL01) - A.HSBJCB - 
+                A.FCBJCB * (1 + D.JXSL01) + A.XSYFJE) / SUM(A.PFJE + A.LSJE) 
+        END HSZHMLV, SUM(A.ZZSL) ZZSL, SUM(A.ZZJE) ZZJE, 
+        SUM(A.ZZJE * (1 + D.JXSL01)) HSZZJE, SUM(A.PFBJSL) PFBJSL, 
+        SUM(A.PFBJJE) HSPFBJJE, SUM(A.PFBJJE / (1 + E.SPXX08)) PFBJJE, 
+        SUM(A.CYSL) CYSL, SUM(A.CYJE) CYJE, SUM(A.XSYFJE) XSYFJE, 
+        SUM(A.SRFTJE) SRFTJE, SUM(A.SRFTXS) SRFTXS, 
+        SUM(A.XSYFJE / (1 + E.SPXX08)) XSYFJEWS, 
+        NVL((SELECT 1 
+               FROM SPZTZXB 
+              WHERE SPXX01 = A.SPXX01 
+                AND GSXX01 = A.GSXX01 
+                AND BM01 = A.BM01 
+                AND SPSX = A.SPJXC08 
+                AND ROWNUM = 1), 0) PZSSP, SUM(A.SQJCSL) SQJCSL, 
+        SUM(A.SQJCJE) SQJCJE, SUM(A.SQJCJE * (1 + D.JXSL01)) HSSQJCJE, 
+        SUM(A.BQJCSL) BQJCSL, SUM(A.BQJCJE) BQJCJE, 
+        SUM(A.BQJCJE * (1 + D.JXSL01)) HSBQJCJE, 
+        SUM(A.SQJCSL + A.JHSL + A.ZZSL + A.SYSL - A.CYSL - A.FCSL - A.PFSL - 
+             A.LSSL - A.BQJCSL) SLCE, 
+        SUM(A.SQJCJE + A.JHJE + A.BJJE + A.ZZJE + A.SYJE - A.CYJE - A.FCBJCB - 
+             A.FCJE - A.BJCB - A.PFCB - A.LSCB - A.BQJCJE) JECE, 
+        SUM((A.SQJCJE + A.JHJE + A.BJJE + A.ZZJE + A.SYJE - A.CYJE - 
+             A.FCBJCB - A.FCJE - A.PFCB - A.LSCB - A.BQJCJE) * (1 + D.JXSL01) - 
+             A.HSBJCB) HSJECE, E.SPXH01, E.SPXX19, S.SCCJ02, E.SPXX26, 
+        J.JQJX02, 
+        (SELECT WLDW01_R FROM KSJSBH WHERE WLDW01 = A.WLDW01) WLDW01_R, 
+        (SELECT WLDW.WLDW02 
+           FROM KSJSBH, WLDW 
+          WHERE KSJSBH.WLDW01_R = WLDW.WLDW01 
+            AND KSJSBH.WLDW01 = A.WLDW01) WLDW02_R,
+        CASE 
+           WHEN (SUM(A.BQJCJE * (1 + D.JXSL01)) + SUM(A.SQJCJE * (1 + D.JXSL01))) = 0 
+           THEN 0 
+           ELSE SUM(A.HSBJCB + A.FCBJCB * (1 + D.JXSL01) + A.PFCB * (1 + D.JXSL01) + A.LSCB * (1 + D.JXSL01))
+	        	*2/(SUM(A.BQJCJE * (1 + D.JXSL01)) + SUM(A.SQJCJE * (1 + D.JXSL01))) 
+        END KCZZL,
+<!--          (select 
+                   (select spfl02
+                      from spfl
+                    where a.spfl01 like spfl01 || '%' and spfl03 = 1) sjflmc                    
+                   from spfl a
+                  where spfl01 =F.SPFL01 ) SPDL -->
+                  (SELECT SPFL02 FROM SPFL WHERE SPFL03 = '1' AND F.SPFL01 LIKE SPFL01||'%') SPDL
+   FROM VIEW_SPJXCR_HZ A, SPXX E, WLDW D, SPFL F, BM C, SCCJ S, JQJX J 
+  WHERE A.BM01 = C.BM01 
+    AND A.WLDW01 = D.WLDW01 
+    AND A.SPXX01 = E.SPXX01 
+    AND F.SPFL01 = SUBSTR(E.SPFL01, 1, 12) 
+    AND E.SCCJ01 = S.SCCJ01(+) 
+    AND E.JQJX01 = J.JQJX01(+)
+    <![CDATA[
+    AND ((A.MINDATE = TO_DATE(#{RQQ}, 'YYYY-MM-DD') - 1 AND A.MAXDATE IS NULL) OR
+        (A.MINDATE >= TO_DATE(#{RQQ}, 'YYYY-MM-DD') AND
+        A.MAXDATE <= TO_DATE(#{RQZ}, 'YYYY-MM-DD')) OR
+        (A.MINDATE IS NULL AND A.MAXDATE = TO_DATE(#{RQZ}, 'YYYY-MM-DD')))
+    ]]>  
+    <if test="GYS != null and GYS != ''"> 
+		AND (D.WLDW01 LIKE '%'||#{GYS}||'%' OR D.WLDW02 LIKE '%'||#{GYS}||'%' OR D.WLDW03 LIKE '%'||#{GYS}||'%')
+	</if>                     
+    <!-- <if test="RQQ !=null and RQQ != ''">
+    	AND ((A.MINDATE = TO_DATE(#{RQQ}, 'YYYY-MM-DD') - 1 AND A.MAXDATE IS NULL) OR 
+      <![CDATA[ 
+        A.MINDATE >= TO_DATE(#{RQQ}, 'YYYY-MM-DD'))
+      ]]>
+    </if>
+    <if test="RQZ !=null and RQZ != ''">
+      <![CDATA[ 
+       AND (A.MAXDATE <= TO_DATE(#{RQZ}, 'YYYY-MM-DD') OR 
+      ]]>
+        (A.MINDATE IS NULL AND A.MAXDATE = TO_DATE(#{RQZ}, 'YYYY-MM-DD'))) 
+    </if>   -->      
+      
+	<if test="SPMC != null and SPMC != ''"> 
+		AND (Upper(E.SPXX02) LIKE Upper('%'||#{SPMC}||'%') OR Upper(E.SPXX04) LIKE Upper('%'||#{SPMC}||'%') OR Upper(E.SPPYM) LIKE Upper('%'||#{SPMC}||'%'))
+	</if>
+	<if test="CGBM != null and CGBM != ''">
+    	 <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")">
+          A.BM01 = #{item}
+         </foreach>
+    </if>
+    <if test="PP != null and PP != ''">
+    	 <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")">
+          E.PPB01 LIKE '%'||#{item}||'%'
+         </foreach>
+    </if>
+    <if test="SPFL != null and SPFL != ''">
+    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+           F.SPFL01  LIKE #{item}||'%'
+         </foreach>
+    </if>
+    <if test="SPSX != null and SPSX != ''">
+    	<foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")">
+          A.SPJXC08 = #{item}  
+         </foreach>
+    </if>
+    <if test="HZFS != null and HZFS != ''">
+    	AND A.SPJXC02 LIKE '%'||#{HZFS}||'%'
+    </if>
+    JL{CZY|A.BM01|BM_CX|LIKE%}JL
+    JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+    JL{CZY|E.PPB01|PPB_CX|inS}JL
+    JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+  GROUP BY A.BM01, C.BM02, A.WLDW01, D.WLDW02, A.SPXX01, E.SPXX02, E.SPXX04, 
+           E.SPXX23, F.SPFL01, F.SPFL02, A.SPJXC02, A.SPJXC08, E.PPB01, 
+           E.PPB02, E.SPXX08, D.JXSL01, E.GGB01, A.GSXX01, A.SPJXC08, 
+           E.SPXH01, E.SPXX19, S.SCCJ02, E.SPXX26, J.JQJX02    
+	</select>
+	
+	<select id="RCLDATE" parameterType="Map" resultType="java.util.Map">
+		SELECT TO_CHAR(MAX(RCL01),'yyyy-mm-dd') RCLDATE FROM RCL WHERE RCL06 IS NOT NULL
+	</select>
+</mapper>

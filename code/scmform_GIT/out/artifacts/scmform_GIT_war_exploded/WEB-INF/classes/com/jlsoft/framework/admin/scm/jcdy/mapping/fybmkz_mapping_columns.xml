@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="mongo.fybmkz.scm.fybmkz">
+	  <Nested id="FYBM01" allownull="N" name="费用部门">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="费用部门" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="费用部门" />
+	  </Nested> 
+		<FIELD attrname="DZBM" fieldtype="string" allownull="N" name="对照部门" />
+      <Nested id="CBZXLX" allownull="N" name="成本中心类型">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="成本中心类型" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="成本中心类型" />
+	  </Nested> 
+      <Nested id="CCJGFW" allownull="N" name="层次结构范围">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="层次结构范围" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="层次结构范围" />
+	  </Nested> 
+      <Nested id="GNFW" allownull="N" name="功能范围">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="功能范围" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="层次结构范围" />
+	  </Nested> 
+     </JLConfig>
+</root>

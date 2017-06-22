@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!-- 保证金查询工程登录单 登录序号  -->
+	<JLConfig id="MONGO_GCDLD.SCM_BZJ">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="GCBH" format='{"GCBH":{"$regex":"#GCBH#"}}' fieldtype="String" allownull="Y" name="工程编码" />
+       <!-- <FIELD attrname="JXSMC" format='{"JXSMC":{"$regex":"#JXSMC#"}}' fieldtype="String" allownull="Y" name="经销商名称" /> -->
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="联系方式" />
+       <FIELD attrname="SYDWDZ" format='{"SYDWDZ":{"$regex":"#SYDWDZ#"}}' fieldtype="String" allownull="Y" name="使用单位地址" />
+  	   <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+  	   
+  	   <FIELD qx='QXCZY01|CZY_CX|in' /> 
+       <FIELD qx='WLDW01|WLDW_CX|in' /> 
+       
+	</JLConfig>
+</root>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>支付</title>
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="../js/ui.js"></script>
+</head>
+<body>
+
+<div class="main">
+<div class="cart_title bor_bottom">
+  <span>待付款金额：<b class="ml5 mr5 font_color">39000.00</b>元</span>
+</div>
+
+<div class="jl_line"></div>
+
+<h4 class="w12 lh30 pl10 pt5 bor_bottom">选择支付方式：</h4>
+
+<div class="jl_list bor_bottom" onClick="window.location.href='orderSuccess.html'">
+  <div class="jl_list_case">
+    <img src="../images/yfk_zf_ico.png">
+    <span class="ml10"><b class="ml5 mr5 font_color">39000.00</b></span>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list bor_bottom" onClick="window.location.href='orderSuccess.html'">
+  <div class="jl_list_case">
+    <img src="../images/zfb_zf_ico.png">
+    <span class="ml10">支付宝</span>
+  </div>
+</div>
+<div class="jl_list bor_bottom">
+  <div class="jl_list_case">
+    <img src="../images/wx_zf_ico.png">
+    <span class="ml10">微信</span>
+  </div>
+</div>
+<div class="jl_list bor_bottom">
+  <div class="jl_list_case">
+    <img src="../images/yl_zf_ico.png">
+    <span class="ml10">银联</span>
+  </div>
+</div>
+</div>
+<div class="w12 pl20 pr20 mt20">
+  <div class="w12 mt20 jl_btn btn_color radius5" onclick="window.location.href='orderSuccess.html'">确定支付</div>
+</div>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

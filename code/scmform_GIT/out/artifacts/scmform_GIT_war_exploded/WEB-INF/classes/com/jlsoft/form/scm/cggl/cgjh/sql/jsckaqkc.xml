@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JSCKAQKC">
+
+  <select id="KCXX" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT A.CK01, A.BM01, A.SPXX01, B.CK02 CKMC, C.BM02 BMMC, E.SPXX02 SPBM, E.SPXX04 SPMC,
+             (SELECT PPB02 FROM PPB WHERE PPB01 = E.PPB01) PPBMC, A.CKSP12, E.JLDW01,
+             (((SUM(D.SPPCXS06) / (TO_DATE(#{XSRQZ},'YYYY-MM-DD') - TO_DATE(#{XSRQQ},'YYYY-MM-DD') + 1))
+              * #{ZDPSZQ}) - ((SUM(D.SPPCXS06) / (TO_DATE(#{XSRQZ},'YYYY-MM-DD') - TO_DATE(#{XSRQQ},'YYYY-MM-DD') + 1))
+              * #{PSZQ})) AQKC, ((SUM(D.SPPCXS06) / (TO_DATE(#{XSRQZ},'YYYY-MM-DD') - TO_DATE(#{XSRQQ},'YYYY-MM-DD') + 1))
+              * #{ZDPSZQ}) SXKC, SUM(D.SPPCXS06) QJXL,
+             (TO_DATE(#{XSRQZ},'YYYY-MM-DD') - TO_DATE(#{XSRQQ},'YYYY-MM-DD') + 1) TS,
+             (SUM(D.SPPCXS06) / (TO_DATE(#{XSRQZ},'YYYY-MM-DD') - TO_DATE(#{XSRQQ},'YYYY-MM-DD') + 1)) RXL
+      FROM CKSP A, CK B, BM C, SPXX E, SPPCXSR D
+      WHERE A.CK01 = B.CK01 AND A.BM01 = C.BM01 AND A.SPXX01 = E.SPXX01 AND A.SPXX01 = D.SPXX01
+        AND A.BM01 = D.BM01 AND A.WLDW01 = D.WLDW01 AND CKSP12 = D.CGXY02 AND A.GSXX01 = D.GSXX01
+        AND D.SPPCXS14 = 0 AND B.CK06 = 0
+      <if test="GSXX01 != null"> AND A.GSXX01 =#{GSXX01} </if>
+      <if test="CK != null">
+		<foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		  A.CK01 like CONCAT(#{item},'%')
+		</foreach>
+	  </if>
+	  <if test="PPB != null">
+		<foreach item="item" index="index" collection="PPB"  open=" AND (" separator=" or " close=")"> 
+		  E.PPB01 = #{item}
+		</foreach>
+	  </if>
+      <if test="SPFL != null">
+		<foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")"> 
+		  E.SPFL01 like CONCAT(#{item},'%')
+		</foreach>
+	  </if>
+      <if test="SPMC != null"> AND E.SPXX04 LIKE '%'||#{SPMC}||'%'</if>
+      <if test="SPSX != null"> AND A.CKSP12 =#{SPSX} </if>
+      <if test="XSRQQ != null"> <![CDATA[ AND D.SPPCXS01 >= TO_DATE(#{XSRQQ},'YYYY-MM-DD')]]></if>
+      <if test="XSRQZ != null"> <![CDATA[ AND D.SPPCXS01 <= TO_DATE(#{XSRQZ},'YYYY-MM-DD')]]> </if>
+      JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+      GROUP BY A.CK01, A.BM01, A.SPXX01, B.CK02, C.BM02, E.SPXX02, E.SPXX04, E.PPB01, A.CKSP12, E.JLDW01
+      HAVING SUM(D.SPPCXS06) > 0
+  </select>
+</mapper>

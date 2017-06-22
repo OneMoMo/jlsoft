@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cgjs.cgjsd">
+	<FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="供应商编码" />
+	<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="供应商" />
+	<FIELD attrname="BM01" fieldtype="string" allownull="N" name="部门编码" />
+	<FIELD attrname="BMMC" fieldtype="string" allownull="N" name="采购部门" />
+	<FIELD attrname="HZFS" fieldtype="string" allownull="N" name="合作方式编码" />
+	<FIELD attrname="HZFSMC" fieldtype="string" allownull="N" name="合作方式" />
+	<FIELD attrname="JSQSRQ" fieldtype="string" allownull="N" name="结算起始日期" />
+	<FIELD attrname="JSZZRQ" fieldtype="string" allownull="N" name="结算终止日期" />
+	<Nested id="HKLB" allownull="N" name="货款列表">
+	        <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="DJLX" fieldtype="String" allownull="N" name="单据类型" />
+            <FIELD attrname="WSDJ" fieldtype="String" allownull="N" name="无税单价" />
+            <FIELD attrname="KPSL" fieldtype="String" allownull="N" name="开票数量" />
+            <FIELD attrname="PCXH" fieldtype="String" allownull="N" name="批次序号" />
+    </Nested>
+    
+    <Nested id="SRLB" >
+	        <FIELD attrname="SRD01" fieldtype="String" allownull="N" name="收入单编号" />
+            <FIELD attrname="SDRXH" fieldtype="String" allownull="N" name="收入单序号" />
+            <FIELD attrname="JSSR01" fieldtype="String" allownull="N" name="收入代码" />
+            <FIELD attrname="SYJE" fieldtype="String" allownull="N" name="使用金额" />
+    </Nested>
+	</JLConfig>
+</root>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.fwwd">
+		<FIELD attrname="XFWSD" fieldtype="string" allownull="N" name="下午" />
+		<FIELD attrname="SFWSD" fieldtype="string" allownull="N" name="上午" />
+		<FIELD attrname="FWWD02" fieldtype="string" allownull="N" name="网点名称" /> 
+		
+	</JLConfig>	 
+</root>

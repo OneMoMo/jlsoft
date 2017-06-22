@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+     <JLConfig id="form.scm.fxgl.fxjs.fxskdfxd">
+	<FIELD attrname="PFD01" fieldtype="string" allownull="N" name="分销单号" />
+	</JLConfig>
+	  <JLConfig id="form.scm.fxgl.fxjs.fxskdyfjs">
+	<FIELD attrname="YFJSD01" fieldtype="string" allownull="N" name="延付结算单号" />
+	</JLConfig>
+	<JLConfig id="form.scm.fxgl.fxjs.fxskd">
+	<Nested id="SPLB" allownull="N" name="商品价格明细">
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="FXDJ" fieldtype="String" allownull="N" name="销售单价" />
+            <FIELD attrname="SL" fieldtype="String" allownull="N" name="销售数量" />
+            <FIELD attrname="XSBM01" fieldtype="String" allownull="N" name="销售部门代码" />
+            <FIELD attrname="XSBM" fieldtype="String" allownull="N" name="销售部门" />
+            <FIELD attrname="CK01" fieldtype="String" allownull="N" name="仓库代码" />
+            <FIELD attrname="CKMC" fieldtype="String" allownull="N" name="仓库名称" />
+    </Nested>
+    <Nested id="SKLB" allownull="N" name="收款方式明细">
+            <FIELD attrname="SKFS02" fieldtype="String" allownull="N" name="收款方式" />
+            <FIELD attrname="SKJE" fieldtype="String" allownull="N" name="实收金额" /> 
+    </Nested>
+	</JLConfig>
+	<JLConfig id="form.scm.fxgl.fxjs.fxskdpd">
+	<Nested id="SPLB" allownull="N" name="商品价格明细">
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="FXDJ" fieldtype="String" allownull="N" name="销售单价" />
+            <FIELD attrname="SL" fieldtype="String" allownull="N" name="销售数量" />
+            <FIELD attrname="XSBM01" fieldtype="String" allownull="N" name="销售部门代码" />
+            <FIELD attrname="XSBM" fieldtype="String" allownull="N" name="销售部门" />
+            <FIELD attrname="CK01" fieldtype="String" allownull="N" name="仓库代码" />
+            <FIELD attrname="CKMC" fieldtype="String" allownull="N" name="仓库名称" />
+    </Nested>
+    <Nested id="SKLB" allownull="N" name="收款方式明细">
+            <FIELD attrname="SKFS02" fieldtype="String" allownull="N" name="收款方式" />
+            <FIELD attrname="SKJE" fieldtype="String" allownull="N" name="实收金额" />
+            <FIELD attrname="YHXX" fieldtype="String" allownull="N" name="银行名称" />
+            <FIELD attrname="YHZH" fieldtype="String" allownull="N" name="银行账号" />
+    </Nested>
+	</JLConfig>
+	<JLConfig id="form.scm.fxgl.fxjs.fxskdp">
+	<Nested id="SPLB" allownull="N" name="商品价格明细">
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="FXDJ" fieldtype="String" allownull="N" name="销售单价" />
+            <FIELD attrname="SL" fieldtype="String" allownull="N" name="销售数量" />
+            <FIELD attrname="XSBM01" fieldtype="String" allownull="N" name="销售部门代码" />
+            <FIELD attrname="XSBM" fieldtype="String" allownull="N" name="销售部门" />
+            <FIELD attrname="CK01" fieldtype="String" allownull="N" name="仓库代码" />
+            <FIELD attrname="CKMC" fieldtype="String" allownull="N" name="仓库名称" />
+    </Nested>
+    <Nested id="SKLB" allownull="N" name="收款方式明细">
+            <FIELD attrname="SKFS02" fieldtype="String" allownull="N" name="收款方式" />
+            <FIELD attrname="SKJE" fieldtype="String" allownull="N" name="实收金额" />
+            <FIELD attrname="CDR" fieldtype="String" allownull="N" name="承兑人" />
+            <FIELD attrname="BSR" fieldtype="String" allownull="N" name="背书人" /> 
+    </Nested>
+	</JLConfig>
+</root>

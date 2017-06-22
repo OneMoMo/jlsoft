@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>确认订单</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header class="hide">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<h2>确认订单</h2>
+</div>
+</header>
+
+<div class="main">
+
+<div class="jl_list jl_list_bottom" jlui="d1">
+  <div class="jl_list_case">
+    <b class="w12">JL{SPMC}JL</b>
+    <span class="w12 mt5 font_color">￥3000.00</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>
+
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case">
+    <b class="w12">张三 - 18571137522</b>
+    <span class="w12 mt5">湖北省武汉市江汉区新华路168号，福星国际商会大厦1610-1612</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>
+
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case">
+    <span class="w04">优惠券</span>
+    <span class="w08 tr" jlui="d3">已用 ￥JL{JE}JL</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div class="jl_list_case">
+    <span class="w04">送货信息</span>
+    <span class="w08 tr">2016/10/21 15:30</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div class="jl_list_case">
+    <span class="w04">安装信息</span>
+    <span class="w08 tr">2016/10/22 15:30</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>
+
+<div class="jl_list">
+  <div class="jl_list_case pr0">
+    <span class="w04">商品金额</span>
+    <span class="w08 tr">￥3000.00</span>
+    <div jlui="d7">
+    <span class="w04 mt10">JL{MC}JL</span>
+    <span class="w08 mt10 tr">￥-JL{JE}JL</span>
+    </div>
+    <span class="w04 mt10">实付款</span>
+    <span class="w08 mt10 tr font_color">￥2970.00</span>
+  </div>
+</div>
+ 
+</div>
+
+<footer>
+<div class="w12 jl_btn" jlui="b1">提交订单</div>
+</footer>
+</body>
+<script>
+var jlform = new JLForm();
+jlform.setTab(document);
+
+jlform.setUI({
+	"d1" : {
+		"query" : {
+			"dsType" : "local",
+			"key" : "GMSP"
+		}
+	},
+	"d3" : {
+		"query" : {
+			"dsType" : "var",
+			"data" : (function() {
+				var sum = 0;
+				if(jlform.getStorage("YQ") != null) {
+					$.each(jlform.getStorage("YQ"), function(n, val) {
+						sum += Number(val.JE);
+					});
+				}
+				return {"JE":sum};
+			})()//电子券
+		}
+	},
+	"d7" : {
+		"query" : {
+			"dsType" : "local",
+			"key" : "YQ"//
+		}
+	},
+	"b1" : {
+	    "listener" : {
+			"click" : function() {
+				alert('ajax submit data');
+				window.location.href='orderSuccess.html';
+			}
+		}    
+	}
+});
+
+jlform.initForm();
+</script>
+</html>

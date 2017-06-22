@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fxgl.yftdch">
+	    <Nested id="THLX">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="退货类型" />
+        </Nested>
+		<FIELD attrname="YFDH01" fieldtype="string" allownull="N" name="原延付单号" />
+		<Nested id="THYY">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="退货原因" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="退货原因" />
+        </Nested>         	
+		<Nested id="SPLB" allownull="N" name="商品列表">
+            <FIELD attrname="SPXX01" fieldtype="string" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品代码" />
+            <FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+            <FIELD attrname="SPSX" fieldtype="string" allownull="N" name="商品属性" />
+            <FIELD attrname="SPDW" fieldtype="string" allownull="N" name="商品单位" />
+            <FIELD attrname="XSDJ" fieldtype="string" allownull="N" name="单价" />
+            <FIELD attrname="SL" fieldtype="string" allownull="N" name="数量" />
+            <FIELD attrname="JE" fieldtype="string" allownull="N" name="金额" />
+            <FIELD attrname="SYFL" fieldtype="string" allownull="N" name="使用返利" />
+        </Nested>
+         
+	</JLConfig>
+	
+	<JLConfig id="form.scm.fxgl.yftdchts">
+	    <Nested id="THLX">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="退货类型" />
+        </Nested>
+        <FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="客户代码" />
+        <FIELD attrname="KHMC" fieldtype="string" allownull="N" name="客户名称" />
+        <FIELD attrname="YWY01" fieldtype="string" allownull="N" name="业务员代码" />
+        <FIELD attrname="YWYMC" fieldtype="string" allownull="N" name="业务员名称" />
+        <FIELD attrname="XS_BM01" fieldtype="string" allownull="N" name="销售部门代码" />
+        <FIELD attrname="XSBM02" fieldtype="string" allownull="N" name="销售部门名称" />
+        <Nested id="THYY" allownull="N" name="退货原因" >
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="退货原因" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="退货原因" />
+        </Nested>  
+		<Nested id="XSFS02">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="销售方式代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="销售方式名称" />
+        </Nested>                 	
+		<Nested id="SPLB" allownull="N">
+            <FIELD attrname="SPXX01" fieldtype="string" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品代码" />
+            <FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+           <FIELD attrname="SPDW" fieldtype="string" allownull="N" name="商品单位" />
+            <FIELD attrname="XSDJ" fieldtype="string" allownull="N" name="单价" />
+            <FIELD attrname="SL" fieldtype="string" allownull="N" name="数量" />
+            <FIELD attrname="JE" fieldtype="string" allownull="N" name="金额" />
+            <FIELD attrname="SYFL" fieldtype="string" allownull="N" name="使用返利" />
+        </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.fxgl.yfdsh">
+		<FIELD attrname="CGBYJ" fieldtype="string" allownull="N" name="意见" />
+		
+	</JLConfig>
+</root>

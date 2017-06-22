@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_DYGGW.SCM_DYGGW">  
+    	<FIELD attrname="query" format='{"$or":[{"FLDM01":"#query#"},{"SJFLBH":{"$regex":"#query#"}},{"FLMC":{"$regex":"#query#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

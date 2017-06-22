@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" type="text/css" href="jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_css.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_form.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_list.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_table.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_page.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_control.css" />
+<link rel='stylesheet' type='text/css' href="lib/JQuery/css/smartMenu.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kkPages.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/mobiscroll.custom-2.17.0.min.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kalendae.css" />
+<!-- <link rel="stylesheet" type="text/css" href="o2o/css/jl_pc_configure.css" /> -->
+<link rel="icon" href="icon.ico">
+<title>金力供应链系统V10</title>
+</head>
+
+<body>
+<div class="jl_header"><!---头部截点---></div>
+<div class="jl_main">
+  	<div class="jl_nav">
+	  	<ul class="nav_menu">
+		  	<li class="nav_seach">
+				<div id="d_serchMenu" class="w12 jl_btn_group">
+            		<input type="text" placeholder="查询菜单">
+            		<span class="jl_btn btn_white"><i class="fa fa-arrow-circle-right" title="打开菜单"></i></span>
+            		<ul class="jl_dropdown_menu overflow_y"></ul>
+          		</div>
+			</li>
+		</ul>
+		<div id="showMenu" class="nav_stop" title="收起菜单"><i class="fa fa-angle-double-left"></i></div>
+		<div id="hideMenu" class="nav_stop nav_star hide" title="展开菜单"><i class="fa fa-angle-double-right"></i></div>
+	</div>
+  	<div class="page_main">
+  		<div class="jl_order_asc"></div>
+	  	<!-- <div class="jl_pageconfigure">
+	  		<i class="fa fa-cog" title="系统配置"></i>
+			<ul id="systemConfig"></ul>
+		</div> -->
+    	<div class="jl_content"><!---页面内容--->
+    		<div class="jl_huoye_title">
+  				<ul></ul>
+			</div>
+			<div class="jl_huoye_main"></div>
+    	</div>    
+  	</div>
+</div>
+<div class="jl_catalog hide"><!---页面目录---></div>
+<div class="jl_quicnav">
+	<ul>
+  		<li title="返回顶部" onclick="$('html,body').animate({scrollTop:0}, 300);"><i class="fa fa-upload"></i></li>
+	</ul>
+</div>
+<div class="jl_modal"><!---弹出层---></div>
+</body>
+</html>
+<!-- <script type="text/javascript" src="/scripts/lib/jquery-1.11.1.min.js"></script> -->
+<script type="text/javascript" src="/scripts/lib/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-smartMenu.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/mobiscroll.custom-2.17.0.min.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/kalendae.standalone.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-pinyin.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-time.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.Paging.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/json2.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/LodopFuncs.js"></script>
+<script type="text/javascript" src="jllib/jllib_pc/o2oPub/js/JLPaging.js"></script>
+<script type="text/javascript">
+	var rid = Math.random();
+	//var rid = 1;
+
+	document.write("<script type='text/javascript' src='jllib/form/js/ui.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/JLCommons.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/jl-all.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/JLForm.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/JLMessage.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/jllib_pc/pub/js/JLQuery.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='index.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='userConfig.js?rid="+rid+"'><\/script>");
+</script>

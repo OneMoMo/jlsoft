@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_XSFS.SCM_XSFS">   
+        <FIELD attrname="DMMC" format='{"$or":[{"XSDM":{"$regex":"#DMMC#"}},{"XSFS":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="人员" />
+        <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+      
+	</JLConfig>
+</root>   

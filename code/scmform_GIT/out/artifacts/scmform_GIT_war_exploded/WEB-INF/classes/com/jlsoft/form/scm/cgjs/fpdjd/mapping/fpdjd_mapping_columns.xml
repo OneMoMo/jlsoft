@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cgjs.fpdjd">
+		<FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="供应商编码" />
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="供应商" />
+        <FIELD attrname="BM01" fieldtype="string" allownull="N" name="部门编码" />
+        <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="采购部门" />
+        <FIELD attrname="CGFPRQ" fieldtype="String" allownull="N" name="发票日期" />
+        <FIELD attrname="CGFPJE" fieldtype="String" allownull="N" name="发票金额" />
+        <FIELD attrname="FPSE" fieldtype="String" allownull="N" name="发票税额" />
+        <Nested id="CGFPLX">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="发票类型" />
+            <FIELD attrname="value" fieldtype="String" allownull="N" name="发票类型" />
+        </Nested>
+        <FIELD attrname="CGFPH" fieldtype="String" allownull="N" name="发票号" />
+        <FIELD attrname="CGFPJE" fieldtype="String" allownull="N" name="发票金额" />
+        <FIELD attrname="FPSL" fieldtype="string" allownull="N" name="发票税率" /> 
+        
+		<!-- <Nested id="FPMXLB">
+            <FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+            <FIELD attrname="DJLX" fieldtype="string" allownull="N" name="单据类型" />
+            <FIELD attrname="WSDJ" fieldtype="string" allownull="N" name="无税单价" />
+            <FIELD attrname="KPSL" fieldtype="string" allownull="N" name="开票数量" />
+            <FIELD attrname="PCXH" fieldtype="string" allownull="N" name="批次序号" />
+        </Nested>
+         -->
+       <!--  <Nested id="DXFPMXLB">
+            <FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+            <FIELD attrname="DJLX" fieldtype="string" allownull="N" name="单据类型" />
+            <FIELD attrname="WSDJ" fieldtype="string" allownull="N" name="无税单价" />
+            <FIELD attrname="KPSL" fieldtype="string" allownull="N" name="开票数量" />
+            <FIELD attrname="PCXH" fieldtype="string" allownull="N" name="批次序号" />
+            <FIELD attrname="DXKL" fieldtype="string" allownull="N" name="代销扣率" />
+            <FIELD attrname="LYKL" fieldtype="string" allownull="N" name="联营扣率" />
+        </Nested> -->
+        	
+        	<Nested id="SRLB">
+            <FIELD attrname="SRD01" fieldtype="string" allownull="N" name="收入单编号" />
+            <FIELD attrname="SDRXH" fieldtype="string" allownull="N" name="收入单序号" />
+            <FIELD attrname="JSSR01" fieldtype="string" allownull="N" name="收入代码" />
+            <FIELD attrname="GDJE" fieldtype="string" allownull="N" name="勾对金额" />
+        </Nested>	
+	</JLConfig>	
+</root>

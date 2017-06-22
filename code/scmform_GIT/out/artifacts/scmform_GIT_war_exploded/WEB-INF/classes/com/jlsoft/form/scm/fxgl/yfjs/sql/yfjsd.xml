@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YFJSD">
+	<select id="YFJSD_YFD" parameterType="Map" resultType="java.util.Map">
+		    Select A.YFDI01 FHDH, Y.JlWBDH YFD01,C.SPXX02 SPBM,C.SPXX04 SPMC,A.YFDI05 YXSSL,
+			       (A.YFDI05 - A.YFDI09 - A.YFDI14) As WJSL,(A.YFDI05 - A.YFDI09 - A.YFDI14) As JSSL,A.YFDI02 YFDJ,
+			       A.YFDI03 ZDXJ,A.YFDI21 KL,A.YFDI02 JSDJ,0 JE,A.YFDI32 FLJE,A.CK01 CK01,A.KHBZJG,
+			       A.YFDI31 FLL,A.WLDW01,E.WLDW02 ,to_char(A.YFDI12,'YYYY-MM-DD hh24:mi:ss') FHRQ      
+			      From YFDITEM A, YFD Y, SPXX C, WLDW E, XSWD X,SPJGB S
+			     Where A.GSXX01 = Y.GSXX01
+			       And A.YFD01 = Y.YFD01
+			       And A.WLDW01 = E.WLDW01
+			       AND A.WLDW01 = S.WLDW01
+			       And A.SPXX01 = C.SPXX01		       
+			       <![CDATA[  AND ((A.YFDI12 IS NOT NULL and yfd08 <0)or(yfd08>0)) ]]>
+			       And A.SPXX01 = S.SPXX01
+			       AND A.GSXX01 = S.GSXX01
+			       AND A.BM01 = S.BM01
+			       And A.GSXX01 = X.GSXX01(+)
+			       And A.XSWD01 = X.XSWD01(+)
+			       And Y.YFD12 = 1
+			       AND Y.JLWBDH LIKE 'YF%'
+			     <![CDATA[  And  ((A.YFDI05 - A.YFDI14 - A.YFDI09 >0 AND YFDI05>0) OR (A.YFDI05 - A.YFDI14 - A.YFDI09 < 0 AND YFDI05<0)) ]]>
+		<if test="WLDW01!=null and  WLDW01 != ''"> AND Y.WLDW01=#{WLDW01}</if>
+		<if test="BM01!=null and  BM01 != ''"> AND Y.BM01=#{BM01}</if>
+		<if test="YFWBDH!=null and  YFWBDH != ''"> AND 	Y.JLWBDH LIKE '%'||#{YFWBDH}||'%' </if>
+		<if test="YWY01!=null and  YWY01 != ''"> AND Y.YFD05=#{YWY01}</if>
+		<if test="GSXX01!=null and  GSXX01 != ''"> AND Y.GSXX01=#{GSXX01}</if>
+		<if test="YFDH !=null and  YFDH != ''"> AND Y.JlWBDH=#{YFDH}</if>
+		<if test="WBJSDHQ!=null and  WBJSDHQ != ''"> <![CDATA[AND Y.WBJSBH>=#{WBJSDHQ}]]></if>
+		<if test="WBJSDHZ!=null and  WBJSDHZ != ''"> <![CDATA[AND Y.WBJSBH<=#{WBJSDHZ}]]></if>
+		<if test="SPMC !=null and  SPMC != ''"> AND (REGEXP_LIKE(C.SPXX02, #{SPMC}, 'i') or REGEXP_LIKE(C.SPXX04, #{SPMC}, 'i'))</if>
+		<if test="edtWD!=null and  edtWD != ''"> AND A.XSWD01=#{edtWD}</if>
+		<if test="FHRQS !=null and  FHRQS != ''">
+		  <![CDATA[ AND A.YFDI12 >= TO_DATE(#{FHRQS},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="FHRQE !=null and  FHRQE != ''"> 
+		  <![CDATA[ AND A.YFDI12 <= TO_DATE(#{FHRQZ},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="FLFS01!=null and  FLFS01 != ''"> AND Y.FLFS01=#{FLFS01}</if>
+		union all
+		Select A.YFDI01 FHDH, Y.JlWBDH YFD01,C.SPXX02 SPBM,C.SPXX04 SPMC,A.YFDI05 YXSSL,
+			       (A.YFDI05 - A.YFDI09 - A.YFDI14) As WJSL,(A.YFDI05 - A.YFDI09 - A.YFDI14) As JSSL,A.YFDI02 YFDJ,
+			       A.YFDI03 ZDXJ,A.YFDI21 KL,A.YFDI02 JSDJ,0 JE,A.YFDI32 FLJE,A.CK01 CK01,A.KHBZJG,
+			       A.YFDI31 FLL,A.WLDW01,E.WLDW02 ,to_char(A.YFDI12,'YYYY-MM-DD hh24:mi:ss') FHRQ      
+			      From YFDITEM A, YFD Y, SPXX C, WLDW E, XSWD X,SPJGB S
+			     Where A.GSXX01 = Y.GSXX01
+			       And A.YFD01 = Y.YFD01
+			       And A.WLDW01 = E.WLDW01
+			       AND A.WLDW01 = S.WLDW01
+			       And A.SPXX01 = C.SPXX01		       
+			       <![CDATA[  AND ((A.YFDI12 IS NOT NULL and yfd08 <0)or(yfd08>0)) ]]>
+			       And A.SPXX01 = S.SPXX01
+			       AND A.GSXX01 = S.GSXX01
+			       AND A.BM01 = S.BM01
+			       And A.GSXX01 = X.GSXX01(+)
+			       And A.XSWD01 = X.XSWD01(+)
+			       And Y.YFD12 = 1
+			       <!-- 未结退货的单据不需要查出来也不需要退款，已结退货需要查出来，已结可收款，退已结要退款 -->
+			         AND Y.JLWBDH LIKE 'YT%'
+			         AND  ( select SUM(YJTHSL)
+	                   from dsfhpsb 
+	                   where
+                     DJLX=9
+                     AND wbtdh=a.wbtdh 
+                     and JLWBDH=y.JLWBDH
+	                   and gsxx01=a.gsxx01 )
+	                  !=0
+			     <![CDATA[  And  ((A.YFDI05 - A.YFDI14 - A.YFDI09 >0 AND YFDI05>0) OR (A.YFDI05 - A.YFDI14 - A.YFDI09 < 0 AND YFDI05<0)) ]]>
+		<if test="WLDW01!=null and  WLDW01 != ''"> AND Y.WLDW01=#{WLDW01}</if>
+		<if test="BM01!=null and  BM01 != ''"> AND Y.BM01=#{BM01}</if>
+		<if test="YFWBDH!=null and  YFWBDH != ''"> AND 	Y.JLWBDH LIKE '%'||#{YFWBDH}||'%' </if>
+		<if test="YWY01!=null and  YWY01 != ''"> AND Y.YFD05=#{YWY01}</if>
+		<if test="GSXX01!=null and  GSXX01 != ''"> AND Y.GSXX01=#{GSXX01}</if>
+		<if test="YFDH !=null and  YFDH != ''"> AND Y.JlWBDH=#{YFDH}</if>
+		<if test="WBJSDHQ!=null and  WBJSDHQ != ''"> <![CDATA[AND Y.WBJSBH>=#{WBJSDHQ}]]></if>
+		<if test="WBJSDHZ!=null and  WBJSDHZ != ''"> <![CDATA[AND Y.WBJSBH<=#{WBJSDHZ}]]></if>
+		<if test="SPMC !=null and  SPMC != ''"> AND (C.SPXX02 LIKE '%'||#{SPMC}||'%'  or C.SPXX04 LIKE '%'||#{SPMC}||'%')</if>
+		<if test="edtWD!=null and  edtWD != ''"> AND A.XSWD01=#{edtWD}</if>
+		<if test="FHRQS !=null and  FHRQS != ''">
+		  <![CDATA[ AND A.YFDI12 >= TO_DATE(#{FHRQS},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="FHRQE !=null and  FHRQE != ''"> 
+		  <![CDATA[ AND A.YFDI12 <= TO_DATE(#{FHRQZ},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="FLFS01!=null and  FLFS01 != ''"> AND Y.FLFS01=#{FLFS01}</if>
+	  </select>
+	  
+	  <select id="YFJSD_CX" parameterType="Map" resultType="java.util.Map">
+		Select A.JLWBDH YFJS01,A.YFJS02 JSJE,A.WLDW01,W.WLDW02 WLDWMC,
+		       A.BM01 XSBM01,B.BM02 XSBMMC
+		  From YFJSD A, WLDW W, BM B
+		 Where A.WLDW01 = W.WLDW01
+		   And A.BM01 = B.BM01
+	    <if test="GSXX01!=null  and GSXX01 != ''"> AND A.GSXX01=#{GSXX01}</if>
+		<if test="YFJS01!=null and YFJS01 != ''"> AND A.JLWBDH=#{YFJS01}</if>
+	    <if test="WLDW01!=null and WLDW01 != ''"> AND A.WLDW01=#{WLDW01}</if>
+	    <if test="XSBM01!=null and XSBM01 != ''">AND A.BM01 like CONCAT(#{XSBM01},'%')</if>
+	    JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+	  </select>
+	  
+</mapper>

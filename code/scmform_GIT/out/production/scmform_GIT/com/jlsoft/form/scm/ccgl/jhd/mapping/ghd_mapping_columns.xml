@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.ghdzd">
+		<FIELD attrname="GHCKMC" fieldtype="string" allownull="N" name="归还仓库" />
+		<Nested id="SPLB" allownull="N" name="商品列表">
+	    	<FIELD attrname="GHSL" fieldtype="double" allownull="N" name="归还数量" />
+	    </Nested>
+	</JLConfig>
+	
+</root>

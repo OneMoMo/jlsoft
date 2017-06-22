@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JSDJD">
+	<select id="queryJSDJD" parameterType="java.util.Map" resultType="java.util.Map">
+		<if test="CXFS==1">
+		Select 1 CXFS,A.GSXX01, 
+         (Select GSXX02 From GSXX Where GSXX01 = A.GSXX01) GSMC,A.JLWBDH JSDJDH, A.WLDW01 GYSDM, 
+       W.WLDW02 GYSMC, A.CGBM01 CGBMDM, B.BM02 CGBMMC, A.JSDJ02 HSJXJE, 
+       A.JSDJ03 HSDXLYJE, A.JSDJ04 HSSRJE, A.JSDJ05 HSCYFJE, A.JSDJ19 HSQCHKJE, A.JSDJ06 HSTZJE, A.JSDJ07 HSYFJE, 
+       A.GYSFPDJD01 FPDJDH, A.JSDJ08 PKDH, get_hzfs(A.HZFS01) HZFS,  DECODE(A.JSDJ09,0,'制单',1,'审核',2,'终止',3,'排款',4,'付款') DJZT, TO_CHAR(A.JSDJ17,'YYYY-MM-DD') JSZZRQ, A.JSDJ10 ZDR, TO_CHAR(A.JSDJ11,'YYYY-MM-DD') ZDRQ, 
+       A.JSDJ12 SHR, TO_CHAR(A.JSDJ13,'YYYY-MM-DD') SHRQ, A.JSDJ14 ZZR, TO_CHAR(A.JSDJ15,'YYYY-MM-DD') ZZRQ, A.JSDJ16 BZ, DECODE(A.JSDJ18,0,'未付款',1,'已付款') FKBJ 
+ 			 From JSDJD A, BM B,WLDW W 
+ 		Where A.CGBM01 = B.BM01
+ 		      AND A.WLDW01 = W.WLDW01 
+ 		      JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+       	      JL{CZY|B.BM01|BM_CX|LIKE%}JL
+              JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL 
+		</if>
+		<if test="CXFS==2">
+		Select 2 CXFS,A.GSXX01, (Select GSXX02 From GSXX Where GSXX01 = A.GSXX01) GSMC, W.WLDW02 GYSMC, 
+       (Select BM02 From BM Where BM01 = A.CGBM01) CGBMMC, A.JLWBDH JSDJDH,get_djlx (B.JSDJJH02) DJLX,  get_jlwbdh_td(B.JSDJJH02,B.JSDJJH03,B.GSXX01)  DJHM, S.SPXX02 SPBM, 
+       S.SPXX04 SPMC, B.JSDJJH08 DJSL, B.JSDJJH09 DJUJE, B.JSDJJH10 DJSE, B.DHD01 DHDH, B.JSDJJH07 HSDJ, B.JSDJJH04 DJUSL, 
+		(Select BJLX02 From BJLX Where BJLX01 = B.BJLX01) BJLX,ROUND(B.JSDJJH09,2) DJJE, B.SPPC01 PCH, B.SPPC02 PCXH, TO_CHAR(B.JSDJJH11,'YYYY-MM-DD') YDRQ, TO_CHAR(B.FPRQ,'YYYY-MM-DD') FPRQ, 
+       B.FPHM, B.JSDJJH12 BZ 
+  From JSDJD A, JSDJD_JH B, SPXX S, BM C, SCCJ J ,WLDW W
+ Where A.JSDJ01 = B.JSDJ01 
+   And A.GSXX01 = B.GSXX01 
+   AND A.WLDW01 = W.WLDW01
+   And B.SPXX01 = S.SPXX01 
+   And A.CGBM01 = C.BM01 
+   AND S.SCCJ01 = J.SCCJ01(+) 
+   JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+   JL{CZY|C.BM01|BM_CX|LIKE%}JL
+   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL 
+	</if>
+	<if test="CXFS==3">
+	Select 3 CXFS,A.GSXX01, A.JLWBDH JSDJDH, S.SPXX02 SPBM, S.SPXX04 SPMC, S.SPXH01 SPXH, 
+       get_djlx (B.JSDJXS03) DJLX , B.JSDJXS04 DJUSL,B.JSDJXS05 DJUJE, B.JSDJXS07 HSDJ, 
+       B.JSDJXS12 LYSPKL, B.JSDJXS08 YDJSL, B.JSDJXS09 DJHSJE, B.JSDJXS10 DJSE, 
+       B.TZJE, (B.JSDJXS09 + B.TZJE) TZHYJJE, 
+       DECODE(B.DJLY, 
+              8, 
+              '分销单', 
+              10, 
+              '零售单', 
+              3, 
+              '返厂单', 
+              4, 
+              '损溢单', 
+              6, 
+              '变价单', 
+              11, 
+              '销售调整单') DJLY, 
+       B.DJBH DJHM, S.SPXX24 SPSL, B.SPPC01 PCH, B.SPPC02 PCXH, TO_CHAR(B.FPRQ,'YYYY-MM-DD') FPRQ, 
+       B.FPHM, TO_CHAR(B.SPPCXS01,'YYYY-MM-DD') JZRQ, B.JSDJXS11 BZ, C.BM02 XSBMMC, 
+       (Select BM02 From BM Where BM01 = A.CGBM01) CGBMMC, 
+       W.WLDW02 GYSMC 
+  From JSDJD A, JSDJD_XS B, SPXX S, BM C, SCCJ J,WLDW W 
+ Where A.JSDJ01 = B.JSDJ01 
+   And A.GSXX01 = B.GSXX01 
+   And B.SPXX01 = S.SPXX01 
+   And B.XSBM01 = C.BM01 
+   AND A.WLDW01 = W.WLDW01
+   AND S.SCCJ01 = J.SCCJ01(+) 
+   JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+   JL{CZY|C.BM01|BM_CX|LIKE%}JL
+   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL 
+	</if>
+	<if test="CXFS==4">
+	  Select 4 CXFS,B.GSXX01, 
+       A.JLWBDH JSDJDH, 
+       B.JSSRD01 SRDBH, 
+       B.JSSR01 SRDM, 
+       B.JSSR02 SRMC, 
+       B.JSDJSR02 SYJE 
+  From JSDJD_SR B, JSDJD A
+ Where A.JSDJ01 = B.JSDJ01 
+   And A.GSXX01 = B.GSXX01 
+   JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+   JL{CZY|A.CGBM01|BM_CX|LIKE%}JL
+   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL 
+	</if>
+		<if test="GSXX01 != null and GSXX01 != ''"> 
+		   AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="WLDW != null and WLDW != ''">
+		     <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 
+		     W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 LIKE '%'||#{item}||'%'
+		     </foreach> 
+	    </if> 
+	    <if test="CGBMMC!= null and CGBMMC != ''">
+		     <foreach item="item" index="index" collection="CGBMMC"  open=" AND (" separator=" or " close=")"> 
+		     A.CGBM01 = #{item}
+		     </foreach> 	         
+	    </if>       
+	    <if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(S.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{item}||'%')
+		     </foreach> 
+	    </if>
+	     <if test="HZFS != null and HZFS != ''">
+	    	 <foreach item="item" index="index" collection="HZFS"  open=" AND (" separator=" or " close=")">
+	         A.HZFS01 = #{item}
+	         </foreach>
+	    </if>
+	   
+	   <if test="JSDJDH != null and JSDJDH != '' ">
+		     <foreach item="item" index="index" collection="JSDJDH"  open=" AND (" separator=" or " close=")"> 
+		     A.JLWBDH = #{item}
+		     </foreach> 
+	    </if>
+	   <if test="DJLX != null and DJLX != '' and CXFS==2">
+		     <foreach item="item" index="index" collection="DJLX"  open=" AND (" separator=" or " close=")"> 
+		     B.JSDJJH02 = #{item}
+		     </foreach> 
+	    </if>
+	    <if test="DJHM != null and DJHM != '' ">
+		     <foreach item="item" index="index" collection="DJHM"  open=" AND (" separator=" or " close=")"> 
+		     get_jlwbdh_td(B.JSDJJH02,B.JSDJJH03,B.GSXX01) = #{item}
+		     </foreach> 
+	    </if>
+	    <if test="ZDR != null and ZDR != '' ">
+	    <foreach item="item" index="index" collection="ZDR"  open=" AND (" separator=" or " close=")"> 
+	      A.JSDJ10 = #{item}
+		  </foreach>
+	    </if>
+	    <if test="SHRQ_S !=null and SHRQ_S != ''">
+	       <![CDATA[AND A.JSDJ13 >= TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="SHRQ_E !=null and SHRQ_E != ''">
+	       <![CDATA[AND A.JSDJ13 <= TO_DATE(#{SHRQ_E},'YYYY-MM-DD')]]>
+	    </if>
+	    <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND A.JSDJ11 >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+	       <![CDATA[AND A.JSDJ11 <= TO_DATE(#{ZDRQ_E},'YYYY-MM-DD')]]>
+	    </if>			 
+	</select>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PDB">
+	<select id="PDB_PDDY" parameterType="Map" resultType="java.util.Map">
+		SELECT DISTINCT A.JLWBDH JHDH01,
+		TO_CHAR(A.PDRQ, 'YYYY-MM-DD') PDRQ,
+		(wmsys.wm_concat(DISTINCT A.CK01)
+		over(PARTITION BY A.PDRQ)) CK01,
+		(wmsys.wm_concat(DISTINCT TO_CHAR(C.CK02))
+		over(PARTITION BY A.PDRQ)) CKMC,
+		A.CKHJ01 HJ01,
+		A.CKHJ02 HJMC,
+		A.SPFL01,
+		A.SPFL02 SPFLMC,
+		A.PPB01,
+		A.PPB02 SPPPMC,
+		A.SPXX01,
+		A.BM01,
+		A.BZ,
+		(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BMMC,
+		(SELECT SPXX02 FROM SPXX WHERE SPXX01 = A.SPXX01) SPBM,
+		(SELECT SPXX04 FROM SPXX WHERE SPXX01 = A.SPXX01) SPMC
+		FROM PDJH A, PDBDY B, CK C
+		WHERE A.PDJH01 = B.PDJH01
+		AND A.GSXX01 = B.GSXX01
+		AND A.CK01 = C.CK01
+		<if test="JHDH01 != null and JHDH01 != ''"> AND A.JLWBDH = #{JHDH01} </if>
+		<if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01 = #{GSXX01} </if>
+	</select>
+	<select id="PDB_PDMX" parameterType="Map" resultType="java.util.Map">
+	SELECT DISTINCT S.SPXX02 SPBM, S.SPXX04 SPMC,A.CK01,0 YKSL,0 PDSL,
+	(SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKMC,S.JLDW01 JLDW,
+	A.ZMS ZMSL,A.CKHJ01 HJ01, A.CKHJ02 HJMC,A.BM01,A.SPXX01 SPXX01,
+	(SELECT BM02 FROM BM WHERE BM01=A.BM01) BMMC,
+	GET_FSSL(A.SPXX01,A.GSXX01,A.CK01,A.BM01,A.CKHJ01)-A.ZMS FSSL
+	FROM PDBDY A, SPXX S,PDJH P
+	WHERE A.SPXX01=S.SPXX01
+	AND A.PDJH01=P.PDJH01
+	AND A.GSXX01=P.GSXX01
+	<if test="JHDH01 != null and JHDH01 != ''"> AND P.JLWBDH = #{JHDH01} </if>
+	<if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01 = #{GSXX01} </if>
+	<if test="CK01 != null and CK01 !=''">
+		<foreach item="item" index="index" collection="CK01" open=" AND ("
+			separator=" or " close=")">
+			A.CK01 LIKE '%'||#{item}||'%'
+		</foreach>
+	</if>
+		<if test="HJ01 != null and HJ01 != ''"> AND A.CKHJ01 = #{HJ01} </if>
+		<if test="SPPPMC != null and SPPPMC != ''"> AND S.PPB02 = #{SPPPMC} </if>
+		<if test="SPBM != null and SPBM != ''"> AND S.SPXX02 = #{SPBM} </if>
+	</select>
+	<select id="PDB_CMPDMX" parameterType="Map" resultType="java.util.Map">
+	   SELECT A.CK01,
+       K.CK02   CKMC,
+       S.SPXX02 SPBM,
+       S.SPXX04 SPMC,
+       S.JLDW01 JLDW,
+       A.JQM01  CM,
+      S.SPXX01 SPXX01
+  FROM JQMKC A, CK K, SPXX S\
+ WHERE A.SPXX01 = S.SPXX01
+   AND A.CK01 = K.CK01
+           
+        
+		<if test="CM != null and CM != ''"> 
+		<foreach item="item" index="index" collection="CM"  open=" AND (" separator=" or " close=")"> 
+		    A.JQM01 =  #{item}
+		 </foreach> 
+		</if>
+	</select>
+	<!--  串码盘点时 商品数量-->
+	<select id="PDB_SPPDMX" parameterType="Map" resultType="java.util.Map">
+	    SELECT DISTINCT S.SPXX02 SPBM, S.SPXX04 SPMC,A.CK01,0 YKSL,0 PDSL,
+               (SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKMC,S.JLDW01 JLDW,
+	           A.ZMS ZMSL,A.CKHJ01 HJ01, A.CKHJ02 HJMC,A.BM01,A.SPXX01 ,
+               (SELECT BM02 FROM BM WHERE BM01=A.BM01) BMMC
+          FROM PDBDY A, SPXX S,PDJH P,JQMKC J
+         WHERE A.SPXX01=S.SPXX01
+           AND A.PDJH01=P.PDJH01
+           AND A.SPXX01 = J.SPXX01
+        <if test="JHDH01 != null and JHDH01 != ''"> AND P.JLWBDH = #{JHDH01} </if>
+		<if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01 = #{GSXX01} </if>
+		<if test="CK01 != null and CK01 != ''"> AND A.CK01 = #{CK01} </if>
+		<if test="HJ01 != null and HJ01 != ''"> AND A.CKHJ01 = #{HJ01} </if>
+		<if test="SPPPMC != null and SPPPMC != ''"> AND S.SPXX04 = #{SPPPMC} </if>
+		<if test="SPBM != null and SPBM != ''"> AND S.SPXX02 = #{SPBM} </if>
+		<if test="CM != null and CM != ''"> 
+		<foreach item="item" index="index" collection="CM"  open=" AND (" separator=" or " close=")"> 
+		    J.JQM01 =  #{item}
+		 </foreach> 
+		</if>
+	</select>
+</mapper>

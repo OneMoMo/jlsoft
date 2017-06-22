@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FXJSSKD">
+	<!-- 查询单据明细 -->
+	<select id="DJLB" parameterType="java.util.Map" resultType="java.util.Map">
+	  <![CDATA[ 
+		SELECT A.PFSP01 PFSK01,A.PFSP01 PFSKBH,get_djlx(A.PFSP02) DJLX, A.PFSP02 DJLXDM, (A.PFSP06-B.KHMX04) HSDJJE,0 HSJSJE,
+		       TO_CHAR(A.PFSP10,'YYYY-MM-DD') ZDRQ,(SELECT C.PFSK18 FROM PFSKD C WHERE C.GSXX01=A.GSXX01 AND PFSP02=8 AND C.PFSK01=A.PFSP01) BZ ,
+		       PFSP12-PFSP13 PFSP13,0 PFSP14,PFSP14 PFSP15,0 PFSP16, 
+		       (SELECT (SELECT JLWBDH FROM PFD WHERE PFD.PFD01 = B.PFSK21 AND PFD.GSXX01 = B.GSXX01) 
+		       FROM PFSKD B WHERE B.PFSK01=A.PFSP01 AND B.GSXX01=A.GSXX01) PFD01, 
+		       (SELECT (SELECT PFD01 FROM PFD WHERE PFD.PFD01 = B.PFSK21 AND PFD.GSXX01 = B.GSXX01) 
+		       FROM PFSKD B WHERE B.PFSK01=A.PFSP01 AND B.GSXX01=A.GSXX01) PFDBH,
+		       (Select B.PFSK05 From PFSKD B Where B.PFSK01 = A.PFSP01  And B.GSXX01 = A.GSXX01)FPHM 
+		  FROM PFSPJSB A, KHMXZ B 
+		  WHERE A.GSXX01 = B.GSXX01
+		    AND A.XSBM01 = B.BM01
+		    AND A.KHDM01 = B.WLDW01
+		    AND A.PFSP01 = B.KHMX01
+		    AND B.KHMX02 = 18
+		    AND A.PFSP15=0 
+		    AND (A.PFSP06-B.KHMX04)<>0
+		  ]]>
+		<if test="WLDW01 != null"> AND A.KHDM01 =#{WLDW01}</if>
+		<if test="XSBM01 != null"> AND A.XSBM01 =#{XSBM01}</if>
+		<if test="GSXX01 != null"> AND A.GSXX01 =#{GSXX01}</if>
+		<![CDATA[ AND Abs(A.PFSP06) > Abs(A.PFSP11) ]]>
+		<if test="ZDRQ_S != null"> <![CDATA[AND A.PFSP10 >=TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]></if>
+		<if test="ZDRQ_E != null"><![CDATA[  AND A.PFSP10 <=TO_DATE(#{ZDRQ_E},'YYYY-MM-DD') ]]></if> 
+	</select>
+	<!-- 查询预收款 -->
+	<select id="YSKLB" parameterType="java.util.Map" resultType="java.util.Map">
+	<![CDATA[ 
+		Select ROWNUM MYID, B.JLWBDH YSKD01,B.YSKD09 BZ,B.YSKD01 YSKDBH,
+		       A.KHMX03 - A.KHMX04 WJSJE, 0 BCJSJE,A.KHMX07-A.KHMX08 YSKD04,A.KHMX03 DJJE, 
+		       (SELECT DISTINCT(SKFS07) FROM YSKDSKFS WHERE GSXX01=B.GSXX01 AND YSKD01=B.YSKD01)YSKD06,0 YSKD07 
+		  From KHMXZ A,YSKD B, DBYSK C 
+		 Where A.GSXX01=B.GSXX01 
+		   AND A.KHMX01=B.YSKD01 
+		   AND B.LX01 = C.LX01(+)
+		   AND A.KHMX06 = 2 
+		   And A.KHMX02 = 72  And A.KHMX03 - A.KHMX04 <> 0
+		   AND ((C.ZKZY =0) OR (B.LX01 IS NULL) OR (B.LX01 NOT IN (SELECT LX01 FROM DBYSK)))
+		    ]]>
+        <if test="WLDW01 != null"> And A.WLDW01 = #{WLDW01}</if>
+		<if test="XSBM01 != null"> And A.BM01 = #{XSBM01}</if>
+		<if test="GSXX01 != null"> AND A.GSXX01 =#{GSXX01}</if>
+		<if test="ZDRQ_S != null"> <![CDATA[ And A.KHMX05 >=TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]></if>
+		<if test="ZDRQ_E != null"> <![CDATA[ And A.KHMX05 <=TO_DATE(#{ZDRQ_E},'YYYY-MM-DD') ]]></if>	
+	</select>
+	<!-- 查询返利单 -->
+	<select id="FLDLB" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT ROWNUM FLDXH, A.JLWBDH FLD01,A.FLD01 FLDBH ,case when A.FLD09 = 2 then '非固定费用单' else
+			   '返利单' end DJLX, A.FLD09 DJLXDM,(B.FLDI03+B.FLDI06-B.FLDI05) KYFLYE, 0 BCJSJE,
+	           B.FLFS01 FLFS, (SELECT FLFS02 FROM FLFS WHERE FLFS01=B.FLFS01) FLFSMC,
+	           B.FLDM01, (SELECT FLDM02 FROM FLDM WHERE FLDM01=B.FLDM01) FLDM02 
+	      FROM FLD A,FLDITEM B 
+	     WHERE A.GSXX01=B.GSXX01 AND A.FLD01=B.FLD01 
+	      AND A.FLD06 IS NOT NULL
+	      AND A.FLD08 IS NULL    
+	      AND ABS(B.FLDI03+B.FLDI06-B.FLDI05)>0  
+        <if test="WLDW01 != null"> And A.WLDW01 = #{WLDW01}</if>
+		<if test="XSBM01 != null"> And A.BM01 = #{XSBM01}</if>
+		<if test="GSXX01 != null"> AND A.GSXX01 =#{GSXX01}</if>
+		<if test="ZDRQ_S != null"> <![CDATA[ And A.FLD06 >=TO_DATE(#{ZDRQ_S},'YYYY-MM-DD') ]]></if>
+		<if test="ZDRQ_E != null"> <![CDATA[ And A.FLD06 <=TO_DATE(#{ZDRQ_E},'YYYY-MM-DD') ]]></if>	
+	</select>
+</mapper>

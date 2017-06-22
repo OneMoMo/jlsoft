@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="XJCKD.YHZH">
+		<FIELD attrname="CKJE" fieldtype="String" allownull="N" name="金额" />
+		<FIELD attrname="YSHJ" fieldtype="String" allownull="N" name="银行账号" />
+		<FIELD attrname="YHKHJ" fieldtype="String" allownull="N" name="存款银行" />
+		<FIELD attrname="ZDYMC" fieldtype="String" allownull="N" name="	制单人" />
+		<Nested id="ZDRQ" allownull="N" name="制单日期">
+        </Nested>
+		<Nested id="CKRQ" allownull="N" name="存款日期">
+        </Nested>	
+        <Nested id="JZXSRQ" allownull="N" name="截止销售日期">
+        </Nested>
+	</JLConfig>
+	<JLConfig id="XJCKD.YHZH.SH">
+		<FIELD attrname="CKJE" fieldtype="String" allownull="N" name="金额" />
+		<FIELD attrname="YSHJ" fieldtype="String" allownull="N" name="银行账号" />
+		<FIELD attrname="YHKHJ" fieldtype="String" allownull="N" name="存款银行" />
+		<FIELD attrname="SHYMC" fieldtype="String" allownull="N" name="审核人" />
+		<Nested id="SHRQ" allownull="N" name="制单日期">
+        </Nested>
+		<Nested id="SHRQ" allownull="N" name="审核日期">
+        </Nested>	
+        <Nested id="JZXSRQ" allownull="N" name="截止销售日期">
+        </Nested>
+	</JLConfig>
+</root>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.fxgl.fxjs.fgdfld">
+	      <FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客户名称" />
+	      <FIELD attrname="XSBMMC" fieldtype="string" allownull="N" name="销售部门名称" />
+	      <FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="客户代码" />
+	      <FIELD attrname="XS_BM01" fieldtype="string" allownull="N" name="销售部门代码" />
+		<Nested id="SPLB" allownull="N" name="返利方式列表">
+            <FIELD attrname="FLJE" fieldtype="string" allownull="N" name="返利金额" />
+            <FIELD attrname="FLDM01" fieldtype="string" allownull="N" name="返利代码" />
+        </Nested>
+	</JLConfig>
+	
+	
+	<JLConfig id="form.scm.fxgl.fxjs.fxbjd">
+        <FIELD attrname="YWY_RYXX01" fieldtype="string" allownull="N" name="业务员代码" />
+        <FIELD attrname="YWYMC" fieldtype="string" allownull="N" name="业务员名称" />
+        <FIELD attrname="XS_BM01" fieldtype="string" allownull="N" name="销售部门代码" />
+        <FIELD attrname="XSBMMC" fieldtype="string" allownull="N" name="销售部门名称" />
+          <Nested id="BJLX">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="变价类型代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="变价类型名称" />
+        </Nested>
+		<Nested id="SPLB" allownull="N" name="分销变价单明细">
+            <FIELD attrname="SPXX01" fieldtype="int" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+            <FIELD attrname="XDJ" fieldtype="string" allownull="N" name="新单价" />
+            <FIELD attrname="BJSL" fieldtype="double" allownull="N" name="变价数量" />
+        </Nested>		
+	</JLConfig>	
+	
+	<JLConfig id="form.scm.fxgl.fxjs.yfjsd">
+	
+		<FIELD attrname="WLDW02" fieldtype="string" allownull="N" name="客户名称" />
+		<FIELD attrname="YWY02" fieldtype="string" allownull="N" name="业务员名称" />
+		<Nested id="XSBM02">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="销售部门代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="销售部门名称" />
+        </Nested>
+        <Nested id="XSFS02">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="销售方式代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="销售方式名称" />
+        </Nested>
+	</JLConfig>	
+	
+</root>

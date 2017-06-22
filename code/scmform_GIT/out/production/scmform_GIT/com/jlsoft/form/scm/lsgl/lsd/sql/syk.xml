@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SYK">
+  <select id="LSWL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.LSD01 LSDH, 
+       SKFS02 QKLX, 
+       A.SKFS01 SKFSDM,
+       A.LSDS04,
+       SUM(LSWLI02 - LSWLI08) QKJE, 
+       to_char(A.LSDS04,'YYYY-MM-DD') DJRQ,
+       D.LSD13 BZ, 
+       A.SKDW01, 
+       D.LSD04 KHXM, 
+       D.JLWBDH,
+       (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.SKDW01) SKDWMC, 
+       D.BM01 XSBMBM, 
+       (SELECT BM02 FROM BM WHERE BM01 = D.BM01) XSBM 
+  FROM LSDSK A, SKFS B, LSWLITEM C, LSD D
+  WHERE A.GSXX01 = C.GSXX01 
+   AND A.LSD01 = C.LSD01 
+   AND C.LSD01 = D.LSD01 
+   AND C.GSXX01 = D.GSXX01 
+   AND A.SKFS01 = C.SKFS01 
+   AND A.SKFS01 = B.SKFS01 
+   AND B.SKFS06 IN (5, 6) 
+   AND A.LSDS12 = 0 
+   <if test="DJRQQ != null and DJRQQ !=''"><![CDATA[AND A.LSDS04 >=TO_DATE(#{DJRQQ},'YYYY-MM-DD')]]></if>
+   <if test="DJRQZ != null and DJRQZ !=''"><![CDATA[AND A.LSDS04 <=TO_DATE(#{DJRQZ},'YYYY-MM-DD')]]></if>
+   <if test="GSXX01 != null and GSXX01 != ''">
+       AND D.GSXX01 = #{GSXX01}
+   </if>
+   <if test="LSDH != null and LSDH !=''"> AND D.JLWBDH LIKE '%'||#{LSDH}||'%'</if>
+   <if test="XSBMMC != null and XSBMMC != ''">
+	 <foreach item="item" index="index" collection="XSBMMC"  open=" AND (" separator=" or " close=")"> 
+	       D.BM01 LIKE #{item}||'%'
+	 </foreach> 
+   </if>
+   GROUP BY TO_NUMBER(0, 9), 
+          A.LSD01, 
+          A.SKFS01, 
+          B.SKFS02, 
+          A.LSDS04,
+          A.LSDS08, 
+          A.LSDS05, 
+          A.LSDS02, 
+          A.LSDS04, 
+          D.LSD13,
+          D.JLWBDH, 
+          A.SKDW01, 
+          D.LSD04, 
+          D.LSD05, 
+          D.LSD53, 
+          A.GSXX01,
+          D.BM01 
+   HAVING(SUM(LSWLI02 - LSWLI08)) > 0 
+   JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL  
+   JL{CZY|D.BM01|BM_CZ|LIKE%}JL
+   ORDER BY A.LSD01 
+  </select>
+  <select id="SKFS" parameterType="Map" resultType="java.util.Map">
+		SELECT A.SKFS01,A.SKFS02,A.SKFS06
+		  FROM SKFS A, QXSKFSITEM B,CZY C
+		 WHERE A.SKFS01 = B.SKFS01
+		   AND B.QXSKFS01 = C.CZY05
+		   AND A.SKFS03 = 1 
+		   AND A.SKFS06  IN (0,3,17,1) 
+		   AND C.CZY01 = #{CZY01}
+		 ORDER BY B.QXSKFSI01 
+  </select>
+  <select id="YHXX" parameterType="Map" resultType="java.util.Map">
+		Select A.GSXX01 DFGSXX01, A.YHZH01, A.YHZH02, A.YHZH03, A.YHZH04, B.YHXX01, B.YHXX02
+          From YHZH A, YHXX B
+         Where A.YHXX01 = B.YHXX01
+          And A.YHZH05 = 1
+          And A.GSXX01 = #{GSXX01}
+         ORDER BY A.YHZH01
+  </select>
+</mapper>

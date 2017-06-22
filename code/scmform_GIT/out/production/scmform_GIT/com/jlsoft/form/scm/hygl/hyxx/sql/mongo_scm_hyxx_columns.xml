@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_HYGL.SCM_HYXX"> 
+      <FIELD attrname="HYXX01" format='{"HYXX01":{"$regex":"#HYXX01#"}}' fieldtype="String" allownull="Y" name="计划单号" />
+	  <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>

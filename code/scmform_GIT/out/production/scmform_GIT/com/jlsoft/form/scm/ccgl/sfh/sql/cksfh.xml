@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CKSFH">
+    <select id="CKSFH_DJ" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT A.JLWBDH,A.YTDH,TO_CHAR(A.FSRQ,'YYYY-MM-DD') FSRQ,A.THDH,A.DJLX DJLX01,
+		        GET_DJLX(A.DJLX) DJLX,A.CZLX CZLX,DECODE(A.CZLX,0,'入库',1,'出库') CZLX01,A.YSFSL,
+		        A.DJHM,A.CK01,(SELECT CK11 FROM CK WHERE CK01=A.CK01)XLCKBJ,S.JLDW01 JLDW,(case when CZLX = 0 AND DJLX=7  THEN 
+		        ((SELECT SSFSL FROM DSFHPSB WHERE DJHM=A.DJHM AND THDH=A.THDH AND GSXX01=A.GSXX01 AND DJLX=A.DJLX AND CZLX=1)-A.SSFSL) 
+		        ELSE (A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL)END) DJSL,A.THSL,A.WBTDH,
+		        (case when CZLX = 0 AND DJLX=7  THEN 
+		        (SELECT SSFSL FROM DSFHPSB WHERE DJHM=A.DJHM AND THDH=A.THDH AND GSXX01=A.GSXX01 AND DJLX=A.DJLX AND CZLX=1) 
+		        ELSE 0 END)YDFHSL,GET_SPSX_V10(A.SPSX) SPSXMC,A.SPSX,A.HSDJ,A.BZHL,
+		        (case when CZLX = 0 AND DJLX=7  THEN 
+		        ((SELECT SSFSL FROM DSFHPSB WHERE DJHM=A.DJHM AND THDH=A.THDH AND GSXX01=A.GSXX01 AND DJLX=A.DJLX AND CZLX=1)-A.SSFSL) 
+		        ELSE (A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL)END) KPSL,0 JSSL,
+		        A.SSFSL WKPSL,A.ZFSL,A.JSSL YJSSL,(SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,(SELECT WLDW01 FROM CK WHERE CK01 = A.CK01) WCGYS,
+		        A.BZ BZ ,S.SPXX01,S.SPXX28 GLCM,A.CGBM01 CG_BM01,A.WLDW01 GYS_WLDW01,A.XSBM01,
+		        (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01)GYSMC,
+		        (SELECT BM02 FROM BM WHERE BM01 = A.CGBM01)CGBMMC,
+		        (SELECT BM02 FROM BM WHERE BM01 = A.XSBM01)XSBMMC,
+		         (select rkd03 from rkd b where jlwbdh=a.jlwbdh and b.GSXX01=A.GSXX01) RKD03,
+		          (select get_spfldl(SPFL01) FROM SPFL WHERE SPFL01=S.SPFL01) SPDL,
+		        S.SPXX02 SPBM,S.SPXX04 SPMC,GET_JLCONF_F(100,A.GSXX01) CS100,C.CKSP03 BGS,S.PPB02 SPPPMC,
+		        CASE WHEN (SELECT COUNT(FWDI01) FROM CSS_FWDITEM WHERE DJHM = A.JLWBDH AND DJLX = A.DJLX AND GSXX01 = A.GSXX01) > 0 THEN '配送' ELSE '自提' END PSFS,
+		        (SELECT (SELECT FWWD02 FROM CSS_FWWD WHERE FWWD01 = CSS_SHGD.FWWD01) FROM CSS_SHGD WHERE CSS_SHGD.DJHM = A.JLWBDH AND CSS_SHGD.DJLX = A.DJLX AND ROWNUM = 1)PSWD,
+		        (CASE WHEN A.DJLX='8' THEN TO_CHAR((SELECT WLDW02 FROM WLDW WHERE WLDW01 = (SELECT WLDW01 FROM PFD WHERE JLWBDH=A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM = 1))) ELSE '' END)JXSMC
+		   FROM DSFHPSB A,SPXX S,CKSP C
+		  WHERE A.SPXX01 = S.SPXX01
+		  	AND A.SPXX01 = C.SPXX01(+)
+   			AND A.CK01 = C.CK01(+)
+   			AND A.SPSX = C.CKSP12(+)
+   			AND A.WLDW01=C.WLDW01(+)
+   			AND A.GSXX01=C.GSXX01(+)
+   			AND A.CGBM01=C.BM01(+)
+   			AND A.BZHL = C.CKSP01(+) 
+   			<!-- AND (C.CKSP03>0 OR A.CZLX = 0 ) -->
+   		<!-- <if test="CS100 != null and CS100 != ''">
+		    AND NOT EXISTS (SELECT 1
+					          FROM BOM D, BOMITEM E
+					         WHERE A.GSXX01 = D.GSXX01
+					           AND D.BOM01 = E.BOM01
+					           AND D.GSXX01 = E.GSXX01
+					           AND D.BOM09 = 1
+					           AND A.SPXX01 = D.SPXX01)
+					           
+			AND S.SPXX28 not in  (select DISTINCT (case
+						when GET_JLCONF_F(100, A.GSXX01) = 1 then 1
+						when A.DJLX IN (8 , 9 , 10 , 51) then 1 else -1 end)
+				   FROM DSFHPSB M, SPXX N
+                         WHERE M.SPXX01 = N.SPXX01
+                           AND M.JLWBDH=A.JLWBDH
+                           AND M.GSXX01=A.GSXX01
+				    )
+			 <![CDATA[ 
+			 AND ((S.SPXX28 = 0 OR (CASE WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = A.GSXX01 AND JLCO01 = 387) = 0 AND A.DJLX = 7 THEN
+	               TO_CHAR(0) WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = A.GSXX01 AND JLCO01 = 387) = 1 AND A.DJLX = 7 
+	               AND (SELECT JLCO04 FROM JLCONF_GSXX WHERE JLCO01=100 AND GSXX01 = #{GSXX01})<>2 THEN
+	               TO_CHAR(1) ELSE TO_CHAR(GET_100CSZT(A.DJLX, A.GSXX01)) END) = 0) OR (C.CK01 in (SELECT E.CK01 FROM CK E WHERE E.CK01 = C.CK01 AND E.SMBJ = 1)))
+	         ]]>
+	     </if>     -->    
+	     
+	     <choose>
+	        <when test="CS100 != null and CS100 != ''">
+	            <![CDATA[ 
+					 AND ((S.SPXX28 = 0 OR (CASE WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = A.GSXX01 AND JLCO01 = 387) = 0 AND A.DJLX = 7 THEN
+			               TO_CHAR(0) WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = A.GSXX01 AND JLCO01 = 387) = 1 AND A.DJLX = 7 
+			               AND (SELECT JLCO04 FROM JLCONF_GSXX WHERE JLCO01=100 AND GSXX01 = #{GSXX01})<>2 THEN
+			               TO_CHAR(1) ELSE TO_CHAR(GET_100CSZT(A.DJLX, A.GSXX01)) END) = 0) 
+			             OR (C.CK01 in (SELECT E.CK01 FROM CK E WHERE E.CK01 = C.CK01 AND E.SMBJ = 1)))
+		        ]]>
+	        </when>
+	        <otherwise>
+	            AND C.CK01 in (SELECT E.CK01 FROM CK E WHERE E.CK01 = C.CK01 AND E.SMBJ = 1)
+	        </otherwise>
+	    </choose>
+	     
+       	 JL{CZY|A.WLDW01|WLDW_CZ|LIKE%}JL
+       	 <!-- JL{CZY|A.CGBM01|BM_CZ|LIKE%}JL
+       	 JL{CZY|A.XSBM01|BM_CZ|LIKE%}JL -->
+       	 JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+      <if test="SFHZT != null and SFHZT != '' and SFHZT != -1">
+       	 <![CDATA[
+       	 	   AND ABS(A.YSFSL)-ABS(A.SSFSL)>ABS(A.ZFSL)+ABS(A.JSSL)
+       	 ]]>
+      </if>
+      <if test="SFHZT == -1">
+       	 <![CDATA[
+       	 	   AND ABS(A.YSFSL)-ABS(A.SSFSL)<=ABS(A.ZFSL)+ABS(A.JSSL)
+       	 ]]>
+      </if>
+	  <if test="JLWBDH != null and JLWBDH != ''">
+		       AND A.JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND A.GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND A.DJLX = #{DJLX}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND A.CZLX = #{CZLX}
+	  </if>
+	  <if test="CZLX == 0 and DJLX == 7 and SFHZT != -1">
+		       AND ABS((SELECT SSFSL FROM DSFHPSB 
+		       			 WHERE DJHM=A.DJHM 
+		       			   AND THDH=A.THDH
+		       			   AND GSXX01=A.GSXX01
+		       			   AND DJLX=A.DJLX
+		       			   AND CZLX=1))-ABS(A.SSFSL)>0
+	  </if>
+	  <if test="WLDWMC != null and WLDWMC != ''">
+		       AND A.WLDW01 IN (SELECT WLDW01 FROM WLDW WHERE (WLDW02 LIKE '%'||#{WLDWMC}||'%' OR WLDW01 LIKE '%'||#{WLDWMC}||'%'))
+	  </if>
+	  <if test="CG_BM01 != null and CG_BM01 != ''">
+		       AND A.CGBM01 IN (SELECT BM01 FROM BM WHERE (BM02 LIKE '%'||#{CG_BM01}||'%' OR BM01 LIKE '%'||#{CG_BM01}||'%'))
+	  </if>
+	  <if test="FSRQ != null and FSRQ != ''">
+		       AND to_char(A.FSRQ,'YYYY-MM-DD') = to_char( to_date(#{FSRQ},'YYYY-MM-DD'),'YYYY-MM-DD')
+	  </if>
+<!--	  <if test="CKMC != null and CKMC != ''">
+		       AND A.CK01 IN (SELECT CK01 FROM CK WHERE (CK02 LIKE '%'||#{CKMC}||'%' OR CK01 LIKE '%'||#{CKMC}||'%'))
+	  </if>-->
+	  <if test="CK01 != null and CK01 != ''">
+		     <foreach item="item" index="index" collection="CK01"  open=" AND (" separator=" or " close=")"> 
+		      A.CK01 LIKE #{item}||'%'
+		     </foreach> 	         
+	    </if>
+	  <if test="RKD03 != null and RKD03 != ''">
+		       AND A.JLWBDH IN (SELECT JLWBDH FROM RKD WHERE RKD03 LIKE '%'||#{RKD03}||'%' AND GSXX01=A.GSXX01)
+	  </if>
+		<if test="SPDL != null and SPDL != ''">
+			<foreach item="item" index="index" collection="SPDL"  open=" AND (" separator=" or " close=")">
+				S.SPFL01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+    </select>
+    <!--转仓单收出库  -->
+    <select id="ZCD" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT A.JLWBDH,GET_DJLX(A.DJLX) DJLX,A.CZLX CZLX,DECODE(A.CZLX,0,'入库',1,'出库') CZLX01,A.CK01,A.CKMC
+		   FROM DSFHPSB A,SPXX S,CKSP C
+		  WHERE A.SPXX01 = S.SPXX01
+		  	AND A.SPXX01 = C.SPXX01(+)
+   			AND A.CK01 = C.CK01(+)
+   			AND A.SPSX = C.CKSP12(+)
+   			AND A.WLDW01=C.WLDW01(+)
+   			AND A.GSXX01=C.GSXX01(+)
+   			AND A.CGBM01=C.BM01(+)
+   			AND A.BZHL = C.CKSP01(+)
+   			<![CDATA[
+   			AND 0 < (SELECT (case
+   							 when A.CZLX = 1 then 1
+   							 else SSFSL -ABS(A.SSFSL)
+   							 end)
+   							 FROM DSFHPSB
+   							WHERE DJHM = A.DJHM
+   							  AND THDH = A.THDH
+   							  AND GSXX01 = A.GSXX01 
+   							  AND DJLX = A.DJLX 
+   							  AND CZLX = 1)
+   			]]>
+   			<!-- AND (C.CKSP03>0 OR A.CZLX = 0 ) -->
+   		<if test="CS100 != null and CS100 != ''">
+		    AND NOT EXISTS (SELECT 1
+					          FROM BOM D, BOMITEM E
+					         WHERE A.GSXX01 = D.GSXX01
+					           AND D.BOM01 = E.BOM01
+					           AND D.GSXX01 = E.GSXX01
+					           AND D.BOM09 = 1
+					           AND A.SPXX01 = D.SPXX01)
+					           
+			<!--AND S.SPXX28 not in  (select DISTINCT (case
+						when GET_JLCONF_F(100, A.GSXX01) = 1 then 1
+						when A.DJLX IN (8 , 9 , 10 , 51) then 1 else -1 end)
+				   FROM DSFHPSB M, SPXX N
+                         WHERE M.SPXX01 = N.SPXX01
+                           AND NOT EXISTS (SELECT 1
+                                  FROM BOM D, BOMITEM E
+                                 WHERE M.GSXX01 = D.GSXX01
+                                   AND D.BOM01 = E.BOM01
+                                   AND D.GSXX01 = E.GSXX01
+                                   AND D.BOM09 = 1
+                                   AND M.SPXX01 = D.SPXX01)-->
+                           AND (S.SPXX28 = 0 OR GET_100CSZT(A.DJLX,A.GSXX01) = 0)
+                           AND M.JLWBDH=A.JLWBDH
+                           AND M.GSXX01=A.GSXX01
+	  <if test="JLWBDH != null and JLWBDH != ''">
+		       		AND M.JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       		AND M.GSXX01 = #{GSXX01}
+	  </if>
+				    )
+	  </if>		           
+       	 JL{CZY|A.WLDW01|WLDW_CZ|LIKE%}JL
+       	 <!-- JL{CZY|A.CGBM01|BM_CZ|LIKE%}JL
+       	 JL{CZY|A.XSBM01|BM_CZ|LIKE%}JL -->
+       	 JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+      <if test="SFHZT != null and SFHZT != '' and SFHZT != -1">
+       	 <![CDATA[
+       	 	   AND ABS(A.YSFSL)-ABS(A.SSFSL)>ABS(A.ZFSL)+ABS(A.JSSL)
+       	 ]]>
+      </if>
+      <if test="SFHZT == -1">
+       	 <![CDATA[
+       	 	   AND ABS(A.YSFSL)-ABS(A.SSFSL)<=ABS(A.ZFSL)+ABS(A.JSSL)
+       	 ]]>
+      </if>
+	  <if test="JLWBDH != null and JLWBDH != ''">
+		       AND A.JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND A.GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(A.DJLX) = #{DJLX}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(A.CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  <if test="WLDWMC != null and WLDWMC != ''">
+		       AND A.WLDW01 IN (SELECT WLDW01 FROM WLDW WHERE WLDW02 LIKE '%'||#{WLDWMC}||'%')
+	  </if>
+	  <if test="CG_BM01 != null and CG_BM01 != ''">
+		       AND A.CGBM01 IN (SELECT BM01 FROM BM WHERE BM02 LIKE '%'||#{CG_BM01}||'%')
+	  </if>
+	  <if test="FSRQ != null and FSRQ != ''">
+		       AND to_char(A.FSRQ,'YYYY-MM-DD') = to_char( to_date(#{FSRQ},'YYYY-MM-DD'),'YYYY-MM-DD')
+	  </if>
+	  <if test="CKMC != null and CKMC != ''">
+		       AND A.CK01 IN (SELECT CK01 FROM CK WHERE CK02 LIKE '%'||#{CKMC}||'%')
+	  </if>
+	  
+    </select>
+</mapper>

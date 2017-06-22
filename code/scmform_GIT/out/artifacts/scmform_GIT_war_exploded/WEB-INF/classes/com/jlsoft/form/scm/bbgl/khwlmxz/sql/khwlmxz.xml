@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KHWLMXZ">
+	<select id="queryKHWL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01, (SELECT KSLX02 FROM KSLX WHERE KSLX01 = W.KSLX01) KSLX,
+       A.WLDW01, 
+       B.BM02 BMMC, 
+       W.WLDW02 KHMC, 
+       W.WLDW03, 
+       to_char(NVL(A.DWYE01, 0)) HKYE, 
+       A.GSXX01, 
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSXX02, 
+       (SELECT KSLB02 
+          FROM KSLB 
+         WHERE KSLB01 = W.WLDW31 
+           AND KSLB03 = 1) KSLB02, 
+       to_char(NVL(A.DWYE02, 0)) YFKYE, 
+       to_char(NVL(A.DWYE10, 0)) CYFJE, 
+     <!--   NVL((A.DWYE01 - A.DWYE02 - A.DWYE10), 0) YFYE,  -->
+       to_char(NVL(A.DWYE06, 0)) FLYE, 
+       to_char(NVL(A.DWYE07, 0)) FPYE, 
+       to_char(NVL(A.DWYE08, 0)) YSSR, 
+       to_char(NVL(A.DWYE13, 0)) YUSYE, 
+       to_char(NVL(A.DWYE03, 0)) YFYE, 
+       to_char(NVL(A.DWYE04, 0)) YSYE, 
+       to_char(NVL((A.DWYE03 + A.DWYE04 - A.DWYE13), 0)) YE, 
+       to_char(NVL(A.DWYE05, 0)) XYED, 
+       to_char(NVL(A.DWYE14, 0)) WBYSKYF, 
+       to_char(NVL((A.DWYE14 + A.DWYE15 - A.DWYE16), 0)) WBYSYE, 
+       to_char(NVL((A.DWYE15), 0)) WBPDYE, 
+       to_char(NVL(A.DWYE16, 0)) WBYUSYE, 
+       to_char(NVL((A.DWYE03 + A.DWYE04 - A.DWYE13 - A.DWYE06), 0)) KCFLYE, 
+       to_char(NVL((A.DWYE01 - A.DWYE02 - A.DWYE10 - A.DWYE08), 0)) YE, 
+       to_char(NVL(A.DWYE19, 0)) YFFL, 
+       to_char(NVL(A.DWYE06 - A.dwye24, 0)) KYFL, 
+       NVL(A.dwye24, 0) YHFLJE,
+       to_char(NVL(A.DWYE20, 0)) YFZDYE, 
+       to_char(NVL(A.DWYE21, 0)) FXZDYE, 
+       to_char(NVL(A.DWYE23, 0)) YHZDYE, 
+       to_char(NVL(A.DWYE25, 0)) DWYE25, 
+        to_char(NVL(A.DWYE26, 0)) BZJYE, 
+       (Select WLDW01_R From KSJSBH Where WLDW01 = A.WLDW01) WLDW01_R, 
+       (Select WLDW.WLDW02 
+          From KSJSBH, WLDW 
+         Where KSJSBH.WLDW01_R = WLDW.WLDW01 
+           AND KSJSBH.WLDW01 = A.WLDW01) WLDW02_R, 
+       to_char(NVL((A.DWYE01 - A.DWYE02 - A.DWYE10 - A.DWYE07), 0)) CWYE, 
+       to_char(NVL(A.DWYE26, 0)) DWYE26 ,
+      NVL(A.DWYE13 - (A.DWYE23 - A.DWYE24 )  +  A.LSED   + A.DWYE05 - A.DWYE21 - A.DWYE03 - A.DWYE04,0) KYYE
+  FROM DWYEZ A, BM B, WLDW W 
+ WHERE A.BM01 = B.BM01 
+   AND A.WLDW01 = W.WLDW01 
+   AND W.WLDW20=1
+		   JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+       	   JL{CZY|A.BM01|BM_CX|LIKE%}JL
+           JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+        <if test="WLDW != null and WLDW != ''">
+			   AND (A.WLDW01 LIKE '%'||#{WLDW}||'%' OR W.WLDW02
+					LIKE '%'||#{WLDW}||'%')
+        </if>
+	    <if test="CGBM != null and CGBM != ''">
+			 <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+	          B.BM01 LIKE #{item}||'%'
+	    	 </foreach>
+	    </if>
+	    <if test="WLMX != null and WLMX != ''">
+	       AND   W.WLDW21 = #{WLMX}
+	    </if>
+	    <if test="YFKE == null ">
+	       AND (A.DWYE03 + A.DWYE04 - A.DWYE13)!=0
+	    </if>
+		
+		<if test="KSLX != null and KSLX != ''">
+	       AND W.KSLX01=#{KSLX}
+	    </if>
+			 
+	</select>
+</mapper>

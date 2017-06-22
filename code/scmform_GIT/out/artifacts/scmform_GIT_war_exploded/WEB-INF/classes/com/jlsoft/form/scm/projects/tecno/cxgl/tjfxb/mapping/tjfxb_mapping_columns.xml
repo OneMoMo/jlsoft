@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.cxgl.tjfxb">
+		<FIELD attrname="GSXX01" target="GSXX01" allownull="N" name="公司代码" />
+		<FIELD attrname="LSWJH01" allownull="N" name="外部单号" />
+		<FIELD attrname="YYRQQ" target="YXRQ_S" allownull="N" name="有效日期起" />
+		<FIELD attrname="YYRQZ" target="YXRQ_E" allownull="N" name="有效日期止" />
+		<FIELD attrname="ZDRMC" allownull="N" name="制单人" />
+		<FIELD attrname="XS_BM01" target="BM01" allownull="N" name="销售部门" />
+		<FIELD attrname="BZ" allownull="N" name="备注" />
+		<FIELD attrname="SHRMC" allownull="N" name="审核人名称" />
+		<Nested id="SPLB">
+			<FIELD attrname="SPXX01" allownull="N" name="商品内码" />
+			<FIELD attrname="JYLSJ" target="JYDJ" defaultValue="0" name="零售单价" />
+			<FIELD attrname="LSDJ" target="YLSDJ" defaultValue="0" name="原零售价" />
+		</Nested>
+		<Nested id="CXBM">
+			<FIELD attrname="key" allownull="N" name="销售部门" />
+		</Nested>
+	</JLConfig>
+</root>

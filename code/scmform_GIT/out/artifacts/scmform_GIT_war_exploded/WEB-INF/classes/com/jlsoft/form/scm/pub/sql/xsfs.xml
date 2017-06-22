@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="XSFS">
+  <!-- 查询销售方式 -->
+  <select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT DISTINCT B.FLFS01, B.FLFS02 
+    FROM QXXSFSITEM A, FLFS B
+    WHERE A.FLFS01 = B.FLFS01
+    <if test="FLFS01 != null and FLFS01 != ''">
+	    AND B.FLFS01=#{FLFS01}
+	</if>
+  </select>  
+</mapper>

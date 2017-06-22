@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_WLDCD.SCM_CXWLDCD">
+       <FIELD attrname="DCDH01" format='{"DCDH01":{"$regex":"#DCDH01#"}}' fieldtype="String" allownull="Y" name="对冲单号" />
+       <FIELD attrname="DCMS" format='{"DCMS.key":"#DCMS#"}' fieldtype="String" allownull="Y" name="对冲模式" />
+       <!-- <FIELD attrname="BM01" format='{"SPLB.BM01":"#BM01#"}' fieldtype="String" allownull="Y" name="部门编码" /> -->
+       <FIELD attrname="WLDWMC" format='{"$or":[{"SPLB.WLDWMC":{"$regex":"#WLDWMC#"}}]}' fieldtype="String" allownull="Y" name="供应商" />
+       <FIELD attrname="CWRQQ" format='{"CWRQ":{"$gte":"#CWRQQ#"}}' fieldtype="String" allownull="Y" name="财务日期" />
+       <FIELD attrname="CWRQE" format='{"CWRQ":{"$lte":"#CWRQE#"}}' fieldtype="String" allownull="Y" name="财务日期" />
+  	   <FIELD attrname="ZDRMC" format='{"ZDRMC":{"$regex":"#ZDRMC#"}}' fieldtype="String" allownull="Y" name="制单人" />
+  	   <FIELD attrname="ZDRQQ" format='{"ZDRQ":{"$gte":"#ZDRQQ#"}}' fieldtype="String" allownull="Y" name="制单日期" />
+       <FIELD attrname="ZDRQE" format='{"ZDRQ":{"$lte":"#ZDRQE#"}}' fieldtype="String" allownull="Y" name="制单日期" />
+       <FIELD attrname="SHRMC" format='{"SHRMC":{"$regex":"#SHRMC#"}}' fieldtype="String" allownull="Y" name="审核人" />
+       <FIELD attrname="SHRQQ" format='{"SHRQ":{"$gte":"#SHRQQ#"}}' fieldtype="String" allownull="Y" name="审核日期" />
+       <FIELD attrname="SHRQE" format='{"SHRQ":{"$lte":"#SHRQE#"}}' fieldtype="String" allownull="Y" name="审核日期" />
+	   <FIELD qx='SPLB.WLDW01|WLDW_CX|in' />
+	   <FIELD qx='SPLB.BM01|BM_CX|LIKE%' />
+	</JLConfig>
+	
+</root>

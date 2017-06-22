@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FYBM.SCM_FYBM">
+	  <FIELD attrname="query" format='{"$or":[{"FYBMDM":{"$regex":"#query#"}},{"FYBMMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="费用部门编码" />
+      <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+      <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_FYBM.SCM_FYBM1">  
+	    <FIELD attrname="query" format='{"$or":[{"FYBMDM":{"$regex":"#query#"}},{"FYBMMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="费用部门编码" />
+        <FIELD qx='GSMC.key|CZGS_CZ|in' />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+
+	<JLConfig id="MONGO_FYBM.SCM_FYBM2">  
+	    <FIELD attrname="query" format='{"$or":[{"FYBMDM":{"$regex":"#query#"}},{"FYBMMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="费用部门编码" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+   </JLConfig>
+	
+	
+</root>
+ 

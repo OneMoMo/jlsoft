@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cxgl.cxzc">
+        <FIELD attrname="CXZCMC" fieldtype="String" allownull="N" name="政策名称" />
+        <FIELD attrname="CXKSRQ" allownull="N" name="开始时间"/>
+        <FIELD attrname="CXJSRQ" allownull="N" name="结束时间"/>
+	</JLConfig>
+	
+</root>

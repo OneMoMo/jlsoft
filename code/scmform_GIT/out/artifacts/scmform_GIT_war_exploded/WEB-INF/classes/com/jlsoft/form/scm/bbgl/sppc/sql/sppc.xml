@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPPC">
+<!-- 查询SPXX关联SPPCJC表(报表) -->
+	<select id="querySPPC" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,CONCAT(TO_CHAR(A.SPPC01), CONCAT('-', TO_CHAR(A.SPPC02))) AS  PCH,
+		       ROUND(A.SPPC05,2) YJHDJWS,A.SPPC02 PCXH,W.JXSL01 JXSL,S.GGB01 SPGG,S.JLDW01 JLDW,
+		       A.SPPC06 JHSL,ROUND(A.SPPC05 * (1 + W.JXSL01),2) YJHDJHS,A.CGXY02 SPSX,
+		       A.SPPC11 THSL,GET_SPSX_V10(A.CGXY02) SPSXMC,A.SPPC07 BJSL,A.SPPC08 SYSL,A.SPPC09 XSSL,
+		       0 XJHDJHS,(SELECT JLWBDH FROM CGXY WHERE GSXX01=A.GSXX01 AND CGXY01=A.SPPC22) XYH01,
+		       SPPC12 YXJC,A.WLDW01 GYS_WLDW01,A.SPPC26 CYSL,W.WLDW02 GYSMC,
+		       A.BM01 CG_BM01,A.SPPC25 ZZSL,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) CGBMMC,
+		       A.SPPC12 JCSL,ROUND(A.SPPC13,2) WSJCJE,(SELECT PPB02 FROM PPB WHERE PPB01 = S.PPB01) SPPP,
+		       ROUND(A.SPPC13 * (1 + W.JXSL01), 2) HSJCJE,TO_CHAR(A.SPPC03, 'YYYY-MM-DD') JHRQ,
+		       A.YFLL01 YFL,(SELECT HSBL FROM SPHSDW WHERE DWBJ = 1 AND SPXX01 = A.SPXX01) HSBL,
+		       ROUND(A.TFJE01,2) TFJE, GET_HZFS(A.SPPC04) HZFSMC,A.SPPC04 HZFS,S.SPFL01,S.SPFL02 SPFLMC,
+		       A.SPPC10 BRSL
+		  FROM SPPCJC A, SPXX S, WLDW W, BM B, SCCJ C
+		 WHERE A.BM01 = B.BM01
+		   AND A.WLDW01 = W.WLDW01
+		   AND A.SPXX01 = S.SPXX01
+		   AND S.SCCJ01 = C.SCCJ01(+)
+       <if test="SPMC != null and SPMC != ''">
+            <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		     Upper(S.SPXX02)  LIKE  Upper( '%'||#{item}||'%') OR  Upper(S.SPXX04) LIKE Upper('%'||#{item}||'%')  OR  Upper(S.SPPYM)  LIKE  Upper('%'||#{item}||'%')
+		     </foreach>
+       </if>
+       
+	   <if test="BM01 != null and BM01 !=''">
+		    <foreach item="item" index="index" collection="BM01"  open=" AND (" separator=" or " close=")"> 
+			A.BM01 = #{item}
+			</foreach> 
+	   </if>
+	   
+	   <if test="SPFL01 != null and SPFL01 !=''">
+		    <foreach item="item" index="index" collection="SPFL01"  open=" AND (" separator=" or " close=")"> 
+			S.SPFL01 like #{item}||'%'
+			</foreach> 
+	   </if>
+	   
+	   <if test="WLDW != null and WLDW !=''">
+	       <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 
+	   		W.WLDW02 LIKE  '%'||#{item}||'%' OR A.WLDW01 LIKE  '%'||#{item}||'%' OR W.WLDW03 LIKE '%'||#{item}||'%'		
+		   </foreach>
+       </if>
+       
+       <if test="SPPP01 != null and SPPP01 !=''">
+		    <foreach item="item" index="index" collection="SPPP01"  open=" AND (" separator=" or " close=")"> 
+			S.PPB01 = #{item}
+			</foreach>  
+	   </if>
+	   
+	   <if test="SPSX != null and SPSX != ''">
+       	   AND A.CGXY02 = #{SPSX}
+       </if>
+       
+       <if test="HZFS != NULL and HZFS != ''">
+           AND A.SPPC04 = #{HZFS}
+       </if>
+       
+       <if test="PCH != null and PCH !=''">
+	       AND A.SPPC01 = #{PCH}
+	   </if>
+	   
+	   <if test="XYH01 != null and XYH01 !=''">
+	       AND A.SPPC22 = #{XYH01}
+	   </if>
+       
+       <if test="JHRQ_S != null and JHRQ_S !=''">
+		    <![CDATA[AND A.SPPC03 >= TO_DATE(#{JHRQ_S},'YYYY-MM-DD')]]>
+	   </if>
+	   
+	   <if test="JHRQ_E != null and JHRQ_E !=''">
+		    <![CDATA[AND A.SPPC03 <= TO_DATE(#{JHRQ_E},'YYYY-MM-DD')]]>
+	   </if>
+	   
+	   <if test="JCBJ != null and JCBJ !=''">
+	    <![CDATA[AND ((A.SPPC12 > 0) or (A.SPPC12 < 0))]]>
+       </if> 
+       JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	   ORDER BY A.BM01,
+	            A.SPXX01,
+	            A.SPPC01,
+	            A.SPPC02 
+  </select>
+</mapper>

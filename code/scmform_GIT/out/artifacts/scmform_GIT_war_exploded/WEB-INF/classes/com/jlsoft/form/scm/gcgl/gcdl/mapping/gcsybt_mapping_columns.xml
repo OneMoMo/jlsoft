@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gcdl.gcsybtzd">
+		<FIELD attrname="GCDLD01" fieldtype="String" allownull="N" name="工程登录单号" />
+        <FIELD attrname="SYDW" fieldtype="String" allownull="N" name="使用单位" />
+        <FIELD attrname="LXDH" fieldtype="String" allownull="N" name="联系电话" />
+        <FIELD attrname="GMDW" fieldtype="String" allownull="N" name="购买单位" />
+        <FIELD attrname="YHDH" fieldtype="String" allownull="N" name="用户电话" />
+		<Nested id="YYHZZ" allownull="N" name="已要货终止">
+        </Nested>
+	</JLConfig>
+</root>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgld.gcdld">
+        <FIELD attrname="SYDW" fieldtype="String" allownull="N" name="使用单位" />      
+        <FIELD attrname="GMDW" fieldtype="String" allownull="N" name="购买单位" />      
+        <FIELD attrname="JXSMC" fieldtype="String" allownull="N" name="经销商" />
+        <FIELD attrname="YHDH" fieldtype="String" allownull="N" name="用户电话" />
+        <!-- <FIELD attrname="MJ" fieldtype="String" allownull="N" name="面积" />
+        <FIELD attrname="PS" fieldtype="String" allownull="N" name="匹数" /> -->
+        <Nested id="GCYT">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="工程用途" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="工程用途" />
+        </Nested>
+        <Nested id="SPLB" allownull="N" name="工程登录明细">
+            <FIELD attrname="SQSL" fieldtype="String" allownull="N" name="申请数量" />
+            <!-- <FIELD attrname="SQDJ" fieldtype="String" allownull="N" name="申请价格" /> -->
+        </Nested>
+        <Nested id="AZDZLB" allownull="N" name="安装地址列表">
+            <FIELD attrname="AZDZ" allownull="N" name="安装地址" />
+            <FIELD attrname="LXR" fieldtype="String"  allownull="N" name="联系人" />
+            <FIELD attrname="LXDH" fieldtype="String" allownull="N" name="联系电话" />
+        </Nested>
+	</JLConfig>
+	<JLConfig id="form.scm.gcgld.gcdldsh">
+		<FIELD attrname="DLXH" fieldtype="String" allownull="N" name="登录序号" />
+        <!-- <Nested id="SPLB" allownull="N" name="工程登录明细">
+            <FIELD attrname="PFSL" fieldtype="String" allownull="N" name="批复数量" />
+            <FIELD attrname="PFDJ" fieldtype="String" allownull="N" name="批复价格" />
+        </Nested> -->
+	</JLConfig>
+	
+	<JLConfig id="form.scm.gcht.gchtzd">
+        <FIELD attrname="HTQDRQ" fieldtype="String"  allownull="N" name="合同签订日期" />
+		<Nested id="HTSCFJ" allownull="N" name="上传附件">
+		</Nested>
+		<Nested id="SPLB" allownull="N" name="工程登录明细">
+			<FIELD attrname="PFSL" fieldtype="String" allownull="N" check=" PFSL > 0 " name="合同数量" />
+            <FIELD attrname="SQDJ" fieldtype="String" allownull="N" check=" SQDJ > 0 " name="合同单价" />
+             <FIELD attrname="SQJE" fieldtype="String" allownull="N" name="合同金额" />
+            <FIELD attrname="AZDZ" fieldtype="String" allownull="N" name="安装地址" />
+            <FIELD attrname="LXR" fieldtype="String" allownull="N" name="联系人" />
+            <FIELD attrname="LXDH" fieldtype="String" allownull="N" name="联系电话"/>
+		</Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.gcht.gchtsh">
+         <Nested id="SPLB" allownull="N" name="工程登录明细">
+            <FIELD attrname="PFDJ" fieldtype="String" allownull="N" name="批复单价" />
+            <FIELD attrname="PFJE" fieldtype="String" allownull="N" name="批复金额" />
+        </Nested>
+         <Nested id="HTXSFS">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="销售方式" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="销售方式" />
+        </Nested> 
+	</JLConfig>
+	
+</root>

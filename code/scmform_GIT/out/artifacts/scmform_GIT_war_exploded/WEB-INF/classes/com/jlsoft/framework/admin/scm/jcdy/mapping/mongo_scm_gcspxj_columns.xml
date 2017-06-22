@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCSPXJ.SCM_GCSPXJ">
+		<FIELD attrname="GCSP" format='{"$or":[{"GCSPBM":"#GCSP#"},{"GCSPMC":{"$regex":"#GCSP#"}}]}' fieldtype="string" allownull="Y" />
+    	<FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" />
+    	<FIELD attrname="PCRM_GSXX01" format='{"GSXX01":"#PCRM_GSXX01#"}' fieldtype="string" allownull="Y" />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_GCSPXJ.GCSP">
+		<FIELD attrname="GCSP" format='{"$or":[{"GCSPBM":"#GCSP#"},{"GCSPMC":{"$regex":"#GCSP#"}}]}' fieldtype="string" allownull="Y" />
+    	<FIELD attrname="S_VALUE"  format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="string" allownull="Y" />
+    	<FIELD attrname="PCRM_GSXX01" format='{"GSXX01":"#PCRM_GSXX01#"}' fieldtype="string" allownull="Y" />
+	</JLConfig>
+</root>
+ 

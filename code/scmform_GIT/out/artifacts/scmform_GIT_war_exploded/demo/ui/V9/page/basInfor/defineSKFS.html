@@ -1,0 +1,216 @@
+<div class="pagr_content">
+  <div class="w12 jl_defSee">
+    <div class="w12 jl_screening">
+      <div class="w09 scr_seach">
+        <ul>
+          <li>
+            <dl>
+              <dt>时间：</dt>
+              <dd class="w10">
+            <div class="w06 jl_btn_group">
+              <input type="text" placeholder="开始时间" class="jl_time_01">
+              <span class="jl_btn btn_blue_or"><i class="fa fa-calendar"></i></span>
+            </div>
+            <div class="w06 jl_btn_group">
+              <input type="text" placeholder="结束时间" class="jl_time_02">
+              <span class="jl_btn btn_blue_or"><i class="fa fa-calendar"></i></span>
+            </div>
+            </dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dd class="w12">
+                <div class="jl_btn_group">
+              <input type="text" placeholder="代码/名称">
+              <span class="jl_btn btn_blue_or"><i class="fa fa-search"></i></span>
+            </div>
+            </dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+      <div class="scr_btn">
+        <a class="jl_btn btn_blue" onclick="jl_defCarShow()"><i class="fa fa-plus-square"></i>新增</a>
+      </div>
+    </div>
+    <div class="w12 jl_title">
+      <dl>
+        <dt><i class="fa fa-square-o"></i></dt>
+        <dd class="w01">代码</dd>
+        <dd class="w02">名称</dd>
+        <dd class="w02">外地币种</dd>
+        <dd class="w02">本地币种</dd>
+        <dd class="w01">金额方式</dd>
+        <dd class="w01 tc">手续费率</dd>
+        <dd class="w01 tc">找零金额</dd>
+        <dd class="w01 tc">最高手续费</dd>
+        <dd class="w01 tc">操作</dd>
+      </dl>
+    </div>
+    <div class="w12 jl_list">
+      <div class="jl_list_03">
+      <div class="list_item_main">
+        <dl>
+          <dt><i class="fa fa-square-o"></i></dt>
+          <dd class="w01"><ul><li><span>01</span></li></ul></dd>
+          <dd class="w02"><ul><li><span>现金</span></li></ul></dd>
+          <dd class="w02"><ul><li><span>人名币</span></li></ul></dd>
+          <dd class="w02"><ul><li><span>人名币</span></li></ul></dd>
+          <dd class="w01"><ul><li><span>现金</span></li></ul></dd>
+          <dd class="w01 tc"><ul><li><span>0</span></li></ul></dd>
+          <dd class="w01 tc" title="0"><ul><li><span>0</span></li></ul></dd>
+          <dd class="w01 tc" title="0"><ul><li><span>0</span></li></ul></dd>
+          <dd class="w01 tc"><ul><li><span><a class="font_blue" onclick="jl_defCarShow()">编辑</a> <a class="font_blue" id="message_ts">删除</a></span></li></ul></dd>
+          <dd class="w12 more">
+            <ul>
+             <li><span class="font_red">转收入有效</span><span class="font_red">分销有效</span><span class="font_red">找零有效</span><span class="font_red">销售有效</span><span class="font_red">收付款有效</span><span class="font_red">订金有效</span><span class="font_red">赊款有效</span></li>
+            </ul>
+          </dd>
+        </dl>
+        <dl>
+          <dt><i class="fa fa-square-o"></i></dt>
+          <dd class="w01"><ul><li><span>01</span></li></ul></dd>
+          <dd class="w02"><ul><li><span>现金</span></li></ul></dd>
+          <dd class="w02"><ul><li><span>人名币</span></li></ul></dd>
+          <dd class="w02"><ul><li><span>人名币</span></li></ul></dd>
+          <dd class="w01"><ul><li><span>现金</span></li></ul></dd>
+          <dd class="w01 tc"><ul><li><span>0</span></li></ul></dd>
+          <dd class="w01 tc" title="0"><ul><li><span>0</span></li></ul></dd>
+          <dd class="w01 tc" title="0"><ul><li><span>0</span></li></ul></dd>
+          <dd class="w01 tc"><ul><li><span><a class="font_blue" onclick="jl_defCarShow()">编辑</a> <a class="font_blue ml10" id="message_ts">删除</a></span></li></ul></dd>
+          <dd class="w12 more">
+            <ul>
+             <li><span class="font_red">转收入有效</span><span class="font_red">分销有效</span><span class="font_red">找零有效</span><span class="font_red">销售有效</span></li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+      </div>
+    </div>
+    <div class="jl_bottom">
+      <ul>
+      <li><div class="jl_input_checkbox"><i class="fa fa-check-square"></i><span>全选</span></div></li>
+      <li><a class="jl_btn btn_blue_or"><i class="fa fa-trash-o"></i>删除</a></li>
+      <li>
+      <div class="jl_btn_group">
+        <div class="btn_group_text">每页10条</div>
+          <span class="jl_btn btn_white"><i class="fa fa-angle-up"></i></span>
+          <ul class="jl_dropdown_menu jl_droptop_menu">
+            <li><a>每页10条</a></li>
+            <li><a>每页30条</a></li>
+            <li><a>每页50条</a></li>
+            <li><a>每页100条</a></li>
+          </ul>
+        </div>
+        </li>
+        <li>
+         <div class="paging">
+          <a class="border_radius" title="首页"><i class="fa fa-angle-double-left"></i></a>
+          <a class="border_radius" title="上一页"><i class="fa fa-angle-left"></i></a>
+          <label>
+           <input />
+           <span>至</span>
+           <span>3</span>
+          </label>
+          <a class="border_radius" title="下一页"><i class="fa fa-angle-right"></i></a>
+          <a class="border_radius" title="末页"><i class="fa fa-angle-double-right"></i></a>
+         </div>
+         </li>
+       </ul>
+      </div>
+  </div>
+</div>
+</div>
+<div class="w05 jl_defCar">
+  <div class="jl_defCar_header">
+    <h3>新增收款方式</h3>
+    <span class="close" onclick="jl_defCarHide()">×</span>
+  </div>
+  <div class="jl_defCar_main">
+    <div class="jl_form">
+      <div class="jl_form_01">
+      <dl>
+        <dt class="w02" title="代码">代码</dt>
+        <dd class="w10"><em class="btx font_red"></em><input type="text" class="w09"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="名称">名称</dt>
+        <dd class="w10"><em class="btx font_red"></em><input type="text" class="w09"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="外地币种">外地币种</dt>
+        <dd class="w10">
+          <em class="btx font_red"></em>
+          <div class="w09 jl_btn_group">
+            <input placeholder="外地币种" type="text" />
+            <span class="jl_btn btn_white"><i class="fa fa-angle-down"></i></span>
+            <ul class="jl_dropdown_menu">
+              <li><a>人名币</a></li>
+              <li><a>美元</a></li>
+              <li><a>欧元</a></li>
+            </ul>
+          </div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="本地币种">本地币种</dt>
+        <dd class="w10">
+          <em class="btx font_red"></em>
+          <div class="w09 jl_btn_group">
+            <input placeholder="本地币种" type="text" />
+            <span class="jl_btn btn_white"><i class="fa fa-angle-down"></i></span>
+            <ul class="jl_dropdown_menu">
+              <li><a>人名币</a></li>
+              <li><a>美元</a></li>
+              <li><a>欧元</a></li>
+            </ul>
+          </div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="金额方式">金额方式</dt>
+        <dd class="w10">
+          <em class="btx font_red"></em>
+          <div class="w09 jl_btn_group">
+            <input placeholder="金额方式" type="text" />
+            <span class="jl_btn btn_white"><i class="fa fa-angle-down"></i></span>
+            <ul class="jl_dropdown_menu">
+              <li><a>现金</a></li>
+              <li><a>信用卡</a></li>
+              <li><a>电子券</a></li>
+            </ul>
+          </div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="手续费率">手续费率</dt>
+        <dd class="w10"><input type="text" class="w09"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="最高手续费">最高手续费</dt>
+        <dd class="w10"><input type="text" class="w09"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="是否有效">是否有效</dt>
+        <dd class="w10">
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>分销有效</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>有效</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>转收入有效</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>销售回款</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>单行销售</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>现金退款</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>收付款有效</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>零售有效</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>赊款有效</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>订金有效</span></div>
+        </dd>
+      </dl>
+    </div>
+    </div>
+  </div>
+  <div class="jl_defCar_footer">
+    <a class="jl_btn btn_blue_or"><i class="fa fa-floppy-o"></i>保存</a>
+    <a class="jl_btn btn_blue_or"><i class="fa fa-reply-all"></i>清空</a>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="w12 jl_screening">
+ <div class="w09 scr_seach">
+    <ul> 
+      <li>
+        <dl>
+          <dd class="w12">
+            <div class="jl_btn_group">
+				 <input type="text" placeholder="代码/名称" name="CXTJ" onkeypress="if(event.keyCode==13) {defineSPPP.query();return false;}">
+				 <span id="query" class="jl_btn btn_white"><i class="fa fa-search" name="search"></i></span>
+			</div>
+         </dd>
+        </dl>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!--列表-->
+<div id="d_LIST" class="w12"></div>
+
+<div class="jl_form addCarShow hide">
+	 <div class="jl_form_02">
+		<ul>
+			<div id="d_jlbh" class="hide"></div>
+			<li  class="w12">
+				<dl>
+					<dt class="w02" title="返利收入编码">返利收入编码</dt>
+					<dd class="w06">
+						<em class="btx font_red"></em><div id="d_FLSRBM" class="w12"></div>
+					</dd>
+				</dl>
+			</li>
+			<li  class="w12">
+				<dl>
+					<dt class="w02" title="返利收入名称">返利收入名称</dt>
+					<dd class="w06">
+						<em class="btx font_red"></em><div id="d_FLSRMC"  class="w12"></div>
+					</dd>
+				</dl>
+			</li>
+			<li  class="w12">
+				<dl>
+					<dt class="w02" title="财务类型">财务类型</dt>
+					<dd class="w06">
+						<div id="d_CWLX"  class="w12"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="返利"></dt>
+					<dd class="w06"><b style="color:red">返利：根据业务数据计算出来的返利，主要用于收入返利政策</b></dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="费用"></dt>
+					<dd class="w06"><b style="color:red">费用：用于非固定收入单和非固定返利单</b></dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="其他"></dt>
+					<dd class="w06"><b style="color:red">其他：系统自动生成收入单或返利单时使用</b></dd>
+				</dl>
+			</li>
+			<li  class="w12">
+				<dl>
+					<dt class="w02" title="使用设置">使用设置</dt>
+					<dd class="w10">
+						<div class="w03" id="d_SYSZ" ></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="供应商收入"></dt>
+					<dd class="w06">
+						<b style="color:red">供应商收入：制定非固定收入单使用</b>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="供应商收入"></dt>
+					<dd class="w06">
+						<b style="color:red">客户返利：制定非固定返利单使用</b>
+					</dd>
+				</dl>
+			</li>
+			<li  class="w12">
+				<dl>
+					<dt class="w02" title="有效标记">有效标记</dt>
+					<dd class="w06">
+						<div id="d_YX" class="w12"></div>
+					</dd>
+				</dl>
+			</li>
+			<li  class="w12">
+				<dl>
+					<dt class="w02" title="发票标记">发票标记</dt>
+					<dd class="w06">
+						<div id="d_FPBJ" class="w12"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="发票标记"></dt>
+					<dd class="w06">
+						<b style="color:red">发票标记：勾选客户返利时才可使用</b>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	 </div>
+	 <div class="jl_form_02">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w04"></dt>
+					<dd class="w08">
+						<div id="d_footer"></div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	 </div>
+</div>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GCYHD">
+	<select id="querySPLB" parameterType="Map" resultType="java.util.Map">
+		SELECT A.JLWBDH GCYHD01, B.SPXX02, S.SPXX04, B.YHDJ,B.YHSL,B.ZZSL,B.XSSL 
+		 FROM KHYHDITEM_NEW B, KHYHD_NEW A, SPXX S 
+		WHERE A.KHYHD01 = B.KHYHD01
+		  AND S.SPXX02 = B.SPXX02
+		   AND A.GSXX01 = B.GSXX01
+	      AND A.JLWBDH = #{GCYHD01}
+		  <if test="SPMC != null and SPMC != ''">
+		      AND (S.SPXX02 LIKE '%' || #{SPMC} || '%' OR S.SPXX04 LIKE '%' || #{SPMC} || '%')
+		  </if>
+		  <if test="GSXX01 != null and GSXX01 != ''">
+		    AND A.GSXX01=#{GSXX01}
+		  </if>
+	</select>
+	<select id="hotGCYHD" parameterType="Map" resultType="java.util.Map">
+		SELECT A.GCSPBM, A.GCSPMC, S.SPXX02,S.SPXX04, A.SPXX01,S.PPB02 PPMC,
+			   GET_KMS(S.SPXX01, (SELECT NVL(SUM(CKSP04 + CKSP05), 0) 
+			   FROM CKSP WHERE SPXX01 = S.SPXX01 JL{CZY|CK01|CK_CZ|LIKE%}JL)) SL 
+  			FROM GCSPDZ A, SPXX S
+ 		WHERE A.SPXX01 = S.SPXX01
+ 		<if test="GCSPBM != null and GCSPBM != ''">
+ 			AND A.GCSPBM= #{GCSPBM}
+ 			</if>
+ 		<if test="GSXX01 != null and GSXX01 != ''">
+ 			AND A.GSXX01= #{GSXX01}
+ 			</if>	
+ 		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+		  <if test="SPXX != null and SPXX != ''">
+      		 AND (S.SPXX02 LIKE '%'||#{SPXX}||'%' OR S.SPXX04 LIKE '%'||#{SPXX}||'%') 
+		  </if>
+	</select>
+	
+	<!-- 控制件经销商结算的收差数量 -->
+	<select id="KZSCSL" parameterType="Map" resultType="java.util.Map">
+		select A.PFDI01,A.SPXX01,B.SPXX02,B.SPXX04,
+        A.PFDI05 THSL,A.GCJZLSL ZLSL,A.GCSCSL GCSCSL,C.GCDJH GCDLD01,
+        A.PFDI05 - A.GCJZLSL - A.GCSCSL KSCSL ,A.GSXX01  
+   		FROM PFDITEM A, SPXX B, PFD C
+  		WHERE A.SPXX01 = B.SPXX01
+    		AND A.PFD01 = C.PFD01
+    		AND A.PFDI12 is not null
+    		AND A.GSXX01 = C.GSXX01
+ 		<if test="PFDI01 != null and PFDI01 != ''">
+ 			AND A.PFDI01= #{PFDI01}
+ 			</if>
+ 		<if test="SPXX01 != null and SPXX01 != ''">
+ 			AND A.SPXX01= #{SPXX01}
+ 			</if>	
+ 		<if test="GSXX01 != null and GSXX01 != ''">
+ 			AND A.GSXX01= #{GSXX01}
+ 			</if>
+	</select>
+</mapper>

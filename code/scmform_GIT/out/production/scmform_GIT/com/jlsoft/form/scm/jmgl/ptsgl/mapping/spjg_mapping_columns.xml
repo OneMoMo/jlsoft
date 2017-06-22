@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jmgl.ptsgl.spjg">
+		<FIELD attrname="SUPPLIER_ID" fieldtype="string" allownull="N" name="平台商编码" />
+		  <Nested id="PRICE" target="PRICE" allownull="N">
+            <FIELD attrname="GOODS_ID" target="GOODS_ID" allownull="N"/> <!--商品代码-->
+            <FIELD attrname="TAG" target="TAG" allownull="N"/> <!--标牌价格（零售价）-->
+            <FIELD attrname="LIMIT" target="LIMIT" allownull="N"/> <!--限价-->
+            <FIELD attrname="COST" target="COST" allownull="N"/> <!--加盟商成本-->
+        </Nested>
+	</JLConfig>
+	<JLConfig id="MONGO_SPJG.SCM_SPJG">
+	<!-- 
+	 <FIELD attrname="DMMC" format='{"ZDR_RYXX01":{"$regex":"#ZDR_RYXX01#"}}' fieldtype="String" allownull="Y" name="人员" />
+	  -->
+	   <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	   <FIELD attrname="ZDR_RYXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	   <FIELD attrname="action" fieldtype="Map" allownull="Y" name="操作类型" />
+	</JLConfig>
+</root>

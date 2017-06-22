@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_MDKZSQ.SCM_MDKZSQ">  
+  <!--   	<FIELD attrname="query" format='{"$or":[{"FLDM01":"#query#"},{"SJFLBH":{"$regex":"#query#"}},{"FLMC":{"$regex":"#query#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+ -->    	<!-- <FIELD attrname="SFKQ" fieldtype="string" allownull="Y" name="状态" /> -->
+  	<FIELD attrname="MDZT" format='{"MDZT.key":{"$regex":"#MDZT#"}}' fieldtype="String" allownull="N" name="门店状态" />
+  	  	          	</JLConfig>
+</root>   

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>商品搜索</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header class="seach_header">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<div class="header_seach">
+  <div class="jl_input">
+    <input placeholder="输入会员手机号码检索" class="w12 radius3">
+    <i class="fa fa-times-circle"></i>
+  </div>
+</div>
+<a class="seach_a">搜索</a>
+</div>
+</header>
+
+<div class="main" style="padding-top:2.5rem;">
+<h3 class="seachPro_ls">历史搜索</h3>
+<div class="jl_list seachPro_list">
+  <div class="jl_list_case">
+    <span>美的空调</span>
+  </div>
+  <div class="jl_list_case">
+    <span>格力空调</span>
+  </div>
+  <div class="jl_list_case">
+    <span>小天鹅洗衣机</span>
+  </div>
+  <div class="jl_list_case">
+    <span>美的空调</span>
+  </div>
+  <div class="jl_list_case">
+    <span>格力空调</span>
+  </div>
+  <div class="jl_list_case">
+    <span>小天鹅洗衣机</span>
+  </div>
+</div>
+</div>
+
+<footer>
+<div class="w12 jl_btn">清除历史记录</div>
+</footer>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

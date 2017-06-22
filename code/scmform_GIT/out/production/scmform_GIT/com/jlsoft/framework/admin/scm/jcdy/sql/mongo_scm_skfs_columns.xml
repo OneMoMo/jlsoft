@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SKFS.SCM_SKFS">   
+        <FIELD attrname="DMMC" format='{"$or":[{"SKFS01":{"$regex":"#DMMC#"}},{"SKMC":{"$regex":"#DMMC#"}},{"SFZH":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="人员" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        <FIELD attrname="KSSJ" format='{"RZRQ":{"$gte":"#KSSJ#"}}'  fieldtype="String" allownull="Y" name="开始时间" />
+        <FIELD attrname="JSSJ" format='{"RZRQ":{"$lte":"#JSSJ#"}}'  fieldtype="String" allownull="Y" name="结束时间" />
+	</JLConfig>
+</root>   

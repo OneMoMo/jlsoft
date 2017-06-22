@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_WHKJQJ.SCM_WHKJQJ">   
+        <FIELD attrname="WHCWND" format='{"$or":[{"CWND":{"$regex":"#WHCWND#"}},{"GSXX01":{"$regex":"#GSXX01#"}}]}' fieldtype="String" allownull="Y" name="财务年度查询" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+	
+		<JLConfig id="MONGO_WHKJQJ.SCM_WHKJQJ1">   
+        <FIELD attrname="WHCWND" format='{"$or":[{"CWND":{"$regex":"#WHCWND#"}},{"GSXX01":{"$regex":"#GSXX01#"}}]}' fieldtype="String" allownull="Y" name="财务年度查询" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+         <FIELD qx='GSXX01|CZGS_CZ|in' />
+	</JLConfig>
+	
+		<JLConfig id="MONGO_WHKJQJ.SCM_WHKJQJ2">   
+        <FIELD attrname="WHCWND" format='{"$or":[{"CWND":{"$regex":"#WHCWND#"}},{"GSXX01":{"$regex":"#GSXX01#"}}]}' fieldtype="String" allownull="Y" name="财务年度查询" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.spfl">
+		<FIELD attrname="SPFL01" fieldtype="string" allownull="N" name="分类代码" />
+        <FIELD attrname="SPFLMC" fieldtype="string" allownull="N" name="分类名称" />
+	</JLConfig>
+</root>

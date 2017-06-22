@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="GCHTTZD.CXGCHTTZD">
+	  <FIELD attrname="GCSP" format='{"$or":[{"SPLB.GCSPMC":{"$regex":"#GCSP#"}},{"SPLB.GCSPBM":{"$regex":"#GCSP#"}}]}' fieldtype="String" allownull="Y" name="工程商品查询" />
+	
+		<FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" name="用户姓名" />
+	  	<FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+		<FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+		<FIELD attrname="PCRM_GSXX01" format='{"GSXX01":"#PCRM_GSXX01#"}' fieldtype="String" allownull="Y" name="公司信息" />
+		<FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+		<FIELD attrname="GCHTH01" format='{"GCHTH01":{"$regex":"#GCHTH01#"}}' fieldtype="String" allownull="Y" name="工程合同号" />
+		<FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+		<FIELD attrname="SYDWDZ" format='{"SYDWDZ":{"$regex":"#SYDWDZ#"}}' fieldtype="String" allownull="Y" name="使用单位地址" />
+		<FIELD attrname="SHRQQ" format='{"SHSJ":{"$gte":"#SHRQQ# 00:00:01"}}' fieldtype="String" allownull="Y" name="批复时间" />
+		<FIELD attrname="SHRQZ" format='{"SHSJ":{"$lte":"#SHRQZ# 23:59:59"}}' fieldtype="String" allownull="Y" name="批复时间" />
+		<FIELD attrname="SQRQQ" format='{"HTSJ":{"$gte":"#SQRQQ# 00:00:01"}}' fieldtype="String" allownull="Y" name="批复时间" />
+		<FIELD attrname="SQRQZ" format='{"HTSJ":{"$lte":"#SQRQZ# 23:59:59"}}' fieldtype="String" allownull="Y" name="批复时间" />
+		<FIELD qx='WLDW01|WLDW_CX|in' />
+		<FIELD qx='XSBM01|BM_CX|LIKE%' />
+	</JLConfig>
+</root>

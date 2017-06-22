@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FormQuery">
+
+  <select id="selectCX" parameterType="Map" resultType="java.util.Map">
+	${CX03}
+	<if test="queryFields != null">
+		<foreach item="item" index="index" collection="queryFields">
+			<if test="item.value != null and item.value != ''">
+   	   			<if test="item.TJ04==0">
+  	   		   		AND ${item.TJ02} ${item.TJ05} 
+               		<choose>
+	                	<when test="item.TJ05 == 'LIKE'"> '%'|| #{item.value} ||'%' </when>
+	                	<when test="item.TJ05 == 'IN'"> (select * from table(PK_SPLIT.split('${item.value}',','))) </when>
+	                	<otherwise> #{item.value} </otherwise>
+	              	</choose>
+  	   		   	</if>
+   	   			<if test="item.TJ04==1">
+  	   		   		${item.TJ05} 
+  	   		   	</if>
+   	   		</if>
+   	   </foreach>
+   </if> 
+   <if test="CX04 != null">${CX04}</if> 
+  </select>
+	
+</mapper>

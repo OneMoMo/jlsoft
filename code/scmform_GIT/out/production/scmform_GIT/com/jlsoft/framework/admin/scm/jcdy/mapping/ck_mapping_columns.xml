@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.ck">
+		<FIELD attrname="CK01" fieldtype="string" allownull="N" name="仓库代码" />
+        <FIELD attrname="CKMC" fieldtype="string" allownull="N" name="仓库名称" />
+        <FIELD attrname="CKSX" allownull="N" name="仓库属性" />
+     </JLConfig>
+    <!--  <JLConfig id="form.scm.jcdy.ckmj">  
+		<Nested id="SZKQ" allownull="N" name="库区">
+            <FIELD attrname="KQBM" fieldtype="string" allownull="N" name="库区编码" />
+            <FIELD attrname="KQMC" fieldtype="string" allownull="N" name="库区名称" />
+       </Nested> 
+	</JLConfig>  -->
+</root>

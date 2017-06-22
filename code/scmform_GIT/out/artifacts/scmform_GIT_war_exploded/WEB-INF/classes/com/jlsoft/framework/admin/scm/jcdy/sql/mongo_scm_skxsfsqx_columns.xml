@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SKXSFSQX.SCM_SKXSFSQX">  
+        <FIELD attrname="query" format='{"$or":[{"QX01":{"$regex":"#query#"}},{"QXMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="权限名称" />
+        
+        <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FLFS">
+	<select id="FLFSXX" parameterType="Map" resultType="java.util.Map">
+		SELECT B.FLFS01 key, B.FLFS02 value
+          FROM QXXSFSITEM A, FLFS B
+         WHERE A.FLFS01 = B.FLFS01
+           AND B.FLFS03 = 1
+           <if test="QXXSFS01 != null and QXXSFS01 != ''">
+               AND A.QXXSFS01 = #{QXXSFS01} 
+           </if>
+           <if test="XSLX != null and XSLX != ''">
+               AND B.FLFS04 = #{XSLX} 
+           </if>
+           <if test="FLFS01 != null and FLFS01 != ''">
+               AND B.FLFS01 = #{FLFS01} 
+           </if>
+           <if test="XSLX_F != null and XSLX_F != ''">
+     	    AND B.FLFS04  not in  (${XSLX_F})
+      	   </if>
+      	   <if test="RYQX != null and RYQX != ''">
+      	    AND A.QXXSFS01 IN 
+                (SELECT R.RYXX09 FROM RYXX R WHERE R.RYXX01 = #{RYQX})
+           </if> 
+      	  ORDER BY A.QXXSFSI01
+	</select>
+	
+	<select id="DWFLFS" parameterType="Map" resultType="java.util.Map">
+		select A.STR key, B.FLFS02 value
+			  from (SELECT distinct REGEXP_SUBSTR(A.FLFS01, '[^;]+', 1, LEVEL, 'i') AS STR
+			          FROM DWYWY A
+			        
+			         WHERE A.FLFS01 is not null
+			         <if test="GSXX01 != null and GSXX01 != ''">
+				  	 AND GSXX01  = #{GSXX01}
+		      	  </if>
+		      	  <if test="WLDW01 != null and WLDW01 != ''">
+				  	 AND WLDW01  = #{WLDW01}
+		      	  </if>
+		      	   <if test="RYXX01 != null and RYXX01 != ''">
+				  	 AND RYXX01  = #{RYXX01}
+		      	  </if>
+			   <![CDATA[ CONNECT BY LEVEL <= LENGTH(A.FLFS01) -
+			              LENGTH(REGEXP_REPLACE(A.FLFS01, ';', '')) + 1) A,]]> 
+			       FLFS B
+			 WHERE A.STR = B.FLFS01
+	</select>
+	
+	<select id="XSFS" parameterType="Map" resultType="java.util.Map">
+		SELECT A.FLFS01, A.FLFS02, A.KHYHBJ FROM FLFS A 
+		WHERE 1=1
+		 <if test="FLFS01 != null and FLFS01 != ''">
+		 AND  A.FLFS01=#{FLFS01}
+		 </if>
+	</select>
+	
+	<select id="FLDM" parameterType="Map" resultType="java.util.Map">
+			SELECT FLDM01,FLDM02,FLDM04,FLDM05,FLDM06 
+			  FROM FLDM 
+			 WHERE FLDM03=1 AND FLDM06=2 
+			 <if test="FLDM01 != null and FLDM01 != ''">
+		         AND FLDM01=#{FLDM01}
+		     </if>
+	</select>
+	<select id="SR" parameterType="Map" resultType="java.util.Map">
+	SELECT JSSR01, JSSR02 FROM JSSRDM WHERE JSSR04=1  and JSSR03=3
+	</select>
+</mapper>

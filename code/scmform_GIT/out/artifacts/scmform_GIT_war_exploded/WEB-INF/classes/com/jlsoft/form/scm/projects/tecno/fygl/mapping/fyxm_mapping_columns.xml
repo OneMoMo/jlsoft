@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.fygl.fyxm">
+      <FIELD attrname="FYBM" fieldtype="string" allownull="N" name="费用编码" />
+      <FIELD attrname="FYXM" fieldtype="string" allownull="N" name="项目名称" />
+      <FIELD attrname="CWKM" fieldtype="string" allownull="N" name="财务科目" />
+	</JLConfig>	 
+</root>

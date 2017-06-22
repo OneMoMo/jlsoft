@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>账户资料</title>
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="../js/ui.js"></script>
+</head>
+<body>
+<div class="main">
+<div class="jl_list jl_list_bottom" id="portrait">
+  <div class="jl_list_case bor_bottom" jlui>
+    <span class="w04">头像</span>
+    <span class="tr imgbox"><img class="w12" src="../images/user_tx.jpg"/></span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom" onclick="window.location.href='rename.html'" jlui>
+    <span class="w04">用户名</span>
+    <span class="w08 tr">张三</span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom" onClick="window.location.href='repassword.html'">
+    <span class="w04">修改密码</span>
+    <span class="w08 tr"></span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom" onClick="window.location.href='address.html'">
+    <span class="w04">收货地址</span>
+    <span class="w08 tr"></span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="w12 model message_choose hide">
+      <div class="por_choose">
+         <ul class="w12">
+            <li class="bor_bottom">排照</li>
+            <li>从相册选择</li>
+         </ul>
+         <div class="cancel w12" id="cancel">取消</div>
+      </div>
+  </div>
+</div>
+</div>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+
+</script>
+</html>

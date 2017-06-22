@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.cksm">
+	<FIELD attrname="JLWBDH" fieldtype="string" allownull="N" name="单号" />
+	<FIELD attrname="DJLX" fieldtype="string" allownull="N" name="单据类型" />
+	<FIELD attrname="CZLX" fieldtype="string" allownull="N" name="操作类型" />
+	<FIELD attrname="CKMC" fieldtype="string" allownull="N" name="仓库名称" />
+	<Nested id="SPMXLB" allownull="N" name="商品明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="YSMSL" fieldtype="double" allownull="N" name="应扫数量" />
+    </Nested>
+	</JLConfig>
+</root>

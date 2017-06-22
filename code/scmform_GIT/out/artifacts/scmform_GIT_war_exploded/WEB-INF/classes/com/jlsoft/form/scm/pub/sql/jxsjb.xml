@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JXSJB">
+  <!-- 操作员对应的经销商级别 -->
+  <select id="CZY" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT A.JXSJB 
+      FROM W_GW A,W_CZYGW B,W_CZY C
+	  WHERE C.CZY01=B.CZY01 AND A.GW01=B.GW01 
+     <if test="DLZH != null and DLZH != ''">
+       AND C.CZY02 = #{DLZH}
+     </if>
+  </select>
+</mapper>  

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCZBD.GCZBD_BBZBTJ">
+       <FIELD attrname="GCZBD01" format='{"GCZBD01":{"$regex":"#GCZBD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="FHDH" format='{"FHDH":{"$regex":"#FHDH#"}}' fieldtype="String" allownull="Y" name="发货单号" />
+       <!-- <FIELD attrname="GCCKD" format='{"GCCKD":{"$regex":"#GCCKD#"}}' fieldtype="String" allownull="Y" name="工厂出库单号" /> -->
+        <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="GSXX01" />
+       <!--  <FIELD attrname="FHCK" format='{"FH_CK01":{"$in":#FHCK#}}'  allownull="Y" name="发货仓库"/>
+	   <FIELD attrname="SHCK" format='{"SH_CK01":{"$in":#SHCK#}}'  allownull="Y" name="收货仓库"/> -->
+       <FIELD attrname="ZDR" format='{ "$or" : [ { "ZDRMC" : { "$regex" : "#ZDR#"}} , { "ZDR_RYXX01" : { "$regex" : "#ZDR#"}}]}' fieldtype="String" allownull="Y" name="制单人" />
+  		<FIELD attrname="SHR" format='{ "$or" : [ { "SHRMC" : { "$regex" : "#SHR#"}} , { "SHR_RYXX01" : { "$regex" : "#SHR#"}}]}' fieldtype="String" allownull="Y" name="审核人" />
+        <FIELD attrname="ZDRQ_S" format='{"ZDRQ":{"$gte":"#ZDRQ_S# 00:00:01" }}' fieldtype="String" allownull="Y" name="制单时间" />
+       <FIELD attrname="ZDRQ_E" format='{"ZDRQ":{"$lte":"#ZDRQ_E# 23:59:59" }}' fieldtype="String" allownull="Y" name="制单时间" />
+       <FIELD attrname="SHRQ_S" format='{"SHRQ":{"$gte":"#SHRQ_S# 00:00:01" }}' fieldtype="String" allownull="Y" name="审核时间" />
+       <FIELD attrname="SHRQ_E" format='{"SHRQ":{"$lte":"#SHRQ_E# 23:59:59" }}' fieldtype="String" allownull="Y" name="审核时间" />
+       <FIELD attrname="GCCKD1" format='{"GCCKD":{"$gte":#GCCKD1#}}' fieldtype="String" allownull="Y" name="工厂入库单号" />
+       <FIELD attrname="GCCKD2" format='{"GCCKD":{"$lte":#GCCKD2#}}' fieldtype="String" allownull="Y" name="工厂入库单号" />
+       <FIELD attrname="BZ" format='{"BZ":{"$regex":"#BZ#"}}' fieldtype="String" allownull="Y" name="备注" />
+        <FIELD attrname="SPMC" format='{ "$or" : [ {"SPLB.SPMC" : { "$regex" : "#SPMC#","$options":"i"}}, {"SPLB.SPBM" : { "$regex" : "#SPMC#","$options":"i"}}]}' fieldtype="String" allownull="Y" name="商品名称" />
+       <FIELD attrname="WLDW" format='{ "$or" : [ { "WLDWMC" : { "$regex" : "#WLDW#"}} , { "WLDW01" : { "$regex" : "#WLDW#"}}]}' fieldtype="String" allownull="Y" name="供应商" />
+	</JLConfig>
+	<JLConfig id="MONGO_GCZBD.GCZBTZD_BBZBTJ">
+       <FIELD attrname="GCZBD01" format='{"GCZBD01":{"$regex":"#GCZBD01#"}}' fieldtype="String" allownull="Y" name="工厂直拨单号" />
+       <FIELD attrname="ZBTZD01" format='{"ZBTZD01":{"$regex":"#ZBTZD01#"}}' fieldtype="String" allownull="Y" name="工厂直拨调整单号" />
+       <FIELD attrname="FHDH" format='{"FHDH":{"$regex":"#FHDH#"}}' fieldtype="String" allownull="Y" name="发货单号" />
+       <!-- <FIELD attrname="GCCKD" format='{"GCCKD":{"$regex":"#GCCKD#"}}' fieldtype="String" allownull="Y" name="工厂出库单号" /> -->
+        <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="GSXX01" />
+       <!--  <FIELD attrname="FHCK" format='{"FH_CK01":{"$in":#FHCK#}}'  allownull="Y" name="发货仓库"/>
+	   <FIELD attrname="SHCK" format='{"SH_CK01":{"$in":#SHCK#}}'  allownull="Y" name="收货仓库"/> -->
+       <FIELD attrname="ZDR" format='{ "$or" : [ { "ZDRMC" : { "$regex" : "#ZDR#"}} , { "ZDR_RYXX01" : { "$regex" : "#ZDR#"}}]}' fieldtype="String" allownull="Y" name="制单人" />
+  		<FIELD attrname="SHR" format='{ "$or" : [ { "SHRMC" : { "$regex" : "#SHR#"}} , { "SHR_RYXX01" : { "$regex" : "#SHR#"}}]}' fieldtype="String" allownull="Y" name="审核人" />
+        <FIELD attrname="ZDRQ_S" format='{"ZDRQ":{"$gte":"#ZDRQ_S# 00:00:01" }}' fieldtype="String" allownull="Y" name="制单时间" />
+       <FIELD attrname="ZDRQ_E" format='{"ZDRQ":{"$lte":"#ZDRQ_E# 23:59:59" }}' fieldtype="String" allownull="Y" name="制单时间" />
+       <FIELD attrname="SHRQ_S" format='{"SHRQ":{"$gte":"#SHRQ_S# 00:00:01" }}' fieldtype="String" allownull="Y" name="审核时间" />
+       <FIELD attrname="SHRQ_E" format='{"SHRQ":{"$lte":"#SHRQ_E# 23:59:59" }}' fieldtype="String" allownull="Y" name="审核时间" />
+       <FIELD attrname="GCCKD1" format='{"GCCKDH":{"$gte":"#GCCKD1#"}}' fieldtype="String" allownull="Y" name="工厂入库单号" />
+       <FIELD attrname="GCCKD2" format='{"GCCKDH":{"$lte":"#GCCKD2#"}}' fieldtype="String" allownull="Y" name="工厂入库单号" />
+	</JLConfig>
+	<JLConfig id="MONGO_GCZBD.GCZBD_BBMXTJ">
+	   <!-- <FIELD attrname="BM" format='{"BM01":{"$in":#BM#}}' allownull="Y" name="部门名称"/> -->
+        <!-- <FIELD attrname="SPMC" format='{ "$or" : [ { "SPMC" : { "$regex" : "#SPMC#"}} , { "SPBM" : { "$regex" : "#SPMC#"}}]}' fieldtype="String" allownull="Y" name="商品名称" />  -->
+         <FIELD attrname="SPMC" format='{ "$or" : [ {"SPMC" : { "$regex" : "#SPMC#","$options":"i"}}, {"SPBM" : { "$regex" : "#SPMC#","$options":"i"}}]}' fieldtype="String" allownull="Y" name="商品名称" />  
+       <FIELD attrname="WLDW" format='{ "$or" : [ { "WLDWMC" : { "$regex" : "#WLDW#"}} , { "WLDW01" : { "$regex" : "#WLDW#"}}]}' fieldtype="String" allownull="Y" name="供应商" />
+   <!--     <FIELD attrname="CGFS" format='{ "CGFS.key" : { "$regex" : "#CGFS.key#"}} ' fieldtype="String" allownull="Y" name="供应商" /> -->
+	</JLConfig>
+	<JLConfig id="CXGCZBD.SCM_GCZBD">
+		 <FIELD attrname="GCZBD01" format='{"GCZBD01":{"$regex":"#GCZBD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+	     <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="GSXX01" />
+	</JLConfig>
+	<JLConfig id="MONGO_GCZBD.SCM_GCZBD">
+	     <FIELD attrname="GCCKD" fieldtype="String" allownull="Y" name="工厂入库单号" />
+	     <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="GSXX01" />
+         <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+	<JLConfig id="MONGO_GCZBD.SCM_TZDCXZBD">
+	     <FIELD attrname="GCZBD01" format='{"GCZBD01":{"$regex":"#GCZBD01#"}}' fieldtype="String" allownull="Y" name="工厂入库单号" />
+	     <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="GSXX01" />
+	</JLConfig>
+</root>

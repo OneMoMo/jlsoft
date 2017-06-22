@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_KHMD.SCM_KHMD">
+		<FIELD attrname="search" format='{"$or":[{"WLDW01":{"$regex":"#search#"}},{"WLDWMC":{"$regex":"#search#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="query" format='{"$or":[{"MDBM":{"$regex":"#query#"}},{"MDMC":{"$regex":"#query#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>

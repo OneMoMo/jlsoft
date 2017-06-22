@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.kslx">
+		<FIELD attrname="KSBM" fieldtype="string" allownull="N" name="编码" />
+        <FIELD attrname="KSLXMC" fieldtype="string" allownull="N" name="名称" />
+	</JLConfig>
+</root>

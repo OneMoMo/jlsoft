@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jmgl.ptsgl.ptsspsq">
+	<FIELD attrname="PTSMC" fieldtype="string" allownull="N" name="平台商名称" />
+	<FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品" />
+	<FIELD attrname="SPPP" fieldtype="string" allownull="N" name="商品品牌" />
+	<FIELD attrname="SPGG" fieldtype="string" allownull="N" name="规格" />
+	<FIELD attrname="SPXH" fieldtype="string" allownull="N" name="型号" />
+	<FIELD attrname="SPFLMC" fieldtype="string" allownull="N" name="商品分类" />
+	<FIELD attrname="JLDW" fieldtype="string" allownull="N" name="计量单位" />
+	</JLConfig>	
+</root>

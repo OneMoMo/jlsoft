@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="/scripts/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript">
+	pubJson.writeCss("FormUrl", "/jllib/jllib_base/css/public.css");
+	pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_css.css");
+	pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_form.css");
+	pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_list.css");
+	pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_table.css");
+	pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_control.css");
+	pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_page.css");
+</script>
+<title>系统设置</title>
+</head>
+<body page="设置">
+	<header class="jl_header">
+		<div class="header_nav nav_left" onclick="javascript:history.go(-1)">
+			<i class="fa fa-angle-left"></i>
+			<span>系统设置</span>
+		</div>
+	</header>
+
+	<div class="jl_main">
+		<div class="user_img">
+			<div class="user_img_main" id="PCRM_CZY03">自定义</div>
+		</div>
+		<div class="w12 jl_form">
+			<div class="jl_form_01">
+				<dl>
+					<dt class="w03">账户详情</dt>
+					<dd class="w09">
+						<ul>
+							<li class="w12 pr20">
+								<span class="form_icon position_a right0 pt5" id="CZ"><i class="fa fa-angle-right"></i></span>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="w12 jl_form">
+			<div class="jl_form_01">
+				<dl id="setting">
+					<dt class="w03">系统设置</dt>
+					<dd class="w09">
+						<ul>
+							<li class="w12 pr20">
+								<span class="form_icon position_a right0 pt5" id="CZ"><i class="fa fa-angle-right"></i></span>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="w12 jl_form">
+			<div class="jl_form_01">
+				<dl>
+					<dt class="w03">关于</dt>
+					<dd class="w09">
+						<ul>
+							<li class="w12 pr20">
+								<span class="w12 tr" id="PCRM_CZY03">V2016.09.03</span>
+								<span class="form_icon position_a right0 pt5" id="CZ"><i class="fa fa-angle-right"></i></span>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="w12 form_btn" id="logout">
+			<a class="w12 jl_btn btn_red ui-link">退出登录</a>
+		</div>
+	</div>
+
+	<footer class="jl_footer">
+		<!---头部截点--->
+	</footer>
+	<script type="text/javascript">
+		pubJson.writeJs("FormUrl", "/lib/JQuery/js/jquery.cookie.js");
+		pubJson.writeJs("FormUrl", "/jllib/jllib_mobile/form/js/ui.js");
+		pubJson.writeJs("FormUrl", "/lib/JQuery/js/jquery.md5.js");
+		pubJson.writeJs("FormUrl", "/jllib/form/js/jl-all.js");
+		pubJson.writeJs("FormUrl", "/jllib/form/js/JLForm.js");
+		pubJson.writeJs("FormUrl", "/form/form_mobile/js/personal.js");
+	</script>
+</body>
+</html>

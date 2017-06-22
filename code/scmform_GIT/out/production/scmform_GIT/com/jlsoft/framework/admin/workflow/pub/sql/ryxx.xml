@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RYXX">
+  <!-- 查找在职的采购人员-->
+  <select id="RYGW" parameterType="java.util.Map" resultType="java.util.Map">
+ <!--    SELECT A.CZY01,A.GW01,B.GW02 GWMC FROM W_CZYGW A,W_GW B 
+	 --> 
+	<!--  --> SELECT A.GW01 KEY,B.GW02 VALUE, B.GSXX01  FROM W_CZYGW A,W_GW B 
+	 WHERE A.GW01 = B.GW01 
+	   AND A.GSXX01 = B.GSXX01 
+	   AND A.YXBJ = 0 
+	   AND B.GW03 = 0
+      
+       <if test="CZYMC != null and CZYMC != ''">
+       AND (A.CZY02 LIKE '%'||#{CZYMC}||'%' OR A.CZY01 LIKE '%'||#{CZYMC}||'%')
+       </if>
+  </select>
+  <!-- 仓库 -->
+   <select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.CK01 key, A.CK02 value
+      FROM CK A, GSXX B
+     WHERE A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND A.CK01 = #{CK01}
+       </if>
+       <if test="CKMC != null and CKMC != ''">
+       AND A.CK02 LIKE '%'||#{CKMC}||'%'
+       </if>
+       <if test="MJBJ != null">
+       AND A.CK04 = #{MJBJ}
+       </if>
+       <if test="CKJB != null">
+       AND A.CK03 = #{CKJB}
+       </if>
+       <if test="ZDCKBJ != null">
+       AND A.CK05 = #{ZDCKBJ}
+       </if>
+       <if test="CJCKBJ != null">
+       AND A.CK06 = #{CJCKBJ}
+       </if>
+       <if test="CKSX != null">
+       AND A.CK09 = #{CKSX}
+       </if>
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  <!-- 部门权限 -->
+    <select id="BM" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.BM01 key, A.BM02 value
+      FROM BM A, GSXX B
+     WHERE A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND A.BM01 = #{BMMC}
+       </if>
+       <if test="BMMC != null and BMMC != ''">
+       AND A.BM02 LIKE '%'||#{BMMC}||'%'
+       </if>
+       <if test="MJBJ != null">
+       AND A.BM04 = #{MJBJ}
+       </if>
+       <if test="BMSX != null">
+       AND A.BM06 = #{BMSX}
+       </if>
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  <!-- 品牌权限 -->
+  <select id="SPPP" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.PPB01 key, A.PPB02 value
+      FROM PPB A
+     WHERE 1=1
+       <if test="SPPPMC != null and SPPPMC != ''">
+        AND (  A.PPB02 LIKE '%'||#{SPPPMC}||'%' OR   A.PPB01 LIKE '%'||#{SPPPMC}||'%')
+       </if>
+  </select>
+  
+  <select id="GZBM" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.BM01 key , A.BM02 value
+      FROM BM A, GSXX B
+     WHERE A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND A.BM01 = #{BMMC}
+       </if>
+       <if test="BMMC != null and BMMC != ''">
+       AND A.BM02 LIKE '%'||#{BMMC}||'%'
+       </if>
+       <if test="MJBJ != null">
+       AND A.BM04 = #{MJBJ}
+       </if>
+       <if test="BMSX != null">
+       AND A.BM06 = #{BMSX}
+       </if>
+  </select>
+  
+</mapper>

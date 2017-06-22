@@ -1,0 +1,29 @@
+/***
+页面主体jl_form
+***/
+.jl_form{ float:left; position:relative; padding-right:20px;}
+.jl_form > dl.form_btn{ width:100%; margin-top:20px;}
+.jl_form > dl.form_btn > dd{ padding-left:20px;}
+.jl_form > dl.form_btn > dd > .jl_btn{ margin-right:20px; padding:5px 25px;}
+.jl_form dd em.btx:before{ font-size:20px; position:absolute; font-style:normal; top:15px; left:5px; font-weight:bold; content:"*"}
+
+
+
+.jl_form_01{ float:left; width:100%; position:relative;}
+.jl_form_01 > dl{ width:100%;}
+.jl_form_01 > dl > dt{ text-align:right; line-height:30px; color:#999; padding:10px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.jl_form_01 > dl > dd{ padding:10px 0 10px 20px;}
+.jl_form_01 > dl > dd > label.message{ font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#fff; padding:3px 10px; margin:7px 0 0 10px; display:none; float:left;}
+
+
+.jl_form_02{ float:left; width:100%; position:relative;}
+.jl_form_02 > ul{ width:100%;}
+.jl_form_02 > ul > li{ padding:0px;}
+.jl_form_02 > ul > li > dl{ width:100%; min-height:55px;}
+.jl_form_02 > ul > li > dl > dt{ text-align:right; line-height:30px; color:#999; padding:10px 0; padding-left:10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.jl_form_02 > ul > li > dl > dd{ padding:10px 0 10px 20px;}
+.jl_form_02 > ul > li > dl > dd > .jl_up_img{ height:33px;}
+.jl_form_02 > ul > li > dl > dd > .jl_up_img > .img_main{ height:33px;}
+.jl_form_02 > ul > li > dl > dd > .jl_up_img > .load_main i{ font-size:15px; line-height:33px;}
+
+

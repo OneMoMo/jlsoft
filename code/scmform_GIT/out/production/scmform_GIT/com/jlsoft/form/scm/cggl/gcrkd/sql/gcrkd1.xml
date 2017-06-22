@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GCRKD1">
+    <!-- 末级仓库（按可操作仓库权限过滤） -->
+  <select id="MJCK" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT A.CK01, A.CK02 CKMC, A.CK01 key, A.CK02 value, A.GSXX01, B.GSXX02 GSMC, A.CK03 CKJB,
+	           A.CK04 MJBJ, GET_BOOL(A.CK04) MJBJMC,A.CK05 ZDCKBJ, 
+	           GET_BOOL(A.CK05) ZDCKBJMC,A.CK06 CJCKBJ, GET_BOOL(A.CK06) CJCKBJMC,
+	           A.CK09 CKSX, GET_CKSX(A.CK09) CKSXMC,A.WLDW01,
+	           (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01)WLDWMC
+	    FROM CK A, GSXX B
+	    WHERE A.CK04 = 1
+	      AND A.CK09=0
+	      AND A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND A.WLDW01 = #{WLDW01}
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND A.CK01 = #{CK01}
+       </if>
+       <if test="CKMC != null and CKMC != ''">
+       AND (A.CK02 LIKE '%'||#{CKMC}||'%'  or A.CK01 LIKE '%'||#{CKMC}||'%')
+       </if>
+       <if test="WCGYS != null and WCGYS != ''">
+       AND A.WLDW01 IS NOT NULL
+       </if>       
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+    </select>
+    
+    <!--查找商品信息 -->
+	<select id="SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+   SELECT DISTINCT S.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,
+          S.SPXX46 CMT,S.JLDW01 JLDW,NVL(C.CKSP05,0) YSSL,
+          C.CK01,(SELECT CK02 FROM CK WHERE CK01 = C.CK01) CKMC,
+          C.WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = C.WLDW01) WLDW01,
+          C.BM01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = C.WLDW01) BMMC
+  FROM SPXX S, CKSP C
+ WHERE S.SPXX17 = 1
+   AND S.SPXX01 = C.SPXX01(+)
+	<if test="CK01 != null and CK01 != ''">
+		AND C.CK01(+)  = #{CK01}
+	</if>
+	<if test="WLDW01 != null and WLDW01 != ''">
+		AND C.WLDW01(+)  = #{WLDW01}
+	</if>
+	<if test="BM01 != null and BM01 != ''">
+		AND C.BM01(+)  = #{BM01}
+	</if>
+	<if test="SPMC != null and SPMC != ''">
+		AND (REGEXP_LIKE(S.SPPYM, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX02, #{SPMC}, 'i'))
+	</if>
+	<if test="PPB01 != null and PPB01!=''">
+		<foreach item="item" index="index" collection="PPB01" open=" AND ("
+			separator=" or " close=")">
+			S.PPB01 = #{item}
+		</foreach>
+	</if>
+	</select>
+	
+ <!-- 查询SPXX关联SPHSDW和SPJGB表 -->
+  <select id="GHHT" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT A.JLWBDH GHHT01,A.BM01,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BMMC,
+       TO_CHAR(A.GHHT04,'YYYY-MM-DD') YXQQ,
+       TO_CHAR(A.GHHT05,'YYYY-MM-DD') YXQZ,
+       DECODE(A.GHHT22,1,'制单',2,'审核',3,'审批') HTZT,
+       GET_HZFS(A.GHHT24)  HZFSMC,A.GHHT24 HZFS01
+   FROM GHHT A 
+  WHERE 1=1
+    <if test="GSXX01 != null"> AND A.GSXX01 =#{GSXX01}</if>
+    <if test="WLDW01 != null"> AND A.WLDW01 =#{WLDW01}</if>
+  </select>
+</mapper>

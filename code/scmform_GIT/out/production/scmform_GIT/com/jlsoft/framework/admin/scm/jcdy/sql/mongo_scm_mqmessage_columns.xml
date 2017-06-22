@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_CXJKSJSCQK.MQMessage">
+      <FIELD attrname="topic" format='{"topic":{"$regex":"#topic#"}}' fieldtype="String" allownull="Y" name="topic类型" />
+	</JLConfig>
+
+</root>   

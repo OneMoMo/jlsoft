@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.zpxx.zpmc">
+	<!-- <FIELD attrname="SPPP01" fieldtype="string" allownull="N" name="品牌编码" /> -->
+	<FIELD attrname="ZPMC" fieldtype="string" allownull="N" name="赠品名称" />
+	</JLConfig>	 
+</root>

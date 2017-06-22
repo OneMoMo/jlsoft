@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KHCYD">
+	<!-- 查询KHCYD明细关联CKSP和SPJGB表 -->
+	<select id="SPJGB_KHCYD" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT * FROM (select A.BM01 BM01,
+		A.CK01 CK01,
+		Z.SPXX01 ZPXX01,
+		Z.SPXX02 ZPXX02,
+		(Y.CYXE-Y.YCYSL)KCYSL,
+		A.ZPCK01 KCSL,
+		Z.SPPYM SPPYM,
+		ZPCK03 PJKCJE,
+		CASE A.ZPCK01
+		WHEN 0 THEN
+		0
+		ELSE
+		ROUND(A.ZPCK03 / A.ZPCK01,
+		2)
+		END PJDJ,
+		A.ZPCK02 ZDWCKSL,
+		(A.ZPCK01 - A.ZPCK02) KKDSL,
+		A.ZPCK03 KCJE,
+		Z.SPXX04 ZPMC,
+		Z.JLDW01 JLDW,
+		Z.GGB01 GG,
+		C.CK02 CKMC,
+		B.BM02 BMMC,
+		A.GSXX01 GSXX01,
+		(SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC
+		from ZPCKSP A, SPXX Z, CK C, BM B,YPCYXE Y
+		where A.ZPXX01 = Z.SPXX01
+		and A.CK01 = C.CK01
+		and A.BM01 = B.BM01
+		and A.ZPXX01 = Y.SPXX01
+		and
+		A.GSXX01= Y.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="WLDW != null and WLDW != ''">
+			AND Y.WLDW01 = #{WLDW}
+		</if>
+		<if test="CK01 != null and CK01 != ''">
+			AND C.CK01 LIKE #{CK01}||'%'
+		</if>
+		<if test="BMBM != null and BMBM != ''">
+			AND A.BM01 = #{BMBM}
+		</if>
+		) X WHERE 1=1
+		<if test="BM01 != null and BM01 != ''">
+			AND B.BM01 LIKE #{BM01}||'%'
+		</if>
+		<if test="ZPXX01 != null and ZPXX01 != ''">
+			AND X.ZPMC LIKE '%'|| #{ZPXX01} ||'%' OR X.ZPXX02 LIKE
+			'%'||#{ZPXX01}||'%' OR X.SPPYM LIKE '%'||#{ZPXX01}||'%'
+		</if>
+	</select>
+
+	<select id="MJCK" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.CK01, A.CK02 CKMC, A.CK01 key, A.CK02 value, A.GSXX01,
+		B.GSXX02 GSMC, A.CK03 CKJB,
+		A.CK04 MJBJ, GET_BOOL(A.CK04) MJBJMC,
+		A.CK05 ZDCKBJ, GET_BOOL(A.CK05) ZDCKBJMC,
+		A.CK06 CJCKBJ,
+		GET_BOOL(A.CK06) CJCKBJMC,
+		A.CK09 CKSX, GET_CKSX(A.CK09) CKSXMC,
+		A.WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01)WLDWMC
+		FROM
+		CK A, GSXX B
+		WHERE A.CK04 = 1
+		AND A.CK09=0
+		AND A.CK06=0
+		AND A.GSXX01 =
+		B.GSXX01
+		AND A.WLDW01 IS NULL
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="CKMC != null and CKMC != ''">
+			AND (A.CK02 LIKE '%'||#{CKMC}||'%' or A.CK01 LIKE
+			'%'||#{CKMC}||'%')
+		</if>
+		JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<select id="queryKHCYD" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select A.JLWBDH KHCYD01, S.SPXX02 SPBM, S.SPXX04 SPMC, B.ZPCKDI01
+		CYSL,
+		A.WLDW01 KHBM, W.WLDW02 KHMC,
+		A.CK01,(SELECT CK02 FROM CK WHERE
+		CK01 = A.CK01)CKMC,
+		A.BM01,(SELECT BM02 FROM BM WHERE BM01 =
+		A.BM01)BMMC,
+		A.ZPCK03 ZDR,TO_CHAR(A.ZPCK04,'YYYY-MM-DD') ZDRQ,A.ZPCK05
+		SHR,TO_CHAR(A.ZPCK06,'YYYY-MM-DD') SHRQ,A.ZPCK02 BZ
+		from zpckd a,
+		zpckditem b, SPXX S,WLDW W
+		where a.zpck01 = b.zpck01
+		and a.gsxx01 =
+		b.gsxx01
+		AND B.ZPXX01 = S.SPXX01
+		AND W.WLDW01 =A.WLDW01
+		and A.JLWBDH LIKE
+		'KHCY%'
+		JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		JL{CZY|A.BM01|BM_CX|LIKE%}JL
+		JL{CZY|A.WLDW01|WLDW_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="KHCYD01 != null and KHCYD01 != ''">
+			AND A.JLWBDH = #{KHCYD01}
+		</if>
+		<if test="KH != null and KH != ''">
+			<foreach item="item" index="index" collection="KH" open=" AND ("
+				separator=" or " close=")">
+				(W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01
+				LIKE '%'||#{item}||'%')
+			</foreach>
+		</if>
+
+		<if test="BM01 != null and BM01 != ''">
+			<foreach item="item" index="index" collection="BM01" open=" AND ("
+				separator=" or " close=")">
+				A.BM01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+
+		<if test="SPMC != null and SPMC != ''">
+			<foreach item="item" index="index" collection="SPMC" open=" AND ("
+				separator=" or " close=")">
+				S.SPXX02 LIKE '%'||#{item}||'%' OR S.SPXX04
+				LIKE '%'||#{item}||'%' OR
+				S.SPPYM LIKE '%'||#{item}||'%'
+			</foreach>
+		</if>
+		<if test="CK01 != null and CK01 != ''">
+			<foreach item="item" index="index" collection="CK01" open=" AND ("
+				separator=" or " close=")">
+				A.CK01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="BZ != null and BZ != ''">
+			AND A.ZPCK02 LIKE '%'||#{BZ}||'%'
+		</if>
+		<if test="ZDR != null and ZDR != ''">
+			<foreach item="item" index="index" collection="ZDR" open=" AND ("
+				separator=" or " close=")">
+				 A.ZPCK03 = #{item}
+			</foreach>
+		</if>
+		<if test="ZDRQ_S != null and ZDRQ_S != ''">AND A.ZPCK04 &gt;= TO_DATE(#{ZDRQ_S} , 'yyyy-mm-dd ')</if>
+		<if test="ZDRQ_E != null and ZDRQ_E != ''">AND A.ZPCK04 &lt;= TO_DATE(#{ZDRQ_E} , 'yyyy-mm-dd ')</if>
+		<if test="SHR != null and SHR != ''">
+			<foreach item="item" index="index" collection="SHR" open=" AND ("
+				separator=" or " close=")">
+				 A.ZPCK05 = #{item}
+			</foreach>
+		</if>
+		<if test="SHRQ_S != null and SHRQ_S != ''">AND A.ZPCK06 &gt;= TO_DATE(#{SHRQ_S} , 'yyyy-mm-dd ')</if>
+		<if test="SHRQ_E != null and SHRQ_E != ''">AND A.ZPCK06 &lt;= TO_DATE(#{SHRQ_E} , 'yyyy-mm-dd ')</if>
+
+	</select>
+</mapper>

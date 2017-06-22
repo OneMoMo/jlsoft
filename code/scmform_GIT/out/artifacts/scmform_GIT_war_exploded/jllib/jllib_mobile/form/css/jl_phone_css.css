@@ -1,0 +1,121 @@
+body{ margin:0 auto; font-size:16px; font-family:"Helvetica"; color:#000; overflow-x:hidden; background:#f5f5f5;}
+input,select,textarea{ font-family:"Helvetica";}
+select{ border:0px; height:30px;}
+
+.ui-loader-default{ display:none}
+.ui-mobile-viewport{ border:none;}
+.ui-page {padding: 0; margin: 0; outline: 0} 
+
+/***
+头部
+jl_header
+李龙威
+***/
+.jl_header{ width:100%; float:left; background:#2195c9; height:48px; line-height:48px; position:relative; position:fixed; top:0px; left:0px; z-index:997;}
+.jl_header > h2{ width:100%; float:left; font-size:1.4em; color:#fff; text-align:center; font-weight:100;}
+.jl_header > .header_nav{ position:absolute;}
+.jl_header > .header_nav > i{ font-size:1.2em; color:#fff; padding:0 10px;}
+.jl_header > .header_nav > span{ font-size:1.2em; color:#fff;}
+.jl_header > .nav_left{ left:5px;}
+.jl_header > .nav_right{ right:5px;}
+.jl_header > .nav_right > i{ font-size:1.1em; height:48px; line-height:48px;}
+.header_mold{ position:fixed; z-index:996; background:rgba(0,0,0,0.1); width:100%; height:100%; left:0px; display:none;}
+.jl_header > .header_nav .jl_dropdown_menu{ top:0px; right:5px;}
+.jl_header > .header_nav .jl_dropdown_menu:before{ position:absolute; top:-7px; right:16px; display:inline-block !important; border-right:7px solid transparent; border-bottom:7px solid #ccc; border-left:7px solid transparent; border-bottom-color:rgba(0, 0, 0, 0.2); content:'';}
+.jl_header > .header_nav .jl_dropdown_menu:after{ position:absolute; top:-6px; right:17px; display:inline-block !important; border-right:6px solid transparent; border-bottom:6px solid #fff; border-left:6px solid transparent; content:'';}
+.header_nav .jl_dropdown_menu li{ height:30px; overflow:hidden;}
+.page_content{ padding-bottom:65px;}
+
+
+/***
+登录
+jl_login
+李龙威
+***/
+.login{ padding:20px;}
+.login > li{ height:46px; border-bottom:1px solid #eee; width:100%;}
+.login > li > i{ float:left; width:45px; height:45px; line-height:45px; text-align:center; font-size:1.4em; position:absolute; left:0px; top:0px; color:#666;}
+.login > li > input{ border:0px; height:45px; line-height:45px; width:100%; padding-left:30px;}
+.login > li.text{ border-bottom:0px; font-size:1em; margin:10px 0;}
+.login > li.text a{ color:#2195c9;}
+.login > li.btn{ margin-top:10px; border-bottom:0px;}
+.login > li.btn > .jl_btn{ padding:10px 0; font-size:1.1em;}
+.login > li.btn > .jl_btn.xuan{ color:#ccc !important;}
+.banquan{ height:20px; width:100%; text-align:center; bottom:10px; position:fixed; z-index:999; font-size:0.8em; color:#ccc; font-family:Verdana, Geneva, sans-serif;}
+
+
+/***
+页面主体
+jl_main
+李龙威
+***/
+.jl_main{ float:left; margin-top:48px; width:100%; background:#f5f5f5; padding-bottom:70px;}
+
+/***
+banner
+jl_banner
+李龙威
+***/
+.jl_banner{ width:100%; height:22%; background:url(../images/phone_banner.png) top center no-repeat;}
+
+
+/***
+菜单
+jl_nav
+李龙威
+***/
+.jl_main_nav{ position:fixed; top:48px; height:100%; min-height:100%; width:100%; overflow-y:auto; overflow-x:hidden; background:#f5f5f5;}
+.jl_nav{ width:100%; float:left; height:75%; background:#fff;}
+.jl_nav > .jl_nav_list{ width:100%; float:left; height:100%;}
+.jl_nav > .jl_nav_list > div{ height:100%; float:left; width:100%;}
+.jl_nav > .jl_nav_list dl{ border-right:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4; height:25%; position:relative;}
+.jl_nav > .jl_nav_list dl > dd{ width:100%; height:100%;}
+.jl_nav > .jl_nav_list dl > dd > ul{ position:absolute; width:100px; height:100px; top:50%; left:50%; margin:-50px 0 0 -50px;}
+.jl_nav > .jl_nav_list dl > dd > ul > li.nav_img{ width:100%; text-align:center; line-height:60px; font-size:2em;}
+.jl_nav > .jl_nav_list dl > dd > ul > li.nav_name{ width:100%; text-align:center; line-height:20px;}
+
+
+/***
+头部
+jl_message
+李龙威
+***/
+.jl_modal{ position:fixed; z-index:999; width:100%; height:100%; background:rgba(0,0,0,0.5); top:0px; left:0px; display:none;}
+.jl_modal > .jl_modal_close{ position:absolute; z-index:1; width:100%; height:100%;}
+.jl_modal > .jl_message{ position:absolute; z-index:2; width:80%; left:10%; background:#fff; padding:10px; top:50%;}
+.jl_modal > .jl_message > .jl_message_title{}
+.jl_modal > .jl_message > .jl_message_main{ font-size:1em; margin:10px 0; color:#666;}
+.jl_modal > .jl_message > .jl_message_btn > span{ float:right; margin-left:15px;}
+
+.jl_modal > .jl_modal_radio{ position:absolute; z-index:2; width:80%; left:10%; background:#fff; top:50%;}
+.jl_modal > .jl_modal_radio > li{ width:100%; border-bottom:1px solid #e1e1e1; line-height:40px; padding:0px 10px;}
+
+/***
+头部
+jl_font_size
+李龙威
+***/
+.jl_font_small{ font-size:14px !important;}
+.jl_font_standard{ font-size:16px !important;}
+.jl_font_large{ font-size:18px !important;}
+.jl_font_super{ font-size:20px !important;}
+
+/***
+底部
+***/
+.jl_footer{ width:100%; background:#f1f1f1; border-top:1px solid #e1e1e1; position:fixed; bottom:0px; left:0px; z-index:995;}
+.jl_footer > ul{ margin:8px 0 5px 0; width:100%;}
+.jl_footer > ul > li > a{ width:100%; height:100%; text-align:center;}
+.jl_footer > ul > li > a > i{ width:100%; font-size:1.5em; color:#666;}
+.jl_footer > ul > li > a > span{ width:100%; font-size:0.8em;}
+.jl_footer > ul > li > a > label{ position:absolute; top:-15px; right:50%; margin-right:-30px; color:#fff; border-radius:10px; padding:2px 6px; font-size:0.8em;}
+.jl_footer > ul > li.xuan > a{ color:#2195c9;}
+.jl_footer > ul > li.xuan > a > i{ color:#2195c9;}
+
+/***
+按钮，字体，颜色等配置样式
+***/
+.btn_color{ background:#d9534f; color:#fff; border:1px solid #d9534f;}
+.btn_color:hover{ background:#b01914; border:1px solid #b01914;}
+.btn_color_or{ background:#fff; color:#d9534f !important; border:1px solid #d9534f;}
+.btn_color_or:hover{ background:#b01914; color:#fff !important; border:1px solid #b01914;}

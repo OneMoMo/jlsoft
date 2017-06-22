@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fxgl.fxjs.tzqcwl">
+	
+
+     <FIELD attrname="CGBMMC" allownull="N" name="采购部门名称" />
+        <FIELD attrname="XSBMMC" allownull="N" name="销售部门名称" />
+		
+ 
+	</JLConfig>	
+</root>

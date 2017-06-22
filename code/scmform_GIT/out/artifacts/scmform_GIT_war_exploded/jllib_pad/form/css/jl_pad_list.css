@@ -1,0 +1,23 @@
+/***
+grid列表jl_list
+***/
+.jl_list{}
+.jl_list dt{ text-align:left; padding-left:10px; font-size:20px;}
+
+.jl_list > .jl_list_title{ float:left; height:35px; background:#eee; width:100%; position:relative; color:#333; color:#000; font-weight:bold;}
+.jl_list > .jl_list_title > dl{ float:left; width:100%; height:35px; line-height:35px;}
+.jl_list > .jl_list_title > dl > dd{ padding-left:10px;}
+
+.jl_list_01{ width:100%; float:left; max-height:90%; overflow-y:auto; overflow-x:hidden;}
+.jl_list_01 > dl{ width:100%; padding:20px 0 10px 0; border-bottom:1px solid #e1e1e1;}
+.jl_list_01 > dl.xuan{ background:#f7fcfd;}
+.jl_list_01 > dl > dd{ padding-left:10px;}
+.jl_list_01 > dl > dd.jl_list_btn{ text-align:right;}
+.jl_list_01 > dl > dd > ul{ float:left; width:100%;}
+.jl_list_01 > dl > dd > ul > li{ float:left; width:100%;}
+.jl_list_01 > dl > dd > ul > li > h3{ margin:0 20px 10px 0;}
+.jl_list_01 > dl > dd > ul > li > img{ width:80%;}
+.jl_list_01 > dl > dd > ul > li > span{ margin:0 20px 10px 0; color:#666; float:left;}
+.jl_list_01 > dl > dd > ul > li > b{ margin:0 20px 10px 0; color:#666;}
+.jl_list_01 > dl > dd > ul > li > input{ margin:0 20px 10px 0; width:100px;}
+.jl_list_01 > dl > dd.more{ border-top:1px solid #eee; margin-top:10px; padding-top:10px;}

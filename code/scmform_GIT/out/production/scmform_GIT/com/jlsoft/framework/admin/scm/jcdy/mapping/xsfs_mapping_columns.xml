@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.xsfs">
+		<Nested id="XSLX">
+		<FIELD attrname="key" fieldtype="string" allownull="N" name="销售类型" />
+	    <FIELD attrname="value" fieldtype="string" allownull="N" name="销售类型" />
+	    </Nested>
+		<FIELD attrname="XSDM" fieldtype="string" allownull="N" name="销售代码" />
+		<FIELD attrname="XSFS" fieldtype="string" allownull="N" name="销售方式" /> 
+	</JLConfig>  	 
+</root>

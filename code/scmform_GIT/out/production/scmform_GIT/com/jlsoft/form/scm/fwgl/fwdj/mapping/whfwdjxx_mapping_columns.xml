@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fwgl.whfwdjxx">
+	     <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+	     <FIELD attrname="KHXM" fieldtype="string" allownull="N" name="客户" />
+	     <FIELD attrname="FWDH" fieldtype="string" allownull="N" name="服务单号" />
+	     <FIELD attrname="SHDZ" fieldtype="string" allownull="N" name="送货地址" />
+	</JLConfig>
+</root>

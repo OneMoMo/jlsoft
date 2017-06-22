@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>多渠云导购 - 首页</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header>
+<div class="index_header">
+<a class="w01 logo"><img src="images/header_logo.png" /></a>
+<div class="seach">
+        <div class="jl_input mt10">
+          <input jlui="i1" class="radius5" placeholder="商品名称/编码可检索">
+          <i class="fa fa-times-circle"></i>
+        </div>
+</div>
+<i jlui="b2" class="fa fa-comments-o"></i>
+</div>
+</header>
+
+<div class="main">
+  <div class="w12 jl_tab">
+    <ul class="w12">
+      <li class="xuan">我的收藏</li>
+      <li>热卖商品</li>
+      <li class="fr"><i class="fa fa-filter mr5"></i>筛选</li>
+    </ul>
+  </div>
+  <div jlui="d1" class="w12 pro_list">
+    <div class="pro_list_case">
+      <div class="pro_list_name">JL{SPMC}JL</div>
+      <div class="pro_list_text mt10"><i class="mr5">编</i>JL{SPBM}JL</div>
+      <div class="pro_list_text mt5"><i class="mr5">供</i>武汉工贸家电</div>
+      <div class="pro_list_text mt5"><i class="mr5">仓</i>武汉市正品仓一</div>
+      <div class="pro_list_btn radius5" jlui="b1">立即开单</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+<dl class="w04 xuan">
+  <dt><i class="fa fa-home"></i></dt>
+  <dd>首页</dd>
+</dl>
+<dl class="w04">
+  <dt><i class="fa fa-file-text"></i></dt>
+  <dd>订单</dd>
+</dl>
+<dl class="w04">
+  <dt><i class="fa fa-user"></i></dt>
+  <dd>我</dd>
+</dl>
+</footer>
+</body>
+<script type="text/javascript">
+var jlform = new JLForm();
+jlform.setTab(document);
+jlform.setStorage("SPXX", JSON.stringify([{"SPMC":"格力空调", "SPBM":"12E3532532", "GSXX":"0001"}, {"SPMC":"美的空调", "SPBM":"12E3538888", "GSXX":"0002"}]));
+
+jlform.setUI({
+	"d1" : {
+		"query" : {
+			"dsType" : "local",
+			"key" : "SPXX",
+			"jluiData" : ["SPMC","GSXX"],//["*"]
+			"jlui" : "b1"
+		}
+	},
+	"b1" : {
+	    "listener" : {
+			"click" : function() {
+				jlform.setStorage("GMSP", $(this).attr("jluiData"));//, ["SPMC","GSXX"]);
+				window.location.href='selCoupons.html';
+			}
+		}    
+	},
+	"b2" : {
+		"listener" : {
+			"click" : function() {
+				jlform.applyUI("d1", true);
+				jlform.applyUI("b1");
+			}
+		}
+	}
+});
+
+jlform.initForm();
+
+
+</script>
+</html>

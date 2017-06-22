@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GYSWJ">
+	<select id="queryGYSWJ" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<if test="HZFS == 0 ">
+		   select * from(
+			select to_char(JXSP12,'YYYY-MM-DD') JZRQ,
+			0 HZFS,
+			get_djlx(JXSP02) DJLX,
+			JXSP02,
+			 get_jlwbdh(JXSP02,JXSP01,a.GSXX01) DJH,
+			S.spxx02 SPBM,
+			S.SPXX04 SPMC,
+			A.SPXX01,
+			A.GSXX01 ,
+			A.wldw01 GYSBM,
+			W.wldw02 GYSMC,
+			A.BM01 CGBM01,
+			(select BM02 from BM WHERE A.BM01 =
+			BM01) CGBMMC,
+			A.CGXY02  SPSX01,
+			(select SPSXMC from SPSX WHERE A.CGXY02=SPSX01) SPSX,
+			JXSP08 JSDJ,
+			JXSP05 YJSL,
+			(JXSP05 - JXSP06) WJSL,
+			(JXSP08*(JXSP05 -
+			JXSP06)) WJJE,
+			(JXSP05-GYSFPGDSL01) WDFPSL,
+			JXSP01 PCH,
+			JXSP17 BZ,
+			JXSP16 JSZDSL,
+			JXSP14 JSSHSL,
+			JXSP06 JSFKSL,
+			GYSFPGDSL01 FPGDSL,
+			A.JXSP12  JXSP12,
+			S.SPXX02 SPXX02,
+			S.SPXX04 SPXX04,
+			S.SPPYM SPPYM,
+			S.PPB01 PPB01,
+			S.SPFL01  SPFL01
+			from
+			JXSPJSB A ,SPXX S,WLDW W
+			where A.spxx01=S.spxx01
+			AND A.WLDW01 =
+			W.wldw01  
+	        JL{CZY|A.bm01|BM_CX|LIKE%}JL
+		   JL{CZY|A.wldw01|WLDW_CX|LIKE%}JL
+		   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL ) A
+		   
+			WHERE  1=1
+			<if test="RQ_S != null and RQ_S != ''">
+				AND A.JXSP12 &gt;= TO_DATE(#{RQ_S} , 'yyyy-mm-dd ')
+			</if>
+			<if test="RQ_E != null and RQ_E != ''">
+				AND A.JXSP12 &lt;= TO_DATE(#{RQ_E}, 'yyyy-mm-dd')
+			</if>
+			<!-- <if test="WLDW != null and WLDW != ''">
+				<foreach item="item" index="index" collection="WLDW" open=" AND ("
+					separator=" or " close=")">
+					(A.GYSBM LIKE '%'||#{item}||'%' OR A.GYSMC
+					LIKE '%'||#{item}||'%')
+				</foreach>
+			</if> -->
+			
+			 <if test="WLDW != null and WLDW != ''">
+			   AND (A.GYSBM LIKE '%'||#{WLDW}||'%' OR A.GYSMC
+					LIKE '%'||#{WLDW}||'%')
+			</if>
+			<if test="SPMC != null and SPMC != ''">
+				<foreach item="item" index="index" collection="SPMC" open=" AND ("
+					separator=" or " close=")">
+					(Upper(A.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(A.SPXX04)
+					LIKE Upper('%'||#{item}||'%') OR
+					Upper(A.SPPYM) LIKE Upper('%'||#{item}||'%'))
+				</foreach>
+			</if>
+			<if test="DJHM != null and DJHM != ''">
+				<foreach item="item" index="index" collection="DJHM" open=" AND ("
+					separator=" or " close=")">
+					A.DJH LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+			<if test="DJLX != null and DJLX != ''">
+				<foreach item="item" index="index" collection="DJLX" open=" AND ("
+					separator=" or " close=")">
+					A.JXSP02 = #{item}
+				</foreach>
+			</if>
+			<if test="PPMC != null and PPMC != ''">
+				<foreach item="item" index="index" collection="PPMC" open=" AND ("
+					separator=" or " close=")">
+					A.PPB01 = #{item}
+				</foreach>
+			</if>
+			<if test="BM != null and BM!= ''">
+				<foreach item="item" index="index" collection="BM" open=" AND ("
+					separator=" or " close=")">
+					A.CGBM01 LIKE #{item}||'%'
+				</foreach>
+			</if>
+			<if test="SPSX != null and SPSX != ''">
+				<foreach item="item" index="index" collection="SPSX" open=" AND ("
+					separator=" or " close=")">
+					A.SPSX01 = #{item}
+				</foreach>
+			</if>
+			<if test="SPFL != null and SPFL != ''">
+				<foreach item="item" index="index" collection="SPFL" open=" AND ("
+					separator=" or " close=")">
+					A.SPFL01 LIKE #{item}||'%'
+				</foreach>
+			</if>
+			<!-- <if test="GSXX01 != null and GSXX01 != ''">
+      			   AND A.GSXX01 = #{GSXX01}
+             </if> -->
+
+
+
+
+
+		</if>
+		<if test="HZFS == 1 or HZFS == 2 or HZFS == 3 ">
+		select * from(
+			select to_char(SPPCXS01,'YYYY-MM-DD') JZRQ,
+			A.SPPCXS01 SPPCXS01,
+			1 HZFS,
+			get_djlx(DJLY) DJLX,
+			DJLY,
+			 get_jlwbdh(DJLY,DJBH,A.GSXX01)
+			DJH,
+			A.SPXX01,
+			A.GSXX01 ,
+			S.spxx02 SPBM,
+			S.SPXX04 SPMC,
+			A.wldw01 GYSBM,
+			w.wldw02 GYSMC,
+			A.XSBM XSBM01,
+			(select BM02 from BM WHERE A.XSBM =
+			BM01) XSBMMC,
+			A.BM01 CGBM01,
+			(select BM02 from BM WHERE A.BM01 = BM01)
+			CGBMMC,
+			A.CGXY02  SPSX01,
+			(select SPSXMC from SPSX WHERE A.CGXY02=SPSX01) SPSX,
+			SPPCXS04
+			HZFS01,
+			SPPCXS08 JSDJ,
+			SPPCXS06 YJSL,
+			(SPPCXS06 - SPPCXS13) WJSL,
+			(SPPCXS08*(SPPCXS06 - SPPCXS13)) WJJE,
+			(SPPCXS06-GYSFPGDSL01) WDFPSL,
+			SPPCXS02 PCH,
+			SPPCXS15 JSZDSL,
+			SPPCXS16 JSSHSL,
+			SPPCXS13 JSFKSL,
+			SPPCXS12 LYKL,
+			GYSFPGDSL01 FPGDSL,
+			S.SPXX02 SPXX02,
+			SPXX04,
+			S.PPB01 PPB01,
+			S.SPFL01  SPFL01
+			from SPPCXSR A ,SPXX S,WLDW W
+			where
+			A.spxx01=S.spxx01
+			AND A.WLDW01 = W.wldw01
+			  JL{CZY|A.BM01|BM_CX|LIKE%}JL
+		      JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+			) A
+		 
+		   WHERE 1=1
+			<if test="RQ_S != null and RQ_S != ''">
+				AND A.SPPCXS01 &gt;= TO_DATE(#{RQ_S} , 'yyyy-mm-dd ')
+			</if>
+			<if test="RQ_E != null and RQ_E != ''">
+				AND A.SPPCXS01 &lt;= TO_DATE(#{RQ_E}, 'yyyy-mm-dd')
+			</if>
+
+             <if test="WLDW != null and WLDW != ''">
+			   AND (A.GYSBM LIKE '%'||#{WLDW}||'%' OR A.GYSMC
+					LIKE '%'||#{WLDW}||'%')
+			</if>
+			<if test="SPMC != null and SPMC != ''">
+				<foreach item="item" index="index" collection="SPMC" open=" AND ("
+					separator=" or " close=")">
+					(A.SPXX02 LIKE '%'||#{item}||'%' OR A.SPXX04
+					LIKE '%'||#{item}||'%' OR
+					A.SPPYM LIKE '%'||#{item}||'%')
+				</foreach>
+			</if>
+			<if test="DJHM != null and DJHM != ''">
+				<foreach item="item" index="index" collection="DJHM" open=" AND ("
+					separator=" or " close=")">
+					A.DJH LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+			<if test="DJLX != null and DJLX != ''">
+				<foreach item="item" index="index" collection="DJLX" open=" AND ("
+					separator=" or " close=")">
+					A.JXSP02 = #{item}
+				</foreach>
+			</if>
+			<if test="PPMC != null and PPMC != ''">
+				<foreach item="item" index="index" collection="PPMC" open=" AND ("
+					separator=" or " close=")">
+					A.PPB01 = #{item}
+				</foreach>
+			</if>
+			<if test="BM != null and BM!= ''">
+				<foreach item="item" index="index" collection="BM" open=" AND ("
+					separator=" or " close=")">
+					A.CGBM01 LIKE #{item}||'%'
+				</foreach>
+			</if>
+			<if test="SPSX != null and SPSX != ''">
+				<foreach item="item" index="index" collection="SPSX" open=" AND ("
+					separator=" or " close=")">
+					A.SPSX01 = #{item}
+				</foreach>
+			</if>
+			<if test="SPFL != null and SPFL != ''">
+				<foreach item="item" index="index" collection="SPFL" open=" AND ("
+					separator=" or " close=")">
+					A.SPFL01 LIKE #{item}||'%'
+				</foreach>
+			</if>
+			<if test="XSBM != null and XSBM!= ''">
+				<foreach item="item" index="index" collection="XSBM" open=" AND ("
+					separator=" or " close=")">
+					A.XSBM01 LIKE #{item}||'%'
+				</foreach>
+			</if>
+			<!-- <if test="GSXX01 != null and GSXX01 != ''">
+      			   AND A.GSXX01 = #{GSXX01}
+        </if> -->
+
+		</if>
+	</select>
+</mapper>

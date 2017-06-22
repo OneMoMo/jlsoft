@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_QKSQD.SCM_QKSQD">
+       <FIELD attrname="QKSQD01" format='{"QKSQD01":{"$regex":"#QKSQD01#"}}' fieldtype="String" allownull="Y" name="请款申请单号" />
+	   <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+       <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+	
+</root>

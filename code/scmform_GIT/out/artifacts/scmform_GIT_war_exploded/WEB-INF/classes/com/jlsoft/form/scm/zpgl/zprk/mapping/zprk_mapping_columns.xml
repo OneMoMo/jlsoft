@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.zpgl.zprk.zprk">
+		<Nested id="CK01" allownull="N" name="仓库">
+
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="仓库" />
+			<FIELD attrname="value" fieldtype="string" allownull="N" name="仓库" />
+		</Nested>
+		<!-- <FIELD attrname="ZPRKDH" fieldtype="string" allownull="N" name="赠品入库单号" 
+			/> -->
+		<Nested id="BM01" allownull="N" name="部门">
+
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="部门" />
+			<FIELD attrname="value" fieldtype="string" allownull="N" name="部门" />
+		</Nested>
+
+		<Nested id="ZPLB" allownull="N" name="赠品明细">
+			<FIELD attrname="RKSL" fieldtype="String" allownull="N" name="入库数量" />
+			<FIELD attrname="RKDJ" fieldtype="String" allownull="N" name="入库单价" />
+		</Nested>
+
+	</JLConfig>
+
+</root>

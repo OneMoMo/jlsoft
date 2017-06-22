@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.fxgl.yfjs">
+	      <FIELD attrname="WLDW02" fieldtype="string" allownull="N" name="客户" />
+	      <FIELD attrname="YWY02" fieldtype="string" allownull="N" name="业务员" />
+	      <FIELD attrname="XSBM02" fieldtype="string" allownull="N" name="销售部门" />
+	      <Nested id="XSFS02">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="销售方式" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="销售方式" />
+          </Nested>
+		  <Nested id="SPLB" allownull="N" name="商品列表">
+            <FIELD attrname="FHDH" fieldtype="string" allownull="N" name="发货单号" />
+            <FIELD attrname="YFD01" fieldtype="string" allownull="N" name="延付单号" />
+            <FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品代码" />
+            <FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+            <FIELD attrname="YXSSL" fieldtype="double" allownull="N" name="原单数量" />
+            <FIELD attrname="WJSL" fieldtype="double" allownull="N" name="未结数量" />
+            <FIELD attrname="JSSL" fieldtype="double" allownull="N" name="结算数量" />
+            <!-- <FIELD attrname="XYSL" fieldtype="double" allownull="N" name="损益数量" /> -->
+            <FIELD attrname="YFDJ" fieldtype="double" allownull="N" name="延付单价" />
+            <FIELD attrname="ZDXJ" fieldtype="double" allownull="N" name="最低限价" />
+            <FIELD attrname="KL" fieldtype="double" allownull="N" name="扣率" />
+            <FIELD attrname="JSDJ" fieldtype="double" allownull="N" name="结算单价" />
+            <FIELD attrname="JE" fieldtype="double" allownull="N" name="结算金额" />
+            <FIELD attrname="FLJE" fieldtype="double" allownull="N" name="返利金额" />
+            <FIELD attrname="FLL" fieldtype="double" allownull="N" name="返利率" />
+            <FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="供应商代码" />
+            <FIELD attrname="WLDW02" fieldtype="string" allownull="N" name="供应商名称" />
+            <!-- <FIELD attrname="FHRQ" fieldtype="string" allownull="N" name="发货日期" /> -->
+          </Nested>
+	</JLConfig>
+	
+</root>

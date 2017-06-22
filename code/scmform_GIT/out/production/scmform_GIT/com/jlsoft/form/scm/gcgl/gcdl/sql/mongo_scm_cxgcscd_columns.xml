@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCSCD.SCM_CXGCSCD">
+       <FIELD attrname="SPMC" format='{"SPMC":{"$regex":"#SPMC#"}}' fieldtype="String" allownull="Y" name="商品" />
+       <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+  	   <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="SBSJ" format='{"SBSJ":{"$gte":"#SCRQQ#","$lte":"#SCRQE#"}}' fieldtype="String" allownull="Y" name="交资料时间" />
+        <FIELD attrname="WLDW" format='{ "$or" : [ { "WLDWMC" : { "$regex" : "#WLDW#"}} , { "WLDW01" : { "$regex" : "#WLDW#"}}]}' fieldtype="String" allownull="Y" name="供应商" />
+        <FIELD qx='WLDW01|WLDW_CX|in' />
+
+    </JLConfig>
+</root>

@@ -1,0 +1,31 @@
+var MONGO_HYLX_SCM_HYLX = {
+		  "title" : "查找仓库",
+		  "DataBaseType" : "",
+		  "collection" : "SCM_HYLX",
+		  "page":"admin/scm/jcdy/search/MONGO_RY_RYMC.html",
+		  "result" : [
+		              {"id" : "GSXX01","name" : "公司编码","width" : 100},
+		              {"id" : "HYLX01","name" : "会员类型编码","width" : 100},
+		              {"id" : "jlbh","name" : "jlbh","width" : 100},
+		              {"id" : "HYLX","name" : "会员类型","width" : 100},
+		              {"id" : "JFBL","name" : "积分比率","width" : 100},
+		              {"id" : "KHCD","name" : "卡号长度","width" : 100},
+		              {"id" : "YFBL","name" : "用分比率","width" : 100},
+		              {"id" : "ZKL","name" : "折扣率","width" : 100},
+		              {"id" : "CFBL","name" : "充分比率","width" : 100},
+		              {"id" : "YXQ","name" : "有效期（月）","width" : 100},
+		              {"id" : "DHBL","name" : "兑换比率","width" : 100},
+		              {"id" : "XSJB","name" : "销售级别","width" : 100},
+		              {"id" : "CZBL","name" : "充值比率","width" : 100},
+		              {"id" : "JKJE","name" : "建卡金额","width" : 100},
+		              {"id" : "XFCZBL","name" : "消费储值比率","width" : 100},
+		              {"id" : "JKSX","name" : "建卡时限（天）","width" : 100},
+		              {"id" : "YZBL","name" : "用值比率","width" : 100},
+		              {"id" : "JFSX","name" : "积分时限（天）","width" : 100},
+		              {"id" : "QXBL","name" : "取现比率","width" : 100},
+		              {"id" : "GBF","name" : "工本费","width" : 100},
+		              {"id" : "SRBS","name" : "生日倍数","width" : 100},
+		              {"id" : "MS","name" : "描述","width" : 100},
+		              {"id" : "SJBL","name" : "升级比率","width" : 100}
+		  ]
+};

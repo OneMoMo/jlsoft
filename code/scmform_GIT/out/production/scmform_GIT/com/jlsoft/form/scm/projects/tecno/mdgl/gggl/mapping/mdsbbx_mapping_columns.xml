@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.mdgl.mdsbbx">
+        <Nested id="BXLB" allownull="N" name="报销列表">
+            <FIELD attrname="FYLX02" fieldtype="String" allownull="N" name="费用项目" />
+            <FIELD attrname="QKJE" fieldtype="String" allownull="N" name="请款金额" />            
+            <!-- <FIELD attrname="SQDJ" fieldtype="String" allownull="N" name="申请价格" /> -->
+        </Nested>
+	</JLConfig>
+	
+	
+	<JLConfig id="form.scm.mdgl.mdsbbx2">
+    <Nested id="MXLB" allownull="N" name="报销列表">
+            <FIELD attrname="FYLX02" fieldtype="String" allownull="N" name="费用项目" />
+            <FIELD attrname="QKJE" fieldtype="String" allownull="N" name="请款金额" />            
+            <FIELD attrname="BXJE" fieldtype="String" allownull="N" name="报销金额" />
+            <FIELD attrname="FYBM" fieldtype="String" allownull="N" name="费用部门" /> 
+            <FIELD attrname="ZFFS" fieldtype="String" allownull="N" name="支付方式" />
+            <FIELD attrname="YHZH" fieldtype="String" allownull="N" name="银行帐号" />            
+        </Nested>
+	</JLConfig>
+</root>

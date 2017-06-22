@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CGXY">
+<!-- 查询SPXX关联SPHSDW和SPJGB表 -->
+  <select id="SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.SPJG01 XRKJ, A.SPJG04 LYKL, A.SPJG05 LSDJ, A.SPJG06 LSXJ,
+    B.SPXX01 SPXX01, B.SPXX02 SPBM, B.SPXX04 SPMC，A.BM01,
+    (select bm02 from bm where bm01 = a.bm01) BMMC
+  FROM SPJGB A,SPXX B  
+  WHERE A.SPXX01 = B.SPXX01
+    AND A.GSXX01 = #{GSXX01}
+   AND A.WLDW01 = #{WLDW01}
+   AND A.BM01 = #{BM01}  
+   AND A.SPJG02 = #{HZFS}
+    <if test="SPMC != null and SPMC !=''" >
+       AND (B.SPXX01 LIKE '%'||#{SPMC}||'%' OR B.SPXX04 LIKE '%'||#{SPMC}||'%' OR B.SPXX02 LIKE '%'||#{SPMC}||'%')
+    </if>
+   JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+   JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL  
+  </select>
+  <select id="CGXYZXMX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT DISTINCT B.JLWBDH,
+       A.GHHT01,
+       A.SPXX01,
+       A.SPXX02 SPBM,
+       A.SPXX04 SPMC,
+       A.CGXY02 SPSX01,
+       get_spsx_v10(A.CGXY02) SPSX,
+       A.HZFS01,
+       GET_HZFS(A.HZFS01) HZFSMC, 
+       A.CGXYZ19 XSFS01,
+       decode(B.CGXY13, 0, '全部', 1, '禁止销售', 2, '仅零售', 3, '仅分销') XSFW,
+       decode(A.CGXYZ19,0,'正常',1,'负卖') XSFS,
+       A.CGXY01,
+       B.WLDW01,
+       B.CGXY08 BZ,
+       B.CK01 FM_CK01,
+       (SELECT CK02 FROM CK WHERE CK01=B.CK01) FMCKMC,
+       to_char(B.CGXY04 ,'YYYY-MM-DD') JHRQQ, 
+       to_char(B.CGXY05 ,'YYYY-MM-DD') JHRQZ, 
+       to_char(A.CGXYZ02 ,'YYYY-MM-DD') XSSQQ, 
+       to_char(A.CGXYZ03 ,'YYYY-MM-DD') XSSQZ, 
+       A.CGXYZ22 YSBJ,
+       A.BM01,
+      (SELECT SUM(CGXYI01) FROM CGXYITEM WHERE CGXY01 = B.CGXY01 AND GSXX01=B.GSXX01 AND SPXX01=A.SPXX01) SL,
+      (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) WLDWMC,
+       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) BMMC,
+       ((SELECT SUM(CGXYI01) FROM CGXYITEM WHERE CGXY01 = B.CGXY01 AND GSXX01=B.GSXX01 AND SPXX01=A.SPXX01) - A.CGXYZ05 - A.CGXYZ20 + A.CGXYZ21)KFPSL,
+       A.CGXYZ05 FPSL,
+       A.SPXX02,
+       A.SPXX04, 
+       A.CGXYZ07 XRKJ,
+       A.CGXYZ08 LSDJ,
+       A.CGXYZ09 LSXJ,
+       A.CGXYZ10 LYKL,
+       A.CGXYZ22 BJ
+  FROM CGXYZX A, CGXY B
+  WHERE A.GSXX01 = B.GSXX01
+   AND A.CGXY01 = B.CGXY01
+   AND A.WLDW01 = B.WLDW01
+   AND A.CGXY02 = B.CGXY02
+   AND A.HZFS01 = B.HZFS01
+   AND A.GHHT01 = B.GHHT01
+   <if test="GSXX01 != null and GSXX01 !=''"> 
+       AND  A.GSXX01 = #{GSXX01}
+  </if>
+  <if test="WLDWMC != null and WLDWMC != ''">
+	 AND ((SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) LIKE '%'||#{WLDWMC}||'%' OR B.WLDW01 = #{WLDWMC})	
+  </if>
+  <if test="CGBM != null and CGBM !=''"> 
+    AND (A.BM01 LIKE '%'||#{CGBM}||'%' OR (SELECT BM02 FROM BM WHERE BM01 = A.BM01) LIKE '%'||#{CGBM}||'%') 
+  </if>
+  <if test="XYBH != null and XYBH != ''"> 
+		 AND (B.JLWBDH LIKE '%'||#{XYBH}||'%')	
+  </if>
+  <if test="SPSX != null and SPSX !=''"> 
+       AND (A.CGXY02 = #{SPSX})
+  </if>
+  <if test="SPBM != null and SPBM !=''" >
+       AND (A.SPXX01 LIKE '%'||#{SPBM}||'%' OR A.SPXX04 LIKE '%'||#{SPBM}||'%' OR A.SPXX02 LIKE '%'||#{SPBM}||'%')
+   </if>
+  JL{CZY|B.WLDW01|WLDW_CZ|inS}JL
+  JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+  </select>
+  <select id="RYXJ" parameterType="java.util.Map" resultType="java.util.Map">
+   SELECT XSJG01,XSJG02,DECODE((SELECT RYXX06 FROM RYXX WHERE RYXX01=#{RYXX01}),1,XSJG02,2,XSJG03,3,XSJG04,4,XSJG05,5,XSJG06,XSJG01) XJ 
+   FROM XSJGB A 
+   WHERE SPXX01 =#{SPXX01}
+   AND WLDW01 = #{WLDW01}
+  </select>
+  <select id="SPSX" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT SPSX01 KEY,SPSXMC VALUE 
+	FROM SPSX 
+	WHERE YXBJ = 1
+	<![CDATA[AND SPSX01 <> 0]]>  
+ </select>
+ <select id="XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.BM01, A.BM02 BMMC, A.GSXX01, B.GSXX02 GSMC,
+           A.BM06 BMSX, GET_BMSX(A.BM06) BMSXMC,
+           A.BM04 MJBJ, GET_BOOL(A.BM04) MJBJMC,
+           A.BM_BM01, (SELECT BM02 FROM BM WHERE BM01 = A.BM_BM01) BM_BMMC
+      FROM BM A, GSXX B
+     WHERE A.BM04 = 1
+       AND A.BM06 = 3
+       AND A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND A.BM01 = #{BMMC}
+       </if>
+       <if test="BMMC != null and BMMC != ''">
+       AND A.BM02 LIKE '%'||#{BMMC}||'%'
+       </if>
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+</mapper>

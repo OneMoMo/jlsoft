@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YFD">
+	<select id="YF_ZDCH" parameterType="Map" resultType="java.util.Map">
+	    SELECT DISTINCT B.WBTDH, A.JLWBDH YFDJLWBDH,A.GSXX01,A.YFD01 YFDH01,TO_CHAR(A.YFD03,'YYYY-MM-DD') XSRQ,TO_CHAR(A.YFD04,'YYYY-MM-DD')YFD04,
+		       A.WLDW01,A.YFD05 YWY01,A.YFD13 YWYMC,A.BM01 XS_BM01,A.FLFS01 XSFS01,
+		       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM02,A.YYSHSJ,W.WLDW02 KHMC,A.YFD13,
+		       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS02,A.YFD08,
+		       B.YFD01,B.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,S.GGB01 SPGG,B.YFDI15 SPSX,get_spsx_v10(B.YFDI15) SPSXMC,
+		       B.JLDW01 SPDW,B.YFDI02 XSDJ,B.YFDI05 SL,B.YFDI32 SYFL,B.YFDI06 JE,B.YFDI01,
+		        GET_HZFS(YFDI13) HZFSMC,YFDI13 HZFS,
+		       (D.DWYE05 - (D.DWYE03 + D.DWYE04 + D.DWYE11 - D.DWYE13 - D.DWYE19 + D.DWYE20)) KYED,
+		       (D.DWYE06 - D.DWYE19) FLYE,D.DWYE02 YFKYE,D.DWYE03 YFYE,0 THLX,
+	           NVL((SELECT YSFSL-SSFSL-ZFSL FROM DSFHPSB WHERE DJHM = A.YFD01
+	                   AND THDH = B.YFDI01 AND CZLX = 1 AND GSXX01 = A.GSXX01 AND DJLX =9),0)KTSL,
+	           (SELECT CK02 FROM CK WHERE CK01=B.CK01)CKMC,B.CK01,B.BM01 CG_BM01
+	      FROM YFD A, YFDITEM B, SPXX S, DWYEZ D,WLDW W
+
+	     WHERE A.GSXX01 = B.GSXX01
+	       AND A.YFD01 = B.YFD01
+	       AND B.SPXX01 = S.SPXX01
+	       AND A.BM01 = D.BM01 
+	       AND A.WLDW01 = W.WLDW01
+	       AND A.WLDW01 = D.WLDW01
+	       AND B.YFDI14 = 0
+	       AND (B.YFDI05 - B.YFDI09)>0
+         AND NVL((SELECT YSFSL - SSFSL - THSL - YJTHSL YJTHSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                     AND THDH = B.YFDI01 AND CZLX = 1 AND GSXX01 = A.GSXX01 AND DJLX =9),0)>0 
+	       <if test="YFD01 != null and YFD01 !=''">
+	         AND A.JLWBDH = #{YFD01}
+	       </if>
+	        <if test="KHMC !=''">
+	         AND W.WLDW02 LIKE '%'||#{KHMC}||'%'
+	         </if>
+	           <if test="YFDI14 !='' and YFDI14 != null">
+		         <if test="YFDI14 == 0">		         
+		         AND B.YFDI14 = 0
+		         </if> 
+		         <if test="YFDI14 == 1">		         
+		         AND B.YFDI14 > 0
+		         </if> 
+	         </if>   
+	          <if test="YFD04 !=''">
+	         AND A.YFD04 = TO_DATE(#{YFD04},'YYYY-MM-DD')
+	         </if>
+	    <if test="HZFS ==0 or HZFS==1">THCKBJ = 1</if>
+	    <if test="HZFS ==2 or HZFS==3">CK06=1</if>
+	      <if test="GSXX01 != null and GSXX01 !=''">
+	         AND A.GSXX01 = #{GSXX01}
+	       </if>
+	    UNION ALL            
+        SELECT DISTINCT B.WBTDH, A.JLWBDH YFDJLWBDH,A.GSXX01,A.YFD01 YFDH01,TO_CHAR(A.YFD03,'YYYY-MM-DD') XSRQ,TO_CHAR(A.YFD04,'YYYY-MM-DD')YFD04,
+	           A.WLDW01,A.YFD05 YWY01,A.YFD13 YWYMC,A.BM01 XS_BM01,A.FLFS01 XSFS01,
+	           (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM02,A.YYSHSJ,W.WLDW02 KHMC,A.YFD13,
+	           (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS02,A.YFD08,
+	           B.YFD01,B.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,S.GGB01 SPGG,B.YFDI15 SPSX,get_spsx_v10(B.YFDI15) SPSXMC,
+	           B.JLDW01 SPDW,B.YFDI02 XSDJ,B.YFDI05 SL,B.YFDI32 SYFL,B.YFDI06 JE,B.YFDI01,
+	            GET_HZFS(YFDI13) HZFSMC,YFDI13 HZFS,
+	           (D.DWYE05 - (D.DWYE03 + D.DWYE04 + D.DWYE11 - D.DWYE13 - D.DWYE19 + D.DWYE20)) KYED,
+	           (D.DWYE06 - D.DWYE19) FLYE,D.DWYE02 YFKYE,D.DWYE03 YFYE,1 THLX,
+               NVL((SELECT SSFSL - THSL+ZFSL - YJTHSL FROM DSFHPSB WHERE DJHM = A.YFD01
+               	       AND THDH = B.YFDI01 AND CZLX = 1 AND GSXX01 = A.GSXX01 AND DJLX =9),0)KTSL,
+	           (SELECT CK02 FROM CK WHERE CK01=B.CK01)CKMC,B.CK01,B.BM01 CG_BM01
+	      FROM YFD A, YFDITEM B, SPXX S, DWYEZ D,WLDW W
+	     WHERE A.GSXX01 = B.GSXX01
+	       AND A.YFD01 = B.YFD01
+	       AND B.SPXX01 = S.SPXX01
+	       AND A.BM01 = D.BM01
+	       AND A.WLDW01 = W.WLDW01
+	       AND A.WLDW01 = D.WLDW01
+	       AND B.YFDI14 = 0
+	       AND (B.YFDI05 - B.YFDI09)>0
+           AND NVL((SELECT SSFSL - THSL+ZFSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                     AND THDH = B.YFDI01 AND CZLX = 1 AND GSXX01 = A.GSXX01 AND DJLX =9),0)>0 
+          <if test="YFD01 != null and YFD01 !=''">
+	         AND A.JLWBDH = #{YFD01}
+	      </if>
+	       <if test="KHMC !=''">
+	         AND W.WLDW02 LIKE '%'||#{KHMC}||'%'
+	         </if>
+	           <if test="YFD04 !=''and YFD04 != null">
+	         AND A.YFD04 = TO_DATE(#{YFD04},'YYYY-MM-DD')
+	         </if>
+	         <if test="YFDI14 !='' and YFDI14 != null">
+		         <if test="YFDI14 == 0">		         
+		         AND B.YFDI14 = 0
+		         </if> 
+		         <if test="YFDI14 == 1">		         
+		         AND B.YFDI14 > 0
+		         </if> 
+	         </if>    
+	    <if test="HZFS ==0 or HZFS==1">THCKBJ = 1</if>
+	    <if test="HZFS ==2 or HZFS==3">CK06=1</if>
+	      <if test="GSXX01 != null and GSXX01 !=''">
+	         AND A.GSXX01 = #{GSXX01}
+	      </if>
+	</select>
+	
+	<select id="FLLB" parameterType="Map" resultType="java.util.Map">
+	   SELECT A.FLD01 FLDH,A.FLD09 PFDFLI02,(B.FLDI03+B.FLDI06-B.FLDI05)KYFL,
+	          B.FLFS01,(SELECT FLFS02 FROM FLFS WHERE FLFS01=B.FLFS01)DJLX,
+	          B.FLDM01,(SELECT FLDM02 FROM FLDM WHERE FLDM01=B.FLDM01)FLMC
+	     FROM FLD A,FLDITEM B 
+	    WHERE A.GSXX01=B.GSXX01 
+	      AND A.FLD01=B.FLD01 
+	      AND A.FLD16 IS NULL  AND A.FLD06 IS NOT NULL 
+	      AND (B.FLDI03+B.FLDI06-B.FLDI05)>0
+		<if test="GSXX01 != null"> AND A.GSXX01=#{GSXX01} </if>
+		<if test="WLDW01 != null"> AND A.WLDW01=#{WLDW01} </if>
+		<if test="BM01 != null"> AND A.BM01=#{BM01} </if>
+  	</select>	
+  	<!-- 根据原延付单查询回填 -->
+	<select id="YF_ZDCH_NEW" parameterType="Map" resultType="java.util.Map">
+		    SELECT DISTINCT A.JLWBDH YFDJLWBDH,A.GSXX01,A.YFD01 YFDH01,TO_CHAR(A.YFD03,'YYYY-MM-DD') XSRQ,TO_CHAR(A.YFD04,'YYYY-MM-DD')YFD04,
+		       A.WLDW01,A.YFD05 YWY01,A.YFD13 YWYMC,A.BM01 XS_BM01,A.FLFS01 XSFS01,
+		       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM02,A.YYSHSJ,W.WLDW02 KHMC,A.YFD13,
+		       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS02,A.YFD08,
+		       B.YFD01,
+		        GET_HZFS(YFDI13) HZFSMC,YFDI13 HZFS,
+		       (D.DWYE05 - (D.DWYE03 + D.DWYE04 + D.DWYE11 - D.DWYE13 - D.DWYE19 + D.DWYE20)) KYED,
+		       (D.DWYE06 - D.DWYE19) FLYE,D.DWYE02 YFKYE,D.DWYE03 YFYE,0 THLX,
+		        <if test="YFDI14 !='' and YFDI14 != null">
+		         <if test="YFDI14 == 0">		         
+		          NVL((B.YFDI05 - B.YFDI09 - B.YFDI14),0) KTSL,
+		         </if> 
+		         <if test="YFDI14 == 1">		         
+		           NVL(B.YFDI14 - (SELECT YJTHSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                     AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0)  KTSL,
+		         </if> 
+	         </if>   
+	           (SELECT CK02 FROM CK WHERE CK01=B.CK01)CKMC,B.CK01,B.BM01 CG_BM01
+	      FROM YFD A, YFDITEM B, SPXX S, DWYEZ D,WLDW W
+	     WHERE A.GSXX01 = B.GSXX01
+	       AND A.YFD01 = B.YFD01
+	       AND B.SPXX01 = S.SPXX01
+	       AND A.BM01 = D.BM01
+	       AND A.WLDW01 = W.WLDW01
+	       AND A.WLDW01 = D.WLDW01
+	       <if test="YFD01 != null and YFD01 !=''">
+	         AND A.JLWBDH = #{YFD01}
+	       </if>
+	        <if test="KHMC !=''">
+	         AND W.WLDW02 LIKE '%'||#{KHMC}||'%'
+	         </if>
+	           <if test="YFDI14 !='' and YFDI14 != null">
+		         <if test="YFDI14 == 0">		         
+		         AND NVL((B.YFDI05 - B.YFDI09 - B.YFDI14),0)>0
+		         </if> 
+		         <if test="YFDI14 == 1">		         
+		         AND NVL(B.YFDI14 - (SELECT YJTHSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                     AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0)> 0
+		         </if> 
+	         </if>   
+	          <if test="YFD04 !=''">
+	         AND A.YFD04 = TO_DATE(#{YFD04},'YYYY-MM-DD')
+	         </if>
+	    <if test="HZFS ==0 or HZFS==1">THCKBJ = 1</if>
+	    <if test="HZFS ==2 or HZFS==3">CK06=1</if>
+	      <if test="GSXX01 != null and GSXX01 !=''">
+	         AND A.GSXX01 = #{GSXX01}
+	       </if>
+	</select>
+	<!-- 查询商品明细 -->
+	<select id="YF_ZDCH_ZB" parameterType="Map" resultType="java.util.Map">	
+		   SELECT DISTINCT B.WBTDH, A.JLWBDH YFDJLWBDH,A.GSXX01,A.YFD01 YFDH01,TO_CHAR(A.YFD03,'YYYY-MM-DD') XSRQ,TO_CHAR(A.YFD04,'YYYY-MM-DD')YFD04,
+		       A.WLDW01,A.YFD05 YWY01,A.YFD13 YWYMC,A.BM01 XS_BM01,A.FLFS01 XSFS01,
+		       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM02,A.YYSHSJ,W.WLDW02 KHMC,A.YFD13,
+		       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS02,A.YFD08,
+		       B.YFD01,B.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,S.GGB01 SPGG,B.YFDI15 SPSX,get_spsx_v10(B.YFDI15) SPSXMC,
+		       B.JLDW01 SPDW,B.YFDI02 XSDJ,B.YFDI05 SL,B.YFDI32 SYFL,B.YFDI06 JE,B.YFDI01,
+		        GET_HZFS(YFDI13) HZFSMC,YFDI13 HZFS,
+		       (D.DWYE05 - (D.DWYE03 + D.DWYE04 + D.DWYE11 - D.DWYE13 - D.DWYE19 + D.DWYE20)) KYED,
+		       (D.DWYE06 - D.DWYE19) FLYE,D.DWYE02 YFKYE,D.DWYE03 YFYE,0 THLX,
+			<if test="YFDI14 !='' and YFDI14 != null">
+		         <if test="YFDI14 == 0">		         
+		          NVL((B.YFDI05 - B.YFDI09 - B.YFDI14),0)  KTSL,
+		         </if> 
+		         <if test="YFDI14 == 1">		         
+		          NVL(B.YFDI14 - (SELECT YJTHSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                     AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0)  KTSL,
+		         </if> 
+	         </if>  
+	           (SELECT CK02 FROM CK WHERE CK01=B.CK01)CKMC,B.CK01,B.BM01 CG_BM01,B.WLDW01 GYS_WLDW01
+            FROM YFD A, YFDITEM B, SPXX S, DWYEZ D,WLDW W
+           WHERE A.GSXX01 = B.GSXX01
+             AND A.YFD01 = B.YFD01
+	         AND A.WLDW01 = W.WLDW01
+	           <if test="YFD01 !=''">
+	         AND A.JLWBDH = #{YFD01}
+	         </if>
+	         <if test="GSXX01 != null and GSXX01 !=''">
+	         AND A.GSXX01 = #{GSXX01}
+	         </if>
+       		 <if test="YFDI14 !='' and YFDI14 != null">
+	         <if test="YFDI14 == 0">		         
+	         AND (B.YFDI05 -B.YFDI09 -B.YFDI14)>0
+	         AND  NVL((SELECT YSFSL - SSFSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                 AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0) >0
+	         </if> 
+	         <if test="YFDI14 == 1">		         
+	        AND B.YFDI14 - NVL((SELECT YJTHSL
+              FROM DSFHPSB
+             WHERE DJHM = A.YFD01
+               AND THDH = B.YFDI01
+               AND GSXX01 = A.GSXX01
+               AND DJLX = 9),0) > 0
+               AND  NVL((SELECT YSFSL - SSFSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                 AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0) >0
+	         </if> 
+         </if>  
+	       AND B.SPXX01 = S.SPXX01
+   			AND A.WLDW01 = D.WLDW01
+  		 AND A.BM01 = D.BM01
+	           AND A.YFD02 = 0
+	           AND A.YFD12 = 1
+	           AND (A.FHD01 IS NULL OR A.FHD01 = 0)
+	           AND (A.TGDB01 IS NULL OR A.TGDB01 = 0)
+	           AND (A.WLDW01 IN (SELECT QXGYS01
+	                               FROM QXGYSITEM
+	                              WHERE QXGYSITEM.QXGSXX01 = #{GSXX01}
+	                                AND QXGYSITEM.QXGYS04 = 1) OR
+	               GET_JLCONF_F(53, #{GSXX01}) = 0)
+	      UNION ALL   
+	         SELECT DISTINCT B.WBTDH, A.JLWBDH YFDJLWBDH,A.GSXX01,A.YFD01 YFDH01,TO_CHAR(A.YFD03,'YYYY-MM-DD') XSRQ,TO_CHAR(A.YFD04,'YYYY-MM-DD')YFD04,
+		       A.WLDW01,A.YFD05 YWY01,A.YFD13 YWYMC,A.BM01 XS_BM01,A.FLFS01 XSFS01,
+		       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM02,A.YYSHSJ,W.WLDW02 KHMC,A.YFD13,
+		       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS02,A.YFD08,
+		       B.YFD01,B.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,S.GGB01 SPGG,B.YFDI15 SPSX,get_spsx_v10(B.YFDI15) SPSXMC,
+		       B.JLDW01 SPDW,B.YFDI02 XSDJ,B.YFDI05 SL,B.YFDI32 SYFL,B.YFDI06 JE,B.YFDI01,
+		        GET_HZFS(YFDI13) HZFSMC,YFDI13 HZFS,
+		       (D.DWYE05 - (D.DWYE03 + D.DWYE04 + D.DWYE11 - D.DWYE13 - D.DWYE19 + D.DWYE20)) KYED,
+		       (D.DWYE06 - D.DWYE19) FLYE,D.DWYE02 YFKYE,D.DWYE03 YFYE,1 THLX,
+	           <if test="YFDI14 !='' and YFDI14 != null">
+		         <if test="YFDI14 == 0">		         
+		            NVL((B.YFDI05 - B.YFDI09 - B.YFDI14),0)  KTSL,
+		         </if> 
+		         <if test="YFDI14 == 1">		         
+		          NVL(B.YFDI14 - (SELECT YJTHSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                     AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0)  KTSL,
+		         </if> 
+	         </if>  
+	           (SELECT CK02 FROM CK WHERE CK01=B.CK01)CKMC,B.CK01,B.BM01 CG_BM01,B.WLDW01 GYS_WLDW01
+            FROM YFD A, YFDITEM B, SPXX S, DWYEZ D,WLDW W
+           WHERE A.GSXX01 = B.GSXX01
+             AND A.YFD01 = B.YFD01
+	         AND A.WLDW01 = W.WLDW01
+	         <if test="YFD01 !=''">
+	         AND A.JLWBDH = #{YFD01}
+	         </if>
+	         <if test="GSXX01 != null and GSXX01 !=''">
+	         AND A.GSXX01 = #{GSXX01}
+	         </if>
+	           AND B.SPXX01 = S.SPXX01
+   				AND A.WLDW01 = D.WLDW01
+   				AND A.BM01 = D.BM01
+	           AND A.YFD02 = 0
+	           AND A.YFD12 = 1
+	           <if test="YFDI14 !='' and YFDI14 != null">
+		         <if test="YFDI14 == 0">		         
+		         AND (B.YFDI05 -B.YFDI09 -B.YFDI14)>0
+                  AND  NVL((SELECT SSFSL- THSL - ZFSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                 AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0)>0
+		         </if> 
+		         <if test="YFDI14 == 1">		         
+		         AND NVL(B.YFDI14 - (SELECT YJTHSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                 AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0)  > 0
+                 AND  NVL((SELECT SSFSL- THSL - ZFSL FROM DSFHPSB WHERE DJHM = A.YFD01 
+                 AND THDH = B.YFDI01  AND GSXX01 = A.GSXX01 AND DJLX =9),0)>0
+		         </if> 
+	         </if> 
+	           AND (A.FHD01 IS NULL OR A.FHD01 = 0)
+	           AND (A.TGDB01 IS NULL OR A.TGDB01 = 0)
+	           AND (A.WLDW01 IN (SELECT QXGYS01
+	                               FROM QXGYSITEM
+	                              WHERE QXGYSITEM.QXGSXX01 = #{GSXX01}
+	                                AND QXGYSITEM.QXGYS04 = 1) OR
+	               GET_JLCONF_F(53, #{GSXX01}) = 0)   
+	          ORDER BY YFDJLWBDH, GSXX01
+	</select>
+	
+	<select id="YF_TDCH" parameterType="Map" resultType="java.util.Map">
+		 SELECT DISTINCT A.GSXX01,A.YFD01 YFDH01,to_char(A.YFD03,'YYYY-MM-DD') XSRQ,A.YFD04,A.YFD08,A.YFD13,
+		                 A.WLDW01,A.YFD05 YWY01,A.YFD13 YWYMC,A.BM01 XS_BM01,A.FLFS01 XSFS01,
+		                 (select BM02 from BM where BM01 = A.BM01) XSBM02,
+		                 (select WLDW02 from WLDW where WLDW01 = A.WLDW01) KHMC,
+		                 (select FLFS02 from FLFS where FLFS01 = A.FLFS01) XSFS02,
+		                 A.YYSHSJ
+		   FROM YFD A, YFDITEM B
+		  WHERE A.GSXX01 = B.GSXX01
+		    and A.YFD01 = B.YFD01
+		    AND A.GSXX01 = #{GSXX01}
+		    AND A.YFD02 = 0
+		    AND A.YFD12 = 1
+		    AND (A.YFDI05 - A.YFDI09)>0
+		    AND B.YFDI11 IS NULL
+		    AND (A.FHD01 Is Null Or A.FHD01 = 0)
+		    And (A.TGDB01 Is Null Or A.TGDB01 = 0)
+		    And (A.WLDW01 In (Select QXGYS01
+		                        From QXGYSITEM
+		                       Where QXGYSITEM.QXGSXX01 = #{GSXX01}
+		                         And QXGYSITEM.QXGYS04 = 1) Or
+		        GET_JLCONF_F(53, #{GSXX01}) = 0)
+		   <if test="GSXX01 != null and GSXX01 !=''">
+	         AND A.GSXX01 = #{GSXX01}
+	       </if>
+		  ORDER BY A.YFD01, A.GSXX01 
+	</select>
+	
+	
+	<!-- 预收款单备注下拉框查询 -->
+	<select id="BZ" parameterType="Map" resultType="java.util.Map">
+		SELECT NRBM KEY, NRMS VALUE FROM ZDYITEM  WHERE ID = 'YSK_BZ'
+	</select>
+	
+	<select id="YF_TDCH_I" parameterType="Map" resultType="java.util.Map">
+		SELECT A.YFD01,A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,S.GGB01 SPGG,A.YFDI15 SPSX,
+		       A.JLDW01 SPDW,A.YFDI02 XSDJ,A.YFDI05 SL,A.YFDI32 SYFL,A.YFDI06 JE,A.YFDI01
+		  FROM YFDITEM A, SPXX S
+		 WHERE A.SPXX01 = S.SPXX01
+		   AND A.YFDI14 = 0
+		   AND A.YFDI11 IS NULL 
+		   AND (A.YFDI05 - A.YFDI09)>0
+		   AND A.GSXX01 = #{GSXX01}
+		   AND A.YFD01 = #{YFD01}
+	</select>
+	<select id="THYY" parameterType="Map" resultType="java.util.Map">
+		select A.THYY01 key,
+	       A.thyy02 value from thyy A
+	       where A.DJLX like '%9%'
+	       and A.DJCZLX = '0'
+	</select>
+	
+	<select id="YF_YFD" parameterType="Map" resultType="java.util.Map">
+	    SELECT YYSHSJ,YFD04,YFD07,YFD12,YFD01,GSXX01,YFD27,YFD28,WBLXDH,YFD10,
+	           WB05BH,YFD16,WBJSBH,(SELECT KHZL16 FROM KHZL WHERE KHZL01=YFD.KHZL01 
+	           AND GSXX01=YFD.GSXX01)KHZL16 
+	      FROM YFD
+	     WHERE 1=1 
+	     <if test="YFD28!=null and YFD28 != ''">
+	       AND YFD28 LIKE '%'||#{YFD28}||'%'
+	     </if> 
+	     <if test="GSXX01 != null and GSXX01 !=''">
+	         AND GSXX01 = #{GSXX01}
+	     </if>
+	     <if test="RQ_S!=null and RQ_S != ''">
+	       <![CDATA[AND YFD03 >= TO_DATE(#{RQ_S},'YYYY-MM-DD')]]>
+	     </if> 
+	     <if test="RQ_E!=null and RQ_E != ''">
+	       <![CDATA[AND YFD03 <= TO_DATE(#{RQ_E},'YYYY-MM-DD')]]>
+	     </if> 
+	     <if test="RYXX01!=null and RYXX01 != ''">
+	       AND EXISTS(SELECT 1 FROM RYXX WHERE RYXX02 = YFD.YFD06 
+	           AND RYXX01=#{RYXX01});
+		 </if> 
+	</select>
+	<select id="YF_YFDITEM" parameterType="Map" resultType="java.util.Map">
+	<![CDATA[SELECT (SELECT SPXX04 FROM SPXX WHERE SPXX01=A.SPXX01)SPXX04,
+               (SELECT CK02 FROM CK WHERE CK01=A.CK01)CK02,
+               (SELECT WLDW02 FROM WLDW WHERE WLDW01=A.WLDW01)WLDW02,
+         	   (SELECT BM02 FROM BM WHERE BM01=A.BM01)BM02,
+               TO_CHAR(B.YYSHSJ,'yyyy-mm-dd') YYSHSJ,B.YFD04,B.YFD07,B.YFD12,B.YFD01,B.GSXX01,B.YFD27,B.YFD28,B.WBLXDH,B.YFD10,B.
+               WB05BH,B.YFD16,B.WBJSBH,(SELECT KHZL16 FROM KHZL WHERE KHZL01=B.KHZL01 
+               AND GSXX01=B.GSXX01)KHZL16  
+          FROM YFDITEM A ,YFD B
+         WHERE A.YFD01 = B.YFD01 AND A.GSXX01 = B.GSXX01]]>
+		 <if test="YFD01!=null and YFD01 != ''">
+	       AND YFD01 = #{YFD01}
+	     </if>  
+	     <if test="GSXX01!=null and GSXX01 != ''">
+	       AND GSXX01 = #{GSXX01}
+	     </if>  
+	</select>		
+	
+	<select id="YF_DZ" parameterType="Map" resultType="java.util.Map">
+	<![CDATA[SELECT KHDQ01,KHD_KHDQ01,KHDQ02 DQMC,KHDQ03,KHDQ04 MJBJ FROM KHDQ]]>
+		 <if test="KHDQ01!=null and KHDQ01 != ''">
+	       AND KHDQ01 = #{KHDQ01}
+	     </if>  
+	     <if test="GSXX01!=null and GSXX01 != ''">
+	       AND GSXX01 = #{GSXX01}
+	     </if>   
+	</select>	
+	
+	<select id="queryYFD" parameterType="Map" resultType="java.util.Map"> 
+	<![CDATA[SELECT DISTINCT S.SPXX02 SPBM,S.SPXX04 SPMC,A.YFDI05 SL,A.YFDI02 DJ,A.KHBZJG,S.SPFL01 SPFL01,
+			     (select 
+                   (select spfl02
+                      from spfl
+                    where a.spfl01 like spfl01 || '%' and spfl03 = 1) sjflmc                    
+                   from spfl a
+                  where spfl01 =S.SPFL01 )SPDL,
+				  S.SPXX68 SPTJ,
+                  A.YFDI06 JE,A.YFDI19 YFCB,A.YFDI11 FHR,to_char(A.YFDI12,'YYYY-MM-DD') FHRQ,(A.YFDI02 - A.YFDI19)*A.YFDI05 ML,
+                  A.YFDI07 SJ,get_spsx_v10(A.YFDI15)SPSX,S.JLDW01 JLDW,A.YFDI14 YJSL,B.YFD10 BZ,A.YFDI36 MXBZ,
+                  B.WLDW01,B.JLWBDH,(SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,
+                  (SELECT XSWD02 FROM XSWD WHERE XSWD01 = A.XSWD01 AND GSXX01 = A.GSXX01)XSWDMC,
+                  W.WLDW02 WLDWMC,A.CK01,A.XSWD01,A.YFDI05 - A.YFDI14 WJSL,A.YFDI06 - A.YFDI34 WJJE,
+                  (SELECT FLFS02 FROM FLFS WHERE FLFS01 = B.FLFS01)XSFS,B.YFD13 YYY,
+                  (SELECT BM02 FROM BM WHERE BM01 = B.BM01)XSBM,A.YFDI14 JSSL,A.YFDI34 JSJE,
+                  (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01)GYSMC,
+                  (SELECT BM02 FROM BM WHERE BM01 = A.BM01)CGBM,B.YFD07 SHR,to_char(B.YFD04,'YYYY-MM-DD') SHRQ,
+                  B.YFD06 ZDR,to_char(B.YFD03,'YYYY-MM-DD') ZDRQ
+             FROM YFDITEM A ,YFD B,SPXX S,WLDW W,DSFHPSB C
+            WHERE A.YFD01 = B.YFD01 
+            AND W.WLDW01 = B.WLDW01
+              AND A.GSXX01 = B.GSXX01
+              AND C.DJLX = 9
+              AND B.YFD01 = C.DJHM
+              AND A.GSXX01 = C.GSXX01
+              AND S.SPXX01 = A.SPXX01]]>
+        JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+        JL{CZY|B.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|W.WLDW01|WLDW_CZ|LIKE%}JL 
+		 <if test="YFD01 !=null and YFD01 != ''">
+	       AND A.YFD01 = #{YFD01}
+	     </if> 
+	      <if test="BZ !=null and BZ != ''">
+	         AND (B.YFD10 LIKE '%'||#{BZ}||'%')	
+	     </if>   
+	     <if test="GSXX01 !=null and GSXX01 != ''">
+	       AND A.GSXX01 = #{GSXX01}
+	     </if>
+	     <if test="KH != null and KH != ''">
+	      AND (W.WLDW02 LIKE '%'||#{KH}||'%' OR W.WLDW01 = #{KH})
+	     </if>
+	     <if test="XSBM != null and XSBM != ''">
+		 <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+		      B.BM01 = #{item}
+		 </foreach> 
+	     </if>  
+	     <if test="XSWD != null and XSWD != ''">
+		 <foreach item="item" index="index" collection="XSWD"  open=" AND (" separator=" or " close=")"> 
+		      B.BM01 = #{item}
+		 </foreach> 
+	     </if>  
+	     <if test="CK != null and CK != ''">
+		 <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		      A.CK01 = #{item}
+		 </foreach> 
+	    </if>
+	    <if test="YYY != null and YYY != ''">
+		 <foreach item="item" index="index" collection="YYY"  open=" AND (" separator=" or " close=")"> 
+	          B.YFD05 = #{item}
+	         </foreach>
+	    </if>
+	     <if test="PP != null and PP != ''">
+		 <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+		      S.PPB01 = #{item}
+		 </foreach> 
+	     </if>
+	     <if test="YFDH != null and YFDH != ''"> 
+		    AND (B.JLWBDH LIKE '%'||#{YFDH}||'%')	
+         </if> 
+	     <if test="SPSX != null and SPSX != ''">
+		       <foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")"> 
+		       A.YFDI15 = #{item}
+		     </foreach>
+	    </if>
+	     <if test="SPFL != null and SPFL  != ''">
+		 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")"> 
+		      S.SPFL01 like #{item}||'%'
+		 </foreach> 
+	     </if>
+	      <if test="XSFS != null and XSFS != ''">
+		    AND B.FLFS01 = #{XSFS}	         
+	    </if>
+	    <if test="FHZT != null and FHZT != ''">
+		   <if test="FHZT == 1">AND (A.YFDI11 is null AND C.SSFSL=0 AND C.CZLX = 1)</if> 
+		   <if test="FHZT == 2">AND (C.CZLX=1 AND C.YSFSL>C.SSFSL AND C.SSFSL>0)</if> 
+		   <if test="FHZT == 3">AND (C.SSFSL = C.YSFSL AND C.CZLX = 1)</if> 
+        </if>	
+	     <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND B.YFD03 >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]>
+	     </if> 
+	     <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+	       <![CDATA[AND B.YFD03 <= TO_DATE(#{ZDRQ_E},'YYYY-MM-DD')]]>
+	     </if> 
+	     <if test="SHRQ_S !=null and SHRQ_S != ''">
+	       <![CDATA[AND B.YFD04 >= TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]>
+	     </if> 
+	     <if test="SHRQ_E !=null and SHRQ_E != ''">
+	       <![CDATA[AND B.YFD04 <= TO_DATE(#{SHRQ_E},'YYYY-MM-DD')]]>
+	     </if>
+	     <if test="SP !=null and SP != ''">
+	      AND (REGEXP_LIKE(S.SPPYM, #{SP}, 'i') OR REGEXP_LIKE(S.SPXX04, #{SP}, 'i') OR REGEXP_LIKE(S.SPXX02, #{SP}, 'i') OR REGEXP_LIKE(S.SPXX01, #{SP}, 'i'))
+	     </if>	     
+	     <if test="DJZT !=null and DJZT != ''">
+	        <if test="DJZT == '制单'">
+	       	AND B.YFD03 IS NOT NULL
+	       	AND B.YFD04 IS NULL
+	     </if>
+	     <if test="DJZT == '审核'">
+	       	AND B.YFD04 IS NOT NULL
+	     </if>
+	     </if>
+	     JL{CZY|B.GSXX01|CZGS_CX|LIKE%}JL
+	</select>			
+</mapper>

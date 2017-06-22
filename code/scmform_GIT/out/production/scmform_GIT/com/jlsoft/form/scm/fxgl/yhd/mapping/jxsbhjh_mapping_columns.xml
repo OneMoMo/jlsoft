@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.fxgl.yhd。jxsbhjh">
+	    <FIELD attrname="JXSMC" fieldtype="string" allownull="N" name="经销商" />
+	    <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="销售部门" />
+        <Nested id="SPLB" allownull="N" name="商品列表">
+            <FIELD attrname="BHSL" fieldtype="string" allownull="N" name="备货数量" />
+            <FIELD attrname="YJYHSJ" fieldtype="string" allownull="N" name="预计要货时间" />
+        </Nested>
+	</JLConfig>
+	
+	
+</root>

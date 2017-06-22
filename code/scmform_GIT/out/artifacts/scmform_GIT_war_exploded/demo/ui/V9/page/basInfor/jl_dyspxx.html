@@ -1,0 +1,240 @@
+<div class="jl_huoye_title">
+  <ul>
+    <li class="xuan"><a jlange>定义商品信息</a><i class="fa fa-times-circle" title="关闭"></i></li>
+  </ul>
+</div>
+<div class="jl_huoye_main">
+<div class="jl_breadcrumb">
+  <ul>
+    <li><i class="fa fa-align-justify"></i></li>
+    <li><a href="index.html" jlange>基础信息</a></li>
+    <li><i class="fa fa-angle-right"></i><a href="#" jlange>业务信息</a></li>
+    <li><i class="fa fa-angle-right"></i><a href="#" jlange>定义商品信息</a></li>
+  </ul>
+  <div class="jl_process">
+    <ul>
+      <li class="before" jlange>上一步流程</li>
+      <li class="center" jlange>当前流程</li>
+      <li class="after" jlange>下一步流程</li>
+    </ul>
+    <i class="fa fa-sort-amount-asc" title="查看所有步骤"></i>
+    <div class="jl_process_menu hide">
+      <ul class="jl_dropdown_menu">
+        <li><a>张三/2016-01-11 14:41<label class="jl_btn bgcolor_gray" jlange>新建</label></a></li>
+        <li><a>刹那芳华/2016-01-11 14:41<label class="jl_btn bgcolor_green" jlange>审核</label></a></li>
+        <li><a>赵六<label class="jl_btn bgcolor_red" jlange>完成</label></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="pagr_content">
+    <div class="w12 jl_defSee">
+      <div class="w12 jl_screening">
+<div class="w09 scr_seach">
+        <ul>
+          <li>
+            <dl>
+              <dt>时间：</dt>
+              <dd class="w10">
+            <div class="w06 jl_btn_group">
+              <input type="text" placeholder="开始时间" class="jl_time_01">
+              <span class="jl_btn btn_blue_or"><i class="fa fa-calendar"></i></span>
+            </div>
+            <div class="w06 jl_btn_group">
+              <input type="text" placeholder="结束时间" class="jl_time_02">
+              <span class="jl_btn btn_blue_or"><i class="fa fa-calendar"></i></span>
+            </div>
+            </dd>
+            </dl>
+          </li>
+          <li>
+            <dl>
+              <dd class="w12">
+                <div class="jl_btn_group">
+              <input type="text" placeholder="代码/名称">
+              <span class="jl_btn btn_blue_or"><i class="fa fa-search"></i></span>
+            </div>
+            </dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+          <div class="scr_btn">
+            <a class="jl_btn btn_blue" onclick="jl_defCarShow()"><i class="fa fa-plus-square"></i>新增</a>
+          </div>
+      </div>
+      <div class="w12 jl_title">
+        <dl>
+          <dt><i class="fa fa-square-o"></i></dt>
+          <dd class="w01">编码</dd>
+          <dd class="w03">名称</dd>
+          <dd class="w02">型号</dd>
+          <dd class="w01">品牌</dd>
+          <dd class="w01">计量单位</dd>
+          <dd class="w01">规格</dd>
+          <dd class="w01">分类</dd>
+          <dd class="w01">厂家编码</dd>
+          <dd class="w01 tc">操作</dd>
+        </dl>
+      </div>
+      <div class="w12 jl_list">
+        <div class="jl_list_03">
+        <div class="list_item_main">
+          <dl>
+            <dt><i class="fa fa-square-o"></i></dt>
+            <dd class="w01" title="004112"><ul><li><span>004112</span></li></ul></dd>
+            <dd class="w03" title="美的烟机/中式 CXW-180-DS20"><ul><li><span>美的烟机/中式 CXW-180-DS20</span></li></ul></dd>
+            <dd class="w02" title="CXW-180-DS20"><ul><li><span>CXW-180-DS20</span></li></ul></dd>
+            <dd class="w01" title="美的"><ul><li><span>美的</span></li></ul></dd>
+            <dd class="w01" title="只"><ul><li><span>只</span></li></ul></dd>
+            <dd class="w01" title="中等"><ul><li><span>中等</span></li></ul></dd>
+            <dd class="w01" title="挂机"><ul><li><span>挂机</span></li></ul></dd>
+            <dd class="w01" title="">&nbsp;</dd>
+            <dd class="w01 tc"><ul><li><a class="font_blue" onclick="jl_defCarShow()">编辑</a> <a class="font_blue" id="message_ts">删除</a></li></ul></dd>
+          </dl>
+        </div>
+        </div>
+      </div>
+      <div class="jl_bottom">
+        <ul>
+          <li><div class="jl_input_checkbox"><i class="fa fa-check-square"></i><span>全选</span></div></li>
+          <li><a class="jl_btn btn_blue_or"><i class="fa fa-trash-o"></i>删除</a></li>
+          <li>
+            <div class="jl_btn_group">
+              <div class="btn_group_text">每页10条</div>
+              <span class="jl_btn btn_white"><i class="fa fa-angle-up"></i></span>
+              <ul class="jl_dropdown_menu jl_droptop_menu">
+                <li><a>每页10条</a></li>
+                <li><a>每页30条</a></li>
+                <li><a>每页50条</a></li>
+                <li><a>每页100条</a></li>
+              </ul>
+             </div>
+          </li>
+          <li>
+         <div class="paging">
+          <a class="border_radius" title="首页"><i class="fa fa-angle-double-left"></i></a>
+          <a class="border_radius" title="上一页"><i class="fa fa-angle-left"></i></a>
+          <label>
+           <input />
+           <span>至</span>
+           <span>3</span>
+          </label>
+          <a class="border_radius" title="下一页"><i class="fa fa-angle-right"></i></a>
+          <a class="border_radius" title="末页"><i class="fa fa-angle-double-right"></i></a>
+         </div>
+         </li>
+         </ul>
+        </div>
+    </div>
+</div>
+</div>
+<div class="w06 jl_defCar">
+  <div class="jl_defCar_header">
+    <h3>新增商品信息</h3>
+    <span class="close" onclick="jl_defCarHide()">×</span>
+  </div>
+  <div class="jl_defCar_main">
+    <div class="jl_tab_title">
+      <ul>
+        <li class="xuan" jlange>必填信息</li>
+        <li jlange>基本信息</li>
+        <li jlange>换算单位</li>
+        <li jlange>行业属性</li>
+        <li jlange>个性属性</li>
+        <li jlange>物流信息</li>
+        <li jlange>维修信息</li>
+      </ul>
+    </div>
+    <div class="w12 jl_tab_main">
+      <div class="w12 jl_form">
+      <div class="jl_form_02">
+      <ul>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="商品代码">商品代码</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="销项税率">销项税率</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="商品名称">商品名称</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="基本单位">基本单位</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="品牌">品牌</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="产地">产地</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="商品分类">商品分类</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="商品花色">商品花色</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="机器件型">机器件型</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="质量等级">质量等级</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="型号">型号</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="物料编码">物料编码</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+        <li class="w06">
+          <dl>
+            <dt class="w03" title="规格">规格</dt>
+            <dd class="w09"><em class="btx font_red"></em><input type="text" class="w12"></dd>
+          </dl>
+        </li>
+      </ul>
+      </div>
+      </div>
+    </div>
+  </div>  
+  <div class="jl_defCar_footer">
+    <a class="jl_btn btn_blue_or"><i class="fa fa-floppy-o"></i>保存</a>
+    <a class="jl_btn btn_blue_or"><i class="fa fa-reply-all"></i>清空</a>
+  </div>
+</div>

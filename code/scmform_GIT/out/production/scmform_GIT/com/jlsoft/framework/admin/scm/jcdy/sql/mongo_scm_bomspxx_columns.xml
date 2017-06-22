@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_BOMSPXX.SCM_BOMSPXX">
+		<FIELD attrname="search" format='{"$or":[{"BOM01":"#search#"},{"ZSPBM":"#search#"},{"ZSPMC":{"$regex":"#search#"}},{"SPLB.BSPBM":"#search#"},{"SPLB.BSPMC":{"$regex":"#search#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="GSXX01" fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

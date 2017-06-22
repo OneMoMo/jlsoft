@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.rkchd">
+		<FIELD attrname="RKDH" fieldtype="string" allownull="N" name="入库单号" />
+		<Nested id="SPLB" allownull="N" name="商品列表">
+			<FIELD attrname="CHSL" fieldtype="string" allownull="N" name="冲红数量" />
+	    </Nested>
+	</JLConfig>
+	
+</root>

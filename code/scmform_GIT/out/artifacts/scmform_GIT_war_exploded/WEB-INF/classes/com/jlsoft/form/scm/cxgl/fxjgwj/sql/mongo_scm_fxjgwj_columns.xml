@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FXJGWJ.SCM_FXJGWJ">
+	    <FIELD attrname="DJHM" format='{"FXJGWJ01":{"$regex":"#DJHM#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>

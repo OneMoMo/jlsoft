@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="XSSRCBBB">
+	<select id="queryXSSRCBBB" parameterType="Map" resultType="java.util.Map">
+	SELECT
+      
+      <if test="BJ == 'SP'">
+	       SPBM, SPMC,'SP' BJ,
+		</if>
+      <if test="BJ == 'PP'">
+	       PPB01, PPMC,'PP' BJ,
+		</if>
+		<if test="BJ == 'SPFL'">
+	         SPFL01,  SPFLMC,'SPFL' BJ,
+		</if> 
+		<if test="BJ == 'XSBM'">
+	       XSBM01,XSBMMC, 'XSBM' BJ,
+		</if>  
+		<if test="BJ == 'XSFS'">
+	        XSFS01,XSFSMC,'XSFS' BJ,
+		</if> 
+		<!--  <if test="SPFLJB != null and SPFLJB != ''">
+			SPFLJB, 
+	    </if>
+          <if test="GYS != null and GYS != ''">
+		   GYS01,GYSMC,
+	    </if> 
+	    <if test="CGBM != null and CGBM != ''">
+		      CGBM01,CGBMMC,        
+	    </if> -->
+       SUM(PFSR) PFSR,
+       SUM(PFCB) PFCB,
+       SUM(HSPFML) HSPFML,
+       SUM(WSPFML) WSPFML,
+       SUM(LSSR) LSSR,
+       SUM(LSCB) LSCB,
+       SUM(HSLSML) HSLSML,
+       SUM(WSLSML) WSLSML,
+       SUM(XSZR) XSZR,
+       SUM(SRJE) SRJE,
+       SUM(BJTCB) BJTCB,
+       SUM(PFBJSR) PFBJSR,
+        (SUM(LSSR)+SUM(PFSR)+SUM(XSZR)+SUM(PFBJSR)) ZHSR, 
+       (SUM(LSCB)+SUM(PFCB)+SUM(BJTCB)+SUM(SRJE)) ZHCB, 
+       (SUM(LSSR)+SUM(PFSR)+SUM(XSZR)+SUM(PFBJSR)-SUM(LSCB)-SUM(PFCB)-SUM(BJTCB)-SUM(SRJE)) ZHML 
+  FROM VIEW_XSSRCB
+  where 1=1 
+  and GSXX01=#{GSXX01}
+   <if test="RQQ != null and RQQ !=''">
+	 <![CDATA[
+ 	    AND RQ >= TO_DATE(#{RQQ}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+    <if test="RQZ != null and RQZ !=''">
+    <![CDATA[
+  		AND RQ <= TO_DATE(#{RQZ}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+  	
+  	 <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          	SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	    </if>
+  	
+  	
+  	   <if test="XSBM != null and XSBM != ''">
+		     <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+		      XSBM01 = #{item}
+		     </foreach> 	         
+	    </if>
+	    
+	     <if test="PP != null and PP != ''">
+	         <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+	          PPB01 = #{item}
+	         </foreach>
+	    </if>
+	    
+	     <if test="GYS != null and GYS != ''">
+		    AND ( GYS01 LIKE '%'||#{GYS}||'%' OR GYSMC = #{GYS})
+	    </if> 
+	    
+	    <if test="XSFS != null and XSFS != ''">
+		     <foreach item="item" index="index" collection="XSFS"  open=" AND (" separator=" or " close=")"> 
+		      XSFS01 = #{item}
+		     </foreach> 	         
+	    </if>
+	  
+	      <if test="SPFLJB != null and SPFLJB != ''">
+			AND SPFLJB = #{SPFLJB}
+	    </if>
+	    
+	   	<if test="SPMC != null and SPMC != ''">
+		   AND (SPBM LIKE '%'||#{SPMC}||'%' OR SPMC LIKE '%'||#{SPMC}||'%' ) 
+	    </if>
+	   
+	    
+ 		<if test="BJ != null and BJ != ''">
+	         Group By 
+		</if>
+    	<if test="BJ == 'SP'">
+	       SPBM, SPMC
+		</if>
+		<if test="BJ == 'PP'">
+	       PPB01, PPMC
+		</if>
+		<if test="BJ == 'SPFL'">
+	         SPFL01,  SPFLMC
+		</if>  
+		<if test="BJ == 'XSBM'">
+	     XSBM01,XSBMMC
+		</if>  
+		<if test="BJ == 'XSFS'">
+	        XSFS01,XSFSMC
+		</if>  
+		
+	</select>
+</mapper>

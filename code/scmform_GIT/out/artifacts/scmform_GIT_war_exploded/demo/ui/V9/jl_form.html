@@ -1,0 +1,116 @@
+<div class="jl_huoye_title">
+  <ul>
+    <li class="xuan"><a jl_lage>表单模板</a><i class="fa fa-times-circle" title="关闭"></i></li>
+    <li><a jl_lage>表格模板</a><i class="fa fa-times-circle"></i></li>
+    <li><a jl_lage>列表模板</a><i class="fa fa-times-circle"></i></li>
+  </ul>
+</div>
+<div class="jl_huoye_main">
+<div class="jl_breadcrumb">
+  <ul>
+    <li><i class="fa fa-home"></i><a href="index.html" jl_lage>首页</a></li>
+    <li><i class="fa fa-angle-right"></i><a href="#" jl_lage>表单模板</a></li>
+    <li><i class="fa fa-angle-right"></i><a href="#" jl_lage>新增员工</a></li>
+  </ul>
+  <div class="jl_process">
+    <ul>
+      <li class="before" jl_lage>上一步流程</li>
+      <li class="center" jl_lage>当前流程</li>
+      <li class="after" jl_lage>下一步流程</li>
+    </ul>
+    <i class="fa fa-sort-amount-asc" title="查看所有步骤"></i>
+    <div class="jl_process_menu hide">
+      <ul class="jl_dropdown_menu">
+        <li><a>张三/2016-01-11 14:41<label class="jl_btn btn_black" jl_lage>已完结的流程</label></a></li>
+        <li><a>李四/2016-01-11 14:41<label class="jl_btn btn_black" jl_lage>已完结的流程</label></a></li>
+        <li><a>王五/2016-01-11 14:41<label class="jl_btn btn_black" jl_lage>已完结的流程</label></a></li>
+        <li><a>刹那芳华/2016-01-11 14:41<label class="jl_btn btn_green" jl_lage>当前流程</label></a></li>
+        <li><a>赵六<label class="jl_btn btn_red" jl_lage>未走流程</label></a></li>
+        <li><a>孙七<label class="jl_btn btn_red" jl_lage>未走流程</label></a></li>
+        <li><a>刘八<label class="jl_btn btn_red" jl_lage>未走流程</label></a></li>
+        <li><a>李九<label class="jl_btn btn_red" jl_lage>未走流程</label></a></li>
+        <li><a>高十<label class="jl_btn btn_red" jl_lage>未走流程</label></a></li>
+        <li><a>胡十一<label class="jl_btn btn_red" jl_lage>未走流程</label></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="pagr_content">
+  <div class="w11 jl_screening">
+    <ul>
+      <li>
+        <dl>
+          <dt class="w01">关键字</dt>
+          <dd class="w11">
+            <div class="w06 jl_btn_group">
+              <input type="text" placeholder="输入品牌名称可查询">
+              <span class="jl_btn btn_white xuan"><i class="fa fa-search"></i></span>
+            </div>
+          </dd>
+        </dl>
+      </li>
+      <li>
+        <dl>
+          <dt class="w01">时间</dt>
+          <dd class="w11">
+            <div class="w03 jl_btn_group">
+              <input type="text" placeholder="开始时间" class="jl_time_01">
+              <span class="jl_btn btn_white"><i class="fa fa-calendar"></i></span>
+            </div>
+            <div class="w03 jl_btn_group">
+              <input type="text" placeholder="结束时间" class="jl_time_02">
+              <span class="jl_btn btn_white"><i class="fa fa-calendar"></i></span>
+            </div>
+            <span>今天</span>
+            <span>昨天</span>
+            <span>一周前</span>
+          </dd>
+        </dl>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+<!---页面目录--->
+<div class="jl_catalog">
+<div class="catalog_ico"><i class="fa fa-list-ul"></i></div>
+<div class="catalog_main">
+  <dl>
+    <dt class="xuan">表单样式一</dt>
+    <dt>表单样式二</dt>
+    <dt>表单样式三</dt>
+    <dt>大分类</dt>
+    <dd>小分类</dd>
+    <dd>小分类</dd>
+    <dt>大分类</dt>
+    <dd>小分类</dd>
+    <dd>小分类</dd>
+  </dl>
+</div>
+</div>
+</div>
+
+<script>
+  $('.jl_date').fdatepicker();
+  $('.jl_time').fdatepicker({format: 'yyyy-mm-dd hh:ii',pickTime: true});
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var checkin = $('.jl_time_01').fdatepicker({
+	  onRender: function (date) {return date.valueOf() < now.valueOf() ? 'disabled' : '';
+	  }}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+			}
+			checkin.hide();
+			$('.jl_time_02')[0].focus();
+		}).data('datepicker');
+		var checkout = $('.jl_time_02').fdatepicker({
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');
+</script>

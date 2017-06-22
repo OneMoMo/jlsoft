@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SHGD">
+	<!-- 查询送货人员 -->
+	<select id="SHRY" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT A.FWRY01, A.FWRY02 RYMC, A.LXDH, A.SFZH, A.FWRY01 KEY, A.FWRY02 VALUE, 
+        	   B.FWWD01,B.FWWD02,C.DQXX01 SSDQ01,A.WLGS,CASE WHEN A.WLGS = 0 THEN '送货人员' 
+        	   WHEN A.WLGS = 1 THEN '物流公司' END WLBJMC
+		  FROM CSS_FWRY A, CSS_FWWD B,CSS_WLXX C
+		 WHERE A.FWWD01 = B.FWWD01
+		   AND A.RYZT = 0
+		   AND (A.SHLX = 1 OR A.WLGS = 1)
+		   AND A.FWRY01 = C.WLGS01(+)
+		   AND B.WDLX = 0
+		   AND C.YXBJ(+) = 0
+		   JL{CZY|A.FWWD01|PSWD_CZ|LIKE%}JL
+	   <if test="RYMC != null and RYMC != ''">
+		   AND (A.FWRY01 LIKE '%'||#{RYMC}||'%' OR A.FWRY02 LIKE '%'||#{RYMC}||'%')
+	   </if>
+    </select>
+  
+	<!-- 查询物流公司 -->
+  <select id="WLGS" parameterType="java.util.Map" resultType="java.util.Map">              
+       SELECT WLGS01,WLGS02 WLGSMC,DQXX01,TCF,YCF,YCFBZ,TSXHF,XHDF 
+         FROM CSS_WLXX
+        WHERE YXBJ = 0
+        JL{CZY|FWWD01|PSWD_CZ|LIKE%}JL
+       <if test="WLGS01 != null and WLGS01 != ''">
+         AND WLGS01 = #{WLGS01}
+       </if>
+       <if test="DQXX01 != null and DQXX01 != ''">
+         AND DQXX01 = #{DQXX01}
+       </if>
+  </select>
+  	<!-- 查询送货车辆 -->
+  <select id="SHCLBZ" parameterType="java.util.Map" resultType="java.util.Map">
+ 	   <if test="FWWD01 != null and FWWD01 != ''">
+  	   SELECT CLXX01,CX,CLZZ,ZZTJ,CLZT,FWWD01,CLXX01 KEY,CLXX01 VALUE FROM CSS_CLXX
+        WHERE 1=1
+       	  AND FWWD01 = #{FWWD01}
+       </if>
+       <if test="WLGS01 != null and WLGS01 != ''">
+       SELECT WLGS01,ZZTJ,ZZTJ KEY,MC,MC VALUE FROM CSS_WLCLBZ
+        WHERE 1=1       
+          AND WLGS01 = #{WLGS01}
+	       <if test="SPTJ != null and SPTJ != ''">
+	         ORDER BY ABS(ZZTJ - #{SPTJ})
+	       </if>
+       </if>      
+  </select>
+  <!-- 查询路线最远区域-->
+  <select id="ZYDQ" parameterType="java.util.Map" resultType="java.util.Map">
+	  SELECT DISTINCT DQXX01 
+	    FROM CSS_WLFYMX A
+	   WHERE 1=1 
+	  <if test="DQXX01 != null and DQXX01 != ''">
+		     <foreach item="item" index="index" collection="DQXX01"  open=" AND (" separator=" or " close=")"> 
+		      A.DQXX01 = #{item}
+		     </foreach> 
+	  </if>
+	     AND SHJL = (SELECT MAX(SHJL) 
+	                   FROM CSS_WLFYMX B
+	                  WHERE A.WLGS01 = B.WLGS01
+	  <if test="DQXX01 != null and DQXX01 != ''">
+		     <foreach item="item" index="index" collection="DQXX01"  open=" AND (" separator=" or " close=")"> 
+		      B.DQXX01 = #{item}
+		     </foreach> 
+	  </if>)
+   </select>  
+   <!-- 查询送货费用-->
+  <select id="querySHFY" parameterType="java.util.Map" resultType="java.util.Map">
+	<if test="DX == 1">  
+		SELECT A.CK01,(SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKCK,A.SHSL,B.SPTJ ZLFS,
+		       B.WLGS01,(SELECT WLGS02 FROM CSS_WLXX WHERE WLGS01 = B.WLGS01 AND YXBJ = 0
+		       JL{CZY|CSS_WLXX.FWWD01|PSWD_CZ|LIKE%}JL) WLGSMC,
+		       A.DJHM,GET_DJLX(A.DJLX)DJLX,TO_CHAR(C.ZDRQ,'YYYY-MM-DD')DJRQ,
+		       TO_CHAR(C.ZDRQ,'YYYY-MM-DD')SHRQ,A.HYXX01 KHBM,A.LXR KHMC,
+		       A.SPXX01 SPNM,S.SPXX02 SPBM,S.SPXX04 SPMC,NVL(E.SSFSL,0)FHSL,NVL(E.YSFSL-E.SSFSL,0)WFHSL,S.SPXX68 SPTJ,
+		       ROUND((B.YCF+B.TSXHF+B.XHDF+B.SHFY+B.CFF)/(SELECT COUNT(1) FROM CSS_SHGD WHERE GDHZ01 = B.GDHZ01),2)SHFY,
+		       CASE WHEN A.DJLX = 8 THEN (SELECT WLDW01 FROM PFD WHERE PFD.JLWBDH = A.DJHM AND PFD.GSXX01 = A.GSXX01) ELSE '' END WLDW01,
+		       CASE WHEN A.DJLX = 8 THEN (SELECT TO_CHAR(WLDW.WLDW02) FROM PFD,WLDW WHERE PFD.WLDW01 = WLDW.WLDW01 AND PFD.JLWBDH = A.DJHM AND PFD.GSXX01 = A.GSXX01) ELSE '' END WLDWMC
+		  FROM CSS_SHGD A, CSS_WLFYJL B,CSS_FWD C,CSS_FWDITEM D,SPXX S,DSFHPSB E 
+		 WHERE A.GDHZ01 = B.GDHZ01
+		   AND D.DJHM = E.JLWBDH(+) 
+		   AND D.DJLX = E.DJLX(+)
+		   AND D.WBTDH = E.WBTDH(+)
+		   AND D.GSXX01 = E.GSXX01(+)
+		   AND E.CZLX(+) = 1
+		   AND C.FWD01 = D.FWD01
+		   AND A.SPXX01 = S.SPXX01
+		   AND A.FWDI01 = D.FWDI01
+		  <if test="WLGS != null and WLGS != ''">
+		   AND B.WLGS01 = #{WLGS}	 
+		  </if>
+		  <if test="CK != null and CK != ''">
+			     <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+			      A.CK01 LIKE #{item}||'%'
+			     </foreach> 
+		  </if>
+		</if>
+	<if test="DX == 0">  
+		SELECT A.CK01,(SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKCK,A.SHSL,B.FWRY01 SHRY01,B.FWRY02 SHRYMC,
+		       A.FWWD01 SHWD01,(SELECT FWWD02 FROM CSS_FWWD WHERE FWWD01 = A.FWWD01)SHWDMC,
+		       A.DJHM,GET_DJLX(A.DJLX)DJLX,TO_CHAR(C.ZDRQ,'YYYY-MM-DD')DJRQ,
+		       TO_CHAR(C.ZDRQ,'YYYY-MM-DD')SHRQ,A.HYXX01 KHBM,A.LXR KHMC,A.LXDH LXDH,
+		       A.SPXX01 SPNM,S.SPXX02 SPBM,S.SPXX04 SPMC,NVL(E.SSFSL,0)FHSL,NVL(E.YSFSL-E.SSFSL,0)WFHSL,S.SPXX68 SPTJ,
+		       ROUND(B.FYJE,2)SHFY,
+		       CASE WHEN A.DJLX = 8 THEN (SELECT WLDW01 FROM PFD WHERE PFD.JLWBDH = A.DJHM AND PFD.GSXX01 = A.GSXX01) ELSE '' END WLDW01,
+		       CASE WHEN A.DJLX = 8 THEN (SELECT TO_CHAR(WLDW.WLDW02) FROM PFD,WLDW WHERE PFD.WLDW01 = WLDW.WLDW01 AND PFD.JLWBDH = A.DJHM AND PFD.GSXX01 = A.GSXX01) ELSE '' END WLDWMC
+		  FROM CSS_SHGD A, CSS_SHRYFY B,CSS_FWD C,CSS_FWDITEM D,SPXX S,DSFHPSB E
+		 WHERE A.GD01 = B.GD01
+		   AND D.DJHM = E.JLWBDH(+) 
+		   AND D.DJLX = E.DJLX(+)
+		   AND D.WBTDH = E.WBTDH(+)
+		   AND D.GSXX01 = E.GSXX01(+)
+		   AND E.CZLX(+) = 1
+		   AND C.FWD01 = D.FWD01
+		   AND A.SPXX01 = S.SPXX01
+		   AND A.FWDI01 = D.FWDI01
+		   <if test="SHWD != null and SHWD != ''">
+		     AND (A.FWWD01 LIKE '%'||#{SHWD}||'%' or (SELECT FWWD02 FROM CSS_FWWD WHERE FWWD01 = A.FWWD01) LIKE '%'||#{SHWD}||'%')
+	      </if>		   
+		  <if test="FWWD01 != null and FWWD01 != ''">
+			AND A.FWWD01 = #{FWWD01}	 
+		  </if>
+		  <if test="SHRY != null and SHRY != ''">
+			AND (B.FWRY01 LIKE '%'||#{SHRY}||'%' or B.FWRY02 LIKE '%'||#{SHRY}||'%')
+		  </if>
+	</if>
+	<if test="DJHM != null and DJHM != ''">
+		AND A.DJHM = #{DJHM}	 
+	</if>
+	<if test="KHXM != null and KHXM != ''">
+		AND (A.LXR LIKE '%'||#{KHXM}||'%' 
+		     OR A.LXDH LIKE '%'||#{KHXM}||'%'
+		     OR EXISTS (SELECT PFD.WLDW01 FROM PFD, WLDW
+                                    WHERE PFD.JLWBDH = A.DJHM 
+                                      AND PFD.GSXX01 = A.GSXX01
+                                      AND WLDW.WLDW01 = PFD.WLDW01
+                                      AND (PFD.WLDW01 LIKE '%'||#{KHXM}||'%' 
+                                           OR WLDW.WLDW02 LIKE '%'||#{KHXM}||'%')))
+	</if>
+	<if test="SPMC != null and SPMC != ''">
+		AND (Upper(S.SPXX02) LIKE Upper('%'||#{SPMC}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{SPMC}||'%')  OR Upper(S.SPPYM) LIKE Upper('%'||#{SPMC}||'%') )
+	</if>
+	<if test="DJRQQ != null and DJRQQ != ''">
+	<![CDATA[AND C.ZDRQ >= TO_DATE(#{DJRQQ},'YYYY-MM-DD')]]>
+	</if>
+	<if test="DJRQZ != null and DJRQZ != ''">
+	<![CDATA[AND C.ZDRQ <= TO_DATE(#{DJRQZ},'YYYY-MM-DD')]]>
+	</if>
+   </select>  
+    <!-- 查询送货费用-->
+  <select id="querySHGD" parameterType="java.util.Map" resultType="java.util.Map">
+	<if test="DJLX == 10">  
+		SELECT A.GD01,A.FWD01 DJDH,CASE WHEN A.YYSJ IS NULL THEN '' WHEN A.FWSD = 0 THEN to_char(A.YYSJ,'YYYY-MM-DD')||'上午' ELSE to_char(A.YYSJ,'YYYY-MM-DD')||'下午' END YYSJ,
+			   CASE WHEN (SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01)IS NULL THEN '' WHEN (SELECT FFWSD FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01) = 0
+			   THEN to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'上午' ELSE 
+			   to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'下午' END FWSJ,
+			   A.FWWD01,(SELECT FWWD02 FROM CSS_FWWD WHERE CSS_FWWD.FWWD01 = A.FWWD01)FWWDMC,
+		       GET_GDLC(A.GDLC)GDLC,GET_GDRQ(A.GD01,'PWD')PWDRQ,GET_GDRQ(A.GD01,'PG')PGRQ,GET_GDRQ(A.GD01,'HZ')HZRQ,
+		       GET_GDRY(A.GD01,'PWD')PWDR,GET_GDRY(A.GD01,'PG')PGR,GET_GDRY(A.GD01,'HZ')HZR,A.DJHM,B.BM01,
+		       (SELECT BM02 FROM BM WHERE BM01 = B.BM01)BMMC,A.CK01,(SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKMC,
+		       B.LSD06 KPSJ,B.LSD07 SKRQ,A.HYXX01,A.LXR,A.LXDH,A.XXDZ,A.BZ,B.LSD16 YYY,
+		       A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,A.SHSL,A.YSHSL,A.SQXSL,'' JXS,
+		       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = B.FLFS01)XSFS,
+		       (SELECT FWRY02 FROM CSS_SHRYFY WHERE GD01 = A.GD01 AND FWRYLX = 0 AND ROWNUM = 1) SHRY,
+       		   (SELECT LXDH FROM CSS_SHRYFY S, CSS_FWRY R WHERE GD01 = A.GD01 AND FWRYLX = 0 AND S.FWRY01 = R.FWRY01 AND ROWNUM = 1) SHLXFS
+		  FROM CSS_SHGD A,LSD B,SPXX S WHERE A.SPXX01 = S.SPXX01 
+		   AND A.DJHM = B.JLWBDH AND A.GSXX01 = B.GSXX01 AND A.DJLX = 10
+		<if test="ZDRQQ != null and ZDRQQ != ''">
+		<![CDATA[AND B.LSD06 >= TO_DATE(#{ZDRQQ},'YYYY-MM-DD')]]>
+		</if>
+		<if test="ZDRQZ != null and ZDRQZ != ''">
+		<![CDATA[AND B.LSD06 <= TO_DATE(#{ZDRQZ},'YYYY-MM-DD')]]>
+		</if> 	 
+	</if>
+	<if test="DJLX == 8">  
+		SELECT A.GD01,A.FWD01 DJDH,CASE WHEN A.YYSJ IS NULL THEN '' WHEN A.FWSD = 0 THEN to_char(A.YYSJ,'YYYY-MM-DD')||'上午' ELSE 
+			   to_char(A.YYSJ,'YYYY-MM-DD')||'下午' END YYSJ,
+			   CASE WHEN (SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01)IS NULL THEN '' WHEN (SELECT FFWSD FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01) = 0
+			   THEN to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'上午' ELSE 
+			   to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'下午' END FWSJ,
+			   A.FWWD01,(SELECT FWWD02 FROM CSS_FWWD WHERE CSS_FWWD.FWWD01 = A.FWWD01)FWWDMC,
+		       GET_GDLC(A.GDLC)GDLC,GET_GDRQ(A.GD01,'PWD')PWDRQ,GET_GDRQ(A.GD01,'PG')PGRQ,GET_GDRQ(A.GD01,'HZ')HZRQ,
+		       GET_GDRY(A.GD01,'PWD')PWDR,GET_GDRY(A.GD01,'PG')PGR,GET_GDRY(A.GD01,'HZ')HZR,A.DJHM,B.BM01,
+		       (SELECT BM02 FROM BM WHERE BM01 = B.BM01)BMMC,A.CK01,(SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKMC,
+		       TO_CHAR(B.PFD04,'YYYY-MM-DD') KPSJ,TO_CHAR(B.PFD05,'YYYY-MM-DD') SKRQ,A.HYXX01,A.LXR,A.LXDH,A.XXDZ,A.BZ,B.PFD19 YYY,
+		       A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,A.SHSL,A.YSHSL,A.SQXSL,W.WLDW02 JXS,
+		       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = B.FLFS01)XSFS,
+		       (SELECT FWRY02 FROM CSS_SHRYFY WHERE GD01 = A.GD01 AND FWRYLX = 0 AND ROWNUM = 1) SHRY,
+       		   (SELECT LXDH FROM CSS_SHRYFY S, CSS_FWRY R WHERE GD01 = A.GD01 AND FWRYLX = 0 AND S.FWRY01 = R.FWRY01 AND ROWNUM = 1) SHLXFS
+		  FROM CSS_SHGD A,PFD B,SPXX S,WLDW W WHERE A.SPXX01 = S.SPXX01 
+		   AND A.DJHM = B.JLWBDH 
+		   AND W.WLDW01 = B.WLDW01
+		   AND A.GSXX01 = B.GSXX01 AND A.DJLX = 8	
+		   JL{CZY|B.WLDW01|WLDW_CX|inS}JL
+		<if test="ZDRQQ != null and ZDRQQ != ''">
+		<![CDATA[AND B.PFD04 >= TO_DATE(#{ZDRQQ},'YYYY-MM-DD')]]>
+		</if>
+		<if test="ZDRQZ != null and ZDRQZ != ''">
+		<![CDATA[AND B.PFD04 <= TO_DATE(#{ZDRQZ},'YYYY-MM-DD')]]>
+		</if> 	 
+	</if>
+	<if test="DJLX == 9">  
+		SELECT A.GD01,A.FWD01 DJDH,CASE WHEN A.YYSJ IS NULL THEN '' WHEN A.FWSD = 0 THEN to_char(A.YYSJ,'YYYY-MM-DD')||'上午' 
+			   ELSE to_char(A.YYSJ,'YYYY-MM-DD')||'下午' END YYSJ,
+			   CASE WHEN (SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01)IS NULL THEN '' WHEN (SELECT FFWSD FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01) = 0
+			   THEN to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'上午' ELSE 
+			   to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'下午' END FWSJ,
+			   A.FWWD01,(SELECT FWWD02 FROM CSS_FWWD WHERE CSS_FWWD.FWWD01 = A.FWWD01)FWWDMC,
+		       GET_GDLC(A.GDLC)GDLC,GET_GDRQ(A.GD01,'PWD')PWDRQ,GET_GDRQ(A.GD01,'PG')PGRQ,GET_GDRQ(A.GD01,'HZ')HZRQ,
+		       GET_GDRY(A.GD01,'PWD')PWDR,GET_GDRY(A.GD01,'PG')PGR,GET_GDRY(A.GD01,'HZ')HZR,A.DJHM,B.BM01,
+		       (SELECT BM02 FROM BM WHERE BM01 = B.BM01)BMMC,A.CK01,(SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKMC,
+		       TO_CHAR(B.YFD03,'YYYY-MM-DD') KPSJ,TO_CHAR(B.YFD04,'YYYY-MM-DD') SKRQ,A.HYXX01,A.LXR,A.LXDH,A.XXDZ,A.BZ,B.YFD13 YYY,
+		       A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,A.SHSL,A.YSHSL,A.SQXSL,W.WLDW02 JXS,
+		       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = B.FLFS01)XSFS,
+		       (SELECT FWRY02 FROM CSS_SHRYFY WHERE GD01 = A.GD01 AND FWRYLX = 0 AND ROWNUM = 1) SHRY,
+       		   (SELECT LXDH FROM CSS_SHRYFY S, CSS_FWRY R WHERE GD01 = A.GD01 AND FWRYLX = 0 AND S.FWRY01 = R.FWRY01 AND ROWNUM = 1) SHLXFS
+		  FROM CSS_SHGD A,YFD B,SPXX S,WLDW W WHERE A.SPXX01 = S.SPXX01 
+		   AND A.DJHM = B.JLWBDH AND A.GSXX01 = B.GSXX01 
+		   AND W.WLDW01 = B.WLDW01
+		   AND A.DJLX = 9	        
+		   JL{CZY|B.WLDW01|WLDW_CX|inS}JL
+		<if test="ZDRQQ != null and ZDRQQ != ''">
+		<![CDATA[AND B.YFD03 >= TO_DATE(#{ZDRQQ},'YYYY-MM-DD')]]>
+		</if>
+		<if test="ZDRQZ != null and ZDRQZ != ''">
+		<![CDATA[AND B.YFD03 <= TO_DATE(#{ZDRQZ},'YYYY-MM-DD')]]>
+		</if> 
+	</if>
+	<if test="DJLX == 7">  
+	  SELECT A.GD01,A.FWD01 DJDH,CASE WHEN A.YYSJ IS NULL THEN '' WHEN A.FWSD = 0 THEN to_char(A.YYSJ,'YYYY-MM-DD')||'上午' 
+	         ELSE to_char(A.YYSJ,'YYYY-MM-DD')||'下午' END YYSJ,
+	         CASE WHEN (SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01)IS NULL THEN '' WHEN (SELECT FFWSD FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01) = 0
+	         THEN to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'上午' ELSE 
+	         to_char((SELECT FWSJ FROM CSS_FWDITEM WHERE FWDI01 = A.FWDI01),'YYYY-MM-DD')||'下午' END FWSJ,
+	         A.FWWD01,(SELECT FWWD02 FROM CSS_FWWD WHERE CSS_FWWD.FWWD01 = A.FWWD01)FWWDMC,
+	           GET_GDLC(A.GDLC)GDLC,GET_GDRQ(A.GD01,'PWD')PWDRQ,GET_GDRQ(A.GD01,'PG')PGRQ,GET_GDRQ(A.GD01,'HZ')HZRQ,
+	           GET_GDRY(A.GD01,'PWD')PWDR,GET_GDRY(A.GD01,'PG')PGR,GET_GDRY(A.GD01,'HZ')HZR,A.DJHM,A.BM01,
+	           (SELECT BM02 FROM BM WHERE BM01 = A.BM01)BMMC,A.CK01,(SELECT CK02 FROM CK WHERE CK01 = A.CK01)CKMC,
+	           TO_CHAR(B.ZCD06,'YYYY-MM-DD') KPSJ,'' SKRQ,A.HYXX01,A.LXR,A.LXDH,A.XXDZ,A.BZ,B.ZCD05 YYY,
+	           A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,A.SHSL,A.YSHSL,A.SQXSL,
+	           ''XSFS,
+	           (SELECT FWRY02 FROM CSS_SHRYFY WHERE GD01 = A.GD01 AND FWRYLX = 0 AND ROWNUM = 1) SHRY,
+       		   (SELECT LXDH FROM CSS_SHRYFY S, CSS_FWRY R WHERE GD01 = A.GD01 AND FWRYLX = 0 AND S.FWRY01 = R.FWRY01 AND ROWNUM = 1) SHLXFS
+	      FROM CSS_SHGD A,ZCD B,SPXX S WHERE A.SPXX01 = S.SPXX01 
+	       AND A.DJHM = B.JLWBDH AND A.GSXX01 = B.GSXX01 
+	       AND A.DJLX = 7
+	</if>
+	<if test="GD01 != null and GD01 != ''">
+		AND A.GD01 = #{GD01}	 
+	</if>
+	<if test="GDLC != null and GDLC != ''">
+		<if test="GDLC != 'QB'">
+			AND A.GDLC = #{GDLC}	 
+		</if> 
+	</if>
+	<if test="DJHM != null and DJHM != ''">
+		AND A.DJHM = #{DJHM}	 
+	</if>
+	<if test="XSBM != null and XSBM != ''">
+		<foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+		   B.BM01 like #{item}||'%'
+		</foreach> 	         
+	</if>
+	<if test="CK != null and CK != ''">
+		<foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		   A.CK01 like #{item}||'%'
+		</foreach> 	         
+	</if>
+	<if test="FWWD != null and FWWD != ''">
+		<foreach item="item" index="index" collection="FWWD"  open=" AND (" separator=" or " close=")"> 
+		   A.FWWD01 = #{item}
+		</foreach> 	         
+	</if>
+	<if test="JXS != null and JXS != ''">
+		<foreach item="item" index="index" collection="JXS"  open=" AND (" separator=" or " close=")"> 
+		   A.HYXX01 = (SELECT VIP_HYXX01 FROM WLDW WHERE WLDW01 =  #{item})
+		</foreach> 	         
+	</if>
+	<if test="LXR != null and LXR != ''">
+		AND A.LXR LIKE '%'||#{LXR}||'%'	
+	</if>
+	<if test="LXDH != null and LXDH != ''">
+		AND A.LXDH = #{LXDH}	 
+	</if>
+	<if test="XXDZ != null and XXDZ != ''">
+		AND A.XXDZ LIKE '%'||#{XXDZ}||'%'	 
+	</if>
+	<if test="FLFS != null and FLFS != ''">
+		<foreach item="item" index="index" collection="FLFS"  open=" AND (" separator=" or " close=")"> 
+		    B.FLFS01 = #{item}	
+		</foreach>        
+	</if>
+	<if test="SPXX != null and SPXX != ''">
+		AND (Upper(S.SPXX02) LIKE Upper('%'||#{SPXX}||'%') OR Upper(S.SPXX04 )LIKE Upper('%'||#{SPXX}||'%')  OR Upper(S.SPPYM )LIKE Upper('%'||#{SPXX}||'%') )         
+	</if>
+	<if test="PWDRQQ != null and PWDRQQ != ''">
+	<![CDATA[AND  TO_DATE(GET_GDRQ(A.GD01,'PWD'),'YYYY-MM-DD') 
+					>= TO_DATE(#{PWDRQQ},'YYYY-MM-DD')]]>
+	</if>
+	<if test="PWDRQZ != null and PWDRQZ != ''">
+	<![CDATA[AND  TO_DATE(GET_GDRQ(A.GD01,'PWD'),'YYYY-MM-DD') 
+					<= TO_DATE(#{PWDRQZ},'YYYY-MM-DD')]]>
+	</if>
+	<if test="PGRQQ != null and PGRQQ != ''">
+	<![CDATA[AND  TO_DATE(GET_GDRQ(A.GD01,'PG'),'YYYY-MM-DD') 
+					>= TO_DATE(#{PGRQQ},'YYYY-MM-DD')]]>
+	</if>
+	<if test="PGRQZ != null and PGRQZ != ''">
+	<![CDATA[AND  TO_DATE(GET_GDRQ(A.GD01,'PG'),'YYYY-MM-DD') 
+					<= TO_DATE(#{PGRQZ},'YYYY-MM-DD')]]>
+	</if>
+	<if test="HZRQQ != null and HZRQQ != ''">
+	<![CDATA[AND  TO_DATE(GET_GDRQ(A.GD01,'HZ'),'YYYY-MM-DD') 
+					>= TO_DATE(#{HZRQQ},'YYYY-MM-DD')]]>
+	</if>
+	<if test="HZRQZ != null and HZRQZ != ''">
+	<![CDATA[AND  TO_DATE(GET_GDRQ(A.GD01,'HZ'),'YYYY-MM-DD') 
+					<= TO_DATE(#{HZRQZ},'YYYY-MM-DD')]]>
+	</if>	
+	JL{CZY|A.FWWD01|PSWD_CX|LIKE%}JL
+	JL{CZY|A.BM01|BM_CX|LIKE%}JL
+	JL{CZY|A.CK01|CK_CX|LIKE%}JL
+   </select>             
+</mapper>

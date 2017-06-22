@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_KSXX.SCM_KSXX">
+        <FIELD attrname="DMMC" format='{"$or":[{"WLDWMC":{"$regex":"#DMMC#"}},{"PYM":{"$regex":"#DMMC#"}},{"WLDW01":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="代码名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" format='{"GSXX01":"#GSXX01#"}' fieldtype="String" allownull="Y" name="公司信息" />
+		<FIELD qx='WLDW01|GYS_CZ|in' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_KSXX.SCM_KSXX1">
+        <FIELD attrname="DMMC" format='{"$or":[{"WLDWMC":{"$regex":"#DMMC#"}},{"PYM":{"$regex":"#DMMC#"}},{"WLDW01":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="代码名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD qx='WLDW01|GYS_CZ|in' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_KSXX.SCM_KSXX2">
+        <FIELD attrname="DMMC" format='{"$or":[{"WLDWMC":{"$regex":"#DMMC#"}},{"PYM":{"$regex":"#DMMC#"}},{"WLDW01":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="代码名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD qx='WLDW01|GYS_CZ|in' />
+	</JLConfig>
+</root>   

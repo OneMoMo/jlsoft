@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.fygl.fyys">
+      <FIELD attrname="YSQJ" fieldtype="string" allownull="N" name="预算期间" />
+      <Nested id="FYBMMC">
+          <FIELD attrname="key" fieldtype="String" allownull="N" name="费用部门" />
+          <FIELD attrname="value" fieldtype="String" allownull="N" name="费用部门" />
+      </Nested>
+      <Nested id="SPLB" allownull="N" name="费用预算明细">
+         <FIELD attrname="YSJE" fieldtype="double" allownull="N" name="预算金额" />
+      </Nested>
+	</JLConfig>	 
+</root>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GHHT">
+<!-- 查询SPXX关联SPHSDW和SPJGB表 -->
+  <select id="HT" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT A.JLWBDH GHHT01,
+        A.BM01 ,
+        (SELECT BM02 FROM BM WHERE BM01 = A.BM01) CGBMMC,
+      TO_CHAR(A.GHHT04,'YYYY-MM-DD')   YXQQ,
+       TO_CHAR(A.GHHT05,'YYYY-MM-DD')  YXQZ,
+        decode(A.GHHT22,1,'制单',2,'审核',3,'审批') HTZT,
+       get_hzfs(A.GHHT24)  HZFS
+   FROM GHHT A 
+  WHERE <!-- A.WLDW01 = 000018
+    AND A.GSXX01 = '0001'  -->
+ <if test="GSXX01 != null">  A.GSXX01 =#{GSXX01}</if>
+ <if test="WLDW01 != null"> AND A.WLDW01 =#{WLDW01}</if>
+  </select>
+</mapper>

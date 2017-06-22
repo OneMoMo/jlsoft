@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_DYCGFS.SCM_DYCGFS">
+	  <FIELD attrname="search" format='{"$or":[{"CGFS01":{"$regex":"#search#"}},{"CGFSMC":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="采购方式" />
+	  <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

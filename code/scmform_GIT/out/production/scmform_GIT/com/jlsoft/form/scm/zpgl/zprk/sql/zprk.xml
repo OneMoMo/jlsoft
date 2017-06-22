@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ZPRK">
+  <!-- 赠品信息 -->
+  <select id="ZPXX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.ZPXX01 ZPXX01, A.ZPXX02 ZPMC, A.ZPXX07 RKDJ
+      FROM ZPXX A 
+      WHERE A.ZPXX08=0
+     <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+      </if>
+       <if test="ZPXX01 != null and ZPXX01 != ''">
+       AND (A.ZPXX01  LIKE '%'||#{ZPXX01}||'%' OR A.ZPXX02 LIKE '%'||#{ZPXX01}||'%')
+      </if>
+  </select>
+    <select id="queryZPKC" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.ZPXX01 ZPXX01, A.ZPXX02 ZPMC, A.ZPXX07 RKDJ
+      FROM ZPXX A 
+      WHERE A.ZPXX08=0
+     <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+      </if>
+       <if test="ZPXX01 != null and ZPXX01 != ''">
+       AND (A.ZPXX01  LIKE '%'||#{ZPXX01}||'%' OR A.ZPXX02 LIKE '%'||#{ZPXX01}||'%')
+      </if>
+  </select>
+   <!-- 商品信息 -->
+  <select id="SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.SPXX01 ZPXX01,A.SPXX02 ZPXX02, A.SPXX04 ZPMC,
+       (select spjg01 from spjgb where (spjg03,spxx01) in 
+       (SELECT max(spjg03),spxx01 FROM SPJGB WHERE SPJGB.SPXX01=A.SPXX01
+       <!--  <if test="GSXX01 != null and GSXX01 != ''">
+       AND SPJGB.GSXX01 = #{GSXX01}
+      </if> -->
+        group by spxx01) and rownum=1)rkdj
+      FROM SPXX A 
+    WHERE SPXX17=1
+   <!--   <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+      </if> -->
+       <if test="ZPXX01 != null and ZPXX01 != ''">
+   and    (REGEXP_LIKE(A.SPXX02, #{ZPXX01}, 'i') OR REGEXP_LIKE(A.SPXX04, #{ZPXX01}, 'i')
+					OR REGEXP_LIKE(A.SPPYM, #{ZPXX01}, 'i'))
+      
+      </if>
+  </select>
+  </mapper>

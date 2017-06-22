@@ -1,0 +1,112 @@
+.jl_list{ background:#fff; float:left; width:100%;}
+
+/***
+列表样式01
+jl_list_01
+李龙威
+***/
+.jl_list > .jl_list_01{ width:100%;}
+.jl_list_01 > ul{ width:100%; padding:5px 0;}
+.jl_list_01 > ul > li{ width:100%; padding:0 10px; border:none; background-image:-webkit-linear-gradient(#eee 50%,transparent 50%); background-image:-moz-linear-gradient(#eee 50%,transparent 50%);background-image:-o-linear-gradient(#eee 50%,transparent 50%); background-image:linear-gradient(#eee 50%,transparent 50%); background-size: 100% 1px; background-repeat:no-repeat; background-position:bottom;}
+.jl_list_01 > ul > li:last-child{ background-size:100% 0px;}
+.jl_list_01 > ul > li.xuan{ background:#f1f1f1;}
+.jl_list_01 > ul > li > dl{ width:100%;}
+.jl_list_01 > ul > li > dl > dt{ font-size:1.4em;}
+
+/***
+列表样式02
+jl_list_02
+慕寞思怀
+***/
+.jl_list > .jl_list_02{ width:100%;}
+.jl_list_02 > ul{ width:100%; line-height:30px;}
+.jl_list_02 > ul > li{ width:98%; padding:5px 0 5px 0; margin-left:2%; border-bottom:1px solid #f5f5f5;}
+
+/***
+列表样式03
+jl_list_03
+慕寞思怀
+***/
+.jl_list > .jl_list_03{ width:100%; float:left; overflow:hidden;}
+.jl_list_03 > .list_case{ position:relative; float:left; border-bottom:1px solid #eee; width:100%;}
+.jl_list_03 > .list_case > ul{ width:100%;}
+.jl_list_03 > .list_case > ul > li{ width:100%;}
+.jl_list_03 > .list_case > ul > li.xuan{ background:#f0fbff;}
+.jl_list_03 > .list_case > ul > li > a{ width:100%; margin-top:4px; position:relative;}
+.jl_list_03 > .list_case > ul > li > a > .list_name{ border-radius:50%; width:40px; height:40px; line-height:40px; color:#fff; text-align:center; margin:8px 5px; position:absolute; overflow:hidden; font-size:1em;}
+.jl_list_03 > .list_case > ul > li > a > .list_name > em{ position:absolute; top:0px; right:0px; width:20px; height:20px; background:#000; z-index:120;}
+.jl_list_03 > .list_case > ul > li > a > .list_name > img{ width:100%; height:100%;}
+.jl_list_03 > .list_case > ul > li > a > .list_main{ padding:0 5px 0 55px; margin:8px 0; width:100%; float:left;}
+.jl_list_03 > .list_case > ul > li > a > .list_main > div{ width:100%; overflow:hidden; height:20px;}
+.jl_list_03 > .list_case > ul > li > a > .list_main h4{ overflow:hidden; font-weight:500; height:20px;}
+.jl_list_03 > .list_case > ul > li > a > .list_main label{ position:absolute; right:5px; color:#ccc; font-size:0.8em; padding:2px 7px; color:#fff; border-radius:10px;}
+.jl_list_03 > .list_case > ul > li > a > .list_main span{ margin:0 10px 0 0; color:#999; font-size:0.8em;}
+
+
+/***
+列表样式04
+jl_list_04
+李龙威
+***/
+.jl_list > .jl_list_04{ width:100%; float:left; overflow:hidden;}
+.jl_list_04 > .list_case{ position:relative; float:left; border:none; background-image:-webkit-linear-gradient(#eee 50%,transparent 50%); background-image:-moz-linear-gradient(#eee 50%,transparent 50%); background-image:-o-linear-gradient(#eee 50%,transparent 50%); background-image:linear-gradient(#eee 50%,transparent 50%); background-size:100% 1px; background-repeat:no-repeat;
+background-position:bottom;}
+.jl_list_04 > .xuan{ background:#f0fbff;}
+.jl_list_04 > .list_case:last-child{ border-bottom:1px solid #eee; background-image:-webkit-linear-gradient(#eee 0,transparent 0); background-image:-moz-linear-gradient(#eee 50%,transparent 0%); background-image:-o-linear-gradient(#eee 0%,transparent 0%); background-image:linear-gradient(#eee 0%,transparent 0%); background-size:0% 0px; background-repeat:no-repeat;
+background-position:bottom;}
+/***.list_case > ul{ padding:10px; width:100%; padding-left:40px;} ***/
+.jl_list_04 > .list_case > ul{ padding:10px; width:100%;}
+.jl_list_04 > .list_case > ul:last-child{ margin-bottom:10px; border:0px;}
+.jl_list_04 > .list_case > ul > li.pro_name{ line-height:30px;}
+.jl_list_04 > .list_case > ul > li.checkbox{ width:40px; height:100%; float:left; position:absolute; left:0px; top:0px;}
+.jl_list_04 > .list_case > ul > li.checkbox > i{ position:absolute; top:50%; left:50%; margin:-8px 0 0 -8px; font-size:1.2em; color:#aaa;}
+.jl_list_04 > .list_case > ul > li > dl{ width:100%; line-height:25px; font-size:1em;}
+.jl_list_04 > .list_case > ul > li > dl > dt{ color:#999;}
+
+/***
+列表样式05
+jl_list_05
+李龙威
+***/
+.jl_list > .jl_list_05{ width:100%; float:left; overflow:hidden;}
+.jl_list_05 > div{ position:relative; float:left; border:none; background-image:-webkit-linear-gradient(#eee 50%,transparent 50%); background-image:-moz-linear-gradient(#eee 50%,transparent 50%); background-image:-o-linear-gradient(#eee 50%,transparent 50%); background-image:linear-gradient(#eee 50%,transparent 50%); background-size:100% 1px; background-repeat:no-repeat;
+background-position:bottom;}
+.jl_list_05 > .xuan{ background:#f0fbff;}
+.jl_list_05 > div{ width:100%;border-bottom:1px solid #eee; background-image:-webkit-linear-gradient(#eee 0,transparent 0); background-image:-moz-linear-gradient(#eee 50%,transparent 0%); background-image:-o-linear-gradient(#eee 0%,transparent 0%); background-image:linear-gradient(#eee 0%,transparent 0%); background-size:0% 0px; background-repeat:no-repeat;
+background-position:bottom;}
+/***div > ul{ padding:10px; width:100%; padding-left:40px;} ***/
+.jl_list_05 > div > dl{ width:100%;  border: none; background-image: -webkit-linear-gradient(#eee 50%,transparent 50%);background-image: -moz-linear-gradient(#eee 50%,transparent 50%);background-image: -o-linear-gradient(#eee 50%,transparent 50%);background-image: linear-gradient(#eee 50%,transparent 50%);background-size: 100% 1px;background-repeat: no-repeat;background-position: bottom;}
+.jl_list_05 > div > dl > dt{ position: absolute; left: 10px; top: 50%; margin-top: -12px;}
+.jl_list_05 > div > dl > dd{ float:left;}
+.jl_list_05 > div > dl > dd > ul{ width:100%;}
+.jl_list_05 > div > dl > dd > ul > li{ width:100%; margin-top: 6px;}
+.jl_list_05 > div > dl > dd > ul > li:first-child{ margin-top: 0px;}
+.jl_list_05 > div > dl > dd.list_name{ border-radius:50%; width:40px; height:40px; line-height:40px; color:#fff; text-align:center; margin:8px 5px; position:absolute; overflow:hidden; font-size:1em;}
+.jl_list_05 > div > dl > dd.list_main{ padding: 0px 10px; margin:10px 0; width:100%; float:left;}
+.jl_list_05 > div > dl > dd.list_main > ul > li > span{ margin:0 10px 0 0; color:#999; font-size:0.8em;}
+.jl_list_05 > div > dl > dd.list_main > ul > li > label{ position:absolute; right:5px; color:#ccc; font-size:0.8em; padding:2px 7px; color:#fff; border-radius:10px;}
+.jl_list_05 > div > dl > dd > ul > li.pro_name{ line-height:30px;}
+.jl_list_05 > div > dl > dd > ul > li.checkbox{ width:40px; height:100%; float:left; position:absolute; left:0px; top:0px;}
+.jl_list_05 > div > dl > dd > ul > li.checkbox > i{ position:absolute; top:50%; left:50%; margin:-8px 0 0 -8px; font-size:1.2em; color:#aaa;}
+.jl_list_05 > div > dl > dd > ul > li > dl{ width:100%; line-height:25px; font-size:1em;}
+.jl_list_05 > div > dl > dd > ul > li > dl > dt{ color:#999;}
+.jl_list_05 > div > dl > dd.btn{position: absolute; right: -200px; height: 100%; z-index: 20;}
+.jl_list_05 > div > dl > dd.btn > ul{height:100%;}
+.jl_list_05 > div > dl > dd.btn > ul > li{height:100%;width:inherit;margin-top: 0px;}
+.jl_list_05 > div > dl > dd.btn > ul > li > span{ position: absolute; height: 30px; line-height: 30px; top: 50%; margin-top: -15px; width: 100%; text-align: center; color: #fff;}
+
+
+.swiper > .list_case{ position:relative; float:left; border:none; background-image:-webkit-linear-gradient(#eee 50%,transparent 50%); background-image:-moz-linear-gradient(#eee 50%,transparent 50%); background-image:-o-linear-gradient(#eee 50%,transparent 50%); background-image:linear-gradient(#eee 50%,transparent 50%); background-size:100% 1px; background-repeat:no-repeat;
+background-position:bottom;}
+.swiper > .list_case:last-child{ border-bottom:1px solid #eee; background-image:-webkit-linear-gradient(#eee 0,transparent 0); background-image:-moz-linear-gradient(#eee 50%,transparent 0%); background-image:-o-linear-gradient(#eee 0%,transparent 0%); background-image:linear-gradient(#eee 0%,transparent 0%); background-size:0% 0px; background-repeat:no-repeat;
+background-position:bottom;}
+.swiper > .list_case > .btn{ width:200px; position:absolute; right:-100%; height:100%; }
+.swiper > .list_case > .btn > ul{ width:100%; height:100%; float:left;}
+.swiper > .list_case > .btn > ul > li{ height:100%;}
+.swiper > .list_case > .btn > ul > li > i{ position:absolute; height:30px; width:100%; text-align:center; line-height:30px; color:#fff;}
+.swiper > .list_case > .btn > ul > li > .plus{ top:0px;}
+.swiper > .list_case > .btn > ul > li > .minus{ bottom:0px;}
+.swiper > .list_case > .btn > ul > li > input{ width:80%; height:30px; border:0px; margin:0 10%; position:absolute; top:50%; margin-top:-15px; text-indent:inherit; text-align:center;}
+.swiper > .list_case > .btn > ul > li span{ position:absolute; height:30px; line-height:30px; top:50%; margin-top:-15px; width:100%; text-align:center; color:#fff;}
+.form_checkbox{ position:absolute; width:30px; height:100%; z-index:1; text-align:center; left:0px; top:0px;}
+.form_checkbox > i{ position:absolute; width:16px; height:16px; top:50%; left:50%; margin:-8px 0 0 -8px; font-size:1.2em;}

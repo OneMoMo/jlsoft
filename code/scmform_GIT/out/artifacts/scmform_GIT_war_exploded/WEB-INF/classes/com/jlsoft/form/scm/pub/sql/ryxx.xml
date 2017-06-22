@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RYXX">
+
+  <!-- 查找所有人员-->
+  <select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC,
+           R.RYXX03 RYZT, GET_RYZT(R.RYXX03) RYZTMC,
+           GET_BOOL(INSTR(R.RYXX08, 0)) RYSX_ALL,
+           GET_BOOL(INSTR(R.RYXX08, 1)) RYSX_GL,
+           GET_BOOL(INSTR(R.RYXX08, 2)) RYSX_YW,
+           GET_BOOL(INSTR(R.RYXX08, 3)) RYSX_XS,
+           GET_BOOL(INSTR(R.RYXX08, 4)) RYSX_SY,
+           GET_BOOL(INSTR(R.RYXX08, 5)) RYSX_CW,
+           GET_BOOL(INSTR(R.RYXX08, 6)) RYSX_BG,
+           GET_BOOL(INSTR(R.RYXX08, 7)) RYSX_QT
+      FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYXX08 != null and RYXX08 != ''">
+       AND R.RYXX08 in ${RYXX08}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND R.BM01 = #{BM01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+
+  <!-- 查找在职的销售人员-->
+  <select id="XSRY" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC,
+           R.RYXX03 RYZT, GET_RYZT(R.RYXX03) RYZTMC,
+           GET_BOOL(INSTR(R.RYXX08, 0)) RYSX_ALL,
+           GET_BOOL(INSTR(R.RYXX08, 1)) RYSX_GL,
+           GET_BOOL(INSTR(R.RYXX08, 2)) RYSX_YW,
+           GET_BOOL(INSTR(R.RYXX08, 3)) RYSX_XS,
+           GET_BOOL(INSTR(R.RYXX08, 4)) RYSX_SY,
+           GET_BOOL(INSTR(R.RYXX08, 5)) RYSX_CW,
+           GET_BOOL(INSTR(R.RYXX08, 6)) RYSX_BG,
+           GET_BOOL(INSTR(R.RYXX08, 7)) RYSX_QT,    
+           (select FLFS.FLFS01 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01
+           <if test="XSLX_F != null and XSLX_F != ''"> AND FLFS04 not in ${XSLX_F} </if> AND ROWNUM=1 ) XSFS01,
+           (select FLFS.FLFS02 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01
+           <if test="XSLX_F != null and XSLX_F != ''"> AND FLFS04 not in ${XSLX_F} </if> AND ROWNUM=1 ) XSFSMC
+      FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.RYXX03 = 0
+       AND B.BM10=1
+       AND R.RYXX09 IS NOT NULL
+       <![CDATA[
+       AND INSTR(R.RYXX08, 3) > 0
+       ]]>
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       <if test="XSLX_F != null">
+           <![CDATA[ AND exists(select 1 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01 AND flfs04 not in ${XSLX_F})   ]]>
+      	</if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+<!-- 查找在职的销售人员 对应的客户业务员-->
+  <select id="XSRYKHYWYYX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC,
+           R.RYXX03 RYZT, GET_RYZT(R.RYXX03) RYZTMC,D.FLFS01,
+           GET_BOOL(INSTR(R.RYXX08, 0)) RYSX_ALL,
+           GET_BOOL(INSTR(R.RYXX08, 1)) RYSX_GL,
+           GET_BOOL(INSTR(R.RYXX08, 2)) RYSX_YW,
+           GET_BOOL(INSTR(R.RYXX08, 3)) RYSX_XS,
+           GET_BOOL(INSTR(R.RYXX08, 4)) RYSX_SY,
+           GET_BOOL(INSTR(R.RYXX08, 5)) RYSX_CW,
+           GET_BOOL(INSTR(R.RYXX08, 6)) RYSX_BG,
+           GET_BOOL(INSTR(R.RYXX08, 7)) RYSX_QT,    
+           (select FLFS.FLFS01 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01
+           <if test="XSLX_F != null and XSLX_F != ''"> AND FLFS04 not in ${XSLX_F} </if> AND ROWNUM=1 ) XSFS01,
+           (select FLFS.FLFS02 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01
+           <if test="XSLX_F != null and XSLX_F != ''"> AND FLFS04 not in ${XSLX_F} </if> AND ROWNUM=1 ) XSFSMC
+      FROM RYXX R, BM B, GSXX G,DWYWY D
+     WHERE R.BM01 = B.BM01
+       AND R.RYXX03 = 0
+       AND B.BM10=1
+       AND R.RYXX09 IS NOT NULL
+       AND  R.RYXX01=D.RYXX01
+        AND  R.GSXX01=D.GSXX01
+       <![CDATA[
+       AND INSTR(R.RYXX08, 3) > 0
+       ]]>
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+        <if test="GCBJ != null and GCBJ != ''">
+         AND B.GCBJ = -1
+       </if>
+        <if test="WLDW01 != null and WLDW01 != ''">
+       AND D.WLDW01 = #{WLDW01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND R.BM01 = #{BM01}
+       </if>
+       <if test="BM07 != null and BM07 != ''">
+       AND B.BM07 = #{BM07}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       <if test="XSLX_F != null">
+           <![CDATA[ AND exists(select 1 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01 AND flfs04 not in ${XSLX_F})   ]]>
+      	</if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  <!-- 查找在职的零售销售人员-->
+  <select id="LS_XSRY" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, CASE WHEN C.BM01 IS NOT NULL THEN C.BM01
+           ELSE R.BM01 END BM01, CASE WHEN C.BM01 IS NOT NULL THEN 
+           (SELECT M.BM02 FROM BM M WHERE M.BM01 = C.BM01)
+           ELSE B.BM02 END BMMC, R.GSXX01, G.GSXX02 GSMC,
+           R.RYXX03 RYZT, GET_RYZT(R.RYXX03) RYZTMC,
+           (SELECT B.FLFS01 FROM QXXSFSITEM A, FLFS B
+             WHERE A.FLFS01 = B.FLFS01
+               AND B.FLFS04 IN (0, 3)
+               AND A.QXXSFS01 = R.RYXX09
+               AND B.FLFS14 = 0
+               AND ROWNUM = 1) XSFS01,
+           (SELECT B.FLFS02 FROM QXXSFSITEM A, FLFS B
+             WHERE A.FLFS01 = B.FLFS01
+               AND B.FLFS04 IN (0, 3)
+               AND A.QXXSFS01 = R.RYXX09
+               AND B.FLFS14 = 0
+               AND ROWNUM = 1) XSFSMC
+      FROM RYXX R, BM B, GSXX G,RYBM C
+     WHERE R.BM01 = B.BM01
+       AND R.GSXX01 = G.GSXX01
+       AND R.RYXX01 = C.RYXX01(+)
+       AND R.GSXX01 = SUBSTR(C.BM01(+),0,4)
+       AND B.BM04 = 1
+       AND B.BM06 = 3
+       AND R.RYXX03 = 0
+       <![CDATA[
+       AND INSTR(R.RYXX08, 3) > 0 
+       ]]>
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       AND EXISTS  (SELECT B.FLFS01 FROM QXXSFSITEM A, FLFS B
+             WHERE A.FLFS01 = B.FLFS01
+               AND B.FLFS04 IN (0, 3)
+               AND A.QXXSFS01 = R.RYXX09
+               AND B.FLFS14 = 0
+               AND ROWNUM = 1)
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+
+  <!-- 查找在职的采购人员-->
+  <select id="CGRY" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC, R.RYXX09 QXXSFS01
+      FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.RYXX03 = 0
+       AND INSTR(R.RYXX08, 2) > 0
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+  <!-- 查找在职的业务员-->
+  <select id="YWY" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC, R.RYXX09 QXXSFS01
+      FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.RYXX03 = 0
+       AND INSTR(R.RYXX08, 3) > 0
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  <!-- 定义客户业务员用 查找在职的业务员-->
+  <select id="YWYYX" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC,
+           R.RYXX03 RYZT, GET_RYZT(R.RYXX03) RYZTMC,
+           GET_BOOL(INSTR(R.RYXX08, 0)) RYSX_ALL,
+           GET_BOOL(INSTR(R.RYXX08, 1)) RYSX_GL,
+           GET_BOOL(INSTR(R.RYXX08, 2)) RYSX_YW,
+           GET_BOOL(INSTR(R.RYXX08, 3)) RYSX_XS,
+           GET_BOOL(INSTR(R.RYXX08, 4)) RYSX_SY,
+           GET_BOOL(INSTR(R.RYXX08, 5)) RYSX_CW,
+           GET_BOOL(INSTR(R.RYXX08, 6)) RYSX_BG,
+           GET_BOOL(INSTR(R.RYXX08, 7)) RYSX_QT,    
+           (select FLFS.FLFS01 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01
+           <if test="XSLX_F != null and XSLX_F != ''"> AND FLFS04 not in ${XSLX_F} </if> AND ROWNUM=1 ) XSFS01,
+           (select FLFS.FLFS02 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01
+           <if test="XSLX_F != null and XSLX_F != ''"> AND FLFS04 not in ${XSLX_F} </if> AND ROWNUM=1 ) XSFSMC
+      FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.RYXX03 = 0
+       AND B.BM10=1
+       AND R.RYXX09 IS NOT NULL
+       <![CDATA[
+       AND INSTR(R.RYXX08, 3) > 0
+       ]]>
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+        <if test="RY != null and RY != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       <if test="XSBM != null and XSBM != ''">
+       <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 	      
+		      (R.BM01 LIKE '%'||#{item}||'%')
+	 </foreach>
+       </if>
+       <if test="XSLX_F != null">
+           <![CDATA[ AND exists(select 1 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01 AND flfs04 not in ${XSLX_F})   ]]>
+      	</if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  <!-- 查找在职的收款人员-->
+  <select id="SKRY" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC, R.RYXX09 QXXSFS01
+      FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.RYXX03 = 0
+       AND INSTR(R.RYXX08, 4) > 0
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+  <select id="CXSKRY" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01 key,
+       R.RYXX02 value  
+       FROM RYXX R, BM B, GSXX G
+ 	WHERE R.BM01 = B.BM01
+   AND R.RYXX03 = 0
+   AND INSTR(R.RYXX08, 4) > 0
+   AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  <!-- 查找担保人-->
+  <select id="DBR" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT RYXX01 DBRDM, RYXX02 DBRMC, RYXX17-RYXX18 DBJE
+  	 	FROM RYXX 
+	WHERE RYXX14=1
+	<![CDATA[
+	  AND RYXX15 <= sysdate
+	  AND RYXX16 >= sysdate
+	  AND RYXX17-RYXX18 > 0
+	]]>
+    <if test="GSXX01 != null and GSXX01 != ''">
+	  AND GSXX01 = #{GSXX01}
+    </if>
+    <if test="RYMC != null and RYMC != ''">
+	  AND (RYXX02 LIKE '%'||#{RYMC}||'%' OR RYXX01 LIKE '%'||#{RYMC}||'%')
+	</if>
+  </select>
+  
+	<!-- 查找所有在职人员-->
+  <select id="ALL_ONWORK" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT R.RYXX01, R.RYXX02 RYMC, R.BM01, B.BM02 BMMC, R.GSXX01, G.GSXX02 GSMC,
+           R.RYXX03 RYZT, GET_RYZT(R.RYXX03) RYZTMC
+      FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.GSXX01 = G.GSXX01
+       AND R.RYXX03 = 0
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+       <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+
+	<!-- 工程 查找销售业务员 -->
+	<select id="GC_CXXSYWY" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT R.RYXX01, R.RYXX02 RYMC, R.GSXX01,
+		G.GSXX02 GSMC, R.RYXX03 RYZT
+		FROM RYXX R, BM B, GSXX G,CZYQXGYS C
+		WHERE R.BM01 = B.BM01
+		AND R.RYXX03 = 0
+		AND B.BM10 = 1
+		AND R.RYXX01=C.QXCZY01
+		AND C.GYSLX=1
+		AND R.RYXX09 IS NOT NULL
+		AND INSTR(R.RYXX08, 3) > 0
+		AND R.GSXX01 = G.GSXX01
+		AND B.BM01=#{BM01}
+     <![CDATA[
+     	AND C.QXCZY01<>#{WLDW01}
+     ]]>
+		AND C.QXGYS01=#{WLDW01}
+		AND R.GSXX01 = #{GSXX01}
+		<if test="RYMC != null and RYMC != ''">
+			AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+		</if>
+
+		JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	
+	  <!-- xzw -->
+	<select id="selectDBR" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.RYXX01 KEY,A.RYXX02 VALUE,A.RYXX18 SYJE,A.RYXX17 DBED,(A.RYXX17-A.RYXX18)JE,
+		A.RYXX26 SQED,A.RYXX27 SYED,(A.RYXX26-RYXX27)ED,A.RYXX06 QXJB,to_char(A.RYXX15, 'yyyy-mm-dd')DBQXQ, 
+    to_char(A.RYXX16, 'yyyy-mm-dd') DBQXZ,
+    A.RYXX20 ZQ,to_char(A.RYXX24, 'yyyy-mm-dd') SQRQQ,to_char(A.RYXX25, 'yyyy-mm-dd') SQRQZ
+		  FROM RYXX A
+		 WHERE 1=1  
+		 <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+  		<if test="DBRMC != null and DBRMC != ''">
+       AND (A.RYXX02 LIKE '%'||#{DBRMC}||'%' OR A.RYXX01 LIKE '%'||#{DBRMC}||'%')
+       </if>
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	
+	<select id="WBZT" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.WBZT01 KEY,A.WBZT02 VALUE
+      FROM WBZT A
+      WHERE 1=1
+      <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="XZZT != null and XZZT != ''">
+       AND (A.WBZT01 LIKE '%'||#{XZZT}||'%' OR A.WBZT02 LIKE '%'||#{XZZT}||'%')
+       </if>
+     JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+     
+      </select>
+      
+      	<!-- 带权限查询外部账套 -->
+       	<select id="WBZT01" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT A.WBZT01 KEY,A.WBZT02 VALUE
+	      FROM WBZT A
+	      WHERE 1=1
+       <if test="GSXX01 != null and GSXX01 != ''">
+       		AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="XZZT != null and XZZT != ''">
+      	 	AND (A.WBZT01 LIKE '%'||#{XZZT}||'%' OR A.WBZT02 LIKE '%'||#{XZZT}||'%')
+       </if>
+	   <if test="CZY14 != null">
+       		JL{CZY|A.GSXX01|CZGS_CZ|inS}JL
+       </if>
+       </select>
+      
+      <!-- 工程要货单查询业务员 -->
+	<select id="GCCXYWY" parameterType="java.util.Map" resultType="java.util.Map">
+		select RYXX01,RYXX02 YWYMC FROM DWYWY
+		 <if test="GSXX01 != null and GSXX01 != ''">
+        WHERE  GSXX01 = #{GSXX01}
+       </if>
+  		<if test="WLDW01 != null and WLDW01 != ''">
+      	 AND WLDW01 = #{WLDW01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       		AND BM01 = #{BM01}
+       </if>
+	   <if test="RYMC != null and RYMC != ''">
+       		AND (RYXX01 LIKE '%'||#{RYMC}||'%' OR RYXX02 LIKE '%'||#{RYMC}||'%')
+       </if>
+	</select>
+	
+	<!-- 工程登陆单查询工程跟踪人 -->
+<!-- 	<select id="GCGZR" parameterType="java.util.Map" resultType="java.util.Map">
+		select  RYXX01 GCGZRDM,RYXX02 GCGZR
+  			from BM A, DWYWY B
+ 			WHERE A.BM01 = B.BM01
+		 <if test="GSXX01 != null and GSXX01 != ''">
+           AND A.GSXX01 = #{GSXX01}
+       </if>
+  		<if test="WLDW01 != null and WLDW01 != ''">
+      	    AND B.WLDW01 = #{WLDW01}
+       </if>
+       <if test="GCBJ != null and GCBJ != ''">
+       		AND A.GCBJ = #{GCBJ}
+       </if>
+	   <if test="RYMC != null and RYMC != ''">
+       		AND (B.RYXX01 LIKE '%'||#{RYMC}||'%' OR 2.RYXX02 LIKE '%'||#{RYMC}||'%')
+       </if>
+	</select> -->
+	<!-- 工程登陆单查询工程跟踪人 -->
+	<select id="GCGZR" parameterType="java.util.Map" resultType="java.util.Map">
+	 select B.RYXX01 GCGZRDM, B.RYXX02 GCGZR, C.RYXX23 GCGZRDH
+            FROM BM A, DWYWY B, RYXX C
+ 			WHERE A.BM01 = B.BM01 AND C.RYXX01 = B.RYXX01
+		 <if test="GSXX01 != null and GSXX01 != ''">
+           AND A.GSXX01 = #{GSXX01}
+       </if>
+  		<if test="WLDW01 != null and WLDW01 != ''">
+      	    AND B.WLDW01 = #{WLDW01}
+       </if>
+       <if test="GCBJ != null and GCBJ != ''">
+       		AND A.GCBJ = #{GCBJ}
+       </if>
+	   <if test="RYMC != null and RYMC != ''">
+       		AND (B.RYXX01 LIKE '%'||#{RYMC}||'%' OR 2.RYXX02 LIKE '%'||#{RYMC}||'%')
+       </if>
+	</select>
+
+	<select id="CWND" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT distinct A.YWKJ01 KEY , A.YWKJ01 VALUE 
+          FROM ywkjqj A 
+         WHERE A.GSXX01 = #{GSXX01}
+	</select>
+</mapper>

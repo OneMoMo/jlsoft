@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <JLConfig id="o2o.goods.query" description="O2O平台：查询商家套餐信息">
+        <FIELD attrname="venderId" target="zcxx01.key" fieldtype="int" allownull="N"/> <!--商家编码-->
+        <FIELD attrname="spmc" target="name"/> <!--商品名称-->
+    </JLConfig>
+
+    <JLConfig id="o2o.order.process" description="O2O平台：订单处理">
+        <FIELD attrname="orderId" allownull="N"/> <!--订单编号-->
+        <FIELD attrname="state" allownull="N" check="state in('10','20','30','40','50')"/> <!--订单状态-->
+        <FIELD attrname="action" allownull="N"  check="action in('pay','cancel','deliver','refundApply','sign','approve','notApprove')"/> <!--订单操作-->
+        <FIELD attrname="ts" allownull="N"/> <!--时间戳（乐观锁）-->
+    </JLConfig>
+	
+    <JLConfig id="o2o.order.outstorage" description="O2O平台：订单出库">
+        <FIELD attrname="logisticsId" allownull="N"/> <!--物流公司id(可通过获取商家物流公司接口获得,0,表示自送) -->
+        <FIELD attrname="logisticsName"/> <!--物流公司name -->
+        <FIELD attrname="packageNum" allownull="N"/> <!--包裹数量-->
+        <FIELD attrname="waybill"/> <!--运单号(当自送时运单号可为空)-->
+        <FIELD attrname="trade_no"/> <!--流水号-->
+    </JLConfig>
+	
+    <JLConfig id="o2o.order.approve.order" description="O2O平台：同意退款">
+        <FIELD attrname="id" target="refundId" allownull="N"/> <!--退款单号 -->
+    </JLConfig>
+
+    <JLConfig id="o2o.order.approve" description="O2O平台：同意退款">
+        <!--<FIELD attrname="id" target="refundId" allownull="N"/> &lt;!&ndash;退款单号 &ndash;&gt;-->
+        <FIELD attrname="checkUserName" allownull="N"/> <!--审核人 -->
+        <FIELD attrname="checkTime" allownull="N"/> <!--审核时间 -->
+        <FIELD attrname="remark" allownull="N"/> <!--审核备注 -->
+        <FIELD attrname="status" fieldtype="int" defaultValue="1"/> <!--退款申请单状态-->
+    </JLConfig>
+
+    <JLConfig id="o2o.order.noapprove" description="O2O平台：不同意退款">
+        <!--<FIELD attrname="id" target="refundId" allownull="N"/> &lt;!&ndash;退款单号 &ndash;&gt;-->
+        <FIELD attrname="checkUserName" allownull="N"/> <!--审核人 -->
+        <FIELD attrname="checkTime" allownull="N"/> <!--审核时间 -->
+        <FIELD attrname="remark" allownull="N"/> <!--审核备注 -->
+        <FIELD attrname="status" fieldtype="int" defaultValue="2"/> <!--退款申请单状态-->
+        <FIELD attrname="rejectType" allownull="N"/> <!-- -->
+    </JLConfig>
+
+    <JLConfig id="o2o.warehouse.save" description="O2O平台：仓库定义（新增）">
+        <FIELD attrname="action" allownull="N" check="action in('save','update')"/> <!--操作：‘save’：新建；‘update’：修改 -->
+        <FIELD attrname="warehouseName" allownull="N"/> <!--仓库名称 -->
+        <FIELD attrname="venderId" fieldtype="int" allownull="N"/>
+        <Nested id="RANGE" allownull="N"> <!--仓配范围 -->
+            <FIELD attrname="key" allownull="N"/> <!--省 -->
+            <FIELD attrname="value"/> <!--市 -->
+            <!-- <FIELD attrname="county"/> 县（区） -->
+        </Nested>
+        <Nested id="STOCK" allownull="N"> <!--库存-->
+            <FIELD attrname="tcCode" allownull="N"/> <!--套餐编码-->
+            <FIELD attrname="tcName" allownull="N"/> <!--套餐名称-->
+            <FIELD attrname="quantity" fieldtype="int"  allownull="N"/> <!--库存数量-->
+        </Nested>
+    </JLConfig>
+
+    <JLConfig id="o2o.warehouse.update" description="O2O平台：仓库定义（修改）">
+        <FIELD attrname="warehouseID" allownull="N"/> <!--仓库代码 -->
+    </JLConfig>
+    
+</root>

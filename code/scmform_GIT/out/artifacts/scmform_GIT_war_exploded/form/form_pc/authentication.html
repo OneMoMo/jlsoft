@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<script type="text/javascript" src="/scripts/lib/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript">
+pubJson.writeCss("FormUrl", "/jllib/jllib_base/css/public.css");
+pubJson.writeCss("FormUrl", "/jllib/form/css/jl_pc_css.css");
+pubJson.writeCss("FormUrl", "/jllib/form/css/jl_pc_form.css");
+pubJson.writeCss("FormUrl", "/jllib/form/css/jl_pc_list.css");
+pubJson.writeCss("FormUrl", "/jllib/form/css/jl_pc_table.css");
+pubJson.writeCss("FormUrl", "/jllib/form/css/jl_pc_page.css");
+pubJson.writeCss("FormUrl", "/jllib/form/css/jl_pc_control.css");
+pubJson.writeCss("FormUrl", "/lib/JQuery/css/smartMenu.css");
+pubJson.writeCss("FormUrl", "/lib/JQuery/css/kkPages.css");
+pubJson.writeCss("FormUrl", "/lib/JQuery/css/mobiscroll.custom-2.17.0.min.css");
+pubJson.writeCss("FormUrl", "/lib/JQuery/css/kalendae.css");
+</script>
+<link rel="icon" href="icon.ico">
+<title>表单系统 - 首页</title>
+</head>
+
+<body class="jl_login_bg">
+	<div class="jl_login_main">
+		<div class="jl_login mt50 pb20">
+			<ul>
+				<div class="jl_btn_group w12">
+	                <input type="text" placeholder="输入验证码" style="text-indent: 10px;"/>
+	                <span id="getAuthentication" class="jl_btn btn_white" style="padding: 0; width: 100px; line-height: 26px; ">
+	                	<i class="fa fa-envelope-o mr5" name="search"></i><span>发送短信</span>
+	                </span>
+	            </div>
+				<li class="border_none">
+					<a class="w12 jl_btn btn_red" id="checkAuthentication">确定</a>
+				</li>
+                <li class="login_message hide" id="tip">请输入用户名</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+pubJson.writeJs("FormUrl", "/lib/JQuery/js/jquery.cookie.js");
+pubJson.writeJs("FormUrl", "/lib/JQuery/js/jquery.md5.js");
+pubJson.writeJs("FormUrl", "/lib/JQuery/js/json2.js");
+pubJson.writeJs("FormUrl", "/jllib/form/js/jl-all.js");
+$("#checkAuthentication").click(function(){
+	if(JL.isNull($(this).parent().prev().find("> :text").val())){
+		alert("请填写验证码");
+		return false;
+	}
+	var XmlData = {};
+	XmlData["phone"] = userInfo.PCRM_CZY06; 
+	XmlData["code"] = $(this).parent().prev().find("> :text").val();
+	var ajaxJson = {};
+	ajaxJson["async"] = true;
+	ajaxJson["src"] = pubJson.getURL("FormUrl") + "/Authentication/checkMessage.do";
+	ajaxJson["data"] = {"XmlData":JSON.stringify(XmlData)};
+	ajaxJson["callback"] = function(resultData){
+		console.info(resultData);
+		if(!JL.isNull(resultData)){
+			var MSGID = resultData.data.MSGID;
+			var MESSAGE = resultData.data.MESSAGE;
+			if(MSGID == "S"){
+				window.location.href = pubJson.getURL("FormUrl") + "/index.html";
+			}else{
+				$("#tip").show().html(MESSAGE);
+			}
+		}
+	}
+	JL.ajax(ajaxJson);
+});
+$("#getAuthentication").click(function(){
+	var obj = $(this);
+	if(obj.hasClass("font_gray")){
+		return false;
+	}
+	obj.addClass("font_gray")
+	var span = obj.find("span");
+	span.html("180秒重发");
+	var time = 179;
+	var interva = setInterval(function(){
+		if(time > 1){
+			time--;
+			span.html(time+"秒重发");
+		}else{
+			span.html("重新发送");
+			obj.removeClass("font_gray")
+			clearInterval(interva);
+		}
+	}, 1000);
+	
+	var XmlData = {};
+	XmlData["phone"] = userInfo.PCRM_CZY06;
+	var ajaxJson = {};	
+	ajaxJson["async"] = true;
+	ajaxJson["src"] = pubJson.getURL("FormUrl") + "/Authentication/sendMessage.do";
+	ajaxJson["data"] = {"XmlData":JSON.stringify(XmlData)};
+	ajaxJson["callback"] = function(resultData){
+		console.info(resultData);
+	}
+	JL.ajax(ajaxJson);
+});
+</script>

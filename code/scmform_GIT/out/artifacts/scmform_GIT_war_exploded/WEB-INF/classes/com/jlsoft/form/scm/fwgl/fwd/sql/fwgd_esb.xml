@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="jl.scm.fwgl.fwd.selectFWGD.selectFWGD" description="金力服务工单查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fwgl.fwd.fwgd" method="selectFWGD"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

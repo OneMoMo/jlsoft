@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.cggl.ysd">
+     
+     <FIELD attrname="WLDWMC" fieldtype="String" allownull="N" name="供应商" />
+     <FIELD attrname="CKMC" fieldtype="String" allownull="N" name="仓库" />
+      <FIELD attrname="JZRQ" fieldtype="String" allownull="N" name="截止日期" />
+      <Nested id="SPLB" allownull="N" name="商品列表">
+      <FIELD attrname="YSSL" fieldtype="String" allownull="N" name="预售数量"/>
+    </Nested>
+</JLConfig>
+</root>

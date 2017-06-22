@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gcjxszc">
+		<FIELD attrname="KHMC" fieldtype="String" allownull="N" name="客户" />
+		<FIELD attrname="BMMC" fieldtype="String" allownull="N" name="销售部门" />
+		<FIELD attrname="ERJXSGSQC" fieldtype="String" allownull="N" name="二级经销商全程" />
+		<FIELD attrname="CJBM" fieldtype="String" allownull="N" name="厂家编码" />
+		<FIELD attrname="RYMC" fieldtype="String" allownull="N" name="人员名称" />
+		<!-- <FIELD attrname="DLMM" fieldtype="String" allownull="N" name="登录密码" />
+		<FIELD attrname="CXSRMM" fieldtype="String" allownull="N" name="重新输入密码" /> -->
+		<FIELD attrname="WLDW01" fieldtype="String" allownull="N" name="客户代码" />	
+		<FIELD attrname="DLZH" fieldtype="String" allownull="N" name="登录账号" />	
+	</JLConfig>
+</root>

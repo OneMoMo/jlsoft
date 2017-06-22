@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BM">
+
+	<!-- 末级采购部门（按可操作部门权限过滤） -->
+	<select id="CGBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01, A.BM02 BMMC, A.GSXX01, B.GSXX02 GSMC,
+		A.BM06 BMSX,
+		GET_BMSX(A.BM06) BMSXMC,
+		A.BM04 MJBJ, GET_BOOL(A.BM04) MJBJMC,
+		A.BM_BM01, (SELECT BM02 FROM BM WHERE BM01 = A.BM_BM01) BM_BMMC
+		FROM BM
+		A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.BM06 = 2
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND A.BM01 = #{BMMC}
+		</if>
+		<if test="BMMC != null and BMMC != ''">
+			AND A.BM02 LIKE '%'||#{BMMC}||'%'
+		</if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+
+	<!-- 末级销售部门（按可操作部门权限过滤） -->
+	<select id="XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01, A.BM02 BMMC, A.GSXX01, B.GSXX02 GSMC,
+		A.BM06 BMSX,
+		GET_BMSX(A.BM06) BMSXMC,
+		A.BM04 MJBJ, GET_BOOL(A.BM04) MJBJMC,
+		A.BM_BM01, (SELECT BM02 FROM BM WHERE BM01 = A.BM_BM01) BM_BMMC
+		FROM BM
+		A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.BM06 = 3
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="GCBJ != null and GCBJ != ''">
+			AND A.GCBJ = -1
+		</if>
+		<if test="FGCBJ != null and FGCBJ != ''">
+			<![CDATA[AND A.GCBJ <> #{FGCBJ} ]]>
+		</if>
+		<if test="BM07 != null and BM07 != ''">
+			AND A.BM07 = #{BM07}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND A.BM01 = #{BM01}
+		</if>
+		<if test="BMMC != null and BMMC != ''">
+			AND A.BM02 LIKE '%'||#{BMMC}||'%'
+		</if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+
+	<!-- 末级部门（按可操作部门权限过滤） -->
+	<select id="MJBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01,A.BM01 KEY, A.BM02 BMMC,A.BM02 VALUE, A.GSXX01, B.GSXX02
+		GSMC,
+		A.BM06 BMSX, GET_BMSX(A.BM06) BMSXMC,
+		A.BM04 MJBJ,
+		GET_BOOL(A.BM04) MJBJMC,
+		A.BM_BM01, (SELECT BM02 FROM BM WHERE BM01 =
+		A.BM_BM01) BM_BMMC
+		FROM BM A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.GSXX01 =
+		B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND A.BM01 = #{BMMC}
+		</if>
+		<if test="BMMC != null and BMMC != ''">
+			AND A.BM02 LIKE '%'||#{BMMC}||'%'
+		</if>
+		<if test="BMSX != null">
+			AND A.BM06 = #{BMSX}
+		</if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+
+	<!-- 所有部门（按可操作部门权限过滤） -->
+	<select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01, A.BM02 BMMC, A.GSXX01, B.GSXX02 GSMC,
+		A.BM06 BMSX,
+		GET_BMSX(A.BM06) BMSXMC,
+		A.BM04 MJBJ, GET_BOOL(A.BM04) MJBJMC,
+		A.BM_BM01, (SELECT BM02 FROM BM WHERE BM01 = A.BM_BM01) BM_BMMC
+		FROM BM
+		A, GSXX B
+		WHERE A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND A.BM01 = #{BM01}
+		</if>
+		<if test="BMMC != null and BMMC != ''">
+			AND A.BM02 LIKE '%'||#{BMMC}||'%'
+		</if>
+		<if test="MJBJ != null">
+			AND A.BM04 = #{MJBJ}
+		</if>
+		<if test="BMSX != null  and BMSX != ''">
+			AND A.BM06 = #{BMSX}
+		</if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<select id="DQ" parameterType="java.util.Map" resultType="java.util.Map">
+		select DISTINCT DQXX01 , DQXX02
+		from DQXX
+		WHERE DQXX04=1
+		<if test="DQMC != null  and DQMC != ''">
+			<!-- <foreach item="item" index="index" collection="DQMC" open=" AND (" 
+				separator=" or " close=")"> DQXX02 LIKE '%'||#{item}||'%' </foreach> -->
+			<!-- AND DQXX01 LIKE (SELECT DECODE(DQXX03, 1, SUBSTR(DQXX01, 0, 2), 2, 
+				SUBSTR(DQXX01, 0, 4),DQXX01) DQXX01 FROM DQXX WHERE DQXX02 = #{DQMC} )||'%' -->
+			START WITH DQXX01 IN (SELECT DQXX01 FROM DQXX WHERE DQXX02 LIKE
+			'%'||#{DQMC}||'%')
+			CONNECT BY PRIOR DQXX01 = DQX_DQXX01
+			ORDER BY DQXX01 ASC 
+		</if>
+	</select>
+	<select id="SXDQ" parameterType="java.util.Map" resultType="java.util.Map">
+		select DISTINCT DQXX01, DQXX02 , DQXX04 MJBJ, DQXX03 JB, DQX_DQXX01
+		PARENT
+		from DQXX
+
+		START WITH DQXX01 IN (
+		SELECT DQXX01
+		FROM DQXX
+		WHERE 1=1
+
+		)
+		<if test="DQMC != null  and DQMC != ''">
+			<foreach item="item" index="index" collection="DQMC" open=" AND ("
+				separator=" or " close=")">
+				DQXX02 LIKE '%'||#{item}||'%'
+			</foreach>
+		</if>
+		CONNECT BY NOCYCLE PRIOR DQX_DQXX01 = DQXX01
+		ORDER BY JB
+	</select>
+	<select id="WD" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+		FWWD01 , FWWD02 ,(SELECT GSXX02 FROM GSXX WHERE GSXX01 =
+		A.GSXX01)
+		GSXX02 from css_fwwd A
+		WHERE WDLX=0
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+		JL{CZY|A.FWWD01|PSWD_CZ|inS}JL
+	</select>
+	<!-- 查询 车辆信息 -->
+	<select id="CLXX" parameterType="java.util.Map" resultType="java.util.Map">
+		select ZZTJ , MC from CSS_WLCLBZ
+		WHERE 1=1
+		<if test="WLGS01 != null and WLGS01 != ''">
+			AND WLGS01 = #{WLGS01}
+		</if>
+	</select>
+</mapper>

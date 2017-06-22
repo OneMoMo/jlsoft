@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jmgl.jmdgl.jmdjyfw">
+		<FIELD attrname="PTSMC" fieldtype="string" allownull="N" name="平台商名称" />
+		<FIELD attrname="JMDMC" fieldtype="string" allownull="N" name="加盟店名称" />
+	</JLConfig>
+	<JLConfig id="MONGO_JMDSQ.RoleApply">
+		<FIELD attrname="venderCode" fieldtype="string" allownull="N" name="平台商编码" />
+		<FIELD attrname="applyType.key" fieldtype="string" allownull="N" name="申请类型" />
+	</JLConfig>
+</root>

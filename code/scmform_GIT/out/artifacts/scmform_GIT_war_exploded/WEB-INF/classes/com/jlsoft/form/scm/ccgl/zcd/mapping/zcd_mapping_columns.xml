@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.zcd">
+	<FIELD attrname="FHCKMC" fieldtype="string" allownull="N" name="发货仓库" />
+	<FIELD attrname="SHCKMC" fieldtype="string" allownull="N" name="收货仓库" />
+	<Nested id="SPLB" allownull="N" name="转仓商品明细">
+	        <FIELD attrname="XH" fieldtype="String" name="序号" />
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="CK01" fieldtype="String" allownull="N" name="仓库代码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="JLDW" fieldtype="String" allownull="N" name="单位" />
+            <FIELD attrname="ZCSL" fieldtype="double" allownull="N" name="转仓数量" />
+            <FIELD attrname="SPSX" fieldtype="String" allownull="N" name="商品属性" />
+            <FIELD attrname="WLDW01" fieldtype="String" allownull="N" name="供应商代码" />
+            <FIELD attrname="BM01" fieldtype="String" allownull="N" name="采购部门代码" />
+    </Nested>
+	</JLConfig>
+</root>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_RKD.SCM_SPRKD">
+      
+        <FIELD attrname="DMMC" format='{"$or":[{"SPRKD01":{"$regex":"#DMMC#"}},{"CGDHD01":{"$regex":"#DMMC#"}},{"WLDWMC":{"$regex":"#DMMC#"}},{"WLDW01":{"$regex":"#DMMC#"}},{"CKMC":{"$regex":"#DMMC#"}},{"BMMC":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="供应商" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        
+	</JLConfig>
+</root>

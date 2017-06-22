@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_LSSYT.SCM_LSSYT">
+        <FIELD attrname="LSDH" format='{"LSDH":"#LSDH#"}' fieldtype="String" allownull="Y" name="零售单号" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>

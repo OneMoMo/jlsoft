@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.gsyh">
+		
+		 <FIELD attrname="YHFGS" fieldtype="string" allownull="N" name="要货分公司" />
+		
+		<Nested id="SPLB" allownull="N" name="商品明细">
+			<FIELD attrname="YHSL" fieldtype="String" allownull="N" name="要货数量" />
+		</Nested>
+
+	</JLConfig>
+
+</root>

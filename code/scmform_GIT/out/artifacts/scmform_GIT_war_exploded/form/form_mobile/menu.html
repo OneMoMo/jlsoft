@@ -1,0 +1,167 @@
+<header class="jl_header">
+<div class="header_nav nav_left" id="goBack">
+
+
+</div>
+
+
+</header>
+<div class="jl_main_nav">
+<div class="jl_banner"></div>
+
+
+<div id="d_model" class="jl_nav">
+
+
+</div>
+
+
+<!--   <ul  name="model" id1="model1">
+    <li class="w04">
+      <dl><dt><i class="fa fa-edit font_red"></i></dt><dd>表单模板</dd></dl>
+    </li>
+    <li class="w04">
+      <dl><dt><i class="fa fa-table font_yellow"></i></dt><dd>表格模板</dd></dl>
+    </li>
+    <li class="w04">
+      <dl><dt><i class="fa fa-file-text-o font_blue"></i></dt><dd>列表模板</dd></dl>
+    </li>
+    <li class="w04">
+      <dl><dt><i class="fa fa-edit fa-unlink font_green"></i></dt><dd>控件模板</dd></dl>
+    </li>
+    <li class="w04">
+      <dl><dt><i class="fa fa-bell-o font_black"></i></dt><dd>代办</dd></dl>
+    </li>
+    <li class="w04">
+      <dl><dt><i class="fa fa-user font_purple"></i></dt><dd>我的</dd></dl>
+    </li>
+  </ul> -->
+
+</div>
+<script>
+var menu = JL.JLForm();
+menu.setTab(document);
+
+var oldData;
+
+//初始话控件
+menu.setPlugin({
+	"model": {
+		"jlid" : "JLLayoutGrid",
+	    "style":"jl_nav_list",
+		"multi":false,
+		"rowclass":"w04",
+		"header" : [
+		            {"id" : "CD10","groupid" : "DM","title" : "图标","editor":"i","parentcss":"nav_img","css":"fa fa-home"}, 
+		            {"id" : "CD02","groupid" : "DM","title" : "名称","parentcss":"nav_name"}
+		        ],
+		        "listener":{
+		        	"rowclick":function(thisPlugin, data, rowIndex){
+		                 //debugger;
+		        		 if(data.CD04==0){
+		        			var XmlData={};
+			        		XmlData["PARENT"]=data.CD01;
+			        		menu.initData(XmlData);
+			        	    
+		        		}else if(data.ISGZL==1){
+		        		var	resultData=menu.getGZLBZ(data.CD01);
+		        	
+		        		    resultData=resultData.data.resultList;
+		        		    
+		        		    for(var i=0;i<resultData.length;i++){
+		        		    	
+		        		    	resultData[i]["CD01"]=resultData[i]["BZ01"];
+		        		    	resultData[i]["CD02"]=resultData[i]["BZ02"];
+		        		    	
+		        		    }
+		        			
+		        		    menu.getPluginObj("model").setData(resultData);
+		        			
+		        		}
+		        		 
+		        		 
+		        		 else{
+		        			
+		          location.href=pubJson.getURL("FormUrl")+"/form/form_mobile/pub.html?data="+escape(JSON.stringify(data))+"";
+		        			
+		        		}
+
+		        	}
+		        	
+		        }
+
+	}
+});
+
+//表单页面加载完成后执行方法(加载第一级菜单)
+menu.setAfterInit(function() {
+	
+	menu.initData({});
+
+});
+
+menu.initData = function(XmlData){	
+	XmlData["CZY01"] = userInfo["PCRM_CZY01"];
+	XmlData["VIEW08"] = 1;//手机
+	//XmlData["CD06"]="";//标识手机端菜单
+	var ajaxJson = {};
+	
+	ajaxJson["src"] = pubJson.getURL("FormUrl")+"/user/selectMenu.do";
+	ajaxJson["data"] = {
+		"XmlData" : JSON.stringify(XmlData)
+	};
+
+	var resultData = JL.ajax(ajaxJson);
+	oldData = resultData;
+    if(!resultData){
+  	  return;
+     }	
+    
+    resultData= resultData.data.resultList;
+    
+    if(!JL.isNull(XmlData["PARENT"])){
+		var GZL = menu.getGZL(XmlData["PARENT"]);
+		$.unique($.merge(resultData, GZL));
+	}
+	
+    menu.getPluginObj("model").setData(resultData);
+	
+}
+
+ menu.getGZL = function(LX01){
+	var XmlData={};
+	XmlData["PI_USERNAME"] = userInfo["PCRM_CZY02"];
+	if(!JL.isNull(LX01)){
+		XmlData["LX01"] = LX01;
+	}
+	
+	XmlData["GZL08"] = 1;//只查手机的工作流
+	var ajaxJson = {};
+	ajaxJson["src"] = pubJson.getURL("FormUrl")+"/CX/selectCD.do";
+	ajaxJson["data"] = {"XmlData":JSON.stringify(XmlData),"sid":Math.random()};
+	var resultData=JL.ajax(ajaxJson);
+	if(!JL.isNull(resultData)){
+		resultData = resultData.data.resultList;
+	}else{
+		resultData = [];
+	}
+	return resultData;
+}
+
+
+menu.getGZLBZ = function(parent){
+	var XmlData = {};
+	XmlData["GZL01"] = parent;
+	XmlData["RYBH"] = userInfo.PCRM_CZY01;
+	var ajaxJson = {};
+	
+	ajaxJson["src"] = pubJson.getURL("FormUrl")+"/CX/selectGZLBZDB.do";
+	ajaxJson["data"] = {"XmlData":JSON.stringify(XmlData)};
+
+	var reslutData=JL.ajax(ajaxJson);
+	return reslutData;
+}
+
+
+menu.initForm();
+</script>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_HYXX.VIP_HYLX">
+         <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+         <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FXBJD.SCM_FXBJD">
+      
+       <FIELD attrname="KHMC" format='{"$or":[{"KHMC":{"$regex":"#KHMC#"}},{"KH_WLDW01":{"$regex":"#KHMC#"}},{"PFBJD01":{"$regex":"#KHMC#"}},{"XS_BM01":{"$regex":"#KHMC#"}},{"XSBMMC":{"$regex":"#KHMC#"}},{"BZ":{"$regex":"#KHMC#"}}]}' fieldtype="String" allownull="Y" name="供应商" />
+        <FIELD attrname="JLBH" format='{"JLBH":#JLBH#}' fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        
+	</JLConfig>
+</root>

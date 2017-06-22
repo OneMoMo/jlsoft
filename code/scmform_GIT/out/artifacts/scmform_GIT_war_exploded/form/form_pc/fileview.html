@@ -1,0 +1,143 @@
+<h3 class="w12 bb1 pb10 pt10 pl10">查看附件</h3>
+<div class="w12 overflow_xh overflow_y" style="height:455px">
+	<div id="noFile" class="tc pr50 hide" style="width: 100%; height:100%; line-height: 300px; font-size: 24px;">无附件</div>
+	<h3 id="images" class="w12 pl20 pb5 pt5">图片 :</h3>
+	<ul id="images" class="w12 downattachments_list">
+	</ul>
+	<h3 id="files" class="w12 mt10 pl20 pt10 pb5 bt1">文件 :</h3>
+	<ul id="files" class="w12 downattachments_list">
+	</ul>
+	<div class="w12 downattachments_bottom position_a bottom0">
+		<div id="selectAll" class="jl_input_checkbox checkbox_css"><i class="fa fa-square-o"></i><span>全选</span></div>
+		<a id="downloadZip" class="jl_btn btn_color ml30"><i class="fa fa-download mr5"></i>打包下载</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+var fileview = JL.JLForm();
+
+fileview.setEvent([{
+	"selector":"#selectAll",
+	"event":"click",
+	"func": function(){
+		if($(this).find("i").hasClass("fa-square-o")){
+			fileview.find(".downattachments_list > li > .down_xuan > i.fa-square-o").closest("li").click();
+		}else{
+			fileview.find(".downattachments_list > li > .down_xuan > i.fa-check-square").closest("li").click();
+		}
+	}
+},{
+	"selector":"#downloadZip",
+	"event":"click",
+	"func": function(){
+		var FILE_LIST = [];
+		var selected = fileview.find(".downattachments_list > li > .down_xuan > i.fa-check-square");
+		for(var i=0; i<selected.length; i++){
+			FILE_LIST.push($(selected[i]).closest("li").data());
+		}
+		debugger;
+		if(FILE_LIST.length == 0){
+			JL.tip("请选择附件");
+			return false;
+		}
+		var XmlData = {};
+		XmlData["FILE_LIST"] = JSON.stringify(FILE_LIST);
+		XmlData["FILE_NAME"] = $(".jl_huoye_title > ul > .xuan").text();
+		JL.download(pubJson.getURL("FormUrl") + "/FormUpload/downloadZip.do", XmlData);
+	}
+},{
+	"selector":".downattachments_list > li",
+	"event":"click",
+	"func": function(){
+		var fa = $(this).find(" > .down_xuan > i");
+		if(fa.hasClass("fa-square-o")){
+			$(this).addClass("borcolor_blue");
+			$(this).children().addClass("show");
+			fa.addClass("fa-check-square").removeClass("fa-square-o");
+		}else{
+			$(this).removeClass("borcolor_blue");
+			$(this).children().removeClass("show");
+			fa.addClass("fa-square-o").removeClass("fa-check-square");
+		}
+	}
+}]);
+
+fileview.loadImage = function(data){
+	var li = $("<li>").appendTo(fileview.find("ul#images"));
+	li.data(data);
+	li.attr("title", data.FILE_DESC);
+	li.append("<div class='down_xuan'><i class='fa fa-square-o'></i></div>");
+	li.append("<div class='down_main'><img src='"+data.FILE_URL+"'></i></div>")
+	li.append("<div class='w12 tc mt5'><a id='ck' class='w06'>查看</a><a id='xz' class='w06'>下载</a></div>");
+	li.find("#ck").click(function(e){
+		JL.showImage($(this).closest("li").find("img"));
+		e.stopPropagation();
+	});
+	li.find("#xz").click(function(e){
+		var XmlData = {};
+		XmlData["filename"] = $(this).closest("li").data("FILE_DESC");
+		XmlData["url"] = $(this).closest("li").data("FILE_URL");
+		JL.download(pubJson.getURL("FormUrl") + "/FormUpload/download.do", XmlData);
+		e.stopPropagation();
+	});
+};
+
+fileview.loadFile = function(data){
+	var li = $("<li>").appendTo(fileview.find("ul#files"));
+	li.data(data);
+	li.attr("title", data.FILE_DESC);
+	li.append("<div class='down_xuan'><i class='fa fa-square-o'></i></div>");
+	li.append("<div class='down_main'><i class='fa fa-file-text-o'></i></div>");
+	li.append("<div class='w12 text_hide tc mt5'>"+data.FILE_DESC+"</div>");
+	li.find("div:last").click(function(e){
+		var XmlData = {};
+		XmlData["filename"] = $(this).closest("li").data("FILE_DESC");
+		XmlData["url"] = $(this).closest("li").data("FILE_URL");
+		JL.download(pubJson.getURL("FormUrl") + "/FormUpload/download.do", XmlData);
+		e.stopPropagation();
+	});
+};
+
+fileview.appendFile = function(data){
+	$.each(data, function(key, value){
+		if(typeof value == "object" && $.isArray(value) && value.length > 0){
+			if(JSON.stringify(value).indexOf("FILE_URL") != -1){
+				for(var i=0; i<value.length; i++){
+					var row = value[i];
+					if(!JL.isNull(row.FILE_DESC)){
+						var imageType = ["jpg","bmp","gif","png","jpeg"];
+						var fileType = row.FILE_DESC.split(".");
+						fileType = fileType[fileType.length-1];
+						if(fileview.find(".downattachments_list > li[title='"+row.FILE_DESC+"']").length == 0){
+							if($.inArray(fileType, imageType) != -1){
+								fileview.loadImage(row);
+							}else{
+								fileview.loadFile(row);
+							}
+						}
+					} else {
+						fileview.appendFile(row);
+					}
+				}
+			}
+		}
+	});
+};
+
+fileview.setAfterInit(function(){
+	console.info(fileview.data);
+	fileview.appendFile(fileview.data);
+	
+	if(fileview.find("ul#images > li").length == 0){
+		fileview.find("#images").hide();
+	}
+	if(fileview.find("ul#files > li").length == 0){
+		fileview.find("#files").hide();
+	}
+	
+	if(fileview.find("ul#images > li").length == 0 
+			&& fileview.find("ul#files > li").length == 0){
+		fileview.find("#noFile").show();
+	}
+});
+</script>

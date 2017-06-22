@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KHMD">
+       <select id="CXKHWLDW" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT A.WLDW01 KEY,A.WLDW02 VALUE FROM WLDW A
+      WHERE A.WLDW20='1' AND WLDW21='0'
+	  JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+      <if test="WLDWMC != null and WLDWMC != ''">
+       AND (WLDW01 LIKE '%'||#{WLDWMC}||'%' OR WLDW02 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+      </select>
+</mapper>

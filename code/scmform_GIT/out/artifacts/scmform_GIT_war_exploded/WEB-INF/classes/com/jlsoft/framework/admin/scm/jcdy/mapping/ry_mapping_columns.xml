@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.ry">
+		<FIELD attrname="RYXX01" fieldtype="string" allownull="N" name="人员编码" />
+        <FIELD attrname="RYMC" fieldtype="string" allownull="N" name="人员名称" />
+        <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+       <!--  <FIELD attrname="RZRQ" fieldtype="string" allownull="N" name="入职日期" /> -->
+        <Nested id="RYJS">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="人员角色" />
+        </Nested>
+        <Nested id="GZBM">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="工作部门" />
+        </Nested> 
+		<Nested id="SSGS">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="所属公司" />
+        </Nested>    	
+		<Nested id="RYLX" >
+			<FIELD attrname="value" fieldtype="string" allownull="N" name="人员类型" />
+	    </Nested>
+	    <Nested id="RYZT" >
+			<FIELD attrname="value" fieldtype="string" allownull="N" name="人员状态" />
+	    </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.fxgl.yfdsh">
+		<FIELD attrname="CGBYJ" fieldtype="string" allownull="N" name="意见" />
+	</JLConfig>
+</root>

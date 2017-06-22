@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_HYZPDHBZ.SCM_HYZPDHBZ">
+		<FIELD attrname="search"
+			format='{"$or":[{"ZPXX01":{"$regex":"#search#"}},{"ZPMC":{"$regex":"#search#"}},{"DHFZ":{"$regex":"#search#"}}]}'
+			fieldtype="String" allownull="Y" name="赠品" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>

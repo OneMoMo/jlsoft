@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>送货安装</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/mobiscroll.custom-2.17.0.min.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+<script type="text/javascript" src="js/mobiscroll.custom-2.17.0.min.js"></script>
+    <script>
+        $(function () {
+            function init() {
+                $('.demo_calendar_datetime').mobiscroll().calendar({
+                    theme: theme,
+                    mode: mode,
+                    display: "bottom",
+                    lang: "zh",
+                    controls: ['calendar', 'date', 'time']
+                });   
+            }    
+            var demo, theme, mode, display, lang;
+            $('.settings').on('change', function() {
+                demo = 'calendar_datetime';
+                theme = $('#theme').val() || $.mobiscroll.defaults.theme,
+                mode = $('#mode').val(),
+                display = $('#display').val(),
+                lang = $('#language').val();
+                $('.demo-cont').hide();
+                $("#demo_cont_" + demo).show();
+                
+                init();
+            });
+            $('#demo').trigger('change');
+        });
+    </script>
+</head>
+<body>
+<header class="hide">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<h2>送货安装</h2>
+</div>
+</header>
+
+<div class="main">
+<div class="jl_main">
+<div class="delivert_item_title">会员信息</div>
+<div class="delivert_item_main mt10">
+  <div class="w04">
+    <i class="fa fa-user delivert_item_icon"></i>
+    <div class="jl_input">
+      <input placeholder="会员姓名" value="张三" class="w12 radius3" />
+      <i class="fa fa-times-circle"></i>
+    </div>
+  </div>
+  <div class="w07 ml_w01">
+    <i class="fa fa-mobile delivert_item_icon"></i>
+    <div class="jl_input">
+      <input placeholder="会员手机" type="number" value="18571137522" class="w12 radius3" />
+      <i class="fa fa-times-circle"></i>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="jl_main">
+<div class="delivert_item_title">会员地址</div>
+<div class="delivert_item_main mt10">
+  <div class="w12">
+    <i class="fa fa-map-marker delivert_item_icon"></i>
+    <textarea placeholder="会员地址" class="radius3">湖北省武汉市江汉区新华路186号，福星国际商会大厦1610-1612</textarea>
+  </div>
+</div>
+</div>
+
+<div class="jl_main">
+<div class="delivert_item_tab"><a class="xuan radius3">物流配送</a><a class="ml10 radius3">预约</a></div>
+<div class="delivert_item_title mt10">送货时间</div>
+<div class="delivert_item_main mt10">
+  <div class="w12">
+    <select name="demo" id="demo" class="settings hide"></select>
+    <i class="fa fa-calendar delivert_item_icon"></i>
+    <div class="jl_input">
+      <input placeholder="选择送货时间" value="2016/10/21 15:30" class="w12 radius3 demo_calendar_datetime" />
+      <i class="fa fa-times-circle"></i>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="jl_main">
+<div class="delivert_item_tab"><a class="xuan radius3">安装派网点</a><a class="ml10 radius3">预约</a></div>
+<div class="delivert_item_title mt10">安装时间</div>
+<div class="delivert_item_main mt10">
+  <div class="w12">
+    <select name="demo" id="demo" class="settings hide"></select>
+    <i class="fa fa-calendar delivert_item_icon"></i>
+    <div class="jl_input">
+      <input placeholder="选择安装时间" value="2016/10/22 15:30" class="w12 radius3 demo_calendar_datetime" />
+      <i class="fa fa-times-circle"></i>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="jl_main">
+<div class="delivert_item_title">备注</div>
+<div class="delivert_item_main mt10">
+  <div class="w12">
+    <i class="fa fa-file-text delivert_item_icon"></i>
+    <textarea placeholder="备注信息" class="radius3">贵重物品，小心轻放，谢谢配合。</textarea>
+  </div>
+</div>
+</div>
+
+</div>
+
+<footer>
+<div class="w12 jl_btn" onClick="window.location.href='confirmOrder.html'">确定订单</div>
+</footer>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

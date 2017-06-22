@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>送货安装</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+<script type="text/javascript" src="js/mobiscroll.custom-2.17.0.min.js"></script>
+    <script>
+        $(function () {
+            function init() {
+                $('.demo_calendar_datetime').mobiscroll().calendar({
+                    theme: theme,
+                    mode: mode,
+                    display: "bottom",
+                    lang: "zh",
+                    controls: ['calendar', 'date', 'time']
+                });   
+            }   
+                $('.demo_select').mobiscroll().select({
+                    theme: theme,     // Specify theme like: theme: 'ios' or omit setting to use default 
+                    mode: mode,       // Specify scroller mode like: mode: 'mixed' or omit setting to use default 
+                    display: "bottom", // Specify display mode like: display: 'bottom' or omit setting to use default 
+                    lang: "zh",        // Specify language like: lang: 'pl' or omit setting to use default 
+                });
+            var demo, theme, mode, display, lang;
+            $('.settings').on('change', function() {
+                demo = 'calendar_datetime';
+                theme = $('#theme').val() || $.mobiscroll.defaults.theme,
+                mode = $('#mode').val(),
+                display = $('#display').val(),
+                lang = $('#language').val();
+                $('.demo-cont').hide();
+                $("#demo_cont_" + demo).show();
+                
+                init();
+            });
+            $('#demo').trigger('change');
+        });
+    </script>
+</head>
+<body>
+
+<div class="main">
+<!----顾客信息---->
+<div class="jl_list_title">顾客信息<font class="font_color ml10">(注：收货人信息可更改)</font></div>
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case pr0 mt5">
+    <span class="w03">手机</span>
+    <input class="w09 sr tr" type="number" value="18671137522" />
+  </div>
+  <div class="jl_list_case pr0">
+    <span class="w03">姓名</span>
+    <input class="w09 sr tr" value="张三" placeholder="顾客姓名用于线下联系顾客" />
+  </div>
+  <div class="jl_list_case textarea pr0">
+    <span class="w03">地址</span>
+    <textarea class="w09 sr tr" placeholder="顾客姓名用于线下联系顾客" onClick="window.location.href='seachAdress.html'">湖北省武汉市江汉区新华路186号，福星国际商会大厦1610-1612</textarea>
+  </div>
+</div>
+
+<!----送货信息---->
+<div class="jl_list_title">送货信息</div>
+<div class="jl_list jl_list_bottom mt5">
+  <div class="jl_list_case">
+    <b class="jl_btn btn_color_or xuan">物流配送</b>
+    <b class="jl_btn btn_color_or ml10">预约</b>
+    <b class="jl_btn btn_color_or ml10">自提</b>
+  </div>
+  <div class="jl_list_case">
+    <span class="w04">送货时间</span>
+    <div class="w08 sr">
+    <select class="demo_select sr hide" data-role="none">
+      <option value="0">2016-10-26 上午</option>
+      <option value="1">2016-10-26 下午</option>
+      <option value="2">2016-10-27 上午</option>
+      <option value="3">2016-10-26 下午</option>
+      <option value="4">2016-10-28 上午</option>
+      <option value="5">2016-10-28 下午</option>
+      <option value="6">2016-10-29 上午</option>
+      <option value="7">2016-10-29 下午</option>
+    </select>  
+    </div>
+  </div>
+</div>
+
+<!----安装信息---->
+<div class="jl_list_title">安装信息</div>
+<div class="jl_list jl_list_bottom mt5">
+  <div class="jl_list_case">
+    <b class="jl_btn btn_color_or">安装派网点</b>
+    <b class="jl_btn btn_color_or ml10">预约</b>
+    <b class="jl_btn btn_color_or xuan ml10">不安装</b>
+    <span class="w12 font_gray pl10 mt10">当前商品将不会安排安装。</span>
+  </div>
+  <div class="jl_list_case hide">
+    <span class="w04">安装时间</span>
+    <div class="w08 sr">
+    <select class="demo_select sr hide" data-role="none">
+      <option value="0">2016-10-26 上午</option>
+      <option value="1">2016-10-26 下午</option>
+      <option value="2">2016-10-27 上午</option>
+      <option value="3">2016-10-26 下午</option>
+      <option value="4">2016-10-28 上午</option>
+      <option value="5">2016-10-28 下午</option>
+      <option value="6">2016-10-29 上午</option>
+      <option value="7">2016-10-29 下午</option>
+    </select>  
+    </div>
+  </div>
+</div>
+
+<!----备注信息---->
+<div class="jl_list_title">备注</div>
+<div class="jl_list jl_list_bottom mt5">
+  <div class="jl_list_case textarea">
+    <span class="w04">备注</span>
+    <textarea class="w12 sr" placeholder="备注">易碎物品，小心轻放，谢谢合作！</textarea>
+  </div>
+</div>
+
+<footer>
+<div class="w12 jl_btn btn_color" onClick="window.location.href='confirmOrder.html'">确定订单</div>
+</footer>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

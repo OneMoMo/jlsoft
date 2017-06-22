@@ -1,0 +1,22 @@
+<div class="jl_screening_main"> 
+<ul id="MONGO_SCM_JK">
+	<li class="w12">
+	  <dl class="w12">
+	    <dt class="w01"><b>接口名称</b></dt>
+	    <dd class="w03">
+	      	<input type="text" name="JKMC" class="w12"/>
+	    </dd>
+	  </dl>
+	</li>
+</ul>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+  $("ul#MONGO_SCM_JK").delegate("[name='JKMC']", "keydown", function (event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode == 13) {
+      commonQuery.query();
+    }
+  });
+});
+</script>

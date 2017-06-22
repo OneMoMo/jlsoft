@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gcdl.gczljc">
+	<Nested id="SPLB" allownull="N" name="工程登录明细">
+            <FIELD attrname="BCJCSL" fieldtype="String" allownull="N" name="寄厂数量" />
+        </Nested>
+	</JLConfig>
+</root>

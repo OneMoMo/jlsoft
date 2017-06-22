@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CGBJD">
+ <!-- 查询SPXX关联SPPCJC表 -->
+  <select id="CGBJD" parameterType="java.util.Map" resultType="java.util.Map">
+  		SELECT DISTINCT A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,A.SPPC01 PCH,
+		                A.SPPC02 PCXH,to_char(A.SPPC03,'YYYY-MM-DD') SPPC03,
+		                W.JXSL01 JXSL,S.GGB01 SPGG,S.JLDW01 JLDW,
+		                A.sppc06 JHSL,A.sppc12 JCSL,A.sppc09 XSSL,A.sppc07 BJZRSL,
+		                ROUND(A.SPPC05 * (1 + W.JXSL01), 4) YJHDJHS,A.CGXY02 SPSX,
+		                (SELECT SPSXMC FROM SPSX WHERE SPSX01=A.CGXY02)SPSXMC,
+						SUM(A.SPPC06) + SUM(SPPC07) BJSL,0 XJHDJHS, 
+						C.JLWBDH XYH01,R.RKD03 GCCKDH
+		  FROM SPPCJC A, SPXX S, WLDW W,CGXY C,RKD R
+		 WHERE A.SPXX01 = S.SPXX01
+		   AND A.WLDW01 = W.WLDW01
+		   AND A.SPPC22 = C.CGXY01(+)
+           AND A.GSXX01=C.GSXX01(+)
+           AND A.SPPC01 = R.RKD01(+)
+           AND A.GSXX01 = R.GSXX01(+)
+		   AND (A.SPPC04 = 0 OR A.SPPC04 = 1)
+		   <![CDATA[  AND A.SPPC09 + A.SPPC12 > 0
+		   			  AND A.SPPC01 <> -2  ]]>
+		   AND A.GSXX01 = #{GSXX01}
+		   AND A.YWLDW01 = #{WLDW01}
+		   AND A.YBM01 = #{BM01}
+		  <if test="SPMC != null and SPMC != ''">
+         AND (REGEXP_LIKE(S.SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX02, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX01, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPPYM, #{SPMC}, 'i'))
+         </if>
+         <if test="PCH != null and PCH != ''">
+         AND A.SPPC01 LIKE '%'||#{PCH}||'%'
+         </if>
+         <if test="JHRQQ != null and JHRQQ != ''">
+         <![CDATA[
+         AND A.SPPC03 >= to_date( #{JHRQQ},'yyyy-mm-dd')
+         ]]>
+         </if>
+         <if test="JHRQZ != null and JHRQZ != ''">
+         <![CDATA[
+         AND A.SPPC03 <= to_date( #{JHRQZ},'yyyy-mm-dd')
+         ]]>
+         </if>
+         <if test="GCCKDH != null and GCCKDH != ''">
+         	AND R.RKD03  LIKE '%'||#{GCCKDH}||'%' 
+         </if>
+		 GROUP BY A.GSXX01,C.JLWBDH,A.SPXX01,S.SPXX02,S.SPXX04,A.SPPC01,A.CGXY02,
+		          A.SPPC02,A.SPPC05,W.JXSL01,S.GGB01,S.JLDW01,A.SPPC22,
+		          A.sppc06,A.sppc12,A.sppc09,A.sppc07,A.SPPC03,R.RKD03
+  </select>
+   <select id="queryCGBJD" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT A.JLWBDH CGBJD01, S.SPXX02 SPBM, S.SPXX04 SPMC, A.JJBJ02 PCH, A.JJBJ03 PCXH,
+              A.JJBJ05 YWSDJ, JJBJ06 XWSDJ,
+              A.JJBJ05 * (1 + W.JXSL01) YHSDJ,
+              A.JJBJ06 * (1 + W.JXSL01) XHSDJ,
+              A.JJBJ31 YFL, A.JJBJ07 TXSSL,
+              A.JJBJ07 * ((A.JJBJ06 * (1 + W.JXSL01)) - (A.JJBJ05 * (1 + W.JXSL01))) TXSJE,
+              A.JJBJ08 * ((A.JJBJ06 * (1 + W.JXSL01)) - (A.JJBJ05 * (1 + W.JXSL01))) TKCJE,
+              (A.JJBJ08 * ((A.JJBJ06*(1+W.JXSL01)) - (A.JJBJ05*(1+W.JXSL01))))/(1+W.JXSL01) TWSKCJE,
+              A.JJBJ10 * ((A.JJBJ06 * (1 + W.JXSL01)) - (A.JJBJ05 * (1 + W.JXSL01))) TSYJE,
+              A.JJBJ10 TSYSL,
+              (A.JJBJ10 * ((A.JJBJ06*(1+W.JXSL01)) - (A.JJBJ05*(1+W.JXSL01))))/(1+W.JXSL01) TWSSYJE,
+              A.JJBJ08 TKCSL,
+              (A.JJBJ07 * ((A.JJBJ06 * (1 + W.JXSL01)) - (A.JJBJ05 * (1 + W.JXSL01))))/(1+W.JXSL01) TWSXSJE,
+              GET_SPSX_V10(A.JJBJ24) SPSX,
+              (A.JJBJ07 + A.JJBJ08 + A.JJBJ10) TJSLHJ,
+              A.JJBJ14 * (1+W.JXSL01) TJJEHJ, A.JJBJ14 TJWSJEHJ, A.JJBJ11 TFCSL,
+              (SELECT BM02 FROM BM WHERE BM01 = A.BM01) CGBM,A.WLDW01 GYSBM,
+              (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) GYSMC,
+              CASE WHEN A.JJBJ22 IS NOT NULL THEN GET_HZFS(A.JJBJ22) ELSE TO_CHAR(A.JJBJ22) END  HZFS,
+              A.JJBJ17 ZDR,TO_CHAR(A.JJBJ18,'YYYY-MM-DD') ZDRQ,S.SPFL02 SPFL,
+              (SELECT PPB02 FROM PPB WHERE PPB01 = S.PPB01) SPPP, A.JJBJ16 BZ,
+              A.JJBJ19 SHR, TO_CHAR(A.JJBJ20,'YYYY-MM-DD') SHRQ
+         FROM JJBJD A, SPXX S, WLDW W
+        WHERE A.SPXX01 = S.SPXX01
+          AND A.WLDW01 = W.WLDW01
+		<if test="SPMC != null and SPMC != ''">	
+	        <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      REGEXP_LIKE(S.SPXX02, #{item}, 'i') OR REGEXP_LIKE(S.SPXX04, #{item}, 'i')  OR  REGEXP_LIKE(S.SPPYM, #{item}, 'i')  
+		     </foreach>
+        </if> 
+        <if test="CGBM != null and CGBM != ''">
+            <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 LIKE '%'||#{item}||'%'  
+		    </foreach> 	       
+	    </if>
+	    <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          S.SPFL01 LIKE '%'||#{item}||'%'
+	         </foreach>
+	    </if>
+	    <if test="BJDH != null and BJDH != ''">
+		    AND A.JLWBDH LIKE '%'||#{BJDH}||'%'	         
+	    </if> 
+	    <if test="GYS != null and GYS != ''">	
+	        <foreach item="item" index="index" collection="GYS"  open=" AND (" separator=" or " close=")"> 	      
+		      (W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 = #{item})
+		    </foreach>
+	    </if> 
+	    <if test="HZFS != null and HZFS != ''">		      
+		    AND A.JJBJ22 = #{HZFS}
+	    </if> 
+	    <if test="PP01 != null and PP01 != ''">
+	         <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+	          S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	    <if test="SPSX != null and SPSX != ''">	
+	    <foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")"> 
+	           A.JJBJ24 = #{item}
+	         </foreach>	      
+		              
+	    </if>
+	    <if test="DJZT != null and DJZT != ''">
+	    	<if test="DJZT == 0">
+	          AND A.JJBJ18 IS NOT NULL
+	          AND A.JJBJ20 IS NULL
+	        </if>
+	        <if test="DJZT == 1">
+	          AND A.JJBJ20 IS NOT NULL
+	        </if>
+	    </if>
+	    <if test="BJFS != null and BJFS != ''">
+		      <!-- AND A.GSBJD08 = #{BJFS}	   -->
+	    </if>
+	    <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND A.JJBJ18 >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+	       <![CDATA[AND A.JJBJ18 <= TO_DATE(#{ZDRQ_E},'YYYY-MM-DD')]]>
+	    </if>
+	    <if test="SHRQ_S !=null and SHRQ_S != ''">
+	       <![CDATA[AND A.JJBJ20 >= TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="SHRQ_E !=null and SHRQ_E != ''">
+	       <![CDATA[AND A.JJBJ20 <= TO_DATE(#{SHRQ_E},'YYYY-MM-DD')]]>
+	    </if>
+	    JL{CZY|A.BM01|BM_CX|LIKE%}JL
+        JL{CZY|A.WLDW01|GYS_CX|inS}JL
+        JL{CZY|S.SPFL01|SPFL_CX|inS}JL
+  </select>
+  
+</mapper>

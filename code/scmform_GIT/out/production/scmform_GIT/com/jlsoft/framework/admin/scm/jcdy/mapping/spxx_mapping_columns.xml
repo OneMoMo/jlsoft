@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.spxxpd">
+	<Nested id="BMLB">
+	<FIELD attrname="key" fieldtype="string" allownull="N" name="编码类别" />
+    <FIELD attrname="value" fieldtype="string" allownull="N" name="编码类别" />
+    </Nested>
+	<FIELD attrname="SPBM" fieldtype="string" allownull="Y" name="商品编码" />
+	<FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+	<!-- <FIELD attrname="SPFL01" fieldtype="string" allownull="N" name="商品分类代码" /> -->
+	<FIELD attrname="SPPP01" fieldtype="string" allownull="N" name="品牌编码" />
+	<FIELD attrname="XXSL" fieldtype="string" allownull="N" name="销项税率" />
+	<FIELD attrname="JLDW" fieldtype="string" allownull="N" name="计量单位" />
+	</JLConfig>
+	<JLConfig id="form.scm.jcdy.spxxpp">
+	<Nested id="BMLB">
+	<FIELD attrname="key" fieldtype="string" allownull="N" name="编码类别" />
+    <FIELD attrname="value" fieldtype="string" allownull="N" name="编码类别" />
+    </Nested>
+	<FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品名称" />
+	<!-- <FIELD attrname="SPFL01" fieldtype="string" allownull="N" name="商品分类代码" /> -->
+	<FIELD attrname="SPPP01" fieldtype="string" allownull="N" name="品牌编码" />
+	<FIELD attrname="XXSL" fieldtype="string" allownull="N" name="销项税率" />
+	<FIELD attrname="JLDW" fieldtype="string" allownull="N" name="计量单位" />
+	</JLConfig>	 	 
+</root>

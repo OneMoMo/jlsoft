@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>首页</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/mobiscroll.custom-2.17.0.min.css" />
+<link rel="stylesheet" type="text/css" href="css/CYCSS.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header>
+<div class="index_header">
+<a class="w01 logo"><img src="images/header_logo.png" /></a>
+<div class="header_seach">
+  <div class="seach_main">
+    <i class="seach_icon fa fa-search"></i>
+    商品名称/代码可搜索
+  </div>
+</div>
+<i class="fa fa-comments-o"></i>
+</div>
+</header>
+
+<div class="main" style="padding-top:2.5rem;">
+  <div class="w12 jl_tab">
+    <ul class="w12">
+      <li class="xuan">热卖商品</li>
+    </ul>
+  </div>
+  <div class="w12 pro_list">
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_name">海信空调KFR-26GW/27BP内机<i>样机</i></div>
+      <div class="clear"></div>
+      <div class="pro_list_text mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+      <div class="pro_list_text mt5"><i class="mr5">码</i>00023</div>
+      <div class="pro_list_text mt5"><i class="mr5">仓</i>湖北仓库</div>
+      <div class="pro_list_text mt5"><i class="mr5">品</i>华为</div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+      <div class="pro_list_btn radius5" style="right:3rem" onclick="window.location.href='confirmOrder.html'">立即开单</div>
+      <div class="pro_list_hw">可卖数：1000</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+<dl class="w03 xuan" onClick="window.location.href='index.html'">
+  <dt><i class="fa fa-home"></i></dt>
+  <dd>首页</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='myCart.html'">
+  <dt><i class="fa fa-cart-plus"></i></dt>
+  <dd>购物车</dd>
+  <em>15</em>
+</dl>
+<dl class="w03" onClick="window.location.href='myOrder.html'">
+  <dt><i class="fa fa-file-text"></i></dt>
+  <dd>订单</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='userIndex.html'">
+  <dt><i class="fa fa-user"></i></dt>
+  <dd>我的</dd>
+</dl>
+</footer>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

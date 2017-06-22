@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fwgl.fwdj">
+	     <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+		 <Nested id="SHDZ" allownull="N" name="送货地址">
+		   <FIELD attrname="KEY" fieldtype="string" allownull="N" name="送货地址" />
+            <FIELD attrname="VALUE" fieldtype="string" allownull="N" name="送货地址" />
+        </Nested>
+	</JLConfig>
+</root>

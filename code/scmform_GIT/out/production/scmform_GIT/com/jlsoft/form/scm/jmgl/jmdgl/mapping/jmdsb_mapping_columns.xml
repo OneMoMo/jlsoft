@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	 <JLConfig id="form.scm.jmgl.jmdgl.jmdsb" >
+        <FIELD attrname="JMS01" target="DISTRIBUTOR_ID" allownull="N"/> 
+        <FIELD attrname="JMDMC" target="SHOP_NAME" allownull="N"/>
+        <FIELD attrname="DZ" target="ADDRESS" defaultValue=""/> 
+        <FIELD attrname="LXDH" target="TEL" defaultValue=""/>
+        <FIELD attrname="LXR" target="ATTN" defaultValue=""/> 
+        <FIELD attrname="YZBM" target="ZIP" defaultValue=""/>
+        <FIELD attrname="CZHM" target="FAX" defaultValue=""/>
+        <FIELD attrname="DMMJ" target="AREA" fieldtype="double" defaultValue="0"/> 
+        <FIELD attrname="JYPL" target="CATEGORY" defaultValue=""/> 
+        <FIELD attrname="JMDLX" target="SHOP_TYPE" defaultValue="0"/> 
+    </JLConfig>
+</root>
+
+

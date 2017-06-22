@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.khywy">
+		<FIELD attrname="RY" fieldtype="string" allownull="N" name="人员" />
+	 </JLConfig>
+</root>

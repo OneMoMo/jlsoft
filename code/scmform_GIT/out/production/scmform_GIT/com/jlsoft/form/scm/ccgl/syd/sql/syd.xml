@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SYD">
+  <!--查询损益单  -->
+  <select id="query_SYD" parameterType="Map" resultType="java.util.Map">
+  	 <!-- SELECT A.JLWBDH,A.SYD01 SYDH,S.SPXX02 SPBM,S.SPXX04 SPMC,get_spsx_v10(A.CGXY02) SPSX,A.SYD05 SYJS,A.SYD06 SYSL,
+       	    A.SYD07 SYJE,A.SYD08 SJJE,(SELECT SYLX02 FROM SYLX WHERE SYLX05=A.SYD11)SYLX,A.CK01,C.CK02,A.BM01,
+       	    B.BM02,A.SYD17 GYSDM,W.WLDW02 GYSMC,GET_HZFS(A.SYD16) HZFS,A.SYD02 PCH,A.SYD03 PCXH,A.SYD20 HTH,
+       	    A.SYD22 PDRQ,A.SYD09 BZ,A.SYD12 ZDR,TO_CHAR(A.SYD13,'YYYY-MM-DD')ZDRQ,A.SYD14 HXR,S.PPB02 SPPP,
+       	    (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC, 
+       	    (SELECT CPFL01 || ',' || CPFL02 FROM SPGNSM WHERE SPXX01 = S.SPXX01) SPFL 
+  	   FROM SYD A, SPXX S, WLDW W, BM B, CK C 
+ 	  WHERE A.SPXX01 = S.SPXX01 
+   	    AND A.BM01 = B.BM01
+   	    AND A.CK01 = C.CK01
+   	    AND A.SYD17 = W.WLDW01 -->
+   	 SELECT A.JLWBDH,S.SPXX02 SPBM,S.SPXX04 SPMC,get_spsx_v10(B.CGXY02) SPSX,B.SYDI01 SYJS,B.SYDI01 SYSL,B.SYDI02 SYJE,
+       	    B.SYDI03 SJJE,(SELECT SYLX02 FROM SYLX WHERE SYLX05=B.SYLX01)SYLX,B.CK01,C.CK02,M.BM01,M.BM02,B.WLDW01 GYSDM,
+       	    W.WLDW02 GYSMC,GET_HZFS(B.HZFS01)HZFS,B.SPPC01 PCH,B.GHHT01 HTH,B.SYDI07 PDRQ,A.SYD06 BZ,A.SYD02 ZDR,
+       		TO_CHAR(A.SYD03,'YYYY-MM-DD')ZDRQ,A.SYD04 SHR,TO_CHAR(A.SYD05,'YYYY-MM-DD')SHRQ,A.SYD08 HXR,S.PPB02 SPPP,
+       		(SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC,
+       		S.SPFL02 SPFL
+  	   FROM SYDJ A, SYDJITEM B, SPXX S,CK C,BM M,WLDW W
+ 	  WHERE A.GSXX01 = B.GSXX01
+   		AND A.SYD01 = B.SYD01
+   		AND B.SPXX01 = S.SPXX01
+   		AND B.CK01=C.CK01
+   		AND B.BM01=M.BM01
+   		AND B.WLDW01=W.WLDW01
+   	 <if test="SPMC != null and SPMC != ''">
+   	 	AND (REGEXP_LIKE(S.SPPYM, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX02, #{SPMC}, 'i'))
+   	 </if>
+   	 <if test="WLDW != null and WLDW != ''">
+   	 	<foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 
+		    W.WLDW02 LIKE '%'||#{item}||'%' OR W.WLDW01 LIKE '%'||#{item}||'%' OR W.WLDW03 LIKE '%'||#{item}||'%' 
+		</foreach> 
+   	 </if>
+   	 <if test="SPFL01 != null and SPFL01 != ''">
+   	 	<foreach item="item" index="index" collection="SPFL01"  open=" AND (" separator=" or " close=")"> 
+		    S.SPFL01 LIKE '%'||#{item}||'%'
+		</foreach> 
+   	 </if>
+   	 <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND A.SYD03 >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]>
+	 </if> 
+	 <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+	       <![CDATA[AND A.SYD03 <= TO_DATE(#{ZDRQ_E},'YYYY-MM-DD')]]>
+	 </if>
+	 <if test="CKMC != null and CKMC != ''">
+	     <foreach item="item" index="index" collection="CKMC" open=" AND (" separator=" or " close=")"> 
+	      	B.CK01 LIKE '%'||#{item}||'%'
+	     </foreach>
+	 </if>
+   	 <if test="PP != null and PP != ''">
+   	 	<foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+		    S.PPB01 = #{item} 
+		</foreach> 
+   	 </if>
+   	 <if test="BM01 != null and BM01 != ''">
+   	 	<foreach item="item" index="index" collection="BM01"  open=" AND (" separator=" or " close=")"> 
+		    B.BM01 LIKE '%'||#{item}||'%'
+		</foreach> 
+   	 </if>
+   	 <if test="SYDH != null and SYDH != ''">
+   	 	<foreach item="item" index="index" collection="SYDH"  open=" AND (" separator=" or " close=")"> 
+		    A.JLWBDH LIKE '%'||#{item}||'%'
+		</foreach> 
+   	 </if>
+   	 <if test="SHRQ_S !=null and SHRQ_S != ''">
+	       <![CDATA[AND A.SYD05 >= TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]>
+	 </if> 
+	 <if test="SHRQ_E !=null and SHRQ_E != ''">
+	       <![CDATA[AND A.SYD05 <= TO_DATE(#{SHRQ_E},'YYYY-MM-DD')]]>
+	 </if>
+	 <if test="HZFS != null and HZFS != ''">
+   	 	<foreach item="item" index="index" collection="HZFS"  open=" AND (" separator=" or " close=")"> 
+		    B.HZFS01 LIKE '%'||#{item}||'%'
+		</foreach> 
+   	 </if>
+   	 JL{CZY|W.WLDW01|WLDW_CZ|LIKE%}JL
+     JL{CZY|B.CK01|CK_CX|LIKE%}JL
+     JL{CZY|B.BM01|BM_CX|LIKE%}JL
+     JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+  </select>
+	
+	
+	<!--查询盘点损溢情况  -->
+	 <select id="queryPDSY" parameterType="Map" resultType="java.util.Map">
+	SELECT TO_CHAR(A.PDB01,'YYYY-MM-DD') PDRQ,A.PDB07 SYSL,S.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,BM01,(SELECT BM02 FROM BM WHERE BM01=A.BM01)BMMC,CK01, 
+	   (SELECT CK02 FROM CK WHERE CK01=A.CK01) CKMC, SPXX70 BZHL,
+	   (SELECT SUM(CKSP03) FROM CKSP WHERE CK01=A.CK01 AND SPXX01=A.SPXX01 AND BM01=A.BM01)JCSL 
+ 	  FROM PDB A,SPXX S 
+ 	WHERE A.SPXX01=S.SPXX01
+ 	  <![CDATA[ AND A.PDB07<>0]]>
+ 	  <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+      </if>
+      <if test="SPMC != null and SPMC != ''">
+      AND (REGEXP_LIKE(S.SPPYM, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX02, #{SPMC}, 'i'))
+      </if> 
+      <if test="PDRQQ != null and PDRQQ != ''">
+	  <![CDATA[ AND A.PDB01 >= TO_DATE(#{PDRQQ},'YYYY-MM-DD')]]>
+	  </if> 														
+	  <if test="PDRQZ != null  and PDRQZ != ''">
+	  <![CDATA[ AND A.PDB01 <= TO_DATE(#{PDRQZ},'YYYY-MM-DD')]]>
+	  </if>
+       
+	</select>
+	
+	 <!-- 查找损溢类型-->
+  <select id="SYLX" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT SYLX01 key, SYLX02 value from SYLX 
+  </select>
+  
+  <!-- 查询SPXX关联SPJGB和CKSP表 -->
+  <select id="CKSP_SPJGB" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.SPXX01, B.SPXX02 SPBM, B.SPXX04 SPMC, A.GGB01 SPGG, B.JLDW01 JLDW,A.GHHT01,
+           B.SPXX28 CMBJ, GET_BOOL(B.SPXX28) CMBJMC, C.CKSP12 SPSX, get_spsx_v10(C.CKSP12) SPSXMC,
+           C.CK01, D.CK02 CKMC, C.WLDW01, E.WLDW02 WLDWMC, C.BM01, F.BM02 BMMC,C.CKSP05 KMXZS,C.CKSP01 BZHL,
+           C.CKSP04 KMS,C.CKSP03 BGS,
+           A.SPJG01 JHDJ, A.SPJG05 LSDJ, A.SPJG07 FXDJ,A.SPJG08 FXXJ, E.JXSL01 JXSL,
+           (SELECT SUM(SPPC12) FROM SPPCJC WHERE SPXX01=A.SPXX01 AND BM01=A.BM01 AND 
+           WLDW01=A.WLDW01 AND CGXY02=C.CKSP12 )JCSL,
+           GET_HZFS(SPJG02) HZFSMC,SPJG02 HZFS,
+           C.CKSP13 FMBJ01
+      FROM SPJGB A, SPXX B, CKSP C, CK D, WLDW E, BM F
+     WHERE A.SPXX01 = B.SPXX01
+       AND A.BM01 = C.BM01
+       AND A.WLDW01 = C.WLDW01
+       AND A.SPXX01 = C.SPXX01
+       AND C.CK01 = D.CK01
+       AND A.WLDW01 = E.WLDW01
+       AND A.BM01 = F.BM01
+       AND D.CK06 = 0
+       AND C.CKSP12 = 0
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="SPXX01 != null">
+       AND A.SPXX01 = #{SPXX01}
+       </if>
+      <if test="WLDW01 != null and WLDW01 != ''">
+       	    AND A.WLDW01 = #{WLDW01} 
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND A.BM01 = #{BM01}
+       </if>
+       <if test="SPMC != null and SPMC != ''">
+       AND (B.SPPYM LIKE '%'||#{SPMC}||'%' OR REGEXP_LIKE(B.SPXX04,#{SPMC},'i') OR REGEXP_LIKE(B.SPXX02,#{SPMC},'i') )
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND C.CK01 = #{CK01}
+       </if>
+       JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|C.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  	<!-- 查询可卖数-->
+    <select id="QuerryKMS" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT   NVL(SUM(C.CKSP04),0) KMS 
+    FROM  SPXX S, CKSP C 
+    WHERE S.SPXX01 =  C.SPXX01 
+    <if test="WLDW01 != null and WLDW01 != ''">
+     AND C.WLDW01 = #{WLDW01}
+    </if>
+    <if test="BM01 != null and BM01 != ''">
+   	 AND C.BM01 = #{BM01}
+   	</if>
+   	<if test="SPXX01 != null and SPXX01 != ''">
+   	 AND C.SPXX01 = #{SPXX01} 
+    </if>
+    <if test="CK01 != null and CK01 != ''">
+   	 AND C.CK01 = #{CK01} 
+    </if>
+    JL{CZY|C.WLDW01|WLDW_CZ|inS}JL
+    JL{CZY|C.CK01|CK_CZ|LIKE%}JL
+    </select> 
+</mapper>

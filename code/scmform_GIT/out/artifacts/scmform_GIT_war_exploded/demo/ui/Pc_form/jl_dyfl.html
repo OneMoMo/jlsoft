@@ -1,0 +1,113 @@
+<div class="jl_pagetitle"><h2>定义分类</h2><span>定义平台品牌基础数据。</span></div>
+<div class="jl_breadcrumb">
+  <ul>
+    <li><i class="fa fa-home"></i><a href="index.html">首页</a></li>
+    <i class="fa fa-angle-right"></i>
+    <li><a href="#">定义基础属性</a></li>
+    <i class="fa fa-angle-right"></i>
+    <li><a href="#">定义分类</a></li>
+  </ul>
+  <div class="jl_process">
+    <ul>
+      <li class="before">上一步流程</li>
+      <li class="center">当前流程</li>
+      <li class="after">下一步流程</li>
+    </ul>
+    <i class="fa fa-sort-amount-asc" title="查看所有步骤"></i>
+    <div class="jl_process_menu hide">
+      <ul class="jl_dropdown_menu">
+        <li><a>张三/2016-01-11 14:41<label class="jl_btn btn_black">已完结的流程</label></a></li>
+        <li><a>李四/2016-01-11 14:41<label class="jl_btn btn_black">已完结的流程</label></a></li>
+        <li><a>王五/2016-01-11 14:41<label class="jl_btn btn_black">已完结的流程</label></a></li>
+        <li><a>刹那芳华/2016-01-11 14:41<label class="jl_btn btn_green">当前流程</label></a></li>
+        <li><a>赵六<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>孙七<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>刘八<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>李九<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>高十<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>胡十一<label class="jl_btn btn_red">未走流程</label></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="pagr_content">
+  <div class="w12 jl_tree_01">
+  <div class="jl_tabel_header w12">
+    <ul class="jl_tabel_bac w12">
+      <li class="w06">
+        <span class="w12">分类名称</span>
+      </li>
+      
+    </ul>
+  </div>  
+  <div class="jl_tree_main">  
+  <dl>
+    <dt class="lj"></dt>
+    <dd><i class="fa fa-caret-down"></i><input type="text" value="大家电"><i class="fa fa-level-down cz" title="新增"></i><i class="fa fa-trash-o cz" title="删除"></i><i class="fa fa-ban cz" title="非末级"></i><i class="fa fa-ban font_red cz" title="末级"></i></dd>   
+  </dl>
+  <div class="child">
+    <div class="jl_tree_main">
+      <dl>
+        <dt class="lj"></dt><dt class="line"></dt>
+        <dd><i class="fa fa-caret-down"></i><input type="text" value="厨卫电器"><i class="fa fa-level-down cz" title="新增"></i><i class="fa fa-trash-o cz" title="删除"></i><i class="fa fa-ban cz" title="非末级"></i><i class="fa fa-ban font_red cz" title="末级"></i></dd>
+      </dl>
+      <div class="child">
+        <div class="jl_tree_main">
+            <dl>
+              <dt class="lj"></dt><dt class="line"></dt>
+              <dd><i class="fa fa-caret-right"></i><input type="text" value="冰箱"></dd>
+            </dl>
+            <dl>
+              <dt class="lj"></dt><dt class="line"></dt>
+              <dd><i class="fa fa-caret-right"></i><input type="text" value="洗衣机"></dd>
+            </dl>
+            <dl>
+              <dt class="lj"></dt><dt class="line"></dt>
+              <dd><i class="fa fa-caret-right"></i><input type="text" value="空调"></dd>
+            </dl>
+          </div>
+        </div>
+      <dl>
+        <dt class="lj"></dt><dt class="line"></dt>
+        <dd><i class="fa fa-caret-down"></i><input type="text" value="厨卫电器"><i class="fa fa-level-down cz" title="新增"></i><i class="fa fa-trash-o cz" title="删除"></i><i class="fa fa-ban cz" title="非末级"></i><i class="fa fa-ban font_red cz" title="末级"></i></dd>
+    </dl>
+  </div>
+  </div>
+  <dl class="w12">
+    <dt class="lj"></dt>
+    <dd class=" w06"><i class="fa fa-caret-right"></i><input type="text" value="中家电"></dd>
+  </dl>
+</div> 
+    
+    
+    
+    
+    
+  </div>
+</div>
+<!---页面目录--->
+
+<script>
+  $('.jl_date').fdatepicker();
+  $('.jl_time').fdatepicker({format: 'yyyy-mm-dd hh:ii',pickTime: true});
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var checkin = $('.jl_time_01').fdatepicker({
+	  onRender: function (date) {return date.valueOf() < now.valueOf() ? 'disabled' : '';
+	  }}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+			}
+			checkin.hide();
+			$('.jl_time_02')[0].focus();
+		}).data('datepicker');
+		var checkout = $('.jl_time_02').fdatepicker({
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');
+</script>

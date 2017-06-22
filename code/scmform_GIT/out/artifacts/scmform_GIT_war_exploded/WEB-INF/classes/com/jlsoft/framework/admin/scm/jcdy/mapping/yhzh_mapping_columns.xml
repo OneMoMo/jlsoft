@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.yhzh">
+	<Nested id="YHMC" allownull="N" name="银行名称">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="银行名称" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="银行名称" />
+     </Nested>
+     <FIELD attrname="YHZH02" fieldtype="string" allownull="N" name="银行账号" />
+	</JLConfig>	 
+</root>

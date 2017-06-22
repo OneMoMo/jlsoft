@@ -1,0 +1,120 @@
+<script type="text/javascript">
+/* 分销结算单 */
+var DYFXJSD = function(data){
+	debugger;
+	var SPLB=data.SPLB;
+	var DYTS=0,height=0;
+	var LODOP = getLodop();
+	LODOP.NewPage();
+	LODOP.NewPageA();   //分页
+	LODOP.PRINT_INITA(0,0,794,559,"分销结算单");
+	LODOP.SET_PRINT_PAGESIZE(0,2100,1400,"");
+	LODOP.ADD_PRINT_HTM(0,0,"99%","99%","");
+	//打印标题
+	DYFXJSD.getTitle(data,LODOP);
+	for(var i=0;i<SPLB.length;i++){
+				DYTS++;
+				if(i%8==0 && i!=0){
+					DYFXJSD.getButtom(data, LODOP ,(height+125));
+					LODOP.NewPageA();
+					DYFXJSD.getTitle(data,LODOP);
+					DYTS=1;
+				}
+				height=25*DYTS;
+				
+	    //分销单据
+		var PFD01=JL.isNull(SPLB[i].PFDI01)?"":SPLB[i].PFDI01;
+	    //商品代码
+		var SPXX01=JL.isNull(SPLB[i].SPXX01)?"":SPLB[i].SPXX01;
+		//商品名
+		var SPMC=JL.isNull(SPLB[i].SPMC)?"":SPLB[i].SPMC;
+		//数量
+	    var SL=JL.isNull(SPLB[i].SL)?"":SPLB[i].SL;
+		//销售单价
+		var FXDJ=JL.isNull(SPLB[i].FXDJ)?"":SPLB[i].FXDJ;
+		//销售金额
+	    var SSJE=JL.isNull(SPLB[i]. SSJE)?"":SPLB[i].SSJE;
+		//返利
+		var SYFL=JL.isNull(SPLB[i].SYFL)?"":SPLB[i].SYFL;
+	
+		LODOP.ADD_PRINT_TEXT(170+height,30,100,20,PFD01);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(170+height,130,100,20,SPXX01);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(170+height,200,200,20,SPMC);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(170+height,300,100,20,SL);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(170+height,400,100,20,FXDJ);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(170+height,500,100,20,SSJE);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(170+height,600,100,20,SYFL);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+	}
+	DYFXJSD.getButtom(data,LODOP);
+	LODOP.NewPageA(); 
+	LODOP.PREVIEW();
+	window.close();
+};
+DYFXJSD.getTitle=function(data,LODOP){
+	//客户
+    var KH02=JL.isNull(data.KH02)?"":data.KH02;
+  //收款单号  结算单号
+    var PFSK01=JL.isNull(data.PFSK01)?"":data.PFSK01;
+	LODOP.ADD_PRINT_TEXT(40,250,287,32,"上海束氏茶道有限公司");
+	LODOP.SET_PRINT_STYLEA(0,"FontSize",15);
+	LODOP.SET_PRINT_STYLEA(0,"Alignment",2);
+	LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+	LODOP.ADD_PRINT_TEXT(70,350,100,20,"分销结算单");
+	LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+	LODOP.ADD_PRINT_TEXT(100,30,100,20,"部门：");
+	LODOP.ADD_PRINT_TEXT(100,250,100,20,"收款日期：");
+	LODOP.SET_PRINT_STYLEA(0,"ItemType",4);
+	LODOP.ADD_PRINT_TEXT(100,450,100,20,"结算单号："+PFSK01);
+	LODOP.ADD_PRINT_TEXT(130,30,250,20,"客户:"+KH02);
+	LODOP.ADD_PRINT_TEXT(130,372,23,20,"第");
+	LODOP.ADD_PRINT_TEXT(130,395,17,20,"");
+	LODOP.SET_PRINT_STYLEA(0,"ItemType",2);
+	LODOP.ADD_PRINT_TEXT(130,415,22,20,"页");
+	LODOP.ADD_PRINT_TEXT(130,438,19,20,"/");
+	LODOP.ADD_PRINT_TEXT(130,459,22,20,"共");
+	LODOP.ADD_PRINT_TEXT(131,481,14,20,"");
+	LODOP.SET_PRINT_STYLEA(0,"ItemType",3);
+	LODOP.ADD_PRINT_TEXT(131,498,23,20,"页");
+	LODOP.ADD_PRINT_TEXT(170,30,100,20,"分销单单号");
+	LODOP.ADD_PRINT_TEXT(170,120,100,20,"商品代码");
+	LODOP.ADD_PRINT_TEXT(170,250,400,20,"商品名称");
+	LODOP.ADD_PRINT_TEXT(170,400,80,20,"数量");
+	LODOP.ADD_PRINT_TEXT(170,500,80,20,"单价");
+	LODOP.ADD_PRINT_TEXT(170,600,80,20,"金额");
+	LODOP.ADD_PRINT_TEXT(170,650,100,20,"返利金额");
+	//划线
+	LODOP.ADD_PRINT_LINE(168,30, 168, 750,0, 1);
+	LODOP.ADD_PRINT_LINE(192,30, 192, 750,0, 1);
+	LODOP.ADD_PRINT_IMAGE(20,30,180,60, "<img width='180px' height='55px' src='scm/fxgl/fxjs/logo01.jpg' />");
+
+};
+DYFXJSD.getButtom=function(data,LODOP,height){
+	// 应收金额合计
+	var SSJEHJ=JL.isNull(data.SSJEHJ)?"":data.SSJEHJ;
+	LODOP.ADD_PRINT_TEXT(470,30,100,20,"收款方式：");
+	LODOP.ADD_PRINT_TEXT(470,230,300,20,"应收账款："+SSJEHJ);
+	LODOP.ADD_PRINT_LINE(468,30, 468, 750,0, 1);
+	LODOP.ADD_PRINT_LINE(492,30, 492, 750,0, 1);
+};
+</script>

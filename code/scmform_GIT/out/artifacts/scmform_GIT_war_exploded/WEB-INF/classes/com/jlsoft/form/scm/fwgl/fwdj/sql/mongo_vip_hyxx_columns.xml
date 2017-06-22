@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_HYXX.VIP_HYXX"> 
+       <FIELD attrname="S_VALUE" format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="String" allownull="Y" name="供应商" />
+      <FIELD attrname="HYXX01" format='{"HYXX01":"#HYXX01#"}' fieldtype="String" allownull="Y" name="会员编号" />
+      <FIELD attrname="LXDH" format='{"$or":[{"SJHM":{"$regex":"#LXDH#"}},{"LXDZV":{"$regex":"#LXDH#"}},{"HYMC":{"$regex":"#LXDH#"}}]}' fieldtype="String" allownull="Y" name="联系电话" />
+	</JLConfig>
+</root>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BZJMX">
+	 <select id="SCM_GCBZJFH" parameterType="Map" resultType="java.util.Map">
+		select A.FHDH,A.GCDLDH,A.KHYHDH,A.SHRQ,A.FHRQ,
+      A.JXSMC,
+       A.SPMC,A.SL, A.YHJG,A.PFJG,A.BZJE,A.PFDI01,A.GCMC,
+        DECODE(A.DJZT,0,'未返还',1,'已返还',2,'部分返还') DJZT
+  from VIEW_CXBZJMX A
+	  <![CDATA[ WHERE A.BZJE > 0]]>
+	   AND A.BZJE !=0
+	   <if test="GCDLD01 != null and GCDLD01 != ''">
+			AND A.GCDLDH=#{GCDLD01}
+	    </if>
+	    <if test="DJZT != null and DJZT != ''">
+			AND A.DJZT=#{DJZT}
+	    </if>
+	    <if test="YHDH != null and YHDH != ''">
+			AND A.KHYHDH=#{YHDH}
+	    </if>
+	    <if test="GCMC != null and GCMC != ''">
+			AND A.GCMC=#{GCMC}
+	    </if>
+	<if test="RQ_S != null and RQ_S != ''"> 
+	    <![CDATA[AND (A.SHRQ >= TO_CHAR(TO_DATE(#{RQ_S},'YYYY-MM-DD'),'YYYY-MM-DD') OR A.FHRQ >= TO_CHAR(TO_DATE(#{RQ_S},'YYYY-MM-DD'),'YYYY-MM-DD'))]]>
+	</if>
+	<if test="RQ_E != null and RQ_E != ''">
+	     <![CDATA[AND (A.SHRQ <= TO_CHAR(TO_DATE(#{RQ_E},'YYYY-MM-DD'),'YYYY-MM-DD') OR A.FHRQ <= TO_CHAR(TO_DATE(#{RQ_E},'YYYY-MM-DD'),'YYYY-MM-DD'))]]>
+	</if>
+	<if test="SQRQ_S != null and SQRQ_S != ''"> 
+	    <![CDATA[AND (A.SHRQ >= TO_CHAR(TO_DATE(#{SQRQ_S},'YYYY-MM-DD'),'YYYY-MM-DD'))]]>
+	</if>
+	<if test="SQRQ_E != null and SQRQ_E != ''">
+	     <![CDATA[AND (A.SHRQ <= TO_CHAR(TO_DATE(#{SQRQ_E},'YYYY-MM-DD'),'YYYY-MM-DD'))]]>
+	</if> 
+	<if test="FHRQ_S != null and FHRQ_S != ''"> 
+	    <![CDATA[AND (A.FHRQ >= TO_CHAR(TO_DATE(#{FHRQ_S},'YYYY-MM-DD'),'YYYY-MM-DD'))]]>
+	</if>
+	<if test="FHRQ_E != null and FHRQ_E != ''">
+	     <![CDATA[AND (A.FHRQ <= TO_CHAR(TO_DATE(#{FHRQ_E},'YYYY-MM-DD'),'YYYY-MM-DD'))]]>
+	</if>  
+	  <if test="JXSMC != null and JXSMC != ''">
+			 AND (A.WLDW01 LIKE '%'||#{JXSMC }||'%'  OR  A.JXSMC LIKE '%'||#{JXSMC}||'%')
+	 </if>
+           JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+           JL{CZY|A.wldw01|WLDW_CX|LIKE%}JL
+	</select>
+	
+	<select id="queryBZJMX" parameterType="Map" resultType="java.util.Map">
+	SELECT TDH, TO_CHAR(RQ, 'YYYY-MM-DD')RQ, SPBM, SPMC, BZJSQ, BZJTH, GCDLD01 FROM ( 
+     SELECT XH TDH,B.KHBZJ09 RQ,S.SPXX01,SPXX02 SPBM,SPXX04 SPMC,BZJE BZJSQ,0 BZJTH,B.GCDJH GCDLD01 
+  FROM KHBZJSP A,KHBZJ B,SPXX S 
+    WHERE A.SPXX01=S.SPXX01 AND A.KHBZJ01=B.KHBZJ01 AND A.GSXX01=B.GSXX01 
+  UNION ALL 
+SELECT XH TDH,B.KHBZJCX08 RQ,S.SPXX01,SPXX02 SPBM,SPXX04 SPMC,0 BZJSQ,CXJE BZJTH,GCDJH GCDLD01 
+  FROM KHBZJCXSP A,KHBZJCX B,SPXX S 
+    WHERE A.SPXX01=S.SPXX01 AND A.KHBZJCX01=B.KHBZJCX01 AND A.GSXX01=B.GSXX01 
+  ) A WHERE 1=1 
+ 	<if test="GCDLD01 != null and GCDLD01 != ''">
+			AND A.GCDLD01=#{GCDLD01}
+	    </if>
+		<!-- <if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01=#{GSXX01}
+	    </if> -->
+	    <!-- <if test="SPDM != null"> 
+	    AND A.SPXX01 =#{SPDM}
+	    </if> -->
+	    <if test="RQ_S != null and RQ_S != ''"> <![CDATA[AND A.RQ >= TO_DATE(#{RQ_S},'YYYY-MM-DD')]]></if>
+		   <if test="RQ_E != null and RQ_E != ''"><![CDATA[AND A.RQ <= TO_DATE(#{RQ_E},'YYYY-MM-DD')]]></if> 
+  </select>
+
+	   
+
+</mapper>

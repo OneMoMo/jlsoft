@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FWXX">
+	<select id="FWLX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT FWLX01 key, LXMC value
+		  FROM CSS_FWLX  
+		 WHERE YXBJ = 1
+		<if test="FWLX != null and FWLX != ''">
+              <![CDATA[AND FWLX01 <> 1]]> 
+        </if>		 
+	</select>
+	<!-- 查找售后服务人员 -->
+  <select id="FWRY" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT FWRY01, FWRY02 RYMC, LXDH, SFZH, FWRY01 KEY, FWRY02 VALUE
+		  FROM CSS_FWRY 
+		 WHERE RYZT = 0
+	   <if test="RYMC != null and RYMC != ''">
+		     <foreach item="item" index="index" collection="RYMC"  open=" AND (" separator=" or " close=")"> 
+		      FWRY01 LIKE '%'||#{item}||'%' OR FWRY02 LIKE '%'||#{item}||'%'
+		     </foreach> 
+	   </if>	 
+       <if test="SHRY != null and SHRY != ''">
+           AND SHLX = 1
+       </if>
+       <if test="FWRY != null and FWRY != ''">
+           AND FWLX = 1
+       </if>
+       <if test="AZRY != null and AZRY != ''">
+           AND AZLX = 1
+       </if>
+       <if test="BYRY != null and BYRY != ''">
+           AND BYLX = 1
+       </if>
+       <if test="WLGS != null and WLGS != ''">
+           AND WLGS = 1
+       </if>
+  </select>
+  <!-- 查找网点 -->
+  <select id="FWWD" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT FWWD01 key,FWWD02 value
+		  FROM CSS_FWWD 
+		 WHERE YXBJ = 1
+	   <if test="WDMC_DX != null and WDMC_DX != ''">
+		     <foreach item="item" index="index" collection="WDMC_DX"  open=" AND (" separator=" or " close=")"> 
+		      FWWD01 LIKE '%'||#{item}||'%' OR FWWD02 LIKE '%'||#{item}||'%'
+		     </foreach> 
+	   </if>	 
+       <if test="WDLX != null and WDLX != ''">
+       	   AND WDLX = #{WDLX}
+           <if test="WDLX == 1 ">
+           AND WDLX = 1
+           JL{CZY|FWWD01|AZWD_CZ|LIKE%}JL
+		   </if>
+		   <if test="WDLX == 0 ">
+		   AND WDLX = 0
+           JL{CZY|FWWD01|PSWD_CZ|LIKE%}JL
+		   </if>
+       </if>
+       <if test="WDDM != null and WDDM != ''">
+           AND FWWD01 = #{WDDM}
+       </if>
+       <if test="WDMC != null and WDMC != ''">
+           AND FWWD02 LIKE '%'||#{WDMC}||'%'
+       </if>
+       <if test="WDSX != null and WDSX != ''">
+           AND WDSX = #{WDSX}
+       </if>
+  </select>
+  
+</mapper>

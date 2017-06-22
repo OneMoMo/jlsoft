@@ -1,0 +1,73 @@
+<header class="jl_header">
+<h2>FORM5手机版</h2>
+</header>
+<div class="jl_main_nav">
+<div class="jl_banner"></div>
+<nav class="jl_nav">
+<div class="jl_nav_list">
+  <div>
+  <dl class="w04" onclick="window.location.href='Defpayorder.html'">
+    <dd>
+      <ul>
+        <li class="nav_img"><i class="fa fa-file-text-o font_red"></i></li>
+        <li class="nav_name">延付单</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl class="w04" onclick="window.location.href='leave.html'">
+    <dd>
+      <ul>
+        <li class="nav_img"><i class="fa fa-clock-o font_blue"></i></li>
+        <li class="nav_name">请假</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl class="w04" onclick="window.location.href='oa.html'">
+    <dd>
+      <ul>
+        <li class="nav_img"><i class="fa fa-external-link font_yellow"></i></li>
+        <li class="nav_name">OA审批</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl class="w04" onclick="window.location.href='Defcompany.html'">
+    <dd>
+      <ul>
+        <li class="nav_img"><i class="fa fa-truck font_light_green"></i></li>
+        <li class="nav_name">送货</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl class="w04" onclick="window.location.href='Defcompany.html'">
+    <dd>
+      <ul>
+        <li class="nav_img"><i class="fa fa-hospital-o font_purple"></i></li>
+        <li class="nav_name">定义公司</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl class="w04" onclick="window.location.href='control.html'">
+    <dd>
+      <ul>
+        <li class="nav_img"><i class="fa fa-wrench font_rose_rad"></i></li>
+        <li class="nav_name">控件展示</li>
+      </ul>
+    </dd>
+  </dl>
+</div>
+</div>
+</nav>
+</div>
+<script>
+var menu = JL.JLForm();
+menu.setTab(document);
+menu.setPlugin({
+	"model": {
+		"jlid" : "JLmune",
+		"resource" : "WORKFLOW"
+	}
+});
+
+menu.initForm();
+
+</script>

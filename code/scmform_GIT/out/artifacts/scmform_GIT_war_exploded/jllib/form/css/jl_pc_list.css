@@ -1,0 +1,114 @@
+﻿/*** 
+grid列表jl_list
+***/
+.jl_list{}
+.jl_list .list_item_title{ width:100%; padding:6px 10px; background:#e4e4e4; border-bottom:1px solid #fff; color:#00a2ca; float:left;}
+.jl_list .list_item_title > i{ float:left; line-height:20px; font-size:18px; cursor:pointer; width:20px;}
+.jl_list .list_item_title > i.checkbox{ font-size:14px;}
+.jl_list .list_item_title .jl_btn{ padding:0 8px !important; font-size:12px !important; height:20px !important; line-height:18px !important;}
+
+/***
+jl_list_01/李龙威
+***/
+.jl_list_01{ width:100%; float:left;}
+.jl_list_01 > .list_item_main{ float:left; width:100%;}
+.jl_list_01 > .list_item_main > dl{ width:100%; margin-top:5px; padding:0px 10px 0 30px; border:1px solid #00a2ca; transition:background 0.2s;}
+.jl_list_01 > .list_item_main > dl.xuan{ background:#f7fcfd;}
+.jl_list_01 > .list_item_main > dl:hover{ background:#f7fcfd; }
+.jl_list_01 > .list_item_main > dl > dt{ position:absolute; left:0px; top:0px; width:20px; background:#00a2ca;}
+.jl_list_01 > .list_item_main > dl > dt > i{ margin-left:3px; color:#fff;}
+.jl_list_01 > .list_item_main > dl > dd{ padding-right:10px;}
+.jl_list_01 > .list_item_main > dl > dd.jl_list_btn{}
+.jl_list_01 > .list_item_main > dl > dd > ul{ float:left; width:100%; margin-top:5px;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li{ float:left; width:100%;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > h3{ margin:0 20px 0 0;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > img{ width:80%;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > span{ margin:0 20px 0 0; line-height:30px; color:#666; float:left;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > span > i{ margin-left:10px; color:#00a2ca; cursor:pointer;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > span:hover > .dropdown_menu{ display:block;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > b{ margin:0 20px 0 0; color:#666; line-height:30px;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > input{ margin:0 10px 0 0;}
+.jl_list_01 > .list_item_main > dl > dd > ul > li > i{ font-size:20px;}
+.jl_list_01 > .list_item_main > dl > dd.more{ border-top:1px dotted #e4e4e4; padding-bottom:5px;}
+
+.jl_list_02 > dl{ padding:8px 10px !important;}
+.jl_list_02 > dl:hover{ background:#f5f5f5 !important;}
+.jl_list_02 > dl > dt > i{ color:#333;}
+.jl_list_02 > dl > dd > span{ border-right:1px solid #ccc; padding-right:10px;}
+.jl_list_02 > dl > dd > span:last-child{ border:0px;}
+.oa_urgent{ border:1px solid #f4645f;}
+
+.jl_list_03{ width:100%; float:left;}
+.jl_list_03 > .list_item_main{ float:left; width:100%;}
+.jl_list_03 > .list_item_main > dl{ width:100%; float:left; padding:3px 10px 3px 30px; border-bottom:1px solid #e4e4e4;}
+.jl_list_03 > .list_item_main > dl:nth-child(even){ background:#fff;}
+.jl_list_03 .xuan{ background:#c2efff !important; color:#00a2ca;}
+.jl_list_03 > .list_item_main > dl:hover{ cursor:pointer; background:#c2efff !important; color:#00a2ca;}
+.jl_list_03 > .list_item_main > dl > dt{ position:absolute; left:10px; top:10px;}
+.jl_list_03 > .list_item_main > dl > dt > i{ font-size:16px;}
+.jl_list_03 > .list_item_main > dl > dd{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-right:20px;}
+.jl_list_03 > .list_item_main > dl > dd > ul{ float:left; width:100%;}
+.jl_list_03 > .list_item_main > dl > dd > ul > li{ float:left; min-height:1px; width:100%;}
+.jl_list_03 > .list_item_main > dl > dd > ul > li > a{ margin-right:8px; cursor:pointer; color:#00a2ca; line-height:30px;}
+.jl_list_03 > .list_item_main > dl > dd > ul > li > span{ margin:0 20px 0 0; line-height:30px; color:#666; float:left;}
+.jl_list_03 > .list_item_main > dl > dd > ul > li > span > i{ margin-left:10px; color:#00a2ca;}
+.jl_list_03 > .list_item_main > dl > dd > ul > li > b{ margin:0 20px 0 0; color:#666; line-height:30px;}
+.jl_list_03 > .list_item_main > dl > dd > ul > li > span:hover > .dropdown_menu{ display:block;}
+.jl_list_03 > .list_item_main > dl:hover > dd{ color:#00a2ca;}
+.jl_list_03 > .list_item_main > dl > dd.more{ border-top:1px dotted #e4e4e4; margin-top:5px; padding-top:5px;}
+.jl_list_03_bgwhite > .list_item_main > dl:nth-child(even){ background:inherit;}
+
+
+.jl_list_04{ width:100%; float:left;}
+.jl_list_04 > dl{ margin-top:10px; padding:5px;}
+.jl_list_04 > dl > dt{ width:100%; font-size:18px; margin-bottom:10px;}
+.jl_list_04 > dl > dd{ width:100%; padding-left:20px; color:#666;}
+.jl_list_04 > dl > dd >.jl_input_checkbox{ width:100%;}
+.jl_list_04 > dl > dd >.jl_input_radio{ width:100%;}
+
+.jl_list_05{ float:left; width:100%; position:relative; color:#000;}
+.jl_list_05 > div > dl.xuan{ color: inherit !important; background: inherit !important; cursor: inherit !important;}
+.jl_list_05 > div > dl:hover{ color: inherit !important; background: inherit !important; cursor: inherit !important;}
+.jl_list_05 > div > dl > dd > ul > li .img_main{border:0px}
+.jl_list_05 > div > dl > dd > ul > li > span.ellipsis{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;}
+.jl_list_05 > div > dl > dd > ul > li > span.textarea{margin-top: 6px;line-height: inherit;width: 100%; word-wrap: break-word;white-space: normal;}
+
+.scrolBar_main{ float:left; width:100%; overflow:hidden;}
+
+/* .jl_list_05 > div > dl{ width:100%;}
+.jl_list_05 > div > dl > dd{ padding:0px;}
+.jl_list_05 > div > dl > dd > ul{ width:100%;}
+.jl_list_05 > div > dl > dd > ul > li{ width:100%; text-align:right; line-height:30px; color:#666; padding:0px 0px 10px 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.jl_list_05 > div > dl > dd.p0 > ul > li{ padding:0;}
+.jl_list_05 > div > dl > dd.ellipsis > ul > li > span{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;} */
+
+ul.pro_list li{ margin-top:15px; border:1px solid #fff; width:182px; overflow:hidden}
+ul.pro_list li:hover{ border:1px solid #e9e9e9; box-shadow:0 0 5px #eee; cursor:pointer;}
+ul.pro_list li .pro_img{overflow:hidden;width:100%; position:relative}
+ul.pro_list li .pro_img > a{ float:left; width:100%;}
+ul.pro_list li .pro_img img{ height:140px;}
+ul.pro_list li .pro_img > .control{width:100%; height:34px;padding:3px 0; position:absolute; left:0; bottom:0; background-color:rgba(0,0,0,0.6); z-index:100}
+ul.pro_list li .pro_img > .control > a{float:left;height:28px;line-height:25px;padding:0 10px;min-width:26px;text-align:center;margin-right:10px;border:1px solid #e1e1e1;background:#fff;font-size:14px;color:#00a2ca}
+ul.pro_list li .pro_pic{color:#e84d1c; font-size:20px; font-weight:bold;}
+ul.pro_list li .pro_pic i{ font-size:18px; margin-right:5px;}
+ul.pro_list li .pro_name{ height:35px; overflow:hidden; margin:8px 0;}
+ul.pro_list li .pro_name a:hover{ color:#e84d1c; text-decoration:underline;}
+ul.pro_list li .pro_rew{ color:#999;}
+ul.pro_list li .pro_rew em{ color:#005aa0; font-weight:700;}
+ul.pro_list_img li{ padding:10px;}
+ul.pro_list_text li{ padding:10px;}
+ul.pro_list_text li .pro_img img{ margin:0; height:100%;}
+ul.pro_list_text li .pro_name{ margin:0px;}
+
+
+.jl_list_06{}
+.jl_list_06 > dl{border-bottom:1px solid #e4e4e4;}
+.jl_list_06 > dl > dt{position:absolute; left:10px; top:20px;}
+.jl_list_06 > dl > dd{ padding:20px 0;}
+.jl_list_06 > dl > .more_show > .more{ position:absolute; width:600px; min-height:350px; background:#fff; z-index:1; left:250px; border:3px solid #00a2ca; top:5px; border-radius:3px; padding:0px 20px;}
+.jl_list_06 > dl > .more_show > .more:before{ position:absolute; top:8px; left:-14px; display:inline-block !important; border-top:14px solid transparent; border-right:14px solid #00a2ca; border-bottom:13px solid transparent; border-right-color:#00a2ca; content:'';}
+.jl_list_06 > dl > .more_show > .more:after { position:absolute; top:11px; left:-10px; display:inline-block !important; border-top:11px solid transparent; border-right:11px solid #fff; border-bottom:11px solid transparent; content:'';}
+.jl_list_06 > dl > .more_show > .more .more_title{ border-bottom:1px solid #e4e4e4; padding:10px 0;}
+.jl_list_06 > dl > .more_show > .more .more_body{ padding:5px 0 10px; border-bottom:1px solid #e4e4e4;}
+.jl_list_06 > dl > .more_show > .more .more_body span{ margin-top:5px;}
+.jl_list_06 > dl > .more_show > .more .more_list_case{ border-bottom:1px solid #e4e4e4; padding:10px 0;}

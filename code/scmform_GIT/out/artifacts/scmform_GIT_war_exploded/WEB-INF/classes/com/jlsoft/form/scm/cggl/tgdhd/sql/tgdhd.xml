@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TGDHD">
+  <select id="TGDBHT" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT A.GHHT01 SHGHHT01, A.SHCGBM01 SHBM01, A.FHGYS01 SHGYS01, A.SHGS01 DHFGS01,
+             (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.SHGS01) DHFGSMC,A.SHCK01,
+             (SELECT CK02 FROM CK WHERE CK01=A.SHCK01) SHCKMC, A.GHHT24 SHHZFS01, A.FHCK01 CK01,
+             A.FHXSBM01
+      FROM DBHT A
+      WHERE A.DBHT10 IS NOT NULL
+      <if test="GSXX01 != null and GSXX01 != ''">
+        AND A.FHGS01=#{GSXX01}
+      </if>
+  </select>
+  
+  <!-- 查找指定供应商(指定协议)、部门下的商品(含进价)填充采购订货单商品列表 -->
+  <select id="SPLB" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT A.SPXX01, A.SPXX02 SPBM, A.SPFL02,A.SPXX04 SPMC, A.GGB01 SPGG, A.JLDW01 JLDW,
+             <if test="HZFS!=null and HZFS!=''">
+             #{HZFS} HZFS ,
+             </if>
+             B.SPJG01 HSJJ
+      FROM SPXX A, SPJGB B
+      WHERE A.SPXX01 = B.SPXX01
+        AND A.SPXX17 = 1
+        AND B.SPJG14 = 1
+      <if test="SPFL != null and SPFL != '' ">
+         AND ( A.SPFL01 LIKE '%'|| #{SPFL} ||'%' OR  A.SPFL02 LIKE '%'|| #{SPFL} ||'%')
+      </if>
+         AND B.WLDW01 = #{WLDW01}
+         AND B.BM01 = #{BM01}
+      <if test="SPXX01 != null and SPXX01 != 0">
+         AND A.SPXX01 = #{SPXX01}
+      </if>
+      <if test="SPBM != null and SPBM != ''">
+         AND A.SPXX02 = #{SPBM}
+      </if>
+      <if test="SPMC != null and SPMC != ''">
+         AND (A.SPXX02 LIKE '%'||#{SPMC}||'%' OR A.SPXX04 LIKE '%'||#{SPMC}||'%' OR A.GGB01 LIKE '%'||#{SPMC}||'%' OR A.SPPYM LIKE '%'||#{SPMC}||'%')
+      </if>
+      JL{CZY|B.WLDW01|WLDW_CZ|inS}JL
+      JL{CZY|B.BM01|BM_CZ|LIKE%}JL
+  </select>
+  
+  <!-- 末级仓库（按可操作仓库权限过滤） -->
+  <select id="MJCK" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.CK01, A.CK02 CKMC, A.CK01 key, A.CK02 value, A.GSXX01, B.GSXX02 GSMC, A.CK03 CKJB,
+           A.CK04 MJBJ, GET_BOOL(A.CK04) MJBJMC,
+           A.CK05 ZDCKBJ, GET_BOOL(A.CK05) ZDCKBJMC,
+           A.CK06 CJCKBJ, GET_BOOL(A.CK06) CJCKBJMC,
+           A.CK09 CKSX, GET_CKSX(A.CK09) CKSXMC
+      FROM CK A, GSXX B
+     WHERE A.CK04 = 1
+     AND A.CK09=0
+       AND A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND A.CK01 = #{CK01}
+       </if>
+       <if test="CKMC != null and CKMC != ''">
+       AND (A.CK02 LIKE '%'||#{CKMC}||'%'  or A.CK01 LIKE '%'||#{CKMC}||'%')
+       </if>
+       <if test="CKJB != null">
+       AND A.CK03 = #{CKJB}
+       </if>
+       <if test="ZDCKBJ != null">
+       AND A.CK05 = #{ZDCKBJ}
+       </if>
+       AND A.CK06 = 0
+       <if test="CKSX != null">
+       AND A.CK09 = #{CKSX}
+       </if>
+       <if test="DHFGS01 != null and DHFGS01 != ''">
+       AND A.GSXX01 = #{DHFGS01}
+       </if>
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+</mapper>

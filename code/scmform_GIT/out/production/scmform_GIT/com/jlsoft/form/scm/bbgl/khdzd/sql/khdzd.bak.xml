@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KHDZD">
+	<select id="queryKHDZD" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT TO_CHAR(A.SKRQ ,'YYYY-MM-DD') SKRQ,
+       DJLX,
+       DJBH,
+       SKJE,
+       DJZJE,
+       SPID,
+       SPXX,
+       (SELECT SPDZ01
+          FROM SPDZ
+         WHERE SPXX01 = (SELECT SPXX01 FROM SPXX WHERE SPXX02 = A.SPID)
+           AND SXDW01 = A.WLDW01) SPDZ01,
+       SPDJ,
+       SPSL,
+       (SPDJ* SPSL) XSJE,
+       JLDW,
+       SPFL,
+       YSZJ,
+       YSJS,
+       YSYE,
+       YUSZJ,
+       YUSJS,
+       YUSYE,
+       YFZJ,
+       YFJS,
+       YFYE,
+       FLZJ,
+       FLJS,
+       FLYE,
+       WBSKJE,
+       WBDJZJE,
+       WBYSZJ,
+       WBYSJS,
+       WBYSYE,
+       WBYUSZJ,
+       WBYUSJS,
+       WBYUSYE,
+       WBYFZJ,
+       WBYFJS,
+       WBYFYE,
+       SKFS,
+       A.GSXX01,
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSXX02,
+       A.BM01,
+       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM02,
+       A.WLDW01,
+       FLFS02,
+       YHDW,
+       BZ,
+       TO_CHAR(XSRQ ,'YYYY-MM-DD') XSRQ,
+       CWRQ,
+       BJJE,
+       YFFLZJ,
+       YFFLJS,
+       XH,
+       B.KHXS10 FLJS,
+       B.KHXS09 FLZJ,
+       B.KHXS11  FLYES,
+       (select  B.KHXS05  from  KHXSR B where B.WLDW01=A.WLDW01 AND BM01 = A.BM01 and A.WLDW01 = WLDW01 and A.SKRQ = B.KHXS01 and A.GSXX01 = B.GSXX01 ) YFYES ,
+        B.KHXS30 YSJSS,
+           b.KHXS29 YSZJS
+  FROM VIEW_KHDZD A, WLDW W, KHXSR B
+ WHERE 1 = 1
+   AND A.WLDW01 = W.WLDW01
+   AND A.BM01 = B.BM01
+   AND A.WLDW01 = B.WLDW01
+   AND A.SKRQ = B.KHXS01
+   AND A.GSXX01 = B.GSXX01
+  <if test="KH != null and KH !=''">
+	   		 AND (A.WLDW01 LIKE '%'||#{KH}||'%' OR W.WlDW02  LIKE '%'||#{KH}||'%' OR
+       W.WLDW19 LIKE '%'||#{KH}||'%')
+       </if>
+        <if test="SKRQ_S != null and SKRQ_S !=''">
+ <![CDATA[
+   AND SKRQ >= TO_DATE(#{SKRQ_S}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+    <if test="SKRQ_E != null and SKRQ_E !=''">
+    <![CDATA[
+   AND SKRQ <= TO_DATE(#{SKRQ_E}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+      <if test="XSRQ_S != null and XSRQ_S !=''">
+ <![CDATA[
+   AND XSRQ >= TO_DATE(#{XSRQ_S}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+    <if test="XSRQ_E != null and XSRQ_E !=''">
+    <![CDATA[
+   AND XSRQ <= TO_DATE(#{XSRQ_E}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+ ORDER BY SKRQ, TIME01, DJBH
+
+  </select>
+</mapper>

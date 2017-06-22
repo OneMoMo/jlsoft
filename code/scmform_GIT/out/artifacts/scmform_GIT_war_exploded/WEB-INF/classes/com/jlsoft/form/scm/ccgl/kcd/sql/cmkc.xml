@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CMKC">
+	<select id="queryCMKC" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.JQM01 CM01,
+		A.GSXX01,
+		a.SPXX02 SPBM,
+		a.SPXX04 SPMC,
+		DECODE(A.JQMK01, 0, '入库', 1, '出库', 2, '转仓出库') CMZT,
+		A.CK01 CKBM,
+		a.CK02 CKMC,
+		A.SPSX,
+		A.JQMK08 PCH,
+		A.KHDM,
+		A.KHMC,
+		A.WLDW01 WLDWBM,
+		a.WLDW02 WLDWMC,
+		A.BM01 CGBMBM,
+		a.BM02 CGBMMC,
+		TO_CHAR(A.JQMK05, 'YYYY-MM-DD') CZRQ,
+		get_djlx(A.JQMK06) DJLX,
+		get_jlwbdh(A.JQMK06, A.JQMK07, A.GSXX01) DJHM,
+		a.SPXX01,
+		a.SPFL01,
+		a.SPFL02 SPFL,
+		a.PPB01,
+		a.PPB02 SPPPMC,
+		TO_CHAR(A.JQMK05,'YYYY-MM-DD') CZRQ,
+		A.KHDM,
+		A.KHMC,
+		<!-- 拼接三个字段 -->
+		concat(concat(concat('1111',get_jlwbdh(A.JQMK06, A.JQMK07,
+		A.GSXX01)),TO_CHAR(A.JQMK05, 'YYYY/MM/DDhh:mm:ss')),A.JQM01) DHSJTM
+		<!--  -->
+		from (select A.JQM01, 
+               A.GSXX01, 
+               S.SPXX02, 
+               S.SPXX04, 
+               A.JQMK01, 
+               A.CK01, 
+               C.CK02, 
+               get_spsx_v10(NVL(A.CGXY02, -99)) SPSX, 
+               A.JQMK08, 
+               A.WLDW01, 
+               W.WLDW02, 
+               A.BM01, 
+               B.BM02, 
+               A.JQMK05, 
+               A.JQMK06, 
+               A.JQMK07, 
+               S.SPXX01, 
+               S.SPFL01, 
+               S.SPFL02, 
+               S.PPB01, 
+               S.PPB02,
+               NULL KHDM,
+               NULL KHMC 
+          from JQMKC A, SPXX S, CK C, WLDW W, BM B 
+         WHERE A.SPXX01 = S.SPXX01 
+           AND A.CK01 = C.CK01 
+           AND A.WLDW01 = W.WLDW01 
+           AND A.BM01 = B.BM01 
+        union all 
+        select A.JQM01, 
+               A.GSXX01, 
+               S.SPXX02, 
+               S.SPXX04, 
+               A.JQMK01, 
+               A.CK01, 
+               C.CK02, 
+           get_spsx_v10(NVL(A.CGXY02, -99)) SPSX,
+               A.JQMK08, 
+               A.WLDW01, 
+               W.WLDW02, 
+               A.BM01, 
+               B.BM02, 
+               A.JQMK05, 
+               A.JQMK06, 
+               A.JQMK07, 
+               S.SPXX01, 
+               S.SPFL01, 
+               S.SPFL02, 
+               S.PPB01, 
+               S.PPB02,
+               A.KHDM,
+               (SELECT WLDW02 FROM WLDW WHERE WLDW01=A.KHDM)KHMC 
+          from JQMCK A, SPXX S, CK C, WLDW W, BM B 
+         WHERE A.SPXX01 = S.SPXX01 
+           AND A.CK01 = C.CK01 
+           AND A.WLDW01 = W.WLDW01 
+           AND A.BM01 = B.BM01) A
+		WHERE 1=1
+		JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+		JL{CZY|A.KHDM|KH_CZ|inS}JL
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+		JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+
+		<if test="DJLX != null and DJLX != ''">
+			<foreach item="item" index="index" collection="DJLX" open=" AND ("
+				separator=" or " close=")">
+				A.JQMK06 = #{item}
+			</foreach>
+		</if>
+
+		<if test="DH != null and DH != ''">
+			AND GET_JLWBDH(A.JQMK06,A.JQMK07,A.GSXX01) like '%'||#{DH}||'%'
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			AND	(A.KHMC LIKE '%'||#{KHMC}||'%' OR A.KHDM LIKE '%'||#{KHMC}||'%')
+		</if>
+		<if test="FXDH != null and FXDH != ''">
+			AND GET_JLWBDH(A.JQMK06,A.JQMK07,A.GSXX01) LIKE '%'||#{FXDH}||'%'
+		</if>
+		<if test="SPMC != null and SPMC != ''">
+			<foreach item="item" index="index" collection="SPMC" open=" AND ("
+				separator=" or " close=")">
+				Upper(A.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(A.SPXX04) LIKE
+				Upper('%'||#{item}||'%')
+			</foreach>
+		</if>
+		<if test="CK01 != null and CK01 != ''">
+			<foreach item="item" index="index" collection="CK01" open=" AND ("
+				separator=" or " close=")">
+				A.CK01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="WLDW != null and WLDW != ''">
+			<foreach item="item" index="index" collection="WLDW" open=" AND ("
+				separator=" or " close=")">
+				A.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 LIKE '%'||#{item}||'%'
+			</foreach>
+		</if>
+
+		<if test="PP01 != null and PP01 != ''">
+			<foreach item="item" index="index" collection="PP01" open=" AND ("
+				separator=" or " close=")">
+				A.PPB01 = #{item}
+			</foreach>
+		</if>
+		<if test="SPFL != null and SPFL != ''">
+			<foreach item="item" index="index" collection="SPFL" open=" AND ("
+				separator=" or " close=")">
+				A.SPFL01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+
+		<if test="CGBM!= null and CGBM != ''">
+			<foreach item="item" index="index" collection="CGBM" open=" AND ("
+				separator=" or " close=")">
+				A.BM01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="CM!= null and CM != ''">
+			<foreach item="item" index="index" collection="CM" open=" AND ("
+				separator=" or " close=")">
+				A.JQM01 = #{item}
+			</foreach>
+		</if>
+		<if test="CMZT!= null and CMZT != ''">
+			<foreach item="item" index="index" collection="CMZT" open=" AND ("
+				separator=" or " close=")">
+				A.JQMK01 = #{item}
+			</foreach>
+		</if>
+		<if test="CZRQ_S !=null and CZRQ_S != ''">
+	       <![CDATA[AND A.JQMK05 >= TO_DATE(#{CZRQ_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="CZRQ_E !=null and CZRQ_E != ''">
+	       <![CDATA[AND A.JQMK05 <= TO_DATE(#{CZRQ_E}|| '23:59:59','YYYY-MM-DD HH24:MI:SS')]]>
+		</if>
+	</select>
+	<select id="queryCMKCMX" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT A.GSXX01,
+		A.JQM01 CM01,
+		S.SPXX02 SPBM,
+		S.SPXX04 SPMC,
+		TO_CHAR(A.JQMI04, 'YYYY-MM-DD') CZRQ,
+		A.JQMI05 CZRYMC,
+		get_djlx(A.JQMI01) DJLX,
+		get_jlwbdh(A.JQMI01, A.JQMI02,A.GSXX01) DJHM,
+		A.CK01 CKBM,
+		C.CK02 CKMC,
+		A.WLDW01 WLDWBM,
+		W.WLDW02 WLDWMC,
+		DECODE(A.JQMI03, 0, '入库', 1, '出库', 2, '转仓出库') CMZT,
+		A.BM01 CGBMBM,
+		B.BM02 CGBMMC,
+		get_spsx_v10(nvl(A.CGXY02, -99)) SPSX,
+		A.JQMI09 PCH,S.GGB01 JLDW
+		FROM JQMITEM A, SPXX S, CK C, WLDW W, BM B
+		WHERE A.SPXX01 = S.SPXX01
+		AND A.CK01 = C.CK01
+		AND A.WLDW01 = W.WLDW01
+		AND A.BM01 = B.BM01
+		JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+		JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="CM01 != null and CM01 != ''">
+			AND A.JQM01 = #{CM01}
+		</if>
+		<if test="DJMXH != null and DJMXH != ''">
+			AND get_jlwbdh(A.JQMI01, A.JQMI02,A.GSXX01)=#{DJMXH}
+		</if>
+		<if test="DJLXMX != null and DJLXMX != ''">
+			AND A.JQMI01=#{DJLXMX}
+		</if>
+		<if test="DJRQ_S !=null and DJRQ_S != ''">
+	       <![CDATA[AND A.JQMI04 >= TO_DATE(#{DJRQ_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="DJRQ_E !=null and DJRQ_E != ''">
+	       <![CDATA[AND A.JQMI04<= TO_DATE(#{DJRQ_E}|| '23:59:59','YYYY-MM-DD HH24:MI:SS')]]>
+		</if>
+	</select>
+</mapper>

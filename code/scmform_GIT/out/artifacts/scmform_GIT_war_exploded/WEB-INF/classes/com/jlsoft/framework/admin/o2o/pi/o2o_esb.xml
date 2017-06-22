@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="o2o.goods.query" description="O2O平台：查询商家套餐信息" concurrency="false" log="false">
+        <processor component="jsonToMapConvertor"/>
+        <processor component="mapMappingConvertor" configKey="o2o.goods.query"/>
+        <action component="o2o.goods" method="queryGoods" parameterType="java.util.Map"/>
+    </chain>
+
+    <chain id="o2o.order.process" description="O2O平台：订单处理" concurrency="false" log="false">
+        <processor component="jsonToMapConvertor"/>
+        <processor component="partMapMappingConvertor" configKey="o2o.order.process"/>
+        <action component="o2o.order" method="process" parameterType="java.util.Map"/>
+    </chain>
+	
+    <chain id="o2o.warehouse.save" description="O2O平台：仓库定义" concurrency="false" log="false">
+        <processor component="jsonToMapConvertor"/>
+        <router>
+            <if condition="action=='save'"> <!--新建 -->
+                <processor component="partMapMappingConvertor" configKey="o2o.warehouse.save"/>
+            </if>
+            <if condition="action=='update'"> <!--修改 -->
+                <processor component="partMapMappingConvertor" configKey="o2o.warehouse.save"/>
+                <processor component="partMapMappingConvertor" configKey="o2o.warehouse.update"/>
+            </if>
+        </router>
+        <action component="o2o.warehouse" method="save" parameterType="java.util.Map"/>
+    </chain>
+    
+    
+    
+</root>

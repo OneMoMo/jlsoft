@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SHDJ">
+	<!-- 按照客户信息查询打印单据  -->
+  <select id="PRINT_SHHYXX" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT B.FWDI01,A.LXR,A.LXDH,A.XXDZ,A.BZ,TO_CHAR(B.YYSJ,'yyyy-mm-dd') YYSJ,B.YSHSL,
+		       0 SMSKJE
+		  FROM CSS_FWD A,CSS_FWDITEM B
+		 WHERE A.FWD01 = B.FWD01 
+       <if test="FWDH != null and FWDH != ''">
+           AND A.FWD01 = #{FWDH}
+       </if>
+       <if test="FHCK != null and FHCK != ''">
+           AND B.CK01 = #{FHCK}
+       </if>
+       <if test="SHDZ != null and SHDZ != ''">
+           AND B.XXDZ LIKE '%'||#{SHDZ}||'%'
+       </if>
+  </select>
+  	<!-- 按照工单查询打印单据  -->
+  <select id="PRINT_SHGDXX" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT A.GD01,A.LXR KHMC,A.LXDH,A.XXDZ,B.BZ,A.SPXX01,S.SPXX02 SPBM,
+      	     S.SPXX04 SPMC,A.SHSL,A.CK01,A.YYSJ
+        FROM CSS_SHGD A,CSS_FWD B,SPXX S,CK C
+       WHERE A.FWD01 = B.FWD01
+         AND A.SPXX01 = S.SPXX01
+         AND A.CK01 = C.CK01
+       <if test="SHGD != null and SHGD != ''">
+         AND A.GD01 = #{SHGD}
+       </if>
+       <if test="FHCK != null and FHCK != ''">
+         AND A.CK01 = #{FHCK}
+       </if>
+       <if test="SHWD != null and SHWD != ''">
+         AND A.FWWD01 = #{SHWD}
+       </if>
+  </select>
+  	<!-- 查询工单日志 -->
+  <select id="GDRZ" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT GD01,CZXW,GDLX,FWWD01,TO_CHAR(ZCRQ, 'yyyy-mm-dd hh24:mi:ss') ZCRQ,ZCR,GDLC,
+             (SELECT FWWD02 FROM CSS_FWWD WHERE FWWD01 = CSS_GDRZ.FWWD01)FWWDMC
+        FROM CSS_GDRZ 
+       WHERE 1=1
+       <if test="GD01 == null or GD01 == ''">
+         AND GD01 is null
+       </if>  
+       <if test="GD01 != null and GD01 != ''">
+         AND GD01 = #{GD01}
+       </if>
+       <if test="GDLC != null and GDLC != ''">
+         AND GDLC = #{GDLC}
+       </if>
+       <if test="GDLX != null and GDLX != ''">
+         AND GDLX = #{GDLX}
+       </if>
+  </select>
+</mapper>

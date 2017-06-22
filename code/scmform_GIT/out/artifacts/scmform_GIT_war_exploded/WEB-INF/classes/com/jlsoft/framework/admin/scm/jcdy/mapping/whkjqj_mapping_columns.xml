@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<JLConfig id="momgo.whkjqj.scm.whkjqj">
+        <FIELD attrname="XZZT" fieldtype="string" allownull="N" name="当前账套" />
+        <FIELD attrname="CWND" fieldtype="string" allownull="N" name="财务年度" />
+		<Nested id="WHKJQJ">
+			<FIELD attrname="key" fieldtype="string" allownull="Y" name="会计期间" />
+            <FIELD attrname="value" fieldtype="string" allownull="Y" name="会计期间" />
+        </Nested>
+</JLConfig>
+
+</root>
+

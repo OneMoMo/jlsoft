@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="jl.scm.cxgl.khyhd.GetSPXX.getSPXX" description="金力查询客户优惠单" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.cxgl.khyhd.getspxx" method="getSPXX"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

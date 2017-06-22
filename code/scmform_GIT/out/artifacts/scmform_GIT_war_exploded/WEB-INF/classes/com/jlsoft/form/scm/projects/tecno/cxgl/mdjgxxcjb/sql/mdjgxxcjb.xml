@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MDJGXXCJB">
+	<!-- 查询SPXX关联SPJGB -->
+	<select id="SPXXX_SPJGB" parameterType="java.util.Map" resultType="java.util.Map">
+          SELECT D.SPXX01,D.SPBM,D.SPMC,D.PPB02,D.SPXH,
+		         CASE
+		           WHEN NVL(D.LSDJ, 0) = 0 THEN
+		            (SELECT E.SPJG05
+		               FROM SPJGB E
+		              WHERE E.SPXX01 = D.SPXX01
+		                AND E.GSXX01 = #{GSXX01}
+		                AND (E.SPJG03, E.SPXX01) IN
+		                    (SELECT MAX(SPJG03), F.SPXX01 FROM SPJGB F WHERE F.GSXX01 = #{GSXX01} GROUP BY F.SPXX01))
+		           ELSE
+		            D.LSDJ
+		         END LSDJ
+		    FROM (SELECT A.SPXX01,A.SPXX02 SPBM,A.SPXX04 SPMC,A.PPB02,A.GGB01 SPXH,
+		                 (SELECT B.XSJG01
+		                    FROM XSJGB B
+		                   WHERE B.GSXX01 = #{GSXX01}
+		                     AND B.XSBM01 = #{XS_BM01}
+		                   	 AND (B.XSJGWJ01, B.SPXX01) IN
+		                         (SELECT MAX(C.XSJGWJ01), C.SPXX01
+		                            FROM XSJGB C
+		                           WHERE C.SPXX01 = A.SPXX01
+		                             AND C.GSXX01 = #{GSXX01}
+		                             AND C.XSBM01 = #{XS_BM01}
+		                           GROUP BY C.SPXX01)
+		                     AND ROWNUM = 1) LSDJ
+		            FROM SPXX A
+         		   WHERE A.SPXX02 = #{SPBM} AND EXISTS (SELECT 1 FROM SPJGB WHERE SPXX01 = A.SPXX01 AND GSXX01 = #{GSXX01})) D
+	</select>
+	<!-- 查询人员是不是末级销售部门 -->
+	<select id="XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT BM02 XSBMMC FROM BM WHERE BM06 = 3 AND BM04 = 1 AND BM01 = #{XS_BM01}
+	</select>
+</mapper>

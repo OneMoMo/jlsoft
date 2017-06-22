@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <JLConfig id="bdjk.assemble">
+        <FIELD attrname="bdbh" fieldtype="string" allownull="N"/> <!--表单编号-->
+        <FIELD attrname="jlbh" fieldtype="int" allownull="N"/> <!--记录编号（新建时为0，否则传表单记录编号）-->
+        <FIELD attrname="GZL01" fieldtype="string" allownull="N"/> <!--工作流编号-->
+        <FIELD attrname="BZ01" fieldtype="string" allownull="N"/> <!--工作流步骤-->
+        <FIELD attrname="PI_USERNAME" fieldtype="string" allownull="N"/> <!--当前操作员-->
+        <FIELD attrname="lzry" fieldtype="string"/> <!--流转人员（指定到人）-->
+        <FIELD attrname="wldw01" fieldtype="string"/> <!--scm权限往来单位-->
+        <FIELD attrname="ck01" fieldtype="string"/> <!--scm权限仓库-->
+        <FIELD attrname="bm01" fieldtype="string"/> <!--scm权限部门-->
+        <FIELD attrname="qxczy01" fieldtype="string"/> <!--scm权限人员-->
+        <FIELD attrname="ssbm01" fieldtype="string"/> <!--权限扩展字段-->
+        <FIELD attrname="qx02" fieldtype="string"/> <!--权限扩展字段-->
+    </JLConfig>
+
+</root>

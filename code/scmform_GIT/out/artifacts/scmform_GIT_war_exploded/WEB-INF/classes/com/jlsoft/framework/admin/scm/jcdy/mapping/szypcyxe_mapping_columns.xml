@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO.SZYPCYXE.SCM.SZYPCYXE">   
+		<FIELD attrname="KHMC" fieldtype="string" allownull="N" name="客户" />  
+		<FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品" />  
+		<FIELD attrname="CYXE" fieldtype="string" allownull="N" name="出样限额" />  
+	</JLConfig>
+	
+</root>

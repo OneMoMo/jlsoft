@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="jl.scm.fxgl.fxd.GetSPJG.getSPJG" description="金力分销单商品查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fxgl.fxd.getspjg" method="getSPJG"/>
+        <processor component="logProcessor"/>
+    </chain>
+
+	<chain id="jl.scm.fxgl.fxd.GetSPJG_FXD.getSPJG" description="金力分销单商品查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fxgl.fxd.getspjg_fxd" method="getSPJG"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+    <chain id="jl.scm.fxgl.fxd.getFLBL.do" description="金力分销单商品查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fxgl.fxd.getspjg_fxd" method="getFLBL"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

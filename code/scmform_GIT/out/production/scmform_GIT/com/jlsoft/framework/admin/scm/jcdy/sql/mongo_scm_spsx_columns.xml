@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SPSX.SCM_SPSX">
+        <FIELD attrname="search" format='{"$or":[{"SPSX01":{"$regex":"#search#"}},{"SPSXMC":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="" />
+        <FIELD attrname="S_VALUE" fieldtype="String" allownull="Y" name="" />
+	</JLConfig>
+</root>
+ 

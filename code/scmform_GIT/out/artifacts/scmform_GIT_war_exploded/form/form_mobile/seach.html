@@ -1,0 +1,95 @@
+<header class="jl_header">
+<div class="header_nav nav_left" onclick="javascript:history.go(-1)">
+  <i class="fa fa-angle-left"></i>
+  <span>搜索</span>
+</div>
+</header>
+<div class="jl_main">
+<div class="w12 jl_seach">
+  <input class="w10" id="productSearch" type="search" placeholder="搜索控件">
+  <span class="w02 font_blue" onclick="commonQuery.query()">搜索</span>
+</div>
+<!--  <div class="jl_title">历史记录<i class="fa fa-angle-down"></i></div>-->
+<div class="w12 jl_form">
+ 
+</div>
+</div>
+
+<!--   <div class="jl_form_01 jl_banner1">
+    <ul>
+      <li>
+      <dl>
+        <dt class="w11">美的空调X-OIUWEIQ2</dt>
+        <dd class="w01 form_icon"><i class="fa fa-angle-down"></i></dd>
+        <dd class="w12 hide">
+        <div class="w12 jl_list">
+          <div class="jl_list_04">
+            <ul>
+            <li class="w06">
+              <dl>
+                <dt class="w05">仓库：</dt>
+                <dd class="w07"><span>直播仓</span></dd>   
+              </dl>
+            </li>
+            <li class="w06">
+              <dl>
+                <dt class="w05">采购：</dt>
+                <dd class="w07"><span>厨房电器</span></dd>   
+              </dl>
+            </li>
+            <li class="w12">
+              <dl>
+                <dt class="w03">供应商：</dt>
+                <dd class="w09"><span>芜湖美的厨房电器制造有限公司</span></dd>   
+              </dl>
+            </li>
+            </ul>
+            </div>
+            </div>
+        </dd>
+      </dl>
+      </li>
+      <li>
+      <dl>
+        <dt class="w11">美的</dt>
+        <dd class="w01 form_icon"></dd>
+      </dl>
+      </li>
+    </ul>
+  </div>-->
+  
+  
+<script>
+var userInfoCookie = $.cookie("userInfo");
+var userInfo = JSON.parse(userInfoCookie);
+
+/**$(".jl_banner1").load("commonQuery.html",function(){
+JLQuery["config"]["modalField"]={
+		"dataType":"Json",
+		"QryType":"Report",
+		"PAGESIZE" :"3",
+	    "PI_USERNAME": userInfo["PCRM_CZY02"],
+		"RYXX01":  userInfo["PCRM_CZY02"],  
+	    "SPXX04": "a"
+ }
+ 
+
+
+ JLQuery["config"]["sqlMap"]={
+    sqlid: "V9.Get_CKSP",
+    DataBaseType: "jhform",
+    page:"common.html",
+    result:[{"id":"SPXX04","name":"SPXX04",listener:{"click":function(data){
+    	
+    	
+    }}}]
+    
+
+  }
+
+commonQuery.setTab($(this));
+commonQuery.initForm();
+});**/
+
+</script>
+

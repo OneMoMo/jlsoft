@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>顾客搜索</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header class="seach_header">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<div class="header_seach">
+  <div class="jl_input">
+    <input placeholder="顾客手机号码检索(输入1非会员模式)" class="w12 radius3" id="Hy_ui_input_val">
+    <i class="fa fa-times-circle"></i>
+  </div>
+</div>
+<a class="seach_a" id="Hy_ui_btn_test">搜索</a>
+</div>
+</header>
+
+<div class="main" style="padding-top:2.5rem;">
+
+<div id="Hy_ui_001">
+<h3 class="seachPro_ls">历史搜索</h3>
+<div class="jl_list seachPro_list">
+  <div class="jl_list_case">
+    <b class="w12">张三 - 18571137522</b>
+    <span class="w12 mt5">湖北省武汉市江汉区新华路168号，福星国际商会大厦1610-1612</span>
+  </div>
+  <div class="jl_list_case">
+    <b class="w12">张三 - 18571137522</b>
+    <span class="w12 mt5">湖北省武汉市江汉区新华路168号，福星国际商会大厦1610-1612</span>
+  </div>
+  <div class="jl_list_case">
+    <b class="w12">王五 - 18571137524</b>
+    <span class="w12 mt5">湖北省武汉市江汉区新华路168号，福星国际商会大厦1610-1612</span>
+  </div>
+</div>
+<footer>
+<div class="w12 jl_btn">清除历史记录</div>
+</footer>
+</div>
+
+<div id="Hy_ui_002" class="hide">
+<h3 class="seachPro_ls">手机号并不是会员</h3>
+<div class="jl_list seachPro_list">
+  <div class="jl_list_case">  
+    <div class="jl_input">
+    <input placeholder="用户手机" value="13797196158" class="w12 radius3">
+    <i class="fa fa-times-circle"></i>
+    </div>
+  </div>
+  <div class="jl_list_case">  
+    <div class="jl_input">
+    <input placeholder="顾客姓名" class="w12 radius3">
+    <i class="fa fa-times-circle"></i>
+    </div>
+  </div>
+  <div class="jl_list_case">  
+    <textarea placeholder="详细地址" class="w12 radius3"></textarea>
+  </div>
+<footer>
+<div class="w12 jl_btn" onClick="window.location.href='selCoupons.html'">确定</div>
+</footer>
+</div>
+
+</div>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

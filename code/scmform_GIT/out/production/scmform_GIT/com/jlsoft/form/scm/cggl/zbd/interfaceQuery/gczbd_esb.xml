@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!-- 查询工厂直拨单明细报表 -->
+    <chain id="scm.cggl.zbd.cxgczbd" description="查询报表工厂直拨单" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCZBD" method="getGCZBDBB"/>
+        <processor component="logProcessor"/>
+    </chain>
+	
+</root>

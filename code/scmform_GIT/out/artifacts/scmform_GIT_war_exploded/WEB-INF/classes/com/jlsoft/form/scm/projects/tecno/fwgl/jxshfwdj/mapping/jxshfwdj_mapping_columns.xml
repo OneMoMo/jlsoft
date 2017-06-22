@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.fwgl.jxshfwdj">
+        <FIELD attrname="KHMC" allownull="N" name="客户名称"/>
+        <FIELD attrname="LXDH" allownull="N" name="联系电话"/>
+        <FIELD attrname="SPMC" allownull="N" name="商品名称"/>
+        <FIELD attrname="SPCM" allownull="N" name="商品串码"/>
+        <FIELD attrname="GZLX" allownull="N" name="故障类型"/>
+        <FIELD attrname="FWLX" allownull="N" name="服务类型"/>
+        <FIELD attrname="GZMS" allownull="N" name="故障描述"/>
+	</JLConfig>
+</root>

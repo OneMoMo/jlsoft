@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCDLD.GCZZCXDLD">
+		<FIELD attrname="PCRM_GSXX01" format='{"GSXX01":"#PCRM_GSXX01#"}' fieldtype="String" allownull="Y" />
+		<FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" />
+		<FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" />
+		<FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" />
+		<FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" />
+		<FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" />
+		<FIELD attrname="BZ02" format='{"BZ02":{"$regex":"#BZ02#"}}' fieldtype="String" allownull="Y" />
+		<FIELD attrname="RQQ" format='{"SHSJ":{"$gte":"#RQQ#"}}' fieldtype="String" allownull="Y" />
+       	<FIELD attrname="RQZ" format='{"SHSJ":{"$lte":"#RQZ# 23:59:59"}}' fieldtype="String" allownull="Y" />
+       	<FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商" />
+		<FIELD qx='WLDW01|WLDW_CX|in' />
+		<FIELD qx='XSBM01|BM_CX|LIKE%'/>
+	</JLConfig>
+</root>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SKFS">
+	<select id="SKFS" parameterType="Map" resultType="java.util.Map">
+	 SELECT DISTINCT A.SKFS01, A.SKFS02 SKFSMC, A.SKFS03, A.SKFS04,A.SKFS06 AS SKFS05, 
+	        A.SKFS16, C.WBBZ04 AS SKFS07 
+	   FROM SKFS A, QXSKFSITEM B,WBBZ C 
+	  WHERE A.SKFS03 = 1 AND A.SKFS01 = B.SKFS01 AND C.WBBZ01= A.WBBZ01 AND A.BBBZ01=C.BBBZ01
+	        AND A.SKFS05=1 
+	      <if test="BBBZ01 != NULL">AND C.BBBZ01 = #{BBBZ01}   </if> 
+	      <if test="QXXSFS01 != NULL"> AND B.QXSKFS01 = #{QXXSFS01}   </if>
+	      <if test="RYXX01 != NULL and RYXX01 != ''"> 
+	      		AND B.QXSKFS01 = (SELECT CZY05 FROM CZY WHERE RYXX01 = #{RYXX01})   
+	      </if>
+	      <if test="JEFS != NULL and JEFS != ''"> 
+	      		AND A.SKFS06 IN ${JEFS}
+	      </if>
+	      ORDER BY A.SKFS01
+	</select>
+	<select id="YHXX" parameterType="Map" resultType="java.util.Map">
+         SELECT YHXX01 KEY,YHXX02 VALUE 
+			   FROM YHXX
+			  WHERE  1=1
+			  And YHXX04 = 1
+	      <!-- <if test="YHMC != NULL">AND YHMC LIKE '%'||#{YHMC}||'%' </if>  --> 
+	</select>
+	
+	<select id="YHZHXX" parameterType="Map" resultType="java.util.Map">
+	     SELECT A.GSXX01, A.YHZH01, A.YHZH02, A.YHZH03, A.YHZH04, B.YHXX01, B.YHXX02
+          From YHZH A, YHXX B
+          WHERE A.YHXX01 = B.YHXX01
+          And A.YHZH05 = 1
+          And A.GSXX01 = #{GSXX01}
+         ORDER BY A.YHZH01
+	</select>
+	
+	<select id="WBBZ" parameterType="Map" resultType="java.util.Map">
+			 SELECT WBBZ01 key,WBBZ02 value
+			   FROM WBBZ
+			  WHERE  1=1
+	</select>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.hbhl">
+		 <Nested id="GSXX" allownull="N" name="公司信息">
+	        <FIELD attrname="key" fieldtype="String" allownull="N" name="公司信息" />
+            <FIELD attrname="value" fieldtype="String" allownull="N" name="公司信息" />
+       </Nested>
+       <Nested id="HBMC" allownull="N" name="外币">
+	        <FIELD attrname="key" fieldtype="String" allownull="N" name="外币" />
+            <FIELD attrname="value" fieldtype="String" allownull="N" name="外币" />
+       </Nested>
+       <FIELD attrname="HBBM" allownull="N" name="本币"/>
+       <FIELD attrname="HBHL" allownull="N" name="汇率"/>
+	</JLConfig>
+</root>

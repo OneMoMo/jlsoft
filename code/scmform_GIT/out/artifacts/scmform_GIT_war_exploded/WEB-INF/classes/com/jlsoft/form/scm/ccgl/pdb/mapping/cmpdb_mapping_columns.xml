@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.pdb.cmpdb">
+		<FIELD attrname="JHDH01" fieldtype="string" allownull="N" name="计划单号" />
+		<FIELD attrname="PDRMC" fieldtype="string" allownull="N" name="盘点人" />
+		<FIELD attrname="FHRMC" fieldtype="string" allownull="N" name="复核人" />
+		
+	</JLConfig>
+	
+</root>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPFL">
+
+  <!-- 查询商品分类表 -->
+  <select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.SPFL01, A.SPFL02 SPFLMC, A.SPFL03 SPFLJB,
+           A.SPFL04 MJBJ, GET_BOOL(A.SPFL04) MJBJMC,
+           A.SPF_SPFL01 SPFL_SPFL01,
+           (SELECT SPFL02 FROM SPFL WHERE SPFL01 = A.SPF_SPFL01) SPFL_SPFLMC,
+           (SELECT SPFL03 FROM SPFL WHERE SPFL01 = A.SPF_SPFL01) SPFL_SPFLJB
+      FROM SPFL A
+     WHERE 1=1 
+       <if test="SPFL01 != null">
+       AND A.SPFL01 = #{SPFL01}
+       </if>
+       <if test="SPDL != null and SPDL !=''">
+       AND A.DLBJ = #{SPDL}
+       </if>
+       <if test="SPFL03 != null">
+       AND A.SPFL03 = 1
+       </if>
+       <if test="SPFLMC != null and SPFLMC != ''">
+       AND A.SPFL02 LIKE '%'||#{SPFLMC}||'%'
+       </if>
+  </select> 
+  <!--树形商品分类 -->
+    <select id="SXSPFL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.SPFL01 SPFL01 , A.SPFL02 SPFLMC, A.SPFL03 JB,
+           A.SPFL04 MJBJ, GET_BOOL(A.SPFL04) MJBJMC,
+           A.SPF_SPFL01 PARENT,
+           (SELECT SPFL02 FROM SPFL WHERE SPFL01 = A.SPF_SPFL01) SPFL_SPFLMC,
+           (SELECT SPFL03 FROM SPFL WHERE SPFL01 = A.SPF_SPFL01) SPFL_SPFLJB
+      FROM SPFL A
+     WHERE 1=1 
+       <if test="SPFL01 != null">
+       AND A.SPFL01 = #{SPFL01}
+       </if>
+       <if test="SPDL != null and SPDL !=''">
+       AND A.DLBJ = #{SPDL}
+       </if>
+       <if test="SPFL03 != null">
+       AND A.SPFL03 = 1
+       </if>
+       <if test="SPFLMC != null and SPFLMC != ''">
+       AND A.SPFL02 LIKE '%'||#{SPFLMC}||'%'
+       </if>
+  </select> 
+</mapper>

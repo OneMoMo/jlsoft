@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.jk">
+		<!-- <FIELD attrname="JKLX01" fieldtype="string" allownull="N" name="接口类型" /> -->
+        <FIELD attrname="JKSJ04" fieldtype="string" allownull="N" name="模版名称" />
+      <!--   <FIELD attrname="JKSJ03" fieldtype="string" allownull="N" name="数据源" />   -->
+        <FIELD attrname="JKSJ06" fieldtype="string" allownull="N" name="起始时间戳" />  
+        <FIELD attrname="JKSJ05" fieldtype="string" allownull="N" name="查询范围字段" /> 
+	    <FIELD attrname="JKSJ08" fieldtype="string" allownull="N" name="查询范围表" /> 
+	    <FIELD attrname="JKSJ02" fieldtype="string" allownull="N" name="短信模版" /> 
+	    <FIELD attrname="JKSJ01" fieldtype="string" allownull="N" name="取数SQL" /> 
+	</JLConfig> 
+</root>

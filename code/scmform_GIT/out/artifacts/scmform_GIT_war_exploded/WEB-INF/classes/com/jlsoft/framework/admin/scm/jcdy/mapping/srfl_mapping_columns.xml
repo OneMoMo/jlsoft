@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.srfl">
+        <FIELD attrname="FLSRBM" allownull="N" name="收入返利编码"/>
+        <FIELD attrname="FLSRMC" allownull="N" name="收入返利名称"/>
+        <Nested id="SYSZ" allownull="N" name="使用设置">
+       </Nested> 
+	</JLConfig>
+</root>

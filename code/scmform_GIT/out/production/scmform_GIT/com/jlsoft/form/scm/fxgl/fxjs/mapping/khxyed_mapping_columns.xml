@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fxgl.fxjs.khxyedpd">
+	
+	<FIELD attrname="KH_WLDW01" fieldtype="string" allownull="N" name="客户编码" />
+	<FIELD attrname="KHMC" fieldtype="string" allownull="N" name="客户" />
+	<FIELD attrname="XS_BM01" fieldtype="string" allownull="N" name="销售部门编码" />
+	<FIELD attrname="XSBMMC" fieldtype="string" allownull="N" name="销售部门" />
+	<FIELD attrname="SXED" fieldtype="string" allownull="N" name="授信额度" />
+	<Nested id="SXLX">
+	<FIELD attrname="key" fieldtype="string" allownull="N" name="授信类型" />
+    <FIELD attrname="value" fieldtype="string" allownull="N" name="授信类型" />
+    </Nested>
+    <Nested id="SPLB" >
+            <FIELD attrname="WLDW01" fieldtype="String" allownull="N" name="客户编码" />
+            <FIELD attrname="WLDWMC" fieldtype="String" allownull="N" name="客户" />
+            <FIELD attrname="BM01" fieldtype="String" allownull="N" name="销售部门编码" />
+            <FIELD attrname="BMMC" fieldtype="String" allownull="N" name="销售部门" />
+    </Nested> 
+	</JLConfig>
+	
+	<JLConfig id="form.scm.fxgl.fxjs.khxyedp">
+	
+	<FIELD attrname="KH_WLDW01" fieldtype="string" allownull="N" name="客户编码" />
+	<FIELD attrname="KHMC" fieldtype="string" allownull="N" name="客户" />
+	<FIELD attrname="XS_BM01" fieldtype="string" allownull="N" name="销售部门编码" />
+	<FIELD attrname="XSBMMC" fieldtype="string" allownull="N" name="销售部门" />
+	<FIELD attrname="DQSJ" fieldtype="string" allownull="N" name="到期时间" />
+	<Nested id="SXLX">
+	<FIELD attrname="key" fieldtype="string" allownull="N" name="授信类型" />
+    <FIELD attrname="value" fieldtype="string" allownull="N" name="授信类型" />
+    </Nested>
+	 <Nested id="SPLB" >
+            <FIELD attrname="WLDW01" fieldtype="String" allownull="N" name="客户编码" />
+            <FIELD attrname="WLDWMC" fieldtype="String" allownull="N" name="客户" />
+            <FIELD attrname="BM01" fieldtype="String" allownull="N" name="销售部门编码" />
+            <FIELD attrname="BMMC" fieldtype="String" allownull="N" name="销售部门" />
+    </Nested> 
+	</JLConfig>
+</root>

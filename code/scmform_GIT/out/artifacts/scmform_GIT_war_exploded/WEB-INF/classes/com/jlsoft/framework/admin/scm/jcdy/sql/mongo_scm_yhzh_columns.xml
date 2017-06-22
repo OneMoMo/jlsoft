@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_YHZH.SCM_YHZH">
+	<FIELD attrname="search" format='{"$or":[{"YHZH":{"$regex":"#search#"}},{"YHZH02":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="银行账号" />  
+	<FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>

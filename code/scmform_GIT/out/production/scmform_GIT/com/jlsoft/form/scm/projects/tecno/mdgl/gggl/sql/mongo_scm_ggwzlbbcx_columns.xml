@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GGWZLBBCX.SCM_GGWZL">  
+  <!--   	<FIELD attrname="query" format='{"$or":[{"FLDM01":"#query#"},{"SJFLBH":{"$regex":"#query#"}},{"FLMC":{"$regex":"#query#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+ -->    	<!-- <FIELD attrname="SFKQ" fieldtype="string" allownull="Y" name="状态" /> -->
+  	     <FIELD attrname="GGWMC" format='{"GGWMC":{"$regex":"#GGWMC#"}}' fieldtype="String" allownull="Y" name="广告位名称" />
+  	         <FIELD attrname="YJFL" format='{"YJFL":{"$regex":"#YJFL#"}}' fieldtype="String" allownull="Y" name="一级经销商" />
+  	             <FIELD attrname="EJFL" format='{"EJFL":{"$regex":"#EJFL#"}}' fieldtype="String" allownull="Y" name="二级经销商" />
+  	              <FIELD attrname="ZLF" format='{"ZLF":{"$regex":"#ZLF#"}}' fieldtype="String" allownull="Y" name="租赁方" />
+  	             	          	</JLConfig>
+</root>      

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jmgl.ptsgl.sales">
+		<FIELD attrname="guiderid" fieldtype="string" allownull="N" name="导购员编码" />
+		<FIELD attrname="guidername" fieldtype="string" allownull="N" name="导购员名称" />
+		<FIELD attrname="shopid" fieldtype="string" allownull="N" name="加盟店编码" />
+		<FIELD attrname="distributorid" fieldtype="string" allownull="N" name="加盟商编号" />
+		<FIELD attrname="password" fieldtype="string" allownull="N" name="密码" />
+	</JLConfig>
+	<JLConfig id="MONGO_SALES.SCM_SALES">
+	 <FIELD attrname="DMMC" format='{"$or":[{"guiderid":{"$regex":"#DMMC#"}},{"guidername":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="人员" />
+	  <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	   <FIELD attrname="ZDR_RYXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>

@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SZPHB">
+  <!-- 按销售部门查历史数据 -->
+  <select id="PubZBQuery_SZPHB" parameterType="Map" resultType="java.util.Map">
+  <!-- 按销售部门汇总 -->
+  <if test="BMBJ == 0">
+  	<!--   Select 1 XH, A.BM01 CODE, TO_CHAR(B.BM02) Name, Sum(A.NUM) NUM, Sum(A.JSHJ) JSHJ,
+          Sum(A.SJHJ) SJHJ, Sum(A.JKHJ) JKHJ, 0 YS, 0 YJJE, 0 BZLJE, '1' YHMC,
+          Sum(YBSL) YBSL, Sum(YBJE) YBJE, Sum(YJHXSL) YJHXSL,
+          Sum(YJHXJE) YJHXJE,0 WJJE,'上级部门合计' HJBJ
+	  From V_SZPHB_SJBM A, BM B 
+	 Where A.BM01 = B.BM01
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	   <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 Group By A.BM01, B.BM02
+ UNION ALL   
+	Select 2 XH, Null CODE, '上级部门合计' Name, Null NUM, Null JSHJ, Null SJHJ,
+	        Null JKHJ, Null YS, Null YJJE, Null BZLJE, Null YHMC, Null YBSL,
+	        Null YBJE, Null YJHXSL, Null YJHXJE,0 WJJE,'上级部门合计' HJBJ
+	   From dual
+	  UNION ALL   -->
+	 Select 3 XH, A.BM01 CODE, TO_CHAR(B.BM02) Name, Sum(A.NUM) NUM, Sum(A.JSHJ) JSHJ,
+	        Sum(A.SJHJ) SJHJ, Sum(A.JKHJ) JKHJ, 0 YS, 0 YJJE, 0 BZLJE, Null YHMC,
+	        Sum(YBSL) YBSL, Sum(YBJE) YBJE, Sum(YJHXSL) YJHXSL,
+	        Sum(YJHXJE) YJHXJE,0 WJJE,'部门销售合计' HJBJ
+	  From V_SZPHB_BM A, BM B <!-- 按销售部门汇总 -->
+	 Where A.BM01 = B.BM01
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.BM01, B.BM02   
+	 UNION ALL   
+	  SELECT 4 XH, NULL CODE, '部门销售合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE,NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,0 WJJE  
+	         ,'部门销售合计' HJBJ
+	    FROM dual  
+	      UNION ALL
+	 SELECT 19 XH, A.YSCODE CODE, A.YSNAME NAME, NULL NUM, SUM(A.JSHJ) JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE
+	         ,'实收款合计' HJBJ  
+	 FROM V_SZPHB_YSKHJ A   <!-- 应收帐款 -->
+	 WHERE 1=1
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.YSCODE, A.YSNAME  
+	 UNION ALL     
+	 SELECT 14 XH, NULL CODE, '实收款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE 
+	         ,'实收款合计' HJBJ    
+	    FROM dual
+	   <!-- UNION ALL 
+	   SELECT 6 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(CASE WHEN A.SKFS06=10 THEN A.JFHJ ELSE A.JSHJ END) JSHJ,   
+	         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+	         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'实收款合计' HJBJ  
+	  FROM V_SZPHB_SKFS A   按收款方式汇总（非往来帐）
+	 WHERE 1=1
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC
+	  UNION ALL         
+	  SELECT 16 XH, NULL CODE, '实收款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE   
+	         ,'实收款合计' HJBJ   
+	    FROM dual -->  
+	     UNION ALL   
+	 <!--  SELECT 5 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE,NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,0 WJJE  
+	    FROM dual   
+	   UNION ALL    -->
+	    <!-- 按收款方式汇总（非往来帐） -->
+	 <!--   SELECT 6 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(CASE WHEN A.SKFS06=10 THEN A.JFHJ ELSE A.JSHJ END) JSHJ,   
+	         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+	         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'小计' HJBJ  
+	  FROM V_SZPHB_SKFS A  
+	 WHERE A.SKFS06 NOT IN (2,5,6,9,4,16,17,19)  
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC
+	
+	   UNION ALL -->
+	 SELECT 6 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(CASE WHEN A.SKFS06=10 THEN A.JFHJ ELSE A.JSHJ END) JSHJ,   
+	         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+	         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'收款合计' HJBJ  
+	  FROM V_SZPHB_SKFS A   <!-- 按收款方式汇总（非往来帐） -->
+	 WHERE A.SKFS06 NOT IN (2,5,6,9,4,16,17,19,27)  
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC    
+	 UNION ALL   
+	  <!-- 按收款方式汇总（非往来帐） -->
+<!--  	SELECT 7 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'小计' HJBJ 
+	  FROM V_SZPHB_SKFS A  
+	 WHERE A.SKFS06 =2  
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC 
+	  UNION ALL   
+	SELECT 8 XH, NULL CODE, '小计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE
+         ,'小计' HJBJ   
+    FROM dual 
+   UNION ALL   -->  
+    SELECT 9 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ, NULL SJHJ, NULL JKHJ,   
+         NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE 
+         ,'预收合计' HJBJ    
+	  FROM V_SZPHB_SKFS A   <!-- 按收款方式汇总（预收） -->
+	 WHERE ( (A.SKFS06 in (4,16,17,27) AND A.BJ=0) OR (A.BJ=1) )  
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC   
+	 UNION ALL   
+	SELECT 10 XH, NULL CODE, '预收合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+         NULL YS, NULL YJJE, NULL BZLJE,NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,NULL WJJE  
+         ,'预收合计' HJBJ 
+    FROM dual   
+   UNION ALL   
+    SELECT 11 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ, NULL SJHJ, NULL JKHJ,   
+         NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE  
+         ,'费用合计' HJBJ  
+	  FROM V_SZPHB_SKFS A   <!-- 按收款方式汇总（费用） -->
+	 WHERE A.SKFS06=19  
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC   
+	 UNION ALL   
+	SELECT 12 XH, NULL CODE, '费用合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,NULL WJJE   
+         ,'费用合计' HJBJ
+    FROM dual   
+	 UNION ALL   
+	SELECT 7 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'收款合计' HJBJ 
+	  FROM V_SZPHB_SKFS A   <!-- 按收款方式汇总（非往来帐） -->
+	 WHERE A.SKFS06 =2 
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if> 
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC 
+	 UNION ALL     
+	  SELECT 15 XH, NULL CODE, '收款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE  
+	         ,'收款合计' HJBJ   
+	    FROM dual   
+	  UNION ALL   
+	SELECT 16 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'赊款合计' HJBJ 
+	  FROM V_SZPHB_SKFS A   
+	 WHERE A.SKFS06 in (5,6)
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if> 
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC 
+	 UNION ALL     
+	  SELECT 17 XH, NULL CODE, '赊款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE  
+	         ,'赊款合计' HJBJ   
+	    FROM dual
+	    
+	    UNION ALL   
+	SELECT 18 XH, A.YSCODE CODE, A.YSNAME NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'应收合计' HJBJ 
+	  FROM V_SZPHB_SKFS A   
+	 WHERE A.SKFS06=9
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if> 
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.YSCODE, A.YSNAME,A.YHMC 
+	 UNION ALL     
+	  SELECT 19 XH, NULL CODE, '应收合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE  
+	         ,'应收合计' HJBJ   
+	    FROM dual 
+	     UNION ALL  
+	 SELECT 21 XH, A.QZ01 CODE, A.QZ02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ,  
+	         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE,0 BZLJE, NULL YHMC,  
+	         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE 
+	         ,'电子券合计' HJBJ     
+	  FROM V_SZPHB_LSD_QZ A  <!-- 计销售券种 -->
+	 WHERE 1=1  
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.QZ01, A.QZ02  
+	  UNION ALL  
+	  SELECT 22 XH, NULL CODE, '电子券合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE   
+	         , '电子券合计' HJBJ
+	    FROM dual
+    	UNION ALL  
+	  SELECT 27 XH, A.YHMC CODE, A.YHZH NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+	         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+	         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE 
+	         ,'银行卡合计' HJBJ
+	  FROM V_SZPHB_SKFS A   <!-- 按收款方式汇总（非往来帐） -->
+	 WHERE A.SKFS06  = 1  
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY <!-- A.SKFS01, A.SKFS02, -->A.YHMC,A.YHZH
+	 UNION ALL  
+	  SELECT 28 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'银行卡合计' HJBJ  
+	    FROM dual 
+	   <!-- UNION ALL  
+	  SELECT 24 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+	         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+	         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE 
+	         ,'票据合计' HJBJ 
+	  FROM V_SZPHB_SKFS A   
+	 WHERE A.SKFS06  =3  
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC
+	  UNION ALL  
+	  SELECT 25 XH, NULL CODE, '票据合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE   
+	    	 , '票据合计' HJBJ
+	    FROM dual  -->
+  </if>
+  <!-- 按采购部门查询 -->
+  <if test="BMBJ == 1">
+  	SELECT 3 XH,A.BM01 CODE,TO_CHAR(B.BM02) NAME,SUM(A.NUM) NUM,SUM(A.JSHJ) JSHJ,SUM(A.SJHJ) SJHJ,
+       	   SUM(A.JKHJ) JKHJ,0 YS,0 YJJE,0 BZLJE,NULL YHMC,SUM(YBSL) YBSL,SUM(YBJE) YBJE,SUM(YJHXSL) YJHXSL,
+       	   SUM(YJHXJE) YJHXJE,0 WJJE,'部门销售合计' HJBJ
+  	  FROM V_SZPHB_CGBM A, BM B 
+ 	 WHERE A.BM01 = B.BM01 
+ 	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+ 	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.BM01, B.BM02
+	UNION ALL
+	SELECT 4 XH,NULL CODE,'部门销售合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,
+       	   NULL BZLJE,NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'部门销售合计' HJBJ
+  	  FROM dual
+  	UNION ALL
+	SELECT 13 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'实收款合计' HJBJ
+  	  FROM V_SZPHB_YSKHJ A 
+  	 WHERE 1=1
+  	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+  	UNION ALL
+	SELECT 14 XH,NULL CODE,'实收款合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'实收款合计' HJBJ
+  	  FROM dual
+  	<!-- UNION ALL
+	SELECT 9 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,
+       	   SUM(A.YJJE) YJJE,SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,
+       	   NULL WJJE,'实收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A
+     WHERE ((A.SKFS06 in (4, 16, 17) AND A.BJ = 0) OR (A.BJ = 1))
+       
+     <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+     <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+  	UNION ALL
+	SELECT 16 XH,NULL CODE,'实收款合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'实收款合计' HJBJ
+  	  FROM dual 
+  UNION ALL
+	SELECT 19 XH,A.YSCODE CODE,A.YSNAME NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,SUM(A.JSHJ) YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'实收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 in (5, 6, 9)
+  	   
+  	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+  GROUP BY A.YSCODE, A.YSNAME-->
+  UNION ALL
+	SELECT 6 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(CASE WHEN A.SKFS06 = 10 THEN A.JFHJ ELSE A.JSHJ END) JSHJ,
+       	   NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,
+       	   NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 NOT IN (2, 5, 6, 9, 4, 16, 17, 19,27)
+  	   
+  	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	UNION ALL
+	SELECT 15 XH,NULL CODE,'收款合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'收款合计' HJBJ
+  	  FROM dual
+	UNION ALL 
+    SELECT 9 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ, NULL SJHJ, NULL JKHJ,   
+         NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE 
+         ,'预收合计' HJBJ    
+	  FROM V_SZPHB_SKFS A   <!-- 按收款方式汇总（预收） -->
+	 WHERE ( (A.SKFS06 in (4,16,17,27) AND A.BJ=0) OR (A.BJ=1) )  
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC   
+	 UNION ALL   
+	SELECT 10 XH, NULL CODE, '预收合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+         NULL YS, NULL YJJE, NULL BZLJE,NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE ,NULL WJJE  
+         ,'预收合计' HJBJ 
+    FROM dual
+	UNION ALL
+	SELECT 11 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'费用合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 = 19
+  	   
+  	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	UNION ALL
+	SELECT 12 XH,NULL CODE,'费用合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'费用合计' HJBJ
+  	  FROM dual
+  	  UNION ALL   
+	SELECT 16 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'赊款合计' HJBJ 
+	  FROM V_SZPHB_SKFS A   
+	 WHERE A.SKFS06 in (5,6)
+	   
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if> 
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.SKFS01, A.SKFS02,A.YHMC 
+	 UNION ALL     
+	  SELECT 17 XH, NULL CODE, '赊款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE  
+	         ,'赊款合计' HJBJ   
+	    FROM dual
+	    
+	    UNION ALL   
+	SELECT 18 XH, A.YSCODE CODE, A.YSNAME NAME, NULL NUM, SUM(A.JSHJ) JSHJ,   
+         NULL SJHJ, NULL JKHJ, NULL YS, SUM(A.YJJE) YJJE, SUM(A.BZLJE) BZLJE, A.YHMC, 
+         NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ)-SUM(A.YJJE) WJJE,'应收合计' HJBJ 
+	  FROM V_SZPHB_SKFS A   
+	 WHERE A.SKFS06=9
+	   
+	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if> 
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	 GROUP BY A.YSCODE, A.YSNAME,A.YHMC 
+	 UNION ALL     
+	  SELECT 19 XH, NULL CODE, '应收合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	         NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE  
+	         ,'应收合计' HJBJ   
+	    FROM dual 
+	UNION ALL
+	SELECT 21 XH,A.QZ01 CODE,A.QZ02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   0 BZLJE,NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'电子券合计' HJBJ
+  	  FROM V_SZPHB_LSD_QZ A 
+  	 WHERE A.BM01 is not null
+  	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+  	  <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.QZ01, A.QZ02
+	UNION ALL
+	SELECT 22 XH,NULL CODE,'电子券合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'电子券合计' HJBJ
+  	  FROM dual
+	UNION ALL
+	SELECT 27 XH,A.YHMC CODE,A.YHZH NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,
+       	   '银行卡合计' HJBJ
+  	  FROM V_SZPHB_SKFS A
+  	 WHERE A.SKFS06 = 1
+  	   
+  	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY <!-- A.SKFS01, A.SKFS02, --> A.YHMC,A.YHZH
+	UNION ALL  
+	SELECT 27 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	       NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'银行卡合计' HJBJ  
+	  FROM dual
+	<!-- UNION ALL
+	SELECT 24 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,
+       	   '票据合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 = 3
+  	   
+  	 <if test="GSXX01!=null and GSXX01!=''">
+	   AND A.GSXX01 LIKE '%'||#{GSXX01}||'%'
+	 </if>
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	UNION ALL
+	SELECT 25 XH,NULL CODE,'票据合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,NULL YHMC,
+       	   NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'票据合计' HJBJ
+  	  FROM dual -->
+	
+  </if>	 
+  </select>
+   <!-- 按销售部门查当天 -->
+  <select id="PubZBQuery_REALSZPHB" parameterType="Map" resultType="java.util.Map">
+	  SELECT 1 XH, A.BM01 CODE, TO_CHAR(B.BM02) NAME, COUNT(DISTINCT (A.REAL08 + A.REAL07 * 0.01)) NUM,  
+	          SUM(A.REAL04 + A.REAL06) JSHJ, SUM(A.SJ) SJHJ, SUM(A.REAL04 + A.REAL06 - A.SJ) JKHJ,  
+	          0 YS, 0 YJJE, 0 BZLJE, NULL YHMC, SUM(YBSL) YBSL, SUM(YBJE) YBJE,SUM(YJHXSL)YJHXSL,SUM(YJHXJE)YJHXJE  
+	     FROM V_SZPHB_REALXSSJ A, BM B   
+	    WHERE A.BM01 = B.BM01   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.BM01, B.BM02  
+	  UNION ALL  
+	   SELECT 2 XH, NULL CODE, '上级部门合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE,NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL  
+	   SELECT 3 XH, A.BM01 CODE, TO_CHAR(B.BM02) NAME, COUNT(DISTINCT (A.REAL08  + A.REAL07 * 0.01)) NUM,  
+	          SUM(A.REAL04 +  A.REAL06) JSHJ, sum(A.SJ) SJHJ, SUM(A.REAL04 +  A.REAL06 - A.SJ) JKHJ,  
+	          0 YS, 0 YJJE, 0 BZLJE, NULL YHMC, SUM(YBSL) YBSL, SUM(YBJE) YBJE,SUM(YJHXSL)YJHXSL,SUM(YJHXJE)YJHXJE  
+	     FROM V_SZPHB_REALXS A, BM B   
+	    WHERE A.BM01 = B.BM01   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.BM01, B.BM02  
+	  UNION ALL  
+	   SELECT 4 XH, NULL CODE, '部门销售合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL  
+	   SELECT 5 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual  
+	  UNION ALL  
+	   SELECT 6 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.REALS07) JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, SUM(A.REALS12) YJJE, SUM(A.REALS15) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND B.SKFS06 NOT IN (2,3,5,6,9,4,16,17,19)   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.SKFS01, A.SKFS02,A.YHMC  
+	  UNION ALL  
+	   SELECT 7 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.REALS07) JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, SUM(A.REALS12) YJJE, SUM(A.REALS15) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND B.SKFS06 = 2   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.SKFS01, A.SKFS02,A.YHMC  
+	  UNION ALL  
+	   SELECT 8 XH, NULL CODE, '小计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL 
+	   SELECT 9 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.REALS07) JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, SUM(A.REALS12) YJJE, SUM(A.REALS15) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND ( (B.SKFS06 IN (4,16,17) AND A.BJ=0) OR (A.BJ=1) )    
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.SKFS01, A.SKFS02,A.YHMC  
+	  UNION ALL  
+	   SELECT 10 XH, NULL CODE, '预收款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL 
+	   SELECT 11 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.REALS07) JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, SUM(A.REALS12) YJJE, SUM(A.REALS15) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND B.SKFS06=19   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.SKFS01, A.SKFS02,A.YHMC  
+	  UNION ALL  
+	   SELECT 12 XH, NULL CODE, '费用合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL 
+	   SELECT 13 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.REALS07) JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, SUM(A.REALS12) YJJE, SUM(A.REALS15) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND B.SKFS06 IN (5,6,9)   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.SKFS01, A.SKFS02,A.YHMC   
+	  UNION ALL   
+	   SELECT 14 XH, NULL CODE, '实收款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL  
+	   SELECT 15 XH, NULL CODE, '收款合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL  
+	   SELECT 16 XH, NULL CODE, '实收合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL  
+	   SELECT 17 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL  
+	   SELECT 18 XH, NULL CODE, '应收帐款' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM dual   
+	  UNION ALL  
+	   SELECT 19 XH, A.WLDW01 CODE, A.WLDW02 NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	          SUM(A.REALS07) YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND B.SKFS06 IN (5,6,9)   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.WLDW01, A.WLDW02  
+	  UNION ALL  
+	 SELECT 20 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	   FROM dual  
+	  UNION ALL  
+	 SELECT 21 XH, A.QZ01 CODE, A.QZ02 NAME, NULL NUM, SUM(A.LSQZ02) JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, SUM(A.LSQZ02) YJJE, 0 BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	   FROM V_SZPHB_REALSKFS_QZ A  
+	  WHERE 1=1  
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	   GROUP BY A.QZ01, A.QZ02  
+	 UNION ALL  
+	 SELECT 22 XH, NULL CODE, '电子券合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	   FROM dual  
+	  UNION ALL  
+	 SELECT 23 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	   FROM dual  
+	  UNION ALL  
+	   SELECT 24 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.REALS07) JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, SUM(A.REALS12) YJJE, SUM(A.REALS15) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND B.SKFS06 =3   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.SKFS01, A.SKFS02,A.YHMC  
+	  UNION ALL  
+	 SELECT 25 XH, NULL CODE, '票据合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	   FROM dual  
+	  UNION ALL  
+	 SELECT 26 XH, NULL CODE, NULL NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	   FROM dual  
+	  UNION ALL  
+	   SELECT 27 XH, A.SKFS01 CODE, A.SKFS02 NAME, NULL NUM, SUM(A.REALS07) JSHJ, NULL SJHJ, NULL JKHJ,  
+	          NULL YS, SUM(A.REALS12) YJJE, SUM(A.REALS15) BZLJE, A.YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	     FROM V_SZPHB_REALSKFS A, SKFS B  
+	    WHERE A.SKFS01 = B.SKFS01 AND B.SKFS06 = 1   
+	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null">AND A.SKY=#{SKY} </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+	  GROUP BY A.SKFS01, A.SKFS02,A.YHMC  
+	  UNION ALL  
+	 SELECT 28 XH, NULL CODE, '信用卡合计' NAME, NULL NUM, NULL JSHJ, NULL SJHJ, NULL JKHJ,  
+	        NULL YS, NULL YJJE, NULL BZLJE, NULL YHMC, NULL YBSL, NULL YBJE,NULL YJHXSL,NULL YJHXJE  
+	   FROM dual  
+  </select>
+  
+  <!-- 按采购部门查 -->
+  <select id="PubZBQuery_CGBMSZPHB" parameterType="Map" resultType="java.util.Map">
+	SELECT 3 XH,A.BM01 CODE,TO_CHAR(B.BM02) NAME,SUM(A.NUM) NUM,SUM(A.JSHJ) JSHJ,SUM(A.SJHJ) SJHJ,
+       	   SUM(A.JKHJ) JKHJ,0 YS,0 YJJE,0 BZLJE,NULL YHMC,SUM(YBSL) YBSL,SUM(YBJE) YBJE,SUM(YJHXSL) YJHXSL,
+       	   SUM(YJHXJE) YJHXJE,0 WJJE,'部门销售合计' HJBJ
+  	  FROM V_SZPHB_CGBM A, BM B 
+ 	 WHERE A.BM01 = B.BM01 
+ 	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.BM01, B.BM02
+	UNION ALL
+	SELECT 4 XH,NULL CODE,'部门销售合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,
+       	   NULL BZLJE,NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'部门销售合计' HJBJ
+  	  FROM dual
+	UNION ALL
+	SELECT 6 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(CASE WHEN A.SKFS06 = 10 THEN A.JFHJ ELSE A.JSHJ END) JSHJ,
+       	   NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,
+       	   NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 NOT IN (2, 5, 6, 9, 4, 16, 17, 19)
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	UNION ALL
+	SELECT 7 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,
+       	   SUM(A.YJJE) YJJE,SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,
+       	   SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 = 2
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	<!-- UNION ALL
+	SELECT 9 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,
+       	   SUM(A.YJJE) YJJE,SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,
+       	   NULL WJJE,'实收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A
+     WHERE ((A.SKFS06 in (4, 16, 17) AND A.BJ = 0) OR (A.BJ = 1))
+     <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC -->
+	UNION ALL
+	SELECT 10 XH,NULL CODE,'预收合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'预收合计' HJBJ
+  	  FROM dual
+	UNION ALL
+	SELECT 11 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'费用合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 = 19
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	UNION ALL
+	SELECT 12 XH,NULL CODE,'费用合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'费用合计' HJBJ
+  	  FROM dual
+	UNION ALL
+	SELECT 13 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'实收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 in (5, 6, 9)
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	UNION ALL
+	SELECT 14 XH,NULL CODE,'实收款合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'实收款合计' HJBJ
+  	  FROM dual
+	UNION ALL
+	SELECT 15 XH,NULL CODE,'收款合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'收款合计' HJBJ
+  	  FROM dual
+	<!-- UNION ALL
+	SELECT 16 XH,NULL CODE,'实收款合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'实收款合计' HJBJ
+  	  FROM dual 
+	UNION ALL
+	SELECT 19 XH,A.YSCODE CODE,A.YSNAME NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,SUM(A.JSHJ) YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'实收款合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 in (5, 6, 9)
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+  GROUP BY A.YSCODE, A.YSNAME-->
+	UNION ALL
+	SELECT 21 XH,A.QZ01 CODE,A.QZ02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   0 BZLJE,NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,'电子券合计' HJBJ
+  	  FROM V_SZPHB_LSD_QZ A 
+  	 WHERE 1=1
+  	  <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.QZ01, A.QZ02
+	UNION ALL
+	SELECT 22 XH,NULL CODE,'电子券合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,
+       	   NULL YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'电子券合计' HJBJ
+  	  FROM dual
+	UNION ALL
+	SELECT 24 XH,A.SKFS01 CODE,A.SKFS02 NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,
+       	   '票据合计' HJBJ
+  	  FROM V_SZPHB_SKFS A 
+  	 WHERE A.SKFS06 = 3
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY A.SKFS01, A.SKFS02, A.YHMC
+	UNION ALL
+	SELECT 25 XH,NULL CODE,'票据合计' NAME,NULL NUM,NULL JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,NULL YJJE,NULL BZLJE,NULL YHMC,
+       	   NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,NULL WJJE,'票据合计' HJBJ
+  	  FROM dual
+	UNION ALL
+	SELECT 27 XH,NULL CODE,NULL NAME,NULL NUM,SUM(A.JSHJ) JSHJ,NULL SJHJ,NULL JKHJ,NULL YS,SUM(A.YJJE) YJJE,
+       	   SUM(A.BZLJE) BZLJE,A.YHMC,NULL YBSL,NULL YBJE,NULL YJHXSL,NULL YJHXJE,SUM(A.JSHJ) - SUM(A.YJJE) WJJE,
+       	   '银行卡合计' HJBJ
+  	  FROM V_SZPHB_SKFS A
+  	 WHERE A.SKFS06 = 1
+  	 <if test="XSBM != null">
+	    <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="CXBM != null">
+	    <foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 like CONCAT(#{item},'%')
+	    </foreach> 
+	 </if>
+	 <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	 <if test="SKY!=null and SKY!=''">
+	 <foreach item="item" index="index" collection="SKY"  open=" AND (" separator=" or " close=")"> 
+	      A.SKY like CONCAT(#{item},'%')
+	 </foreach> 
+	 </if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     
+  GROUP BY <!-- A.SKFS01, A.SKFS02, --> A.YHMC
+	
+  </select>
+  
+  <select id="PubZBQuery_SKFS" parameterType="Map" resultType="java.util.Map">
+    SELECT SKFS01, SKFS02 FROM SKFS WHERE SKFS03 = 1
+  </select>
+  
+  <!-- 收款员汇总表:收款员  -->
+  <select id="PubZBQuery_SKYHZ" parameterType="Map" resultType="java.util.Map">
+	Select SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>) BM01, B.BM02,
+	       (Select S.SKFS02 From SKFS S Where S.SKFS01 = A.SKFS01) SKFS02,
+	       A.RYXX01, A.RYXX02, Sum(A.JYCS) JYCS, Sum(A.XSJE) XSJE,Sum(A.SSJE) SSJE
+	<if test="CXSJ==0">From VIEW_SKYHZ_REAL A, BM B</if>
+	<if test="CXSJ==1">From VIEW_SKYHZ A, BM B</if>
+	Where B.BM01 = SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>)
+	<if test="CXGS != null">
+   		<foreach item="item" index="index" collection="CXGS"  open=" AND (" separator=" or " close=")"> 
+     		 A.GSXX01 like CONCAT(#{item},'%')
+   		</foreach> 
+  	</if>
+    <if test="CXBM != null">
+  		<foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+     		A.BM01 like CONCAT(#{item},'%')
+   		</foreach> 
+    </if>
+    <if test="XSBM != null">
+  		<foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+     		SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>) like CONCAT(#{item},'%')
+   		</foreach> 
+    </if>
+    <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	<if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	<if test="SKY!=null">AND A.RYXX01=#{SKY} </if>
+	JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+	Group By SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>), B.BM02, A.SKFS01, A.RYXX01, A.RYXX02
+  </select>
+  
+  <!-- 收款员汇总表:部门 -->
+  <select id="PubZBQuery_SKYHZ_BM" parameterType="Map" resultType="java.util.Map">
+    Select SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>) BM01, B.BM02,
+	       (Select S.SKFS02 From SKFS S Where S.SKFS01 = A.SKFS01) SKFS02,
+	       Sum(A.JYCS) JYCS, Sum(A.XSJE) XSJE,Sum(A.SSJE) SSJE
+	<if test="CXSJ==0">From VIEW_SKYHZ_REAL A, BM B</if>
+	<if test="CXSJ==1">From VIEW_SKYHZ A, BM B</if>
+	Where B.BM01 = SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>)
+	<if test="CXGS != null">
+   		<foreach item="item" index="index" collection="CXGS"  open=" AND (" separator=" or " close=")"> 
+     		 A.GSXX01 like CONCAT(#{item},'%')
+   		</foreach> 
+  	</if>
+    <if test="CXBM != null">
+  		<foreach item="item" index="index" collection="CXBM"  open=" AND (" separator=" or " close=")"> 
+     		A.BM01 like CONCAT(#{item},'%')
+   		</foreach> 
+    </if>
+    <if test="XSBM != null">
+  		<foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+     		SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>) like CONCAT(#{item},'%')
+   		</foreach> 
+    </if>
+    <if test="XSRQ_S!=null"><![CDATA[ AND A.RQ >= TO_DATE(#{XSRQ_S},'YYYY-MM-DD')]]></if>
+	<if test="XSRQ_E!=null"><![CDATA[ AND A.RQ <= TO_DATE(#{XSRQ_E},'YYYY-MM-DD')]]></if>
+	<if test="SKY!=null"> AND A.RYXX01=#{SKY} </if>
+	Group By SUBSTR(A.BM01, 1, <if test="CXJB!=null">${CXJB}</if>), B.BM02, A.SKFS01
+  </select>
+ 
+</mapper>

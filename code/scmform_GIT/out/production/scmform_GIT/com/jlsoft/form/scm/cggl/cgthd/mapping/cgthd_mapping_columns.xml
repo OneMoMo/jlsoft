@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cggl.cgthd">
+        <FIELD attrname="GSXX01" fieldtype="String" allownull="N" name="公司编码" />
+        <FIELD attrname="WLDW01" fieldtype="String" allownull="N" name="供应商" />
+        <FIELD attrname="HZFS" fieldtype="int" allownull="N" name="合作方式" />
+        <FIELD attrname="GSXX01" fieldtype="String" allownull="N" name="退货单号" />
+        <FIELD attrname="GHHT01" fieldtype="String" allownull="N" name="采购合同号" />
+        <FIELD attrname="BM01" fieldtype="String" allownull="N" name="采购部门" />
+        <FIELD attrname="THYY" fieldtype="String" allownull="N" name="退货原因" />
+         <Nested id="SPLB" allownull="N" name="订单商品明细">
+            <FIELD attrname="THSL" fieldtype="double" allownull="N" name="退货数量" />
+            <FIELD attrname="HSTHDJ" fieldtype="double" allownull="N" name="含税退货单价" />
+        </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.cggl.cgthd_pcmx">
+ <!--         <Nested id="PCMX" allownull="N" name="批次明细">
+         <FIELD attrname="PCTHSL" fieldtype="double" allownull="N" name="批次退货数量" />
+         </Nested>  -->
+	</JLConfig>
+</root>

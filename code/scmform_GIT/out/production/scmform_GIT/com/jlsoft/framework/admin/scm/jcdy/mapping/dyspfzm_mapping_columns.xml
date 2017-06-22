@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.dyspfzmpd">
+		<Nested id="BMLX">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="编码类型" />
+    		<FIELD attrname="value" fieldtype="string" allownull="N" name="编码类型" />
+    	</Nested>
+		<FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品编码" />
+		<FIELD attrname="SPFZM" fieldtype="string" allownull="N" name="商品辅助码" />
+	</JLConfig> 
+	<JLConfig id="form.scm.jcdy.dyspfzmpp">
+		<Nested id="BMLX">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="编码类型" />
+    		<FIELD attrname="value" fieldtype="string" allownull="N" name="编码类型" />
+    	</Nested>
+		<FIELD attrname="SPBM" fieldtype="string" allownull="N" name="商品编码" />
+	</JLConfig> 		 
+</root>

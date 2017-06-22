@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_KHYHD.SCM_KHYHD">
+		<FIELD attrname="SPMC" format='{"$or":[{"SPMC":{"$regex":"#SPMC#"}},{"SPBM":{"$regex":"#SPMC#"}}]}' fieldtype="String" allownull="Y" name="商品名称" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>

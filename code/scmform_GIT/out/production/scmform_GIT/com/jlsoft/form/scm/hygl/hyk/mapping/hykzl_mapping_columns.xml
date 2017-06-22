@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.hygl.hykzl">
+		<FIELD attrname="HYKZL" fieldtype="string" allownull="N" name="会员卡种类" />
+	</JLConfig>
+</root>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FWD">
+	<!-- 按照客户信息查询打印单据  -->
+  <select id="FWDMX" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT A.FWD01,A.HYXX01,A.JLWBDH,A.LXR,A.LXDH,A.XXDZ SHDZ,A.BZ,B.DSBJ TZBJ,
+		       TO_CHAR(B.YYSJ,'YYYY-MM-DD')YYSJ,(SELECT LXMC FROM CSS_FWLX WHERE FWLX01 = C.FWLX01) FWLXMC,
+		       C.FWLX01,B.FWSD SHSJD,TO_CHAR(B.FWSJ,'YYYY-MM-DD') FWSJ,B.FFWSD FWSJD,S.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,B.SPSL SHSL,B.DJHM YWDH,
+		       B.CK01,(SELECT CK02 FROM CK WHERE CK01 = B.CK01) CKMC,GET_DJLX(B.DJLX)DJLX,
+	           (SELECT SUM(SHSL) from css_shgd where gsxx01 = b.gsxx01 and fwdi01 = b.fwdi01 and gdlc in ('PG','HZ')) YSHSL,B.SPSL,
+	           (SELECT SUM(FWSL) from css_fwgd where gsxx01 = b.gsxx01 and fwdi01 = b.fwdi01 and gdlc in ('PG','HZ')) YFWSL       
+		  FROM CSS_FWD A,CSS_FWDITEM B,CSS_FWDFWLX C,SPXX S 
+		 WHERE A.FWD01 = B.FWD01 
+		   AND B.FWDI01 = C.FWDI01 
+		   AND B.SPXX01 = S.SPXX01
+		   AND (A.QXBJ is null or A.QXBJ = 0)
+		AND <![CDATA[
+		(SELECT COUNT(1) FROM DSFHPSB D 
+                       WHERE D.DJLX=B.DJLX AND D.CZLX=1 
+                       AND B.DJTDH = D.WBTDH
+                       AND B.GSXX01 =D.GSXX01
+                       AND D.JLWBDH=A.JLWBDH AND  D.SSFSL <> 0)=0
+		 ]]>  
+	   <if test="FWDH != null and FWDH != ''">
+           AND A.JLWBDH = rtrim(ltrim(#{FWDH})) 
+       </if>
+       <if test="FWD01 != null and FWD01 != ''">
+           AND A.FWD01 = rtrim(ltrim(#{FWD01})) 
+       </if>
+       <if test="YWDH != null and YWDH != ''">
+           AND B.DJHM = rtrim(ltrim(#{YWDH})) 
+       </if>
+       <if test="JDRQ != null and JDRQ != ''">
+           AND A.ZDRQ = TO_DATE(#{JDRQ},'YYYY-MM-DD')
+       </if>
+       <if test="SHDZ != null and SHDZ != ''">
+           AND A.XXDZ LIKE '%'||rtrim(ltrim(#{SHDZ})) ||'%'
+       </if>
+       <if test="LXDH != null and LXDH != ''">
+           AND A.LXDH = rtrim(ltrim(#{LXDH}))
+       </if>
+       <if test="KHXM != null and KHXM != ''">
+           AND A.LXR = rtrim(ltrim(#{KHXM}))
+       </if>
+  </select>
+  <select id="HYXX" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT HYXX01,JXSBM,JXSMC,HYMC,LXR,
+        	   LXDH,XXDZ
+          FROM VIEW_HYXX_JXS
+          WHERE 1=1
+	   <if test="HYXX01 != null and HYXX01 != ''">
+           AND HYXX01 = #{HYXX01}
+       </if>
+       <if test="JXSBM != null and JXSBM != ''">
+           AND (JXSBM LIKE '%'||#{JXSBM}||'%' OR JXSMC LIKE '%'||#{JXSBM}||'%')
+       </if>
+       <if test="HYXX != null and HYXX != ''">
+           AND (HYXX01 LIKE '%'||#{HYXX}||'%' OR HYMC LIKE '%'||#{HYXX}||'%')
+       </if>
+       <if test="LXR != null and LXR != ''">
+           AND LXR LIKE '%'||#{LXR}||'%'
+       </if>
+       <if test="LXDH != null and LXDH != ''">
+           AND LXDH = #{LXDH}
+       </if>
+       <if test="SHDZ != null and SHDZ != ''">
+           AND A.XXDZ LIKE '%'||#{SHDZ}||'%'
+       </if>
+  </select>
+  <select id="FWD" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT DISTINCT A.JLWBDH,A.FWD01,A.LXR,A.LXDH,A.HYXX01,A.XXDZ,B.GSXX01 ,
+        	   (SELECT GSXX02 FROM GSXX WHERE GSXX01 = B.GSXX01)GSMC
+          FROM CSS_FWD A,CSS_FWDITEM B
+          WHERE A.FWD01 = B.FWD01
+            AND (A.QXBJ is null or A.QXBJ = 0)
+	   <if test="FWD01 != null and FWD01 != ''">
+           AND JLWBDH LIKE '%'||rtrim(ltrim(#{FWD01})) ||'%'
+       </if>
+       <if test="JDRQ != null and JDRQ != ''">
+           AND A.ZDRQ = TO_DATE(#{JDRQ},'YYYY-MM-DD')
+       </if>
+        <if test="LXDH != null and LXDH != ''">
+            AND A.LXDH = rtrim(ltrim(#{LXDH}))
+       </if>
+       <if test="KHXM != null and KHXM != ''">
+           AND A.LXR = rtrim(ltrim(#{KHXM}))
+       </if>
+       <if test="YWDH != null and YWDH != ''">
+           AND B.DJHM = rtrim(ltrim(#{YWDH}))
+       </if>
+       <if test="FWDH != null and FWDH != ''">
+           AND A.JLWBDH = rtrim(ltrim(#{FWDH}))
+       </if>
+       <if test="SHDZ != null and SHDZ != ''">
+           AND A.XXDZ LIKE '%'|| rtrim(ltrim(#{SHDZ}))||'%'
+       </if> 
+  </select>
+</mapper>

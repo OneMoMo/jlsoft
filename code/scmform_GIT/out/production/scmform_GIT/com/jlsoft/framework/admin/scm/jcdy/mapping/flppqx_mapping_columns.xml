@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.flppqx">
+		<FIELD attrname="QXMC" fieldtype="string" allownull="N" name="权限名称" />
+		<Nested id="GSXX">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="所属公司" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="所属公司" />
+        </Nested>
+		<Nested id="QXLX">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="权限类型" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="权限类型" />
+        </Nested>
+	</JLConfig>
+</root>

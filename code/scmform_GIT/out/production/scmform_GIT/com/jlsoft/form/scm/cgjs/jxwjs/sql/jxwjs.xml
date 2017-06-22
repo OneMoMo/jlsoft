@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JXWJS">
+	<select id="queryJXWJS" parameterType="Map" resultType="java.util.Map">
+	SELECT GET_JLWBDH_TD(A.JXSP02,A.JXSP01,A.GSXX01) DJHM, 
+     DECODE(A.JXSP02,1,'入库',3,'退货单',6,'变价') DJLX,
+       A.JXSP03 PCH, 
+       A.JXSP04 PCXH, 
+       A.JXSP05 DJSL, 
+       A.JXSP06 JSFKSL, 
+       (A.JXSP05 - A.JXSP06) WJSSL, 
+       round(A.JXSP07,2) WSDJ, 
+       round(A.JXSP08,2) HSDJ, 
+       A.JXSP16  JSSHSL, 
+       (A.JXSP05 - A.JXSP06 - A.JXSP16)   WJSDJSL, 
+       ROUND((A.JXSP05 * A.JXSP08),2) DJJE, 
+       TO_CHAR(A.JXSP12,'YYYY-MM-DD') DJRQ, 
+      TO_CHAR(A.JXSP13,'YYYY-MM-DD')  DZRQ, 
+       A.JXSP14 JSDJSL, 
+       A.JXSP17 BZ, 
+       A.JXSP15 SHDH, 
+       (A.JXSP05 - A.GYSFPGDSL01) WDFPSL, 
+       round(((A.JXSP05 - A.GYSFPGDSL01) * A.JXSP08),2) WDFPHSJE, 
+       round((A.JXSP08 * A.GYSFPGDSL01),2) FPHSJE, 
+       round((A.JXSP08 * (A.JXSP05 - A.JXSP06)),2) WJHSJE, 
+       A.GHHT01 HTH, 
+       A.CGXY01 XYH, 
+       get_spsx_v10(A.CGXY02) SPSX,
+       S.SPXX02 SPPM, 
+       S.SPXX04 SPMC, 
+       S.SPFL02 SPFL, 
+       S.PPB02 SPPP, 
+       A.WLDW01 GYSDM, 
+       W.WLDW02 GYSMC,
+       R.RKD03 GCCKDH,
+       B.BM02 CGBMMC, 
+       A.GYSFPGDSL01 FPSL, 
+       round(A.JXSP16,2) JSSHS, 
+       round((A.JXSP05 - A.JXSP06 - A.JXSP16),2) WJSSHS, 
+       (SELECT SPXH02 
+          FROM SPXH 
+         WHERE SPFL01 = S.SPFL01 
+           and SPXH01 = S.SPXX34 
+           and PPB01 = S.PPB01) SPXH 
+  FROM VIEW_JXSP A, SPXX S, WLDW W, BM B, SCCJ J, RKD R
+ WHERE A.SPXX01 = S.SPXX01 
+   AND A.WLDW01 = W.WLDW01 
+   AND A.BM01 = B.BM01
+   AND A.JXSP03 = R.DHD01
+   AND S.SCCJ01 = J.SCCJ01(+) 
+   
+    <![CDATA[AND A.JXSP06 <> A.JXSP05 ]]> 
+   <![CDATA[AND A.GYSFPGDSL01 <> A.JXSP05 ]]> 
+   
+JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+       	   JL{CZY|A.BM01|BM_CX|LIKE%}JL
+           JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+         <if test="GSXX01 != null and GSXX01 != ''"> 
+		   AND A.GSXX01 = #{GSXX01}
+		</if>        
+	    <if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(S.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{item}||'%')  OR Upper(S.SPPYM) LIKE Upper('%'||#{item}||'%') 
+		     </foreach> 
+	    </if>
+	     <if test="WLDW != null and WLDW != ''">
+		     <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 
+		      W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 LIKE '%'||#{item}||'%'
+		     </foreach> 
+	    </if>
+	    <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          S.SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	    </if>
+	    <if test="DJRQ_S !=null and DJRQ_S != ''">
+	       <![CDATA[AND A.JXSP12 >= TO_DATE(#{DJRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="DJRQ_E !=null and DJRQ_E != ''">
+	       <![CDATA[AND A.JXSP12 <= TO_DATE(#{DJRQ_E},'YYYY-MM-DD')]]>
+	    </if>
+	    <if test="DJLX != null and RKLX != ''">
+	    	 <foreach item="item" index="index" collection="DJLX"  open=" AND (" separator=" or " close=")">
+	          A.JXSP02 = #{item}
+	         </foreach>
+	    </if>
+	    <if test="PPMC != null and PPMC != ''">
+	         <foreach item="item" index="index" collection=   "PPMC"  open=" AND (" separator=" or " close=")"> 
+	          S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	      <if test="BM!= null and BM != ''">
+		     <foreach item="item" index="index" collection="BM"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 LIKE #{item}||'%'
+		     </foreach> 	         
+	    </if>
+	   
+	     <if test="DJHM != null and DJHM != '' ">
+		     <foreach item="item" index="index" collection="DJHM"  open=" AND (" separator=" or " close=")"> 
+		     GET_JLWBDH_TD(A.JXSP02,A.JXSP01,A.GSXX01) = #{item}
+		     </foreach> 
+	    </if>
+	     
+	  
+	    
+	    	
+	    			 
+	</select>
+</mapper>

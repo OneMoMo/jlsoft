@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    
+    <!-- 工程交资料单 查询工程登录单 -->
+    <!-- <chain id="scm.gcgl.gcdl.JZLCXgcdld" description="工程登录单接口查询" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="GCJZLgetGCDLD"/>
+        <processor component="logProcessor"/>
+    </chain> -->
+    
+    <!-- 工程保证金返还单 查询工程登录单 -->
+    <chain id="scm.gcgl.gcdl.BZJCXgcdld" description="工程登录单接口查询" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="GCBZJgetGCDLD"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+    <!-- 工程剩余不提（工程终止提货申请）  查询工程登录单 -->
+    <chain id="scm.gcgl.gcdl.GCZZCXgcdld" description="工程登录单接口查询" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="GCZZgetGCDLD"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+     <!-- 工程资料寄厂  查询工程登录单 -->
+    <chain id="scm.gcgl.gcdl.ZLJCCXgcdld" description="工程登录单接口查询" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="ZLJCgetGCDLD"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+    <!-- 工程分销单 查询工程要货单 主表 明细拼接 -->
+    <!-- <chain id="scm.gcgl.gcdl.GCFXDCXgcdld" description="工程分销单接口查询" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="FXDgetGCYHD"/>
+        <processor component="logProcessor"/>
+    </chain> -->
+    
+    
+    <!-- 工程要货单查询工程登录单 -->
+   <!--  <chain id="scm.gcgl.gcdl.bzj" description="工程登录单接口查询" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+      	<action component="queryBZJ" method="getBZJ"/> -->
+       <!--  <processor component="logProcessor"/>-->
+   <!--  </chain>   -->
+
+    
+    <!-- 工程交资料查询工程登录单 -->
+     <!-- <chain id="scm.gcgl.gcdl.gcjzl" description="工程交资料接口查询" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="getGCJZL"/>
+        <processor component="logProcessor"/>
+    </chain>  -->
+    
+    <!-- 查询工程进度跟进 -->
+     <chain id="scm.gcgl.gcdl.queryGCJDGJ" description="查询工程进度跟进" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCJDGJ" method="getqueryGCJDGJ"/>
+        <processor component="logProcessor"/>
+    </chain> 
+	
+	<!-- 查询工程资料寄厂报表 -->
+    <chain id="scm.gcgl.gcdl.GCZLJCBB" description="查询工程资料寄厂" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="getGCZLJC"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+      <!-- 查询对应工程登录单的地址清单 -->
+    <chain id="scm.gcgl.gcdl.GCDLDAZDZ" description="查询工程资料寄厂" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="getGCDLDDZ"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+    <!-- 查询工程登录单商品明细 -->
+    <chain id="scm.gcgl.gcdl.CXGCDLDEJ" description="查询工程登录单明细" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="getGCDLDEJ"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+     <!-- 查询工程登录单安装明细 -->
+    <chain id="scm.gcgl.gcdl.GCDLDAZMX" description="查询工程登录单安装明细" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="getGCDLDAZMX"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+     <!-- 查询工程登录单合同明细 -->
+    <chain id="scm.gcgl.gcdl.GCDLDHTMX" description="查询工程登录单合同明细" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="getGCDLDHTMX"/>
+        <processor component="logProcessor"/>
+    </chain>
+    
+    <!-- 经销商结算查询工程交资料明细-->
+   <!--  <chain id="scm.gcgl.gcdl.CXGCJZLMX" description="经销商结算查询工程交资料明细" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="JXSJSgetGCJZL"/>
+        <processor component="logProcessor"/>
+    </chain> -->
+    
+	<!-- 工程收差单查询工程工程登录单
+    <chain id="scm.gcgl.gcdl.GCSCDCXgcdld" description="工程收差单查询工程登录单明细" concurrency="true" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryGCDLD" method="GCSCDgetGCDLD"/>
+        <processor component="logProcessor"/>
+    </chain> -->
+</root>

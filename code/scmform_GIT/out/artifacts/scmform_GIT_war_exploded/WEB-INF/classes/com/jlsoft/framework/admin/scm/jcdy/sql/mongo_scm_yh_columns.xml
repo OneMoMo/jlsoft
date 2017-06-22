@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_YH.SCM_YH">
+	<FIELD attrname="CXTJ" format='{"$or":[{"YHBM":{"$regex":"#CXTJ#"}},{"YHMC":{"$regex":"#CXTJ#"}}]}' fieldtype="String" allownull="Y" name="银行名称" />  
+	</JLConfig>
+</root>

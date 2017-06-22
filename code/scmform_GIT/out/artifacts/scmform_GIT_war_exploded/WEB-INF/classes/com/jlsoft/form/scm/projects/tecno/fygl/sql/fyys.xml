@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FYYS">
+  <!-- 查询费用项目-->
+  <select id="FYYS_FYLX" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT FYLX01 KEY,FYLX02 VALUE
+	       FROM FYLX 
+	       WHERE FYLX05 = 1
+	<if test="GSXX01 != null and GSXX01 != ''">
+		AND GSXX01 = #{GSXX01}
+	</if>
+	JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+  <!-- 查询费用部门 -->
+  <select id="FYYS_FYBM" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT A.FYBM01 KEY, A.FYBM02 VALUE
+		FROM FYBM A,GSXX B
+		WHERE A.FYBM04 = 1
+		AND A.FYBM03 = 1
+		AND A.GSXX01 = B.GSXX01
+	<if test="GSXX01 != null and GSXX01 != ''">
+		AND A.GSXX01 = #{GSXX01}
+	</if>
+	   JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+  </select>
+  
+    <!-- 查询费用项目-->
+    <select id="YSFYMX" parameterType="java.util.Map" resultType="java.util.Map">
+	  SELECT A.FYLX01 FYBM,A.FYLX02 FYXM,A.FYLX03 CWKM
+       FROM FYLX A
+       WHERE A.FYLX05 = 1
+       AND A.FYLX04 = 1
+	<if test="GSXX01 != null and GSXX01 != ''">
+		AND A.GSXX01 = #{GSXX01}
+	</if>
+	<if test="FYXM != null and FYXM != ''">
+	    AND (A.FYLX01 LIKE '%'||#{FYXM}||'%' OR A.FYLX02  LIKE '%'||#{FYXM}||'%')
+	</if>
+	JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+  <!-- 查询费用预算明细前三个费用 -->
+  <select id="YSFYMXQJ" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT GSXX01, FYBM01, FYBM, FYXM, CWKM, SUM(ONE) ONE, SUM(TWO) TWO, SUM(THREE) THREE 
+    FROM (SELECT GSXX01, FYBM01, FYBM, FYXM, CWKM, YSJE ONE, 0 TWO, 0 THREE 
+           FROM (SELECT A.GSXX01, A.FYBM01,B.FYLX01 FYBM,(SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) FYXM, 
+                        B.KMDM CWKM,A.YSQJ,ROWNUM RN,SUM(B.YSJE) YSJE 
+                   FROM FYYSD A, FYYSDITEM B 
+                  WHERE A.FYYSD01 = B.FYYSD01 
+                   <![CDATA[
+                    AND A.GSXX01 = B.GSXX01 
+                    AND A.YSQJ < TO_CHAR(TO_DATE(#{YSQJ}, 'YYYY-MM'), 'YYYY-MM') 
+                    ]]>
+			       <if test="GSXX01 != null and GSXX01 != ''">
+					AND A.GSXX01 = #{GSXX01}
+				   </if>
+				   <if test="FYXM != null and FYXM != ''">
+					 AND (B.FYLX01 LIKE '%'||#{FYXM}||'%' OR (SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) LIKE '%'||#{FYXM}||'%')
+				   </if>
+				   <if test="FYBM01 != null and FYBM01 != ''">
+					AND A.FYBM01 = #{FYBM01}
+				   </if>
+				   <if test="CWKM != null and CWKM != ''">
+					AND B.KMDM = #{CWKM}
+				   </if>
+	     		   <if test="FYBM != null and FYBM != ''">
+					AND B.FYLX01 = #{FYBM}
+				   </if>
+				   JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+                  GROUP BY A.GSXX01,A.FYBM01,B.FYLX01,B.KMDM,A.YSQJ,ROWNUM 
+                  ORDER BY A.YSQJ) 
+    WHERE RN = 1 
+     UNION 
+     SELECT GSXX01, FYBM01, FYBM, FYXM, CWKM, 0 ONE, YSJE TWO, 0 THREE 
+     FROM (SELECT A.GSXX01,A.FYBM01,B.FYLX01 FYBM,(SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) FYXM, 
+                  B.KMDM CWKM,A.YSQJ,ROWNUM RN,SUM(B.YSJE) YSJE FROM FYYSD A, FYYSDITEM B 
+                  WHERE A.FYYSD01 = B.FYYSD01 
+                   AND A.GSXX01 = B.GSXX01 
+		        <if test="GSXX01 != null and GSXX01 != ''">
+				AND A.GSXX01 = #{GSXX01}
+			   </if>
+	           <if test="FYXM != null and FYXM != ''">
+				 AND (B.FYLX01 LIKE '%'||#{FYXM}||'%' OR (SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) LIKE '%'||#{FYXM}||'%')
+			   </if>
+			   <if test="FYBM01 != null and FYBM01 != ''">
+				AND A.FYBM01 = #{FYBM01}
+			   </if>
+			   <if test="CWKM != null and CWKM != ''">
+				AND B.KMDM = #{CWKM}
+			   </if>
+     		   <if test="FYBM != null and FYBM != ''">
+				AND B.FYLX01 = #{FYBM}
+			   </if>
+              <![CDATA[AND A.YSQJ < TO_CHAR(TO_DATE(#{YSQJ}, 'YYYY-MM'), 'YYYY-MM')]]> 
+              JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+                  GROUP BY A.GSXX01,A.FYBM01,B.FYLX01,B.KMDM,A.YSQJ,ROWNUM 
+                  ORDER BY A.YSQJ)
+     WHERE RN = 2
+      UNION 
+      SELECT GSXX01, FYBM01, FYBM, FYXM, CWKM, 0 ONE, 0 TWO, YSJE THREE 
+      FROM (SELECT A.GSXX01,A.FYBM01,B.FYLX01 FYBM, 
+                        (SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) FYXM, 
+                        B.KMDM CWKM,A.YSQJ,ROWNUM RN,SUM(B.YSJE) YSJE 
+                   FROM FYYSD A, FYYSDITEM B 
+                  WHERE A.FYYSD01 = B.FYYSD01 
+                    AND A.GSXX01 = B.GSXX01 
+		       <if test="GSXX01 != null and GSXX01 != ''">
+				AND A.GSXX01 = #{GSXX01}
+			   </if>
+  			   <if test="FYXM != null and FYXM != ''">
+				 AND (B.FYLX01 LIKE '%'||#{FYXM}||'%' OR (SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) LIKE '%'||#{FYXM}||'%')
+			   </if>
+			   <if test="FYBM01 != null and FYBM01 != ''">
+				AND A.FYBM01 = #{FYBM01}
+			   </if>
+			   <if test="CWKM != null and CWKM != ''">
+				AND B.KMDM = #{CWKM}
+			   </if>
+     		   <if test="FYBM != null and FYBM != ''">
+				AND B.FYLX01 = #{FYBM}
+			   </if>
+              <![CDATA[AND A.YSQJ < TO_CHAR(TO_DATE(#{YSQJ}, 'YYYY-MM'), 'YYYY-MM')]]> 
+			    JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+                GROUP BY A.GSXX01,A.FYBM01,B.FYLX01,B.KMDM,A.YSQJ,ROWNUM 
+                ORDER BY A.YSQJ)
+     WHERE RN = 3) 
+  GROUP BY GSXX01, FYBM01, FYBM, FYXM, CWKM 
+  </select>
+  
+  	<!-- 末级部门（按可操作部门权限过滤） -->
+	<select id="MJBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01,A.BM01 KEY, A.BM02 BMMC,A.BM02 VALUE, A.GSXX01, B.GSXX02
+		GSMC,
+		A.BM06 BMSX, GET_BMSX(A.BM06) BMSXMC,
+		A.BM04 MJBJ,
+		GET_BOOL(A.BM04) MJBJMC,
+		A.BM_BM01, (SELECT BM02 FROM BM WHERE BM01 =
+		A.BM_BM01) BM_BMMC
+		FROM BM A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.GSXX01 =
+		B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BMSX != null">
+			AND A.BM06 = #{BMSX}
+		</if>
+		<if test="YWBMMC != null and YWBMMC != ''">
+	       AND (A.BM01 LIKE '%'||#{YWBMMC}||'%' OR A.BM02  LIKE '%'||#{YWBMMC}||'%')
+	   </if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+</mapper>

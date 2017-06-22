@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="scm/projects/tecno/mdgl/gggl/ggwzl">   
+		<FIELD attrname="SFKQ" fieldtype="string" allownull="N" name="广告位状态" />  
+		 	     <FIELD attrname="SSBM" format='{"SSBM":{"$regex":"SSBM"}}' fieldtype="String" allownull="Y" name="所属部门" />
+		
+	</JLConfig>
+	
+</root>

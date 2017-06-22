@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cggl.sprkd">
+        <FIELD attrname="CKMC" fieldtype="string" allownull="N" name="送达仓库" />
+        <FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="供应商" />
+        <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="采购部门" />
+        <FIELD attrname="HZFS" fieldtype="string" allownull="N" name="合作方式" />
+        
+        <Nested id="SPLB" allownull="N" name="商品明细">
+	        <FIELD attrname="XH" fieldtype="String" name="序号" />
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="JLDW" fieldtype="String" allownull="N" name="计量单位" />
+            <FIELD attrname="RKSL" fieldtype="String" allownull="N" name="入库数量" />
+    </Nested>
+	</JLConfig>
+	<JLConfig id="form.scm.cggl.ddrkd">
+		
+        <FIELD attrname="CGDHD01" fieldtype="string" allownull="N" name="订货单号" />
+        <Nested id="SPLB" allownull="N" name="商品明细">
+	        <FIELD attrname="XH" fieldtype="String" name="序号" />
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="SPGG" fieldtype="String" name="商品规格" />
+            <FIELD attrname="JLDW" fieldtype="String" allownull="N" name="单位" />
+            <FIELD attrname="YSSL" fieldtype="String" name="应收数量" />
+            <FIELD attrname="RKSL" fieldtype="String" allownull="N" name="入库数量" />
+            <FIELD attrname="JSSL" fieldtype="String" name="拒收数量" />
+            <FIELD attrname="MXBZ" fieldtype="String" name="备注" />
+    </Nested>
+	</JLConfig>
+</root>

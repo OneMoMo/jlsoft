@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.szpzzl">
+		<FIELD attrname="PZBM" fieldtype="string" allownull="N" name="凭证编码" />
+		<FIELD attrname="PZMC" fieldtype="string" allownull="N" name="凭证名称" />
+		<Nested id="XZZT">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="外部账套" />
+			<FIELD attrname="value" fieldtype="string" allownull="N" name="外部账套" />
+		</Nested>
+		<FIELD attrname="WBZT01" fieldtype="string" allownull="N" name="外部账套" />
+		<FIELD attrname="PZLB" fieldtype="string" allownull="N" name="凭证类别" />
+		<FIELD attrname="SJLYB" fieldtype="string" allownull="N" name="数据来源表" />
+		<FIELD attrname="BJZD" fieldtype="string" allownull="N" name="标记字段" />
+		<FIELD attrname="SJZD" fieldtype="string" allownull="N" name="时间字段" />
+		<FIELD attrname="DHZD" fieldtype="string" allownull="Y" name="单号字段" />
+		<FIELD attrname="YJTJSQL" fieldtype="string" allownull="Y" name="月结条件SQL" />
+		<FIELD attrname="JZBJSQL" fieldtype="string" allownull="Y" name="结转标记SQL" />
+		<Nested id="JZTJ">
+			<FIELD attrname="key" fieldtype="string" allownull="Y" name="结转条件" />
+			<FIELD attrname="value" fieldtype="string" allownull="Y" name="结转条件" />
+		</Nested>
+		<Nested id="JZFS">
+			<FIELD attrname="key" fieldtype="string" allownull="Y" name="结转方式" />
+			<FIELD attrname="value" fieldtype="string" allownull="Y" name="结转方式" />
+		</Nested>
+		<Nested id="RYMC">
+			<FIELD attrname="key" fieldtype="string" allownull="Y" name="结转人员" />
+			<FIELD attrname="value" fieldtype="string" allownull="Y" name="结转人员" />
+		</Nested>
+	</JLConfig>
+</root>

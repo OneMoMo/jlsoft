@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DefBM">
+	<!-- 查询公司账套 -->
+	<select id="selectGSZT" parameterType="Map" resultType="java.util.Map">
+		SELECT A.GSXX01 KEY,A.GSXX02 VALUE
+		  FROM W_GSZT A
+		 WHERE 1 = 1
+	</select>
+ 	
+<!--  	<select id="selectBM" parameterType="Map" resultType="java.util.Map">
+		 SELECT BM01, BM_BM01, BM02, BM03, BM04, GSXX01, BM05
+		  FROM W_BM
+		 WHERE  BM05 = 0  AND GSXX01 = #{GSXX01}
+ 	</select> -->
+</mapper>

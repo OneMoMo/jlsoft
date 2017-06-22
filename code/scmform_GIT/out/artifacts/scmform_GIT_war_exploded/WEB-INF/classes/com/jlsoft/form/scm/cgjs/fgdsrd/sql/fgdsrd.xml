@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FGDSRD">
+     <select id="JSSRDM" parameterType="Map" resultType="java.util.Map">
+    	select JSSR01, JSSR02 JSSRMC, JSSR03 JSSRLX, JSSR04 YXBJ, JSSR05 JSQJ
+            from JSSRDM where JSSR04=1
+		<!-- <if test="JSSR01 != null"> AND JSSR01 = #{JSSR01} </if> -->
+		<if test="JSSR11 != null"> AND JSSR11 = #{JSSR11} </if>
+		<if test="SPXX01 != null"> AND SPXX01 = #{SPXX01} </if>
+		<if test="bFalg != null">
+		<if test="bFalg == 1"> AND JSSR04 = #{bFalg} </if>		    
+		</if>
+		<if test="JSSR03LIST != null">
+            <foreach item="item" index="index" collection="JSSR03LIST"  open=" AND (" separator=" or " close=")"> 
+		      JSSR03 = #{item}
+			</foreach> 
+       </if>
+    </select>             
+</mapper>

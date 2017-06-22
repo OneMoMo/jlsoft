@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCYHD.SCM_GCYHD">
+       <FIELD attrname="GCYHD01" format='{"GCYHD01":{"$regex":"#GCYHD01#"}}' fieldtype="String" allownull="Y" name="工程要货号" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="用户电话" />
+       <FIELD attrname="YHSJ" format='{"YHSJ":{"$regex":"#YHSJ#"}}' fieldtype="String" allownull="Y" name="用户手机" />
+  		<FIELD attrname="BZ02" format='{"BZ02":"#BZ02#"}' fieldtype="String" allownull="Y" name="步骤" />
+	</JLConfig>
+</root>
+ 

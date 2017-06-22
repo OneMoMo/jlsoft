@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CXFPKPQK">
+  <select id="queryFPKPQK" parameterType="Map" resultType="java.util.Map">
+	<if test="CXFS==0">
+	  SELECT 0 CXFS,A.WLDW01, A.KHMC, GET_DJLX(DJLX) DJLX, SUM(A.YKFPJE) YKFPJE ,
+	         SUM(A.YKFP) YKFP, SUM(A.WKFP) WKFP, A.GSXX01, A.GSMC,A.KPSL,A.FPCBJE
+        FROM VIEW_CXFPKPQK A
+        WHERE 1=1
+	    <if test="KHMC != null and KHMC != ''">
+		    AND	(A.KHMC LIKE '%'||#{KHMC}||'%' OR A.WLDW01 LIKE '%'||#{KHMC}||'%')
+		</if>
+		<if test="CWRQ_S != null and CWRQ_S != ''">
+	        <![CDATA[AND A.CWRQ  >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="CWRQ_E != null and CWRQ_E != ''">
+	        <![CDATA[AND A.CWRQ <= TO_DATE(#{CWRQ_E},'YYYY-MM-DD')]]>
+		</if>
+        JL{CZY|A.WLDW01|WLDW_CX|LIKE}JL
+        JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+        GROUP BY A.WLDW01, A.KHMC, DJLX, A.GSXX01, A.GSMC,A.KPSL,A.FPCBJE
+   </if>
+   
+   <if test="CXFS==1">
+      <![CDATA[SELECT 1 CXFS,A.JLWBDH DJHM, A.GSXX01, A.GSMC, GET_DJLX(A.DJLX) DJLX, A.WLDW01,
+             A.WLDWMC KHMC, A.XS_BM01, A.XSBMMC,A.SPXX01, A.SPXX02, A.SPXX04, A.XSJE,
+             A.YKFP, A.WKFP, A.XSFPH,TO_CHAR(A.XSFPRQ, 'YYYY-MM-DD') XSFPRQ, A.BZ, 
+             TO_CHAR (A.DJRQ,'YYYY-MM-DD') DJRQ,TO_CHAR(A.CWRQ, 'YYYY-MM-DD') CWRQ,
+	     (SELECT SUM(YKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) YKFPSUM,
+             (SELECT SUM(WKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) WKFPSUM,A.KPSL,A.FPCBJE
+      FROM VIEW_CXFPKPQK_KPMX A
+      WHERE A.DJLX <> 24
+        AND A.YKFP <> 0]]> 
+        <if test="CWRQ_S != null and CWRQ_S != ''">
+	        <![CDATA[AND A.CWRQ  >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="CWRQ_E != null and CWRQ_E != ''">
+	        <![CDATA[AND A.CWRQ <= TO_DATE(#{CWRQ_E},'YYYY-MM-DD')]]>
+		</if>
+	    <if test="DJRQ_S != null and DJRQ_S != ''">
+	        <![CDATA[AND A.DJRQ  >= TO_DATE(#{DJRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="DJRQ_E != null and DJRQ_E != ''">
+	        <![CDATA[AND A.DJRQ <= TO_DATE(#{DJRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			AND	(A.WLDWMC LIKE '%'||#{KHMC}||'%' OR A.WLDW01 LIKE '%'||#{KHMC}||'%')
+		</if>
+		<if test="DJHM != null and DJHM != ''">
+			AND	(A.JLWBDH LIKE '%'||#{DJHM}||'%')
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND A.DJLX=#{DJLX}
+			 <if test="DJLX !=10">
+	 		  JL{CZY|A.WLDW01|WLDW_CX|LIKE}JL
+     		</if>
+		</if>
+		<if test="FPBDZT != null">
+		   <if test="FPBDZT==0"> AND A.XSFPH  IS NULL </if>
+		   <if test="FPBDZT==1"> AND A.XSFPH  IS NOT NULL </if>
+		</if>
+     JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+     JL{CZY|A.XS_BM01|BM_CX|LIKE%}JL
+	<if test="XSBM != null and XSBM != ''">
+	      <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	        A.XS_BM01 LIKE CONCAT(#{item},'%')
+	     </foreach> 
+	</if>
+	
+	UNION ALL
+	<![CDATA[ SELECT 1 CXFS,A.JLWBDH DJHM, A.GSXX01, A.GSMC, GET_DJLX(A.DJLX) DJLX, A.WLDW01,
+             A.WLDWMC KHMC, A.XS_BM01, A.XSBMMC,A.SPXX01, A.SPXX02, A.SPXX04, A.XSJE,
+             A.YKFP, A.WKFP, A.XSFPH,TO_CHAR(A.XSFPRQ, 'YYYY-MM-DD') XSFPRQ, A.BZ, 
+             TO_CHAR (A.DJRQ,'YYYY-MM-DD') DJRQ,TO_CHAR(A.CWRQ, 'YYYY-MM-DD') CWRQ,
+	     (SELECT SUM(YKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) YKFPSUM,
+             (SELECT SUM(WKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) WKFPSUM,A.KPSL,A.FPCBJE
+      FROM VIEW_CXFPKPQK_KPMX A
+      WHERE A.DJLX = 24
+        AND A.YKFP <> 0 ]]>
+        <if test="CWRQ_S != null and CWRQ_S != ''">
+	        <![CDATA[AND A.CWRQ  >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="CWRQ_E != null and CWRQ_E != ''">
+	        <![CDATA[AND A.CWRQ <= TO_DATE(#{CWRQ_E},'YYYY-MM-DD')]]>
+		</if>
+	    <if test="DJRQ_S != null and DJRQ_S != ''">
+	        <![CDATA[AND A.DJRQ  >= TO_DATE(#{DJRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="DJRQ_E != null and DJRQ_E != ''">
+	        <![CDATA[AND A.DJRQ <= TO_DATE(#{DJRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			AND	(A.WLDWMC LIKE '%'||#{KHMC}||'%' OR A.WLDW01 LIKE '%'||#{KHMC}||'%')
+		</if>
+		<if test="DJHM != null and DJHM != ''">
+			AND	(A.JLWBDH LIKE '%'||#{DJHM}||'%')
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND A.DJLX=#{DJLX}
+			 <if test="DJLX !=10">
+	 		  JL{CZY|A.WLDW01|WLDW_CX|LIKE}JL
+     		</if>
+		</if>
+		<if test="FPBDZT != null">
+		   <if test="FPBDZT==0"> AND A.XSFPH  IS NULL </if>
+		   <if test="FPBDZT==1"> AND A.XSFPH  IS NOT NULL </if>
+		</if>
+     JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+     JL{CZY|A.XS_BM01|BM_CX|LIKE%}JL
+	<if test="XSBM != null and XSBM != ''">
+	      <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	        A.XS_BM01 LIKE CONCAT(#{item},'%')
+	     </foreach> 
+	</if>
+   </if>
+   
+   <if test="CXFS==2">
+	  <![CDATA[SELECT 2 CXFS,A.JLWBDH DJHM, A.GSXX01, A.GSMC, GET_DJLX(A.DJLX) DJLX, A.WLDW01,
+             A.WLDWMC KHMC, A.XS_BM01, A.XSBMMC,A.SPXX01, A.SPXX02, A.SPXX04, A.XSJE,
+             A.YKFP, A.WKFP, A.XSFPH,TO_CHAR(A.XSFPRQ, 'YYYY-MM-DD') XSFPRQ, A.BZ,
+             TO_CHAR (A.DJRQ,'YYYY-MM-DD') DJRQ,TO_CHAR(A.CWRQ, 'YYYY-MM-DD') CWRQ,
+	     (SELECT SUM(YKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) YKFPSUM,
+             (SELECT SUM(WKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) WKFPSUM
+      FROM VIEW_CXFPKPQK_KPMX A
+      WHERE A.DJLX <> 24 
+        AND A.WKFP <> 0 ]]>
+		<if test="DJRQ_S != null and DJRQ_S != ''">
+	        <![CDATA[AND A.DJRQ  >= TO_DATE(#{DJRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="DJRQ_E != null and DJRQ_E != ''">
+	        <![CDATA[AND A.DJRQ <= TO_DATE(#{DJRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="CWRQ_S != null and CWRQ_S != ''">
+	        <![CDATA[AND A.CWRQ  >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="CWRQ_E != null and CWRQ_E != ''">
+	        <![CDATA[AND A.CWRQ <= TO_DATE(#{CWRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			AND	(A.WLDWMC LIKE '%'||#{KHMC}||'%' OR A.WLDW01 LIKE '%'||#{KHMC}||'%')
+		</if>
+		<if test="DJHM != null and DJHM != ''">
+			AND	(A.JLWBDH LIKE '%'||#{DJHM}||'%')
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND A.DJLX=#{DJLX}
+			 <if test="DJLX !=10">
+	 		  JL{CZY|A.WLDW01|WLDW_CX|LIKE}JL
+     		</if>	
+		</if>
+		<if test="FPBDZT != null">
+		   <if test="FPBDZT==0"> AND A.XSFPH  IS NULL </if>
+		   <if test="FPBDZT==1"> AND A.XSFPH  IS NOT NULL </if>
+		</if>
+	
+     JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+     JL{CZY|A.XS_BM01|BM_CX|LIKE%}JL
+	<if test="XSBM != null and XSBM != ''">
+	      <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	        A.XS_BM01 LIKE CONCAT(#{item},'%')
+	     </foreach> 
+	</if>
+	UNION ALL
+	<![CDATA[SELECT 2 CXFS,A.JLWBDH DJHM, A.GSXX01, A.GSMC, GET_DJLX(A.DJLX) DJLX, A.WLDW01,
+             A.WLDWMC KHMC, A.XS_BM01, A.XSBMMC,A.SPXX01, A.SPXX02, A.SPXX04, A.XSJE,
+             A.YKFP, A.WKFP, A.XSFPH,TO_CHAR(A.XSFPRQ, 'YYYY-MM-DD') XSFPRQ, A.BZ,
+             TO_CHAR (A.DJRQ,'YYYY-MM-DD') DJRQ,TO_CHAR(A.CWRQ, 'YYYY-MM-DD') CWRQ,
+	     (SELECT SUM(YKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) YKFPSUM,
+             (SELECT SUM(WKFP) FROM VIEW_CXFPKPQK_KPMX WHERE GSXX01 = A.GSXX01 AND JLWBDH = A.JLWBDH) WKFPSUM
+      FROM VIEW_CXFPKPQK_KPMX A
+      WHERE A.DJLX = 24 
+        AND A.WKFP <> 0 ]]>
+		<if test="DJRQ_S != null and DJRQ_S != ''">
+	        <![CDATA[AND A.DJRQ  >= TO_DATE(#{DJRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="DJRQ_E != null and DJRQ_E != ''">
+	        <![CDATA[AND A.DJRQ <= TO_DATE(#{DJRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="CWRQ_S != null and CWRQ_S != ''">
+	        <![CDATA[AND A.CWRQ  >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="CWRQ_E != null and CWRQ_E != ''">
+	        <![CDATA[AND A.CWRQ <= TO_DATE(#{CWRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			AND	(A.WLDWMC LIKE '%'||#{KHMC}||'%' OR A.WLDW01 LIKE '%'||#{KHMC}||'%')
+		</if>
+		<if test="DJHM != null and DJHM != ''">
+			AND	(A.JLWBDH LIKE '%'||#{DJHM}||'%')
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND A.DJLX=#{DJLX}
+			 <if test="DJLX !=10">
+	 		  JL{CZY|A.WLDW01|WLDW_CX|LIKE}JL
+     		</if>
+		</if>
+		<if test="FPBDZT != null">
+		   <if test="FPBDZT==0"> AND A.XSFPH  IS NULL </if>
+		   <if test="FPBDZT==1"> AND A.XSFPH  IS NOT NULL </if>
+		</if>
+	
+     JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+     JL{CZY|A.XS_BM01|BM_CX|LIKE%}JL
+	<if test="XSBM != null and XSBM != ''">
+	      <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	        A.XS_BM01 LIKE CONCAT(#{item},'%')
+	     </foreach> 
+	</if>
+  </if>
+</select>
+
+</mapper>

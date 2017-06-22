@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="form.getJCD.do" description="借出单接口查询" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="JCDAction" method="getJCD"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

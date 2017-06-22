@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_JXSSQ.RoleApply">
+		<FIELD attrname="venderCode" fieldtype="string" allownull="N" name="平台商编码" />
+		<FIELD attrname="applyType.key" fieldtype="string" allownull="N" name="申请类型" />
+		<FIELD attrname="status.key" fieldtype="string" allownull="N" name="审核状态" />
+		<FIELD attrname="companyName"  format='{"companyName":{"$regex":"#companyName#"}}' fieldtype="string" allownull="Y" name="公司名称" />
+		<FIELD attrname="contacts" format='{"contacts":{"$regex":"#contacts#"}}' fieldtype="string" allownull="Y" name="法人代表" />
+	</JLConfig>
+		<JLConfig id="MONGO_DQJXSSQ.RoleApply">
+		<FIELD attrname="venderCode" fieldtype="string" allownull="N" name="平台商编码" />
+		<FIELD attrname="applyType.key" fieldtype="string" allownull="N" name="申请类型" />
+		<FIELD attrname="status.key" fieldtype="string" allownull="N" name="审核状态" />
+	</JLConfig>
+</root>

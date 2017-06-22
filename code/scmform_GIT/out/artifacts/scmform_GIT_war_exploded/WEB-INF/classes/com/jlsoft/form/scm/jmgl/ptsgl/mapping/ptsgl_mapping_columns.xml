@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jmgl.ptsgl">
+		<FIELD attrname="PTS01" fieldtype="string" allownull="N" name="平台商编码" />
+		<!-- <FIELD attrname="PTSMC" fieldtype="string" allownull="N" name="平台商名称" /> -->
+		<FIELD attrname="CK01" fieldtype="string" allownull="N" name="仓库编码" />
+		<FIELD attrname="CKMC" fieldtype="string" allownull="N" name="仓库名称" />
+		
+		<Nested id="CKSPMX" allownull="N" name="商品明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+           <!-- <FIELD attrname="KMSL" fieldtype="double" allownull="N" name="可卖数量" />-->
+            <FIELD attrname="CK01" fieldtype="String" allownull="N" name="仓库编码" />
+            <FIELD attrname="CKMC" fieldtype="String" allownull="N" name="仓库名称" />
+        </Nested>
+        
+	</JLConfig>
+</root>

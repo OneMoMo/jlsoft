@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_BM.SCM_BM111">
+		<FIELD attrname="GSXX01" fieldtype="string" allownull="N" name="公司信息" /> 
+		<FIELD attrname="YXBJ.key" fieldtype="string" allownull="N" name="有效标记" /> 
+	</JLConfig>
+</root>

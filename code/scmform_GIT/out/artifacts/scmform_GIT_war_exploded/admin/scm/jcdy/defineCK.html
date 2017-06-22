@@ -1,0 +1,242 @@
+<div class="w12 jl_defSee">
+	<div class="w12 jl_screening">
+	  <div class="w09 scr_seach">
+	    <ul>
+	      <li>
+	        <dl>
+	          	<dd class="w12">
+		            <div class="jl_btn_group">
+		                <input type="text" placeholder="代码/名称" name = "CK">
+		                <span class="jl_btn btn_white" id="search"><i class="fa fa-search"></i></span>
+		            </div>
+	        	</dd>
+	        </dl>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+	<!--仓库列表-->
+	<div id="d_LIST" class="w12"></div> 
+</div>
+
+<div class="jl_form addCarShow hide">
+	<div class="w12 jl_tab_title pl30 mb10"></div>
+	<div class="jl_form_02" id="JCXX"> 
+		<ul> 
+			<div class="hide" id="d_GSXX01"></div> 
+			<div class="hide" id="d_jlbh"></div>  
+			<div class="hide" id="d_CK03"></div> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="仓库代码">仓库代码</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CK01"></div>
+						<em class="btx font_red"></em>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="仓库名称">仓库名称</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CKMC"></div>  
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="仓库属性">仓库属性</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CKSX"></div>  
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="所属部门">所属部门</dt>
+					<dd class="w10">
+						<div class="w06" id="d_SSBM"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="配送网点">配送网点</dt>
+					<dd class="w10">
+						<div class="w06" id="d_PSWD"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="配送网点">配送仓库</dt>
+					<dd class="w10">
+						<div class="w06" id="d_PSCK"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="上级仓库代码">上级仓库代码</dt>
+					<dd class="w10">
+						<div class="w06" id="d_SJCKDM"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="是否末级">是否末级</dt>
+					<dd class="w10">
+						<div class="w06" id="d_MJBJ"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="扫码标记">扫码标记</dt>
+			        <dd class="w10"><div class="w09" id="d_SMBJ"></div></dd>
+			    </dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="有效标记">有效标记</dt>
+			        <dd class="w10"><div class="w09" id="d_YXBJ"></div></dd>
+			    </dl>
+			</li> 
+		</ul>
+	</div>
+	<div class="jl_form_02" id="QTXX">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="联系人">联系人</dt>
+					<dd class="w10">
+						<div class="w06" id="d_LXR"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="联系电话">联系电话</dt>
+					<dd class="w10">
+						<div class="w06" id="d_LXDH"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="仓库地址">仓库地址</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CKDZ"></div> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="保管品类">保管品类</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CKBGPL"></div>   
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="仓库容量">仓库容量</dt> 
+					<dd class="w10">
+						<div class="w06" id="d_CKRL"></div>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>   
+					<dt class="w02" title="满仓标记">满仓标记</dt>
+			        <dd class="w10"><div class="w09" id="d_CKMCBJ"></div></dd>
+			    </dl>
+			</li>
+			<li class="w12">
+				<dl>   
+					<dt class="w02" title="客户要货标记">客户要货标记</dt>
+			        <dd class="w10"><div class="w09" id="d_KHYHBJ"></div></dd>
+			    </dl>
+			</li>  
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="仓库功能" name="CKGN">仓库功能</dt>
+					<dd class="w10">
+						<div class="w03" id="d_CKSZ1"></div> 
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>自动发货：收款后系统自动进行发货处理;
+						</label> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title=""></dt>
+					<dd class="w10">
+						<div class="w03" id="d_CKSZ3"></div> 
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>退货仓库：销售退货单使用，退货时可以选择有退货仓库标记的仓库;
+						</label> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl> 
+				    <dt class="w02" title=""></dt>
+					<dd class="w10"> 
+						<div class="w03" id="d_CKSZ2"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>厂家仓库：允许商品负卖，在价格文件和采购协议界面设置负卖时需要选择厂家仓库;
+						</label>  
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title=""></dt>
+					<dd class="w10">
+						<div class="w03" id="d_CKSZ4"></div> 
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>虚拟仓库：允许商品负卖，可以进行商品收发货处理，没有保管数也可以发货; 
+						</label> 
+					</dd>
+				</dl>
+			</li>
+			<!-- <li class="w12">
+				<dl> 
+					<dt class="w02" title=""></dt>
+					<dd class="w10"> 
+						<div class="w04" id="d_CKSZ3"></div>
+					</dd>
+				</dl>
+			</li> -->
+		</ul>
+	</div>
+	<!-- <div class="jl_form_02" id="KQXX">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="仓库库区">仓库库区</dt>
+					<dd class="w10">
+						<div id="d_SZKQ"></div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div> -->
+	<div class="jl_form_02">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w02"></dt>
+					<dd class="w10">
+						<div id="d_footer"></div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>

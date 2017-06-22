@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_BMKZSX.SCM_BMKZSX">
+    	<FIELD attrname="search" format='{"$or":[{"BM01":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="权限名称" />
+    	<FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

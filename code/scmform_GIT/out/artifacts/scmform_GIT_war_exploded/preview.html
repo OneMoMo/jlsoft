@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_css.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_form.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_list.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_page.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_control.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_table.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kkPages.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/mobiscroll.custom-2.17.0.min.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kalendae.css" />
+
+</head>
+
+<body>
+<div class="jl_showImage display_none">
+	<div class="image_main"></div>
+</div>
+
+<div id="previewForm" class="w12" style="padding-bottom: 52px;border:1px solid #eee;float: left;"></div>
+<div class="jl_operation">
+  <div class="oper_main">
+  	<a id="jlPrint" class="jl_btn btn_color"><i class="fa fa-print"></i>打印</a>
+  </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/scripts/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/mobiscroll.custom-2.17.0.min.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/kalendae.standalone.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-pinyin.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-time.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.Paging.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/json2.js"></script>
+<script type="text/javascript">
+	var userInfoCookie = $.cookie("userInfo");
+	var userInfo = JSON.parse(userInfoCookie);
+	var rid = Math.random();
+	document.write("<script type='text/javascript' src='jllib/form/js/ui.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/jl-all.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/JLForm.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/jllib_pc/pub/js/JLQuery.js?rid="+rid+"'><\/script>");
+	
+	$(document).ready(function(){
+		var bdbh = JL.getUrlParam("bdbh");
+		var jlbh = JL.getUrlParam("jlbh");
+		console.info(bdbh);
+		console.info(jlbh);
+		var formPath = JL.getFormURL(bdbh);
+		var resultData = {};
+		resultData["INITFIELD"] = [];
+		resultData["YWSJ"] = {};
+		resultData["YWSJ"]["bdbh"] = bdbh;
+		resultData["YWSJ"]["jlbh"] = jlbh;
+		resultData["YWSJ"]["query"] = true;
+		
+		$("#previewForm").data($.extend(formPath, resultData));
+		$("#previewForm").data("formData", resultData);
+		
+		$("#previewForm").attr("title", formPath.bdmc+"("+bdbh+"-"+jlbh+")");
+		$("#previewForm").load(formPath["url"]+"?rid="+Math.random(),function(){
+			var jl_form = eval(formPath["bdym"]);
+			jl_form.setTab($(this));  
+			jl_form.setData(resultData.YWSJ);
+			jl_form.initField = ["initField"];
+			jl_form.previewForm(resultData);
+			
+			$("#jlPrint").click(function(){
+				jl_form.jlPrint($(this));
+			});
+		});
+		 
+		try { 
+			$("#previewForm").prepend("<script type='text/javascript' src='"+formPath["url"].replace(formPath["bdym"]+".html", "js/"+formPath["bdym"]+".js")+"?rid="+Math.random()+"'><\/script>");
+		} catch (e) {
+			// TODO: handle exception
+		} 
+	
+		$(".jl_showImage").click(function(e){
+			var inDiv = $(e.target).closest(".image_main").length;
+			if(inDiv < 1){
+				$(this).fadeOut();
+			}
+		});
+	});
+</script>

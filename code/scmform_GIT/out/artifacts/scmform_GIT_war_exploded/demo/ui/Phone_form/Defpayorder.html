@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_css.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_form.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_list.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_table.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_control.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_page.css" />
+<title>Form5_phone框架</title>
+</head>
+<body>
+<header class="jl_header">
+<div class="header_nav nav_left" onclick="javascript:history.go(-1)">
+  <i class="fa fa-angle-left"></i>
+  <span>延付单</span>
+</div>
+<div class="header_nav nav_right">
+  <i class="" id="edit_title">批量操作</i>
+  <i class="fa fa-search query_title" id="order_title" onclick="pageContainerShow()"></i>
+  <i class="fa fa-sort-amount-asc jl_process_open" title="查看所有步骤"></i>
+</div>
+</header>
+<div class="jl_main">
+ <div class="jl_process_page">
+    <ul>
+      <li class="center center01" jl_lage="">开单</li>
+      <li class="after" jl_lage="">经理审核</li>
+    </ul>
+  </div>
+<div class="w12 jl_seach">
+  <input class="w12 seach_title" type="search" placeholder="搜索商品" onclick="pageContainerShow()">
+</div>
+<div class="jl_title">商品信息<span class="font_red ml10">(3件)</span><i class="fa fa-angle-down"></i></div>
+<div class="w12 jl_list">
+  <div class="jl_list_04 swiper" data-role="page">
+  <div class="list_case">
+    <div class="form_checkbox hide"><i class="fa fa fa-check-square font_blue"></i></div>
+    <ul>
+      <li class="w12 pro_name"><h4>美的空调X-OIUWEIQ2</h4></li>
+      <li class="w12">
+        <dl>
+          <dd class="w12"><span>仓库：直播仓</span></dd>   
+        </dl>
+      </li>
+      <li class="w12">
+        <dl>
+          <dd class="w12"><span>采购：厨房电器</span></dd>   
+        </dl>
+      </li>
+      <li class="w12">
+        <dl>
+          <dd class="w12"><span>供应商：芜湖美的厨房电器制造有限公司</span></dd>   
+        </dl>
+      </li>
+    </ul>
+    <div class="btn">
+      <ul>
+        <li class="w06 btn_red"><i class="fa fa-plus plus"></i><input type="number" placeholder="数量" value="1"><i class="fa fa-minus minus"></i></li>
+        <li class="w06 btn_blue"><span>删除</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="list_case">
+    <div class="form_checkbox hide"><i class="fa fa fa-check-square font_blue"></i></div>
+    <ul>
+      <li class="w12 pro_name"><h4>美的空调X-OIUWEIQ2</h4></li>
+      <li class="w12">
+        <dl>
+          <dd class="w12"><span>仓库：直播仓</span></dd>   
+        </dl>
+      </li>
+      <li class="w12">
+        <dl>
+          <dd class="w12"><span>采购：厨房电器</span></dd>   
+        </dl>
+      </li>
+      <li class="w12">
+        <dl>
+          <dd class="w12"><span>供应商：芜湖美的厨房电器制造有限公司</span></dd>   
+        </dl>
+      </li>
+    </ul>
+    <div class="btn">
+      <ul>
+        <li class="w06 btn_red"><i class="fa fa-plus plus"></i><input type="number" placeholder="数量" value="1"><i class="fa fa-minus minus"></i></li>
+        <li class="w06 btn_blue"><span>删除</span></li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="w12 jl_form">
+  <div class="jl_title">销售信息<i class="fa fa-angle-left"></i></div>
+  <div class="jl_form_01 hide">
+    <dl>
+      <dt class="w03">客户</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr">刹那芳华</span></li>
+          <li class="w01 form_icon"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">销售网点</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr">江汉区</span></li>
+          <li class="w01 form_icon"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">销售方式</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr font_gray">请选择</span></li>
+          <li class="w01 form_icon"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <div class="jl_title">订单信息<i class="fa fa-angle-left"></i></div>
+  <div class="jl_form_01 hide">
+    <dl>
+      <dt class="w03">外部订单号</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="注释" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">校验码</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="注释" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">05单号</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="注释" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">折扣金额</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="注释" /></li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <div class="jl_title">顾客信息<i class="fa fa-angle-left"></i></div>
+  <div class="jl_form_01 hide">
+    <dl>
+      <dt class="w03">顾客姓名</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="注释" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">手机</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="输入客户的常用手机号码" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">固定电话</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="区号 - 号码个格式填写" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">地址</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">预约送货</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" /></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">备注</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><textarea placeholder="备注（100字以内）"></textarea></li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+</div>
+<div class="w12 form_btn">
+  <a class="w12 jl_btn btn_red">提交</a>
+</div>
+<div class="jl_page_container"><!--加载页面--></div>
+</div>
+
+</div>
+<footer class="jl_footer">
+<ul>
+  <li class="w04" onclick="window.location.href='message.html'">
+    <a>
+      <i class="fa fa-bell"></i>
+      <span>消息</span>
+      <label class="bgcolor_red" id="messageId">36</label>
+    </a>
+  </li>
+  <li class="w04" onclick="window.location.href='index.html'">
+    <a>
+      <i class="fa fa-home"></i>
+      <span>金力软件</span>
+    </a>
+  </li>
+  <li class="w04" onclick="window.location.href='user.html'">
+    <a>
+      <i class="fa fa-user"></i>
+      <span>我的</span>
+    </a>
+  </li>  
+</ul>
+</footer>
+<div class="jl_edit_main hide">
+<span><i class="fa fa-square-o"></i> 全选</span>
+<a class="jl_btn btn_red ml10">删除</a>
+</div>
+<div class="jl_process">
+  <div class="jl_process_close"></div>
+  <ul style="right: -100%;">
+    <li>李四<label class="jl_btn bgcolor_green" jl_lage="">开单</label></li>
+    <li>王五<label class="jl_btn bgcolor_red" jl_lage="">经理审核</label></li>
+  </ul>
+</div>
+</body>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/jquery.mobile-1.3.2.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/ui.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/control.js"></script>
+</html>

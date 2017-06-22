@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPPP">
+
+  <!-- 查询商品品牌表 -->
+  <select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.PPB01 SPPP01, A.PPB02 SPPPMC
+      FROM PPB A
+     WHERE 1=1
+       <if test="SPPPMC != null and SPPPMC != ''">
+        AND (  A.PPB02 LIKE '%'||#{SPPPMC}||'%' OR   A.PPB01 LIKE '%'||#{SPPPMC}||'%')
+       </if>
+  </select>
+</mapper>

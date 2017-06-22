@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cxgl.fxjgwj">
+         <Nested id="XSBM" allownull="N" name="销售部门">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="销售部门" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="销售部门" />
+	  </Nested>
+        <FIELD attrname="YXQS"   fieldtype="String" allownull="N" name="有效日期起"/>
+        <FIELD attrname="YXQE"   fieldtype="String" allownull="N" name="有效日期止"/>
+        <Nested id="SPLB" allownull="N" name="商品明细">
+	            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+	            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+	            <FIELD attrname="YFXDJ" fieldtype="String" allownull="N" name="原分销单价" />
+	            <FIELD attrname="YFXXJ" fieldtype="String" allownull="N" name="原分销限价" />
+	  </Nested>
+        </JLConfig>
+</root>

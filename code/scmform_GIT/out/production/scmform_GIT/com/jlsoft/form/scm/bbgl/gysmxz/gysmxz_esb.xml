@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="form.bbgl.getGYSMXZ.do" description="供应商对账单接口查询" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.bbgl.gysdzd.selectgysmxz" method="selectGYSMXZ"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CGFYDJ">
+  <select id="FYLX" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT DISTINCT A.FYLX01,A.FYLX02,B.BBBZ01,(SELECT WBBZ02 FROM BZ WHERE WBBZ01=B.BBBZ01)HBBZ
+     FROM FYLX A,GSXX B 
+     WHERE FYLX05 = 1
+     AND B.GSXX01=#{GSXX01}
+    <if test="FYBM != null and FYBM !=''" >
+       AND (FYLX01 LIKE '%'||#{FYBM}||'%' OR FYLX02 LIKE '%'||#{FYBM}||'%')
+    </if>
+  </select>
+  <select id="RKDMX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.JLWBDH RKDH,S.SPXX01, get_spsx_v10(A.CGXY02) SPSX,S.SPXX02 SPBM,S.SPXX04 SPMC, 
+       B.RKDI05 SL,B.WBTDH,B.RKDI15 DJ,B.RKDI16 JE,S.SPXX63 DTZL, 
+       S.SPXX63*B.RKDI05 ZZL 
+    FROM RKD A,RKDITEM B,SPXX S 
+    WHERE A.RKD01 = B.RKD01 
+    AND B.SPXX01 = S.SPXX01
+    AND A.GSXX01 = B.GSXX01
+    <if test="WLDW01 != null and WLDW01 != ''">
+        AND A.WLDW01 = #{WLDW01}
+    </if>
+    <if test="BM01 != null and BM01 != ''">
+        AND A.BM01 = #{BM01}
+    </if>
+    <if test="RKRQQ != null and RKRQQ !=''"> <![CDATA[AND A.RKD16 >=TO_DATE(#{RKRQQ},'YYYY-MM-DD')]]></if>
+    <if test="RKRQZ != null and RKRQZ != ''"><![CDATA[AND A.RKD16 <=TO_DATE(#{RKRQZ},'YYYY-MM-DD') ]]></if>
+ </select>
+</mapper>

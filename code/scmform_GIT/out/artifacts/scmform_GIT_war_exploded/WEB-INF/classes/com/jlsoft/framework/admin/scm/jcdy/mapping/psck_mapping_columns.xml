@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO.PSCK.SCM.PSCK">
+		<FIELD attrname="PSCKMC" fieldtype="string" allownull="N" name="配送仓库名称" />
+        <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+        <FIELD attrname="LXR" fieldtype="string" allownull="N" name="联系人" />
+       <!-- <Nested id="DYCK" allownull="N" name="对应仓库">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="对应仓库" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="对应仓库" />
+	  </Nested> -->
+     </JLConfig>
+    
+</root>

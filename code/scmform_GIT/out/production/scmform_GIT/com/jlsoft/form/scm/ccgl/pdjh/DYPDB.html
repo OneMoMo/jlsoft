@@ -1,0 +1,134 @@
+
+<script type="text/javascript">
+debugger;
+/**
+ * 打印盘点表
+ */
+ 
+ //定义宽度 高度  左边距
+ var width = 40,height=20;
+ var  width_3 = width*3,width_2 = width*2, width_4 = width*4,width_6 = width*6;
+ var left = 20,left1=left+width_2,left2 = left1+width_3,left3=left2+width_4;
+ var left4=left3+width_3,left5=left4+width_3,left6=left5+width_6,left7=left6+width_2;
+var left8=left7+width_4,left9=left8+width_2;
+
+ debugger;
+var DYPDB = function(data){
+	debugger;
+	var FYDY = 0;
+	var top=100;
+	var JHDH01 = data.JHDH01;
+	var SPLB=data.PDSPLB;
+	var LODOP = getLodop();
+	//var strStyle="";
+	LODOP.NewPage();
+	//LODOP.ADD_PRINT_HTM(0,0,"99%","99%",strStyle+document.getElementById("div1").innerHTML);
+	//LODOP.SET_PRINT_PAGESIZE(0,2100,1480,"");
+	//LODOP.NewPageA();   //分页
+	LODOP.PRINT_INITA(0,0,794,559,"盘点表");
+	LODOP.SET_PRINT_PAGESIZE(0,3160,1400,"");
+	LODOP.ADD_PRINT_HTM(0,0,"99%","99%","");
+	DYPDB.getTitle(data,LODOP);
+
+	
+	debugger;
+	for(var j = 0;j<SPLB.length;j++){
+		//分页打印
+		if(j%19==0 && j!=0){
+			LODOP.NewPageA();
+			DYPDB.getTitle(data,LODOP);
+			FYDY = 0;
+		}
+		debugger;
+		//获取数据
+		var SPBM=JL.isNull(SPLB[j].SPBM)?"":SPLB[j].SPBM;
+		var TXM=JL.isNull(SPLB[j].TXM)?"":SPLB[j].TXM;
+	    var SPMC=JL.isNull(SPLB[j].SPMC)?"":SPLB[j].SPMC;
+	    var SPPPMC=JL.isNull(SPLB[j].SPPPMC)?"":SPLB[j].SPPPMC;
+	    var CKMC=JL.isNull(SPLB[j].CKMC)?"":SPLB[j].CKMC;
+	    var PDSL=JL.isNull(SPLB[j].PDSL)?"":SPLB[j].PDSL;
+	    var CGBMMC=JL.isNull(SPLB[j].CGBMMC)?"":SPLB[j].CGBMMC;
+		var JLBH=JL.isNull(SPLB[j].JLBH)?"":SPLB[j].CJLBH;
+	    
+		debugger;
+		top_margin = top+5 + height*(FYDY+1);
+		FYDY++;
+		LODOP.ADD_PRINT_TEXT(top_margin,left,width_2,height,JLBH);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left1,width_3,height,CGBMMC);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left2,width_4,height,JHDH01);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left3,width_3,height,SPBM);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left4,width_3,height,TXM);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left5,width_6,height,SPMC);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left6,width_2,height,SPPPMC);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left7,width_4,height,CKMC);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+		LODOP.ADD_PRINT_TEXT(top_margin,left8,width_2,height,PDSL);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
+		LODOP.SET_PRINT_STYLEA(0,"Alignment",1);
+		LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+	    
+	}
+
+	LODOP.NewPageA(); 
+	LODOP.PRINT_DESIGN();
+	LODOP.PRINT();
+	window.close();
+};
+DYPDB.getTitle=function(data,LODOP){
+	//定义一页打印20条数据
+	var cum=20;
+	var top=100;
+	//画9条竖线
+	LODOP.ADD_PRINT_LINE(top,left, top+cum*height, left,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left1-10, top+cum*height, left1-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left2-10, top+cum*height, left2-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left3-10, top+cum*height, left3-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left4-10, top+cum*height, left4-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left5-10, top+cum*height, left5-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left6-10, top+cum*height, left6-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left7-10, top+cum*height, left7-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left8-10, top+cum*height, left8-10,0, 1);
+	LODOP.ADD_PRINT_LINE(top,left9-10, top+cum*height, left9-10,0, 1);
+ 	//画横线
+	for(var i = 0; i<cum+1;i++){
+		LODOP.ADD_PRINT_LINE(top+i*height,left, top+i*height, 1170,0, 1);
+	}   
+	//标题
+	LODOP.ADD_PRINT_TEXT(40,left3,width*9,25,"上海名巢实业有限公司:仓库盘点表");
+	LODOP.SET_PRINT_STYLEA(0,"FontSize",16);
+	//列头
+	LODOP.ADD_PRINT_TEXT(105,left,width_2,20,"记录编号");
+	LODOP.ADD_PRINT_TEXT(105,left1,width_3,20,"公司名称");
+	LODOP.ADD_PRINT_TEXT(105,left2,width_4,20,"单据号码");
+	LODOP.ADD_PRINT_TEXT(105,left3,width_3,20,"商品代码");
+	LODOP.ADD_PRINT_TEXT(105,left4,width_3,20,"条形码");
+	LODOP.ADD_PRINT_TEXT(105,left5,width_6,20,"商品名称");
+	LODOP.ADD_PRINT_TEXT(105,left6,width_2,20,"商品品牌");
+	LODOP.ADD_PRINT_TEXT(105,left7,width_3,20,"仓库");
+	LODOP.ADD_PRINT_TEXT(105,left8,width_2,20,"盘点数量");
+	
+};
+</script>

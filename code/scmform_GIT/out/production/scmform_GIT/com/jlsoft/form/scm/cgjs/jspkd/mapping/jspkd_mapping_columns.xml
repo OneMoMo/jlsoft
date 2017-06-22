@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cgjs.jspkd">
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="供应商" />
+        <FIELD attrname="JSFKRQ" fieldtype="String" allownull="N" name="计划付款日期" />
+	</JLConfig>	
+</root>

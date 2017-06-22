@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>商品搜索</title>
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="../js/ui.js"></script>
+</head>
+<body>
+<header class="seach_header">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<div class="header_seach">
+  <div class="jl_input">
+    <input placeholder="输入商品名称搜索" class="w12" autofocus>
+    <i class="fa fa-times-circle"></i>
+  </div>
+</div>
+<a class="seach_a">搜索</a>
+</div>
+</header>
+
+<div class="main" style="padding-top:2.5rem;">
+<h3 class="seachPro_ls bor_bottom">历史搜索</h3>
+<div jlui="" class="jl_list seachPro_list">
+  <div class="jl_list_case bor_bottom" onClick="window.location.href='pro_list.html'">
+    <span>美的空调</span>
+  </div>
+</div>
+</div>
+<div class="w12 pro_list" jlui="">
+    <a class="order_list w12">
+      <div class="store_title w12">
+          <div class="store w08">
+            <img src="../images/yfk_zf_ico.png"/>
+            <span>真诚百货</span>
+            <i class="fa fa-angle-right right_more"></i>
+          </div> 
+          <p class="w04">交易成功</p>
+      </div>
+      <div class="w12">
+        <ul class="order_detail">
+           <li class="imgbox"><img src="../images/sp.jpg"/></li>
+           <li class="w09 discrib">
+              <p class="w12">产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</p>
+              <dl class="w12">
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+              </dl>
+           </li>
+           <li class="order_price w03">
+              <span class="curprice w12"><i>￥</i><em>2999.00</em></span>
+              <span class="oriprice w12"><i>￥</i><em>3299.00</em></span>
+              <p class="w12">x1</p>
+           </li>
+        </ul>
+      </div>
+    </a>
+    <div class="w12 bor_bottom">
+      <dl class="sum_price">
+         <dt class="pr10">合计</dt>
+         <dd><i>￥</i><em>2999.00</em></dd>
+      </dl>
+    </div>
+    <ul class="contrl w12">
+       <li><a>评价</a></li>
+       <li><a>查看物流</a></li>
+       <li><a>删除订单</a></li>
+    </ul>
+</div>
+<footer>
+<div jlui="" class="w12 jl_btn btn_color">清除历史记录</div>
+</footer>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SZPZZL.SCM_SZPZZL">
+		<FIELD attrname="search"
+			format='{"$or":[{"PZBM":{"$regex":"#search#"}},{"PZMC":{"$regex":"#search#"}},{"PZLB":{"$regex":"#search#"}}]}'
+			fieldtype="String" allownull="Y" name="凭证种类查询" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+		<FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+
+	<JLConfig id="MONGO_SZPZZL.SCM_SZPZZL1">
+		<FIELD attrname="search"
+			format='{"$or":[{"PZBM":{"$regex":"#search#"}},{"PZMC":{"$regex":"#search#"}},{"PZLB":{"$regex":"#search#"}}]}'
+			fieldtype="String" allownull="Y" name="凭证种类查询" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	    <FIELD qx='GSXX01|CZGS_CZ|in' />
+	</JLConfig>
+
+	<JLConfig id="MONGO_SZPZZL.SCM_SZPZZL2">
+		<FIELD attrname="search"
+			format='{"$or":[{"PZBM":{"$regex":"#search#"}},{"PZMC":{"$regex":"#search#"}},{"PZLB":{"$regex":"#search#"}}]}'
+			fieldtype="String" allownull="Y" name="凭证种类查询" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

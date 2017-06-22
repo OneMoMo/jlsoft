@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.jcdzz">
+		<FIELD attrname="JHD01" fieldtype="string" allownull="N" name="借出单号" />
+		
+	</JLConfig>
+	
+</root>

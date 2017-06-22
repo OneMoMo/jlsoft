@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<div class="main">
+<div class="user_img">
+  <div class="user_img_main"><img src="images/user_tx.jpg"></div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case">
+    <span class="w04">账户资料</span>
+    <span class="w08 tr">张三</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div class="jl_list_case">
+    <span class="w04">修改密码</span>
+    <span class="w08 tr font_gray">安全</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div class="jl_list_case">
+    <span class="w04">常用营业员</span>
+    <span class="w08 tr">李四</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case">
+    <span class="w04">关于我们</span>
+    <span class="w08 tr"></span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div class="jl_list_case">
+    <span class="w04">版权</span>
+    <span class="w08 tr">武汉金力软件</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="w12 pl20 pr20 mt20">
+  <div class="w12 mt20 jl_btn btn_color radius5" onClick="window.location.href='login.html'">退出登录</div>
+</div>
+
+</div>
+
+<footer>
+<dl class="w04" onClick="window.location.href='index.html'">
+  <dt><i class="fa fa-home"></i></dt>
+  <dd>首页</dd>
+</dl>
+<dl class="w04" onClick="window.location.href='myOrder.html'">
+  <dt><i class="fa fa-file-text"></i></dt>
+  <dd>订单</dd>
+</dl>
+<dl class="w04 xuan" onClick="window.location.href='userIndex.html'">
+  <dt><i class="fa fa-user"></i></dt>
+  <dd>我的</dd>
+</dl>
+</footer>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

@@ -1,0 +1,206 @@
+<!-- /**
+ * @author 陈奇
+ * 2016-8-30 16:41:24（界面修改）
+ */ -->
+<div class="w12 jl_screening">
+	<div class="w09 scr_seach">
+		<ul>
+			<li>
+				<dl>
+					<dd class="w12">
+						<div class="jl_btn_group">
+							<input type="text" placeholder="代码/名称" name="CXTJ"> <span
+								id="query" class="jl_btn btn_white"><i
+								class="fa fa-search" name="search"></i></span>
+						</div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div id="d_LIST" class="w12"></div>
+<div class="jl_form addCarShow hide">
+	<div class="jl_form_02">
+		<div class="hide" id="d_jlbh"></div>
+		<ul>
+			<!-- 费用标准编码 -->
+			<li class="w12" style="display:none">
+				<dl>
+					<dt class="w03" title="费用标准编码">费用标准编码</dt>
+					<dd class="w09">
+						<div class="w12" type="text" id="d_FYBZBM"></div>
+					</dd>
+				</dl>
+			</li>
+			<!-- 费用标准名称 -->
+			<li class="w12">
+				<dl>
+					<dt class="w03" title="费用标准名称">费用标准名称</dt>
+					<dd class="w09">
+						<div class="w12" id="d_FYBZMC"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<!--  计费方式-->
+			<li class="w12">
+				<dl>
+					<dt class="w03" title="计费方式">计费方式</dt>
+					<dd class="w09">
+						<div class="w12" id="d_JFFS"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<!-- 费用 -->
+			<li class="w12" id = LI_FY style="display:none">
+				<dl>
+					<dt class="w03" title="费用名称">送货费用名称</dt>
+					<dd class="w09">
+						<div class="hide" id="d_FYBM01"></div>
+						<div class="w12" id="d_FYMC"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<!-- 物流公司 -->
+			<li class="w12" id=LI_WLGS>
+				<dl>
+					<dt class="w03" title="物流公司 ">物流公司</dt>
+					<dd class="w09">
+						<div class="w12" id="d_WLGS"></div>
+						<div class="hide" id="d_WLGS01"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<div class="w12 jl_tab_title pl30 mb10"></div>
+
+	<!-- 按体积显示的‘费用标准’ -->
+	<div class="jl_form_02" id="TJFYBZ">
+
+		<ul>
+			<!--  体积-->
+			<li class="w02">
+				<div id="d_TJ"></div>
+			</li>
+			<!-- 距离 -->
+			<li class="w02">
+				<div id="d_JULI"></div>
+			</li>
+			<!--费用单价  -->
+			<li class="w02">
+				<div id="d_FYDJ"></div>
+			</li>
+			<!--超方单价  -->
+			<li class="w02">
+				<div id="d_CFDJ"></div>
+			</li>
+			<!--批量更新  -->
+			<li class="w02">
+				<div id="d_PLGX" class="fr"></div>
+			</li>
+			<!--体积费用明细  -->
+			<li class="w12">
+				<div id="d_TJFYMX"></div>
+			</li>
+
+		</ul>
+
+	</div>
+
+	<!-- 按件显示的‘费用标准’ -->
+	<div class="jl_form_02" id="AJFYBZ">
+
+		<ul>
+			<!--费用单价  -->
+			<li class="w03">
+				<div id="d_FYDJ1"></div>
+			</li>
+			<!--开始时间  -->
+			<li class="w02">
+				<div class="w12" id="d_JFSD_Q"></div>
+			</li>
+			<!--终止时间  -->
+			<li class="w02">
+				<div class="w12" id="d_JFSD_E"></div>
+			</li>
+			<!--批量更新  -->
+			<li class="w03">
+				<div id="d_PLGX1" class="fr"></div>
+			</li>
+			<!--体积费用明细  -->
+			<li class="w12">
+				<div id="d_AJFYMX"></div>
+			</li>
+
+		</ul>
+
+	</div>
+
+	<!-- 按件显示试用网点 -->
+	<div class="jl_form_02" id="AJSYWD">
+
+		<ul>
+			<!--体积送货 网点-->
+			<li class="w12">
+				<div id="d_TJSHWD"></div>
+			</li>
+		</ul>
+
+	</div>
+
+	<!-- 按车次 -->
+	<div class="jl_form_02" id="AJCCFF">
+
+		<ul>
+		<li class="w02">
+				<div id="d_FYMC1"></div>
+			</li>
+			<li class="w02">
+				<div id="d_ZZTJ1"></div>
+			</li>
+			<!--FY  -->
+			<li class="w02">
+				<div id="d_FYDJ2"></div>
+			</li>
+			<!-- 输入框 -->
+			<li class="w02">
+				<div id="d_FYJE"></div>
+			</li>
+			<!-- 输入框 -->
+			<!-- <li class="w02">
+				<div id="d_BL"></div>
+			</li> -->
+			<!--批量更新  -->
+			<li class="w02">
+				<div id="d_PLGX2" class="fr"></div>
+			</li>
+			<!-- 按车次送货费用明细 -->
+			<li class="w12">
+				<div id="d_CCYYMX"></div>
+			</li>
+		</ul>
+
+	</div>
+
+
+
+
+	<div class="jl_form_02">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w04"></dt>
+					<dd class="w06">
+						<div id="d_footer"></div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>

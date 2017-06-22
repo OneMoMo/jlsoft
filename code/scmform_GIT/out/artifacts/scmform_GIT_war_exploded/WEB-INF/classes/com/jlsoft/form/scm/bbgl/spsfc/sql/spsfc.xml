@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPSFC">
+	 <select id="querySPSFC" parameterType="Map" resultType="java.util.Map">
+        Select A.BM01, Sum(A.JHSL) JHSL, Sum(A.FCSL) FCSL,
+		 Sum(A.BRSL) BRSL, Sum(A.BCSL) BCSL, Sum(A.ZCZRSL) ZRSL,Sum(A.ZCZCSL) ZCSL,  Sum(A.BSSL) BSSL,
+		 Sum(A.PFSL) PFSL,  Sum(A.LSSL) LSSL, Sum(A.JCSL) JCSL, Sum(A.PFTHSL) FXTH, Sum(A.CYZCSL) CYZCSL,
+		 Sum(A.CYZRSL) CYZRSL, C.BM02 CGBM, A.WLDW01 GYSDM, D.WLDW02 GYSMC, A.SPXX01, S.SPXX02 SPBM, S.SPXX04 SPMC,
+		       S.SPXX23, F.SPFL01, F.SPFL02,
+		          (select 
+                  (select spfl02
+                     from spfl
+                    where a.spfl01 like spfl01 || '%' and spfl03 = 1) sjflmc                    
+                   from spfl a
+                  where spfl01 =F.SPFL01 ) SPDL,
+		       SUBSTR(F.SPFL01, 0, LENGTH(F.SPFL01) - 2) SJFLDM, A.CK01, K.CK02 CKMC,
+		       TO_CHAR(K.CK09) CK09, get_spsx_v10(A.TJBZ) SPSX, S.PPB02, S.SPPZ01, S.SPHS01, S.SPXX34,
+		       S.PPB01, A.GSXX01,
+		       (Select GSXX02 From GSXX Where GSXX01 = A.GSXX01) GSXX02, S.SPXH01,
+		       S.GGB01, S.SPXX26, S.SPXX33,
+		       (Select SPFL02
+		           From SPFL
+		          Where SPFL01 = SUBSTR(F.SPFL01, 0, LENGTH(F.SPFL01) - 2)) SJFLMC,
+		       (Select SCCJ02 From SCCJ Where SCCJ.SCCJ01 = S.SCCJ01) SCCJ02,
+		       (Select CPFL01 || ',' || CPFL02
+		           From SPGNSM
+		          Where SPGNSM.SPXX01 = A.SPXX01) CPFL02,
+		       (Select SPPZ02 From SPPZ Where SPPZ01 = S.SPPZ01) SPPZ02,
+		       (Select SPHS02 From SPHS Where SPHS01 = S.SPHS01) SPHS02,
+		       (Select SPXH02
+		           From SPXH
+		          Where SPFL01 = F.SPFL01
+		            And SPXH01 = S.SPXX34
+		            And PPB01 = S.PPB01) SPXH02, Sum(A.JHSL) JHSL, Sum(A.FCSL) FCSL,
+		       Sum(A.BRSL) BRSL, Sum(A.BCSL) BCSL, Sum(A.ZCZRSL) ZCZRSL,
+		       Sum(A.ZCZCSL) ZCZCSL, Sum(A.BYSL) BYSL, Sum(A.BSSL) BSSL,
+		       Sum(A.PFSL) PFSL, Sum(A.PFTHSL) PFTHSL, Sum(A.LSSL) LSSL,
+		       Sum(A.LSTHSL) LSTHSL, Sum(A.YFSL) YFSL, Sum(A.YFTHSL) YFTHSL,
+		       Sum(A.LXSL) LXSL, Sum(A.LXHZSL) LXHZSL, Sum(A.CYZCSL) CYZCSL,
+		       Sum(A.CYZRSL) CYZRSL, Sum(A.JCSL) JCSL, Sum(A.HHSL) HHSL,
+		       Sum(A.PJDJ) PJDJ,
+		       Sum(A.JHSL + A.BRSL + A.ZCZRSL + A.PFTHSL + A.LSTHSL + A.YFTHSL +
+		            A.LXHZSL + A.HHSL + A.CYZRSL) BQRK,
+		       Sum(A.FCSL + A.BCSL + A.ZCZCSL + A.PFSL + A.LSSL + A.YFSL + A.LXSL +
+		            A.JCSL + A.CYZCSL) BQCK,
+		       (Select CPFL01 || ',' || CPFL02 From SPGNSM Where SPXX01 = S.SPXX01) CPFL02,
+		       Sum(A.SQBGZSL) SQBGZ, Sum(A.SQKMSL) SQKMS, Sum(A.SQSJZSL) SQSJZ,
+		       Sum(A.BQBGZSL) BQBGZ, Sum(A.BQKMSL) BQKMS, Sum(A.BQSJZSL) BQSJZ,
+		       Sum(A.PJDJ) * Sum(A.BQKMSL) BQKMSJE, Sum(A.PJDJ) * Sum(A.BQBGZSL) BQBGZJE,
+		       Sum(A.PJDJ) * Sum(BQSJZSL) BQSJZJE,
+		       Sum(A.SQBGZSL + A.JHSL + A.BRSL + A.ZCZRSL + A.BYSL + A.PFTHSL +
+		            A.LSTHSL + A.YFTHSL + A.LXHZSL + A.HHSL + A.CYZRSL - A.FCSL -
+		            A.BCSL - A.ZCZCSL - A.BSSL - A.PFSL - A.LSSL - A.YFSL - A.LXSL -
+		            A.JCSL - A.BQBGZSL - A.CYZCSL) CE,
+		       (Sum(A.BQSJZSL) / (Case
+		         When (ABS(Sum(A.XSSL)) >= 1) Then
+		          Sum(A.XSSL)
+		         Else
+		          Null
+		       End)) ZZTS
+		  From VIEW_SPSFCR_HZ A, BM C, CK K, WLDW D, SPXX S, SPFL F
+		 Where A.BM01 = C.BM01
+		   And A.CK01 = K.CK01
+		   And A.WLDW01 = D.WLDW01
+		   And A.SPXX01 = S.SPXX01
+		   And F.SPFL01 = SUBSTRING(S.SPFL01, 1, 12)
+		<if test="RQQ !=null and RQQ != '' and RQZ !=null and RQZ !=''">
+	       <![CDATA[     
+	       AND ((A.MINDATE = TO_DATE(#{RQQ},'YYYY-MM-DD')-1 AND A.MAXDATE IS NULL) 
+	       OR (A.MINDATE >= TO_DATE(#{RQQ},'YYYY-MM-DD')AND A.MAXDATE <= TO_DATE(#{RQZ},'YYYY-MM-DD')) 
+	       OR (A.MINDATE IS NULL AND A.MAXDATE =TO_DATE(#{RQZ},'YYYY-MM-DD'))) 
+	       ]]>
+	    </if> 
+
+	    <if test="SPMC != null and SPMC != ''">
+		    AND (S.SPXX02 LIKE '%'||#{SPMC}||'%' OR REGEXP_LIKE(S.SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPPYM, #{SPMC}, 'i'))
+	    </if>
+	    <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          S.SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	    </if>
+	    <if test="CK != null and CK != ''">
+		     <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		      K.CK01 = #{item}
+		     </foreach>
+	    </if>
+	    <if test="PP != null and PP != ''">
+	         <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+	          S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	    <if test="GYS != null and GYS != ''">		      
+		    AND (D.WLDW02 LIKE '%'||#{GYS}||'%' OR D.WLDW01 = #{GYS})
+	    </if>
+	    <if test="CGBM != null and CGBM != ''">		      
+		    <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      C.BM01 = #{item}
+		    </foreach>
+	    </if>
+	    JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+	    JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+	    JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+		 Group By A.BM01, C.BM02, A.WLDW01, D.WLDW02, A.SPXX01, S.SPXX02, S.SPXX04,
+		          S.SPXX23, F.SPFL01, F.SPFL02, A.CK01, K.CK02, K.CK09, A.TJBZ,
+		          S.PPB02, S.SCCJ01, S.SPPZ01, S.SPHS01, S.SPXX34, S.PPB01, A.GSXX01,
+		          S.SPXH01, S.GGB01, S.SPXX26, S.SPXX33, S.SPXX01
+    </select>
+
+    <!-- 右键关联查询 -->
+    <select id="querySPMXLB" parameterType="Map" resultType="java.util.Map">
+    Select  A.SPXX01, S.SPXX02 SPBM, S.SPXX04 SPMC,S.SPXX23, F.SPFL01, F.SPFL02,Sum(A.JHSL) JHSL, Sum(A.FCSL) FCSL,
+            Sum(A.BRSL) BRSL, Sum(A.BCSL) BCSL, Sum(A.ZCZRSL) ZRSL,Sum(A.ZCZCSL) ZCSL, Sum(A.BYSL) BYSL, Sum(A.BSSL) BSSL,
+            Sum(A.PFSL) PFSL, Sum(A.PFTHSL) FXTH, Sum(A.LSSL) LSSL,Sum(A.LSTHSL) LSTH, Sum(A.YFSL) YFSL, Sum(A.YFTHSL) YFTH,
+            Sum(A.LXSL) LXSL, Sum(A.LXHZSL) LXHZSL, Sum(A.CYZCSL) CYZCSL,Sum(A.CYZRSL) CYZRSL, Sum(A.JCSL) JCSL, Sum(A.HHSL) HHSL,
+            Sum(A.PJDJ) PJDJ,Sum(A.JHSL + A.BRSL + A.ZCZRSL + A.PFTHSL + A.LSTHSL + A.YFTHSL + A.LXHZSL + A.HHSL + A.CYZRSL) BQRK,
+            Sum(A.FCSL + A.BCSL + A.ZCZCSL + A.PFSL + A.LSSL + A.YFSL + A.LXSL + A.JCSL + A.CYZCSL) BQCK
+      From VIEW_SPSFCR_HZ A, BM C, CK K, WLDW D, SPXX S, SPFL F
+     Where A.BM01 = C.BM01
+       And A.CK01 = K.CK01
+       And A.WLDW01 = D.WLDW01
+       And A.SPXX01 = S.SPXX01
+       And F.SPFL01 = SUBSTRING(S.SPFL01, 1, 12)
+       <if test="SPSFRQ !=null and SPSFRQ != ''"> 
+	       AND A.MINDATE = TO_DATE(#{SPSFRQ},'YYYY-MM-DD')
+	   </if>
+	   <if test="SPFL01 != null and SPFL01 != ''">
+	       AND S.SPFL01 = #{SPFL01}
+	   </if>
+	   <if test="SPXX01 != null and SPXX01 != ''">
+		   AND S.SPXX01 = #{SPXX01}
+	   </if>
+	   <if test="CK01 != null and CK01 != ''">
+		   AND K.CK01 = #{CK01}
+	   </if>
+	   <if test="PPB01 != null and PPB01 != ''">
+	       AND S.PPB01 = #{PPB01}
+	   </if>
+	   <if test="GYSDM != null and GYSDM != ''">		      
+		   AND D.WLDW01 = #{GYSDM}
+	   </if>
+	   <if test="BM01 != null and BM01 != ''">
+		   AND C.BM01 = #{BM01}
+	   </if>
+     	Group By A.BM01, C.BM02, A.WLDW01, D.WLDW02, A.SPXX01, S.SPXX02, S.SPXX04,
+		          S.SPXX23, F.SPFL01, F.SPFL02, A.CK01, K.CK02, K.CK09, A.TJBZ,
+		          S.PPB02, S.SCCJ01, S.SPPZ01, S.SPHS01, S.SPXX34, S.PPB01, A.GSXX01,
+		          S.SPXH01, S.GGB01, S.SPXX26, S.SPXX33, S.SPXX01
+    </select>
+</mapper>

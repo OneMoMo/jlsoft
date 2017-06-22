@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JLMenu">
+	<select id="selectMenu" parameterType="Map" resultType="java.util.Map">
+		SELECT C.CD01, C.CD02, C.CD03, C.CD04, C.CD08,
+				(SELECT D.CD02 FROM W_CZYCD D WHERE D.CD01 = C.CD08 ) CDMC,
+				C.CD07 PX,
+				C.CD10,
+				C.CD11
+		  FROM W_CZYCD C
+		 WHERE C.CD05 = 0
+		   AND C.CD06 = #{CD06}
+		   <choose>
+			   <when test="CD08 == null">AND C.CD09 = 1</when>
+			   <when test="CD08 != null">AND C.CD09 > 1 AND C.CD08 = #{CD08}</when>
+		   </choose>
+		   AND EXISTS 
+	           (SELECT DISTINCT Q.CD01
+	              FROM W_CZYCZQX Q,W_CZYCD D
+	             WHERE Q.CD01 = D.CD01
+	             	AND (
+	             		D.CD08 = C.CD01 
+	             		OR D.CD01=C.CD01
+	             		)
+	                AND (
+	                	CZY01 = #{CZY01}
+	                	OR GW01 IN (SELECT GW01 FROM W_CZYGW WHERE CZY01 = #{CZY01})
+	                )
+	            )	
+		ORDER BY CD01,PX
+	</select>
+	
+	<select id="queryMenu" parameterType="Map" resultType="java.util.Map">
+		SELECT V.VIEW01 CD01, V.VIEW02 CD02, V.VIEW03 CD08, (SELECT VIEW02 FROM W_MENUVIEW WHERE VIEW01 = V.VIEW03) CDMC,
+			   V.VIEW04, V.VIEW05 CD04, V.VIEW09 CD10, V.VIEW10 CD11, V.VIEW11 CD07, M.MENU02 CD03,
+       		   (SELECT COUNT(1)
+          		  FROM W_TASK E,W_BM F,W_GZL G
+                 WHERE E.GZL01 = G.GZL01 
+                   AND E.BM01 = F.BM01(+) 
+                   AND M.MENU02 LIKE '%"GZL01":"' || E.GZL01 || '"%'
+                   AND M.MENU02 LIKE '%"BZ01":"' || E.BZ01 || '"%'
+                   <!-- 该流程只在部门内部使用，不跨部门流转（0：关闭；1：开启） -->
+			       <if test="SCM_BM01 != null">
+			   	     	AND ((G.GZL10 = 0) OR (G.GZL10 = 1 AND F.SCM_BM01 LIKE #{SCM_BM01}||'%'))
+			   	   </if>
+                   AND ((E.SK05 = 0) OR ((E.SK05 = 1) AND EXISTS (SELECT F.SK01
+                                                                    FROM W_TASKRY F
+                                                                   WHERE F.SK01 = E.SK01
+                                                                     AND F.CZY01 = #{USERID})))
+                  <if test="GSXX01 != null"> 
+ 	  		 		 AND E.GSXX01 = #{GSXX01} 
+ 	 			  </if>                                            
+                  <if test="BM != null">
+				     <foreach collection="BM" index="index" item="bm01" open="AND ( " separator="or" close=")">
+				    		  E.BM01 like  #{bm01}||'%'
+					 </foreach> 
+	     		  </if>
+	     		  AND ((1=1 JL{CZY|E.QXBM01|BM_CZ|LIKE%}JL ) OR E.QXBM01 IS NULL) 
+   	 			  AND ((1=1 JL{CZY|E.WLDW01|WLDW_CZ|inS}JL ) OR E.WLDW01 IS NULL)
+   	 			  AND ((1=1 JL{CZY|E.CK01|CK_CZ|LIKE%}JL ) OR E.CK01 IS NULL) 
+   	 			  AND ((1=1 JL{CZY|E.SSBM01|SSBM01|inS}JL ) OR E.SSBM01 IS NULL) 
+   	 			  AND ((1=1 JL{CZY|E.QX02|QX02|inS}JL ) OR E.QX02 IS NULL) 
+   	 			  JL{CZY|E.QXCZY01|CZY_CZ|inS}JL     
+	           ) NUM
+		  FROM W_MENUVIEW V, W_MENU M
+		 WHERE V.MENU01 = M.MENU01(+)
+		   AND YXBJ = 0
+		   <if test="VIEW01 != null">AND V.VIEW01=#{VIEW01}</if>
+		   <if test="VIEW05 != null">AND V.VIEW05=#{VIEW05}</if>
+		   <if test="VIEW06 != null">AND V.VIEW06=1</if>
+		   <if test="VIEW07 != null">AND V.VIEW07=1</if>
+		   <if test="VIEW08 != null">AND V.VIEW08=1</if>
+		   <if test="VIEW10 != null">AND V.VIEW10 ${VIEW10}</if>
+		   <if test="BDBH != null">AND M.MENU02 LIKE '%"bdbh":"' || #{BDBH} || '"%'</if>
+		   <if test="GZL01 != null">
+		       AND M.MENU02 LIKE '%"GZL01":"' || #{GZL01} || '"%'
+		       AND M.MENU02 LIKE '%"BZ01":"' || #{BZ01} || '"%'
+		   </if>
+		   <if test="BZ03 != null">
+		       AND M.MENU02 LIKE '%"BZ03":"' || #{BZ03} || '"%'
+		   </if>
+		   <if test="USERID != null">
+			   <if test="ALL == null">
+			       AND V.VIEW10 != 4
+				   <choose>
+					   <when test="PARENT == null">AND V.VIEW04=1</when>
+					   <when test="PARENT != null">AND V.VIEW04 > 1 AND V.VIEW03 = #{PARENT}</when>
+				   </choose>
+			   </if>
+			   AND VIEW01 IN (
+				       SELECT VIEW01 FROM W_MENUVIEW MV
+					   START WITH MV.VIEW01 IN (
+					       SELECT VIEW01 FROM W_CZYMENU WHERE (
+					           CZY01 = #{USERID}
+			                   OR GW01 IN (SELECT GW01 FROM W_CZYGW WHERE CZY01 = #{USERID})
+			               )
+					   )
+					   <if test="VIEW12 == null or VIEW12 == 0">AND MV.VIEW12=0</if>
+		   			   <if test="VIEW12 != null and VIEW12 == 1">AND MV.VIEW12=1</if>
+				       CONNECT BY PRIOR MV.VIEW03 = MV.VIEW01
+				   )
+		   </if>
+		   ORDER BY V.VIEW04, V.VIEW11 ASC
+	</select>
+	
+	<select id="selectMenuIndex" parameterType="Map" resultType="java.util.Map">
+		SELECT V.VIEW01 CD01,
+          	   V.VIEW02 CD02,
+		       V.VIEW03 CD08,
+		       (SELECT VIEW02 FROM W_MENUVIEW WHERE VIEW01 = V.VIEW03) CDMC,
+		       V.VIEW05 CD04,
+		       V.VIEW09 CD10,
+		       V.VIEW10 CD11,
+		       V.VIEW11 CD07,
+		       M.MENU02 CD03
+		  FROM W_MENUVIEW V, W_MENU M
+		 WHERE V.MENU01 = M.MENU01
+		   AND YXBJ = 0
+		   AND VIEW01 IN
+		       (SELECT VIEW01
+		          FROM W_MENUVIEW MV
+		         START WITH MV.VIEW01 IN
+		                    (SELECT VIEW01
+		                       FROM W_CZYMENU
+		                      WHERE (CZY01 = #{USERID} OR
+		                            GW01 IN
+		                            (SELECT GW01 FROM W_CZYGW WHERE CZY01 = #{USERID})))
+		        CONNECT BY PRIOR MV.VIEW03 = MV.VIEW01)
+		  ORDER BY NLSSORT(CD08, 'NLS_SORT = SCHINESE_PINYIN_M'), NLSSORT(CD02, 'NLS_SORT = SCHINESE_PINYIN_M') ASC
+	</select>
+</mapper>

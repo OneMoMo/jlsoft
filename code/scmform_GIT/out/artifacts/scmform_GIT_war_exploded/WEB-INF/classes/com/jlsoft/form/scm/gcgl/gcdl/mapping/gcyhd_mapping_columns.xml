@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gcyhd">
+    	<FIELD attrname="GCDLD01" fieldtype="String" allownull="N" name="工程登陆单号" />
+    	<FIELD attrname="SYDW" fieldtype="String" allownull="N" name="使用单位" />
+    	<FIELD attrname="GMDW" fieldtype="String" allownull="N" name="购买单位" />
+    	<FIELD attrname="YWYMC" fieldtype="String" allownull="N" name="业务员" />
+    	<FIELD attrname="BMMC" fieldtype="String" allownull="N" name="销售部门" />	
+    	<Nested id="SYDWDZ" allownull="N" name="使用单位地址">
+        </Nested>
+    	<Nested id="XSFS01">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="销售方式名称" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="销售方式名称" />
+        </Nested> 
+       <Nested id="SPLB" allownull="N" name="工程要货明细">
+            <FIELD attrname="YHSL" fieldtype="String" allownull="N" name="要货数量" />
+            <FIELD attrname="FXDJ" fieldtype="String" allownull="N" name="要货单价" />
+        </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.gcgl.gcyhdps">
+		<FIELD attrname="KHXM" fieldtype="String" allownull="N" name="配送联系人" />
+		<FIELD attrname="KHDH" fieldtype="String" allownull="N" name="配送联系电话" />
+		<!-- <FIELD attrname="PSSJ" fieldtype="String" allownull="N" name="配送时间" /> -->	
+    	<Nested id="SHDZ" allownull="N" name="送货地址">
+        </Nested>
+	</JLConfig>
+	
+	
+	<JLConfig id="form.scm.gcgl.gcyhdsh">
+		<FIELD attrname="GCDLD01" fieldtype="String" allownull="N" name="工程登陆单号" />
+		<Nested id="SPLB" allownull="N" name="工程要货明细">
+            <FIELD attrname="YHSL" fieldtype="String" allownull="N" name="要货数量" />
+            <FIELD attrname="FXDJ" fieldtype="String" allownull="N" name="要货单价" />
+        </Nested>
+	</JLConfig>
+</root>

@@ -1,0 +1,334 @@
+<script type="text/javascript">
+var formQuery = {};
+$(document).ready(function(){
+	var modal = $(".jl_modal .jl_modal_main:not(:hidden)");
+	formQuery = {};
+	formQuery.config = JLQuery.config;
+	formQuery.config.callback = function(){
+		var list = formQuery.querygrid.getSelected();
+		if(!JL.isNull(formQuery.detailgrid)){
+      		var listItem = formQuery.detailgrid.getSelected();
+      		$.extend(list[0], {"item":listItem});
+    	}
+		JLQuery.close(list);
+	}
+	formQuery.config.query = function(){
+		formQuery.querygrid.removeAll();
+		var queryField = {};
+		var texts = modal.find(".jl_screening > div > ul > li").find(":text");
+		for(var i=0;i<texts.length;i++){
+			var text = $(texts[i]);
+			if(!JL.isNull(text.val()) && text.val()!="请选择"){
+				queryField[text.attr("name")] = text.val();
+			}
+		}
+		
+		if(!JL.isNull(formQuery.config.modalField)){
+			$.each(formQuery.config.modalField, function(key, value){
+				if(!JL.isNull(value)){
+					queryField[key] = value;
+				}
+			});
+		}
+		
+		if(!JL.isNull(formQuery.config.beforeQuery) && typeof formQuery.config.beforeQuery == "function"){
+			if(formQuery.config.beforeQuery(queryField)){
+				return true;
+			}
+		}
+	
+		var XmlData={};
+		XmlData["CX01"] = formQuery.config.querybh;
+		if(!JL.isNull(JLQuery.config.sort)){
+			XmlData["sort"] = JLQuery.config.sort;
+		}
+		XmlData["queryField"] = $.extend(queryField,userInfo);
+		
+		var ajaxJson = {};
+		ajaxJson["src"] = "jlquery/selectCustom.do?rid="+Math.random();
+		ajaxJson["data"] = {"XmlData":JSON.stringify(XmlData)};
+		ajaxJson["alert"] = true;
+		ajaxJson["async"] = true;
+		ajaxJson["callback"] = function(resultData){
+			if(!JL.isNull(resultData)){
+				var data = resultData["data"];
+				var fileName = resultData["fileName"];
+				formQuery.querygrid.setData(data);
+				formQuery.querygrid.setPaging(fileName);
+				
+				if(formQuery.config["autocallback"]){
+					queryGrid[queryid].selectFirst();
+					formQuery.config.callback();
+				}
+				
+				if(!JL.isNull(formQuery.config.afterquery) 
+						&& typeof formQuery.config.afterquery == "function"){
+					formQuery.config.afterquery(formQuery.querygrid);
+				}
+			}
+		};
+		var resultData = JL.ajax(ajaxJson,true);
+	};
+	formQuery.config.loadCondition = function(CXTJ,dl){
+		var jl_screening = modal.find(".jl_screening");
+		var jl_screening_main = $("<div>").addClass("jl_screening_main").appendTo(jl_screening);
+		var ul = $("<ul>").appendTo(jl_screening_main);
+		var li = $("<li>").addClass("w12").appendTo(ul);
+		
+		var dl = null;
+		var cursor = 0;
+		for(var i=0; i<CXTJ.length; i++){
+			var TJ = CXTJ[i];
+			if(TJ.TJ06 != 1){
+				if(cursor%3 == 0){
+					dl = $("<dl>").appendTo(li);
+					dl.addClass("w12");
+				}
+				cursor++;
+			}
+			
+			var dt = $("<dt>");
+			dt.addClass("w01");
+			dt.append("<b>"+TJ["TJ03"]+"</b>");
+			dt.appendTo(dl);
+			var dd = $("<dd>");
+			dd.addClass("w03");
+			dd.appendTo(dl);
+			if(TJ["TJ06"] == 0 || TJ["TJ06"] == 1){
+				var input = $("<input>").appendTo(dd);
+				input.attr("type", "text");
+				input.attr("name", TJ.TJ02);
+				input.addClass("w11");
+				if(TJ["TJ08"] == 1){
+					input.keydown(function(event){
+						var e = event || window.event || arguments.callee.caller.arguments[0];
+						if(e && e.keyCode==13){ // enter 键
+							formQuery.config.query();
+				    	}	
+				    });
+				}
+				if(!JL.isNull(TJ["TJ09"])){
+					input.val(TJ["TJ09"]);
+				}
+				if(TJ["TJ06"] == 1){
+					dt.hide();
+					dd.hide();
+				}
+			}else if(TJ["TJ06"] == 2){
+				var div = $("<div>").appendTo(dd);
+				div.attr("id", TJ.TJ02);
+				div.addClass("w11");
+				
+				console.info(TJ.TJ07);
+				var selectConfig = {
+					"jlid": "JLSelect",
+					"options": JSON.parse(TJ.TJ07)
+				};
+				if(!JL.isNull(TJ.TJ09)){
+					selectConfig["default"] = TJ.TJ09;
+				}
+				JL.initPlugIn(div, TJ.TJ02, selectConfig);
+			}else if(TJ["TJ06"] == 3){
+				var div = $("<div id='"+TJ["TJ02"]+"'></div>");
+				div.addClass("w11");
+				div.appendTo(dd);
+				var json = {"jlid":"JLDate","extformat":"Y-m-d"};
+				if(!JL.isNull(TJ["TJ07"])){
+					$.extend(json,JSON.parse(TJ["TJ07"]));
+				}
+				JL.initPlugIn(div, TJ.TJ02, json);
+			}
+		}
+	};
+	
+	var querybh = formQuery.config["querybh"];
+	var ajaxJson = {};
+	ajaxJson["src"] = "FormQuery/getConfig.do?rid="+Math.random();
+	ajaxJson["data"] = {"XmlData":JSON.stringify({"CX01":querybh})};
+	var resultData = JL.ajax(ajaxJson);
+	if(!JL.isNull(resultData)){
+		resultData = resultData.data;
+		$(".jl_modal .max_modal_main .modal_title h3").html(resultData.CX02);
+		$.extend(formQuery.config, resultData);
+		
+		console.info(resultData.CX07);
+		if(!JL.isNull(resultData.CX07)){
+			$(".jl_modal .max_modal_main .jl_screening").empty();
+			$(".jl_modal .max_modal_main .jl_screening").load(resultData.CX07+"?rid="+rid,function(){
+				if(formQuery.config.queryGrid.jlid == "JLGrid"){
+					formQuery.querygrid.setHeight(modal.find(".modal_content").height() - 102 - modal.find(".jl_screening").height());
+				}
+			});
+		}else{
+			if(!JL.isNull(formQuery.config.CXTJ)){
+				formQuery.config.loadCondition(formQuery.config.CXTJ);
+			}else{
+				modal.find(".jl_screening").hide();
+			}
+		}
+	}
+	
+	var queryGrid = formQuery.config.queryGrid;
+	if(JL.isNull(queryGrid)){
+		var CXJGs = formQuery.config.CXJG;
+		var headers = [];
+		var groupField = "";
+		for(var i=0; i<CXJGs.length; i++){
+			var CXJG = CXJGs[i];
+			var header = {};
+			header["id"] = CXJG.JG01;
+			header["name"] = CXJG.JG02;
+			if(CXJG.JG03 > 0){
+				header["width"] = CXJG.JG03;
+			}
+			if(CXJG.JG04 != 0){
+				header["hidden"] = true;
+			}
+			if(!JL.isNull(CXJG.JG05)){
+				header["summary"] = CXJG.JG05;
+			}
+			if(CXJG.JG06 == 1){
+				groupField = CXJG.JG01;
+			}
+			headers.push(header);
+		}
+		
+		var buttons = [{
+			icon:"search",
+			text:"查找",
+			func:function(){
+				formQuery.config.query();	
+			}
+		}];
+		if(modal.hasClass("jl_modal_main")){
+			buttons.push({
+				icon:"grav",
+				text:"确定",
+				func:function(){
+					formQuery.config.callback();
+				}
+			});
+		}
+		if(!JL.isNull(resultData["CX08"])){
+			modal.find("#detailgrid").data("CX08", resultData["CX08"]);
+			buttons.push({
+				text:"查询明细账",
+				func:function(){
+					var queryid = modal.find("#modal_search").attr("data-querypage-index");
+					var grid = queryGrid[queryid];
+					if(grid.getSelected().length != 1){
+						JL.tip("查明细时,只能选择一行主记录");
+						return false;
+					}
+					
+					var querybh = modal.find("#detailgrid").data("CX08");
+					JLQuery.show(modal, {"querybh":querybh,"noback":true,"excel":true,"autoquery":true});
+					JLQuery["config"]["modalField"] = grid.getSelected()[0];
+				}
+			});
+		}
+		
+		queryGrid = {
+			"jlid": "JLGrid",
+			"obj": modal.find("#querygrid"),
+			"headers": headers,
+			"groupField": groupField,
+			"sequence": false,
+			"height": 200,
+			"excel": true,
+			"paging": true,
+			"buttons": buttons,
+			"listener":{
+				"rowdblclick": function(grid, data, rowindex){
+					formQuery.config.callback();
+				}
+			}
+		};
+		if(!JL.isNull(formQuery.config.multi) && formQuery.config.multi == false){
+			queryGrid.multi = false;
+		}
+		
+		formQuery.config.queryGrid = queryGrid;
+		$(".jl_modal .max_modal_main .modal_btn").hide();
+	}
+	
+	if($(".jl_modal .max_modal_main > .modal_btn > a:not(:hidden)").length == 0){
+		$(".jl_modal .max_modal_main > .modal_btn").hide();
+		$(".jl_modal .max_modal_main > .modal_title > h3").after("<div class='w02 font_red'>&nbsp;&nbsp;双击选项回填</div>");
+		modal.find(".modal_content").css({"height": "90%", "max-height": "90%"});
+	}
+	queryGrid.height = modal.find(".modal_content").height() - 102 - modal.find(".jl_screening").height();
+	console.info(modal.find(".modal_content").height());
+	console.info(modal.find(".jl_screening").height());
+	
+	
+	if(JL.isNull(queryGrid.listener)){
+		queryGrid.listener = {};
+	}
+	var queryGridItem = formQuery.config.queryGridItem;
+	if(JL.isNull(queryGridItem)){
+		queryGrid.listener.rowdblclick = function(){
+			formQuery.config.callback();
+		}
+	}
+	if(!JL.isNull(queryGridItem)){
+		if(JL.isNull(queryGridItem.listener)){
+			queryGridItem.listener = {};
+		}
+	 	queryGridItem.listener.rowdblclick = function(){
+	 		formQuery.config.callback();
+	 	}
+		
+		formQuery.detailgrid = JL.initPlugIn($(".jl_modal .max_modal_main #d_detailgrid"), "detailgrid", queryGridItem);
+	}
+	formQuery.querygrid = JL.initPlugIn($(".jl_modal .max_modal_main #d_querygrid"), "querygrid", queryGrid);
+	
+	
+	$(".jl_modal .max_modal_main > .modal_btn > #CX").click(function(){
+		formQuery.config.query();
+	});
+	
+	if(formQuery.config.realTime){
+		formQuery.querygrid.setData(formQuery.config.resultData);
+		formQuery.querygrid.setPaging(formQuery.config.fileName);
+		if(!JL.isNull(formQuery.config.afterquery) 
+				&& typeof formQuery.config.afterquery == "function"){
+			formQuery.config.afterquery(formQuery.querygrid);
+		}
+		$(".jl_modal .max_modal_main > .modal_btn > #CX").hide();
+	}else if(!JL.isNull(formQuery.config.autoquery)){
+		formQuery.config.query();
+		$(".jl_modal .max_modal_main > .modal_btn > #CX").hide();
+	}
+	
+	if(!JL.isNull(formQuery.config.queryGrid.multi) && formQuery.config.queryGrid.multi == false){
+		$(".jl_modal .max_modal_main > .modal_btn > #QD").hide();
+	}
+	
+	$(".jl_modal .max_modal_main > .modal_btn > #QD").click(function(){
+		formQuery.config.callback();
+	});
+	$(".jl_modal .max_modal_main > .modal_btn > #FH").click(function(){
+		$(this).hide();
+		$("#customPage").empty();
+		$("#d_querygrid").show();
+		$("#d_detailgrid").hide();
+	});
+});
+
+</script>
+<div class="max_modal_main">
+	<div class="modal_title"><h3>标题</h3><span>×</span></div>
+	<div class="modal_content">
+		<div id="queryField" class="w12 jl_screening"></div>
+		<div id="customPage"></div>
+        <!--主体内容-->         
+        <div id="d_querygrid" class="w12"></div>
+        <div id="d_detailgrid" class="w12 hide"></div>
+	</div>
+	<div class="modal_btn">
+		<a id="CX" class="jl_btn btn_red"><i class="fa fa-search"></i>查询</a>
+		<a id="QD" class="jl_btn btn_red"><i class="fa fa-gavel"></i>确定</a>
+		<a id="FH" class="jl_btn btn_red hide"><i class="fa fa-reply"></i>返回</a>
+	</div>
+</div>

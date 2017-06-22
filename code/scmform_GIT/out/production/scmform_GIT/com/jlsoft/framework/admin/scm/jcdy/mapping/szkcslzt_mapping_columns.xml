@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<JLConfig id="admin.scm.jcdy.szkcslzt">
+	<Nested id="XZSPLB" allownull="N" name="设置限额商品明细">
+             <FIELD attrname="SLKC" fieldtype="int" allownull="N" name="少量库存数量" />
+             <FIELD attrname="CZKC" fieldtype="int" allownull="N" name="充足库存数量" />
+    </Nested>	
+</JLConfig>	 
+</root>

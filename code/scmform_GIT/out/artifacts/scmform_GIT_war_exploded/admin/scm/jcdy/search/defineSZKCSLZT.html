@@ -1,0 +1,21 @@
+<div class="jl_screening_main">
+ <ul id="MONGO_SZKCSLZT_SPMC">
+	<li class="w12">
+	  <dl class="w12">
+	    <dt class="w01"><b>商品名称</b></dt>
+	    <dd class="w03">
+	      	<input type="text" name="SPMC" class="w12"/>
+	    </dd>
+	  </dl>
+	</li>
+</ul>
+</div>
+
+<script type="text/javascript">
+  $("ul#MONGO_SZKCSLZT_SPMC").delegate("[name='SPMC']", "keydown", function (event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode == 13) {
+      commonQuery.query();
+    }
+  });
+</script>

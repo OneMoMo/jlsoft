@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title></title>
+</head>
+
+<body>
+</body>
+</html>
+<script type="text/javascript" src="jllib/form/js/jl-all.js"></script>
+<script type="text/javascript">
+var system = JL.checkClient();
+if(system.pad){
+	window.location.href = "index_pad.html";
+}else if(system.pc){
+	window.location.href = "index.html";
+}
+</script>

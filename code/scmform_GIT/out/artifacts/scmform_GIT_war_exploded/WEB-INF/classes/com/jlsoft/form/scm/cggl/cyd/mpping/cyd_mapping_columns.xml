@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cggl.cyd">
+	<!--必填项为控制点制定的   -->
+	<FIELD attrname="FHCKMC" fieldtype="string" allownull="N" name="发货仓库" />
+	<FIELD attrname="SHCKMC" fieldtype="string" allownull="N" name="收获仓库" />
+	<Nested id="SPLB" allownull="N" name="商品批次">
+	<FIELD attrname="CYSL" fieldtype="string" allownull="N" name="出样数量" />
+	  </Nested>
+	</JLConfig>
+		
+</root>

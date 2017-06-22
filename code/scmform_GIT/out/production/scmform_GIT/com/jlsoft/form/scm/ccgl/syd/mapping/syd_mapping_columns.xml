@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.syd">
+        <FIELD attrname="HXR" fieldtype="String" allownull="N" name="核销人" />
+         <Nested id="SPLB_PD"  name="盘点损溢情况">
+            <FIELD attrname="SYSL" fieldtype="double" allownull="N" name="损溢数量" />
+              <Nested id="SYLX" allownull="N" name="损溢类型">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="损溢类型" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="损溢类型" />
+	        </Nested>
+            <FIELD attrname="WLDWMC" fieldtype="String" allownull="N" name="供应商" />
+        </Nested>
+        
+         <Nested id="SPLB_N"  name="盘点损溢情况">
+            <FIELD attrname="SYSL" fieldtype="double" allownull="N" name="损溢数量" />
+	        <Nested id="SYLX" allownull="N" name="损溢类型">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="损溢类型" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="损溢类型" />
+	        </Nested>
+        </Nested>
+        
+         <Nested id="SPLB_Y"  name="盘点损溢情况">
+            <FIELD attrname="SYSL" fieldtype="double" allownull="N" name="损溢数量" />
+            <FIELD attrname="SYJE" fieldtype="double" allownull="N" name="损溢金额" />
+	 		<Nested id="SYLX" allownull="N" name="损溢类型">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="损溢类型" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="损溢类型" />
+	        </Nested>
+       </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.ccgl.qtckd">
+	    <Nested id="CKLX" allownull="N" name="出库类型">
+	        <FIELD attrname="key" fieldtype="String" allownull="N" name="出库类型" />
+	        <FIELD attrname="value" fieldtype="String" allownull="N" name="出库类型" />
+	    </Nested>
+        <Nested id="SPLB" allownull="N" name="出库商品明细">
+            <FIELD attrname="SL" fieldtype="double" allownull="N" name="数量" />
+        </Nested>
+	</JLConfig>
+</root>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_CK.SCM_CK">  
+        <FIELD attrname="CK" format='{"$or":[{"CK01":{"$regex":"#CK#"}},{"CKMC":{"$regex":"#CK#"}}]}' fieldtype="String" allownull="Y" name="仓库代码" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	  <FIELD qx='SSBM.key|CK_CZ|LIKE%' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_CK.SCM_CK1">  
+        <FIELD attrname="CK" format='{"$or":[{"CK01":{"$regex":"#CK#"}},{"CKMC":{"$regex":"#CK#"}}]}' fieldtype="String" allownull="Y" name="仓库代码" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" /> 
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD qx='GSXX01|CZGS_CZ|in' />
+      	  <FIELD qx='SSBM.key|CK_CZ|LIKE%' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_CK.SCM_CK2">  
+        <FIELD attrname="CK" format='{"$or":[{"CK01":{"$regex":"#CK#"}},{"CKMC":{"$regex":"#CK#"}}]}' fieldtype="String" allownull="Y" name="仓库代码" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" /> 
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+       	  <FIELD qx='SSBM.key|CK_CZ|LIKE%' />
+	</JLConfig>
+</root>   

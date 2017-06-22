@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FYBX">
+  <!-- 查询请款申请单 -->
+  <select id="queryQKSQ" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT A.JLWBDH QKSQD01,A.QKSQD01 DJH01,B.FYLX01 FYBM,(SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) FYXM,
+       B.KMDM CWKM,B.QKJE,B.YSQJ
+    FROM QKSQD A, QKSQDITEM B
+    WHERE A.GSXX01 = B.GSXX01
+    AND A.QKSQD01 = B.QKSQD01
+    AND A.GSXX01 = B.GSXX01
+    AND A.CNRQ IS NOT NULL
+    AND A.DJZT = 2
+	<if test="GSXX01 != null and GSXX01 != ''">
+		AND A.GSXX01 = #{GSXX01}
+	</if>
+    <if test="FYXM != null and FYXM != ''">
+	    AND (B.FYLX01 LIKE '%'||#{FYXM}||'%' OR (SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) LIKE '%'||#{FYXM}||'%')
+    </if>
+    <if test="QKSQD01 != null and QKSQD01 != ''">
+	    AND A.JLWBDH = #{QKSQD01}
+    </if>
+	JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+   <!-- 查询费用项目 -->
+    <select id="BXMX" parameterType="java.util.Map" resultType="java.util.Map">
+	  SELECT A.FYLX01 FYBM,A.FYLX02 FYXM,A.FYLX03 CWKM
+       FROM FYLX A
+       WHERE A.FYLX05 = 1
+       AND A.FYLX04 = 1
+	<if test="GSXX01 != null and GSXX01 != ''">
+		AND A.GSXX01 = #{GSXX01}
+	</if>
+     <if test="FYXM != null and FYXM != ''">
+	    AND (A.FYLX01 LIKE '%'||#{FYXM}||'%' OR (SELECT FYLX02 FROM FYLX WHERE FYLX01 = A.FYLX01) LIKE '%'||#{FYXM}||'%')
+     </if>
+	 JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+
+   <!-- 查询请款金额 -->  
+   <select id="QKJE" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT NVL(SUM(B.QKJE),0) QKJE
+	FROM QKSQD A,QKSQDITEM B
+	WHERE A.QKSQD01 = B.QKSQD01
+	AND A.GSXX01 = B.GSXX01
+	AND SHRQ IS NOT NULL
+	AND B.YSQJ = TO_CHAR(SYSDATE,'YYYY-MM')
+	<if test="GSXX01 != null and GSXX01 != ''">
+		AND A.GSXX01 = #{GSXX01}
+	</if>
+	<if test="CWKM != null and CWKM != ''">
+		AND B.KMDM = #{CWKM}
+	</if>
+	<if test="FYBM != null and FYBM != ''">
+		AND B.FYLX01 = #{FYBM}
+	</if>
+	JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select> 
+</mapper>

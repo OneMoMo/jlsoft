@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SPPP.SCM_SPPP">
+        <FIELD attrname="search" format='{"$or":[{"SPPP01":{"$regex":"#search#"}},{"SPPPMC":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="品牌编码" />
+      <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPXXBL">
+	<select id="querySPXXBL" parameterType="Map" resultType="java.util.Map">
+		SELECT A.GHSM GYSDM,
+		W.WLDW02 GYSMC,
+		get_HZFS(A.HZFS) HZFS,
+		F.SPFL02 FLMC,
+		B.SPXX02 SPBM,
+		B.SPXX04 SPMC,
+		B.PPB02 SPPP,
+		B.GGB01 SPGG,
+		E.BM02 CGBMMC,
+		G.BM02 XSBMMC,
+		round(SUM(A.LSCB) * (1 + W.JXSL01),2) LSCB,
+		
+		round(SUM(A.LSJE),2) LSJE,
+		SUM(A.LSSL) LSSL,
+		round((SUM(A.LSJE) - SUM(A.LSCB) * (1 + W.JXSL01)),2) LSML,
+		SUM(A.PFSL) FXSL,
+		
+		round(SUM(A.PFJE),2) FXJE,
+		
+		round(SUM(A.PFCB) * (1 + W.JXSL01),2) FXCB,
+		round(SUM(A.PFZK),2) FXFL,
+		
+		round((SUM(A.PFJE) - SUM(A.PFCB) * (1 + W.JXSL01)),2) FXML,
+		SUM(A.PFSL + A.LSSL) XSLLHJ,
+		
+		round(SUM(A.PFJE + A.LSJE),2) XSJEHJ,
+		round(SUM(A.PFCB + A.LSCB) * (1 + W.JXSL01),2) XSCBHJ,
+		
+		round(SUM(A.PFJE + A.LSJE - A.XSYQ - A.BXCF),2) JXSSRJE,
+		
+		round((SUM(A.PFJE + A.LSJE) - SUM(A.PFCB + A.LSCB) * (1 + W.JXSL01)),2) XSMLHJ,
+		
+		SUM(A.YFSL) YFSL,
+		
+		round(SUM(A.YFJE),2) YFJE,
+		round(SUM(A.YFCB),2) YFCB,
+		round((SUM(A.YFJE) - SUM(A.YFCB)),2) YFML,
+		SUM(A.SPXS35) YFJSSL,
+		
+		round(SUM(A.SPXS36),2) YFJSJE,
+		
+		SUM(A.CXF) CXF,
+		SUM(A.LKCTZ) * (1 + W.JXSL01) LKCTZ,
+		SUM(A.PFBJSL) FXBJSL,
+		
+		round(SUM(A.PFBJJE),2) FXBJJE,
+		
+		round(SUM(A.FCML) * (1 + W.JXSL01),2) FCTCB,
+		CASE 
+        <![CDATA[WHEN B.SPXX06 <> 3 THEN]]>
+		round(SUM(A.BJML) * (1 + W.JXSL01),2)
+		ELSE
+		round(SUM(A.BJML),2)
+		END BJTCB,
+		CASE 
+         <![CDATA[WHEN B.SPXX06 <> 3 THEN]]>
+		round(SUM((A.PFCB + A.LSCB + A.FCML + A.LKCTZ) * (1 + W.JXSL01) -
+		A.HSBJML),2)
+		ELSE
+		round(SUM(A.PFCB + A.LSCB + A.FCML + A.BJML + A.LKCTZ),2)
+		END ZHCB,
+		CASE 
+        <![CDATA[WHEN B.SPXX06 <> 3 THEN]]>
+		round((SUM(A.PFJE + A.LSJE) -
+		SUM((A.PFCB + A.LSCB + A.FCML + A.LKCTZ) * (1 + W.JXSL01) -
+		A.HSBJML) + SUM(A.PFBJJE) + Sum(A.XSYFJE)),2)
+		ELSE
+		round((Sum(A.LSJE / (1 + B.SPXX08) + A.PFJE / (1 + B.SPXX08) +
+		(A.PFBJJE) / (1 + B.SPXX08) + (A.XSYFJE) / (1 + B.SPXX08)) -
+		Sum(A.PFCB + A.LSCB + A.FCML + A.BJML + A.LKCTZ)),2)
+		END ZHML,
+		CASE 
+         <![CDATA[WHEN SUM(A.LSJE + A.PFJE) <> 0 THEN
+		ROUND(SUM(A.PFJE + A.LSJE - ((A.FCML + A.LKCTZ + A.PFCB + A.LSCB) *
+		(1 + W.JXSL01) + A.HSBJML) + A.PFBJJE + A.XSYFJE) /
+		SUM(A.LSJE + A.PFJE) * 100,
+		2)
+		ELSE
+		0
+		END MLL,
+		CASE 
+		WHEN SUM(A.LSJE + A.PFJE) <> 0 THEN
+		  ROUND(SUM(A.PFJE + A.LSJE - ((A.FCML + A.LKCTZ + A.PFCB + A.LSCB) *
+			   (1 + W.JXSL01) + A.HSBJML) + A.PFBJJE + A.XSYFJE) /
+		         SUM(A.LSJE + A.PFJE) * 100,
+		         2)-NVL(ROUND((SELECT MLL FROM GHHT_PPMLL WHERE GHHT_PPMLL.BM01 = A.CGBM 
+	                               AND GHHT_PPMLL.WLDW01 = A.GHSM 
+	                               AND GHHT_PPMLL.HZFS = A.HZFS
+	                               AND GHHT_PPMLL.PPB01 = B.PPB01),2),0)
+		ELSE
+		 0
+	        END CY,
+	        NVL(ROUND((SELECT MLL FROM GHHT_PPMLL WHERE GHHT_PPMLL.BM01 = A.CGBM 
+	                               AND GHHT_PPMLL.WLDW01 = A.GHSM 
+	                               AND GHHT_PPMLL.HZFS = A.HZFS
+	                               AND GHHT_PPMLL.PPB01 = B.PPB01),2),0)HTMLL ,]]>
+		CASE 
+        <![CDATA[ WHEN SUM(A.PFJE + A.LSJE - A.XSYQ - A.BXCF) <> 0 THEN]]>
+		ROUND(SUM(A.PFJE + A.LSJE - ((A.PFCB + A.LSCB + A.FCML + A.LKCTZ) *
+		(1 + W.JXSL01) + A.HSBJML) - (A.XSYQ + A.BXCF) +
+		A.XSYFJE) / SUM(A.PFJE + A.LSJE - A.XSYQ - A.BXCF) * 100,
+		2)
+		ELSE
+		0
+		END JMLL,
+		
+		ROUND((Sum(A.PFJE + A.LSJE - A.XSYQ - A.BXCF) -
+		Sum((A.PFCB + A.LSCB + A.FCML + A.LKCTZ) * (1 + W.JXSL01) -
+		A.HSBJML) + Sum(A.XSYFJE) + SUM(A.PFBJJE)),2) JZHML,
+		get_spsx_v10(A.TJBJ) SPXS
+		FROM VIEW_SPXSR A,
+		SPXX B,
+		WLDW D,
+		WLDW W,
+		SPFL F,
+		BM E,
+		BM G,
+		XSFZ J,
+		SCCJ S,
+		JQJX Q
+		WHERE A.XSFZ01 = J.XSFZ01(+) 
+   AND A.SPBM = B.SPXX01 
+   AND W.WLDW01 = A.GHSM 
+   AND A.PFSM = D.WLDW01(+) 
+     
+   AND (EXISTS (SELECT 1 FROM BM E WHERE A.XSBM = E.BM01) AND EXISTS 
+        (SELECT 1 FROM BM F WHERE A.CGBM = F.BM01)) 
+   AND F.SPFL01 = SUBSTR(B.SPFL01, 1, 12) 
+   AND E.BM01 = SUBSTR(A.CGBM, 1, 12) 
+   AND G.BM01 = SUBSTR(A.XSBM, 1, 12) 
+   AND B.SCCJ01=S.SCCJ01(+) 
+   AND B.JQJX01=Q.JQJX01(+) 
+		
+		<if test="RQQ != null and RQQ != ''">
+	      <![CDATA[    AND A.DDATE  >= TO_DATE(#{RQQ},'YYYY-MM-DD') ]]>
+		</if>
+		<if test="RQZ != null and RQZ != ''">
+	        <![CDATA[ AND A.DDATE <= TO_DATE(#{RQZ},'YYYY-MM-DD')]]>
+		</if>
+
+		<if test="GYS != null and GYS != ''">
+		 <foreach item="item" index="index" collection="GYS"  open=" AND (" separator=" or " close=")"> 
+			 (W.WLDW02 LIKE '%'||#{item}||'%' OR
+			 A.GHSM LIKE '%'||#{item}||'%' )
+			 </foreach> 
+		</if>
+		<if test="SPMC != null and SPMC != ''">
+		  <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+			 (Upper(B.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(B.SPXX04) LIKE Upper('%'||#{item}||'%')
+			OR Upper(B.SPXX02) LIKE Upper('%'||#{item}||'%'))
+		  </foreach> 
+		</if>
+		<if test="CGBM != null and CGBM != ''">
+			<foreach item="item" index="index" collection="CGBM" open=" AND ("
+				separator=" or " close=")">
+				E.BM01 = #{item}
+			</foreach>
+		</if>
+
+		<if test="PP != null and PP != ''">
+			<foreach item="item" index="index" collection="PP" open=" AND ("
+				separator=" or " close=")">
+				B.PPB01 = #{item}
+			</foreach>
+		</if>
+		<if test="SPFL != null and SPFL != ''">
+			<foreach item="item" index="index" collection="SPFL" open=" AND ("
+				separator=" or " close=")">
+				B.SPFL01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		
+		<if test="HZFS != null and HZFS != ''">
+		<foreach item="item" index="index" collection="HZFS" open=" AND ("
+				separator=" or " close=")">
+		<!-- 	AND A.HZFS LIKE '%'||#{HZFS}||'%' -->
+			A.HZFS=#{item}
+			</foreach>
+		</if>
+		
+		 <if test="XSBM01 != null and XSBM01  != ''">
+		 <foreach item="item" index="index" collection="XSBM01"  open=" AND (" separator=" or " close=")"> 
+		      A.XSBM = #{item}
+		 </foreach> 
+	 </if>
+		JL{CZY|A.GHSM|WLDW_CZ|inS}JL
+		JL{CZY|E.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+		GROUP BY A.XSFZ01,
+		J.XSFZ02,
+		A.GSXX01,
+		A.GHSM,
+		B.SPXX01,
+		A.RYBM,
+		A.RYMC,
+		B.SPXX02,
+		B.SPXX04,
+		A.TJBJ,
+		A.HZFS,
+		A.XSBM,
+		G.BM01,
+		G.BM02,
+		E.BM01,
+		E.BM02,
+		A.PFSM,
+		B.PPB01,
+		B.PPB02,
+		B.GGB01,
+		B.SPFL01,
+		B.SPFL02,
+		B.SPXX08,
+		D.WLDW31,
+		D.WLDW20,
+		D.KSLX01,
+		F.SPFL01,
+		F.SPFL02,
+		A.GHSM,
+		B.SPXX23,
+		W.WLDW02,
+		W.JXSL01,
+		D.WLDW02,
+		D.WLDW21,
+		W.WLDW21,
+		A.CGBM,
+		B.SPXH01,
+		B.SPXX19,
+		S.SCCJ02,
+		B.SPXX26,
+		Q.JQJX02,
+		B.SPXX06
+
+	</select>
+</mapper>

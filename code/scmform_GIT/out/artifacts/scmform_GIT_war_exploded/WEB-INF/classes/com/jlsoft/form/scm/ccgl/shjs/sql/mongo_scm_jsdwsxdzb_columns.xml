@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_JSDWSXDZB.SCM_JSDWSXDZB">   
+        <FIELD attrname="search" format='{"$or":[{"JSDWMC":{"$regex":"#search#"}},{"JSDW01":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="部门查询" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

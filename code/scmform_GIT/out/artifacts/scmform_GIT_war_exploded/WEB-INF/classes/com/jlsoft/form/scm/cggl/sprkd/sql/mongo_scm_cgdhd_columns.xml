@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SPRKD.SCM_SPRKD">
+        <FIELD attrname="GSXX01" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="SPRKD01" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>

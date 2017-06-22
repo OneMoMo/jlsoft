@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>确认订单</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/mobiscroll.custom-2.17.0.min.css" />
+<link rel="stylesheet" type="text/css" href="css/CYCSS.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header class="hide">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<h2>确认订单</h2>
+</div>
+</header>
+
+<div class="main">
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case bor_bottom">
+    <span class="w03">营业员</span>
+    <span class="w09 tr font_gray" onclick="window.location.href='seachYyy.html'">选择营业员</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <div class="jl_list_case">
+    <span class="w03">顾客</span>
+    <span class="w09 tr font_gray" onclick="window.location.href='seachHy.html'">选择顾客</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom">
+<div class="jl_list_case pr0">
+    <span class="w03">合计</span>
+    <span class="w09 tr font_color">￥20000.00</span>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom" jl-data="gm.page1.sp" jl-repeat="1" onClick="window.location.href='index.html'">
+  <div class="jl_list_case">
+    <div class="w12">
+      <div class="w12 mt10">
+        <b class="w12">海信空调KFR-26GW/27BP内机</b>
+        <span class="w12 mt5 font_color">￥3000.00</span>
+      </div>
+      <div class="w12 mt10">
+        <b class="w12">海信空调KFR-26GW/27BP内机</b>
+        <span class="w12 mt5 font_color">￥3000.00</span>
+      </div>
+      <div class="w12 mt10">
+        <b class="w12">海信空调KFR-26GW/27BP内机</b>
+        <span class="w12 mt5 font_color">￥3000.00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+<div class="w12 jl_btn btn_color" onClick="window.location.href='orderSuccess.html'">提交订单</div>
+</footer>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

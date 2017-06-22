@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.hygl.hykcz">
+		<FIELD attrname="HYKH" fieldtype="string" allownull="N" name="会员卡号" />
+		
+		<Nested id="SPLB" allownull="N" name="商品价格明细">
+	            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+	            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+	            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+	    </Nested>
+	</JLConfig>
+</root>

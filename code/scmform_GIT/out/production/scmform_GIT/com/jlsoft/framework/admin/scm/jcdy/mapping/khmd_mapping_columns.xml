@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.khmd">   
+		<FIELD attrname="BM02" fieldtype="string" allownull="N" name="部门名称" />  
+	</JLConfig>
+	
+</root>

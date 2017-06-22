@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fxgl.fxjs.yskd">
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客户名称" />
+		<FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="客户代码" />
+        <FIELD attrname="YSLX"  allownull="N" name="预收类型" />
+        <FIELD attrname="XS_BM01" fieldtype="string" allownull="N" name="销售部门代码" />
+        <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="销售部门名称" />
+        <FIELD attrname="CWRQ" fieldtype="string" allownull="N" name="财务日期" />
+		<Nested id="SPLB" allownull="N" name="收款明细">
+            <FIELD attrname="SKFS01" fieldtype="string" allownull="N" name="收款方式代码" />
+            <FIELD attrname="SKFS" fieldtype="string" allownull="N" name="收款方式" />
+            <FIELD attrname="SKJE" fieldtype="string" allownull="N" name="收款金额" />
+        </Nested>		
+	</JLConfig>	
+</root>

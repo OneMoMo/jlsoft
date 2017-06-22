@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SZPZFL.SCM_SZPZFL">
+	    <FIELD attrname="WBZT01" format='{"WBZT01":{"$regex":"#WBZT01#"}}' fieldtype="String" allownull="Y" name="外部账套" />
+        <FIELD attrname="PZLX01" format='{"PZLX.key":"#PZLX01#"}' fieldtype="String" allownull="Y" name="凭证类型" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD qx='WBZT01|CWZT_CZ|in' /> 
+	</JLConfig>
+</root>   

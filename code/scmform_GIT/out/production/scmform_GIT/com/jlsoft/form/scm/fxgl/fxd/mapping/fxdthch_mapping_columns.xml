@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fxgl.fxdthch">
+	<Nested id="THLX">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="退货类型" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="退货类型" />
+        </Nested>
+	    <FIELD attrname="KHMC" fieldtype="string" allownull="N" name="客户名称" />
+		<FIELD attrname="YWYMC" fieldtype="string" allownull="N" name="业务员名称" />
+		<FIELD attrname="XSBMMC" fieldtype="string" allownull="N" name="销售部门" />
+		<FIELD attrname="XSFSMC" fieldtype="string" allownull="N" name="销售方式" />
+		
+        <Nested id="SPLB" allownull="N" name="商品明细">
+            <FIELD attrname="SL" fieldtype="double" allownull="N" name="数量" />
+            <FIELD attrname="CK" fieldtype="string" allownull="N" name="仓库" />
+        </Nested>		
+	</JLConfig>
+	
+	<JLConfig id="form.scm.fxgl.fxdthchdjlx">
+	
+	  <FIELD attrname="YPFD01" fieldtype="string" allownull="N" name="原分销单" />
+	  <FIELD attrname="KHMC" fieldtype="string" allownull="N" name="客户名称" />
+	  <FIELD attrname="YWYMC" fieldtype="string" allownull="N" name="业务员名称" />
+	  <FIELD attrname="XSBMMC" fieldtype="string" allownull="N" name="销售部门" />
+	  <FIELD attrname="XSFSMC" fieldtype="string" allownull="N" name="销售方式" />
+       <Nested id="SPLB" allownull="N" name="商品明细">
+         <FIELD attrname="SL" fieldtype="double" allownull="N" name="数量" />
+        </Nested>		
+	</JLConfig>
+</root>

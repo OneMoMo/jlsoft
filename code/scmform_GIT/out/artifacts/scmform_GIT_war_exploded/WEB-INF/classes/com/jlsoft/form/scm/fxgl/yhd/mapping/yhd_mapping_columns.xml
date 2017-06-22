@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.fxgl.yhd">
+	    <FIELD attrname="JXSMC" fieldtype="string" allownull="N" name="经销商" />
+	    <FIELD attrname="YWYMC" fieldtype="string" allownull="N" name="业务员" />
+	    <Nested id="XSFS" allownull="N" name="销售方式">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="销售方式" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="销售方式" />
+        </Nested>
+		<Nested id="PSFS" allownull="N" name="配送方式">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="配送方式" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="配送方式" />
+        </Nested>
+        <Nested id="SPLB" allownull="N" name="商品列表">
+            <FIELD attrname="YHSL" fieldtype="string" allownull="N" name="要货数量" />
+        </Nested>
+	</JLConfig>
+	
+	
+</root>

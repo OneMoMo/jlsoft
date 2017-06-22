@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.gszt">
+		<FIELD attrname="GSZT_ID" fieldtype="string" allownull="N" name="公司代码" />
+		<FIELD attrname="GSZT_MC" fieldtype="string" allownull="N" name="公司名称" />
+		<Nested id="BBBZ">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="本币币种代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="本币币种名称" />
+        </Nested>
+        <Nested id="GSLX">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="公司类型代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="公司类型名称" />
+        </Nested>
+	</JLConfig>
+	
+	<JLConfig id="admin.scm.jcdy.skfs">
+	    <FIELD attrname="SKFS01" fieldtype="string" allownull="N" name="收款方式代码" />
+		<FIELD attrname="SKMC" fieldtype="string" allownull="N" name="收款方式名称" />
+		<Nested id="JEFS">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="金额方式代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="金额方式名称" />
+        </Nested>
+		<Nested id="BBBZ">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="本币币种" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="本币币种" />
+        </Nested>
+        <Nested id="WBBZ">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="外币币种" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="外币币种" />
+        </Nested>
+		
+       
+		
+	</JLConfig>
+	
+	<JLConfig id="admin.scm.jcdy.yh">
+		<FIELD attrname="YHBM" fieldtype="string" allownull="N" name="银行代码" />
+		<FIELD attrname="YHMC" fieldtype="string" allownull="N" name="银行名称" />
+		<FIELD attrname="YHSXF" fieldtype="double" defaultValue="0.0" name="手续费率" />
+		<Nested id="YXBJ">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="有效标记代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="有效标记" />
+        </Nested>
+	</JLConfig>
+</root>

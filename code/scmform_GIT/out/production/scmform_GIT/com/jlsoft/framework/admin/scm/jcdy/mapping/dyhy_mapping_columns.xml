@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.defhyxx">
+		<FIELD attrname="HYBM" fieldtype="string" allownull="N" name="代码" />
+        <FIELD attrname="HYMC" fieldtype="string" allownull="N" name="名称" />
+	</JLConfig>
+</root>

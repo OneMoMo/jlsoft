@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QKSQD">
+	<!-- 查询费用项目 -->
+	<select id="QKMX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.FYLX01 FYBM,A.FYLX02 FYXM,A.FYLX03 CWKM
+		 FROM FYLX A
+		WHERE A.FYLX05 = 1
+		AND A.FYLX04 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="FYXM != null and FYXM != ''">
+			AND (A.FYLX01 LIKE '%'||#{FYXM}||'%' OR (SELECT FYLX02 FROM FYLX WHERE FYLX01 = A.FYLX01) LIKE '%'||#{FYXM}||'%')
+		</if>
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+
+	<!-- 查询预算总额 -->
+	<select id="YSZE" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT NVL(SUM(B.YSJE),0) YSZE
+		 FROM FYYSD A,FYYSDITEM B
+		WHERE A.FYYSD01 = B.FYYSD01
+		AND A.GSXX01 = B.GSXX01
+		AND SHRQ IS NOT NULL
+		<!-- AND A.YSQJ = TO_CHAR(SYSDATE, 'YYYY-MM') -->
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="CWKM != null and CWKM != ''">
+			AND B.KMDM = #{CWKM}
+		</if>
+		<if test="FYBM != null and FYBM != ''">
+			AND B.FYLX01 = #{FYBM}
+		</if>
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select> 
+	
+    <!-- 查询请款总额-->
+	<select id="QKZE" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT NVL(SUM(QKJE),0) QKZE 
+		  FROM QKSQD A, QKSQDITEM B
+		 WHERE A.GSXX01 = B.GSXX01
+		   AND A.QKSQD01 = B.QKSQD01
+		   AND A.SHRQ IS NOT NULL
+		   AND B.YSQJ = TO_CHAR(SYSDATE, 'YYYY-MM')
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="CWKM != null and CWKM != ''">
+			AND B.KMDM = #{CWKM}
+		</if>
+		<if test="FYBM != null and FYBM != ''">
+			AND B.FYLX01 = #{FYBM}
+		</if>
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select> 
+  
+  	<!-- 双击查看费用历史 -->
+	<select id="FYLS" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT A.JLWBDH QKSQD01,A.QKSQD01 DJH01,A.SQRMC,TO_CHAR(A.SQRQ,'YYYY-MM-DD')SQRQ,(SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) FYMC, 
+           B.KMDM,B.CUR,B.QKJE,B.YSQJ 
+    FROM QKSQD A, QKSQDITEM B 
+   WHERE A.GSXX01 = B.GSXX01 
+     AND A.QKSQD01 = B.QKSQD01 
+     AND A.SHRQ IS NOT NULL 
+	<if test="GSXX01 != null and GSXX01 != ''">
+		AND A.GSXX01 = #{GSXX01}
+	</if>
+	<if test="FYBM != null and FYBM != ''">
+		AND B.FYLX01 = #{FYBM}
+	</if>
+	<if test="CWKM != null and CWKM != ''">
+		AND B.KMDM  = #{CWKM}
+	</if>
+   JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+   ORDER BY QKSQD01
+	</select> 
+	
+   <!-- 查找币种-->
+  <select id="QKSQD_BZ" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT WBBZ01 key, WBBZ02 value 
+    FROM WBBZ
+    WHERE 1=1
+    <if test="GSXX01 != null and GSXX01 != ''">
+		AND GSXX01 = #{GSXX01}
+	</if>
+  </select>
+  
+   <!-- 查找收款方式-->
+  <select id="FY_SKFS" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT A.SKFS01, A.SKFS02 SKFSMC, A.SKFS16 YHBJ
+	 FROM SKFS A , QXSKFSITEM B
+	WHERE A.SKFS05=1 AND A.SKFS03 = 1
+	AND A.SKFS01 = B.SKFS01
+	<if test="JEFS != NULL and JEFS != ''"> 
+	    AND A.SKFS06 IN ${JEFS}
+	 </if>
+	<if test="RYXX01 != null and RYXX01 != ''"> 
+	AND B.QXSKFS01 = (SELECT CZY05 FROM CZY WHERE RYXX01 = #{RYXX01})
+	</if>
+	JL{CZY|A.SKFS01|SKFS_CZ|LIKE%}JL 
+  </select>
+
+   <!-- 查询请款申请单 -->
+  <select id="queryQKSQD" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT A.JLWBDH QKSQD01,A.BM01,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BMMC, 
+           A.SQRMC,TO_CHAR(A.SQRQ,'YYYY-MM-DD') SQRQ,A.SQYY,A.QKZE,A.ZDRMC,
+           TO_CHAR(A.ZDRQ,'YYYY-MM-DD') ZDRQ,A.SHRMC,
+           TO_CHAR(A.SHRQ,'YYYY-MM-DD') SHRQ,A.CNRMC,
+           TO_CHAR(A.CNRQ,'YYYY-MM-DD') CNRQ, 
+           GET_QKSQDZT(A.DJZT) DJZT,
+           B.FYLX01,(SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) FYMC, 
+           B.KMDM,B.YSYE,B.CUR, 
+         (SELECT WBBZ02 FROM WBBZ 
+         WHERE WBBZ01 = B.CUR 
+           AND A.GSXX01 = B.GSXX01) WBBZ, 
+         B.QKJE,B.SKFS01,(SELECT SKFS02 FROM SKFS WHERE SKFS01 = B.SKFS01) SKFSMC, 
+         B.YHZH,B.BZ,B.YSQJ,A.GSXX01
+     FROM QKSQD A, QKSQDITEM B 
+   WHERE A.GSXX01 = B.GSXX01 
+   AND A.QKSQD01 = B.QKSQD01 
+       <if test="QKSQD01 != null and QKSQD01 != ''">
+            AND A.JLWBDH = #{QKSQD01}
+       </if>
+       <if test="DJZT != null and DJZT != ''">
+            AND A.DJZT = #{DJZT}
+       </if>
+       <if test="SQRMC != null and SQRMC != ''">
+            AND A.SQRMC = #{SQRMC}
+       </if>
+       <if test="YSQJ_S != null and YSQJ_S !=''">
+		    <![CDATA[AND TO_DATE(B.YSQJ,'YYYY-MM') >= TO_DATE(#{YSQJ_S}, 'YYYY-MM')]]>
+	   </if>
+	   <if test="YSQJ_E != null and YSQJ_E !=''">
+		    <![CDATA[AND TO_DATE(B.YSQJ,'YYYY-MM') <= TO_DATE(#{YSQJ_E},'YYYY-MM')]]>
+	   </if>
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+  </select>  
+  
+  
+     <!-- 查询原因代码-->
+  <select id="QKSQD_YYDM" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT NRBM  key ,NRMS value
+	FROM ZDY A,ZDYITEM B WHERE A.ID = B.ID AND A.YXBJ = 1 AND A.ID = 'FYGL-YYDM'
+      
+  </select>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>

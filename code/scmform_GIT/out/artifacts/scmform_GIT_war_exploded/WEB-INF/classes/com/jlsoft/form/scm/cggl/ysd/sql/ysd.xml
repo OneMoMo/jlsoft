@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YSD">
+	<select id="SPLB" parameterType="java.util.Map" resultType="java.util.Map">
+	 select A.JLWBDH, A.YSD01 YSD01,
+       TO_CHAR(A.YSD02, 'YYYY-MM-DD') JZRQ,
+       A.CK01,
+       (SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,
+       A.BM01,
+       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) BMMC,
+       A.YSD10 YS,
+       DECODE(A.YSD10, 0, '已入库', 1, '未入库') YSMC,
+       B.SPXX01 SPXX,
+       (SELECT SPXX02 FROM SPXX WHERE SPXX01 = B.SPXX01) SPBM,
+       (SELECT SPXX04 FROM SPXX WHERE SPXX01 = B.SPXX01) SPMC,
+       B.YSDI03 SPSX,
+       get_spsx_v10(B.YSDI03) SPSXMC,
+       B.YSDI01 BZHL,
+       C.CKSP04 KMS,
+       C.CKSP05 KMXZS,
+       B.YSDI02 YSSL,
+       B.WLDW01,
+       (SELECT WLDW02 FROM WLDW WHERE WLDW01 = B.WLDW01) WLDWMC,
+        TO_CHAR( B.YSDI04,'YYYY-MM-DD') JHRQ
+  from YSD A, YSDITEM B, CKSP C
+ WHERE A.YSD01 = B.YSD01
+   AND B.SPXX01 = C.SPXX01
+    AND C.CK01=A.CK01
+   AND C.GSXX01=A.GSXX01
+      AND A.YSD06 IS NOT NULL
+   AND A.YSD08 IS NULL
+   AND B.GSXX01 = #{GSXX01}
+  <if test="YSDH !=null and YSDH !=''"></if>
+      AND A.JLWBDH LIKE  '%'||#{YSDH}||'%'
+	</select>
+<select id="queryYSD" parameterType="java.util.Map" resultType="java.util.Map">
+	select A.GSXX01, 
+           A.YSD01 YSDH01, 
+           A.JLWBDH, 
+           C.SPXX02 SPBM, 
+           C.SPXX04 SPMC, 
+           get_spsx_v10(B.YSDI03) SPSX, 
+           B.YSDI02 YSSL, 
+           B.WLDW01, 
+           F.WLDW02 WLDWMC, 
+           A.CK01, 
+           E.CK02 CKMC, 
+           A.BM01, 
+           D.BM02 CGBMMC, 
+           A.YSD03 ZDR, 
+           to_char(A.YSD04 ,'YYYY-MM-DD') ZDRQ, 
+           A.YSD05 SHR, 
+           to_char(A.YSD06 ,'YYYY-MM-DD') SHRQ,
+           A.YSD07 ZZR, 
+           to_char(A.YSD08 ,'YYYY-MM-DD') ZZRQ,
+           A.YSD09 BZ, 
+           to_char(B.YSDI04 ,'YYYY-MM-DD') JHRQ
+      from YSD A, YSDITEM B, SPXX C, BM D, CK E, WLDW F 
+     where A.GSXX01 = B.GSXX01 
+       AND A.YSD01 = B.YSD01 
+       AND B.SPXX01 = C.SPXX01 
+       AND A.CK01 = E.CK01 
+       AND A.BM01 = D.BM01 
+       AND B.WLDW01 = F.WLDW01 
+      <if test="YSDH01 != null and YSDH01 !=''"> AND A.JLWBDH =#{YSDH01}</if>
+      <if test="GYS != null and GYS !=''"> 
+       <foreach item="item" index="index" collection="GYS"  open=" AND (" separator=" or " close=")"> 	      
+		      F.WLDW02 LIKE '%'||#{item}||'%' OR B.WLDW01 LIKE '%'||#{item}||'%'    
+	   </foreach>  
+      </if>
+      <if test="CGBM != null and CGBM != ''">
+			 <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+	          A.BM01 LIKE #{item}||'%'
+	    	 </foreach>
+	  </if>
+	  <if test="SP !=null and SP != ''">
+	    <foreach item="item" index="index" collection="SP"  open=" AND (" separator=" or " close=")"> 
+	       C.SPXX02 LIKE '%'||#{item}||'%' OR C.SPXX04 LIKE '%'||#{item}||'%'
+	    </foreach>    
+	  </if>
+	  <if test="SPFL != null and SPFL  != ''">
+	   <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")"> 
+	      C.SPFL01 like #{item}||'%'
+	   </foreach> 
+     </if>
+     <if test="CK != null and CK != ''">
+	   <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		 A.CK01 = #{item}
+	   </foreach> 
+	 </if>
+	 <if test="PP != null and PP != ''">
+		<foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+		 C.PPB01 = #{item}
+		</foreach> 
+	 </if>
+	 <if test="SPSX != null and SPSX != ''">
+	     <foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")"> 
+	      B.YSDI03 = #{item}
+	     </foreach> 	         
+	 </if>	
+	 <if test="BZ !=null and BZ != ''">
+	      AND (A.YSD09 LIKE '%'||#{BZ}||'%')
+	 </if>
+	 <if test="ZDRQ_S != null and ZDRQ_S !=''"> <![CDATA[AND A.YSD04 >=TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="ZDRQ_E != null and ZDRQ_E != ''"><![CDATA[  AND A.YSD04 <=TO_DATE(#{ZDRQ_E},'YYYY-MM-DD') ]]></if>
+	 <if test="SHRQ_S != null and  SHRQ_S !='' "> <![CDATA[AND A.YSD06 >=TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="SHRQ_E != null and SHRQ_E !=''"><![CDATA[  AND A.YSD06 <=TO_DATE(#{SHRQ_E},'YYYY-MM-DD') ]]></if>
+	 <if test="ZZRQ_S != null and ZZRQ_S !='' "> <![CDATA[AND A.YSD08 >=TO_DATE(#{ZZRQ_S},'YYYY-MM-DD')]]></if>
+	 <if test="ZZRQ_E != null and ZZRQ_E !=''"><![CDATA[  AND A.YSD08 <=TO_DATE(#{ZZRQ_E},'YYYY-MM-DD') ]]></if>
+      JL{CZY|C.PPB01|PPB_CX|LIKE%}JL JL{CZY|C.SPFL01|SPFL_CX|LIKE%}JL 
+      JL{CZY|A.BM01|BM_CX|LIKE%}JL
+      JL{CZY|A.CK01|CK_CX|LIKE%}JL
+      JL{CZY|B.WLDW01|WLDW_CX|LIKE%}JL 
+	</select>	
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration> 
+    <settings>  
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="localCacheScope" value="STATEMENT"/>
+    </settings>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            
+<!--            <dataSource type="POOLED">
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+                <property name="url"  value="jdbc:oracle:thin:@119.79.224.115:9010:WEB"/>
+                <property name="username" value="V9SCM"/>
+                <property name="password" value="v9user"/>
+            </dataSource>-->
+            
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:comp/env/jdbc/sh" />
+            </dataSource>   
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/jlsoft/scm/login/sql/login.xml"/> 
+        <mapper resource="com/jlsoft/scm/shgl/sql/shd.xml"/>
+        <mapper resource="com/jlsoft/scm/shgl/sql/khzl.xml"/>
+        <mapper resource="com/jlsoft/scm/jlclient/sql/jlclientcom_bus.xml"/>
+        <mapper resource="com/jlsoft/scm/shgl/sql/azd.xml"/>
+        <mapper resource="com/jlsoft/scm/pub/sql/pubshquery.xml"/> 
+        <mapper resource="com/jlsoft/scm/def/sql/defwlsh.xml"/>
+        <mapper resource="com/jlsoft/scm/lsgl/sql/lsdjd.xml"/>
+        <mapper resource="com/jlsoft/ECSV8/v7/sql/V7SH.xml"/>
+    </mappers>
+</configuration>

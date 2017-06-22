@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.ksxx.gys">
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客商名称" /> 
+		<FIELD attrname="DZ" fieldtype="string" allownull="N" name="地址" />
+        <FIELD attrname="LXR" fieldtype="string" allownull="N" name="联系人" />
+        <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+		<Nested id="DWLB">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="单位类别" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="单位类别" />
+        </Nested>
+		<Nested id="JSBZ">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="结算币种" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="结算币种" />
+        </Nested>
+        <FIELD attrname="JXSL" fieldtype="string" allownull="N" name="进项税率" />
+        
+	</JLConfig>
+	
+	<JLConfig id="form.scm.jcdy.ksxx.khxx">
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客商名称" />
+		<Nested id="DWLB">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="单位类别" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="单位类别" />
+        </Nested> 
+       	<Nested id="LXRLB" allownull="N" name="联系人列表">
+        <FIELD attrname="LXRMC" fieldtype="string" allownull="N" name="联系人名称" />
+        <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系人电话" />
+        </Nested>
+        <Nested id="JSBZ">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="结算币种" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="结算币种" />
+        </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.jcdy.ksxx.plkhxx">
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客商名称" />
+        <FIELD attrname="LXR" fieldtype="string" allownull="N" name="联系人" />
+        <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+	</JLConfig>
+</root>

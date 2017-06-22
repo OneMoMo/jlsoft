@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_PSCK.SCM_PSCK">   
+        <FIELD attrname="PSCK" format='{"$or":[{"PSCKMC":{"$regex":"#PSCK#"}},{"LXDH":{"$regex":"#PSCK#"}},{"DYCK.value":{"$regex":"#PSCK#"}},{"CKDZ":{"$regex":"#PSCK#"}}]}' fieldtype="String" allownull="Y" name="人员" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>   

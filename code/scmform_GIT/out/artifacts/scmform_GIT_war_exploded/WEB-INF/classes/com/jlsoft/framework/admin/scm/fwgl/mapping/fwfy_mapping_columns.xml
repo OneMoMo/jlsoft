@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fwgl.fwfy">
+	
+	<FIELD attrname="FYMC" fieldtype="string" allownull="N" name="费用名称" />
+	<Nested id="JSDX" allownull="N" name="结算对象">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="结算对象编码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="结算对象" />
+     </Nested>
+	<Nested id="FWLX" allownull="N" name="服务类型">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="服务类型编码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="服务类型" />
+     </Nested>
+	</JLConfig>	 
+</root>

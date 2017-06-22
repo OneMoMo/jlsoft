@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.bbxx">   
+		  <Nested id="BB" allownull="N" name="报表">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="key" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="value" />
+	  	  </Nested>
+		  <Nested id="MB" allownull="N" name="模板">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="key" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="value" />
+	  	  </Nested>
+	</JLConfig>
+</root>

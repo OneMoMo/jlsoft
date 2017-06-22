@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CGTHD">
+	<select id="CGTHD_THYY" parameterType="Map" resultType="java.util.Map">
+		SELECT A.THYY01 KEY,
+	           A.THYY02 VALUE FROM THYY A
+	     WHERE 1=1
+	<if test="DJLX != null">
+    <![CDATA[AND  INSTR(A.DJLX,#{DJLX})>0]]>
+    </if>
+	       AND A.DJCZLX = 0
+	</select>
+	<select id="queryCGTHD" parameterType="Map" resultType="java.util.Map">
+		SELECT A.JLWBDH FCD01,A.WLDW01,M.BM02 CGBM,S.SPXX04 SPMC, B.FCDI05 THSL,W.JXSL01,
+		       round((B.FCDI03+B.FCDI03*W.JXSL01),2)HSTHDJ, ROUND(B.FCDI03,2) WSTHDJ,
+		       round((B.FCDI12+B.FCDI12*W.JXSL01),2)HSJHDJ, ROUND(B.FCDI12,2) WSJHDJ,
+		       B.FCDI08 SJ,round((B.FCDI06+B.FCDI06*W.JXSL01),2)HSJHJE, ROUND(B.FCDI06,2) WSJHJE,
+		       round((B.FCDI07+B.FCDI07*W.JXSL01),2)HSTHJE, ROUND(B.FCDI07,2) WSTHJE,
+		       round(((B.FCDI07+B.FCDI07*W.JXSL01)-(B.FCDI06+B.FCDI06*W.JXSL01)),2 )HSTHJECY, 
+		       B.FCDI01 PCH,B.FCDI11 PCXH,(SELECT PPB02 FROM PPB WHERE PPB01 = S.PPB01)SPPP,
+		       (SELECT SPFL02 FROM SPFL WHERE SPFL01 = S.SPFL01)SPFL, 
+		       (SELECT SPFL02 FROM SPFL WHERE SPFL01 = SUBSTR(S.SPFL01,0,2))SPDL,
+		       S.SPFL01,SUBSTR(S.SPFL01,0,2), S.GGB01 SPGG,
+		       (SELECT W.WLDW02 FROM WLDW W WHERE W.WLDW01 = A.WLDW01) THGYS, 
+         	   (SELECT W.WLDW02 FROM WLDW W WHERE W.WLDW01 = B.WLDW01) JHGYS, 
+		       A.FCD06 THYY,A.FCD10 ZDR,
+	           TO_CHAR(A.FCD11,'YYYY-MM-DD') ZDRQ,A.FCD12 FHR,TO_CHAR(A.FCD13,'YYYY-MM-DD') FHRQ,A.FCD14 SHR,
+	           TO_CHAR(A.FCD15,'YYYY-MM-DD') SHRQ,S.SPXX02 SPBM,C.CK01 CKBM,C.CK02 CKMC
+		  FROM FCD A,FCDITEM B,BM M,SPXX S,WLDW W ,CK C
+		 WHERE A.FCD01 = B.FCD01
+		   AND A.BM01 = M.BM01
+		   AND A.WLDW01 = W.WLDW01
+		   AND B.SPXX01 = S.SPXX01
+		   AND A.GSXX01 = B.GSXX01
+		   AND A.CK01=C.CK01
+		<if test="FCD01 != null and FCD01 !=''">
+	       AND A.JLWBDH LIKE '%'||#{FCD01}||'%'
+	    </if>
+	    <if test="BM01 != null and BM01 !=''">
+		    <foreach item="item" index="index" collection="BM01"  open=" AND (" separator=" or " close=")"> 
+			A.BM01 LIKE #{item}||'%'
+			</foreach> 
+		</if>
+		<if test="WLDW != null and WLDW !=''">
+		    <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 	      
+		      (W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 LIKE '%'||#{item}||'%')
+		    </foreach>			
+		</if>
+		<if test="SPMC !=null and SPMC != ''">
+	       <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      REGEXP_LIKE(S.SPXX02, #{item}, 'i') OR REGEXP_LIKE(S.SPXX04, #{item}, 'i')  OR  REGEXP_LIKE(S.SPPYM, #{item}, 'i')  
+		     </foreach>
+	    </if>
+	    <if test="SPXX !=null and SPXX != ''">
+	       AND S.SPXX02 = #{SPXX}
+	    </if>
+	    <if test="SPFL01 != null and SPFL01 !=''">
+		    <foreach item="item" index="index" collection="SPFL01"  open=" AND (" separator=" or " close=")"> 
+			S.SPFL01 like #{item}||'%'
+			</foreach> 
+		</if>
+		<if test="SPPP01 != null and SPPP01 !=''">
+		    <foreach item="item" index="index" collection="SPPP01"  open=" AND (" separator=" or " close=")"> 
+			S.PPB01 = #{item}
+			</foreach> 
+		</if>
+		<if test="HZFS != null and HZFS !=''">
+			AND GET_HZFS(A.HZFS) = #{HZFS}
+		</if>
+		<if test="THYY != null and THYY !=''">
+			AND A.FCD06 = #{THYY}
+		</if>
+		<if test="SHRQ_S != null and SHRQ_S !=''">
+		    <![CDATA[AND A.FCD15 >= TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="SHRQ_E != null and SHRQ_E !=''">
+		    <![CDATA[AND A.FCD15 <= TO_DATE(#{SHRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="ZDRQ_S != null and ZDRQ_S !=''">
+		    <![CDATA[AND A.FCD11 >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="ZDRQ_E != null and ZDRQ_E !=''">
+		    <![CDATA[AND A.FCD11 <= TO_DATE(#{ZDRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="FHRQ_S != null and FHRQ_S !=''">
+		    <![CDATA[AND A.FCD13 >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="FHRQ_E != null and FHRQ_E !=''">
+		    <![CDATA[AND A.FCD13 <= TO_DATE(#{ZDRQ_E},'YYYY-MM-DD')]]>
+		</if>
+		   JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		   JL{CZY|M.BM01|BM_CX|LIKE%}JL
+           JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+	</select>
+</mapper>

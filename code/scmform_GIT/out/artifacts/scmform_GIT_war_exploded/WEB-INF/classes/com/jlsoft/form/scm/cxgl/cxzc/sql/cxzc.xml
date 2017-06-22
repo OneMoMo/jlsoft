@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CXZC">
+	 <!-- 查询SPJGB关联SPXX表(建议WLDW01与BM01不要传空值) -->
+  <select id="CXZC_SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT S.SPXX01, S.SPXX02 SPBM, S.SPXX04 SPMC, S.SPPYM,
+           S.SPFL01 SPFLBM, S.SPFL02 SPFLMC, S.PPB01 PPBM, S.PPB02 SPPPMC,
+           S.GGB01 SPGG, S.JQJX01, S.JLDW01 JLDW,S.SPXX70 BZHL,
+           A.SPJG01 JHDJ, A.SPJG04 LYKL, A.SPJG05 LSDJ, A.SPJG06 LSXJ,
+           A.SPJG07 PFDJ, A.SPJG08 PFXJ, A.SPJG11 CXF, A.SPXX08 XXSL,
+           (SELECT JXSL01 FROM WLDW WHERE WLDW.WLDW01 = A.WLDW01)JXSL,A.WLDW01,A.BM01
+      FROM SPJGB A, SPXX S
+     WHERE A.SPXX01 = S.SPXX01
+       <if test="SPMC != null and SPMC != ''">
+       AND (REGEXP_LIKE(S.SPPYM, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX02, #{SPMC}, 'i'))
+       </if>
+       <if test="SPFLBM != null and SPFLBM != ''">
+       AND S.SPFL01 = #{SPFLBM}
+       </if>
+       <if test="PPBM != null and PPBM != ''">
+       AND S.PPB01 = #{PPBM}
+       </if>
+       <if test="SPPPMC != null and SPPPMC != ''">
+       AND (S.PPB01 LIKE '%'||#{SPPPMC}||'%' OR S.PPB02 LIKE '%'||#{SPPPMC}||'%')
+       </if>
+      <if test="YXBJ != null and YXBJ != ''">
+       AND S.SPXX17 = 1
+       </if>
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND A.WLDW01 = #{WLDW01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND A.BM01 = #{BM01}
+       </if>
+       <if test="HZFS != null and HZFS != ''">
+       AND A.SPJG02 = #{HZFS}
+       AND A.SPJG02 IN (0,1,3)
+       </if>
+       <if test="JHYX != null and JHYX != ''">       
+       AND A.SPJG14 = #{JHYX}
+       </if>
+       <if test="SPXX01 != null">
+       AND A.SPXX01 = #{SPXX01}
+       </if>
+       <if test="SPMC != null and SPMC != ''">
+       AND (S.SPPYM LIKE '%'||#{SPMC}||'%' OR S.SPXX04 LIKE '%'||#{SPMC}||'%' OR S.SPXX02 LIKE '%'||#{SPMC}||'%')
+       </if>
+       JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+</mapper>

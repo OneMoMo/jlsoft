@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KHYHI">
+
+  <!-- 查询SPXX关联SPJGB和CKSP表 -->
+  <select id="CKSP_SPJGB" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.SPXX01, B.SPXX02 SPBM, B.SPXX04 SPMC,B.PPB02 PPMC, A.GGB01 SPGG, B.JLDW01 JLDW,
+           B.SPXX28 CMBJ, GET_BOOL(B.SPXX28) CMBJMC,  A.WLDW01，A.BM01, B.SPFL02 SPFL,      
+           A.SPJG07 JHDJ, A.SPJG05 LSDJ, A.SPJG07 FXDJ,A.SPJG08 FXXJ,
+           GET_HZFS(SPJG02) HZFSMC,SPJG02 HZFS
+      FROM SPJGB A, SPXX B
+     WHERE A.SPXX01 = B.SPXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="SPXX01 != null and SPXX01 != ''">
+       AND A.SPXX01 = #{SPXX01}
+       </if>
+       <if test="SPBM != null and SPBM != ''">
+       AND B.SPXX02 = #{SPBM}
+       </if>
+       <if test="SPMC != null and SPMC != ''">
+       AND (REGEXP_LIKE(B.SPXX02, #{SPMC}, 'i') OR REGEXP_LIKE(B.SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(B.SPPYM, #{SPMC}, 'i'))
+       </if>
+       <if test="SPFL01 != null and SPFL01 != ''">
+		 <foreach item="item" index="index" collection="SPFL01"  open=" AND (" separator=" or " close=")"> 
+		       B.SPFL01 LIKE #{item}||'%'
+		 </foreach> 
+	  </if>
+	   <if test="PPB01 != null and PPB01 != ''">
+		 <foreach item="item" index="index" collection="PPB01"  open=" AND (" separator=" or " close=")"> 
+		       B.PPB01 = #{item}
+		 </foreach> 
+	  </if>
+       JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+       AND SPJG03 =  (SELECT MAX(SPJG03) FROM SPJGB WHERE SPJGB.SPXX01 = A.SPXX01 AND SPJGB.GSXX01 = A.GSXX01 AND SPJGB.SPXX17 = 1)
+  </select>
+  
+  
+   <!-- 客户优惠单 适用对象 1：行业 2：客户类型 3：客户-->
+  <select id="SYDX1" parameterType="java.util.Map" resultType="java.util.Map">   
+    <!--  select HYXX01,HYXX02 HYMC,0 BJ from HYXX -->
+     <!-- 下拉树行业-->
+		SELECT DISTINCT HYXX01 KEY, HYXX02 VALUE, HYXX04 MJBJ, HYXX03 JB, hyx_hyxx01 PARENT
+		FROM HYXX
+		WHERE 1=1 	
+		<if test="JB != null and JB != ''">
+			AND HYXX03 = #{JB}
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND HYXX01 LIKE #{PARENT}||'%' AND HYXX01 != #{PARENT}
+		</if>
+		START WITH HYXX01 IN (
+	SELECT HYXX01
+          FROM HYXX
+      )
+CONNECT BY NOCYCLE PRIOR hyx_hyxx01 = HYXX01
+		ORDER BY JB
+   </select>
+   
+  <select id="SYDX2" parameterType="java.util.Map" resultType="java.util.Map">   
+    <!-- SELECT KSLX01,kslx02 KSLBMC , 1 BJ  from KSLX -->
+    SELECT DISTINCT KSLX01     KEY,
+                KSLX02     VALUE,
+                KSLX04     MJBJ,
+                KSLX03     JB,
+                KSL_KSLX01 PARENT
+  FROM KSLX
+ WHERE 1 = 1 
+ AND KSLX05=1
+ <if test="JB != null and JB != ''">
+			AND KSLX03 = #{JB}
+		</if>
+ <if test="PARENT != null and PARENT != ''">
+			AND KSLX01 LIKE #{PARENT}||'%' AND KSLX01 != #{PARENT}
+		</if>
+START WITH KSLX01 IN (
+	SELECT KSLX01
+          FROM KSLX
+      )
+CONNECT BY NOCYCLE PRIOR KSL_KSLX01 = KSLX01
+ ORDER BY JB
+    
+    </select>
+  <select id="SYDX3" parameterType="java.util.Map" resultType="java.util.Map">   
+     SELECT W.WLDW01,W.WLDW02 WLDWMC, 2 BJ
+      FROM WLDW W
+     WHERE W.WLDW20 = 1
+       AND W.WLDW16 = 1
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+        	 AND W.WLDW01 = #{WLDW01}
+       </if>
+       JL{CZY|W.WLDW01|WLDW_CZ|inS}JL
+  </select>
+  
+  <!-- 查询客户优惠单 -->
+  <select id="queryKHYHD" parameterType="java.util.Map" resultType="java.util.Map">
+select *
+  from (SELECT   A.GSXX01,
+               A.KHBZJG,
+                A.DWJGWJ01,
+               B.JLWBDH KHYHDH,
+               TO_CHAR(B.DWJGWJ02, 'yyyy-mm-dd hh24:mi:ss') YXRQQ,
+               TO_CHAR(B.DWJGWJ03, 'yyyy-mm-dd hh24:mi:ss') YXRQZ,
+               B.DWJGWJ04,
+               CASE A.YXBJ WHEN 1 THEN
+                  DECODE(B.DWJGWJ04, 0, '有效', 1, '有效', 2, '有效', 3, '无效')
+               ELSE '无效' END ZT,
+               B.DWJGWJ05 ZDR,
+               TO_CHAR(B.DWJGWJ06, 'YYYY-MM-DD') ZDRQ,
+               B.DWJGWJ07 SHR,
+               TO_CHAR(B.DWJGWJ08, 'YYYY-MM-DD') SHRQ,
+               B.BZ,
+               DECODE(B.DWJGWJ16, 0, '高', 1, '中', 2, '低') YXJ,
+               B.HYXX01,
+               (SELECT HYXX02 FROM HYXX WHERE HYXX01 = B.HYXX01) HY,
+               (SELECT WBBZ02 FROM BZ WHERE WBBZ01 = B.WBBZ01) WBBZ02,
+               B.KSLX01 KSLXDM,
+               (SELECT KSLX02 FROM KSLX WHERE KSLX01 = B.KSLX01) KHLX,
+               null KHDM,
+               null KHMC,
+               D.SPXX04 SPMC,
+               D.PPB02 SPPPMC,
+               D.SPXX02 SPBM,
+               A.CGXY02 SPSXDM,
+               get_spsx_v10(A.CGXY02) SPSX,
+               (SELECT BM02 FROM BM WHERE BM.BM01 = A.BM01) BM02,
+               A.DWJGWJI01 FXDJ,
+               A.DWJGWJI03 FXXJ,
+               A.DWJGWJI02 KHDJ,
+               A.FLFS01 XSFSDM,
+               (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS,
+            (SELECT FLFS02 FROM FLFS WHERE FLFS.FLFS01 = A.FLFS01) FLFS02,
+            D.SPFL01 SPFL
+          FROM DWJGWJITEM A, DWJGWJ B, SPXX D
+           WHERE A.DWJGWJ01 = B.DWJGWJ01 
+           AND A.GSXX01 = B.GSXX01 
+           AND A.SPXX01 = D.SPXX01
+           AND NOT EXISTS (SELECT * FROM DWJGWJ_WLDW WHERE A.DWJGWJ01 = DWJGWJ01 AND GSXX01=A.GSXX01)
+           JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+           JL{CZY|A.WLDW01|WLDW_CX|inS}JL 
+           JL{CZY|A.FLFS01|FLFS_CX|inS}JL
+        UNION ALL
+        SELECT  A.GSXX01,
+               A.KHBZJG,
+               A.DWJGWJ01,
+               B.JLWBDH KHYHDH,
+               TO_CHAR(B.DWJGWJ02, 'yyyy-mm-dd hh24:mi:ss') YXRQQ,
+               TO_CHAR(B.DWJGWJ03, 'yyyy-mm-dd hh24:mi:ss') YXRQZ,
+               B.DWJGWJ04,
+               CASE A.YXBJ WHEN 1 THEN
+                  DECODE(B.DWJGWJ04, 0, '有效', 1, '有效', 2, '有效', 3, '无效')
+               ELSE '无效' END ZT,
+               B.DWJGWJ05 ZDR,
+               TO_CHAR(B.DWJGWJ06, 'YYYY-MM-DD') ZDRQ,
+               B.DWJGWJ07 SHR,
+               TO_CHAR(B.DWJGWJ08, 'YYYY-MM-DD') SHRQ,
+               B.BZ,
+               DECODE(B.DWJGWJ16, 0, '高', 1, '中', 2, '低') YXJ,
+               B.HYXX01,
+               (SELECT HYXX02 FROM HYXX WHERE HYXX01 = B.HYXX01) HY,
+               (SELECT WBBZ02 FROM BZ WHERE WBBZ01 = B.WBBZ01) WBBZ02,
+               B.KSLX01 KSLXDM,
+               (SELECT KSLX02 FROM KSLX WHERE KSLX01 = B.KSLX01) KHLX,
+               E.WLDW01 KHDM,
+               F.WLDW02 KHMC,
+               D.SPXX04 SPMC,
+               D.PPB02 SPPPMC,
+               D.SPXX02 SPBM,
+               A.CGXY02 SPSXDM,
+               get_spsx_v10(A.CGXY02) SPSX,
+               (SELECT BM02 FROM BM WHERE BM.BM01 = A.BM01) BM02,
+               A.DWJGWJI01 FXDJ,
+               A.DWJGWJI03 FXXJ,
+               A.DWJGWJI02 KHDJ,
+               A.FLFS01 XSFSDM,
+               (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS,
+             (SELECT FLFS02 FROM FLFS WHERE FLFS.FLFS01 = A.FLFS01) FLFS02,
+             D.SPFL01 SPFL
+          FROM DWJGWJITEM A, DWJGWJ B, SPXX D, WLDW F, DWJGWJ_WLDW E
+           WHERE A.DWJGWJ01 = B.DWJGWJ01 
+   AND A.GSXX01 = B.GSXX01 
+   AND A.DWJGWJ01 = E.DWJGWJ01
+   AND A.GSXX01 = E.GSXX01
+   AND E.WLDW01 = F.WLDW01
+   AND A.SPXX01 = D.SPXX01
+   AND B.HYXX01 IS NULL
+             
+   JL{CZY|F.WLDW01|WLDW_CX|inS}JL 
+   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+    JL{CZY|A.FLFS01|FLFS_CX|inS}JL
+   )
+  WHERE 1=1
+   <if test="GSXX01 != null and GSXX01 != ''">
+  		AND GSXX01 = #{GSXX01}
+  </if>
+  <if test="WLDW != null and WLDW != ''">
+  		 <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 
+        KHDM LIKE '%'||#{item}||'%' OR KHMC LIKE '%'||#{item}||'%' 
+         </foreach>
+  </if>
+  	 <if test="XSFS != null and XSFS != ''">
+		 <foreach item="item" index="index" collection="XSFS"  open=" AND (" separator=" or " close=")"> 
+		       XSFSDM = #{item}
+		 </foreach> 
+	 </if>
+  <if test="KHYHDH != null and KHYHDH != ''">
+    	<foreach item="item" index="index" collection="KHYHDH"  open=" AND (" separator=" or " close=")"> 
+       		 KHYHDH LIKE '%'||#{item}||'%' 
+       	</foreach>
+  </if>
+  <if test="SPMC != null and SPMC != ''">
+    AND (Upper (SPMC) LIKE Upper('%'||#{SPMC}||'%')  OR Upper( SPBM) LIKE Upper ('%'||#{SPMC}||'%'))
+  </if>
+ <!--  <if test="SPMC != null and SPMC != ''">
+  		 <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+       	Upper (SPMC) LIKE Upper('%'||#{item}||'%')  OR Upper( SPBM) LIKE Upper ('%'||#{item}||'%')
+         </foreach>
+  </if> -->
+    <if test="KHLX != null and KHLX != ''">
+	     <foreach item="item" index="index" collection="KHLX"  open=" AND (" separator=" or " close=")"> 
+		        KSLXDM LIKE #{item}||'%'
+		 </foreach>
+  </if>
+  <if test="SPSX != null and SPSX != ''">
+	     <foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")"> 
+		        SPSXDM= #{item}
+		 </foreach>
+  </if>
+  	<if test="HYXX != null and HYXX != ''">
+		 <foreach item="item" index="index" collection="HYXX"  open=" AND (" separator=" or " close=")"> 
+		       HYXX01 = #{item}
+		 </foreach> 
+	 </if>  
+	<if test="DJZT != null and DJZT != ''">
+		 <foreach item="item" index="index" collection="DJZT"  open=" AND (" separator=" or " close=")"> 
+		       DWJGWJ04= #{item}
+		 </foreach> 
+	 </if>  	
+	<if test="SPFL != null and SPFL != ''">
+		 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")"> 
+		       SPFL LIKE #{item}||'%'
+		 </foreach> 
+	 </if>
+	<if test="ZDR != null and ZDR != ''">
+		    AND   ZDR LIKE '%'||#{ZDR}||'%'
+	 </if>
+	<if test="SHR != null and SHR != ''">
+		  AND    SHR LIKE '%'||#{SHR}||'%'
+	 </if>
+	  <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND ZDRQ >= #{ZDRQ_S}]]>
+	  </if> 
+	  <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+		<![CDATA[AND ZDRQ <= #{ZDRQ_E}]]>
+	 </if>
+	  <if test="SHRQ_S !=null and SHRQ_S != ''">
+	       <![CDATA[AND SHRQ >= #{SHRQ_S}]]>
+	  </if> 
+	  <if test="SHRQ_E !=null and SHRQ_E != ''">
+		<![CDATA[AND SHRQ <=#{SHRQ_E}]]>	
+	  </if>		  
+  	</select>
+  <!-- 查询客户优惠单 -->
+  <select id="KHYHD" parameterType="java.util.Map" resultType="java.util.Map">
+select *
+  from (SELECT   A.GSXX01,
+               A.KHBZJG,
+                A.DWJGWJ01,
+               B.JLWBDH KHYHDH,  D.PPB01,
+                TO_CHAR(B.DWJGWJ02, 'yyyy-mm-dd hh24:mi:ss') YXRQQ,
+               TO_CHAR(B.DWJGWJ03, 'yyyy-mm-dd hh24:mi:ss') YXRQZ,
+               B.DWJGWJ04,
+               DECODE(B.DWJGWJ04, 0, '有效', 1, '有效', 2, '有效', 3, '无效') ZT,
+               B.DWJGWJ05 ZDR,
+               TO_CHAR(B.DWJGWJ06, 'YYYY-MM-DD') ZDRQ,
+               B.DWJGWJ07 SHR,
+               TO_CHAR(B.DWJGWJ08, 'YYYY-MM-DD') SHRQ,
+               B.BZ,
+               DECODE(B.DWJGWJ16, 0, '高', 1, '中', 2, '低') YXJ,
+               B.HYXX01,
+               (SELECT HYXX02 FROM HYXX WHERE HYXX01 = B.HYXX01) HY,
+               (SELECT WBBZ02 FROM BZ WHERE WBBZ01 = B.WBBZ01) WBBZ02,
+               B.KSLX01 KSLXDM,
+               (SELECT KSLX02 FROM KSLX WHERE KSLX01 = B.KSLX01) KHLX,
+               null KHDM,
+               null KHMC,
+               D.SPXX04 SPMC,
+               D.PPB02 SPPPMC,
+               D.SPXX02 SPBM,
+               D.SPXX01 SPXX01,
+               A.CGXY02 SPSXDM,
+               get_spsx_v10(A.CGXY02) SPSX,
+               (SELECT BM02 FROM BM WHERE BM.BM01 = A.BM01) BM02,
+               A.DWJGWJI01 FXDJ,
+               A.DWJGWJI02 KHDJ,
+               A.FLFS01 XSFSDM,
+               (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS,
+            (SELECT FLFS02 FROM FLFS WHERE FLFS.FLFS01 = A.FLFS01) FLFS02,
+            D.SPFL01 SPFL
+          FROM DWJGWJITEM A, DWJGWJ B, SPXX D
+           WHERE A.DWJGWJ01 = B.DWJGWJ01 
+           AND A.GSXX01 = B.GSXX01 
+           AND A.SPXX01 = D.SPXX01
+           AND NOT EXISTS (SELECT * FROM DWJGWJ_WLDW WHERE A.DWJGWJ01 = DWJGWJ01 AND GSXX01=A.GSXX01)
+           JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+           JL{CZY|A.WLDW01|WLDW_CX|inS}JL 
+           JL{CZY|A.FLFS01|FLFS_CX|inS}JL
+        UNION ALL
+        SELECT  A.GSXX01,
+               A.KHBZJG,
+               A.DWJGWJ01,
+               B.JLWBDH KHYHDH,  D.PPB01,
+               TO_CHAR(B.DWJGWJ02, 'yyyy-mm-dd hh24:mi:ss') YXRQQ,
+               TO_CHAR(B.DWJGWJ03, 'yyyy-mm-dd hh24:mi:ss') YXRQZ,
+               B.DWJGWJ04,
+               DECODE(B.DWJGWJ04, 0, '有效', 1, '有效', 2, '有效', 3, '无效') ZT,
+               B.DWJGWJ05 ZDR,
+               TO_CHAR(B.DWJGWJ06, 'YYYY-MM-DD') ZDRQ,
+               B.DWJGWJ07 SHR,
+               TO_CHAR(B.DWJGWJ08, 'YYYY-MM-DD') SHRQ,
+               B.BZ,
+               DECODE(B.DWJGWJ16, 0, '高', 1, '中', 2, '低') YXJ,
+               B.HYXX01,
+               (SELECT HYXX02 FROM HYXX WHERE HYXX01 = B.HYXX01) HY,
+               (SELECT WBBZ02 FROM BZ WHERE WBBZ01 = B.WBBZ01) WBBZ02,
+               B.KSLX01 KSLXDM,
+               (SELECT KSLX02 FROM KSLX WHERE KSLX01 = B.KSLX01) KHLX,
+               E.WLDW01 KHDM,
+               F.WLDW02 KHMC,
+               D.SPXX04 SPMC,
+               D.PPB02 SPPPMC,
+               D.SPXX02 SPBM,
+               D.SPXX01 SPXX01,
+               A.CGXY02 SPSXDM,
+               get_spsx_v10(A.CGXY02) SPSX,
+               (SELECT BM02 FROM BM WHERE BM.BM01 = A.BM01) BM02,
+               A.DWJGWJI01 FXDJ,
+               A.DWJGWJI02 KHDJ,
+               A.FLFS01 XSFSDM,
+               (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS,
+             (SELECT FLFS02 FROM FLFS WHERE FLFS.FLFS01 = A.FLFS01) FLFS02,
+             D.SPFL01 SPFL
+          FROM DWJGWJITEM A, DWJGWJ B, SPXX D, WLDW F, DWJGWJ_WLDW E
+           WHERE A.DWJGWJ01 = B.DWJGWJ01 
+   AND A.GSXX01 = B.GSXX01 
+   AND A.DWJGWJ01 = E.DWJGWJ01
+   AND A.GSXX01 = E.GSXX01
+   AND E.WLDW01 = F.WLDW01
+   AND A.SPXX01 = D.SPXX01
+   AND B.HYXX01 IS NULL        
+   JL{CZY|F.WLDW01|WLDW_CX|inS}JL 
+   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+    JL{CZY|A.FLFS01|FLFS_CX|inS}JL
+   )
+  WHERE 1=1
+   <if test="GSXX01 != null and GSXX01 != ''">
+  		AND GSXX01 = #{GSXX01}
+  </if>
+  <if test="WLDW != null and WLDW != ''">
+  		 <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 
+        KHDM LIKE '%'||#{item}||'%' OR KHMC LIKE '%'||#{item}||'%' 
+         </foreach>
+  </if>
+  	 <if test="XSFS != null and XSFS != ''">
+		 <foreach item="item" index="index" collection="XSFS"  open=" AND (" separator=" or " close=")"> 
+		       XSFSDM = #{item}
+		 </foreach> 
+	 </if>
+  <if test="KHYHDH != null and KHYHDH != ''">
+    	<foreach item="item" index="index" collection="KHYHDH"  open=" AND (" separator=" or " close=")"> 
+       		 KHYHDH LIKE '%'||#{item}||'%' 
+       	</foreach>
+  </if>
+  <if test="SPMC != null and SPMC != ''">
+  		 <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+       	Upper(SPMC) LIKE Upper('%'||#{item}||'%')  OR Upper(SPBM) LIKE Upper('%'||#{item}||'%')
+         </foreach>
+  </if>
+  <if test="PP != null and PP != ''">
+	     <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+		        PPB01 LIKE #{item}||'%'
+		 </foreach>
+  </if>
+    <if test="KHLX != null and KHLX != ''">
+	     <foreach item="item" index="index" collection="KHLX"  open=" AND (" separator=" or " close=")"> 
+		        KSLXDM LIKE #{item}||'%'
+		 </foreach>
+  </if>
+  <if test="SPSX != null and SPSX != ''">
+	     <foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")"> 
+		        SPSXDM= #{item}
+		 </foreach>
+  </if>
+  	<if test="HYXX != null and HYXX != ''">
+		 <foreach item="item" index="index" collection="HYXX"  open=" AND (" separator=" or " close=")"> 
+		       HYXX01 = #{item}
+		 </foreach> 
+	 </if>  
+	<if test="DJZT != null and DJZT != ''">
+		 <foreach item="item" index="index" collection="DJZT"  open=" AND (" separator=" or " close=")"> 
+		       DWJGWJ04= #{item}
+		 </foreach> 
+	 </if>  	
+	<if test="SPFL != null and SPFL != ''">
+		 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")"> 
+		       SPFL LIKE #{item}||'%'
+		 </foreach> 
+	 </if>
+	<if test="ZDR != null and ZDR != ''">
+		    AND   ZDR LIKE '%'||#{ZDR}||'%'
+	 </if>
+	<if test="SHR != null and SHR != ''">
+		  AND    SHR LIKE '%'||#{SHR}||'%'
+	 </if>
+	  <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND ZDRQ >= #{ZDRQ_S}]]>
+	  </if> 
+	  <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+		<![CDATA[AND ZDRQ <= #{ZDRQ_E}]]>
+	 </if>
+	  <if test="SHRQ_S !=null and SHRQ_S != ''">
+	       <![CDATA[AND SHRQ >= #{SHRQ_S}]]>
+	  </if> 
+	  <if test="SHRQ_E !=null and SHRQ_E != ''">
+		<![CDATA[AND SHRQ <=#{SHRQ_E}]]>	
+	  </if>		  
+  	</select>
+  </mapper>

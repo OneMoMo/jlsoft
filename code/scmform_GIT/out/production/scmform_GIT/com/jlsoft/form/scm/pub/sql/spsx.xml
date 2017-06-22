@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPSX">
+
+	<!-- 查询商品属性 -->
+	<select id="SPSX_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.SPSX01, A.SPSXMC
+		FROM SPSX A
+		WHERE YXBJ = 1
+		<if test="SPSX != null and SPSX != ''">
+			AND (A.SPSX01 = #{SPSX} OR A.SPSXMC LIKE '%'||#{SPSX}||'%')
+		</if>
+	</select>
+	<select id="SPSX_XL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.SPSX01 key, A.SPSXMC value
+		FROM SPSX A
+		WHERE YXBJ = 1
+		<if test="SPSX != null and SPSX != ''">
+			AND (A.SPSX01 = #{SPSX} OR A.SPSXMC LIKE '%'||#{SPSX}||'%')
+		</if>
+	</select>
+</mapper>

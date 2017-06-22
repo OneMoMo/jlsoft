@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.ccgl.syd.cgfydjpd">
+	        <FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="供应商编码" />
+	        <FIELD attrname="BM01" fieldtype="string" allownull="N" name="部门编码" />
+	        <FIELD attrname="FYZE" fieldtype="string" allownull="N" name="费用总额" />
+	 <Nested id="CGFYMXLB" allownull="N" name="费用明细">
+            <FIELD attrname="FYBM" fieldtype="String" allownull="N" name="费用编码" />
+            <FIELD attrname="FYXM" fieldtype="String" allownull="N" name="费用项目" />
+            <FIELD attrname="FYJE" fieldtype="String" allownull="N" name="费用金额" />
+        <Nested id="HBBZ">
+	        <FIELD attrname="key" fieldtype="string" allownull="N" name="币种" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="币种" />
+        </Nested>
+            <FIELD attrname="YXWLBJ" fieldtype="String" allownull="N" name="影响往来账" />
+            <FIELD attrname="GYS_WLDW01" fieldtype="String" allownull="N" name="供应商编码" />
+            <FIELD attrname="CG_BM01" fieldtype="String" allownull="N" name="部门编码" />
+     </Nested>
+     <Nested id="RKSPMXLB" allownull="N" name="入库明细">
+            <FIELD attrname="JLWBDH" fieldtype="String" allownull="N" name="入库单号" />
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="SPSX" fieldtype="String" allownull="N" name="商品属性" />
+            <FIELD attrname="RKSL" fieldtype="String" allownull="N" name="数量" />
+            <FIELD attrname="RKDJ" fieldtype="String" allownull="N" name="单价" />
+            <FIELD attrname="RKJE" fieldtype="String" allownull="N" name="金额" />
+            <FIELD attrname="DTZL" fieldtype="String" allownull="N" name="单台重量" />
+            <FIELD attrname="ZZL" fieldtype="String" allownull="N" name="总重量" />
+            <FIELD attrname="DTFY" fieldtype="String" allownull="N" name="单台费用" />
+            <FIELD attrname="FYJE" fieldtype="String" allownull="N" name="费用金额" />
+            <FIELD attrname="SJDJ" fieldtype="String" allownull="N" name="实际单价" />
+     </Nested>
+   </JLConfig>
+</root>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JZPZ">
+    <select id="PZLX" parameterType="Map" resultType="java.util.Map">
+        SELECT A.PZLX01 KEY,A.PZLX02 VALUE, A.PZLX03
+        FROM WBPZLX A, WBZTQX B 
+        WHERE A.WBZT01 = B.WBZT01 AND A.PZLX01 = B.PZLX01
+          AND A.PZLX12 = 1
+        <if test="WBZT01 != null">
+		    AND A.WBZT01 = #{WBZT01}
+		</if>
+		<if test="RYXX01 != null">
+		    AND B.RYXX01 = #{RYXX01}
+		</if>
+        ORDER BY A.PZLX01
+    </select>
+
+    <select id="WBZT" parameterType="Map" resultType="java.util.Map">
+        SELECT A.WBZT01 KEY,A.WBZT02 VALUE, A.GSXX01
+          FROM WBZT A 
+         WHERE 1 = 1
+        JL{CZY|A.GSXX01|CZGS_CZ|inS}JL 
+    </select>
+    
+    <select id="CWND" parameterType="Map" resultType="java.util.Map">
+        SELECT DISTINCT YWKJ01 KEY, YWKJ01 VALUE 
+          FROM YWKJQJ
+         WHERE 1 = 1
+           AND YWKJ03 = 0
+           <if test="GSXX01 != null and GSXX01 != ''"> 
+               AND GSXX01 = #{GSXX01}
+           </if>
+      ORDER BY YWKJ01
+    </select>
+
+    <select id="KJQJ" parameterType="Map" resultType="java.util.Map">
+        SELECT DISTINCT YWKJ02 KEY, YWKJ02 VALUE 
+          FROM YWKJQJ
+         WHERE 1 = 1
+           AND YWKJ03 = 0
+           <if test="CWND != null and CWND != ''"> 
+               AND YWKJ01 = #{CWND}
+           </if>
+           <if test="GSXX01 != null and GSXX01 != ''"> 
+               AND GSXX01 = #{GSXX01}
+           </if>
+      ORDER BY YWKJ02
+    </select>
+    
+    <select id="WBPZITEM" parameterType="Map" resultType="java.util.Map">
+        SELECT (CASE WHEN A.WBPZ08 IS NULL THEN 0 ELSE 1 END) GZ, 
+        	   TO_CHAR(A.WBPZ14, 'yyyy-mm-dd') PZRQ,(A.WBPZ13|| '.'||A.WBPZ02) KJQJ,
+               A.WBPZ00 PZZH,B.WBPZI02 ZY,B.WBPZI03 KMDM,B.WBPZI04 KMMC,B.WBPZI05 JFJE,B.WBPZI06 DFJE,
+               B.WBPZI07 JFSL,B.WBPZI08 DFSL,A.WBPZ07 GZR, B.WBPZI14 JSFS, B.WBPZI13 JSH,
+               B.WLDW01, (SELECT WLDW02 FROM WLDW W WHERE W.WLDW01 = B.WLDW01) WLDW02,
+       		   B.BM01, (SELECT BM02 FROM BM M WHERE M.BM01 = B.BM01) BM02,
+       		   B.FYBM01, (SELECT BM02 FROM BM M WHERE M.BM01 = B.FYBM01) FYBM02,
+               B.TSZZBJ,B.ZCBM,B.ZCDH,B.ZCSL,B.ZCYWLX,B.YWJE,B.FKYY,
+               TO_CHAR(A.WBPZ11, 'yyyy-mm-dd') YWRQ, A.WBPZ00, A.JLWBDH,
+               B.WBPZI01 PZFL
+        FROM WBPZ A, WBPZITEM B
+        WHERE A.WBPZ00 = B.WBPZ00
+        <if test = "JLWBDH != null"> AND ( A.JLWBDH LIKE '%' || #{JLWBDH} || '%' OR A.WBPZ00 LIKE '%' || #{JLWBDH} || '%')</if>
+        <if test = "JLWBDH == null"> 
+        	<if test = "PZLX01 != null"> AND A.PZLX01=#{PZLX01} </if>
+        	<if test = "CWND != null"> AND A.WBPZ13=#{CWND} </if>
+        	<if test = "KJQJ != null"> AND A.WBPZ02=#{KJQJ} </if>
+	       	<if test="GZBJ == 0">AND A.CSBJ = 0</if>
+	       	<if test="GZBJ == 1">AND A.CSBJ = 1</if>
+       	</if>
+    </select>
+    
+	<select id="WBPZ_INI" parameterType="Map" resultType="java.util.Map">
+		SELECT * FROM WBPZ_INI WHERE WBPZ00 = #{WBPZ00}
+    </select>
+    
+	<select id="WBPZITEM_INI" parameterType="Map" resultType="java.util.Map">
+		SELECT WBPZ00,
+		       WBPZI01 PZFL,
+		       WBPZI02 ZY,
+		       WBPZI03 KMDM,
+		       WBPZI04 KMMC,
+		       WBPZI05 JFJE,
+		       WBPZI06 DFJE,
+		       WBPZI07 JFSL,
+		       WBPZI08 DFSL,
+		       WBPZI13 PJHM,
+		       WBPZI14 JSFS
+		  FROM WBPZITEM_INI
+ 		 WHERE WBPZ00 = #{WBPZ00}
+    </select>
+    
+	<select id="WBPZFZHS_INI" parameterType="Map" resultType="java.util.Map">
+		SELECT WBPZ00,
+		       WBPZI01 PZFL,
+		       FZHS01 XMDM,
+		       FZHS02 XMMC,
+		       FZHS03 FZHSDM,
+		       FZHS04 FZHSMC 
+		  FROM WBPZFZHS_INI F 
+		 WHERE WBPZ00 = #{WBPZ00}
+    </select>
+    
+	<!-- 金蝶导出SQL -->
+	<select id="WBPZ_EXPORT_JD" parameterType="Map" resultType="java.util.Map">
+		SELECT TO_CHAR(A.WBPZ14,'YYYY-MM-DD') PZRQ,
+		       A.WBPZ13 KJND,
+		       A.WBPZ02 KJQJ,
+		       (SELECT PZLX03 FROM WBPZLX WHERE PZLX01 = A.PZLX01) PZZ,
+		       A.WBPZ00 PZH,
+		       B.WBPZI03 KMDM,
+		       WBPZI04 KMMC,
+		       'RMB' BBDM,
+		       '人民币' BBMC,
+		       (B.WBPZI05 + B.WBPZI06) YBJE,
+		       B.WBPZI05 JFJE,
+		       B.WBPZI06 DFJE,
+		       '系统' ZD,
+		       '系统' SH,
+		       'NONE' HZ,
+		       'NONE' CN,
+		       '' JB,
+		       '*' JSFS,
+		       '' JSH,
+		       B.WBPZI02 ZY,
+		       0 SL,
+		       '*' DW,
+		       0 DJ,
+		       '' CKXX,
+		       TO_CHAR(A.WBPZ14,'YYYY-MM-DD') YWRQ,
+		       '' WLYWBH,
+		       0 FJS,
+		       B.WBPZI01 XH,
+		       '' XTMK,
+		       '' YWMS,
+		       '公司汇率' HLLX,
+		       1 HL,
+		       B.WBPZI01 FLXH,
+		       (SELECT FZHS02 || '--' || FZHS03 || '--' || FZHS04 
+		          FROM WBPZFZHS
+		         WHERE WBPZ00 = B.WBPZ00
+		           AND WBPZI01 = B.WBPZI01
+		           AND ROWNUM = 1) HSXM,
+		       0 GZ,
+		       '' JZPZ,
+		       '' XJLL
+		  FROM WBPZ A, WBPZITEM B
+		 WHERE A.WBPZ00 = B.WBPZ00
+		   AND A.WBPZ00 = #{WBPZ00}
+    </select>
+</mapper>

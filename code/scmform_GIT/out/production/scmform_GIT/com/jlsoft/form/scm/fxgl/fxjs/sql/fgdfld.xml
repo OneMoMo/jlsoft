@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FGDFLD">
+	<!-- 查询单据明细 -->
+	<select id="queryFGDFLD" parameterType="java.util.Map" resultType="java.util.Map">
+	  SELECT A.JLWBDH FLDH,TO_CHAR(B.FPRQ,'YYYY-MM-DD') FPRQ,B.FPHM,
+       A.WLDW01 KHDM, 
+       D.WLDW02 KHMC, 
+       A.FLD13 YWYDM, 
+       A.FLD14 YWY, 
+       A.BM01, 
+       C.BM02 XSBMMC, 
+       (Select PPB02 From PPB Where PPB01 = A.PPB01) PPMC,
+       B.FLFS01 FLFSDM, 
+       E.FLFS02 FLFS, 
+       F.FLDM02 FLDMMC,
+       to_char(B.FLDI03) FLJE, 
+       to_char(B.FLDI06) TZJE, 
+       B.FLDI01 XSSL,
+       to_char(B.FLDI02) XSJE,
+       A.FLD03 ZDR, 
+       A.FLD05 SHR, 
+       <![CDATA[ (CASE A.FLD09
+         WHEN 2 THEN '非固定费用单' else '返利单' end) DJLX ,]]>
+       A.FLD11 || '  ' || B.FLDI04 BZ,
+       to_char(A.FLD04,'YYYY-MM-DD') ZDRQ,
+       to_char(A.FLD06,'YYYY-MM-DD') SHRQ,
+       A.FLD15 FLSJ,
+       to_char(A.FLD07,'YYYY-MM-DD') KSRQ,
+       to_char(A.FLD08,'YYYY-MM-DD') ZZRQ,
+       to_char(A.FLD19,'YYYY-MM-DD') CWRQ,
+       A.GSXX01, 
+       F.FLDM01 FLDM, 
+       to_char((B.FLDI03 + B.FLDI06)) SJFLJE,
+       to_char((B.FLDI03 + B.FLDI06 - B.FLDI05)) WFFLJE,
+       A.FLZC01 FLZC,
+      <![CDATA[ (CASE
+         WHEN (B.FLDI05 <= 0 AND (B.FLDI03 + B.FLDI06 - B.FLDI05) > 0) or
+              (B.FLDI03 < 0 AND (B.FLDI03 + B.FLDI06 - B.FLDI05) < 0) THEN
+           '未付款'
+         WHEN (B.FLDI05 > 0 AND (B.FLDI03 + B.FLDI06 - B.FLDI05) > 0) THEN
+          '部分付款'
+         WHEN ((B.FLDI03 + B.FLDI06 - B.FLDI05) <= 0) THEN
+          '全部付款'
+       END) FKBJ,]]>
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSXX02 
+  FROM  FLD A, FLDITEM B, BM C, WLDW D, FLFS E, FLDM F 
+ WHERE A.GSXX01 = B.GSXX01 
+   AND A.FLD01 = B.FLD01 
+   AND A.WLDW01 = D.WLDW01 
+   AND A.BM01 = C.BM01 
+   AND B.FLFS01 = E.FLFS01(+)
+   AND B.FLDM01 = F.FLDM01
+    <if test="KPQK == 0">
+       	AND B.FPRQ IS NOT NULL
+    </if>
+    <if test="KPQK == 1">
+  		AND B.FPRQ IS  NULL
+    </if> 
+   <if test="FPHM!=null and FPHM != ''">
+        AND B.FPHM = #{FPHM}
+   </if>
+   <if test="FPRQ!=null and FPRQ != ''">
+        AND B.FPRQ = TO_DATE(#{FPRQ},'YYYY-MM-DD')
+   </if>
+   <if test="KH != null and KH != ''">
+			   AND (A.WLDW01 LIKE '%'||#{KH}||'%' OR D.WLDW02
+					LIKE '%'||#{KH}||'%')
+   </if>
+   <if test="XSBM != null and XSBM != ''">
+	 <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	      A.BM01 = #{item}
+	 </foreach> 
+   </if>
+   <if test="FLMC != null and FLMC != ''">
+	 <foreach item="item" index="index" collection="FLMC"  open=" AND (" separator=" or " close=")"> 
+	      B.FLDM01 = #{item}
+	 </foreach> 
+   </if>
+   <if test="PP != null and PP != ''">
+	 <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+	      A.PPB01 = #{item}
+	 </foreach> 
+   </if>
+   <if test="ZDR != null and ZDR !=''"> AND A.FLD03 LIKE '%'||#{ZDR}||'%'</if>
+   <if test="TZRQ_S != null and TZRQ_S !=''"> <![CDATA[AND A.FLD04 >=TO_DATE(#{TZRQ_S},'YYYY-MM-DD')]]></if>
+   <if test="TZRQ_E != null and TZRQ_E != ''"><![CDATA[  AND A.FLD04 <=TO_DATE(#{TZRQ_E}|| '23:59:59','YYYY-MM-DD HH24:MI:SS')]]></if>  
+   <if test="SHRQ_S != null and  SHRQ_S !='' "> <![CDATA[AND A.FLD06 >=TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]></if>
+   <if test="SHRQ_E != null and SHRQ_E !=''"><![CDATA[  AND A.FLD06 <=TO_DATE(#{SHRQ_E}|| '23:59:59','YYYY-MM-DD HH24:MI:SS')]]></if>
+   <if test="DJBH != null and DJBH !=''"> AND A.JLWBDH =#{DJBH}</if>
+   <if test="CWRQQ !=null and CWRQQ != ''">
+	    <![CDATA[AND A.FLD19 >= TO_DATE(#{CWRQQ},'YYYY-MM-DD')]]>
+   </if> 
+   <if test="CWRQZ !=null and CWRQZ != ''">
+	    <![CDATA[AND A.FLD19 <= TO_DATE(#{CWRQZ},'YYYY-MM-DD HH24:MI:SS')]]>
+   </if>
+    JL{CZY|A.WLDW01|KH_CX|LIKE%}JL
+    JL{CZY|A.BM01|BM_CX|LIKE%}JL
+  </select>
+</mapper>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>首页</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<div class="loading hide"><div><i class="fa fa-spinner fa-spin fa-3x fa-fw margin-bottom"></i></div></div>
+<header>
+<div class="index_header">
+<a class="logo"><img src="images/header_logo.png" class="radius0" /></a>
+<div class="header_seach">
+  <div class="seach_main">
+    <i class="seach_icon fa fa-search"></i>
+    商品名称/代码可搜索
+  </div>
+</div>
+<i class="fa fa-comments-o"></i>
+</div>
+</header>
+
+<div class="main" style="padding-top:2.5rem;">
+  <div class="w12 jl_tab">
+    <ul jlui="" class="w12">
+      <li class="xuan">首页</li>
+      <li onClick="window.location.href='activity/activity.html'">客厅</li>
+      <li>卧室</li>
+      <li>厨房</li>
+      <li>卫浴</li>
+      <li>儿童房</li>
+    </ul>
+  </div>
+<!---banner--->
+<div class="w12 banner mt10" style="background:url(images/banner02.jpg)"></div>
+
+<div class="w12 banner_nav bor_bottom">
+  <dl class="w03" onClick="window.location.href='sign.html'">
+    <dt class="w12"><i class="fa fa-calendar-check-o"></i></dt>
+    <dd class="w12">签到</dd>
+  </dl>
+  <dl class="w03">
+    <dt class="w12"><i class="fa fa-bullhorn"></i></dt>
+    <dd class="w12">活动</dd>
+  </dl>
+  <dl class="w03">
+    <dt class="w12"><i class="fa fa-cubes"></i></dt>
+    <dd class="w12">套餐</dd>
+  </dl>
+  <dl class="w03">
+    <dt class="w12"><i class="fa fa-gift"></i></dt>
+    <dd class="w12">推荐</dd>
+  </dl>
+</div>
+
+<!---新品--->
+<div jlui="" class="w12 floor">
+  <div class="w12 floor_title bor_bottom"><h3>窗帘专场</h3></div>
+  <div class="w12 floor_main">
+    <div class="w12 adv_left" style="background:url(images/banner02.jpg)"></div>
+  </div>
+</div>
+</div>
+
+<footer>
+<dl class="w03 xuan" onClick="window.location.href='index.html'">
+  <dt><i class="fa fa-home"></i></dt>
+  <dd>首页</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='nav.html'">
+  <dt><i class="fa fa-navicon"></i></dt>
+  <dd>分类</dd>
+</dl>
+<dl jlui="" class="w03" onClick="window.location.href='cart/cart.html'">
+  <dt><i class="fa fa-cart-plus"></i></dt>
+  <dd>购物车</dd>
+  <em>15</em>
+</dl>
+<dl class="w03" onClick="window.location.href='user/userIndex.html'">
+  <dt><i class="fa fa-user"></i></dt>
+  <dd>我的</dd>
+</dl>
+</footer>
+
+
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

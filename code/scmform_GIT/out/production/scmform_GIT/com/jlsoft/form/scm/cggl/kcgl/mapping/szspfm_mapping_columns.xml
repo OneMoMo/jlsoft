@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.cggl.szspfm">
+   <Nested id="CZLX" allownull="N" name="操作类型">
+   		<FIELD attrname="key" fieldtype="String" allownull="N" name="操作类型" />
+   		 <FIELD attrname="value" fieldtype="String" allownull="N" name="操作类型" />
+   </Nested>
+    <FIELD attrname="GSXX01" fieldtype="String" allownull="N" name="公司编码" />
+    <FIELD attrname="WLDW01" fieldtype="String" allownull="N" name="供应商" />
+    <FIELD attrname="BM01" fieldtype="String" allownull="N" name="采购部门" />
+</JLConfig>
+</root>

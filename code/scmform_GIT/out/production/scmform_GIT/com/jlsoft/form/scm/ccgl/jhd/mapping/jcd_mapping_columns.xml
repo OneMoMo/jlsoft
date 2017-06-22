@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.jcdzd">
+		<Nested id="JCLX">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="借出类型" />
+        </Nested>
+        <Nested id="JCCKMC">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="借出仓库" />
+        </Nested>
+		<Nested id="SPLB" allownull="N" name="商品列表">
+	    	<FIELD attrname="ZCSL" fieldtype="double" allownull="N" name="借出数量" />
+	    </Nested>
+	</JLConfig>
+	
+</root>

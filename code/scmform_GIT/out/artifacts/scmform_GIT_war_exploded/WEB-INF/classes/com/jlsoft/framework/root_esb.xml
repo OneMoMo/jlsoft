@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="JLGateWay" description="JL网关" concurrency="true" log="false">
+        <router>
+            <if condition="sysType=='v7scm'">
+        		<processor component="mapMappingConvertor" configKey="v7scm"/>
+        		<processor component="jlHttpTransportor" url="{{v7scm_url}}/JLESServer/POST_SCM_DJ?UserName=JLSOFT&amp;&amp;PassWord=88888"/>
+            </if>
+            <if condition="sysType=='jlo2o'">
+                <action component="InboundWrapper" method="dispatch" parameterType="java.util.Map"/>
+            </if>
+            <if condition="sysType=='form5'">
+                <action component="InboundWrapper" method="dispatch" parameterType="java.util.Map"/>
+            </if>
+            <if condition="sysType=='jlqs'">
+                <action component="InboundWrapper" method="dispatch" parameterType="java.util.Map"/>
+            </if>
+            <if condition="sysType=='ecsv9'">
+        		<processor component="jlHttpTransportor" url="{{ecsv9_url}}/Inbound/invoke.do"/>
+        		<!-- <processor component="jlHttpTransportor" url="{{SCM_URL}}/Inbound/invoke.do"/> -->
+            </if>
+        </router>
+    </chain>
+    <chain id="JLJcdyGateWay" description="JL网关" concurrency="true" log="false">
+        <router>
+            <if condition="sysType=='v7scm'">
+        		<processor component="mapMappingConvertor" configKey="v7scm"/>
+        		<processor component="jlHttpTransportor" url="{{v7scm_url}}/JLESServer/POST_SCM_DJ?UserName=JLSOFT&amp;&amp;PassWord=88888"/>
+            </if>
+            <if condition="sysType=='jlo2o'">
+                <action component="InboundWrapper" method="dispatch" parameterType="java.util.Map"/>
+            </if>
+            <if condition="sysType=='form5'">
+                <action component="InboundWrapper" method="dispatch" parameterType="java.util.Map"/>
+            </if>
+            <if condition="sysType=='jlqs'">
+                <action component="InboundWrapper" method="dispatch" parameterType="java.util.Map"/>
+            </if>
+            <if condition="sysType=='ecsv9'">
+        		<processor component="jlHttpTransportor" url="{{ecsv9_url}}/Inbound/invoke.do"/>
+        		<!-- <processor component="jlHttpTransportor" url="{{SCM_URL}}/Inbound/invoke.do"/> -->
+            </if>
+        </router>
+    </chain>
+    <chain id="v7scm" description="v7scm" concurrency="true" log="false">
+        <processor component="mapMappingConvertor" configKey="v7scm"/>
+        <processor component="jlHttpTransportor" url="{{v7scm_url}}/JLESServer/POST_SCM_DJ?UserName=JLSOFT&amp;&amp;PassWord=88888"/>
+    </chain>
+    <!-- <chain id="getHis" description="历史纪录" concurrency="true" log="false">
+        <processor component="jsonToMapConvertor"/>
+        <action component="history" method="selectHistory" parameterType="java.util.Map"/>
+    </chain> -->
+   <!--  <chain id="qiuyun" description="供应商对账单接口查询" concurrency="ture" log="false">
+        <action component="scm.bbgl.gysdzd.selectgysdzd" method="selectGYSDZD2" parameterType="java.util.Map"/>
+    </chain> -->
+</root>

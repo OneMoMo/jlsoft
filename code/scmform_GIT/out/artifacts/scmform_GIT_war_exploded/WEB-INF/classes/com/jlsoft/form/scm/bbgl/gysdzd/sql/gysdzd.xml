@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GYSDZD">
+	<select id="queryGYSDZD" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT TO_CHAR(A.RQ, 'YYYY-MM-DD') RQ,
+       A.DJLX,
+       A.JLWBDH DJBH,
+       A.PJBH,
+       A.SPXX01,
+       A.BZ,
+       (SELECT SPXX02 FROM SPXX WHERE A.SPXX01 = SPXX01) SPXX02,
+       (CASE
+         WHEN A.DJLX = '收入单' THEN
+          '销售折扣'
+         ELSE
+          (SELECT TO_CHAR(SPXX04) FROM SPXX WHERE A.SPXX01 = SPXX01)
+       END) SPXX04,
+       A.WLDW01,
+       (SELECT WLDW02 FROM WLDW WHERE A.WLDW01 = WLDW01) WLDW02,
+       A.GSXX01,
+       (SELECT GSXX02 FROM GSXX WHERE A.GSXX01 = GSXX01) GSXX02,
+       A.BM01,
+       (SELECT BM02 FROM BM WHERE A.BM01 = BM01) BM02,
+       A.HKZJ,
+       A.HKJS,
+       A.YFZJ,
+       A.YFJS,
+       A.YSZJ,
+       A.YSJS,
+       A.SL,
+       A.DJ,
+       A.HH,
+       A.TM,
+       B.GHSJXC09 HKYE,   
+       B.GHSJXC12 YFYE,
+       B.GHSJXC15 SRYE,  
+       (B.GHSJXC09 - B.GHSJXC12 - B.GHSJXC15) JYFYE,
+       B.GHSJXC13 SRZJ,
+       B.GHSJXC14 SRJS,
+       A.MXBZ
+  FROM VIEW_GYSDZD_NEW A, GHSJXCR B  ,WLDW W 
+ WHERE 1 = 1
+ AND A.WLDW01=B.WLDW01 
+ AND W.WLDW01=A.WLDW01
+ AND A.BM01=B.BM01
+ AND A.RQ=B.GHSJXC01
+ JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+ JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+    <if test="WLDW != null and WLDW !=''">
+      AND (A.WLDW01 LIKE '%'||#{WLDW}||'%' OR W.WlDW02  LIKE '%'||#{WLDW}||'%' OR
+       W.WLDW19 LIKE '%'||#{WLDW}||'%')
+      </if>
+    <if test="FKRQ_S != null and FKRQ_S !=''">
+    <![CDATA[
+   AND A.RQ >=  TO_DATE(#{FKRQ_S}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+     <if test="FKRQ_E != null and FKRQ_E !=''">
+    <![CDATA[
+   AND A.RQ <=  TO_DATE(#{FKRQ_E}, 'YYYY-MM-DD') 
+    ]]>
+    </if>
+    <if test="BM01 != null and BM01  != ''">
+		 <foreach item="item" index="index" collection="BM01"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 = #{item}
+		 </foreach> 
+	 </if>
+ ORDER BY RQ, TIME01, DJBH 
+
+  </select>
+</mapper>

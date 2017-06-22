@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>选择会员·优惠</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header class="hide">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<h2>选择会员优惠</h2>
+</div>
+</header>
+
+<div class="main">
+  <!----商品信息---->
+  <div class="w12 jl_main pro_info" jlui="d1">
+    <div class="pro_info_name">JL{SPMC}JL</div>
+    <div class="w12 pro_info_btn mt10">
+      <div class="fl number"><span>-</span><input type="number" value="1" /><span>+</span></div>
+      <div class="fl price ml10"><span>￥</span><input type="number" value="3000.00"></div>
+      <div class="fl follow ml10" id="guanzhu"><i class="fa fa-heart-o mr5"></i>关注</div>
+    </div>
+  </div>
+  
+  <!----营业员信息---->
+  <div class="jl_list jl_list_bottom">
+    <div class="jl_list_case">
+      <span class="w03">营业员</span>
+      <span class="w09 tr">张三</span>
+      <i class="fa fa-angle-right"></i>
+    </div>
+  </div>
+  <!----顾客信息---->
+  <div class="jl_list jl_list_bottom">
+    <div class="jl_list_case">
+      <span class="w03">顾客</span>
+      <span class="w09 tr font_gray" onClick="window.location.href='seachHy.html'">系统自动判断是否进入非会员模式</span>
+      <i class="fa fa-angle-right"></i>
+    </div>
+  </div>
+  <!----电子券信息---->
+  <div class="jl_list jl_list_bottom">
+    <div class="jl_list_case pr0">
+      <span class="w12">电子券(5)</span>
+      <span class="w12 mt10">  
+      <div class="w12 cat coupon">
+      <ul class="w12" jlui="d4">
+        <li class="w06" jlui="b1">
+          <div class="cat_case radius3">
+            <div class="cat_name">JL{DZQMC}JL</div>
+            <div class="cat_num"><input jlui="b2" class="w12" placeholder="输入使用金额" value="JL{DZQJE}JL" /></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </span>
+  <span class="w12 more mt5 tc">更多电子券<i class="fa fa-angle-down ml5"></i></span>
+    </div>
+  </div>
+  <!----活动信息---->
+  <div class="jl_list jl_list_bottom">
+    <div class="jl_list_case pr0">
+      <span class="w12">活动(6)</span>
+      <span class="w12 mt10">  
+      <div class="w12 cat coupon">
+      <ul class="w12" jlui="d5">
+        <li class="w06">
+          <div class="cat_case radius3">
+            <div class="cat_name">JL{HDMC}JL</div>
+            <div class="cat_num"><input class="w12" placeholder="金额可修改" value="JL{HDJE}JL" /></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </span>
+  <span class="w12 more mt5 tc">更多活动<i class="fa fa-angle-down ml5"></i></span>
+    </div>
+  </div>
+  
+</div>
+
+<footer>
+<div class="w05">
+<div class="ml10 mt10">用券：<span class="font_color" jlui="d6">￥JL{JE}JL</span></div>
+<div class="ml10 mt5">返储值：<span class="font_color">￥+100.00</span></div>
+</div>
+<div class="w03 ml_w01 jl_btn" onClick="window.location.href='delivery.html'">送货安装</div>
+<div class="w03 jl_btn" onClick="window.location.href='confirmOrder.html'">确定订单</div>
+</footer>
+
+<div class="model hide">
+<div class="model_main">
+  <div class="model_body">切换到非会员模式会清除选中会员</div>
+  <div class="model_btn"><a class="w06">取消</a><a class="w06 sumbtn">确定</a></div>
+</div>
+</div>
+
+</body>
+<script>
+var jlform = new JLForm();
+jlform.setTab(document);
+jlform.setStorage("DZQ", JSON.stringify([{"DZQMC":"红券", "DZQJE":"100"}, {"DZQMC":"蓝券", "DZQJE":"200"}]));
+jlform.setStorage("HD", JSON.stringify([{"HDMC":"满100减10", "HDJE":"10"}, {"HDMC":"满200减30", "HDJE":"30"}]));
+
+jlform.setUI({
+	"d1" : {
+		"query" : {
+			"dsType" : "local",
+			"key" : "GMSP"
+		}
+	},
+	"d4" : {
+		"query" : {
+			"dsType" : "local",
+			"key" : "DZQ",//电子券
+			"param" : {"SPXX01":jlform.local.GMSP},
+			"jluiData" : ["DZQMC"],//["*"]
+			"jlui" : "b2"
+		}
+	},
+	"d5" : {
+		"query" : {
+			"dsType" : "local",
+			"key" : "HD",//活动
+			"param" : {"SPXX01":jlform.local.GMSP}
+		}
+	},
+	"d6" : {
+		"query" : {
+			"dsType" : "var",
+			"data" : {"JE":"0:00"}//用券
+		}
+	},
+	"b1" : {
+	    "listener" : {
+			"click" : function() {
+				//
+			}
+		}    
+	},
+	"b2" : {
+		"listener" : {
+			"keyup" : function() {
+				var dzq = JSON.parse($(this).attr("jluiData"));
+				var json = {"MC":dzq.DZQMC, "JE":$(this).val()};
+				var YQ = jlform.getStorage("YQ");
+				if(YQ == null) {
+					jlform.setStorage("YQ", [json]);
+				}else {
+					jlform.setStorage("YQ",jlform.putArrayItem(json, YQ, ["MC"]));
+				}
+				
+				var sum = 0;
+				if(jlform.getStorage("YQ") != null) {
+					$.each(jlform.getStorage("YQ"), function(n, val) {
+						sum += Number(val.JE);
+					});
+				}
+				jlform.getUI("d6").query.data = {"JE":sum};
+				jlform.applyUI("d6");
+			}
+		}
+	}
+});
+
+jlform.initForm();
+</script>
+</html>

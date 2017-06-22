@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_WDXTGG.FORM_XTGG">   
+        <FIELD attrname="PSCK" format='{"$or":[{"XXFL.value":{"$regex":"#PSCK#"}},{"GGBH":{"$regex":"#PSCK#"}}]}' fieldtype="String" allownull="Y" name="" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        <FIELD attrname="ZDRDM" fieldtype="Map" allownull="Y" name="制单人代码" />
+        <FIELD attrname="BZ02" fieldtype="Map" allownull="Y" name="制单人代码" />
+	</JLConfig>
+	
+	<!--  ,{"ZT":{"$regex":"#PSCK#"}},{"ZY":{"$regex":"#PSCK#"}}-->
+	
+</root>   

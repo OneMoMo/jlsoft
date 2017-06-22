@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_CWWBZT.SCM_CWWBZT">  
+        <FIELD attrname="query" format='{"$or":[{"ZTBM":{"$regex":"#query#"}},{"ZTMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="帐套名称" />
+         <FIELD attrname="GSXX01" format='{"DYGS.key":"#GSXX01#"}' fieldtype="String" allownull="Y" name="公司信息" />
+        <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_CWWBZT.SCM_CWWBZT1">  
+        <FIELD attrname="query" format='{"$or":[{"ZTBM":{"$regex":"#query#"}},{"ZTMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="帐套名称" />
+        <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+        <FIELD qx='DYGS.key|CZGS_CZ|in' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_CWWBZT.SCM_CWWBZT2">  
+        <FIELD attrname="query" format='{"$or":[{"ZTBM":{"$regex":"#query#"}},{"ZTMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="帐套名称" />
+        <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

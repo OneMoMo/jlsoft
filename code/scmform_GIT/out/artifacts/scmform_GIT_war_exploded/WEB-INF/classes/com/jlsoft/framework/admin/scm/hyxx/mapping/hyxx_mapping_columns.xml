@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.hyxx.hylx">
+        <FIELD attrname="HYLXMC" fieldtype="string" allownull="N" name="会员类型名称" />
+        <Nested id="YXBJ">
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="有效标记" />
+        </Nested>
+	</JLConfig>
+</root>

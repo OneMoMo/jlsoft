@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CMKL">
+	<select id="queryCMKL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT distinct JQM01,
+       trunc(sysdate) - trunc(JQMK02) GSKL,
+       trunc(SYSDATE) - trunc(JQMK05) CKKL,
+       SPXX02 SPBM,
+       SPXX04 SPMC,
+       A.WLDW01 GYSBM,
+       W.WLDW02 GYSMC,
+       JQMK11 HSDJ,
+       BM02 CGBMMC,
+        get_hzfs(nvl((select GHHT24 from ghht where ghht01=a.YGHHT01 and GSXX01=A.GSXX01),-1)) YSHZFS,
+        get_hzfs(nvl((select GHHT24 from ghht where ghht01=a.GHHT01 and GSXX01=A.GSXX01),-1)) HZFS,
+      (SELECT WLDW02
+          FROM  WLDW
+         WHERE WLDW01 = YWLDW01
+           AND GSXX01 = A.GSXX01) YSGYS,
+      (select BM02
+      FROM BM WHERE BM01=YBM01
+      AND GSXX01 = A.GSXX01 )  YSCGBM,
+       C.CK02 CKMC,
+       PPB01 SPPP,
+       S.SPXH01 SPXH,
+       S.SPFL02 SPFLMC,
+        S.SPFL01 SPFLBM,
+       S.PPB02  SPPPMC 
+  FROM JQMKC A, SPXX S, WLDW W, BM B, CK C
+ WHERE A.SPXX01 = S.SPXX01
+   AND A.WLDW01 = W.WLDW01
+   AND A.BM01 = B.BM01
+   AND A.CK01 = C.CK01
+ 
+    <if test="WLDW != null and WLDW !=''">
+     <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 	      
+		      (W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 LIKE '%'||#{item}||'%' OR W.WLDW03 LIKE '%'||#{item}||'%')
+	 </foreach>  
+    </if>
+    
+    <if test="CM != null and CM != ''">
+      	 AND A.JQM01 = #{CM}
+    </if>
+    
+     <if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(S.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{item}||'%')  OR Upper(S.SPPYM) LIKE Upper('%'||#{item}||'%') 
+		     </foreach> 
+	  </if>
+	  
+	   <if test="CK01 != null and CK01  != ''">
+		 <foreach item="item" index="index" collection="CK01"  open=" AND (" separator=" or " close=")"> 
+		      A.CK01 LIKE #{item}||'%'
+		 </foreach> 
+	 </if>
+	 
+	   <if test="BM01 != null and BM01  != ''">
+		 <foreach item="item" index="index" collection="BM01"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 LIKE #{item}||'%'
+		 </foreach> 
+	 </if>
+	 
+	  <if test="SPFL01 != null and SPFL01 != ''">
+	    	 <foreach item="item" index="index" collection="SPFL01"  open=" AND (" separator=" or " close=")">
+	          S.SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	   </if>
+	    
+	    <if test="SPPP01 != null and SPPP01 != ''">
+	         <foreach item="item" index="index" collection="SPPP01"  open=" AND (" separator=" or " close=")"> 
+	          S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	    
+	     <if test="HZFS != null and HZFS != ''">
+	        AND EXISTS(SELECT 1 FROM GHHT WHERE GHHT01=A.GHHT01 AND GSXX01=A.GSXX01 AND GHHT24=#{HZFS})
+	      <!--  AND G.GHHT01=#{HZFS} -->
+	    </if>
+	    
+    <if test="GSKL_Q != null and GSKL_Q !=''">
+    <![CDATA[
+   AND (trunc(sysdate) - trunc(JQMK02)) >= #{GSKL_Q}
+    ]]>
+    </if>
+    
+      <if test="GSKL_E != null and GSKL_E !=''">
+    <![CDATA[
+   AND (trunc(sysdate) - trunc(JQMK02)) <= #{GSKL_E}
+    ]]>
+    </if>
+    
+     <if test="CKKL_Q != null and CKKL_Q !=''">
+    <![CDATA[
+   AND (trunc(SYSDATE) - trunc(JQMK05)) >= #{CKKL_Q}
+    ]]>
+    </if>
+    
+      <if test="CKKL_E != null and CKKL_E !=''">
+    <![CDATA[
+   AND (trunc(SYSDATE) - trunc(JQMK05) )<= #{CKKL_E}
+    ]]>
+    </if>
+	 JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+    JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+     JL{CZY|A.CK01|BM_CZ|LIKE%}JL
+  </select>
+</mapper>

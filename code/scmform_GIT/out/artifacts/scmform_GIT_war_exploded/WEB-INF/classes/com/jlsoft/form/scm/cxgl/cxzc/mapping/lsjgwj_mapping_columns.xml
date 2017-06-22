@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cxgl.lsjgwj">
+        <FIELD attrname="WLDWMC" fieldtype="String" allownull="N" name="供应商" />
+        <FIELD attrname="HZFSMC" fieldtype="String" allownull="N" name="合作方式"/>
+        <FIELD attrname="BMMC"   fieldtype="String" allownull="N" name="采购部门"/>
+         <Nested id="CXBM" allownull="N" name="促销部门">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="促销部门" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="促销部门" />
+	  </Nested>
+        <FIELD attrname="YXRQ_S"   fieldtype="String" allownull="N" name="有效日期起"/>
+        <FIELD attrname="YXRQ_E"   fieldtype="String" allownull="N" name="有效日期止"/>
+        <Nested id="SPLB" allownull="N" name="商品价格">
+	            <FIELD attrname="JYDJ" fieldtype="String" allownull="N" name="建议单价" />
+	            <FIELD attrname="LSXJ1" fieldtype="String" allownull="N" name="零售限价1" />
+	            <FIELD attrname="LSXJ2" fieldtype="String" allownull="N" name="零售限价2" />
+	            <FIELD attrname="LSXJ3" fieldtype="String" allownull="N" name="零售限价3" />
+	            <FIELD attrname="LSXJ4" fieldtype="String" allownull="N" name="零售限价4" />
+	            <FIELD attrname="LSXJ5" fieldtype="String" allownull="N" name="零售限价5" />
+	            <Nested id="YXJ" allownull="N" name="优先级">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="优先级" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="优先级" />
+	  </Nested>
+	  </Nested>
+        </JLConfig>
+</root>

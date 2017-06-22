@@ -1,0 +1,239 @@
+/***
+收银台jl_cashier
+***/
+.jl_cashier{width:100%; height:100%;}
+:fullscreen{
+	position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: none !important;
+}
+:-webkit-full-screen {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: none !important;
+}
+:-ms-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: none !important;
+}
+:-moz-full-screen {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: none !important;
+}
+.jl_cashier_til{ padding:5px 10px; background:#3d3d3d; color:#fff; top:0px; left:0px; z-index:10; position:relative;}
+.jl_cashier_til > input[type="text"]{ height:30px;}
+.jl_cashier_til > .jl_btn{ float:right; color:#ccc !important;}
+.jl_cashier_til > .jl_btn:hover{ float:right; color:#eee !important;}
+.jl_cashier_til > span{ float:left; margin-left:10px; line-height:30px;}
+.jl_cashier_pro{ max-height:100%; height:inherit; overflow-x:hidden; overflow-y:auto; border-bottom:0px; border-right:0px; border:1px solid #e4e4e4; border-right:0px; padding:10px; min-height:500px;}
+.jl_cashier_set{ background:#f5f5f5; height:100%; padding:50px 20px; top:0px; right:0px; position:absolute; border-left:1px solid #e4e4e4;}
+.jl_cashier_set > .total{ margin-top:10px; margin-bottom:10px; padding:0 10px 10px; color:#fff; border-radius:3px;}
+.jl_cashier_set > .total > li{ margin-top:10px; width:100%; font-size:16px;}
+.jl_cashier_set > .total > li > b{ font-size:25px; margin:0 10px;}
+.jl_cashier_set > .jl_form{ border:1px solid #ccc; padding:10px; border-radius:3px; max-height:300px; overflow-y:auto;}
+.jl_cashier_set > .jl_btn{ padding:10px 0; font-size:20px; margin-top:10px; border-radius:3px;}
+.jl_cashier_set > textarea{ border:1px solid #ccc; margin-top:10px; min-height:80px; border-radius:3px;}
+.jl_cashier_bot{ width:100%; position:fixed; height:40px; color:#ccc; background:#3d3d3d; bottom:0px; left:0px; padding:5px 10px;}
+.jl_cashier_bot span{ float:left; height:30px; line-height:30px;}
+
+
+/***
+维修看板jl_kanban
+***/
+.jl_kanban{ width:100%; float:left; position:relative;}
+.jl_kanban > .jl_kanban_case:first-child{ border-left:1px solid #eee;}
+.jl_kanban_case{ width:7.13%; float:left; border-top:1px solid #eee;}
+.jl_kanban_case > ul{ width:100%;}
+.jl_kanban_case > ul > li{ width:100%; height:70px; line-height:70px; border-bottom:1px solid #eee; text-align:center; border-right:1px solid #eee;}
+.jl_kanban_case > ul > li:first-child{ height:35px; line-height:35px; background:#fafad2; color:#006400; font-size:16px;}
+.jl_kanban_case > ul.title{}
+.jl_kanban_case > ul.title > li > h3{ position:absolute; width:30px; height:30px; border-radius:50%; line-height:30px; background:#add8e6; top:50%; left:50%; margin:-15px 0 0 -15px; color:#fff;}
+.jl_kanban_case > ul > li > .zw{ position:absolute; width:200px; height:50px; line-height:25px; color:#fff; left:0px; z-index:2; top:50%; margin-top:-25px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:0 5px; text-align:left;}
+
+
+/***
+单据打印模板jl_formprint
+***/
+.jl_formprint{ float:left; width:100%; background:#fff; color:#000 !important; font-size:12px !important;}
+.jl_formprint > .print_hrader{ width:100%; float:left;}
+.print_hrader > h2{ width:100%; margin-bottom:10px; font-weight:500; font-size:18px;}
+.print_hrader > ul.mess{ width:100%; padding-bottom:10px; border-bottom:1px solid #000;}
+.print_hrader > ul.mess > li{ margin-right:20px; color:#000;}
+.print_hrader > ul.mess > li > span{ color:#333;}
+.print_hrader > ul.title{ width:100%; padding:10px 0; border-bottom:3px solid #000;}
+
+.jl_formprint > .print_body{ width:100%; float:left;}
+.print_body > dl{ width:100%; padding:8px 0; border-bottom:1px dashed #ccc;}
+.print_body > dl > dd ul{ width:100%;}
+.print_body > dl > dd li{ width:100%; color:#ccc;}
+.print_body > dl > dd li > span{ color:#000;}
+
+.print_footer{ width:100%; position:fixed; bottom:0px; border-top:1px solid #ccc; text-align:center; border-top:3px solid #000;}
+.print_footer > .remarks{ width:100%; border-bottom:1px solid #000; float:left; padding:10px 0;}
+.print_footer > .remarks > ul > li{ color:#ccc; margin-right:20px;}
+.print_footer > .remarks > ul > li > span{ color:#000;}
+.print_footer > .text{ float:left; margin-top:10px; width:100%; text-align:center;}
+
+
+/***
+小票打印模板jl_ticket
+***/
+.ticket_title{}
+.ticket_title > h1 { width:100%; text-align:center;}
+.ticket_title > p{ text-align:center; line-height:22px; font-size:12px;}
+.lanmu,.lanmu1,.lanmu2,.lanmu3{ border-top:1px dotted #ccc; padding:5px 0; overflow:hidden;}
+.jl_ticket{border-top:1px dotted #ccc; overflow:hidden;}
+.jl_ticket > ul{ width:100%;}
+.jl_ticket > ul > li{ line-height:30px; font-size:12px;font-weight:bold;}
+.lanmu > ul{ width:100%;}
+.lanmu1 > ul{ width:100%;}
+.lanmu2 > ul{ width:100%;}
+.lanmu3 > ul{ width:100%;}
+.lanmu2 > ul > li{ line-height:20px;}
+.lanmu1 > ul > li{ line-height:20px;}
+.lanmu li,.lanmu1 li,.lanmu2 li,.lanmu3 li{ font-size:12px;}
+
+
+.page_print > h3{ width:100%; padding-bottom:10px; font-weight:500; font-size:18px;}
+.page_print .w01,.page_print .w02,.page_print .w03,.page_print .w04,.page_print .w05,.page_print .w06,.page_print .w07,.page_print .w08,.page_print .w09,.page_print .w10,.page_print .w11{ width:auto;}
+.page_print .jl_form_02 > ul > li{ margin-right:20px;}
+.page_print .jl_form_02 > ul > li > dl{ height:inherit;}
+.page_print .jl_form_02 > ul > li > dl > dt{ line-height:inherit;　}
+.page_print .jl_form_02 > ul > li > dl > dd{　}
+.page_print .jl_form_02:last-child{}
+.page_print .jl_table{ margin-top:10px;}
+.page_print .table_content{}
+.page_print .table_content > .table_title{ display:none;}
+.page_print .table_show{ width:100%; float:left; overflow:inherit !important; border:0px !important;}
+.page_print .table_show > .table_main{ float:left; width:100%;}
+.page_print .table_show > .table_main > .title{ background:#fff; border-bottom:3px solid #000; border-top:1px solid #000;}
+.page_print .table_show > .table_main dl.table{ height:inherit; font-size:12px !important;}
+.page_print .table_show > .table_main dl.table > dt{ display:none;}
+.page_print .table_show > .table_main dl.table > dd{ border:0px; color:#000; height:inherit;}
+.page_print .table_show > .table_main dl.table > dd > .ellipsis{overflow:inherit; text-overflow:inherit; white-space:inherit;font-style:inherit;}
+.page_print .table_show > .table_main dl.table > dd > i{ display:none;}
+.page_print .table_show > .table_main > .table_case > dl{ border-bottom:1px dotted #ccc;}
+.page_print .table_content > .table_summary{ display:none;}
+.print_table{ margin:10px 0 0 0 !important; border-bottom:1px solid #000;}
+
+.page_print_form .form_title{ border-bottom:3px solid #000; width:100%; padding-bottom:5px; font-weight:500; font-size:18px; text-align:left;}
+.page_print_form .jl_catalog_line{ background:#fff; margin:20px 0 0 0; padding-bottom:25px; border-bottom:1px dotted #ccc;}
+.page_print_form .jl_catalog_line > .catalog_title{ border:0px; padding:0px; position:relative; z-index:inherit; line-height:inherit; background:none; }
+.page_print_form .jl_catalog_line > .catalog_title > span{ color:#000; font-size:14px;}
+.page_print_form .jl_catalog_line > dd{ display:none;}
+.page_print_form .jl_catalog_line > .catalog_cz{ display:none;}
+.page_print_form .jl_form_02 > ul > li{ margin:0px !important;}
+.page_print_form .jl_form_02 > ul > li > dl{ height:25px;}
+.page_print_form .jl_form_02 > ul > li > dl > dt{ text-align:left; padding-left:0; width:auto !important;}
+.page_print_form .jl_form_02 > ul > li > dl > dd{ padding-left:10px;}
+.page_print_form .jl_form_02 > ul > li > dl > dd input{ border:0px !important; font-size:12px; margin-top:3px;}
+.page_print_form .jl_form_02 > ul > li > dl > dd textarea{ border:0px !important; font-size:12px; margin-top:2px; height:auto; min-height:inherit; resize: none;}
+.page_print_form .jl_form_02 > ul > li > dl > dd > .jl_input_radio{ display:none;}
+.page_print_form .jl_form_02 > ul > li > dl > dd > .jl_input_radio > i{ display:none;}
+.page_print_form .jl_form_02 > ul > li > dl > dd > .font_blue{ display:block !important; color:#000 !important;}
+.page_print_form .jl_operation{ display:none;}
+
+
+/***
+定义操作卡片
+***/
+.jl_defCar{ background:#fff; z-index:999; border-right:1px solid #ccc;}
+.jl_defCar_main{ width:100%; height:100%; max-height:100%; overflow-x:hidden; overflow-y:auto; padding:60px 10px 92px;}
+.jl_defCar_footer{ height:50px; width:100%; position:absolute; left:0px; bottom:0; background:#fff; padding:0 10px; z-index:2; border-top:1px solid #e1e1e1; text-align:center;}
+.jl_defCar_footer > .jl_btn{ margin:10px 0 10px 20px;}
+
+/****
+工程机（OA）模板
+****/
+.oa_demo_01{ width:100%; float:left;}
+/* .oa_demo_01 dt{ padding:0px !important; line-height:25px !important;} */
+.oa_demo_01 dd{ padding:0px 0 0 20px !important; line-height:25px !important;}
+.oa_demo_01 dd > ul{width:100%}
+.oa_demo_01 dd > ul > li{width:100%}
+.oa_demo_01 dd:nth-child(odd){ color: #666; }
+.oa_demo_01 dd:nth-child(even){ text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.oa_demo_01 dd > span{ line-height:25px !important;}
+.oa_demo_01 dl{ background:#f5f5f5; padding:10px;}
+.oa_demo_01 dl:nth-child(odd){ border-bottom:1px dotted #ccc;}
+
+
+/***
+仓库收发货
+***/
+.warehouse_rnd{ height:410px;}
+.warehouse_rnd_tm{ height:100%; border:1px solid #e4e4e4;}
+.warehouse_rnd_tm .jl_btn_group{ height:33px;}
+.warehouse_rnd_tm .jl_btn_group input{ height:35px;}
+.warehouse_rnd_tm .jl_btn_group > span{ height:35px; width:35px; line-height:33px;}
+.warehouse_rnd_tm > ul{ padding:5px; height:300px; max-height:300px; overflow-y:auto;}
+.warehouse_rnd_tm > ul > li{ cursor:pointer; padding:5px;}
+.warehouse_rnd_tm > ul > li i{ font-size:16px; display:none;}
+
+.warehouse_rnd_tm > ul > li:hover{ background:#f0fbff; color:#00a2ca;}
+.warehouse_rnd_tm > ul > li:hover i{ display:block;}
+.warehouse_rnd_change{ height:100%; position:relative;}
+.warehouse_rnd_change > i{ width:50px; height:30px; text-align:center; line-height:30px; font-size:18px; position:absolute; top:50%; left:50%; margin:-15px 0 0 -25px; cursor:pointer;}
+.warehouse_rnd_main{ height:410px; border:1px solid #e4e4e4;}
+.warehouse_rnd_main > .jl_list{ height:300px; max-height:300px; overflow-y:auto;}
+
+/***
+新闻详细页
+***/
+.jl_news_main{}
+.jl_news_main .news_title{ border-bottom:1px solid #e4e4e4; padding-bottom:10px;}
+.jl_news_main .news_title > h2{}
+.jl_news_main .news_title span{ color:#333;}
+.jl_news_main .news_title .jl_btn{ padding:2px 8px;}
+.jl_news_main .news_main{ padding:10px 0; font-size:16px; line-height:30px;}
+.jl_news_main .news_main p{ margin-top:15px;}
+.jl_news_main .news_main p:first-child{ margin-top:0px;}

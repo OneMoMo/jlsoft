@@ -1,0 +1,22 @@
+﻿/*** 
+颜色配置
+***/
+.jl_dropdown_menu > li:hover > a{ color:#e84d1c;}
+.jl_nav ul.nav_menu > li.bian > a{ background:#e84d1c; color:#fff;}
+.jl_nav ul.sub_menu > li.xuan > a{ background:#eee; border-left:3px solid #e84d1c; color:#e84d1c; padding: 3px 15px 3px 35px;}
+.jl_nav ul.sub_menu > li.xuan > a > i:first-child{ color:#e84d1c;}
+.jl_nav .thr_menu > ul > li:hover > a{ border-left:3px solid #e84d1c !important; padding:6px 15px 6px 12px; color:#e84d1c;}
+.jl_nav .thr_menu > ul > li:hover > a > i{ color:#e84d1c;}
+.jl_screen_a_z > ul.title > li.xuan{ border-bottom:2px solid #e84d1c; color:#e84d1c !important;}
+.jl_screen_a_z > ul.title > li:hover{ color:#e84d1c;}
+.jl_square_texe > h3{ margin-top:15px; color:#e84d1c;}
+.jl_square_texe > ul > li:hover{ background:#f5f5f5; color:#e84d1c;}
+.case > .case_main > .case_title > h3{ font-weight:100; font-size:18px; color:#e84d1c;}
+.jl_index > .case > .case_main:hover{ border:1px solid #e84d1c;}
+.case > .case_main > .case_title > h3{ font-weight:100; font-size:18px; color:#e84d1c;}
+.case_title > a:hover{ color:#e84d1c;}
+.case_body > ul.lb > li a:hover{ color:#e84d1c;}
+.jl_table_01 > dl.xuan{ background:#f0fbff; color:#e84d1c;}
+.jl_table_01 > dl:hover{ cursor:pointer; background:#f0fbff; color:#e84d1c;}
+.jl_table_01 > dl > dd > a{ margin-right:8px; cursor:pointer; color:#e84d1c;}
+.jl_table_01 > dl:hover > dd{ color:#e84d1c;}

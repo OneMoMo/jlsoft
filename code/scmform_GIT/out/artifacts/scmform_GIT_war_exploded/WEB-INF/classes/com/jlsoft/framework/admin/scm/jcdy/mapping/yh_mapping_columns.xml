@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.yh">
+	<FIELD attrname="YHMC" fieldtype="string" allownull="N" name="银行名称" />
+	</JLConfig>	 
+</root>

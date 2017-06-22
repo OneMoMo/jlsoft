@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SHFYBZ.CSS_SHFYBZ">
+	  <FIELD attrname="search" format='{"$or":[{"FYBZBM":{"$regex":"#search#"}},{"FYBZMC":{"$regex":"#search#"}},{"FYMC":{"$regex":"#search#"}},{"SYFL":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="费用标准编码" />
+      <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

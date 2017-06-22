@@ -1,0 +1,81 @@
+<script type="text/javascript">
+/* 零售小票 */
+var DYLSD = function(data){
+	debugger;
+	var SPLB=data.SPLB;
+	var DYTS=0;
+	var height=0;
+    LODOP = getLodop();
+	LODOP.PRINT_INITA(0,0,794,559,"零售小票");
+	LODOP.SET_PRINT_PAGESIZE(3,900,"","");
+	LODOP.ADD_PRINT_HTM(0,0,"99%","99%","");
+	
+	//划线
+	LODOP.ADD_PRINT_LINE(218,30, 218, 300,0, 1);
+	LODOP.ADD_PRINT_LINE(260,30, 260, 300,0,1);
+	
+	LODOP.ADD_PRINT_TEXT(65,120,105,30,"零售单");
+	LODOP.SET_PRINT_STYLEA(0,"FontSize",15);
+	LODOP.SET_PRINT_STYLEA(0,"Bold",1);
+	LODOP.ADD_PRINT_TEXT(100,30,100,20,"销售单号");
+	LODOP.ADD_PRINT_TEXT(100,180,100,20,"款机号");
+	LODOP.ADD_PRINT_TEXT(130,30,100,20,"营业员;");
+	LODOP.ADD_PRINT_TEXT(130,180,100,20,"收款员");
+	LODOP.ADD_PRINT_TEXT(160,30,100,20,"销售部门：");
+	LODOP.ADD_PRINT_TEXT(190,30,100,20,"交易时间：");
+	LODOP.ADD_PRINT_TEXT(220,30,100,20,"商品编码 /");
+	LODOP.ADD_PRINT_TEXT(245,30,100,20,"商品名称");
+	LODOP.ADD_PRINT_TEXT(235,142,50,20,"数量");
+	LODOP.ADD_PRINT_TEXT(235,205,48,20,"单价");
+	LODOP.ADD_PRINT_TEXT(235,278,100,20,"金额");
+
+	
+	
+	for(var i=0;i<SPLB.length;i++){
+		DYTS++;
+		height=25*DYTS;
+		var SPXX01=JL.isNull(SPLB[i].SPXX01)?"":SPLB[i].SPXX01;
+		var SPMC=JL.isNull(SPLB[i].SSPMC)?"":SPLB[i].SPMC;
+		var LSSL=JL.isNull(SPLB[i].LSSL)?"":SPLB[i].LSSL;
+		var LSDJ=JL.isNull(SPLB[i].LSDJ)?"":SPLB[i].LSDJ;
+		var LSJE=JL.isNull(SPLB[i].LSJE)?"":SPLB[i].LSJE;
+		
+	    LODOP.ADD_PRINT_TEXT(245+height,30,100,20,SPXX01);
+		LODOP.ADD_PRINT_TEXT(245+height,142,50,20,LSSL);
+		LODOP.ADD_PRINT_TEXT(245+height,205,48,20,LSDJ);
+		LODOP.ADD_PRINT_TEXT(245+height,278,100,20,LSJE); 
+		LODOP.ADD_PRINT_TEXT(265+height,30,100,20,SPMC);
+	}
+	
+	//划线
+	LODOP.ADD_PRINT_LINE(388+height,30, 388+height, 300,0, 1);
+	LODOP.ADD_PRINT_LINE(472+height,30, 472+height, 300,0, 1);
+	LODOP.ADD_PRINT_LINE(502+height,30, 502+height, 300,0, 1); 
+	LODOP.ADD_PRINT_LINE(567+height,30, 567+height, 300,0, 1); 
+	LODOP.ADD_PRINT_LINE(627+height,30, 627+height, 300,0, 1); 
+	LODOP.ADD_PRINT_LINE(668+height,30, 668+height, 300,0, 1); 
+	LODOP.ADD_PRINT_LINE(698+height,30, 698+height, 300,0, 1);  
+	
+	LODOP.ADD_PRINT_IMAGE(0,60,180,60, "<img width='180px' height='55px' src='scm/lsgl/lsd/logo01.jpg' />");
+	
+	
+	
+	LODOP.ADD_PRINT_TEXT(390+height,30,100,20,"销售商品件数:"+SPLB.length);
+	LODOP.ADD_PRINT_TEXT(420+height,30,100,20,"合计消费金额:");
+	LODOP.ADD_PRINT_TEXT(450+height,30,100,20,"找零金额:");
+	LODOP.ADD_PRINT_TEXT(480+height,30,100,20,"付款方式:");
+	LODOP.ADD_PRINT_TEXT(510+height,30,100,20,"会员卡号:");
+	LODOP.ADD_PRINT_TEXT(540+height,30,100,20,"积分余额:");
+	LODOP.ADD_PRINT_TEXT(540+height,230,100,20,"储值余额:");
+	LODOP.ADD_PRINT_TEXT(570+height,30,100,20,"备注:");
+	LODOP.ADD_PRINT_TEXT(600+height,30,100,20,"客服电话：");
+	LODOP.ADD_PRINT_TEXT(630+height,135,216,47,"   欢迎再次惠顾\n   此票为退货唯一凭证");
+	LODOP.ADD_PRINT_TEXT(670+height,30,178,20,"促销活动：详见店内海报");
+	LODOP.ADD_PRINT_TEXT(700+height,30,100,20,"打印时间:");	
+	
+	LODOP.PREVIEW();
+	window.close();
+};
+	
+
+</script>

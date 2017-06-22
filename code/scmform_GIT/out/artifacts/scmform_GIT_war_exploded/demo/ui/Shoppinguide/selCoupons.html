@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>选择会员·优惠</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header class="hide">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<h2>选择会员优惠</h2>
+</div>
+</header>
+
+<div class="main">
+<div class="jl_list jl_list_bottom">
+  <!----商品名称---->
+  <div class="jl_list_case">
+    <b class="w11">海信空调KFR-26GW/27BP内机</b>
+    <i class="fa fa-heart-o"></i>
+  </div>
+  <!----商品数量---->
+  <div class="jl_list_case pr0">
+    <span class="w03">数量</span>
+    <span class="w09 tr">
+      <div class="fr number"><span>-</span><input type="number" value="1" /><span>+</span></div>
+    </span>
+  </div>
+  <!----零售价---->
+  <div class="jl_list_case pr0">
+    <span class="w03">零售价</span>
+    <input class="w04 sr tr font_color" type="number" placeholder="请输入顾客手机" value="3000.00">
+  </div>
+</div>
+<div class="jl_line"></div>
+  
+<div class="jl_list jl_list_bottom">
+  <!----营业员信息---->
+  <div class="jl_list_case">
+    <span class="w03">营业员</span>
+    <span class="w09 tr" onClick="window.location.href='seachYyy.html'">张三</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+  <!----顾客信息---->
+  <div class="jl_list_case">
+    <span class="w03">顾客</span>
+    <span class="w09 tr font_gray" onClick="window.location.href='seachHy.html'">选择顾客</span>
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>
+<div class="jl_line"></div>
+
+<div class="jl_list jl_list_bottom">
+  <!----电子券信息---->
+  <div class="jl_list_case pr0">
+    <span class="w06">电子券(5)</span>
+    <span class="w06 tr">已使用：<font class="font_color">￥30.00</font></span>
+    <span class="w12 mt15">  
+      <div class="w12 cat coupon">
+        <ul class="w12">
+          <li class="w06">
+            <div class="w12 cat_case xuan">
+              <div class="w12 cat_name">储值券</div>
+              <div class="w12 cat_num"><input class="w12" type="number" placeholder="输入使用金额" value="20" /></div>
+              <div class="w12 cat_cz">取消使用</div>
+            </div>
+          </li>
+          <li class="w06">
+            <div class="w12 cat_case">
+              <div class="w12 cat_name">A券</div>
+              <div class="w12 cat_num"><input class="w12" type="number" placeholder="输入使用金额" /></div>
+              <div class="w12 cat_cz">立即使用</div>
+            </div>
+          </li>
+          <li class="w06">
+            <div class="w12 cat_case">
+              <div class="w12 cat_name">C券</div>
+              <div class="w12 cat_num"><input class="w12" type="number" placeholder="输入使用金额" /></div>
+              <div class="w12 cat_cz">立即使用</div>
+            </div>
+          </li>
+          <li class="w06">
+          <div class="w12 cat_case">
+            <div class="w12 cat_name">D券</div>
+            <div class="w12 cat_num"><input class="w12" type="number" placeholder="输入使用金额" value="10" /></div>
+            <div class="w12 cat_cz">立即使用</div>
+          </div>
+        </li>
+          <li class="w06">
+            <div class="w12 cat_case">
+              <div class="w12 cat_name">X券</div>
+              <div class="w12 cat_num"><input class="w12" type="number" placeholder="输入使用金额" /></div>
+              <div class="w12 cat_cz">立即使用</div>
+            </div>
+          </li>
+          <li class="w06">
+            <div class="w12 cat_case">
+              <div class="w12 cat_name">Z券</div>
+              <div class="w12 cat_num"><input class="w12" type="number" placeholder="输入使用金额" value="10" /></div>
+              <div class="w12 cat_cz">立即使用</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </span>
+    <span class="w12 more mt5 tc btn_color_or">更多<i class="fa fa-angle-down ml5"></i></span>
+  </div>
+</div>
+<div class="jl_line"></div>
+
+<div class="jl_list jl_list_bottom">
+  <!----活动信息---->
+  <div class="jl_list_case pr0">
+    <span class="w06">活动(6)</span>
+    <span class="w06 tr">返储值：<font class="font_color">￥100.00</font></span>
+    <span class="w12 mt15">  
+      <div class="w12 cat coupon">
+        <ul class="w12">
+          <li class="w06">
+            <div class="w12 cat_case">
+              <div class="w12 cat_name">消费1000返100</div>
+              <div class="w12 cat_num"><input class="w12" type="number" placeholder="金额可修改" value="100" /></div>
+              <div class="w12 cat_cz">立即送储值</div>
+            </div>
+          </li>
+          <li class="w06">
+            <div class="w12 cat_case">
+              <div class="w12 cat_name">消费2000返300</div>
+              <div class="w12 cat_num"><input class="w12" type="number" placeholder="金额可修改" /></div>
+              <div class="w12 cat_cz">立即送储值</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>
+
+</div>
+
+<footer>
+<div class="w06 jl_btn btn_white" onClick="window.location.href='delivery.html'">送货安装</div>
+<div class="w06 jl_btn btn_color" onClick="window.location.href='confirmOrder.html'">确定订单</div>
+</footer>
+
+<div class="model hide">
+<div class="model_main">
+  <div class="model_body">关注成功！</div>
+  <div class="model_btn"><a class="w06">取消</a><a class="w06 sumbtn" id="model_close">确定</a></div>
+</div>
+</div>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

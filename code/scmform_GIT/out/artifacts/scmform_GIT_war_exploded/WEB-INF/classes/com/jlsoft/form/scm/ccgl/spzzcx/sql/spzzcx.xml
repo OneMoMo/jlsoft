@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPZZCX">
+	<select id="querySPZZCX" parameterType="Map" resultType="java.util.Map">
+		SELECT A.CXDH,DECODE(A.ZZLX,'0','组装','1','拆卸') ZZLX,A.ZSPBM,A.ZSPMC,A.ZZSL,A.CK,A.CGBM,A.GYSDM,A.GYSMC
+		FROM (SELECT Z.ZZCX01,Z.JLWBDH CXDH,Z.CZLX ZZLX,S.SPXX01 ZSPBM,
+		S.SPXX04 ZSPMC,Z.CZSL ZZSL,Z.ZDRQ,C.CK01,C.CK02 CK,B.BM02 CGBM,W.WLDW01 GYSDM,W.WLDW02 GYSMC 
+		from ZZCXD Z,SPXX S,CK C,BM B,WLDW W 
+		WHERE 
+		Z.BM01=B.BM01 
+		AND Z.SPXX01=S.SPXX01 
+		AND Z.CK01=C.CK01 
+		AND Z.WLDW01=W.WLDW01) A 
+		WHERE 1=1
+		<if test="ZZLX != null and ZZLX == 0">
+			AND A.ZZLX=0
+		</if>
+		<if test="ZZLX != null and ZZLX == 1">
+			AND A.ZZLX=1
+		</if>
+		<if test="PSP != null and PSP != ''">
+			AND (A.ZSPBM LIKE '%'||#{PSP}||'%' OR S.ZSPMC LIKE '%'||#{PSP}||'%')
+		</if>
+		<if test="SSP != null and SSP != ''">
+			AND GET_ZSPGS(A.CXDH,A.ZZCX01,#{SSP})>0
+		</if>
+		<if test="RQS != null and RQS != ''">
+        	AND A.ZDRQ &gt;= TO_DATE(#{RQS}, 'YYYY-MM-DD')
+        </if>
+        <if test="RQZ != null and RQZ != ''">
+        	AND A.ZDRQ &lt;= TO_DATE(#{RQZ}, 'YYYY-MM-DD')
+        </if>
+        <if test="CK != null and CK != ''">
+		     <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		     	A.CK01  LIKE #{item}||'%'
+		     </foreach>
+		</if>
+        <if test="GYS != null and GYS != ''">
+		     <foreach item="item" index="index" collection="GYS"  open=" AND (" separator=" or " close=")"> 
+		     	A.GYSDM  LIKE '%'||#{item}||'%'
+		     </foreach>
+		</if>
+	</select>
+	<select id="ZSPMX" parameterType="Map" resultType="java.util.Map">
+		SELECT A.JLWBDH CXDH,DECODE(A.CZLX,'0','组装','1','拆卸') ZZLX, A.SPXX01 ZSPBM,
+		(SELECT SPXX04 FROM SPXX WHERE SPXX01=A.SPXX01) ZSPMC, B.SPXX01 SSPBM,
+		(SELECT SPXX04 FROM SPXX WHERE SPXX01=B.SPXX01) SSPMC,B.ZCSL SYSL
+		FROM ZZCXD A, ZZCXDITEM B, SPXX S
+		WHERE 1=1
+		<if test="CXDH != null and CXDH != ''">
+			AND A.JLWBDH = #{CXDH}
+		</if>
+		AND A.GSXX01 = B.GSXX01
+		AND A.ZZCX01 = B.ZZCX01
+		AND S.SPXX01 = B.SPXX01
+	</select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HDZT">
+	<select id="SPLB" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.SPXX01, B.SPXX02 SPBM, B.SPXX04 SPMC, A.GGB01 SPGG, B.JLDW01 JLDW, B.SPXX28 CMBJ, 
+			   GET_BOOL(B.SPXX28) CMBJMC, A.WLDW01, A.BM01,A.SPJG07 JHDJ, A.SPJG05 LSDJ, A.SPJG07 FXDJ,
+			   A.SPJG08 FXXJ, GET_HZFS(SPJG02) HZFSMC,SPJG02 HZFS, 
+			   A.PPB01, (SELECT PPB02 FROM PPB WHERE PPB01=A.PPB01) PPB02
+		  FROM SPJGB A, SPXX B
+		WHERE A.SPXX01 = B.SPXX01
+		  AND SPJG03 =  (SELECT MAX(SPJG03) FROM SPJGB WHERE SPJGB.SPXX01 = A.SPXX01 AND SPJGB.GSXX01 = A.GSXX01 AND SPJGB.SPXX17 = 1)
+       	  AND A.GSXX01 = #{PCRM_GSXX01}
+		<if test="SPMC != null and SPMC != ''">
+		  AND (B.SPPYM LIKE '%'||#{SPMC}||'%' OR B.SPXX04 LIKE '%'||#{SPMC}||'%' OR B.SPXX02 LIKE '%'||#{SPMC}||'%')
+		</if>
+		<if test="PPB01 != null and PPB01 != ''">
+			<foreach item="item" index="index" collection="PPB01"  open=" AND (" separator=" or " close=")"> 	      
+				A.PPB01 = #{item}
+			</foreach> 
+		</if>
+		JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	
+	<select id="KHLX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT KSLX01 key, KSLX02 value FROM KSLX WHERE KSLX05=1
+	</select>
+  
+</mapper>

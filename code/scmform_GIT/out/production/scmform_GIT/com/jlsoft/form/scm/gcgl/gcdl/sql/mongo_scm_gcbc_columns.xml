@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCBC.SCM_GCDLD">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="公司信息" />
+       <FIELD attrname="JXSMC" format='{"JXSMC":{"$regex":"#JXSMC#"}}' fieldtype="String" allownull="Y" name="经销商" />
+       <FIELD attrname="KHQY" format='{"QY":{"$regex":"#KHQY#"}}' fieldtype="String" allownull="Y" name="区域" />
+       <FIELD attrname="SBSJS" format='{"SHSJ":{"$gte":"#SBSJS# 00:00:01"}}' fieldtype="String" allownull="Y" name="日期" />
+       <FIELD attrname="SBSJE" format='{"SHSJ":{"$lte":"#SBSJE# 23:59:59"}}' fieldtype="String" allownull="Y" name="日期" />
+  	   <!-- <FIELD qx='QXCZY01|CZY_CX|in' />  -->
+  	   <FIELD qx='WLDW01|WLDW_CX|in' />
+  	   <FIELD qx='XSBM01|BM_CX|LIKE%'/>
+	</JLConfig>
+	
+	<JLConfig id="MONGO_GCBC.SCM_GCHT">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="公司信息" />
+  	   <!-- <FIELD attrname="GCXZ" format='{"GCXZ.key":{"$regex":"#GCXZ#"}}' fieldtype="String" allownull="Y" name="工程性质" /> -->
+  	   <FIELD qx='WLDW01|WLDW_CX|in' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_GCBC.SCM_DCGCBC">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="公司信息" />
+  	   <FIELD qx='WLDW01|WLDW_CX|in' />
+	</JLConfig>
+	
+</root>

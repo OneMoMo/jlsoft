@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.lsgl.lsd.syk">
+	 <FIELD attrname="DJRQQ" fieldtype="string" allownull="N" name="单据日期起	" />
+	 <FIELD attrname="DJRQZ" fieldtype="string" allownull="N" name="单据日期止" />
+	<Nested id="SPLB" allownull="N" name="商品价格明细">
+            <FIELD attrname="LSDH" fieldtype="String" allownull="N" name="零售单号" />
+            <FIELD attrname="QKJE" fieldtype="String" allownull="N" name="欠款金额" />
+            <FIELD attrname="SKJE" fieldtype="String" allownull="N" name="收款金额" />
+    </Nested>
+    <Nested id="SKLB" allownull="N" name="收款方式明细">
+            <FIELD attrname="SKFS01" fieldtype="String" allownull="N" name="收款代码" />
+            <FIELD attrname="SKFSMC" fieldtype="String" allownull="N" name="收款方式" />
+            <FIELD attrname="SKJE" fieldtype="String" allownull="N" name="收款金额" /> 
+    </Nested>
+	</JLConfig>
+	<JLConfig id="form.scm.lsgl.lsd.sykpd">
+	 <FIELD attrname="DJRQQ" fieldtype="string" allownull="N" name="单据日期起	" />
+	 <FIELD attrname="DJRQZ" fieldtype="string" allownull="N" name="单据日期止" />
+	<Nested id="SPLB" allownull="N" name="商品价格明细">
+            <FIELD attrname="LSDH" fieldtype="String" allownull="N" name="零售单号" />
+            <FIELD attrname="QKJE" fieldtype="String" allownull="N" name="欠款金额" />
+            <FIELD attrname="SKJE" fieldtype="String" allownull="N" name="收款金额" />
+    </Nested>
+    <Nested id="SKLB" allownull="N" name="收款方式明细">
+            <FIELD attrname="SKFS01" fieldtype="String" allownull="N" name="收款代码" />
+            <FIELD attrname="SKFSMC" fieldtype="String" allownull="N" name="收款方式" />
+            <FIELD attrname="SKJE" fieldtype="String" allownull="N" name="收款金额" /> 
+            <FIELD attrname="YHMC" fieldtype="String" allownull="N" name="银行名称" />
+            <FIELD attrname="YHZH" fieldtype="String" allownull="N" name="银行账号" />
+    </Nested>
+	</JLConfig>
+</root>

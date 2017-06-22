@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_PZJZ.SCM_PZJZ">
+        <FIELD attrname="WBPZ00" format='{"WBPZ00":{"$regex":"#WBPZ00#"}}' fieldtype="String" allownull="Y" name="供应商" />
+        <FIELD attrname="S_VALUE" format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="String" allownull="Y" name="供应商" />
+	</JLConfig>
+</root>

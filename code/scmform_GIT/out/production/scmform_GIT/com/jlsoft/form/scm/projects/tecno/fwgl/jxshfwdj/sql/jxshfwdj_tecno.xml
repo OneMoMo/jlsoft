@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JXSHFWDJ_TECNO">
+	<!-- 查询VIP -->
+	<select id="KH_VIP_JXSHFWDJ" parameterType="java.util.Map" resultType="java.util.Map">
+          SELECT A.HYXX01 VIP_HYXX01,A.HYMC KHMC,A.LXFS01 LXDH,B.XXDZ LXDZ,C.HYLXMC VIPLX
+  			FROM VIP_HYXX A, VIP_HYLXFS B, VIP_HYLX C
+		   WHERE A.HYXX01 = B.HYXX01
+		     AND A.LXFS01 = B.LXDH
+		     AND A.HYLX01 = C.HYLX01
+		     <if test="LXDH != null and LXDH != ''">
+			 AND A.LXFS01 = #{LXDH}
+			 </if>
+			 <if test="KHMC != null and KHMC != ''">
+			 AND A.HYMC LIKE '%'||#{KHMC}||'%'
+			 </if>
+	</select>
+	<!-- 查询商品 -->
+	<select id="SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+          SELECT SPXX02 SPBM,SPXX04 SPMC,PPB02 FROM SPXX WHERE 1 = 1
+		     <if test="SPBM != null and SPBM != ''">
+			 AND SPXX02 = #{SPBM}
+			 </if>
+			 <if test="SPMC != null and SPMC != ''">
+			 AND SPXX04 LIKE '%'||#{SPMC}||'%'
+			 </if>
+	</select>
+	<!-- 查询仓库 -->
+	<select id="CKMC" parameterType="java.util.Map" resultType="java.util.Map">
+          SELECT CK01,CK02 CKMC FROM CK WHERE CK04 = 1 AND GSXX01 = #{GSXX01}
+			 <if test="CK01 != null and CK01 != ''">
+			 AND CK01 = #{CK01}
+			 </if>
+			 <if test="CKMC != null and CKMC != ''">
+			 AND CK02 LIKE '%'||#{CKMC}||'%'
+			 </if>
+		  JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+	</select>
+</mapper>

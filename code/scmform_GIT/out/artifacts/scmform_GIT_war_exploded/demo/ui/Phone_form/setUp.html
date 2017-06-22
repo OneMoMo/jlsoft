@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_css.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_form.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_list.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_table.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_control.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_page.css" />
+<title>系统设置</title>
+</head>
+<body>
+<header class="jl_header">
+<div class="header_nav nav_left" onclick="javascript:history.go(-1)">
+  <i class="fa fa-angle-left"></i>
+  <span>系统设置</span>
+</div>
+</header>
+<div class="jl_main">
+<div class="w12 jl_form">
+  <div class="jl_form_01">
+    <dl>
+      <dt class="w09">消息提醒</dt>
+      <dd class="w03">
+        <ul>
+          <li class="w12">
+            <div class="btn_lbl">
+              <div class="lbl_ture" onclick="$(this).animate({'left':'-100%'},200);$(this).next().animate({'left':'0'},200);$('.jl_operation').css({'display':'none'})" style="left: 0px;"><span></span><i class="font_normal"></i></div>
+              <div class="lbl_false" onclick="$(this).animate({'left':'100%'},200);$(this).prev().animate({'left':'0'},200);$('.jl_operation').css({'display':'block'})" style="left: 100%;"><i></i><span></span></div>
+            </div>
+          </li>
+        </ul>
+      </dd>
+      <dd class="w12 pl10 font_gray">若关闭系统将不会为您推送新的消息</dd>
+    </dl>
+      
+    <dl>
+      <dt class="w09">自动清除缓存</dt>
+      <dd class="w03">
+        <ul>
+          <li class="w12">
+            <div class="btn_lbl">
+              <div class="lbl_ture" onclick="$(this).animate({'left':'-100%'},200);$(this).next().animate({'left':'0'},200);$('.jl_operation').css({'display':'none'})" style="left: -100%;"><span></span><i class="font_normal"></i></div>
+              <div class="lbl_false" onclick="$(this).animate({'left':'100%'},200);$(this).prev().animate({'left':'0'},200);$('.jl_operation').css({'display':'block'})" style="left: 0%;"><i></i><span></span></div>
+            </div>
+          </li>
+        </ul>
+      </dd>
+    </dl>
+     
+    <dl>
+      <dt class="w09">显示消息数量</dt>
+      <dd class="w03">
+        <ul>
+          <li class="w12">
+            <div class="btn_lbl">
+              <div class="lbl_ture" onclick="$(this).animate({'left':'-100%'},200);$(this).next().animate({'left':'0'},200);$('.jl_operation').css({'display':'none'})" style="left: 0px;"><span></span><i class="font_normal"></i></div>
+              <div class="lbl_false" onclick="$(this).animate({'left':'100%'},200);$(this).prev().animate({'left':'0'},200);$('.jl_operation').css({'display':'block'})" style="left: 100%;"><i></i><span></span></div>
+            </div>
+          </li>
+        </ul>
+      </dd>
+      <dd class="w12 pl10 font_gray">若关闭主页详细将不再显示数量</dd>
+    </dl>
+      
+    <dl>
+      <dt class="w09">wifi自动更新</dt>
+      <dd class="w03">
+        <ul>
+          <li class="w12">
+            <div class="btn_lbl">
+              <div class="lbl_ture" onclick="$(this).animate({'left':'-100%'},200);$(this).next().animate({'left':'0'},200);$('.jl_operation').css({'display':'none'})" style="left: 0px;"><span></span><i class="font_normal"></i></div>
+              <div class="lbl_false" onclick="$(this).animate({'left':'100%'},200);$(this).prev().animate({'left':'0'},200);$('.jl_operation').css({'display':'block'})" style="left: 100%;"><i></i><span></span></div>
+            </div>
+          </li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<div class="w12 jl_form">
+  <div class="jl_form_01">
+    <dl>
+      <dt class="w09">字体</dt>
+      <dd class="w03">
+        <ul>
+          <li class="w12"><span class="w12 tr">标准</span></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w09">皮肤</dt>
+      <dd class="w03">
+        <ul>
+          <li class="w12"><span class="w12 tr">蓝色经典</span></li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+</div>
+</div>
+<footer class="jl_footer"><!---头部截点---></footer>
+<div class="jl_modal">
+  <div class="jl_modal_close"></div>
+  <ul class="jl_modal_radio">
+    <li class="jl_font_small">小</li>
+    <li class="jl_font_standard font_blue">标准</li>
+    <li class="jl_font_large">大</li>
+    <li class="jl_font_super">超大</li>
+  </ul>
+  </div>
+</div>
+<div class="jl_page_container"></div>
+</body>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/jquery.mobile-1.3.2.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/ui.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/control.js"></script>
+</html>

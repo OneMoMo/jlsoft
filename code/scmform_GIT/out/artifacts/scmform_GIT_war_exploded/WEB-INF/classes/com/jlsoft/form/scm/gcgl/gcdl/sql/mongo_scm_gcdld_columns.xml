@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCDLD.SCM_GCDLD">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="公司信息" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="用户电话" />
+       <FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" name="用户手机" /> 
+       <FIELD attrname="LXDH" format='{"LXDH":{"$regex":"#LXDH#"}}' fieldtype="String" allownull="Y" name="联系电话" /> 
+       <FIELD attrname="QY" format='{"QY":{"$regex":"#QY#"}}' fieldtype="String" allownull="Y" name="用户手机" /> 
+       <FIELD attrname="RQQ" format='{"SHSJ":{"$gte":"#RQQ# 00:00:01"}}' fieldtype="String" allownull="Y" name="日期" />
+       <FIELD attrname="RQZ" format='{"SHSJ":{"$lte":"#RQZ# 23:59:59"}}' fieldtype="String" allownull="Y" name="日期" />
+  	   <FIELD attrname="BZ02" format='{"BZ02":{"$regex":"#BZ02#"}}' fieldtype="String" allownull="Y" name="步骤" />
+  	  	 <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+  	   <!-- <FIELD qx='QXCZY01|CZY_CX|in' />  -->
+  	   <FIELD qx='WLDW01|WLDW_CX|in' />
+  	   <FIELD qx='XSBM01|BM_CX|LIKE%'/>
+	</JLConfig>
+	
+	<JLConfig id="MONGO_GCDLD.SCM_GCDLDJSZL">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="公司信息" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="用户电话" />
+       <FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" name="用户手机" /> 
+       <FIELD attrname="LXDH" format='{"LXDH":{"$regex":"#LXDH#"}}' fieldtype="String" allownull="Y" name="联系电话" /> 
+       <FIELD attrname="QY" format='{"QY":{"$regex":"#QY#"}}' fieldtype="String" allownull="Y" name="用户手机" /> 
+       <FIELD attrname="RQQ" format='{"SHSJ":{"$gte":"#RQQ# 00:00:01"}}' fieldtype="String" allownull="Y" name="日期" />
+       <FIELD attrname="RQZ" format='{"SHSJ":{"$lte":"#RQZ# 23:59:59"}}' fieldtype="String" allownull="Y" name="日期" />
+  	   <FIELD attrname="BZ02" format='{"BZ02":{"$regex":"#BZ02#"}}' fieldtype="String" allownull="Y" name="步骤" />
+  	  	 <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+  	   <FIELD qx='WLDW01|WLDW_CX|in' />
+	</JLConfig>
+	
+	<!-- 单据状态为 合同已审核的 工程登录单 -->
+	<JLConfig id="MONGO_GCDLD.SCM_TZGCDLD">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="用户电话" />
+       <FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" name="用户手机" /> 
+  	   <FIELD attrname="BZ02" format='{"BZ02":{"$regex":"#BZ02#"}}' fieldtype="String" allownull="Y" name="步骤" />
+  	   <FIELD attrname="GC_DJZT" format='{"GC_DJZT.key":{"$regex":"#GC_DJZT#"}}' fieldtype="String" allownull="Y" name="单据状态" />
+  	   <FIELD qx='WLDW01|WLDW_CX|in' />
+	</JLConfig>
+	
+	<!-- 工程登录单 登录序号  -->
+	<JLConfig id="MONGO_GCDLD.SCM_GCDLD1">
+       <FIELD attrname="GCDLD" format='{"GCDLD01":{"$regex":"#GCDLD#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+       <FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" name="联系方式" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="用户电话" />
+       <FIELD attrname="SYDWDZ" format='{"SYDWDZ":{"$regex":"#SYDWDZ#"}}' fieldtype="String" allownull="Y" name="安装地址" />
+       <FIELD attrname="AZDZ" format='{"SYDWDZ":{"$regex":"#AZDZ#"}}' fieldtype="String" allownull="Y" name="区域" />
+       <FIELD attrname="SBRQQ" format='{"SBSJ":{"$gte":"#SBRQQ# 00:00:00"}}' fieldtype="String" allownull="Y" name="制单时间" />
+	   <FIELD attrname="SBRQE" format='{"SBSJ":{"$lte":"#SBRQE# 23:59:59"}}' fieldtype="String" allownull="Y" name="制单时间" />
+		<!--差异海南屏蔽权限  -->
+		<FIELD qx='XSBM01|BM_CX|LIKE%' />
+	</JLConfig>
+	
+	<!-- 工程登录单 登录序号  -->
+	<JLConfig id="MONGO_GCDLD.SCM_GCDLD2">
+       <FIELD attrname="GCDLD" format='{"GCDLD01":{"$regex":"#GCDLD#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+       <FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" name="联系方式" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="用户电话" />
+       <FIELD attrname="SYDWDZ" format='{"SYDWDZ":{"$regex":"#SYDWDZ#"}}' fieldtype="String" allownull="Y" name="安装地址" />
+       <FIELD attrname="AZDZ" format='{"SYDWDZ":{"$regex":"#AZDZ#"}}' fieldtype="String" allownull="Y" name="区域" />
+       <FIELD attrname="SBRQQ" format='{"SBSJ":{"$gte":"#SBRQQ# 00:00:00"}}' fieldtype="String" allownull="Y" name="制单时间" />
+	   <FIELD attrname="SBRQE" format='{"SBSJ":{"$lte":"#SBRQE# 23:59:59"}}' fieldtype="String" allownull="Y" name="制单时间" />
+		<!--差异海南屏蔽权限  -->
+		<!-- <FIELD qx='XSBM01|BM_CX|LIKE%' /> -->
+	</JLConfig>
+	
+	<!-- 工程登录单 登录序号  或者的情况 -->
+	<JLConfig id="MONGO_GCDLD.SCM_GCDLDHZ">
+		<FIELD qx='XSBM01|BM_CX|LIKE%'/> 
+	</JLConfig>
+
+	<!-- 工程登陆单 安装地址查询 -->
+	<JLConfig id="MONGO_GCDLD.SCM_AZDZLB01">
+		<FIELD attrname="GCDLD" format='{"GCDLD01":{"$regex":"#GCDLD#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+	</JLConfig>
+
+    <!-- 工程登陆单 延期单据查询 -->
+    <JLConfig id="MONGO_GCDLD.DLD_batchYQ">
+        <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+        <FIELD attrname="ZDRQQ" format='{"SBSJ":{"$gte":"#ZDRQQ# 00:00:00"}}' fieldtype="String" allownull="Y" name="制单时间" />
+        <FIELD attrname="ZDRQZ" format='{"SBSJ":{"$lte":"#ZDRQZ# 23:59:59"}}' fieldtype="String" allownull="Y" name="制单时间" />
+        <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+    </JLConfig>
+
+
+</root>

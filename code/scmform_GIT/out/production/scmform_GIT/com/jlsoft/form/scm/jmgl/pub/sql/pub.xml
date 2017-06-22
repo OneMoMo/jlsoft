@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JMGL">
+
+    <!-- 查询合作伙伴-->
+    <select id="O2O_PARTNER" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.PARTNER_ID, A.PARTNER_NAME, A.ADDRESS, A.DEPOSIT_BANK,
+                A.BANK_ACCOUNT, A.TAX_ID, A.BILLING_ACCOUNT, A.INVOICE_TYPE,
+                A.LEGAL_ENTITY, A.TEL, A.ATTN, A.ZIP, A.FAX, A.EXTERNAL_ID
+          from O2O_PARTNER A
+         where 1 = 1
+        <if test="IS_SUPPLIER != null and IS_SUPPLIER != ''">
+            AND A.IS_SUPPLIER = 1
+        </if>
+        <if test="IS_DISTRIBUTOR != null and IS_DISTRIBUTOR != ''">
+            AND A.IS_DISTRIBUTOR = 1
+        </if>
+        <if test="IS_GUIDER != null and IS_GUIDER != ''">
+            AND A.IS_GUIDER = 1
+        </if>
+        <if test="PARTNER_ID != null and PARTNER_ID != ''">
+            AND A.PARTNER_ID = #{PARTNER_ID}
+        </if>
+        <if test="EXTERNAL != null and EXTERNAL != ''">
+            AND A.EXTERNAL = #{EXTERNAL}
+        </if>
+        <if test="OPERATOR_ID != null and OPERATOR_ID != ''">
+            AND A.PARTNER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{OPERATOR_ID})
+        </if>
+    </select>
+
+    <!-- 查询加盟关系（渠道）-->
+    <select id="O2O_CHANNEL" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.PARTNER_ID SUPPLIER_ID, A.PARTNER_NAME SUPPLIER_NAME,
+                B.PARTNER_ID DISTRIBUTOR_ID, B.PARTNER_NAME DISTRIBUTOR_NAME,
+                C.SUPER_DISTRIBUTOR_ID
+          from O2O_PARTNER A, O2O_PARTNER B, O2O_CONTRACT C
+         where A.PARTNER_ID = C.SUPPLIER_ID
+           and B.PARTNER_ID = C.DISTRIBUTOR_ID
+           and A.IS_SUPPLIER = 1
+           and B.IS_DISTRIBUTOR = 1
+           and C.VALID = 1
+           <![CDATA[  and C.START_DAY <= get_date and C.END_DAY >= get_date ]]>
+        <if test="SUPPLIER_ID != null and SUPPLIER_ID != ''">
+            AND A.PARTNER_ID = #{SUPPLIER_ID}
+        </if>
+        <if test="DISTRIBUTOR_ID != null and DISTRIBUTOR_ID != ''">
+            AND B.PARTNER_ID = #{DISTRIBUTOR_ID}
+        </if>
+        <if test="SUPPLIER_OPERATOR_ID != null and SUPPLIER_OPERATOR_ID != ''">
+            AND A.PARTNER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{SUPPLIER_OPERATOR_ID})
+        </if>
+        <if test="DISTRIBUTOR_OPERATOR_ID != null and DISTRIBUTOR_OPERATOR_ID != ''">
+            AND B.PARTNER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{DISTRIBUTOR_OPERATOR_ID})
+        </if>
+    </select>
+    
+    <select id="O2O_CHANNELKV" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.PARTNER_ID KEY, A.PARTNER_NAME VALUE
+          from O2O_PARTNER A, O2O_PARTNER B, O2O_CONTRACT C
+         where A.PARTNER_ID = C.SUPPLIER_ID
+           and B.PARTNER_ID = C.DISTRIBUTOR_ID
+           and A.IS_SUPPLIER = 1
+           and B.IS_DISTRIBUTOR = 1
+           and C.VALID = 1
+           <![CDATA[  and C.START_DAY <= get_date and C.END_DAY >= get_date ]]>
+           <if test="SUPPLIER_ID != null and SUPPLIER_ID != ''">
+            AND A.PARTNER_ID = #{SUPPLIER_ID}
+        </if>
+        <if test="DISTRIBUTOR_ID != null and DISTRIBUTOR_ID != ''">
+            AND B.PARTNER_ID = #{DISTRIBUTOR_ID}
+        </if>
+        <if test="SUPPLIER_OPERATOR_ID != null and SUPPLIER_OPERATOR_ID != ''">
+            AND A.PARTNER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{SUPPLIER_OPERATOR_ID})
+        </if>
+        <if test="DISTRIBUTOR_OPERATOR_ID != null and DISTRIBUTOR_OPERATOR_ID != ''">
+            AND B.PARTNER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{DISTRIBUTOR_OPERATOR_ID})
+        </if>
+    </select>
+
+    <!-- 查询仓库-->
+    <select id="O2O_WAREHOUSE" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.WAREHOUSE_ID, A.WAREHOUSE_NAME, A.SUPPLIER_ID,
+                A.ADDRESS, A.TEL, A.ATTN, A.EXTERNAL_ID
+          from O2O_WAREHOUSE A, O2O_PARTNER B
+         where A.SUPPLIER_ID = B.PARTNER_ID
+           and B.IS_SUPPLIER = 1
+        <if test="WAREHOUSE_ID != null and WAREHOUSE_ID != ''">
+            AND A.WAREHOUSE_ID = #{WAREHOUSE_ID}
+        </if>
+        <if test="SUPPLIER_OPERATOR_ID != null and SUPPLIER_OPERATOR_ID != ''">
+            AND B.PARTNER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{SUPPLIER_OPERATOR_ID})
+        </if>
+    </select>
+
+    <!-- 查询平台商库存-->
+    <select id="O2O_STORE" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.WAREHOUSE_ID, C.WAREHOUSE_NAME, A.GOODS_ID, B.GOODS_NAME, D.SPFL02, E.PPB02, B.SPECS, B.MODEL, B.UNITS, A.QTY, A.QIQ
+          from O2O_STORE A, O2O_GOODS B, O2O_WAREHOUSE C, SPFL D, PPB E
+         where A.SUPPLIER_ID = B.SUPPLIER_ID
+           and A.GOODS_ID = B.GOODS_ID
+           and A.WAREHOUSE_ID = C.WAREHOUSE_ID
+           and B.CATEGORY = D.SPFL01(+)
+           and B.BRAND = E.PPB01(+)
+        <if test="SUPPLIER_OPERATOR_ID != null and SUPPLIER_OPERATOR_ID != ''">
+            AND B.SUPPLIER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{SUPPLIER_OPERATOR_ID})
+        </if>
+        <if test="SUPPLIER_ID != null and SUPPLIER_ID != ''">
+            AND B.SUPPLIER_ID = #{SUPPLIER_ID}
+        </if>
+        <if test="WAREHOUSE_ID != null and WAREHOUSE_ID != ''">
+            AND A.WAREHOUSE_ID = #{WAREHOUSE_ID}
+        </if>
+        <if test="GOODS != null and GOODS != ''">
+            AND ((B.GOODS_ID = #{GOODS}) or
+                 (B.GOODS_NAME LIKE '%'||#{GOODS}||'%') or
+                 (B.EXTERNAL_ID = #{GOODS}) or
+                 (B.SPECS LIKE '%'||#{GOODS}||'%') or
+                 (B.MODEL LIKE '%'||#{GOODS}||'%'))
+        </if>
+    </select>
+
+    <!-- 查询平台商商品-->
+    <select id="O2O_GOODS" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.GOODS_ID, A.GOODS_NAME, A.UNITS, D.SPFL02, E.PPB02, A.SPECS, A.MODEL
+          from O2O_GOODS A, SPFL D, PPB E
+         where A.CATEGORY = D.SPFL01(+)
+           and A.BRAND = E.PPB01(+)
+        <if test="SUPPLIER_OPERATOR_ID != null and SUPPLIER_OPERATOR_ID != ''">
+            AND A.SUPPLIER_ID = (select PARTNER_ID from RYXX where RYXX01 = #{SUPPLIER_OPERATOR_ID})
+        </if>
+        <if test="SUPPLIER_ID != null and SUPPLIER_ID != ''">
+            AND A.SUPPLIER_ID = #{SUPPLIER_ID}
+        </if>
+        <if test="SPECS != null and SPECS != ''">
+            AND A.SPECS = #{SPECS}
+        </if>
+        <if test="MODEL != null and MODEL != ''">
+            AND A.MODEL = #{MODEL}
+        </if>
+        <if test="PPB02 != null and PPB02 != ''">
+            AND E.PPB02 = #{PPB02}
+        </if>
+        <if test="GOODS_NAME != null and GOODS_NAME != ''">
+            AND A.GOODS_NAME = #{GOODS_NAME}
+        </if>
+        <if test="GOODS != null and GOODS != ''">
+            AND ((A.GOODS_ID = #{GOODS}) or
+            (A.GOODS_NAME LIKE '%'||#{GOODS}||'%') or
+            (A.EXTERNAL_ID = #{GOODS}) or
+            (A.SPECS LIKE '%'||#{GOODS}||'%') or
+            (A.MODEL LIKE '%'||#{GOODS}||'%'))
+        </if>
+        <if test="IS_DISTRIBUTOR_NO_EXISTS != null and IS_DISTRIBUTOR_NO_EXISTS != '' and DISTRIBUTOR_ID != null and DISTRIBUTOR_ID != ''">
+            AND not exists (select 1
+                               from O2O_DISTRIBUTOR_AUTHORIZES
+                              where GOODS_ID = A.GOODS_ID
+                                and SUPPLIER_ID = A.SUPPLIER_ID
+                                and DISTRIBUTOR_ID = #{DISTRIBUTOR_ID})
+        </if>
+        <if test="IS_SHOP_NO_EXISTS != null and IS_SHOP_NO_EXISTS != '' and SHOP_ID != null and SHOP_ID != ''">
+            AND not exists (select 1
+                                from O2O_SHOP_AUTHORIZES
+                               where GOODS_ID = A.GOODS_ID
+                                 and SUPPLIER_ID = A.SUPPLIER_ID
+                                 and SHOP_ID = #{SHOP_ID})
+        </if>
+
+    </select>
+
+    <!-- 查询加盟店-->
+    <select id="O2O_SHOP" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.SHOP_ID, A.SHOP_NAME, A.ADDRESS, A.TEL, A.ATTN, A.ZIP,
+                A.FAX, A.AREA, A.CATEGORY, A.DISTRIBUTOR_ID, A.SHOP_TYPE
+          from O2O_SHOP A
+         where 1 = 1
+        <if test="DISTRIBUTOR_OPERATOR_ID != null and DISTRIBUTOR_OPERATOR_ID != ''">
+            AND A.DISTRIBUTOR_ID = (select PARTNER_ID from RYXX where RYXX01 = #{DISTRIBUTOR_OPERATOR_ID})
+        </if>
+        <if test="DISTRIBUTOR_ID != null and DISTRIBUTOR_ID != ''">
+            AND A.DISTRIBUTOR_ID = #{DISTRIBUTOR_ID}
+        </if>
+        <if test="SHOP_ID != null and SHOP_ID != ''">
+            AND A.SHOP_ID = #{SHOP_ID}
+        </if>
+        <if test="SHOP_NAME != null and SHOP_NAME != ''">
+            AND (A.SHOP_NAME LIKE '%'||#{SHOP_NAME}||'%')
+        </if>
+    </select>
+    
+    <select id="O2O_SHOPJMS" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.SHOP_ID, A.SHOP_NAME, A.ADDRESS, A.TEL, A.ATTN, A.ZIP,
+                A.FAX, A.AREA, A.CATEGORY, A.DISTRIBUTOR_ID, A.SHOP_TYPE
+          from O2O_SHOP A
+         where 1 = 1
+        <if test="SHOP_ID != null and SHOP_ID != ''">
+            AND A.SHOP_ID = #{SHOP_ID}
+        </if>
+    </select>
+    
+    <select id="O2O_SHOPKV" parameterType="java.util.Map" resultType="java.util.Map">
+        select A.SHOP_ID KEY, A.SHOP_NAME VALUE
+          from O2O_SHOP A
+         where 1 = 1 
+         <if test="DISTRIBUTOR_OPERATOR_ID != null and DISTRIBUTOR_OPERATOR_ID != ''">
+            AND A.DISTRIBUTOR_ID = (select PARTNER_ID from RYXX where RYXX01 = #{DISTRIBUTOR_OPERATOR_ID})
+        </if>
+        <if test="DISTRIBUTOR_ID != null and DISTRIBUTOR_ID != ''">
+            AND A.DISTRIBUTOR_ID = #{DISTRIBUTOR_ID}
+        </if>
+        <if test="SHOP_ID != null and SHOP_ID != ''">
+            AND A.SHOP_ID = #{SHOP_ID}
+        </if>
+        <if test="SHOP_NAME != null and SHOP_NAME != ''">
+            AND (A.SHOP_NAME LIKE '%'||#{SHOP_NAME}||'%')
+        </if>
+    </select>
+
+</mapper>

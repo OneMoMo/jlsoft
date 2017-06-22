@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FXSKD">
+	<select id="FXSKD" parameterType="Map" resultType="java.util.Map">
+	    SELECT DISTINCT (select pfd01 from PFD where JLWBDH=a.jlwbdh and gsxx01=a.gsxx01 and ROWNUM=1)PFD01,
+	    	   A.PFD09 XSJE, A.GCMC,A.PFD19,A.XSHT01,NVL(A.KHYHD01,0)KHYHD01,A.BM01 XSBM01,
+	    	   A.WLDW01 KH01,TO_CHAR(A.PFD04,'YYYY-MM-DD') ZDRQ,A.PFD11 BZ,
+	           (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM02,A.BM01,
+	           (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) FLFS02,
+	           W.WLDW02 KH02,A.PFD10 FLJE,(A.PFD09 - A.PFD10)YSJE,NVL(Z.DWYE06,0) FLYE,
+	           A.PFD14 YFJSD01,A.JLWBDH FXSKDJLWBDH,NVL(Z.DWYE04,0) YSYE,NVL(Z.DWYE13,0) YSKYE,
+	           NVL((Z.DWYE05-(Z.DWYE04+Z.DWYE03+Z.DWYE11-Z.DWYE13-Z.DWYE19+Z.DWYE20)),0)KYYE,A.GCDJH GCDLD01
+	      FROM PFD A , WLDW W, DWYEZ Z
+	     WHERE A.PFD05 IS NULL
+	       AND W.WLDW01 = A.WLDW01
+	       AND A.BM01 = Z.BM01(+) 
+	       AND A.WLDW01 = Z.WLDW01(+)
+		   AND A.GSXX01 = #{GSXX01}
+		    <![CDATA[ AND NOT EXISTS (SELECT 1
+          FROM DSFHPSB
+         WHERE DJLX=8
+           AND JLWBDH=A.JLWBDH
+           AND CZLX=0
+           and SSFSL<>YSFSL)]]>
+	       AND A.PFD05 IS NULL 
+		   JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+		   <if test="FXSKDJLWBDH != null and FXSKDJLWBDH != ''">
+           AND A.JLWBDH LIKE '%'||#{FXSKDJLWBDH}||'%'
+           <!-- AND ROWNUM = 1 -->
+	    </if>
+	    <if test="KH02 != null and KH02 != ''">
+           AND (W.WLDW02 LIKE '%'||#{KH02}||'%' or W.WLDW01 LIKE '%'||#{KH02}||'%')
+	    </if>
+	    <if test="ZDRQ != null and ZDRQ != ''">
+           AND A.PFD04  = to_date(#{ZDRQ},'YYYY-MM-DD') 
+	    </if>
+	    <if test="PFDBJ != null and PFDBJ != ''" >
+		    <if test="PFDBJ == 1" >and A.JLWBDH like 'F%'</if>
+			<if test="PFDBJ == 0" >and A.JLWBDH like 'YJ%'</if>
+		</if>
+	       AND A.JLWBDH IS NOT NULL
+		   AND A.PFD30 IS NOT NULL
+		   AND (A.WLDW01 IN (SELECT QXGYS01
+		                       FROM QXGYSITEM
+		                      WHERE QXGYSITEM.QXGSXX01 = #{GSXX01}
+		                        AND QXGYSITEM.QXGYS04 = 1) OR
+		       GET_JLCONF_F(53, #{GSXX01}) = 0)
+		 ORDER BY A.JLWBDH
+	</select>
+	<select id="YFJSD" parameterType="Map" resultType="java.util.Map">
+	    SELECT DISTINCT A.PFD01,A.PFD02,A.PFD09 XSJE,A.PFD19,A.XSHT01,A.BM01 XSBM01,A.WLDW01 KH01,TO_CHAR(A.PFD04,'YYYY-MM-DD') ZDRQ,A.PFD03 BZ,
+	           (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM02,A.BM01,
+	           (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) FLFS02,
+	           W.WLDW02 KH02,A.PFD10 FLJE,(A.PFD09 - A.PFD10)YSJE,NVL(Z.DWYE06,0) FLYE,
+	           A.PFD14 YFJSD01,A.JLWBDH FXSKDJLWBDH,NVL(Z.DWYE04,0) YSYE,NVL(Z.DWYE13,0) YSKYE,
+	           NVL((Z.DWYE05-(Z.DWYE04+Z.DWYE03+Z.DWYE11-Z.DWYE13-Z.DWYE19+Z.DWYE20)),0)KYYE
+	      FROM PFD A , WLDW W, DWYEZ Z
+	     WHERE A.PFD05 IS NULL
+	       AND W.WLDW01 = A.WLDW01
+	       AND A.BM01 = Z.BM01(+) 
+	       AND A.WLDW01 = Z.WLDW01(+)
+		   AND A.GSXX01 = #{GSXX01}
+		   JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+		   <if test="FXSKDJLWBDH != null and FXSKDJLWBDH != ''">
+           AND A.JLWBDH LIKE '%'||#{FXSKDJLWBDH}||'%'
+           AND ROWNUM = 1
+	    </if>
+	    <if test="KH02 != null and KH02 != ''">
+           AND (W.WLDW02 LIKE '%'||#{KH02}||'%' or W.WLDW01 LIKE '%'||#{KH02}||'%')
+	    </if>
+	    <if test="ZDRQ != null and ZDRQ != ''">
+           AND A.PFD04  = to_date(#{ZDRQ},'YYYY-MM-DD') 
+	    </if>
+	    <if test="PFDBJ != null and PFDBJ != ''" >
+		    <if test="PFDBJ == 1" >and A.JLWBDH like 'F%'</if>
+			<if test="PFDBJ == 0" >and A.JLWBDH like 'YJ%'</if>
+		</if>
+	       AND A.JLWBDH IS NOT NULL
+		   AND A.PFD30 IS NOT NULL
+		   AND (A.WLDW01 IN (SELECT QXGYS01
+		                       FROM QXGYSITEM
+		                      WHERE QXGYSITEM.QXGSXX01 = #{GSXX01}
+		                        AND QXGYSITEM.QXGYS04 = 1) OR
+		       GET_JLCONF_F(53, #{GSXX01}) = 0)
+		 ORDER BY A.PFD01
+	</select>
+	
+	<select id="FXSKD_MX" parameterType="Map" resultType="java.util.Map">
+		SELECT B.PFDI01,B.SPXX01,NVL(B.WBTDH,0)WBTDH,C.SPXX02 SPBM,C.SPXX04 SPMC,B.PFDI02 FXDJ,
+		       B.PFDI06 SSJE,B.PFDI07 SYFL,A.BM01 XSBM01,B.CK01,D.CK02 CKMC, NVL(B.DJTDH,0) DJTDH,
+			   (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM,B.PFDI05 SL,A.PFD02 THLX,
+			   B.PFDI11 FHRQ
+			FROM PFD A, PFDITEM B, SPXX C, CK D 
+		 WHERE A.PFD01 = B.PFD01 
+		   AND A.GSXX01 = B.GSXX01
+		   AND B.SPXX01 = C.SPXX01 
+		   AND B.CK01 = D.CK01 
+		   AND A.PFD05 IS NULL
+		   <!-- AND A.PFD14 IS NULL  -->
+		   AND B.GSXX01= #{GSXX01} 
+		   <if test="FXSKDJLWBDH != null and FXSKDJLWBDH != ''">
+           AND A.JLWBDH LIKE '%'||#{FXSKDJLWBDH}||'%'
+	       </if>
+	</select>
+	
+	<select id="FXSKD_SKFS" parameterType="Map" resultType="java.util.Map">
+		SELECT A.SKFS01,A.SKFS02,A.SKFS06
+		  FROM SKFS A, QXSKFSITEM B,CZY C
+		 WHERE A.SKFS01 = B.SKFS01
+		   AND B.QXSKFS01 = C.CZY05
+		   AND A.SKFS03 = 1 
+		   And A.SKFS05 = 1
+		    AND A.SKFS06 NOT IN (19) 
+		   AND C.CZY01 = #{CZY01}
+		 ORDER BY B.QXSKFSI01 
+	</select>
+	<select id="YSKD_SKFS" parameterType="Map" resultType="java.util.Map">
+		SELECT A.SKFS01,A.SKFS02,A.SKFS06,A.SKFS16 YHBJ
+		  FROM SKFS A, QXSKFSITEM B,CZY C
+		 WHERE A.SKFS01 = B.SKFS01
+		   AND B.QXSKFS01 = C.CZY05
+		   AND A.SKFS03 = 1 
+		   And A.SKFS05 = 1
+		   AND A.SKFS06 IN (0,1,3,18)
+		   <if test="SKFS01 != null and SKFS01 != ''">
+              AND A.SKFS01  = #{SKFS01} 
+	       </if>
+		   AND C.CZY01 = #{CZY01}
+		 ORDER BY B.QXSKFSI01 
+	</select>
+	<select id="FXSKD_YHXX" parameterType="Map" resultType="java.util.Map">
+		Select A.GSXX01, A.YHZH01, A.YHZH02, A.YHZH03, A.YHZH04, B.YHXX01, B.YHXX02
+          From YHZH A, YHXX B
+         Where A.YHXX01 = B.YHXX01
+          And A.YHZH05 = 1
+          <if test="YHZH01 != null and YHZH01 != ''">
+              AND A.YHZH01  = #{YHZH01} 
+	       </if>
+          And A.GSXX01 = #{GSXX01}
+         ORDER BY A.YHZH01
+	</select>
+	<select id="queryFXSKD" parameterType="Map" resultType="java.util.Map">
+	    <if test="XSLX == 0">
+	    	SELECT 0 XSLX,A.PFSK01 SKDH,B.SKFS01,S.SKFS02 SKFSMC,B.PFDS01 SKJE,W.WLDW02 KHMC,W.WLDW01 KHBM,A.JLWBDH FXDH,
+                   A.PFSK17 SPLX,(SELECT BM02 FROM BM WHERE BM01=A.BM01)XSBM,TO_CHAR(A.PFSK03,'YYYY-MM-DD') SKRQ,
+                   A.PFSK08 SKR,A.PFSK06 BZ, A.PFSK07 YWY
+              FROM PFSKDFS B, PFSKD A, WLDW W, SKFS S 
+            WHERE B.GSXX01 = A.GSXX01 
+              AND B.PFSK01 = A.PFSK01 
+              AND A.WLDW01=W.WLDW01 
+              AND B.SKFS01=S.SKFS01 
+         </if>
+         <if test="XSLX == 1">
+            SELECT 1 XSLX,A.PFSK01 SKDH,B.PFSKI01 THDH,S.SPXX02 SPBM,S.SPXX04 SPMC,
+	               B.PFSKI02 FXDJ,B.PFSKI03 XSSL,B.PFSKI04 XSJE,B.PFSKI05 FLJE,
+	               B.PFSKI10 KPSL,(B.PFSKI03 - B.PFSKI10)WKPSL,W.WLDW02 KHMC,
+	               (SELECT BM02 FROM BM WHERE BM01=A.BM01) XSBM,
+	               A.PFSK08 SKR,TO_CHAR(A.PFSK03,'YYYY-MM-DD')SKRQ,A.PFSK07 YWY
+	          FROM PFSKD A, PFSKDITEM B, WLDW W, SPXX S,PFSKDFS F
+	         WHERE A.GSXX01 = B.GSXX01 AND A.PFSK01 = B.PFSK01 
+	           AND A.WLDW01=W.WLDW01 
+	           AND A.GSXX01 = F.GSXX01
+	           and A.PFSK01 = F.PFSK01 
+	           AND S.SPXX01 = B.SPXX01
+	      </if>
+	       JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+       	   JL{CZY|A.BM01|BM_CX|LIKE%}JL
+           JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+	      <if test="SKDH != null and SKDH != ''">
+	      	AND A.JLWBDH  like '%'||#{SKDH}||'%'
+	      </if>
+	      <if test="GSXX01 != null and GSXX01 != ''">
+	      	AND A.GSXX01 = #{GSXX01}
+	      </if>
+	      <if test="FXDH != null and FXDH != ''">
+	      	<foreach item="item" index="index" collection="FXDH"  open=" AND (" separator=" or " close=")"> 
+	      	 A.JLWBDH  like '%'||#{item}||'%'
+	      	</foreach>
+	      </if>
+	      <if test="SKR != null and SKR != ''">
+	       AND A.PFSK08 = #{SKR}
+	      </if>
+	      <if test="YWY != null and YWY != ''">
+	        AND  A.PFSK07 = #{YWY}
+	      </if>
+	      <if test="WLDW != null and WLDW != ''">		      
+		    AND (W.WLDW02 LIKE '%'||#{WLDW}||'%' OR W.WLDW01 = #{WLDW})
+	      </if>
+	      <if test="XSBM != null and XSBM != ''">
+		     <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 = #{item}
+		     </foreach> 	         
+	      </if>
+	      <if test="SKRQ_S !=null and SKRQ_S != ''">
+	         <![CDATA[AND A.PFSK03 >= TO_DATE(#{SKRQ_S},'YYYY-MM-DD')]]>
+	      </if> 
+	      <if test="SKRQ_E !=null and SKRQ_E != ''">
+	         <![CDATA[AND A.PFSK03 <= TO_DATE(#{SKRQ_E},'YYYY-MM-DD')]]>
+	      </if>
+	      <if test="CWRQ_S !=null and CWRQ_S != ''">
+	         <![CDATA[AND A.PFSK12 >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD')]]>
+	      </if> 
+	      <if test="CWRQ_E !=null and CWRQ_E != ''">
+	         <![CDATA[AND A.PFSK12 <= TO_DATE(#{SKRQ_E},'YYYY-MM-DD')]]>
+	      </if>
+	</select>
+	
+	<select id="YDSKFS" parameterType="Map" resultType="java.util.Map">
+		   SELECT SKFS01, (SELECT SKFS02 FROM SKFS WHERE SKFS01 = S.SKFS01) SKFS02
+     FROM pfskdfs S
+    where S.pfsk01 in
+          (SELECT DISTINCT PFSK01
+             FROM PFSKDITEM C
+            WHERE C.pfski01 in (select PFDI10
+                                  FROM pfditem M
+                                 WHERE 1=1
+                                  <if test="GSXX01 != null and GSXX01 != ''">		      
+									    AND M.GSXX01 = #{GSXX01}
+								  </if>
+								   <if test="PFD01 != null and PFD01 != ''">		      
+									    AND M.PFD01 = #{PFD01}
+								  </if>
+								  )
+			  <if test="GSXX01 != null and GSXX01 != ''">		      
+				    AND C.GSXX01  = #{GSXX01}
+			  </if>
+              )
+            <if test="GSXX01 != null and GSXX01 != ''">		      
+		    AND S.GSXX01  = #{GSXX01}
+	  </if>
+	</select>
+	
+	</mapper>

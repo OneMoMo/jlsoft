@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_JXSZC.SCM_JXSZC">
+       <FIELD attrname="query" format='{"$or":[{"DLZH":{"$regex":"#query#"}},{"ERJXSGSQC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="二级经销商" />
+	   <FIELD attrname="DLZH" format='{"$or":[{"DLZH":{"$regex":"#DLZH#"}}]}' fieldtype="String" allownull="Y" name="登录账号" />       
+	</JLConfig>
+	<JLConfig id="CXDYEJJXS.CXEJJXS">
+       <FIELD attrname="ERJXS" format='{"$or":[{"ERJXSGSQC":{"$regex":"#ERJXS#"}},{"DLZH":{"$regex":"#ERJXS#"}}]}' fieldtype="String" allownull="Y" name="二级经销商" />
+       <FIELD attrname="JXS" format='{"$or":[{"KHMC":{"$regex":"#JXS#"}},{"WLDW01":{"$regex":"#JXS#"}}]}' fieldtype="String" allownull="Y" name="经销商" />
+	   <FIELD attrname="RYMC" format='{"$or":[{"RYMC":{"$regex":"#RYMC#"}}]}' fieldtype="String" allownull="Y" name="人员名称" />       
+	   <FIELD attrname="QY" format='{"$or":[{"DZ.VALUE":{"$regex":"#QY#"}}]}' fieldtype="String" allownull="Y" name="区域" />       
+	</JLConfig>
+</root>

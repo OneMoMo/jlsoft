@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JSPKD">
+	<!-- 查询结算登记单 -->
+	<select id="queryJSDJD" parameterType="Map" resultType="java.util.Map">
+		SELECT A.JLWBDH JSDJ01,A.JSDJ01 JSDJBH,A.JSDJ07 PKYE,A.JSDJ07 PKJE,0
+		YFJE,A.JSDJ16 BZ
+		FROM JSDJD A
+		WHERE JSDJ09 = 1
+		AND JSDJ08 IS NULL
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+			AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND A.CGBM01 = #{BM01}
+		</if>
+	</select>
+
+	<!-- 查询预付款单 -->
+	<select id="queryYFKD" parameterType="Map" resultType="java.util.Map">
+		SELECT A.JLWBDH YFKSQD01 ,A.YFKSQD01 YFKDBH,
+		(A.YFKSQD03 - A.YFKSQD13 -
+		A.PKJE) PKYE,
+		(A.YFKSQD03 - A.YFKSQD13 - A.PKJE) PKJE,
+		0 YFJE,
+		(SELECT
+		P.PPB02 FROM PPB P WHERE P.PPB01 = A.PPB01) PPMC,
+		(SELECT P.PPB01 FROM
+		PPB P WHERE P.PPB01 = A.PPB01) PPBM,
+		A.YFKSQD09 BZ
+		FROM YFKSQD A
+		WHERE
+		A.YFKSQD08 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+			AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND A.BM01 = #{BM01}
+		</if> 
+    <![CDATA[AND (A.YFKSQD03 - A.YFKSQD13 - A.PKJE) <> 0]]>
+	</select>
+	<!--查询结算排款 -->
+	<select id="queryJSPKD" parameterType="Map" resultType="java.util.Map">
+		Select A.JLWBDH JSPKDH01,
+		F.JLWBDH JSDJDH01,
+		B.WLDW01 GYSBM,
+		W.WLDW02
+		GYSMC,
+		A.BM01 CGBMBM ,
+		M.BM02 CGBM,
+		NVL(F.JSDJ02 + F.JSDJ03 + F.JSDJ19,
+		0) HKJE,
+		B.JSPKDW11 YFJE,
+		B.JSPKDW12 SFJE,
+		E.PKJE YIYFJE,
+		E.YFJE SFYFJE,
+		B.JSPKDW07 YUFJE,
+		TO_CHAR(A.JSPKD08, 'YYYY-MM-DD') JHFKRQ,
+		DECODE(B.JSPKDW13,0,'未完成',1,'完成') FKZT,
+		A.JSPKD02 ZDR,
+		TO_CHAR(A.JSPKD03, 'YYYY-MM-DD') ZDRQ,
+		A.JSPKD04 SHR,
+		TO_CHAR(A.JSPKD05, 'YYYY-MM-DD') SHRQ,
+		A.GSXX01,
+		(Select GSXX02 From
+		GSXX Where GSXX01 = A.GSXX01) GSXX02
+		From JSPKD A,
+		JSPKDWLDW B,
+		BM M,
+		WLDW W,
+		JSPKDITEM_FPDJ C,
+		JSPKDITEM_SRD D,
+		JSPKDITEM_YFK E,
+		JSDJD F
+		Where
+		A.GSXX01 = B.GSXX01
+		And A.JSPKD01 = B.JSPKD01
+		And A.BM01 = M.BM01
+		And
+		B.WLDW01 = W.WLDW01
+		And B.GSXX01 = C.GSXX01(+)
+		And B.JSPKD01 =
+		C.JSPKD01(+)
+		And B.WLDW01 = C.WLDW01(+)
+		And B.GSXX01 = D.GSXX01(+)
+		And
+		B.JSPKD01 = D.JSPKD01(+)
+		And B.WLDW01 = D.WLDW01(+)
+		And B.GSXX01 =
+		E.GSXX01(+)
+		And B.JSPKD01 = E.JSPKD01(+)
+		And B.WLDW01 = E.WLDW01(+)
+		And
+		A.GSXX01 = F.GSXX01(+)
+		And A.JSPKD01 = F.JSDJ08(+)
+		
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+		JL{CZY|B.WLDW01|WLDW_CX|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="JSPKDH01 != null and JSPKDH01 != ''">
+			AND A.JLWBDH = #{JSPKDH01}
+		</if>
+		<if test="JSDJDH01 != null and JSDJDH01 != ''">
+			AND F.JLWBDH = #{JSDJDH01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			<foreach item="item" index="index" collection="BM01" open=" AND ("
+				separator=" or " close=")">
+				A.BM01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="GYS != null and GYS != ''">
+			<foreach item="item" index="index" collection="GYS" open=" AND ("
+				separator=" or " close=")">
+				(W.WLDW02 LIKE '%'||#{item}||'%' OR B.WLDW01
+				LIKE '%'||#{item}||'%')
+			</foreach>
+		</if>
+		<if test="FKZT != null and FKZT != ''">
+			AND B.JSPKDW13 = #{FKZT}
+		</if>
+		<if test="JHFKRQ != null and JHFKRQ != ''">
+			AND A.JSPKD08 = TO_DATE(#{JHFKRQ} , 'yyyy-mm-dd ')
+		</if>
+		<if test="ZDR != null and ZDR != ''">
+			AND A.JSPKD02 = #{ZDR}
+		</if>
+		<if test="ZDRQ_S != null and ZDRQ_S != ''">
+			AND A.JSPKD03 &gt;= TO_DATE(#{ZDRQ_S} , 'yyyy-mm-dd ')
+		</if>
+		<if test="ZDRQ_E != null and ZDRQ_E != ''">
+			AND A.JSPKD03 &lt;= TO_DATE(#{ZDRQ_E} , 'yyyy-mm-dd ')
+		</if>
+		<if test="SHR != null and SHR != ''">
+			AND A.JSPKD04 = #{SHR}
+		</if>
+		<if test="SHRQ_S != null and SHRQ_S != ''">
+			AND A.JSPKD05 &gt;= TO_DATE(#{SHRQ_S} , 'yyyy-mm-dd ')
+		</if>
+		<if test="SHRQ_E != null and SHRQ_E != ''">
+			AND A.JSPKD05 &lt;= TO_DATE(#{SHRQ_E} , 'yyyy-mm-dd ')
+		</if>
+
+    ORDER BY A.JSPKD01
+	</select>
+</mapper>

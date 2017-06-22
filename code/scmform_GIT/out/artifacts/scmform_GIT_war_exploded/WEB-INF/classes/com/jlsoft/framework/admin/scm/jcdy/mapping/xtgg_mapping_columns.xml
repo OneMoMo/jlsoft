@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.xtgg">
+		<FIELD attrname="ZT" fieldtype="string" allownull="N" name="主题" /> 
+		<FIELD attrname="ZY" fieldtype="string" allownull="N" name="摘要" /> 
+		<Nested id="XXFL">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="消息分类" />
+		    <FIELD attrname="value" fieldtype="string" allownull="N" name="消息分类" />
+	    </Nested> 
+     </JLConfig>
+</root>

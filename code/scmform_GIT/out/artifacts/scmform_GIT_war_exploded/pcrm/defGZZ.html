@@ -1,0 +1,46 @@
+<script type="text/javascript" src="pcrm/js/p_defGZZ.js"></script>  
+<div class="w12 jl_page">
+  <div class="jl_list">
+  <div class="seach_main">
+    <div class="seach_case float_right">
+      <input type="search" placeholder="支持数据权限名称模糊搜索" onclick="showQueryGZZ()">
+        <div class="w12 jl_poplayer display_none"></div>
+      <input type="button" class="jl_btn btn_blue" value="搜索">
+    </div>
+  </div>
+  <div class="w03" id="gzz_w03">
+     <ul class="w12 list_nav" id="sjqxmx">  
+     </ul>
+  </div>
+  <div class="w09 form02">
+    <dl class="w12 form"><dt class="w02"><b>数据权限代码：</b></dt>
+	<dd class="w10">
+	  <input type="text" id="SJ01"/>
+	</dd></dl>
+    <dl class="w12 form"><dt class="w02"><b>数据权限名称：</b></dt>
+	<dd class="w10">
+	  <input type="text" class="w08" code="" id="SJ02"/>
+	</dd></dl>
+    <dl class="w12 form">
+      <dt class="w02"><b>部门权限：</b></dt>
+      <dd class="w10">
+	     <div class="jl_poplayer w10" style=" position:static; margin-top:10px; box-shadow:0px 0px 0px #fff; border:1px solid #eee; border-top:1px solid #ccc;display:block"> 
+           <div class="jl_tree_03">
+  	         <ul id="bmxx"></ul>
+           </div>
+         </div>
+	  </dd>
+    </dl>
+  </div>
+</div>
+<div class="jl_operation">
+      <div class="oper_main"> 
+        <div class="width_50">
+         <input type="button" class="jl_btn btn_red btn_maigin_right" name="xz" onclick="xz()" value="新增" />
+         <input type="button" class="jl_btn btn_orange btn_maigin_right btn_impcolor" name="xg" onclick="xg()" value="修改" />
+         <input type="button" class="jl_btn btn_blue btn_maigin_right" name="sc" onclick="sc()" value="删除" />
+         <input type="button" class="jl_btn btn_white btn_maigin_right" name="bc" onclick="bc()" value="保存" style="display: none;"/>
+         <input type="button" class="jl_btn btn_grey btn_maigin_right" name="qx" onclick="qx()" value="取消" style="display: none;"/>
+        </div> 
+      </div>
+</div>

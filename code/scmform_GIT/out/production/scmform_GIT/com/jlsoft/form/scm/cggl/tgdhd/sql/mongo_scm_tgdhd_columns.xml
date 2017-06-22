@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_CGDHD.SCM_CGDHD">
+      
+        <FIELD attrname="WLDWMC" format='{"WLDWMC":{"$regex":"#WLDWMC#"}}' fieldtype="String" allownull="Y" name="供应商" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        
+	</JLConfig>
+</root>

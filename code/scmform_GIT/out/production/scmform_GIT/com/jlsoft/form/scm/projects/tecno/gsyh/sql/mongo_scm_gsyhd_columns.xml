@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GSYHD.SCM_GSYHD">
+       <FIELD attrname="YHRQQ" format='{"SHRQ":{"$gte":"#YHRQQ#"}}' fieldtype="String" allownull="Y" name="审核日期" />
+       <FIELD attrname="YHRQZ" format='{"SHRQ":{"$lte":"#YHRQZ#"}}' fieldtype="String" allownull="Y" name="审核日期" />
+       <FIELD attrname="SPFL" format='{"SPLB.SPFLMC":{"$regex":"#SPFL#"}}' fieldtype="String" allownull="Y" name="商品分类" />
+       <FIELD attrname="SPPP" format='{"SPLB.SPPPMC":{"$regex":"#SPPP#"}}' fieldtype="String" allownull="Y" name="商品品牌" />   
+       <FIELD attrname="SPXX" format='{"$or":[{"SPLB.SPBM":{"$regex":"#SPXX#"}},{"SPLB.SPMC":{"$regex":"#SPXX#"}}]}' fieldtype="String" allownull="Y" name="商品信息" />
+	  <!--  <FIELD qx='SPLB.WLDW01|WLDW_CX|in' />
+	   <FIELD qx='SPLB.BM01|BM_CX|LIKE%' /> -->
+	</JLConfig>
+	
+</root>

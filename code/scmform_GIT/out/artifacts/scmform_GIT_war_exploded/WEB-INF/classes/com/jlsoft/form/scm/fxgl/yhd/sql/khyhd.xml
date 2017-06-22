@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KHYHD">
+   <select id="KHYHD_JXS" parameterType="Map" resultType="java.util.Map">
+      	SELECT A.WLDW01 JXS01, A.WLDW02 JXSMC,A.WLDW10 LXDH, B.WLDW01_R EJJXS01, 
+  		       A.RYXX01 YWY_RYXX01,(SELECT RYXX02 FROM RYXX WHERE RYXX01 = A.RYXX01) YWYMC,		
+     		   (SELECT BM01 FROM RYXX WHERE RYXX01 = A.RYXX01) BM01,	
+     		   (SELECT BM02 FROM BM WHERE bm01 = (SELECT bm01 FROM RYXX WHERE RYXX01 = A.RYXX01)) BMMC,			
+               (SELECT WLDW02 FROM WLDW W WHERE W.WLDW01 = B.WLDW01_R)EJJXSMC,
+               (SELECT WLDW10 FROM WLDW W WHERE W.WLDW01 = B.WLDW01_R)EJJXSDH
+        FROM WLDW A,KSJSBH B 
+        WHERE A.WLDW20 = 1
+         AND A.WLDW01 = B.WLDW01(+)
+       <![CDATA[
+       AND A.WLDW01 <> '900001'
+       ]]>
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="JXS01 != null and JXS01 != ''">
+       AND A.WLDW01 = #{JXS01}
+       </if>
+       <if test="JXSMC != null and JXSMC != ''">
+       AND (A.WLDW01 LIKE '%'||#{JXSMC}||'%' OR A.WLDW02 LIKE '%'||#{JXSMC}||'%' OR A.WLDW03 LIKE '%'||#{JXSMC}||'%')
+       </if>
+       <if test="JXSJB != null and JXSJB != ''">
+ 		AND EXISTS(SELECT 1 FROM CZY D,GZZ F WHERE D.GZZ01= F.GZZ01 AND SUBSTR(CZY01,0,6)=A.WLDW01 AND JXSBJ=#{JXSJB}
+         AND CZY01=#{CZY01})
+       </if>
+       
+       JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+    </select>
+    
+     <select id="KHYHD_XSBM" parameterType="Map" resultType="java.util.Map">
+      SELECT A.BM01, A.BM02 BMMC, A.GSXX01, B.GSXX02 GSMC,C.RYXX01 YWY_RYXX01,C.RYXX02,
+             A.BM06 BMSX, GET_BMSX(A.BM06) BMSXMC,
+             A.BM04 MJBJ, GET_BOOL(A.BM04) MJBJMC,
+             A.BM_BM01, (SELECT BM02 FROM BM WHERE BM01 = A.BM_BM01) BM_BMMC
+     FROM BM A, GSXX B,RYXX C
+     WHERE A.BM04 = 1
+      AND A.BM01 = C.BM01
+      AND A.BM06 = 3
+      AND A.GSXX01 = B.GSXX01
+     <if test="GSXX01 != null and GSXX01 != ''">
+      AND A.GSXX01 = #{GSXX01}
+     </if>
+     <if test="YWY_RYXX01 != null and YWY_RYXX01 != ''"> 
+      AND C.RYXX01 = #{YWY_RYXX01}
+	 </if>
+      <if test="BMMC !=null and BMMC != ''">
+         AND (A.BM01 LIKE '%'||#{BMMC}||'%' OR A.BM02 LIKE '%'||#{BMMC}||'%')
+     </if> 
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+    </select>
+    
+    <!-- 不区分供应商 采购部门商品属性 仓库，把同一公司的同一商品sum 然后去得到库存状态 -->
+    <select id="ALL_SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT GET_KMS(S.SPXX01)SL,GSXX01,S.SPXX02 SPBM,SPXX04 SPMC,GGB01 GG,JLDW01 DW 
+  	   FROM CKSP A,SPXX S 
+	WHERE A.SPXX01 = S.SPXX01 
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="SPXX01 != null">
+       AND A.SPXX01 = #{SPXX01}
+       </if>
+       <if test="SPMC != null and SPMC != ''">
+       AND (B.SPPYM LIKE '%'||#{SPMC}||'%' OR B.SPXX04 LIKE '%'||#{SPMC}||'%' OR B.SPXX02 LIKE '%'||#{SPMC}||'%')
+       </if>
+	GROUP BY GSXX01,SPXX02,SPXX04,GGB01,JLDW01,S.SPXX01 
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+	   JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+  <select id="SPJGB_KHYHD" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT GET_KMS(S.SPXX01)SL,GSXX01,S.SPXX01,S.SPXX02 SPBM,SPXX04 SPMC,GGB01 GG,JLDW01 DW ,
+              S.PPB01 SPPPBM, S.PPB02 SPPPMC,
+              (SELECT SPJG05 FROM  (SELECT SPJG03,SPJG05,SPXX01 FROM SPJGB
+         ORDER BY SPJG03 DESC) WHERE SPXX01 = A.SPXX01 AND  ROWNUM = 1) FXDJ
+       FROM CKSP A,SPXX S 
+     WHERE A.SPXX01 = S.SPXX01 
+      <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+      </if>
+       <if test="SPMC != null and SPMC != ''">
+       AND (S.SPXX04 LIKE '%'||#{SPMC}||'%' OR S.SPXX02 LIKE '%'||#{SPMC}||'%')
+	  </if>
+	  <if test="SPPP != null and SPPP != ''">
+       AND (S.PPB02 LIKE '%'||#{SPPP}||'%' OR  S.PPB01  LIKE '%'||#{SPPP}||'%')
+       </if>
+	   <if test="SPXX01 != null and SPMC != ''">
+       AND A.SPXX01 = #{SPXX01}
+       </if>
+       <!-- JL{CZY|A.WLDW01|WLDW_CZ|LIKE%}JL -->
+	   JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+	   JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+    GROUP BY GSXX01,SPXX02,SPXX04,GGB01,JLDW01 ,S.SPXX01 ,PPB02,PPB01,A.SPXX01
+  </select>
+    
+    
+     <select id="KMS_YHD" parameterType="Map" resultType="java.util.Map">
+     SELECT GET_KMS(S.SPXX01,CKSP04+CKSP05)SL,GSXX01,S.SPXX01,S.SPXX02 SPBM,SPXX04 SPMC,GGB01 GG,JLDW01 DW ,
+              S.PPB01 SPPPBM, S.PPB02 SPPPMC
+       FROM CKSP A,SPXX S,CK C 
+     WHERE A.SPXX01 = S.SPXX01 AND A.CK01=C.CK01 AND C.CK09=0 
+      <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+      </if>
+       <if test="SPMC != null and SPMC != ''">
+       AND (S.SPXX04 LIKE '%'||#{SPMC}||'%' OR S.SPXX02 LIKE '%'||#{SPMC}||'%')
+	  </if>
+	   <if test="SPXX01 != null and SPXX01 != ''">
+       AND A.SPXX01 = #{SPXX01}
+       </if>
+       <if test="SPPP != null and SPPP != ''">
+       AND (S.PPB02 LIKE '%'||#{SPPP}||'%' OR  S.PPB01  LIKE '%'||#{SPPP}||'%')
+       </if>
+       <if test="KHYHBJ != null and KHYHBJ != ''">
+       AND A.SPXX01 IN (SELECT SPXX01 FROM DWJGB WHERE SPXX01 = A.SPXX01 AND
+   	   GSXX01 = A.GSXX01 AND FLFS01 = #{FLFS01}
+       <![CDATA[ And TO_DATE(TO_CHAR(DWJG03,'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') 
+          <= TO_DATE(TO_CHAR(Sysdate, 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss')
+       And TO_DATE(TO_CHAR(DWJG04,'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') 
+          >= TO_DATE(TO_CHAR(Sysdate, 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss')]]>)
+       </if>
+       <!-- JL{CZY|A.WLDW01|WLDW_CZ|LIKE%}JL -->
+	   JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+	   JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+    GROUP BY GSXX01,SPXX02,SPXX04,GGB01,JLDW01 ,S.SPXX01 ,PPB02,PPB01,CKSP04,CKSP05
+    </select>
+    
+	<!-- 查询活动主题  -->
+	<select id="HDZT" parameterType="Map" resultType="java.util.Map">
+		SELECT HDZT01, HDZTMC, HDDX
+	  FROM HDZT
+	 WHERE 1 = 1
+<!-- 	 <![CDATA[
+	 and sysdate>= TO_DATE(to_char(CXKSRQ,'yyyy-mm-dd hh:mi:ss'), 'yyyy-mm-dd hh:mi:ss')
+     and sysdate <= TO_DATE(to_char(CXJSRQ, 'yyyy-mm-dd hh:mi:ss'), 'yyyy-mm-dd hh:mi:ss')
+      ]]> -->
+	 AND YXBJ=1
+	  <if test="GSXX01 != null and GSXX01 != ''">
+        AND GSXX01 = #{GSXX01}
+      </if>
+      <if test="HDZTMC != null and HDZTMC != ''">
+       AND (HDZTMC LIKE '%'||#{HDZTMC}||'%' OR HDZT01 LIKE '%'||#{HDZTMC}||'%')
+	  </if>
+	</select>   
+
+<!-- 查询市场部门  -->
+	<select id="SCBM" parameterType="Map" resultType="java.util.Map">
+		SELECT BM01, BM02 BMMC FROM BM T WHERE GCBJ = -1 
+		 <if test="BM01 != null and BM01 != ''">
+        AND BM01 = #{BM01}
+      </if>
+       <if test="GSXX01 != null and GSXX01 != ''">
+        AND GSXX01 = #{GSXX01}
+      </if>
+
+	</select> 
+ 
+   <!-- 查询要货单终止  -->
+	<select id="CXYHDZZ" parameterType="Map" resultType="java.util.Map">
+	 SELECT DJLX,YHDH,ZZDH,KHYHD01 ,WLDW01,WLDWMC,SPXX01,SPXX02,SPXX04,DJ,SL,
+            JE,XSBM,BM01,FLFS01,XSFS,YWYMC,TO_CHAR(SHRQ,'YYYY-MM-DD')SHRQ,
+            GCDJH,YSKDH,BZ,SPFL01,SPFL02,PPB01,PPB02,ZDR,TO_CHAR(ZDRQ,'YYYY-MM-DD')ZDRQ,SHR,TO_CHAR(SHRQ,'YYYY-MM-DD')SHRQ
+ 	  FROM V_YHZZMX 
+ 	  WHERE 1=1
+ 	  <if test="DJLX == 1">
+          AND DJLX =#{DJLX}
+      </if>
+      <if test="DJLX == 2">
+          AND DJLX =#{DJLX}
+      </if>
+      <if test="YHDH != null and YHDH != ''">
+          AND YHDH LIKE '%'||#{YHDH}||'%'
+      </if>
+      <if test="ZZDH != null and ZZDH != ''">
+          AND ZZDH LIKE '%'||#{ZZDH}||'%'
+      </if>
+      <if test="WLDWMC != null and WLDWMC != ''">
+          AND (WLDWMC LIKE '%'||#{WLDWMC}||'%'  OR  WLDW01 LIKE '%'||#{WLDWMC}||'%')
+      </if>
+      <if test="XSBM!= null and XSBM != ''">
+	     <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	        BM01 LIKE CONCAT(#{item},'%')
+	     </foreach> 	         
+      </if>
+      <if test="SPMC != null and SPMC != ''">
+	  AND (REGEXP_LIKE(SPXX04, #{SPMC}, 'i') OR REGEXP_LIKE(SPXX02, #{SPMC}, 'i') OR REGEXP_LIKE(SPXX01, #{SPMC}, 'i'))
+      </if>
+	  <if test="SPFL!= null and SPFL != ''">
+	     <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")"> 
+	         SPFL01 LIKE CONCAT(#{item},'%')
+	     </foreach> 	         
+      </if>
+      <if test="XSFS != null and XSFS != ''">
+          AND FLFS01 =#{XSFS}
+      </if>
+      <if test="PP01!= null and PP01 != ''">
+	     <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+	       PPB01 LIKE CONCAT(#{item},'%')
+	     </foreach> 	         
+      </if>
+	  <if test="SHRQS != null and SHRQS != ''">
+        <![CDATA[AND SHRQ  >= TO_DATE(#{SHRQS},'YYYY-MM-DD') ]]>
+	  </if>
+	  <if test="SHRQE != null and SHRQE != ''">
+        <![CDATA[AND SHRQ <= TO_DATE(#{SHRQE},'YYYY-MM-DD')]]>
+	  </if>
+      <if test="YWYMC != null and YWYMC != ''">
+          AND YWYMC LIKE '%'||#{YWYMC}||'%' 
+      </if>
+      <if test="GCDJH != null and GCDJH != ''">
+          AND GCDJH = #{GCDJH}
+      </if>
+      <if test="YSKDH != null and YSKDH != ''">
+          AND YSKDH = #{YSKDH}
+      </if>
+      <if test="BZ != null and BZ != ''">
+          AND BZ LIKE '%'||#{BZ}||'%' 
+      </if>
+      JL{CZY|WLDW01|WLDW_CX|inS}JL
+      JL{CZY|BM01|BM_CX|LIKE%}JL
+	</select>   
+
+	<!-- 查询实际可卖数  -->
+	<select id="CXSJKMS" parameterType="Map" resultType="java.util.Map">
+	SELECT SUM(CKSP04 + CKSP05)SJKMS ,get_kms(spxx01) SL
+	    FROM CKSP  
+	    WHERE CK01 IN  (SELECT CK01 FROM CK WHERE CK19 = 1)  
+ 	   <if test="SPXX01 != null and SPXX01 != ''">
+        AND SPXX01 = #{SPXX01}
+       </if>
+       JL{CZY|CK01|CK_CZ|LIKE%}JL
+       <!-- JL{CZY|WLDW01|WLDW_CX|inS}JL -->
+       JL{CZY|BM01|BM_CX|LIKE%}JL
+        group by spxx01 
+	</select>
+
+    <!-- 客户要换货单  工程要货单联系人均从此获取  -->
+    <select id="LXR" parameterType="Map" resultType="java.util.Map">
+        SELECT V.LXFS01 KEY,V.LXR VALUE FROM WLDW W,VIP_HYLXFS V WHERE W.VIP_HYXX01 = V.HYXX01
+        <if test="WLDW01 != null and WLDW01 != ''">
+            AND W.WLDW01 = #{WLDW01}
+        </if>
+        <if test="GSXX01 != null and GSXX01 != ''">
+            AND W.GSXX01 = #{GSXX01}
+        </if>
+    </select>
+    <select id="LXRLB" parameterType="Map" resultType="java.util.Map">
+        SELECT V.LXDH LXDH,V.LXR_SFZ SFZH FROM WLDW W,VIP_HYLXFS V WHERE W.VIP_HYXX01 = V.HYXX01
+        <if test="WLDW01 != null and WLDW01 != ''">
+            AND W.WLDW01 = #{WLDW01}
+        </if>
+        <if test="GSXX01 != null and GSXX01 != ''">
+            AND W.GSXX01 = #{GSXX01}
+        </if>
+        <if test="LXR != null and LXR != ''">
+            AND V.LXR = #{LXR}
+        </if>
+    </select>
+    <select id="MRLXR" parameterType="Map" resultType="java.util.Map">
+        SELECT V.LXFS01 KEY,V.LXR VALUE  FROM  WLDW W,VIP_HYLXFS V,VIP_HYXX H
+        WHERE W.VIP_HYXX01 = V.HYXX01
+        AND V.LXDH = H.LXFS01
+        <if test="WLDW01 != null and WLDW01 != ''">
+            AND W.WLDW01 = #{WLDW01}
+        </if>
+        <if test="GSXX01 != null and GSXX01 != ''">
+            AND W.GSXX01 = #{GSXX01}
+        </if>
+        ORDER BY V.LXFS01
+    </select>
+</mapper>

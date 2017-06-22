@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RKCHD">
+
+	 <select id="queryRKCHD" parameterType="Map" resultType="java.util.Map">
+	    SELECT distinct R.JLWBDH JLWBDH, r.gsxx01,r.RKD03 GCCKDH,r.DHD01 CGDHD01,
+	      r.RKD01 RKD01, r.RKD04 HZFS01,
+	      r.RKD09 YDBZ,
+	      r.WLDW01, (select WLDW02 from WLDW where WLDW01 = R.WLDW01) WLDW02,
+	      R.CK01, (select CK02 from CK where CK01 = R.CK01) CK02,
+	      R.BM01, (select BM02 from BM where BM01 = R.BM01) BM02,
+	      r.RKD33 QCBJ
+	   FROM RKD r,RKDITEM t 
+	  WHERE r.GSXX01 = t.GSXX01 
+	    AND r.RKD01 = t.RKD01
+	    AND r.RKD16 IS NOT null
+	    AND r.RKD02 <![CDATA[<>]]> 8
+	     <if test="JLWBDH != null and JLWBDH != ''">
+	     AND r.JLWBDH = #{JLWBDH}
+	    </if>
+	    <if test="GSXX01 != null and GSXX01 != ''">
+	     AND r.GSXX01 = #{GSXX01}
+	    </if>
+	    <if test="ZDSJQ != null and ZDSJQ != ''">
+	     AND TO_CHAR(r.RKD12,'YYYY-MM-DD') >=  #{ZDSJQ}
+	    </if>
+	    <if test="ZDSJZ != null and ZDSJZ != ''">
+	     AND TO_CHAR(r.RKD12,'YYYY-MM-DD') <![CDATA[<=]]> #{ZDSJZ} 
+	    </if>
+	    JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+	    JL{CZY|R.CK01|CK_CZ|LIKE%}JL
+	    JL{CZY|R.WLDW01|WLDW01_CZ|LIKE%}JL
+	  </select>
+	
+	  <select id="queryRKCHDMX" parameterType="Map" resultType="java.util.Map">
+	  SELECT  r.RKD01 SPRKD01, r.CK01, r.WLDW01,r.RKD03 SPRKD01,r.DHD01 CGDHD01,
+	          r.CK01 CK01,r.WLDW01 ,r.BM01,r.RKD04 HZFS01,t.RKDI00 XH,t.SPXX01,
+	          (SELECT SPXX04 FROM SPXX WHERE SPXX01 = t.SPXX01) SPMC,
+	          (SELECT SPXX02 FROM SPXX WHERE SPXX01 = t.SPXX01) SPBM,
+	          (SELECT PPB01 FROM SPXX WHERE SPXX01 = t.SPXX01) PPB01,
+	          t.RKDI05 RKSL,
+	          (SELECT PPB02 FROM PPB WHERE PPB01 = (SELECT PPB01 FROM SPXX WHERE SPXX01 = t.SPXX01)) PPBMC,
+	          (SELECT GGB01 FROM SPXX WHERE SPXX01 = t.SPXX01) GGB01,
+	          r.CGXY02 SPSX,get_spsx(r.CGXY02) SPSXMC ,t.JLDW01 JLDW,
+	          (t.RKDI05  - t.RKDI25) KCHSL,
+	          t.RKDI01 BZHL,
+	          t.RKDI06 WSDJ,t.RKDI15 HSDJ
+	   FROM RKD r,RKDITEM t 
+	  WHERE r.GSXX01 = t.GSXX01 
+	    AND r.RKD01 = t.RKD01
+	    AND r.RKD16 IS NOT NULL
+	    AND r.RKD01 = ${RKD01}
+	    <if test="GSXX01 != null and GSXX01 != ''">
+	     AND r.GSXX01 = #{GSXX01}
+	    </if>
+	  </select>
+  
+  
+</mapper>

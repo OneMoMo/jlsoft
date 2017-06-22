@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="localCacheScope" value="STATEMENT" />
+    </settings>
+
+    <plugins>
+        <plugin interceptor="com.jlsoft.framework.JLSQLInterceptor" />
+    </plugins>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:comp/env/jdbc/v5scm10" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/jlsoft/ECSV8/other/wxdq/base/sql/spxx.xml"/>
+        <mapper resource="com/jlsoft/ECSV8/other/wxdq/base/sql/yqxx.xml"/>
+        <mapper resource="com/jlsoft/ECSV8/other/wxdq/base/sql/dgd.xml"/>
+        <mapper resource="com/jlsoft/ECSV8/other/wxdq/base/sql/yb.xml"/>
+    </mappers>
+</configuration>

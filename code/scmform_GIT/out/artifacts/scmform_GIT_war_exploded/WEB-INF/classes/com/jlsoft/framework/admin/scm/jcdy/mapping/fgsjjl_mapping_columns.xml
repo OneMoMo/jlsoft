@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.fgsjjl">
+		<FIELD attrname="SJGSMC" fieldtype="string" allownull="N" name="下级公司" />
+	 </JLConfig>
+</root>

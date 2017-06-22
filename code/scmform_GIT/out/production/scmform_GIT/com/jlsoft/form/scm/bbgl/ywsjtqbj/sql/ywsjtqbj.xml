@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YWSJTQBJ">
+	<select id="queryYWSJTQBJ" parameterType="Map" resultType="java.util.Map">
+		Select 
+			<if test="BJ == 'PP'">
+		        S.PPB01 SPPPBM, S.PPB02 SPPPMC,
+			</if>
+			<if test="BJ == 'CGBM'">
+		        B.BM01 CGBMBM, B.BM02 CGBMMC,
+			</if>
+			<if test="BJ == 'XSBM'">
+		        B.BM01 XSBMBM, B.BM02 XSBMMC, 
+			</if>
+			<if test="BJ == 'SPFL'">
+		        D.SPFL01 SPFLBM, D.SPFL02 SPFLMC,
+			</if>
+			<if test="BJ == 'SP'">
+		        S.SPXX02 SPBM, S.SPXX04 SPMC,
+			</if>
+			<if test="BJ == 'GYS'">
+		        W.WLDW01 GYSBM, W.WLDW02 GYSMC, 
+			</if> 
+		<![CDATA[Sum(A.SXSSL) LSSL, Sum(A.SLSJE) SLSJE,
+		       Sum(A.SPFJE) SPFJE, Sum(A.SLSJE + A.SPFJE - A.SYQJE) SJJE,
+		       Sum(A.SLSJE + A.SPFJE) LSJE, Sum(A.SXSML / (1 + W.JXSL01)) SXSML,
+		       Sum(A.SXSML) LSML, Sum(A.BXSSL) XSSL, Sum(A.BLSJE) BLSJE,
+		       Sum(A.BPFJE) BPFJE, Sum(A.BLSJE + A.BPFJE - A.BYQJE) BJJE,
+		       Sum(A.BLSJE + A.BPFJE) XSJE, Sum(A.BXSML / (1 + W.JXSL01)) BXSML,
+		       Sum(A.BXSML) XSML, Sum(A.SQJCSL) SQJCSL, Sum(A.SQJCJE) SQJCJE,
+		       Sum(A.SQJCJE * (1 + W.JXSL01)) LSKC, Sum(A.BQJCSL) BQJCSL,
+		       Sum(A.BQJCJE) BQJCJE, Sum(A.BQJCJE * (1 + W.JXSL01)) KCJE,
+		       Case SIGN(ABS(Sum(A.SXSSL)))
+		          When 1 Then
+		           ROUND((Sum(A.BXSSL) - Sum(A.SXSSL)) / Sum(A.SXSSL), 2)
+		        End XLZB,
+		       Case SIGN(ABS(Sum(A.SLSJE)))
+		          When 1 Then
+		           ROUND((Sum(A.BLSJE) - Sum(A.SLSJE)) / Sum(A.SLSJE), 2)
+		        End LSJETBZZ,
+		       Case SIGN(ABS(Sum(A.SPFJE)))
+		          When 1 Then
+		           ROUND((Sum(A.BPFJE) - Sum(A.SPFJE)) / Sum(A.SPFJE), 2)
+		        End PFJETBZZ,
+		       Case SIGN(ABS(Sum(A.SLSJE + A.SPFJE)))
+		          When 1 Then
+		           ROUND((Sum(A.BLSJE + A.BPFJE) - Sum(A.SLSJE + A.SPFJE)) /
+		                 Sum(A.SLSJE + A.SPFJE),
+		                 2)
+		        End JEZB,
+		       Case SIGN(ABS(Sum(A.SLSJE + A.SPFJE - A.SYQJE)))
+		          When 1 Then
+		           ROUND((Sum(A.BLSJE + A.BPFJE - A.BYQJE) -
+		                 Sum(A.SLSJE + A.SPFJE - A.SYQJE)) /
+		                 Sum(A.SLSJE + A.SPFJE - A.SYQJE),
+		                 2)
+		        End JJETBZZ,
+		       Case SIGN(ABS(Sum(A.SXSML)))
+		          When 1 Then
+		           ROUND((Sum(A.BXSML) - Sum(A.SXSML)) / Sum(A.SXSML), 2)
+		        End MLZB,
+		       Case SIGN(ABS(Sum(A.SQJCSL)))
+		          When 1 Then
+		           ROUND((Sum(A.BQJCSL) - Sum(A.SQJCSL)) / Sum(A.SQJCSL), 2)
+		        End KCSLTBZZ,
+		       Case SIGN(ABS(Sum(A.SQJCJE)))
+		          When 1 Then
+		           ROUND((Sum(A.BQJCJE) - Sum(A.SQJCJE)) / Sum(A.SQJCJE), 2)
+		        End KCZB,
+		       Case SIGN(ABS(Sum(A.BXSSL)))
+		          When 1 Then
+		           ROUND(Sum(A.BXSML) / Sum(A.BXSSL), 2)
+		        End DTML,
+		       Case SIGN(ABS(Sum(A.BLSJE + A.BPFJE)))
+		          When 1 Then
+		           ROUND(Sum(A.BXSML) / Sum(A.BLSJE + A.BPFJE), 2)
+		        End MLL
+		  From VIEW_SPTQB A, SPXX S, BM B, SPFL D, WLDW W]]>
+		 Where A.SPXX01 = S.SPXX01
+		   And A.WLDW01 = W.WLDW01
+ <![CDATA[ And ((A.SMINDATE = TO_DATE(#{SQRQZ},'yyyy-mm-dd ') 
+	       AND A.SMAXDATE IS NULL 
+		   AND A.BMINDATE IS NULL AND A.BMAXDATE IS NULL) 
+	        OR (A.SMINDATE >= TO_DATE(#{SQRQQ},'yyyy-mm-dd ') 
+		   AND A.SMAXDATE <= TO_DATE(#{SQRQZ},'yyyy-mm-dd ') AND A.BMINDATE IS NULL 
+		   AND A.BMAXDATE IS NULL) 
+	        OR (A.SMINDATE IS NULL AND A.SMAXDATE IS NULL 
+	       AND A.BMINDATE >= TO_DATE(#{BQRQQ},'yyyy-mm-dd ') 
+	       AND A.BMAXDATE <= TO_DATE(#{BQRQZ},'yyyy-mm-dd ')) 
+	        OR (A.SMINDATE IS NULL AND A.SMAXDATE IS NULL AND A.BMINDATE IS NULL 
+	       AND A.BMAXDATE = TO_DATE(#{BQRQZ},'yyyy-mm-dd ')))]]>
+	   	   And A.BM01 = B.BM01
+	   	   And S.SPFL01 = D.SPFL01
+		<if test="BJ == 'CGBM'">
+			AND B.BM06 = 2
+		</if>
+		<if test="BJ == 'XSBM'">
+	        AND B.BM06 = 3
+		</if>
+		<if test="SPMC != null and SPMC != ''">
+		   AND (S.SPXX02 LIKE '%'||#{SPMC}||'%' OR S.SPXX04 LIKE '%'||#{SPMC}||'%'  OR S.SPPYM LIKE '%'||#{SPMC}||'%') 
+	    </if>
+	    <if test="PP != null and PP != ''">
+	         <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")"> 
+	          S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	    <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          S.SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	    </if>
+	    <if test="CGBM != null and CGBM != ''">
+		     <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      B.BM01 = #{item}
+		     </foreach> 	         
+	    </if>
+	    <if test="XSBM != null and XSBM != ''">
+		     <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+		      B.BM01 = #{item}
+		     </foreach> 	         
+	    </if>
+	    <if test="SPFLJB != null and SPFLJB != ''">
+			AND D.SPFL03 = #{SPFLJB}
+	    </if>
+	    <if test="XSBMJB != null and XSBMJB != ''">
+			AND B.BM03 = #{XSBMJB}
+	    </if> 
+	    <if test="GYS != null and GYS != ''">
+		    AND (W.WLDW02 LIKE '%'||#{GYS}||'%' OR A.WLDW01 = #{GYS})
+	    </if>
+	    <if test="BJ != null and BJ != ''">
+	         Group By 
+		</if>
+		<if test="BJ == 'PP'">
+	        S.PPB01, S.PPB02 
+		</if>
+		<if test="BJ == 'CGBM'">
+	        B.BM01, B.BM02
+		</if>
+		<if test="BJ == 'XSBM'">
+	        B.BM01, B.BM02
+		</if>
+		<if test="BJ == 'SPFL'">
+	        D.SPFL01, D.SPFL02
+		</if>
+		<if test="BJ == 'SP'">
+	        S.SPXX02, S.SPXX04
+		</if>
+		<if test="BJ == 'GYS'">
+	        W.WLDW01, W.WLDW02 
+		</if>
+	</select>
+	
+	<!-- 商品分类级别 -->
+	<select id="SPFLJB" parameterType="Map" resultType="java.util.Map">
+		SELECT DISTINCT SPFL03 KEY,SPFL03 VALUE FROM SPFL ORDER BY SPFL03
+	</select>
+	
+	<!-- 销售部门级别 -->
+	<select id="XSBMJB" parameterType="Map" resultType="java.util.Map">
+		SELECT DISTINCT BM03 KEY,BM03 VALUE FROM BM WHERE BM06=3 ORDER BY BM03
+	</select>
+	
+	<!-- 日期 -->
+	<select id="RQ" parameterType="Map" resultType="java.util.Map">
+		SELECT TO_CHAR(ADD_MONTHS(SYSDATE - 1， - 1) - 6, 'YYYY-MM-DD') SQRQQ,
+		       TO_CHAR(ADD_MONTHS(SYSDATE - 1， - 1), 'YYYY-MM-DD') SQRQZ,
+		       TO_CHAR(SYSDATE - 7, 'YYYY-MM-DD') BQRQQ,
+		       TO_CHAR(SYSDATE - 1, 'YYYY-MM-DD') BQRQZ
+		  FROM DUAL
+	</select>
+</mapper>

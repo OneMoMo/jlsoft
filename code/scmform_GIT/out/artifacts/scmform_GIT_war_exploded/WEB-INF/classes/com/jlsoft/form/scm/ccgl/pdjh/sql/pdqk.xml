@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PDQK">
+	<select id="queryPDQK" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT TO_CHAR(PDB01,'YYYY-MM-DD') PDRQ,SPXX02 SPBM,SPXX04 SPMC,(SELECT CK02 FROM CK WHERE CK01=A.CK01)CKMC, 
+       SUM(PDB03) ZMJS,SUM(PDB04) ZMSL, (SUM(A.PDB08) + SUM(A.PDB14) + SUM(A.PDB15) + SUM(A.PDB17) - 
+       SUM(A.PDB13) - SUM(A.PDB12) - SUM(A.PDB18) - SUM(A.PDB30)) JYSL,SUM(PDB06) PDSL,SUM(PDB07) YKSL, 
+       (SELECT SPJG17 FROM SPJGB WHERE SPXX01=A.SPXX01 AND BM01=A.BM01 AND ROWNUM=1)ZHJJ, 
+        ((SUM(A.PDB06) - SUM(A.PDB04)) * 
+       (SELECT SUM(CKSP17) / SUM(1) 
+           FROM CKSP 
+          WHERE SPXX01 = A.SPXX01 
+            AND CK01 = A.CK01 
+            AND CKSP17 <![CDATA[<>]]> 0)) YGYKJE, 
+            SUM(PDB08) SJZSL,SUM(PDB09) KMSL,SUM(PDB28) SYSL,PDB29 SYDH,(SELECT BM02 FROM BM WHERE BM01=A.BM01) CGBM, 
+            (SELECT SPFL02 FROM SPFL WHERE SPFL01=S.SPFL01)SPFL 
+       FROM PDB A,SPXX S 
+      WHERE A.SPXX01=S.SPXX01 
+         JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+         JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''"> 
+		   AND A.GSXX01 = #{GSXX01}
+		</if> 
+		 <if test="CXFS != null and CXFS==2">
+		   <![CDATA[  AND PDB07 < 0 ]]>    
+	     </if>
+	     <if test="CXFS != null and CXFS==3">
+		  <![CDATA[  AND PDB07 > 0 ]]>
+		</if> 
+		<if test="CXFS != null and CXFS==4">
+		    <![CDATA[  AND PDB07<> 0 ]]>
+		</if> 
+		  
+		 <if test="CK01 != null and CK01 != ''">
+		  <foreach item="item" index="index" collection="CK01"  open=" AND (" separator=" or " close=")"> 
+		      A.CK01 LIKE #{item}||'%'
+		   </foreach>
+	    </if>      
+	    <if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(S.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{item}||'%')
+		     </foreach> 
+	    </if>
+	    
+	     <if test="SPFL != null and SPFL != ''">
+	    	<foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	         S.SPFL01 LIKE #{item}||'%'
+	      </foreach>
+	    </if>
+	     
+	    <if test="CGBM!= null and CGBM != ''">
+		     <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 LIKE #{item}||'%'
+		     </foreach> 	         
+	    </if>
+	
+	<if test="PDRQ_S !=null and PDRQ_S != ''">
+	       <![CDATA[AND PDB01 >= TO_DATE(#{PDRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="PDRQ_E !=null and PDRQ_E != ''">
+	       <![CDATA[AND PDB01 <= TO_DATE(#{PDRQ_E}|| '23:59:59','YYYY-MM-DD HH24:MI:SS')]]>
+	    </if>
+	    GROUP BY A.GSXX01,
+          A.CK01,
+          A.PDB01,
+          A.PDB02,
+          A.SPXX01,
+          S.SPXX02,
+          S.SPXX04,
+          S.SPFL01,
+          S.SPXX01,
+          A.BM01,
+          A.PDB29
+
+   ORDER BY A.PDB01			 
+	</select>
+</mapper>

@@ -1,0 +1,13 @@
+.login_conten{ float:left; width:360px; height:360px; position:absolute; top:50% ;left:50%; margin-top:-180px; margin-left:-180px; background-color:#fff;}
+.login_header{ height:40px; background-color:#2195c9; padding-left:5px;}
+.login_header img{ outline:none; height:40px;}
+.login_header span{height:40px; line-height:40px; text-align:center; color:#fff;}
+.mt10{ margin-top:10px;}
+.mt20{ margin-top:20px;}
+.login_body{ height:280px; padding:0 30px;}
+.login_body i{ float:left; height:35px;width:35px; line-height:35px; text-align:center; border-width:1px 0 1px 1px; border-style:solid; border-color:#e4e4e4; background-color:#fff; color:#999;}
+.login_body em{ float:left; height:35px;width:35px; line-height:35px; text-align:center; border-width:1px 1px 1px 0px; border-style:solid; border-color:#e4e4e4; background-color:#fff; color:#999;}
+.login_body input.database{float:left; height:35px; width:230px; background-color:#fff;  border-width:1px 0px 1px 0px; border-style:solid; border-color:#e4e4e4;}
+.login_body p{ line-height:35px; height:35px;}
+.login_body input.user_name{ float:left; height:35px; width:265px; background-color:#fff;  border-width:1px 1px 1px 0px; border-style:solid; border-color:#e4e4e4;}
+.login_footer{ height:40px; line-height:40px; text-indent:5px;background-color:#e4e4e4;}

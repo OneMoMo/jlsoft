@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.gszt">
+		<FIELD attrname="GSZT01" fieldtype="string" allownull="N" name="公司编码" />
+		<FIELD attrname="GSZTMC" fieldtype="string" allownull="N" name="公司名称" />
+		<Nested id="SSJT">
+       		<FIELD attrname="value" fieldtype="String" allownull="N" name="所属集团" />
+    	</Nested>
+	    <Nested id="HBMC">
+	       <FIELD attrname="value" fieldtype="String" allownull="N" name="本币币种" />
+	    </Nested>
+		<FIELD attrname="GSDZ" fieldtype="string" allownull="N" name="公司地址" />
+		<FIELD attrname="SWH" fieldtype="string" allownull="N" name="税务号" />
+		<Nested id="KHYH">
+	       <FIELD attrname="value" fieldtype="String" allownull="N" name="开户银行" />
+	    </Nested>
+		<FIELD attrname="YHZH" fieldtype="string" allownull="N" name="银行账号" />
+		<FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+	</JLConfig>	
+</root>

@@ -1,0 +1,216 @@
+/***
+select控件jl_select
+***/
+.jl_select{}
+
+
+/***
+input_text控件jl_input_text
+***/
+.jl_input_text{}
+
+
+/***
+控件jl_input_radio
+***/
+.jl_input_radio{ float:left; line-height:30px; cursor:pointer; padding:0 10px;}
+.jl_input_radio > i{ color:#333; margin-right:5px; font-size:16px;}
+.jl_input_radio:last-child{ margin-right:0px;}
+.jl_input_radio > span{}
+.jl_input_radio:hover{ background:#fdf87b;}
+
+/***
+控件jl_input_radio
+***/
+.jl_input_checkbox{ float:left; line-height:30px; cursor:pointer; padding:0 5px 0 10px;}
+.jl_input_checkbox > i{ color:#333; margin-right:5px; font-size:16px;}
+.jl_input_checkbox:last-child{ margin-right:0px;}
+.jl_input_checkbox > span{}
+.jl_input_checkbox:hover{ background:#fdf87b;}
+
+
+/***
+input_file控件jl_input_file
+***/
+.jl_input_file{}
+
+
+
+/***
+时间控件jl_time
+***/
+.jl_time{ width:100%;}
+.datepicker{ display:none; position:absolute; padding:4px;margin-top:1px;direction:ltr;}
+.datepicker.dropdown-menu{ position:absolute; top:100%; left:0; z-index:1000; float:left; display:none; min-width:160px; list-style:none; background-color:#fff; border:1px solid #ccc; -webkit-box-shadow:0 2px 5px #ccc; -moz-box-shadow:0 2px 5px #ccc; box-shadow:0 2px 5px #ccc; -webkit-background-clip:padding-box; -moz-background-clip:padding; background-clip:padding-box; *border-right-width:2px; *border-bottom-width:2px; color:#333; font-size:13px; line-height:18px;}
+.datepicker.dropdown-menu th{ padding:4px 5px;}
+.datepicker.dropdown-menu td{ padding:4px 5px;}
+.datepicker table{ border:0; margin:0; width:auto;}
+.datepicker table tr td span{ display:block;  width:23%;  height:54px;  line-height:54px;  float:left;  margin:1%;  cursor:pointer;}
+.datepicker td{ text-align:center; width:20px; height:20px; border:0; font-size:12px; padding:4px 8px; background:#fff; cursor:pointer;}
+.datepicker td.active.day, .datepicker td.active.year{ background:#4d90fe !important; color:#fff;}
+.datepicker td.old, .datepicker td.new{ color:#999;}
+.datepicker td span.active{ background:#4d90fe !important; color:#fff;}
+.datepicker td.day.disabled{ color:#eee; background:#fff !important;}
+.datepicker-days > .table-condensed > tbody > tr > td:hover{ background:#eee;}
+.datepicker-hours > .table-condensed > tbody > tr > td > span:hover{ background:#eee;}
+.datepicker-minutes > .table-condensed > tbody > tr > td > span:hover{ background:#eee;}
+.datepicker th{ text-align:center; width:20px; height:20px; border:0; font-size:12px; padding:4px 8px; background:#fff; cursor:pointer;}
+.datepicker th.active.day, .datepicker th.active.year{ background:#2ba6cb;}
+.datepicker th.date-switch{ width:145px;}
+.datepicker th span.active{ background:#4d90fe; color:#fff;}
+.datepicker .cw{ font-size:10px; width:12px; padding:0 2px 0 5px; vertical-align:middle;}
+.datepicker.days div.datepicker-days{ display:block;}
+.datepicker.months div.datepicker-months{ display:block;}
+.datepicker.years div.datepicker-years{ display:block;}
+.datepicker thead tr:first-child th{ cursor:pointer;}
+.datepicker thead tr:first-child th.cw{ cursor:default;  background-color:transparent;}
+.datepicker tfoot tr:first-child th{ cursor:pointer;}
+.datepicker-inline{width:220px;}
+.datepicker-rtl{direction:rtl;}
+.datepicker-rtl table tr td span{ float:right;}
+.datepicker-dropdown{top:0;left:0;}
+.datepicker-dropdown:before{ content:''; display:inline-block; border-left:7px solid transparent; border-right:7px solid transparent; border-bottom:7px solid #ccc; border-bottom-color:1px solid rgba(0, 0, 0, 0.2); position:absolute; top:-7px; left:6px;}
+.datepicker-dropdown:after{ content:''; display:inline-block; border-left:6px solid transparent; border-right:6px solid transparent; border-bottom:6px solid #fff; position:absolute; top:-6px; left:7px;}
+.datepicker > div,.datepicker-dropdown::before,.datepicker-dropdown::after{display:none;}
+.datepicker-close{position:absolute;top:-30px;right:0;width:15px;height:30px;padding:0;display:none;}
+.table-striped .datepicker table tr td,.table-striped .datepicker table tr th{background-color:transparent;}
+
+
+/***
+下拉菜单jl_navbar/jl_dropdown_menu
+***/
+.jl_navbar{}
+.jl_navbar > li{ position:relative;}
+.jl_dropdown_menu{ position:absolute; z-index:3; background:#fff; border:1px solid #ccc; left:0px; top:100%; box-shadow:0 2px 5px #ccc; display:none;}
+.jl_dropdown_menu > li{ width:100%;}
+.jl_dropdown_menu > li > a{ padding:6px 15px; white-space:nowrap; cursor:pointer; min-width:160px; width:100%;}
+.jl_dropdown_menu > li > a > i{ margin:0 5px; width:15px;}
+.jl_dropdown_menu > li > a > span{ right:10px; top:8px; position:absolute; border-radius:12px; padding:3px 6px; height:15px; line-height:10px; font-size:12px !important; color:#fff;}
+.jl_dropdown_menu > li > a > span > i{ margin:0px; width:auto; line-height:10px;}
+
+.jl_dropdown_menu > li:hover{ background:#eee;}
+.jl_dropdown_menu .line{ width:100%; float:left; height:1px; margin:8px 0; background:#e1e1e1;}
+.jl_dropdown_menu .line:hover{ background:#e1e1e1;}
+.jl_navbar > li.xuan > .jl_dropdown_menu{ display:block;}
+
+.jl_dropleft_menu{ top:-1px; left:100%;}
+.jl_dropleft_menu.jl_droptop_menu{ left:100%; bottom:0;}
+.jl_droptop_menu{ top:auto; left:0px; bottom:100%;}
+
+
+/***
+可操作控件input
+***/
+.jl_cz_input{}
+.jl_cz_input input{ border-right:0px; width:70%;}
+.jl_cz_input i{ height:36px; line-height:36px; padding:0 15px; background:#e1e1e1; margin-top:2px; font-size:16px;}
+.jl_cz_input i:hover{ cursor:pointer; background:#ccc;}
+datalist option{ padding-left:10px !important;}
+
+
+
+/***
+是否按钮
+***/
+.btn_lbl{ position:relative; float:left; height:25px; margin:5px 10px; min-width:70px; border-radius:15px; overflow:hidden;}
+.btn_lbl i{ width:19px; height:19px; line-height:19px; border-radius:50%; background-color:#fff; margin:3px; color:#ccc;}
+.btn_lbl div{ position:absolute; top:0px; width:100%; height:25px; line-height:25px; color:#fff; border-radius:15px; cursor:pointer;}
+.btn_lbl span{ float:left; width:40px; text-align:center;}
+.btn_lbl .lbl_ture{left:0px; background-color:#3896d4;}
+.btn_lbl .lbl_ture i{ float:right; box-shadow:-1px 1px 2px #666;}
+.btn_lbl .lbl_ture span{ margin-left:5px;}
+.btn_lbl .lbl_false{left:100%; background-color:#999;}
+.btn_lbl .lbl_false i{ float:left; box-shadow:1px 1px 2px #666;}
+.btn_lbl .lbl_false span{ margin-right:5px;}
+
+
+/***
+up_load控件jl_up_load
+***/
+.jl_up_load{ width:60%; height:80px; text-align:center; float:left;}
+.jl_up_load img{ height:100%; float:left; margin-right:10px;}
+.jl_up_load > .load_main{ width:80px; float:left; background:#f1f1f1; position:relative; cursor:pointer;}
+.jl_up_load > .load_main i{ font-size:40px; line-height:80px; color:#aaa; cursor:pointer;}
+.jl_up_load > .load_main > input[type="file"]{ position:absolute; width:100%; height:100%; z-index:1; top:0; left:0; opacity:0; cursor:pointer;}
+.jl_up_load > .load_main:hover{ background:#e1e1e1;}
+
+
+/***
+树形控件01/jl_tree_01
+***/
+.jl_tree_01 > .jl_tabel_header{ background:#f1f1f1; float:left; margin:10px 0;padding: 2px 0; text-align:left; padding:0 10px;}
+.jl_tree_01 > .jl_tabel_header > ul.jl_tabel_bac > li{ line-height:30px;}
+.jl_tree_01 > .jl_tabel_header > ul.jl_tabel_bac > li.table_zw{ width:40px; margin-left:20px;}
+.jl_tree_01 > .jl_tabel_header > ul.jl_tabel_bac > li span{ color:#000; font-size:16px; text-indent:10px;}
+
+.jl_tree_01 .jl_tree_main{ border-left:1px dotted #3276b1; float:left; width:100%;}
+.jl_tree_01 .jl_tree_main > dl{ position:relative; width:100%;}
+.jl_tree_main > dl > dt{ position:absolute;}
+.jl_tree_main > dl > dt.lj{ width:25px; height:1px; border-bottom:1px dotted #3276b1; top:25px; left:0px;}
+.jl_tree_main > dl > dd{ padding:10px 0; width:100%;}
+.jl_tree_main > dl > dd > input[type="text"]{ width:200px;}
+.jl_tree_main > dl > dd > i{ float:left; font-size:18px; width:20px; color:#999; margin:7px 0 0 30px;}
+.jl_tree_main > dl > dd > i.cz{opacity:0;}
+.jl_tree_main > dl > dd:hover{ background-color:#f5f5f5;}
+.jl_tree_main > dl > dd:hover > i.cz{ cursor:pointer; opacity:1;}
+.jl_tree_01 .child{ padding-left:35px; float:left; width:100%;}
+
+
+/***
+筛选jl_screen_a_z
+***/
+.jl_screen_a_z{ width:100%;}
+.jl_screen_a_z > ul.title{ width:100%; border-bottom:1px solid #e1e1e1;}
+.jl_screen_a_z > ul.title:before{ content:"请选择："; float:left; line-height:30px; margin:0 10px 0 10px; color:#999;}
+.jl_screen_a_z > ul.title > li{ height:30px; line-height:30px; font-size:12px; margin-right:20px; background:#fff; color:#666; cursor:pointer;}
+.jl_screen_a_z > ul.title > li.xuan{ border-bottom:2px solid #4d90fe;}
+.jl_screen_a_z > ul.title > li:hover{ color:#4d90fe;}
+.jl_screen_a_z > div.main{ padding:0 0 15px 15px; float:left;}
+
+
+/***
+方格文字平铺jl_square_texe
+***/
+.jl_square_texe{ width:100%;}
+.jl_square_texe > ul{ width:100%;}
+.jl_square_texe > ul > li{ border:1px solid #ccc; height:33px; line-height:31px; margin:15px 15px 0 0; font-size:12px; position:relative;}
+.jl_square_texe > ul > li > span{height:100%; margin:0 15px;}
+.jl_square_texe > ul > li > .jl_masklayer{ background:#f5f5f5; text-align:center; line-height:28px;}
+.jl_square_texe > ul > li > .jl_masklayer i{ text-align:center; width:100%; height:100%; cursor:pointer; line-height:33px; font-size:18px;}
+.jl_square_texe > ul > li > .jl_btn_group{ margin:-1px;}
+
+
+/***
+遮罩层jl_masklayer
+***/
+.jl_masklayer{ position:absolute; z-index:10; width:100%; height:100%; top:0px; left:0px; display:none;}
+
+
+/***
+数据对换控件jl_dataexchange
+***/
+.jl_dataexchange{}
+.dataexchange_case{}
+.dataexchange_main{ width:100%; border:1px solid #ccc; max-height:500px; float:left; margin-top:-1px;}
+.dataexchange_main > ul{ width:100%;}
+.dataexchange_main > ul > li{ padding:5px 10px; width:100%;}
+.dataexchange_main > ul > li.title{ background:#f5f5f5; border-bottom:1px solid #ccc;}
+.dataexchange_main > ul > li.title > span{ line-height:30px; font-size:16px;}
+.dataexchange_main > ul > li > i{ width:20px; height:20px; line-height:20px; margin-left:5px; border-radius:50%; text-align:center; color:#aaa; float:right; margin-top:8px; cursor:pointer;}
+.dataexchange_main > ul > li > i.xuan{ color:#d2322d;}
+.dataexchange_main > ul > li:hover{ background:#f5f5f5;}
+.dataexchange_main > ul > li.xuan{ background:#fdf87b;}
+
+
+/***
+弹窗jl_modal
+***/
+.jl_modal{ position:fixed; z-index:1000; width:100%; height:100%; background:rgba(1,1,1,0.2); display:none;}
+.jl_modal_main{ width:100%; height:100%; position:relative;}
+.jl_modal_main > .modal_close{ width:100%; height:100%; position:absolute; z-index:1;}
+.jl_modal_main > .modal_main{ position:absolute; z-index:2; width:70%; height:70%; top:15%; left:15%; background:#fff; box-shadow:0px 0px 10px #333;}
+.max_modal_main{ max-height:100%; width:100%; overflow-x:hidden; overflow-y:auto;}
+.max_modal_main > .modal_title{ border-bottom:1px solid #e1e1e1; padding:10px 20px; float:left; width:100%;}
+.max_modal_main > .modal_title > h3{ margin:0px;}
+.max_modal_main > .modal_content{ padding:10px 20px;}
+

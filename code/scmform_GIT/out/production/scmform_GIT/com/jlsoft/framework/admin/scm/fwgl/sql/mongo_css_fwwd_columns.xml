@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FWWD.CSS_FWWD">
+		<FIELD attrname="search" format='{"$or":[{"FWWD01":{"$regex":"#search#"}},{"FWWD02":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="服务网点" />
+		<FIELD qx='FWWD01|AZWD_CX|in' /> 
+	</JLConfig>
+</root>

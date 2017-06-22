@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PDJH">
+    <select id="PDJH_ZBDY" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT DISTINCT A.JLWBDH JHDH01,	(wmsys.wm_concat(DISTINCT A.CK01)
+		over(PARTITION BY A.PDRQ)) CK01,
+		(wmsys.wm_concat(DISTINCT TO_CHAR(C.CK02))
+		over(PARTITION BY A.PDRQ)) CKMC,
+B.BM02 BMMC,A.BZ BZ, 
+		       TO_CHAR(A.PDRQ,'YYYY-MM-DD HH24:MI:SS') PDRQ,A.PPB02 SPPPMC,A.BM01 BM01,A.SPFL01,
+		       A.SPFL02 SPFLMC,S.SPXX02 SPBM,S.SPXX04 SPMC,A.CKHJ01 HJBM,A.CKHJ02 HJMC ,A.SPXX01 SPXX01
+		  FROM PDJH A,CK C,SPXX S,BM B
+		 WHERE A.SPXX01 = S.SPXX01(+)
+		   AND A.CK01 = C.CK01(+)
+		   AND A.BM01 = B.BM01(+)
+		   AND A.PDJH07 IS NULL
+      <if test="JHDH01 != null and JHDH01 != ''"> AND A.JLWBDH = #{JHDH01} </if>
+	  <if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01 = #{GSXX01} </if> 
+	  <if test="CKMC != null and CKMC != ''"> 
+	  AND C.CK02 LIKE '%'||#{CKMC}||'%'
+	  </if> 
+		<if test="PDRQQ != null and PDRQQ != ''"> 
+		<![CDATA[ 	AND A.PDRQ >= to_date( #{PDRQQ},'YYYY-MM-DD HH24:MI:SS') ]]>
+		</if>
+		<if test="PDRQE != null and PDRQE != ''"> 
+		<![CDATA[	AND A.PDRQ <= to_date(#{PDRQE},'YYYY-MM-DD HH24:MI:SS') ]]>
+		</if>
+		JL{CZY|C.CK01|CK_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL	  
+    </select>
+    <select id="PDJH_CKSP" parameterType="Map" resultType="java.util.Map">
+	    SELECT GSXX01, CK01,CKMC,SPXX01,SPBM,SPMC,TXM,JLDW,HJBM,HJMC,CKHJ01,RQ, ZMSL,
+               SPFL01,SPFLMC,PPB01,SPPPMC,BM01,CGBMMC
+        FROM PDJH_CKSP
+        WHERE 1=1
+        JL{CZY|CK01|CK_CZ|LIKE%}JL
+        JL{CZY|BM01|BM_CZ|LIKE%}JL
+       <if test="GSXX01 != null and GSXX01 != ''"> AND GSXX01 = #{GSXX01}</if>
+      	<if test="CK01 != null and CK01 !=''">
+		<foreach item="item" index="index" collection="CK01" open=" AND ("
+			separator=" or " close=")">
+			A.CK01 LIKE '%'||#{item}||'%'
+		</foreach>
+	</if>
+       <if test="BM01 != null and BM01 != ''"> AND BM01 = #{BM01}</if>
+       <if test="SPXX01 != null and SPXX01 != ''"> AND SPXX01 = #{SPXX01}</if>
+       <if test="SPFL01 != null and SPFL01 != ''"> AND SPFL01 LIKE #{SPFL01}||'%'</if>
+		<if test="CKHJ != null and CKHJ != ''">
+			AND CKHJ01 = #{CKHJ}
+		</if>
+		<if test="PPB != null and PPB!= ''">
+			AND PPB01 = #{PPB}
+		</if>
+		<if test="CKSPYKC != null and CKSPYKC != ''">
+		  <![CDATA[ AND ((CKSP03 <> 0) OR (CKSP07<>0) OR (BGS <> 0))]]>
+		</if>
+       <if test="PXGZ != null and PXGZ != ''"> 
+	       <if test="PXGZ == 0">        
+	       		ORDER BY SPXX01
+	       </if>
+	       <if test="PXGZ == 1">        
+	       		ORDER BY SPXX61
+	       </if>
+	       <if test="PXGZ == 2">        
+	       		ORDER BY CKHJ01
+	       </if>
+	       <if test="PXGZ == 3">        
+	       		ORDER BY PPB01
+	       </if>
+	       <if test="PXGZ == 4">        
+	       		ORDER BY SPFL01
+	       </if>
+	       <if test="PXGZ == 5">        
+	       		ORDER BY CK01
+	       </if>
+       </if>
+	</select>
+	
+	<select id="PDJH_CKSP_BMHZ" parameterType="Map" resultType="java.util.Map">
+	    SELECT A.GSXX01, A.CK01, C.CK02 CKMC,A.SPXX01, S.SPXX02 SPBM,
+	    	   S.SPXX04 SPMC,S.SPXX61,S.JLDW01 JLDW,
+               SUM(A.CKSP03 + A.CKSP07) ZMSL,
+               S.SPFL01, (SELECT SPFL02 FROM SPFL WHERE SPFL01=S.SPFL01) SPFLMC,
+               S.PPB01, (SELECT PPB02 FROM PPB WHERE PPB01=S.PPB01) SPPPMC
+              <!--  A.BM01, (SELECT BM02 FROM BM WHERE BM01=A.BM01) CGBMMC -->
+        FROM CKSP A, CK C, SPXX S
+        WHERE A.CK01=C.CK01 AND A.SPXX01=S.SPXX01
+          AND S.PHBJ = 0
+       <if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01 = #{GSXX01}</if>
+	<if test="CK01 != null and CK01 !=''">
+		<foreach item="item" index="index" collection="CK01" open=" AND ("
+			separator=" or " close=")">
+			A.CK01 LIKE '%'||#{item}||'%'
+		</foreach>
+	</if>
+       <if test="SPXX01 != null and SPXX01 != ''"> AND A.SPXX01 = #{SPXX01}</if>
+		<if test="SPFL != null and SPFL != ''">
+			AND S.SPFL01 = #{SPFL}
+		</if>
+		<if test="PPB != null and PPB!= ''">
+			AND S.PPB01 = #{PPB}
+		</if>
+		<if test="CKSPYKC != null and CKSPYKC != ''">
+		  <![CDATA[ AND ((A.CKSP03 <> 0) OR (A.CKSP07<>0) OR (D.BGS <> 0))]]>
+		</if>
+		<if test="BM01 != null"> AND A.BM01 like CONCAT(#{BM01},'%')</if>
+       GROUP BY A.GSXX01,A.CK01,C.CK02,A.SPXX01,S.SPXX02,S.SPXX04,S.SPXX61,S.JLDW01,
+                S.SPFL01,S.PPB01<!-- , A.BM01 -->
+       <if test="PXGZ != null and PXGZ != ''"> 
+	       <if test="PXGZ == 0">        
+	       		ORDER BY A.SPXX01
+	       </if>
+	       <if test="PXGZ ==1">        
+	       		ORDER BY S.SPXX61
+	       </if>
+	       <if test="PXGZ == 2">        
+	       		ORDER BY D.CKHJ01
+	       </if>
+	       <if test="PXGZ ==3">        
+	       		ORDER BY S.PPB01
+	       </if>
+	       <if test="PXGZ ==4">        
+	       		ORDER BY S.SPFL01
+	       </if>
+	       <if test="PXGZ ==5">        
+	       		ORDER BY A.CK01
+	       </if>
+       </if>
+	</select>
+	<select id="PDJH_PDJHMX" parameterType="Map" resultType="java.util.Map">
+	    SELECT DISTINCT A.GSXX01,A.CK01,C.CK02 CKMC,A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,
+	    	   S.SPXX61 TXM,S.JLDW01 JLDW,A.ZMS ZMSL,S.SPFL01,
+	    	   (SELECT SPFL02 FROM SPFL WHERE SPFL01=S.SPFL01) SPFLMC,
+               S.PPB01, (SELECT PPB02 FROM PPB WHERE PPB01=S.PPB01) SPPPMC,
+	           A.CKHJ01 HJBM,A.CKHJ02 HJMC,A.PXGZ,A.XH, A.BM01, 
+	           (SELECT BM02 FROM BM WHERE BM01=A.BM01) CGBMMC
+	    FROM PDBDY A, CK C, SPXX S,PDJH P
+	    WHERE A.CK01=C.CK01 AND A.SPXX01=S.SPXX01
+	     AND A.PDJH01 = P.PDJH01
+        <if test="JHDH01 != null and JHDH01 != ''"> AND P.JLWBDH = #{JHDH01} </if>
+	    <if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01 = #{GSXX01} </if> 
+	   	<if test="CK01 != null and CK01 !=''">
+		<foreach item="item" index="index" collection="CK01" open=" AND ("
+			separator=" or " close=")">
+			A.CK01 LIKE '%'||#{item}||'%'
+		</foreach>
+	</if>
+	     <if test="BM01 != null and BM01 != ''"> AND A.BM01 = #{BM01}</if>
+        <if test="PXGZ != null and PXGZ != ''"> 
+	       <if test="PXGZ == 0">        
+	       		ORDER BY A.SPXX01
+	       </if>
+	       <if test="PXGZ ==1">        
+	       		ORDER BY S.SPXX61
+	       </if>
+	       <if test="PXGZ == 2">        
+	       		ORDER BY D.CKHJ01
+	       </if>
+	       <if test="PXGZ ==3">        
+	       		ORDER BY S.PPB01
+	       </if>
+	       <if test="PXGZ ==4">        
+	       		ORDER BY S.SPFL01
+	       </if>
+	       <if test="PXGZ ==5">        
+	       		ORDER BY A.CK01
+	       </if>
+        </if>
+	</select>	
+</mapper>

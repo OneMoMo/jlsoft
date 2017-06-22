@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPBGMXZ">
+	<select id="querySPBGZ" parameterType="Map" resultType="java.util.Map">
+	    SELECT CKSP.BM01 BMBM, 
+		       CKSP.CK01 CKBM, 
+		       BM.BM02 BMMC, 
+		       CK.CK02 CKMC, 
+		       SPXX.SPXX01 SPNM, 
+		       SPXX.SPXX02 SPBM,
+		       SPXX.SPXX61, 
+		       SPXX.SPXX04 SPMC, 
+		       SPFL.SPFL01 FLBM, 
+		       SPFL.SPFL02 FLMC, 
+		       SPXX.PPB01 PPBM, 
+		       SPXX.PPB02 PPMC, 
+		       CKSP.CKSP02 SJZ, 
+		       CKSP.CKSP03 BGS, 
+		       CKSP.CKSP04 KMS, 
+		       CKSP.CKSP10 YFZ, 
+		       CKSP.CKSP12,
+		       get_spsx_v10(CKSP.CKSP12) SPSX, 
+		       CKSP.WLDW01 GYSBM, 
+		       WLDW.WLDW02 GYSMC 
+		  FROM CKSP, SPXX, BM, CK, WLDW, SPJGB, SPFL, SPDW, SCCJ 
+		 WHERE CKSP.SPXX01 = SPXX.SPXX01 
+		   AND CKSP.BM01 = BM.BM01 
+		   AND CKSP.CK01 = CK.CK01(+) 
+		   AND CKSP.WLDW01 = WLDW.WLDW01
+		   AND CKSP.BM01 = SPJGB.BM01(+) 
+		   AND CKSP.WLDW01 = SPJGB.WLDW01(+) 
+		   AND CKSP.SPXX01 = SPJGB.SPXX01(+) 
+		   AND SPFL.SPFL01 = SUBSTR(SPXX.SPFL01, 1, 12) 
+		   AND CKSP.SPXX01 = SPDW.SPXX01(+) 
+		   And SPDW.ISSHOW(+) = 1 
+		   AND SPXX.SCCJ01 = SCCJ.SCCJ01(+) 
+		   <if test="SP != null and SP != ''">
+		       <foreach item="item" index="index" collection="SP"  open=" AND (" separator=" or " close=")"> 
+		           Upper(SPXX.SPXX02) LIKE Upper('%'|| #{item} ||'%') OR Upper(SPXX.SPXX04) LIKE Upper('%'||#{item}||'%') OR Upper(SPXX.SPPYM) LIKE Upper('%'||#{item}||'%') OR Upper(SPXX.SPXX61) LIKE Upper('%'||#{item}||'%') 
+		       </foreach> 
+	 	   </if>
+		   
+		   <if test="WLDW != null and WLDW != ''">
+		       <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 		      
+		           WLDW.WLDW02 LIKE '%'||#{item}||'%' OR WLDW.WLDW01 LIKE '%'||#{item}||'%' OR WLDW.WLDW03 LIKE '%'||#{item}||'%'
+		       </foreach> 
+		   </if>
+		   <if test="CK != null and CK != ''">
+		       <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		           CKSP.CK01 = #{item}
+		       </foreach>
+		   </if>
+		   <if test="CGBM != null and CGBM != ''">
+		       <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+			       CKSP.BM01 = #{item}
+			   </foreach> 	         
+		   </if>
+		   <if test="PP01 != null and PP01 != ''">
+	           <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+	               SPXX.PPB01 = #{item}
+	           </foreach>
+	       </if>
+	       <if test="SPFL != null and SPFL != ''">
+	           <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	               SPXX.SPFL01 LIKE #{item}||'%'
+	           </foreach>
+	       </if>
+	       JL{CZY|CK.CK01|CK_CZ|LIKE%}JL
+	       JL{CZY|WLDW.WLDW01|WLDW_CZ|inS}JL
+       	   JL{CZY|BM.BM01|BM_CZ|LIKE%}JL
+       	   JL{CZY|CKSP.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	
+	<select id="querySPBGMXZ" parameterType="Map" resultType="java.util.Map">
+		SELECT (SELECT CK02 FROM CK WHERE CK01 = CKSPKPZ.CK01) CKMC, 
+		       TO_CHAR(CKSPKPZ.CKSPK01, 'yyyy-mm-dd HH24:mi:ss') RQ, 
+		       GET_DJLX(CKSPKPZ.CKSPK02) DJLX,
+		       CKSPK03,
+		       <!-- GET_JLWBDH(CKSPKPZ.CKSPK02,CKSPKPZ.CKSPK03,CKSPKPZ.GSXX01) DJHM, -->
+			  <![CDATA[     (case
+		         when CKSPKPZ.CKSPK02 = 51 then
+		          (case
+		            when CKSPKPZ.CKSPK04 < 0 then
+		             GET_JLWBDH(CKSPKPZ.CKSPK02, CKSPKPZ.CKSPK03, CKSPKPZ.GSXX01)
+		            else
+		             (select J.JLWBDH
+		                from JHDITEM J
+		               where J.gsxx01 = CKSPKPZ.GSXX01
+		                 AND J.JHD01 = CKSPKPZ.CKSPK03
+		                 AND J.BM01 = CKSPKPZ.BM01
+		                 AND J.WLDW01 = CKSPKPZ.WLDW01
+		                 AND ROWNUM = 1)
+		          end)
+		          when CKSPKPZ.CKSPK02 = 4 then
+          		(select S.JLWBDH
+              from SYDJ S
+             where S.SYD01 = (select sydj01 from syd where syd01=CKSPKPZ.CKSPK03 and gsxx01= CKSPKPZ.GSXX01 )
+               AND S.GSXX01 = CKSPKPZ.GSXX01)
+		         else
+		          GET_JLWBDH(CKSPKPZ.CKSPK02, CKSPKPZ.CKSPK03, CKSPKPZ.GSXX01)
+		       end) DJHM,]]>
+		       CKSPKPZ.CKSPK04 BQFSSL, 
+		       CKSPKPZ.CKSPK05 BKJCSL, 
+		       CKSPKPZ.CKSPK06 BMJCSL, 
+		       CKSPKPZ.CKSPK07 BZ, 
+		       CKSPKPZ.GSXX01, 
+		       (CASE 
+		         WHEN CKSPKPZ.CKSPK02 = 10 THEN 
+		          (SELECT LSD34 
+		             FROM LSD A, LSDITEM B 
+		            WHERE A.LSD01 = B.LSD01 
+		              AND A.GSXX01 = B.GSXX01 
+		              AND B.LSDI01 = CKSPKPZ.CKSPK03 
+		              AND B.GSXX01 = CKSPKPZ.GSXX01) 
+		       END) FPH 
+		  FROM CKSPKPZ, BM 
+		 WHERE 1 = 1 
+		   AND CKSPKPZ.BM01 = BM.BM01 
+		   AND CKSPKPZ.CKSPK08 = #{CKSP12}
+		   <if test="SPNM != null and SPNM != ''">AND CKSPKPZ.SPXX01 = #{SPNM}</if>
+		   <if test="GYSBM != null and GYSBM != ''">AND CKSPKPZ.WLDW01 = #{GYSBM}</if>
+		   <if test="BMBM != null and BMBM != ''">AND CKSPKPZ.BM01 = #{BMBM}</if>
+		   <if test="CKBM != null and CKBM != ''">AND CKSPKPZ.CK01 = #{CKBM}</if>
+		   <if test="DJLX != null and DJLX != ''">AND CKSPKPZ.CKSPK02 = #{DJLX}</if>
+		   <if test="RQ_S != null and RQ_S != ''">AND CKSPKPZ.CKSPK01 &gt;= TO_DATE(#{RQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+		   <if test="RQ_E != null and RQ_E != ''">AND CKSPKPZ.CKSPK01 &lt;= TO_DATE(#{RQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+		 ORDER BY RQ ASC
+	</select>
+</mapper>

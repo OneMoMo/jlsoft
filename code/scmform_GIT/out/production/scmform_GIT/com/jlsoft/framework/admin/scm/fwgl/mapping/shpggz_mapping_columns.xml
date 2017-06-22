@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fwgl.shpggz">
+	<FIELD attrname="SHWDMC" fieldtype="string" allownull="N" name="送货网点" />
+	<FIELD attrname="XZDQ" fieldtype="string" allownull="N" name="选择地区" />
+	
+	</JLConfig>	 
+</root>

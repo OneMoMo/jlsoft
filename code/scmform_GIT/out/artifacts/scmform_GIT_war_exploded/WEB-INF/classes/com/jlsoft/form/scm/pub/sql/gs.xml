@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GS">
+	<select id="JTXX" parameterType="Map" resultType="java.util.Map">
+			 SELECT GSXX01 KEY,GSXX02 VALUE
+			   FROM GSXX
+			  WHERE  GS_GSXX01 = GSXX01
+	</select>
+	<!-- <select id="GSXX" parameterType="Map" resultType="java.util.Map">
+			 SELECT B.GSXX01, B.GSXX02, B.GSXX03, B.GSXX07, A.BM01 
+			   FROM RYXX A,GSXX B 
+			  WHERE A.GSXX01=B.GSXX01 
+			 <if test="RYXX01!=null and RYXX01!=''">
+			 	AND A.RYXX01=#{RYXX01}
+			 </if>
+	</select> -->
+	
+	<select id="GSXX" parameterType="Map" resultType="java.util.Map">
+			 SELECT A.GSXX01, A.GSXX02
+			   FROM GSXX A
+			  WHERE 1=1
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	
+	<select id="GJ" parameterType="java.util.Map" resultType="java.util.Map">
+	     SELECT A.NRBM,A.NRMS FROM ZDYITEM A
+	      WHERE A.ID='00011'
+	    <if test="COUNTRYMC!=null and COUNTRYMC!=''"> 
+			AND (A.NRBM LIKE '%'||#{COUNTRYMC}||'%' OR A.NRMS LIKE '%'||#{COUNTRYMC}||'%')
+		</if> 
+    </select>
+	
+	<select id="GYSTYKM" parameterType="java.util.Map" resultType="java.util.Map">
+	     SELECT A.NRBM,A.NRMS FROM ZDYITEM A
+	      WHERE A.ID='00002' AND A.SJNRBM = 'K'
+	      <if test="TYKMMC!=null and TYKMMC!=''"> 
+			AND (A.NRBM LIKE '%'||#{TYKMMC}||'%' OR A.NRMS LIKE '%'||#{TYKMMC}||'%')
+		</if>
+    </select>
+
+    <select id="KHTYKM" parameterType="java.util.Map" resultType="java.util.Map">
+	     SELECT A.NRBM,A.NRMS FROM ZDYITEM A
+	      WHERE A.ID='00002' AND A.SJNRBM = 'D'
+	      <if test="TYKMMC!=null and TYKMMC!=''"> 
+			AND (A.NRBM LIKE '%'||#{TYKMMC}||'%' OR A.NRMS LIKE '%'||#{TYKMMC}||'%')
+		</if>
+    </select>
+    
+    <select id="PXDM" parameterType="java.util.Map" resultType="java.util.Map">
+	     SELECT A.NRBM ,A.NRMS  FROM ZDYITEM A
+	      WHERE A.ID='00010'
+	      <if test="PXDMMC!=null and PXDMMC!=''"> 
+			AND (A.NRBM LIKE '%'||#{PXDMMC}||'%' OR A.NRMS LIKE '%'||#{PXDMMC}||'%')
+		</if>
+    </select>
+    
+	<!-- 查询该公司币种 -->
+	<select id="GSBZ" parameterType="Map" resultType="java.util.Map"> 
+			 SELECT B.GSXX01, B.GSXX02, B.BBBZ01,
+			        (SELECT WBBZ02 FROM BZ WHERE WBBZ01=B.BBBZ01 AND GSXX01 = B.GSXX01) BBBZ02
+			   FROM GSXX B 
+			  WHERE 1=1 
+			 <if test="GSXX01!=null and GSXX01!=''">
+			  	AND B.GSXX01=#{GSXX01}
+			 </if>
+	</select>
+	<!-- 查询要货分公司 -->
+	<select id="YHFGS" parameterType="Map" resultType="java.util.Map">
+		SELECT SHGS01  GSXX01,(SELECT CK02 FROM CK WHERE A.FHCK01 = CK01) PSCK, (SELECT GSXX02 FROM GSXX ,DBHT WHERE GSXX01= DBHT.SHGS01 and rownum=1) GSMC,
+		       SHCK01 CK01,CK02,FHGS01,(SELECT GSXX02 FROM GSXX,DBHT WHERE GSXX01=DBHT.FHGS01 and rownum=1 ) ZGSMC , A.FHCK01,
+		       A.GHHT24 HZFS01  ,A.GHHT01  GHHT01 , A.SHCGBM01  YHBM01 
+		  FROM DBHT A,CK C 
+		 WHERE C.CK01=A.SHCK01 
+		<!-- <if test="GSXX01!=null and GSXX01!=''">
+			AND B.GSXX01=#{GSXX01}
+		</if> -->
+		JL{CZY|A.SHCGBM01|BM_CX|LIKE%}JL
+		JL{CZY|C.CK01|CK_CX|LIKE%}JL
+		JL{CZY|C.GSXX01|CZGS_CX|LIKE%}JL
+	</select>
+	
+	<!-- 129参数自动生成排款标记 -->
+	<select id="PKBJ" parameterType="Map" resultType="java.util.Map">
+		SELECT JLCO04
+			  FROM JLCONF
+			 WHERE JLCO10 = 0
+			   AND JLCO01 = '129'
+			UNION ALL
+			SELECT B.JLCO04
+			  FROM JLCONF A, JLCONF_GSXX B
+			 WHERE A.JLCO10 = 1
+			   AND A.JLCO01 = B.JLCO01
+			 <if test="GSXX01!=null and GSXX01!=''">
+			   AND GSXX01 = #{GSXX01}
+			   </if>
+			   AND A.JLCO01 = '129'
+	</select>
+</mapper>

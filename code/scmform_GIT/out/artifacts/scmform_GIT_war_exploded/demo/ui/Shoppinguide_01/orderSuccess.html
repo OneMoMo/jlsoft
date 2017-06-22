@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>生成订单</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header class="hide">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<h2>送货安装</h2>
+</div>
+</header>
+
+<div class="main">
+  <div class="orderSuccess">
+    <i class="fa fa-check-circle"></i>
+    <div class="w12 mt10">生成导购单成功</div>
+    <div class="w12 mt30 tl pl50">单号：4209212364412</div>
+    <div class="w12 mt10 tl pl50">客户：张三</div>
+    <div class="w12 mt10 tl pl50">手机：18571137522</div>
+    <div class="w12 mt10 tl pl50">时间：2016-10-24 10:44</div>
+    <div class="w12 mt50 jl_btn btn_color_or radius3">查看详情</div>
+    <div class="w12 mt20 jl_btn btn_color radius5 onClick="window.location.href='index.html'"">返回首页</div>
+  </div>
+</div>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

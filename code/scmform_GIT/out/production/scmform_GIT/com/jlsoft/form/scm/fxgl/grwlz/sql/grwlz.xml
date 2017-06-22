@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GRWLZ">
+	<select id="querySPHZLB" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT C.JLWBDH,A.LSD01 DJHM,A.BM01,B.BM02 BMMC,A.RYXX01 DBR_RYXX01,A.RYXX02 DBRMC,DECODE(A.LSWL00, 5, '上门收款', 6, '赊款购物', 7, '预收款') DJLX,A.LSWL00 DJLX01,
+       	   A.LSWL01 YSJE,C.LSD04 KHMC,A.LSWL02 SYJE,(A.LSWL01 + A.LSWL02) YSYE,TO_CHAR(A.LSWL03,'YYYY-MM-DD') FSRQ,A.LSWL04 SKY,A.LSWL05 YYY, 
+       	   TO_CHAR(A.LSWL07,'YYYY-MM-DD') DZRQ,(CASE (LSWL01 + LSWL02) WHEN 0 THEN 0 ELSE ROUND((GET_DATE - A.LSWL03), 0) END) ZL,C.LSD10 XSJE, 
+       	   CASE WHEN C.LSD10 = 0 THEN 0 ELSE ((A.LSWL01 + A.LSWL02) / C.LSD10 * 100) END SKZB,C.GSXX01
+  	  FROM LSWL A, BM B, LSD C, LSKHXX D 
+ 	 WHERE A.BM01 = B.BM01 
+   	   AND A.LSD01 = C.LSD01 
+   	   AND A.GSXX01 = C.GSXX01 
+   	   AND C.GSXX01 = D.GSXX01(+) 
+   	   AND C.LSD01 = D.LSD01(+) 
+   	   <![CDATA[
+   	   AND ((LSWL00 IN (4,5, 6)) OR (LSWL00 IN (0,7) AND LSWL01 < 0))
+   	   ]]>
+   	<if test="DJZT == 1">
+   	<![CDATA[
+	   AND (A.LSWL01 + A.LSWL02) <> 0
+	]]>
+	</if>
+   	<if test="GSXX01 != null and GSXX01 != ''">
+	   AND C.GSXX01 = #{GSXX01}
+	</if>
+	<if test="JLWBDH != null and JLWBDH != ''">
+	   AND C.JLWBDH = #{JLWBDH}
+	</if>
+	<if test="DJLX != null and DJLX != ''">
+	   AND A.LSWL00 = #{DJLX}
+	</if>
+	<if test="YYY != null and YYY != ''">
+	   AND (A.LSWL05 LIKE '%'||#{YYY}||'%' OR C.LSD08 LIKE '%'||#{YYY}||'%')
+	</if>
+	<if test="SKY != null and SKY != ''">
+	   AND (A.LSWL04 LIKE '%'||#{SKY}||'%' OR C.LSD09 LIKE '%'||#{SKY}||'%')
+	</if>
+	<if test="DBR != null and DBR != ''">
+	   AND (A.RYXX01 LIKE '%'||#{DBR}||'%' OR A.RYXX02 LIKE '%'||#{DBR}||'%')
+	</if>
+	<if test="KHMC != null and KHMC != ''">
+	   AND C.LSD04 LIKE '%'||#{KHMC}||'%'
+	</if>
+	
+	<if test="RQ_Q != null and RQ_Q != ''">
+	   AND A.LSWL03 >= TO_DATE(#{RQ_Q},'YYYY-MM-DD')
+	</if>
+	<if test="RQ_Z != null and RQ_Z != ''">
+	<![CDATA[
+	   AND A.LSWL03 <= TO_DATE(#{RQ_Z},'YYYY-MM-DD')
+	]]>
+	</if>
+	<if test="XSBM != null and XSBM != ''">
+      <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+       A.BM01 = #{item}
+      </foreach>
+	</if>
+	 JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+	 JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	
+	
+	</select>
+	<select id="querySPMXLB" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT (select jlwbdh from lsd where lsd01=l.lswli01 and gsxx01=l.gsxx01)JLWBDH
+	     ,TO_CHAR(L.LSWLI03,'YYYY-MM-DD') RQ,
+	      (case when L.LSWLI04=0 AND LSD12>0 THEN '订金转销售'
+       when L.LSWLI04=0 AND LSD12=0 THEN '赊款销售' else
+       DECODE(L.LSWLI04 ,
+              1,
+              'POS销售',
+              2,
+              '退货冲红',
+              3,
+              '收付款',
+              4,
+              '定金',
+              5,
+              '收余款',
+              6,
+              '订金',
+              7,
+              '冲预收',
+              8,
+              'WEB销售',
+              9,
+              '会员卡充值') end)DJLX,
+	     L.LSWLI02 SKJE,L.LSWLI07 BZ,c.LSD09 SKRDM,c.LSD17 SKRMC 
+  	  FROM LSWL A, BM B, LSD C, LSKHXX D, LSWLITEM L, SKFS S 
+ 	 WHERE A.BM01 = B.BM01 
+   	   AND A.LSD01 = C.LSD01
+   	   AND A.GSXX01 = C.GSXX01
+   	   AND C.GSXX01 = D.GSXX01(+)
+   	   AND C.LSD01 = D.LSD01(+)
+   	   AND ((s.skfs06 = a.lswl00) or (a.lswl00 IN (0,7)))
+   	   AND C.LSD01 = L.LSD01
+   	   AND C.GSXX01 = L.GSXX01
+   	   AND L.SKFS01 = S.SKFS01
+   	   AND S.SKFS06 In (4,5, 6, 16, 17)
+   	<if test="GSXX01 != null and GSXX01 != ''">
+	   AND C.GSXX01 = #{GSXX01}
+	</if>
+	<if test="DJLX01 != null and DJLX01 != ''">
+	   AND A.LSWL00 = #{DJLX01}
+	</if> 
+	<if test="DJHM != null and DJHM != ''">
+	   AND C.LSD01 = #{DJHM}
+	</if>
+	</select>
+
+</mapper>

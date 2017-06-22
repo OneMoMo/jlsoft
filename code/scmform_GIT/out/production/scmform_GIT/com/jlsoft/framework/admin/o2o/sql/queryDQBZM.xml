@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DQBZM">
+
+  <select id="selectDQXX" parameterType="Map" resultType="java.util.Map">
+		SELECT DQBZM01 ,DQBZM02  FROM DQBZM where DQBZM03 &lt;&gt;4 
+		<if test="DQBZM01 !=null and DQBZM01 !=''" >
+			AND DQBZM01=#{DQBZM01}
+		</if>
+		<if test="DQBZM02 !=null and  DQBZM02 !=''">
+			AND DQBZM02 LIKE '%'||#{DQBZM02}||'%'
+		</if>
+		order by DQBZM01 ASC
+  </select>
+  	 <!-- 查询抄送人员 -->
+ 	<select id="queryKTRY" parameterType="Map" resultType="java.util.Map">
+	SELECT A.CZY01 KEY,A.CZY03 VALUE
+         FROM W_CZY A
+        WHERE A.CZY07 = 0
+        <if test="CZY03 != null">
+          AND A.CZY03 = #{CZY03}
+        </if>
+ 	</select>
+</mapper>

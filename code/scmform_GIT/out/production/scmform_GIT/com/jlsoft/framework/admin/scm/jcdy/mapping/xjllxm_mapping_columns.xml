@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.scm.jcdy.xjllxm">   
+		<FIELD attrname="XJLLXM01" fieldtype="string" allownull="Y" name="项目代码" />      
+	</JLConfig>
+</root>

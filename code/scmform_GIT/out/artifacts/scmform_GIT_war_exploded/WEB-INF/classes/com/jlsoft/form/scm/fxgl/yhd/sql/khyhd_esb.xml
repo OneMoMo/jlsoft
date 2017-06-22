@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="jl.scm.fxgl.yhd.GetSPJG_KHYHD.getSPJG" description="金力要货单商品查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fxgl.yhd.getspjg_khyhd" method="getSPJG"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

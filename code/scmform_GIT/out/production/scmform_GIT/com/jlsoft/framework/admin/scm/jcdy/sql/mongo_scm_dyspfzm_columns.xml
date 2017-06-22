@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_DYSPFZM.SCM_DYSPFZM">
+        <FIELD attrname="query" format='{"$or":[{"SPBM":{"$regex":"#query#"}},{"SPMC":{"$regex":"#query#"}},{"SPFZM":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="品牌信息" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+	<JLConfig id="MONGO_DYSPFZM.SCM_SPXX">
+		<FIELD attrname="query" format='{"$or":[{"SPBM":{"$regex":"#query#","$options":"i"}},{"SPMC":{"$regex":"#query#","$options":"i"}}]}' fieldtype="String" allownull="Y" name="商品编码" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>

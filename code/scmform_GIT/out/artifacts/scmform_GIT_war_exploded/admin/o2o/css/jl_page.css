@@ -1,0 +1,44 @@
+.jl_page{ position:relative;}
+ul.list_nav{ background-color:#f1f1f1; border-right:1px solid #e1e1e1; position:relative; padding:10px 0; height:800px;}
+ul.list_nav li{ line-height:35px; border-top:1px solid #f1f1f1; border-bottom:1px solid #f1f1f1; padding-right:20px; text-align:right;}
+ul.list_nav li:hover{ background-color:#fff; cursor:pointer;}
+ul.list_nav li.xuan{ background-color:#fff; margin-left:1px; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1;}
+
+/***
+发布商品
+***/
+.jl_fbsp{ height:350px; overflow-y:auto; max-height:350px;}
+.xzfl_jt{ height:300px; line-height:300px; text-align:center; font-size:30px; color:#e1e1e1;}
+.dataexchange_main > ul.jl_fbsp > li > span{ line-height:30px; font-size:16px;}
+.fljg{ height:50px; line-height:50px; font-size:16px; color:#999;}
+.fljg span{ color:#3896d4;}
+.fljg i{ margin:0 20px; color:#ccc;}
+dd ul.jl_color{ padding:10px; border:1px solid #e1e1e1; background-color:#f9f9f9;}
+dd ul.jl_color li{ line-height:30px;}
+dd ul.jl_color li i{ float:left; margin-top:7px;}
+dd ul.jl_color li em{ float:left; width:20px; height:15px; margin:7px 5px 7px 0; border:1px solid #e1e1e1;}
+dd ul.jl_color li em.color_01{ background-color:#fff;}
+dd ul.jl_color li em.color_02{ background-color:red;}
+dd ul.jl_color li em.color_03{ background-color:#ffff00;}
+dd ul.jl_color li em.color_04{ background-color:#000;}
+dd ul.jl_color li em.color_05{ background-color:#009900;}
+dd ul.jl_color li em.color_06{ background-color:#0099ff;}
+dd ul.jl_color li em.color_07{ background-color:#aaa;}
+dd ul.jl_color li em.color_08{ background-color:#330000;}
+dd ul.jl_color li em.color_09{ background-color:#000099;}
+dd ul.jl_color li em.color_10{ background-color:#ff0066;}
+
+table.one{ margin-bottom:20px; border:#eee 1px solid;}
+.table_main{ max-width:82.54%; overflow-x:auto;}
+table,tr,td,th{border-collapse:collapse;}
+td{ border:#eee 1px solid; min-width:113px; min-height:40px; height:40px; color:#666; text-align:center;}
+th{ min-width:113px; min-height:40px; height:40px; background:#f1f1f1; border:1px solid #f1f1f1;}
+table tr td input{ border:1px solid #ddd; line-height:25px; margin:5%;}
+table tr td input.normal{ width:90%;}
+table tr td a.sc{ color:#3896d4; width:42px; line-height:40px;}
+table tr td i{ width:25px; line-height:40px; text-align:center;}
+.jl_right{ margin-right:10px;}
+dd.spjs span{ width:100px; text-align:center; padding:10px 20px; border:#f5f5f5 solid 1px; border-bottom:0; background:#fff; cursor:pointer;}
+dd.spjs span.xuan{ background:#f1f1f1;}
+.jl_cha{ height:200px; border:1px solid #eee;}
+.jl_cha .jl_sjd{ display:none;}

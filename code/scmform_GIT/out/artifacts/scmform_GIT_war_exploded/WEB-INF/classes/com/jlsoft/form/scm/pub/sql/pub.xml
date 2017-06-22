@@ -1,0 +1,884 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PUBCX">
+	<select id="JYFW" parameterType="Map" resultType="java.util.Map">
+		SELECT A.SPFL01 key, A.SPFL02 value
+		FROM SPFL A
+	</select>
+	<!-- 收款方式 -->
+	<select id="SKFS" parameterType="Map" resultType="java.util.Map">
+		SELECT distinct A.SKFS01 key, A.SKFS02 value
+		FROM SKFS A
+		WHERE 1=1
+		<if test="SKFS != null">
+		     <foreach collection="SKFS" index="index" item="SKFS06" open="AND ( " separator="or" close=")">
+		    		  A.SKFS06 = #{SKFS06}
+			 </foreach> 
+   		</if> 
+		JL{CZY|A.SKFS01|SKFS_CZ|LIKE%}JL 
+	</select>
+	<!-- 商品三级明细中的单据类型 -->
+	<select id="DJLX" parameterType="Map" resultType="java.util.Map">
+		SELECT distinct A.BMSPK02 key, GET_djlx(A.BMSPK02) value
+		FROM BMSPKPZ A
+		
+
+	</select>
+	<!-- 收款方式 ___操作员收款方式权限控制，且为零售可用的 -->
+	<select id="SKFSLS" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT distinct A.SKFS01 key, A.SKFS02 value
+		FROM SKFS A, QXSKFSITEM B, CZY C
+		WHERE A.SKFS03 = 1
+		AND B.QXSKFS01 = C.CZY05
+		AND A.SKFS01 = B.SKFS01
+		AND A.SKFS06 NOT IN (4,16,19)
+		<if test="CZY02 != null and CZY02 != ''">
+			AND C.CZY01 = #{CZY02}
+		</if>
+
+		AND A.SKFS07 = 1
+		<!-- <if test="SPTH != null and SPTH != ''"> AND A.SKFS01 NOT IN ('04','05','06') 
+			商品退货 退款方式 </if> -->
+	</select>
+	<!-- 销售方式 -->
+	<select id="XSFS" parameterType="Map" resultType="java.util.Map">
+		SELECT B.FLFS01 key, B.FLFS02 value
+		FROM QXXSFSITEM A, FLFS B
+		WHERE A.FLFS01 = B.FLFS01
+	</select>
+	<!-- 销售方式   过滤销售内定 零售销售 零售内定-->
+	<select id="XSFSA" parameterType="Map" resultType="java.util.Map">
+		SELECT  B.FLFS01 key, B.FLFS02 value FROM FLFS B WHERE B.FLFS04 NOT IN (1, 2, 3)
+	</select>
+
+	<select id="XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01 key, A.BM02 value
+		FROM BM A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.BM06 = 3
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<!-- 工程要货单销售部门的下拉控件 -->
+	<select id="GCYHD_XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM02 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1 
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>
+		JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 AND BM06 = 3
+            JL{CZY|BM01|BM_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select> 
+	<!-- 下拉树销售部门-->
+	<select id="TREE_XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM01 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1 	
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>	
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 AND BM06 = 3
+           <if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		   </if>
+            JL{CZY|BM01|BM_CZ|LIKE%}JL
+            JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select> 
+	<!-- 下拉树销售部门(适用于分销价格文件单据查询销售部门)-->
+	<select id="TREE_FXSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM01 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1 	
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>	
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 AND BM06 = 3
+           <if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		   </if>
+		    <if test="BM01 != null and BM01 != ''">
+			AND BM01 LIKE #{BM01}||'%'
+		   </if>
+		   JL{CZY|BM01|BM_CZ|LIKE%}JL
+		   JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select>
+	<!-- 下拉树销售部门 带权限-->
+	<select id="TREE_XSBMQX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM01 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1 	
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>	
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 AND BM06 = 3
+             <if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		   </if>
+            JL{CZY|BM01|BM_CZ|LIKE%}JL
+            JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select> 
+	<!-- 查询所有部门（不分销售，采购） -->
+		<select id="SYBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01 key, A.BM02 value
+		FROM BM A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<select id="TREE_SYBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM01 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1		
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>	
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 
+            <if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		    </if>
+            JL{CZY|BM01|BM_CX|LIKE%}JL
+            JL{CZY|GSXX01|CZGS_CX|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select>
+	<!-- 查找在职的收款人员 -->
+	<select id="SKRY" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT R.RYXX01 key, R.RYXX02 value
+		FROM RYXX R, BM B, GSXX G
+		WHERE R.BM01 = B.BM01
+		AND R.RYXX03 = 0
+		AND INSTR(R.RYXX08, 4) > 0
+		AND R.GSXX01 = G.GSXX01
+		JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<select id="PP" parameterType="Map" resultType="java.util.Map">
+		SELECT A.PPB01 key, A.PPB02 value
+		FROM PPB A
+		WHERE 1=1
+	</select>
+   <select id="FXD_PP" parameterType="Map" resultType="java.util.Map">
+		SELECT A.PPB01 key, A.PPB02 value
+		FROM PPB A
+		WHERE 1=1
+		JL{CZY|A.PPB01|PPB_CX|LIKE%}JL
+	</select>
+	<select id="SPFL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.SPFL01 key, A.SPFL02 value
+		FROM SPFL A
+		WHERE A.DLBJ = 1
+	</select>
+
+	<select id="SPFL_DL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.SPFL01 key, A.SPFL02 value
+		FROM SPFL A
+		WHERE DLBJ = 1
+	</select>
+	
+	<!-- 下拉树商品分类-->
+	<select id="TREE_SPFL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT SPFL01 KEY, SPFL02 VALUE, SPFL04 MJBJ, SPFL03 JB, SPF_SPFL01 PARENT
+		FROM SPFL
+		WHERE 1 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="JB != null and JB != ''">
+			AND SPFL03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND SPFL01 LIKE #{PARENT}||'%' AND SPFL01 != #{PARENT}
+		</if>
+		<if test="PARENT == null or PARENT == ''">
+			AND SPFL03 = 1
+		</if>
+		JL{CZY|SPFL01|SPFL_CX|LIKE%}JL
+		JL{CZY|PPB01||PPB_CX|LIKE%}JL
+		ORDER BY SPFL03
+	</select>
+<!-- 下拉树商品分类(查询分销单)-->
+	<select id="TREEFXD_SPFL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT SPFL01 KEY, SPFL02 VALUE, SPFL04 MJBJ, SPFL03 JB, SPF_SPFL01 PARENT
+		FROM SPFL
+		WHERE 1 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="JB != null and JB != ''">
+			AND SPFL03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND SPFL01 LIKE #{PARENT}||'%' AND SPFL01 != #{PARENT}
+		</if>
+		JL{CZY|SPFL01|SPFL_CX|LIKE%}JL
+		ORDER BY SPFL03
+	</select>
+	<select id="CK" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.CK01 key, A.CK02 value
+		FROM CK A, GSXX B
+		WHERE A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="CK06 != null and CK06 != ''">
+			AND A.CK06 = #{CK06}
+		</if>
+		JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<select id="CX_XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01 key, A.BM02 value
+		FROM BM A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.BM06 = 3
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.BM01|BM_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<select id="CGBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01 key, A.BM02 value
+		FROM BM A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.BM06 = 2
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.BM01|BM_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<!-- 操作员查询权限CGBM -->
+	<select id="CX_CGBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01 key, A.BM02 value
+		FROM BM A, GSXX B
+		WHERE A.BM04 = 1
+		AND A.BM06 = 2
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.BM01|BM_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<!-- 操作员查询权限CK -->
+	<select id="CX_CK" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.CK01 key, A.CK02 value
+		FROM CK A, GSXX B
+		WHERE A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="CK06 != null and CK06 != ''">
+			AND A.CK06 = #{CK06}
+		</if>
+		JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<!-- 下拉树仓库-->
+	<select id="TREE_CK" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT CK01 KEY, CK02 VALUE, CK04 MJBJ, CK03-1 JB, CK_CK01 PARENT
+		FROM CK
+		WHERE 1=1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="JB != null and JB != ''">
+			AND CK03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND CK01 LIKE #{PARENT}||'%' AND CK01 != #{PARENT}
+		</if>
+		JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+		START WITH CK01 IN (
+			SELECT CK01
+            FROM CK
+            WHERE 1=1 
+            JL{CZY|CK01|CK_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR CK_CK01 = CK01
+		ORDER BY JB
+	</select>
+	<!-- 不显示厂家仓库下拉树仓库-->
+	<select id="NO_CK" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT CK01 KEY, CK02 VALUE, CK04 MJBJ, CK03-1 JB, CK_CK01 PARENT
+		FROM CK
+		WHERE CK06=0
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="JB != null and JB != ''">
+			AND CK03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND CK01 LIKE #{PARENT}||'%' AND CK01 != #{PARENT}
+		</if>
+		JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+		START WITH CK01 IN (
+			SELECT CK01
+            FROM CK
+            WHERE 1=1 
+            JL{CZY|CK01|CK_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR CK_CK01 = CK01
+		ORDER BY JB
+	</select>
+	<!-- 下拉树仓库（去掉厂家仓库）-->
+	<select id="TREE_CK_CJ" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT CK01 KEY, CK02 VALUE, CK04 MJBJ, CK03-1 JB, CK_CK01 PARENT
+		FROM CK
+		WHERE CK06=0
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="JB != null and JB != ''">
+			AND CK03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND CK01 LIKE #{PARENT}||'%' AND CK01 != #{PARENT}
+		</if>
+		JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+		START WITH CK01 IN (
+			SELECT CK01
+            FROM CK
+            WHERE CK06=0 
+            JL{CZY|CK01|CK_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR CK_CK01 = CK01
+		ORDER BY JB
+	</select>
+	
+	<select id="MJCK" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.CK01 key, A.CK02 value
+		FROM CK A, GSXX B
+		WHERE A.GSXX01 = B.GSXX01
+		AND A.CK04 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+	</select>
+	<!-- 仓库 -->
+	<select id="MJCK2" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.CK01 key, A.CK02 value
+		FROM CK A, GSXX B
+		WHERE A.GSXX01 = B.GSXX01
+		AND A.CK04 = 1
+		AND A.CK06=0
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+	</select>
+	
+	<select id="GC_XSBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BM01 key, A.BM02 value
+		FROM BM A, GSXX B
+		WHERE 1=1
+		AND A.GSXX01 = B.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<!-- 下拉树采购部门-->
+	<select id="TREE_CGBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM01 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>	
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 AND BM06 = 2
+            <if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		    </if>
+            JL{CZY|BM01|BM_CZ|LIKE%}JL
+            JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select>
+	<select id="TREE_CXCGBM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM01 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>		
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 AND BM06 = 2
+            <if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		    </if>
+            JL{CZY|BM01|BM_CX|LIKE%}JL
+            JL{CZY|GSXX01|CZGS_CX|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select>
+	<!-- 下拉树所有部门-->
+	<select id="TREE_BM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT BM01 KEY, BM02 VALUE, BM04 MJBJ, BM03-1 JB, BM_BM01 PARENT
+		FROM BM
+		WHERE 1=1
+		<if test="JB != null and JB != ''">
+			AND BM03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND BM01 LIKE #{PARENT}||'%' AND BM01 != #{PARENT}
+		</if>	
+		START WITH BM01 IN (
+			SELECT BM01
+            FROM BM
+            WHERE 1=1 
+            <if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		    </if>
+            JL{CZY|BM01|BM_CZ|LIKE%}JL
+            JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+        )
+		CONNECT BY NOCYCLE PRIOR BM_BM01 = BM01
+		ORDER BY JB
+	</select>
+	
+	<!-- 下拉树部门测试-->
+	<select id="TEST_BM" parameterType="java.util.Map" resultType="java.util.Map">
+	    <!-- 必须有以下5列并且是如下别名 -->
+		SELECT A.BM01 key, A.BM02 value, A.BM04 mjbj, A.BM03-2 jb, A.BM_BM01 parent
+		FROM BM A
+		WHERE A.GSXX01 = '0001'
+		<!-- 有效数据的级别必须从1开始 -->
+		<if test="JB != null and JB != ''">
+			AND A.BM03 = #{JB}+2
+		</if>
+		<!-- 必须有上级条件 -->
+		<if test="PARENT != null and PARENT != ''">
+			AND A.BM01 LIKE #{PARENT}||'%' AND A.BM01 != #{PARENT}
+		</if>
+		<!-- 必须按级别排序 -->
+		ORDER BY A.BM03
+	</select>
+	<!--下拉树部门  -->
+		<select id="TEST_SYBM" parameterType="java.util.Map" resultType="java.util.Map">
+	    <!-- 必须有以下5列并且是如下别名 -->
+		SELECT A.BM01 key, A.BM02 value, A.BM04 mjbj, A.BM03-2 jb, A.BM_BM01 parent
+		FROM BM A
+		WHERE 1=1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<!-- 有效数据的级别必须从1开始 -->
+		<if test="JB != null and JB != ''">
+			AND A.BM03 = #{JB}+2
+		</if>
+		<!-- 必须有上级条件 -->
+		<if test="PARENT != null and PARENT != ''">
+			AND A.BM01 LIKE #{PARENT}||'%' AND A.BM01 != #{PARENT}
+		</if>
+		<!-- 必须按级别排序 -->
+		ORDER BY A.BM03
+	</select>
+	
+	<!-- 查找在职的采购人员 -->
+	<select id="CGRY" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT R.RYXX01 key, R.RYXX02 value
+		FROM RYXX R, BM B, GSXX G
+		WHERE R.BM01 = B.BM01
+		AND R.RYXX03 = 0
+		AND INSTR(R.RYXX08, 2) > 0
+		AND R.GSXX01 = G.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND R.GSXX01 = #{GSXX01}
+		</if>
+		<if test="RYXX01 != null and RYXX01 != ''">
+			AND R.RYXX01 = #{RYXX01}
+		</if>
+		<if test="RYMC != null and RYMC != ''">
+			AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+		</if>
+		JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+
+	<!-- 查找全部客户（按可操作往来单位权限过滤） -->
+	<select id="KH_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT W.WLDW01 key, W.WLDW02 value
+		FROM WLDW W
+		WHERE W.WLDW20 = 1
+       <![CDATA[
+       AND WLDW01 <> '900001'
+       ]]>
+		JL{CZY|W.WLDW01|WLDW_CZ|inS}JL
+	</select>
+	<select id="GYS_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT W.WLDW01 key, W.WLDW02 value
+		FROM WLDW W
+		WHERE W.WLDW20 = 0
+       <![CDATA[
+       AND WLDW01 <> '900001'
+       ]]>
+		JL{CZY|W.WLDW01|WLDW_CZ|inS}JL
+	</select>
+     <select id="GYS_HT_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+		 SELECT  A.WLDW01 key, C.WLDW02 value
+      FROM GHHT A, WLDW C
+     WHERE A.WLDW01 = C.WLDW01
+       AND C.WLDW20 = 0
+       AND A.GHHT21 IS NULL
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<select id="XSWD_KEY" parameterType="Map" resultType="java.util.Map">
+		SELECT XSWD01 key,XSWD02 value FROM XSWD WHERE XSWD17 = 1
+	</select>
+
+	<select id="FLFSXX" parameterType="Map" resultType="java.util.Map">
+		SELECT B.FLFS01 key, B.FLFS02 value
+		FROM QXXSFSITEM A, FLFS B
+		WHERE A.FLFS01 = B.FLFS01
+		AND B.FLFS03 = 1
+		<if test="QXXSFS01 != null">
+			AND A.QXXSFS01 = #{QXXSFS01}
+		</if>
+		<if test="XSLX != null">
+			AND B.FLFS04 = #{XSLX}
+		</if>
+		<if test="XSLX_F != null">
+			AND B.FLFS04 not in (${XSLX_F})
+		</if>
+		<if test="RYQX != null">
+			AND A.QXXSFS01 IN
+			(SELECT R.RYXX09 FROM RYXX R WHERE R.RYXX01 = #{RYQX})
+		</if>
+		ORDER BY A.QXXSFSI01
+	</select>
+    <select id="FLDM" parameterType="Map" resultType="java.util.Map">
+			SELECT FLDM01 key,FLDM02 value 
+			  FROM FLDM 
+			 WHERE FLDM03=1 AND FLDM06=2 
+	</select>
+	<select id="XSRY" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT R.RYXX01 key, R.RYXX02 value
+		FROM RYXX R, BM B, GSXX G
+		WHERE R.BM01 = B.BM01
+		AND R.RYXX03 = 0
+       <![CDATA[
+       AND INSTR(R.RYXX08, 3) > 0
+       ]]>
+		AND R.GSXX01 = G.GSXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND R.GSXX01 = #{GSXX01}
+		</if>
+		<if test="RYXX01 != null and RYXX01 != ''">
+			AND R.RYXX01 = #{RYXX01}
+		</if>
+		<if test="RYMC != null and RYMC != ''">
+			AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+		</if>
+		<if test="XSLX_F != null">
+           <![CDATA[ AND exists(select 1 from QXXSFSITEM,FLFS where QXXSFS01=r.ryxx09 and QXXSFSITEM.FLFS01=FLFS.FLFS01 AND flfs04 not in ${XSLX_F})   ]]>
+		</if>
+		JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+		JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+	</select>
+	<!-- 查找行业信息 -->
+	<select id="HYXX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT HYXX01 key, HYXX02 value
+		FROM HYXX W
+		WHERE HYXX04=1
+	</select>
+	<!-- 查找客商类型 -->
+	<select id="KSLX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.KSLX01 key, A.KSLX02 value
+		FROM KSLX A
+		WHERE A.KSLX04=1 
+	</select>
+	
+	<!-- 查找会员类型 -->
+	<select id="HYLX" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT HYLX01 key, HYLXMC value
+		FROM VIP_HYLX
+		WHERE YXBJ=1
+	</select>
+	
+	<!-- 查找会员卡种类 -->
+	<select id="HYKZL" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT HYKZL01 key, ZLMC value
+		FROM VIP_HYKZL
+		WHERE YXBJ=1
+	</select>
+	
+	
+	<!-- 查找商品属性 -->
+	<select id="SPSX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT SPSX01 KEY,SPSXMC VALUE 
+		FROM SPSX 
+		WHERE YXBJ = 1
+	</select>
+	
+	<!-- 查找商品属性  有效无效的都显示-->
+	<select id="SPSX_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT SPSX01 KEY,SPSXMC VALUE 
+		FROM SPSX 
+	</select>
+	
+	<!-- 查找服务类型 -->
+	<select id="FWLX" parameterType="java.util.Map" resultType="java.util.Map">
+		select FWLX01 KEY, LXMC VALUE from css_fwlx
+		WHERE YXBJ = 1
+	</select>
+	<!-- 收入名称 -->
+	<select id="SRMC" parameterType="Map" resultType="java.util.Map">
+		SELECT distinct J.JSSR01 key, J.JSSR02 value
+		FROM JSSRDM J
+	</select>
+	<!-- 查询制单人 -->
+	 <select id="ZDR" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT DISTINCT R.RYXX01 BM, R.RYXX02 KEY, R.RYXX02 VALUE
+         FROM RYXX R, BM B, GSXX G
+     WHERE R.BM01 = B.BM01
+       AND R.GSXX01 = G.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND R.GSXX01 = #{GSXX01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+       AND R.RYXX01 = #{RYXX01}
+       </if>
+      <if test="RYMC != null and RYMC != ''">
+       AND (R.RYXX02 LIKE '%'||#{RYMC}||'%' OR R.RYXX01 LIKE '%'||#{RYMC}||'%')
+       </if>
+       JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+    <!-- 查找业务员-->
+    
+  <select id="YWY" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT RYXX02 KEY,RYXX02 VALUE
+  	 FROM RYXX 
+  	 WHERE INSTR(RYXX08,'3')>0 AND INSTR(RYXX03,'0')>0
+	    <if test="GSXX01 != null and GSXX01 != ''">
+	    	AND GSXX01 = #{GSXX01}
+	    </if>
+	    <if test="YWY != null and YWY != ''">
+       		AND (RYXX02 LIKE '%'||#{YWY}||'%' OR RYXX01 LIKE '%'||#{YWY}||'%')
+        </if>
+  </select>
+  
+  
+   <!-- 查找业务员（多选）加权限-->
+  <select id="YWY_QX" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT DISTINCT RYXX01 KEY,RYXX02 VALUE
+  	 FROM RYXX 
+  	 WHERE INSTR(RYXX08,'3')>0 AND INSTR(RYXX03,'0')>0
+	    <if test="GSXX01 != null and GSXX01 != ''">
+	    	AND GSXX01 = #{GSXX01}
+	    </if>
+	    <if test="YWY != null and YWY != ''">
+       		AND (RYXX02 LIKE '%'||#{YWY}||'%' OR RYXX01 LIKE '%'||#{YWY}||'%')
+        </if>
+        JL{CZY|R.BM01|BM_CZ|LIKE%}JL
+        JL{CZY|R.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+  
+    <!-- 查找公司-->
+  <select id="GSXX" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT GSXX01 key, GSXX02 value from GSXX where GSXX33 = 0
+  </select>
+  
+    <!-- 查找币种-->
+  <select id="BZ" parameterType="java.util.Map" resultType="java.util.Map">
+  select WBBZ01 key, WBBZ02 value from bz
+  </select>
+  <!-- 查询物流公司 -->
+  <select id="WLGS" parameterType="java.util.Map" resultType="java.util.Map">
+     select WLGS01 key, WLGS02 value from CSS_WLXX WHERE YXBJ = 0
+     JL{CZY|CSS_WLXX.FWWD01|PSWD_CZ|LIKE%}JL
+  </select>
+  <!-- 人员物流公司 -->
+  <select id="RYWLGS" parameterType="java.util.Map" resultType="java.util.Map">
+    <![CDATA[ SELECT FWRY01 key, FWRY02 value FROM css_FWRY  A WHERE WLGS = 1 AND RYZT = 0
+    JL{CZY|A.FWWD01|PSWD_CZ|LIKE%}JL ]]>
+        <!-- JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL -->
+  </select>
+  <!-- 查询 车辆信息-->
+   <select id="CLXX" parameterType="java.util.Map" resultType="java.util.Map">
+   select ZZTJ key, MC value from CSS_WLCLBZ
+   WHERE 1=1
+   <if test="WLGS01 != null and WLGS01 != ''">
+	    	AND WLGS01 = #{WLGS01}
+   </if>
+   </select>
+  <!-- 地区 -->
+   <select id="DQXX" parameterType="java.util.Map" resultType="java.util.Map">
+    select DISTINCT DQXX01 key, DQXX02 value, DQXX04 MJBJ, DQXX03-1 JB, DQXX.DQXX01 PARENT
+     	 from DQXX
+     	 where 1=1
+     	<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="JB != null and JB != ''">
+			AND DQXX03 = #{JB}+1
+		</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND DQXX01 LIKE #{PARENT}||'%' AND DQXX01 != #{PARENT}
+		</if>
+		START WITH DQXX01 IN (
+			SELECT DQXX01
+            FROM DQXX
+            WHERE 1=1 
+            
+        )
+		CONNECT BY NOCYCLE PRIOR DQXX.DQXX01 = DQXX01
+		ORDER BY JB
+  </select>
+   <!-- 查询 送货网点-->
+   <select id="SHWD" parameterType="java.util.Map" resultType="java.util.Map">
+    select FWWD01 key, FWWD02 value from  css_fwwd
+  </select>
+  
+  <select id="DHFS" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT DHFS01 key,DHFS02 value FROM  DHFS WHERE DHFS03=1
+  </select>
+  
+  <select id="Qry_XJGS" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT SHGS01 KEY,
+             (SELECT GSXX02 FROM GSXX WHERE GSXX01 = SHGS01) VALUE
+      FROM DBHT
+	  WHERE 1=1
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		<![CDATA[AND FHGS01 = #{GSXX01}]]>
+	  </if>
+	  JL{CZY|FHGS01|CZGS_CZ|LIKE%}JL
+  </select>
+    <!--活动主题  -->
+    <select id="HDZT" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT HDZT01 key,HDZTMC value
+      	FROM HDZT
+      	WHERE 1=1
+      <if test="GSXX01!=null and GSXX01!=''">
+			AND GSXX01=#{GSXX01}
+	 </if> 
+  </select>
+    <!-- 查询要货仓库 -->
+	<select id="YHCK" parameterType="Map" resultType="java.util.Map">
+		select SHCK01 KEY,CK02 VALUE  from DBHT a,CK C where
+		 CK01=SHCK01 
+		<!-- <if test="GSXX01!=null and GSXX01!=''">
+			AND B.GSXX01=#{GSXX01}
+		</if> -->
+	</select>
+		<!-- 下拉树商品分类 -->
+  <select id="TREE_CXSPFL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT SPFL01 KEY,
+                SPFL02 VALUE,
+                SPFL04 MJBJ,
+                SPFL03 - 1 JB,
+                SPF_SPFL01 PARENT
+	  FROM SPFL
+	 WHERE 1 = 1
+		<if test="JB != null and JB != ''">
+			AND SPFL03 = #{JB}+1
+     	</if>
+		<if test="PARENT != null and PARENT != ''">
+			AND SPFL01 LIKE #{PARENT}||'%' AND SPFL01 != #{PARENT}
+		</if>		
+		START WITH SPFL01 IN (
+			SELECT SPFL01
+           FROM SPFL
+           WHERE 1=1 
+        )
+		CONNECT BY NOCYCLE PRIOR SPF_SPFL01 = SPFL01
+		ORDER BY JB
+	</select>
+	
+	<!-- 收差原因下拉选项 -->
+	<select id="SCYY" parameterType="Map" resultType="java.util.Map">
+			SELECT NRBM key, NRMS value
+		  FROM zdyitem
+		 where id = 'SCYY'
+	</select>
+	
+	<!-- 凭证类型下拉选项 -->
+	<select id="PZLX" parameterType="Map" resultType="java.util.Map">
+	  SELECT PZLX01 key,PZLX02 value FROM WBPZLX
+	</select>
+</mapper>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jmgl.jmsgl.jmhtsb">
+		<FIELD attrname="YXQQ" fieldtype="string" allownull="N" name="有效期起" />
+		<FIELD attrname="YXQZ" fieldtype="string" allownull="N" name="有效期止" />
+		<FIELD attrname="JMSMC" fieldtype="string" allownull="N" name="加盟商名称" />
+	</JLConfig>
+</root>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_GCDLD.SCM_CXGCDLDDJZT">
+       <FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程登录单号" />
+       <FIELD attrname="SYDW" format='{"SYDW":{"$regex":"#SYDW#"}}' fieldtype="String" allownull="Y" name="使用单位" />
+       <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"WLDW01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+<!--        <FIELD attrname="JXSMC" format='{"JXSMC":{"$regex":"#JXSMC#"}}' fieldtype="String" allownull="Y" name="经销商名称" /> -->
+       <FIELD attrname="YHXM" format='{"YHXM":{"$regex":"#YHXM#"}}' fieldtype="String" allownull="Y" name="用户姓名" />
+  	   <FIELD attrname="GCBH" format='{"GCBH":{"$regex":"#GCBH#"}}' fieldtype="String" allownull="Y" name="工程编号" />
+  	   <FIELD attrname="SYDWDZ" format='{"SYDWDZ1":{"$regex":"#SYDWDZ#"}}' fieldtype="String" allownull="Y" name="使用单位地址" />
+       <FIELD attrname="GMDW" format='{"GMDW":{"$regex":"#GMDW#"}}' fieldtype="String" allownull="Y" name="购买单位" />
+       <FIELD attrname="YHDH" format='{"YHDH":{"$regex":"#YHDH#"}}' fieldtype="String" allownull="Y" name="用户电话" />
+       <FIELD attrname="ZXGJSJQ" format='{"ZXGJSJ":{"$gte":"#ZXGJSJQ#"}}' fieldtype="String" allownull="Y" name="最新跟进时间" />
+       <FIELD attrname="ZXGJSJE" format='{"ZXGJSJ":{"$lte":"#ZXGJSJE#"}}' fieldtype="String" allownull="Y" name="最新跟进时间" />
+       <FIELD attrname="SHSJQ" format='{"SHSJ":{"$gte":"#SHSJQ#"}}' fieldtype="String" allownull="Y" name="审核日期" />
+       <FIELD attrname="SHSJE" format='{"SHSJ":{"$lte":"#SHSJE#"}}' fieldtype="String" allownull="Y" name="审核日期" />
+       <FIELD attrname="GCLX" format='{"GCLX.key":"#GCLX#"}' fieldtype="String" allownull="Y" name="工程类型" />
+       <FIELD attrname="GJZT" format='{"GJZT.key":"#GJZT#"}' fieldtype="String" allownull="Y" name="跟进状态" />
+       <FIELD attrname="LXDH" format='{"LXDH":{"$regex":"#LXDH#"}}' fieldtype="String" allownull="Y" name="联系电话" />
+       <FIELD qx='WLDW01|WLDW_CX|in' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_GCJDGJ.SCM_GCJDGJ_SPLB">
+		<FIELD attrname="GCDLD01" format='{"GCDLD01":{"$regex":"#GCDLD01#"}}' fieldtype="String" allownull="Y" name="工程进度跟进" />
+		<FIELD attrname="SPMC" format='{"$or":[{"SPLB.SPDM":{"$regex":"#SPMC#"}},{"SPLB.SPMC":{"$regex":"#SPMC#"}}]}' fieldtype="String" allownull="Y" name="工程进度跟进" />
+		<FIELD attrname="GSXX01" fieldtype="String" allownull="Y" name="工程进度跟进" />
+		
+	</JLConfig>
+</root>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_BM.SCM_BM">   
+        <FIELD attrname="search" format='{"$or":[{"BMBH":{"$regex":"#search#"}},{"BM01":{"$regex":"#search#"}},{"BM02":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="部门查询" />
+		<FIELD attrname="GSZT.key" fieldtype="Map" allownull="Y" name="公司信息" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" /> 
+		<FIELD attrname="GL" format='{"GSZT":{"$ne":null}}' fieldtype="String" allownull="Y" name="过滤规则" /> 
+	    <FIELD qx='BMBH|BM_CZ|LIKE%' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_BM.SCM_BM1">  
+        <FIELD attrname="search" format='{"$or":[{"BMBH":{"$regex":"#search#"}},{"BM01":{"$regex":"#search#"}},{"BM02":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="部门查询" />
+	    <FIELD qx='GSZT.key|CZGS_CZ|in' />
+	    <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	    <FIELD attrname="GL" format='{"GSZT":{"$ne":null}}' fieldtype="String" allownull="Y" name="过滤规则" /> 
+        <FIELD qx='BMBH|BM_CZ|LIKE%' />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_BM.SCM_BM2">  
+        <FIELD attrname="search" format='{"$or":[{"BMBH":{"$regex":"#search#"}},{"BM01":{"$regex":"#search#"}},{"BM02":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="部门查询" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+		<FIELD attrname="GL" format='{"GSZT":{"$ne":null}}' fieldtype="String" allownull="Y" name="过滤规则" /> 
+	</JLConfig>
+		<JLConfig id="MONGO_BM.SCM_BM3">  
+        <FIELD attrname="BM_BM01" format='{"BMBH":"#BM_BM01#"}'  fieldtype="String" allownull="Y" name="部门查询" />
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FWLX.CSS_FWLX">
+	  <FIELD attrname="search" format='{"$or":[{"FWLX01":{"$regex":"#search#"}},{"FWLX":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="服务类型" />
+	  <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

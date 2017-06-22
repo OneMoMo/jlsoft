@@ -1,0 +1,54 @@
+.advHeader{ width:100%; top:0px; left:0px; height:45px; background:#333; position:fixed; z-index:99;}
+.advHeader_main{ width:1000px; margin:0 auto;}
+.adv_nav{ padding-left:50px;}
+.adv_nav > li{ color:#fff; height:44px; line-height:44px; margin-top:1px; padding:0 20px; font-size:14px; position:relative;}
+.adv_nav > li.xuan{ border:3px solid #f97247;}
+.adv_nav > li i{ margin:0 0 0 8px;}
+.adv_nav > li:hover{ background:#fff; color:#1f1f1f;}
+.adv_nav > li .nav_list_down{ position:absolute; top:100%; left:-1px; min-width:520px; max-height:500px; background:#fff; border-top:0px solid #aaa; display:none; overflow-x:hidden; overflow-y:auto;}
+
+.adv_nav > li .nav_list_down img{ height:100px; width:100px; float:left;}
+.adv_nav > li .nav_list_down .main{ padding:0px;}
+.adv_nav > li .nav_list_down .main > ul{ padding:10px 0 0 10px;}
+.adv_nav > li .nav_list_down .main > ul > li{ float:left; margin:0 10px 10px 0; border:1px solid #ccc; padding:5px;}
+.adv_nav > li .nav_list_down .main > ul > li > span{ position:absolute; width:100%; height:35px; background:#4d90fe; bottom:0px; left:0px; z-index:1; line-height:35px; text-align:center; color:#fff; display:none;}
+.adv_nav > li .nav_list_down .main > ul > li:hover{ border:1px solid #4d90fe; cursor:pointer;}
+.adv_nav > li .nav_list_down .main > ul > li:hover > span{ display:block;}
+
+.adv_fh{ height:25px; border-radius:13px; text-align:center; line-height:23px; border:1px solid #fff; color:#fff; margin:10px 20px 10px 0; padding:0 15px 0 10px; float:right; transition:background 0.5s;}
+.adv_fh i{ margin-right:10px;}
+.adv_fh:hover{ background:#fff; color:#1f1f1f;}
+
+
+.advMain{ margin-top:46px;}
+.advMain .edit{ position:relative;}
+.advMain .edit .editTitle{ position:absolute; top:0px; right:0px; background:rgba(0,0,0,0.5); color:#fff; height:25px; line-height:25px; font-size:12px; padding:0 10px; display:none; z-index:98;}
+.advMain .edit .editTitle span{ margin-left:10px; cursor:pointer;}
+.advMain .edit .editTitle i{ font-size:14px; margin-left:10px; cursor:pointer;}
+.advMain .edit:hover{ border:3px solid #f97247;}
+.advMain .edit:hover .editTitle{ display:block;}
+.advMain .editMain{ width:1000px; height:500px; position:fixed; top:50%; left:50%; margin:-250px 0 0 -500px; background:#fff; z-index:998; border:1px solid #333; box-shadow:0 0 30px #333; display:none;}
+.advMain .editMain .title{ height:40px; background:#333; line-height:40px; color:#fff; font-size:16px; padding:0 20px;}
+.advMain .editMain .title i{ float:right; line-height:40px; cursor:pointer; font-size:20px; color:#ccc;}
+.advMain .editMain .title i:hover{ color:#fff;}
+.advMain .editMain .slt{ height:450px; border-right:1px solid #eee;}
+.advMain .editMain .slt img{ width:80%; margin:20px 10%;}
+.advMain .editMain .edi_info{ max-height:400px; overflow-y:auto; border-bottom:1px solid #eee; padding:10px;}
+.advMain .editMain .edi_btn{ height:50px; padding:5px 50px;}
+.advMain .editMain .edi_btn jl_btn{ margin:0px;}
+
+/* smallImg */
+.smallImg{position:relative; height:50px; overflow:hidden;float:left; margin-top:10px;}
+.scrollbutton{width:14px; height:50px; overflow:hidden; position:relative; float:left; cursor:pointer; }
+.scrollbutton.smallImgUp , .scrollbutton.smallImgUp.disabled{background:url(../template/images/d_08.png) no-repeat;}
+.scrollbutton.smallImgDown , .scrollbutton.smallImgDown.disabled{background:url(../template/images/d_09.png) no-repeat; margin-left:263px; margin-top:-50px;}
+
+#imageMenu {height:50px; width:250px; overflow:hidden; margin-left:0; float:left;}
+#imageMenu li {height:50px; width:50px; overflow:hidden; float:left; text-align:center;}
+#imageMenu li img{width:44px; height:44px;cursor:pointer; margin:4px 0;}
+#imageMenu li#onlickImg img, #imageMenu li:hover img{ width:44px; height:44px; border:1px solid #d22d29;}
+/* bigImg */
+.bigImg{position:relative; float:left; overflow:hidden;}
+.bigImg #midimg{height:280px; border:3px solid #e5383c !important; position:relative;}
+.bigImg .xuand{ background:url(../template/images/xuan_big.png) no-repeat; position:absolute; right:0; bottom:1px; float:left; width:69px; height:54px;}
+

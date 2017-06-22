@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DJDY">
+    <select id="SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+      <!-- 分销单 -->
+      <if test="DJLX == 8">
+	      SELECT DISTINCT A.JLWBDH,A.PFD01 V9DH,TO_CHAR(A.PFD05, 'YYYY-MM-DD') DJRQ,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) DWMC,TO_CHAR(B.PFDI11, 'YYYY-MM-DD') FHRQ,
+	       	     A.PFD11 BZ,(SELECT SUM(PFDI05) FROM PFDITEM WHERE PFD01=A.PFD01 AND GSXX01=A.GSXX01)DJSL,(SELECT SUM(PFDI06) FROM PFDITEM WHERE PFD01=A.PFD01 AND GSXX01=A.GSXX01)DJJE,
+	       	     TO_CHAR(A.PFD65, 'YYYY-MM-DD') FHRQ,(SELECT FLFS02 FROM FLFS WHERE FLFS01=A.FLFS01) XSFS02,(SELECT WLDW02 FROM WLDW WHERE WLDW01=A.WLDW01)KHMC,A.DHD01 KHYHDH,A.FHDH,
+	       	     DECODE(A.PFD02,0,'正常批发',1,'延付转批发',2,'提单冲红',3,'提单退货',4,'商品退货',5,'集团变价',6,'延付商品退货冲红') DJLB,A.PFD11 BZ,A.PFD07 ZDRMC,A.PFD29 SHRMC,DECODE(A.THFS,0,'自提','1','配送')PSFS,
+	       	     (SELECT HDZTMC FROM HDZT WHERE HDZT01=A.HDZT01) HDZT,A.PFD45 DZ,A.GCMC,A.SFZH SFZHM,A.DYCS01 DYCS,A.KHXM THRMC
+	  		FROM PFD A，PFDITEM B
+	 	   WHERE A.PFD01=B.PFD01
+ 			 AND A.GSXX01=B.GSXX01
+	 	   <if test="YDYBJ == 1 and WDYBJ != 1">
+	 	     AND A.JLWBDH IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX})
+	 	   </if>
+	 	   <if test="YDYBJ != 1 and WDYBJ == 1">
+			       AND A.JLWBDH NOT IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX}) 
+		   </if>
+		   <if test="JLWBDH !=null and JLWBDH != ''">
+		 		<foreach item="item" index="index" collection="JLWBDH" open=" AND (" separator=" or " close=")"> 
+			      A.JLWBDH LIKE '%'||#{item}||'%'
+			    </foreach>
+		  </if>	
+		  <if test="GSXX01 != null and GSXX01 != ''">
+			       AND A.GSXX01 = #{GSXX01}
+		  </if>
+		<!--   <if test="DJRQQ !=null and DJRQQ != ''">
+		        <![CDATA[AND A.PFD05 >= TO_DATE(#{DJRQQ},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="DJRQZ !=null and DJRQZ != ''">
+		        <![CDATA[AND A.PFD05 <= TO_DATE(#{DJRQZ},'YYYY-MM-DD')]]>
+		  </if> -->
+		   <if test="FHRQQ1 !=null and FHRQQ1 != ''">
+		        <![CDATA[AND B.PFDI11 >= TO_DATE(#{FHRQQ1},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="FHRQZ1 !=null and FHRQZ1 != ''">
+		        <![CDATA[AND B.PFDI11 <= TO_DATE(#{FHRQZ1},'YYYY-MM-DD')]]>
+		  </if>
+		  <if test="KHDM != null and KHDM != ''">
+			       AND A.WLDW01 = #{KHDM}
+		  </if>
+		  <if test="XS_BM01 != null and XS_BM01 != ''">
+			       AND A.BM01 = #{XS_BM01}
+		  </if>
+		  <if test="XSFS01 != null and XSFS01 != ''">
+			       AND A.FLFS01 = #{XSFS01}
+		  </if>
+		  <if test="SFZHM != null and SFZHM != ''">
+			       AND A.SFZH = #{SFZHM}
+		  </if>
+		  JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		  JL{CZY|B.CK01|CK_CZ|LIKE%}JL
+		  JL{CZY|A.WLDW01|KH_CZ|inS}JL
+       	  JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	  </if>
+	  
+	  <!-- 零售单 -->
+	  <if test="DJLX == 10">
+	      SELECT A.JLWBDH,A.LSD01 V9DH,TO_CHAR(A.LSD06, 'YYYY-MM-DD')DJRQ,A.LSD35 ZDRMC,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM,
+              A.LSD13 BZ,(SELECT SUM(LSDI05) FROM LSDITEM WHERE LSD01 = A.LSD01 AND GSXX01 = A.GSXX01) DJSL, TO_CHAR(L.LSDI11, 'YYYY-MM-DD') FHRQ,
+              (SELECT SUM(LSDI08) FROM LSDITEM WHERE LSD01 = A.LSD01 AND GSXX01 = A.GSXX01) DJJE,B.LXR DWMC,B.LXDH LXDH,B.XXDZ SHDZ,
+              TO_CHAR((SELECT YYSJ FROM CSS_FWDITEM WHERE FWD01=B.FWD01 AND DJHM=A.JLWBDH AND ROWNUM =1), 'YYYY-MM-DD')SHSJ
+             FROM LSD A,CSS_FWD B  ,LSDITEM L
+            WHERE A.JLWBDH=B.JLWBDH(+)
+       and  L.LSD01=A.LSD01 AND L.GSXX01=A.GSXX01 
+           AND (A.JLWBDH LIKE 'LS%' OR A.JLWBDH LIKE 'LT%' OR A.JLWBDH IS NULL)
+	  	   <if test="YDYBJ == 1 and WDYBJ != 1">
+	 	     AND A.JLWBDH IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX})
+	 	   </if>
+	  	  <if test="YDYBJ != 1 and WDYBJ == 1">
+			       AND A.JLWBDH NOT IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX}) 
+		  </if>
+	  	  <if test="JLWBDH !=null and JLWBDH != ''">
+		 		<foreach item="item" index="index" collection="JLWBDH" open=" AND (" separator=" or " close=")"> 
+			      A.JLWBDH LIKE '%'||#{item}||'%'
+			    </foreach>
+		  </if>	
+		  <if test="GSXX01 != null and GSXX01 != ''">
+			     AND A.GSXX01 = #{GSXX01}
+		  </if>
+		   <if test="FHRQQ2 !=null and FHRQQ2 != ''">
+		        <![CDATA[AND L.LSDI11 >= TO_DATE(#{FHRQQ2},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="FHRQZ2 !=null and FHRQZ2 != ''">
+		        <![CDATA[AND L.LSDI11 <= TO_DATE(#{FHRQZ2},'YYYY-MM-DD')]]>
+		  </if>
+		<!--   <if test="DJRQQ !=null and DJRQQ != ''">
+		        <![CDATA[AND A.LSD06 >= TO_DATE(#{DJRQQ},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="DJRQZ !=null and DJRQZ != ''">
+		        <![CDATA[AND A.LSD06 <= TO_DATE(#{DJRQZ},'YYYY-MM-DD')]]>
+		  </if> -->
+		  <if test="KHDM != null and KHDM != ''">
+			       AND B.HYXX01 = #{KHDM}
+		  </if>
+		  <if test="XS_BM01 != null and XS_BM01 != ''">
+			       AND A.BM01 = #{XS_BM01}
+		  </if>
+		  JL{CZY|A.LSD04|KH_CZ|inS}JL
+       	  JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	  </if>
+	  
+	  <!-- 入库单 -->
+	  <if test="DJLX == 1">
+	      SELECT A.JLWBDH,A.RKD01 V9DH,TO_CHAR(A.RKD16, 'YYYY-MM-DD') DJRQ,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM,A.RKD15 SHRMC,
+			 	 (SELECT CK02 FROM CK WHERE CK01=A.CK01)CKMC,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) DWMC,A.RKD09 BZ,
+       			 (SELECT SUM(RKDI03) FROM RKDITEM WHERE RKD01=A.RKD01 AND GSXX01=A.GSXX01)DJSL,
+       			 (SELECT SUM(RKDI07) FROM RKDITEM WHERE RKD01=A.RKD01 AND GSXX01=A.GSXX01)DJJE
+  			FROM RKD A
+	  	   WHERE 1=1
+	  	   <if test="YDYBJ == 1 and WDYBJ != 1">
+	 	     AND A.JLWBDH IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX})
+	 	   </if>
+	  	  <if test="YDYBJ != 1 and WDYBJ == 1">
+			       AND A.JLWBDH NOT IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX}) 
+		  </if>
+	  	  <if test="JLWBDH !=null and JLWBDH != ''">
+		 		<foreach item="item" index="index" collection="JLWBDH" open=" AND (" separator=" or " close=")"> 
+			      A.JLWBDH LIKE '%'||#{item}||'%'
+			    </foreach>
+		  </if>	
+		  <if test="GSXX01 != null and GSXX01 != ''">
+			     AND A.GSXX01 = #{GSXX01}
+		  </if>
+		  <if test="DJRQQ1 !=null and DJRQQ1 != ''">
+		        <![CDATA[AND A.RKD16 >= TO_DATE(#{DJRQQ1},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="DJRQZ1 !=null and DJRQZ1 != ''">
+		        <![CDATA[AND A.RKD16 <= TO_DATE(#{DJRQZ1},'YYYY-MM-DD')]]>
+		  </if>
+		  <if test="GYS_WLDW01 != null and GYS_WLDW01 != ''">
+			       AND A.WLDW01 = #{GYS_WLDW01}
+		  </if>
+		  <if test="CG_BM01 != null and CG_BM01 != ''">
+			       AND A.BM01 = #{CG_BM01}
+		  </if>
+		  JL{CZY|A.WLDW01|GYS_CZ|inS}JL
+       	  JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	  </if>
+	  
+	  <!-- 转仓单 -->
+	  <if test="DJLX == 7">
+	      SELECT A.JLWBDH,A.ZCD01 V9DH,TO_CHAR(A.ZCD06, 'YYYY-MM-DD') DJRQ,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM,A.ZCD04 BZ,
+              (SELECT SUM(ZCDI03) FROM ZCDITEM WHERE ZCD01 = A.ZCD01 AND GSXX01 = A.GSXX01) DJSL,0 DJJE,A.ZCD17 SHRMC,A.ZCD05 ZDRMC,
+            (SELECT CK02 FROM CK WHERE CK01=A.ZCD02)FHCKMC,(SELECT CK02 FROM CK WHERE CK01=A.ZCD03)SHCKMC,DECODE(A.PSLX01,0,'自提','1','配送') PSFS
+        FROM ZCD A
+         WHERE 1=1
+	  	   <if test="YDYBJ == 1 and WDYBJ != 1">
+	 	     AND A.JLWBDH IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX})
+	 	   </if>
+	  	  <if test="YDYBJ != 1 and WDYBJ == 1">
+			       AND A.JLWBDH NOT IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX}) 
+		  </if>
+	  	  <if test="JLWBDH !=null and JLWBDH != ''">
+		 		<foreach item="item" index="index" collection="JLWBDH" open=" AND (" separator=" or " close=")"> 
+			      A.JLWBDH LIKE '%'||#{item}||'%'
+			    </foreach>
+		  </if>	
+		  <if test="GSXX01 != null and GSXX01 != ''">
+			     AND A.GSXX01 = #{GSXX01}
+		  </if>
+		  <if test="DJRQQ2 !=null and DJRQQ2 != ''">
+		        <![CDATA[AND A.ZCD06 >= TO_DATE(#{DJRQQ2},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="DJRQZ2 !=null and DJRQZ2 != ''">
+		        <![CDATA[AND A.ZCD06 <= TO_DATE(#{DJRQZ2},'YYYY-MM-DD')]]>
+		  </if>
+		  <if test="FHCK01 != null and FHCK01 != ''">
+			       AND A.ZCD02 = #{FHCK01}
+		  </if>
+		  <if test="SHCK01 != null and SHCK01 != ''">
+			       AND A.ZCD03 = #{SHCK01}
+		  </if>
+       	  JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	  </if>
+	  
+	  <!-- 借还单 -->
+	  <if test="DJLX == 51">
+	      SELECT A.JLWBDH,A.JHD01 V9DH,TO_CHAR(A.JHD02,'YYYY-MM-DD') DJRQ,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM,
+				 (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) DWMC,A.JHD06 BZ,
+				 (SELECT SUM(JHDI02) FROM JHDITEM WHERE JHD01 = A.JHD01 AND GSXX01 = A.GSXX01) DJSL,0 DJJE
+				 FROM JHD A
+	  	   WHERE 1=1
+	  	  <if test="YDYBJ == 1 and WDYBJ != 1">
+	 	     AND A.JLWBDH IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX})
+	 	   </if>
+	  	  <if test="YDYBJ != 1 and WDYBJ == 1">
+			       AND A.JLWBDH NOT IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX}) 
+		  </if>
+	  	  <if test="JLWBDH !=null and JLWBDH != ''">
+		 		<foreach item="item" index="index" collection="JLWBDH" open=" AND (" separator=" or " close=")"> 
+			      A.JLWBDH LIKE '%'||#{item}||'%'
+			    </foreach>
+		  </if>	
+		  <if test="GSXX01 != null and GSXX01 != ''">
+			     AND A.GSXX01 = #{GSXX01}
+		  </if>
+		  <if test="DJRQQ3 !=null and DJRQQ3 != ''">
+		        <![CDATA[AND A.JHD02 >= TO_DATE(#{DJRQQ3},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="DJRQZ3 !=null and DJRQZ3 != ''">
+		        <![CDATA[AND A.JHD02 <= TO_DATE(#{DJRQZ3},'YYYY-MM-DD')]]>
+		  </if>
+		  <if test="GYS_WLDW01 != null and GYS_WLDW01 != ''">
+			       AND A.WLDW01 = #{GYS_WLDW01}
+		  </if>
+		  <if test="CK01 != null and CK01 != ''">
+			       AND A.CK01 = #{CK01}
+		  </if>
+		  JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+       	  JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	  </if>
+	  
+	  <!-- 赠品出库单 -->
+	  <if test="DJLX == 0">
+		  SELECT A.JLWBDH,A.ZPCK01 V9DH,TO_CHAR(A.ZPCK04, 'YYYY-MM-DD') DJRQ,TO_CHAR(A.ZPCK06, 'YYYY-MM-DD') SHRQ,
+       			 (SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) DWMC,
+       			 (SELECT CK02 FROM CK WHERE CK01=A.CK01)CKMC,A.ZPCK02 BZ,
+       			 (SELECT SUM(ZPCKDI01) FROM ZPCKDITEM WHERE ZPCK01 = A.ZPCK01 AND GSXX01 = A.GSXX01) DJSL,0 DJJE
+  			FROM ZPCKD A
+		   WHERE 1=1
+		   <if test="YDYBJ == 1 and WDYBJ != 1">
+	 	     AND A.JLWBDH IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX})
+	 	   </if>
+		   <if test="YDYBJ != 1 and WDYBJ == 1">
+			       AND A.JLWBDH NOT IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX}) 
+		   </if>
+	  	   <if test="JLWBDH !=null and JLWBDH != ''">
+		 		<foreach item="item" index="index" collection="JLWBDH" open=" AND (" separator=" or " close=")"> 
+			      A.JLWBDH LIKE '%'||#{item}||'%'
+			    </foreach>
+		  </if>	
+		  <if test="GSXX01 != null and GSXX01 != ''">
+			     AND A.GSXX01 = #{GSXX01}
+		  </if>
+		  <if test="DJRQQ4 !=null and DJRQQ4 != ''">
+		        <![CDATA[AND A.ZPCK04 >= TO_DATE(#{DJRQQ4},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="DJRQZ4 !=null and DJRQZ4 != ''">
+		        <![CDATA[AND A.ZPCK04 <= TO_DATE(#{DJRQZ4},'YYYY-MM-DD')]]>
+		  </if>
+		  <if test="KHDM != null and KHDM != ''">
+			       AND A.WLDW01 = #{KHDM}
+		  </if>
+		  <if test="CK01 != null and CK01 != ''">
+			       AND A.CK01 = #{CK01}
+		  </if>
+		  JL{CZY|A.WLDW01|KH_CZ|inS}JL
+       	  JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	  </if>
+	  
+	  <!-- 延付单 -->
+	  <if test="DJLX == 9">
+		  SELECT A.JLWBDH,A.YFD01 V9DH,TO_CHAR(A.YFD03, 'YYYY-MM-DD') DJRQ,TO_CHAR(A.YFD04, 'YYYY-MM-DD') SHRQ,(SELECT BM02 FROM BM WHERE BM01 = A.BM01) BM,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) DWMC,
+       		     (SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,A.YFD10 BZ,(SELECT SUM(YFDI05)FROM YFDITEM WHERE YFD01 = A.YFD01 AND GSXX01 = A.GSXX01) DJSL,A.KHYHD01 KHYHDH,A.YFD07 SHRMC,A.YFD06 ZDRMC,
+       			 (SELECT SUM(YFDI06)FROM YFDITEM WHERE YFD01 = A.YFD01 AND GSXX01 = A.GSXX01) DJJE,(SELECT FLFS02 FROM FLFS WHERE FLFS01=A.FLFS01) XSFS02,DECODE(A.YFD02,0,'延付销售',1,'提单冲红',2,'退货冲红',3,'商品冲红') DJLB
+  		    FROM YFD A
+		   WHERE 1=1
+		   <if test="YDYBJ == 1 and WDYBJ != 1">
+	 	     AND A.JLWBDH IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX})
+	 	   </if>
+		   <if test="YDYBJ != 1 and WDYBJ == 1">
+			       AND A.JLWBDH NOT IN (SELECT DISTINCT JLWBDH FROM DYJL WHERE DJLX=#{DJLX}) 
+		   </if>
+	  	   <if test="JLWBDH !=null and JLWBDH != ''">
+		 		<foreach item="item" index="index" collection="JLWBDH" open=" AND (" separator=" or " close=")"> 
+			      A.JLWBDH LIKE '%'||#{item}||'%'
+			    </foreach>
+		  </if>	
+		  <if test="GSXX01 != null and GSXX01 != ''">
+			     AND A.GSXX01 = #{GSXX01}
+		  </if>
+		  <if test="DJRQQ5 !=null and DJRQQ5 != ''">
+		        <![CDATA[AND A.YFD03 >= TO_DATE(#{DJRQQ5},'YYYY-MM-DD')]]>
+		  </if> 
+		  <if test="DJRQZ5 !=null and DJRQZ5 != ''">
+		        <![CDATA[AND A.YFD03 <= TO_DATE(#{DJRQZ5},'YYYY-MM-DD')]]>
+		  </if>
+		  <if test="KHDM != null and KHDM != ''">
+			       AND A.WLDW01 = #{KHDM}
+		  </if>
+		  <if test="CK01 != null and CK01 != ''">
+			       AND A.CK01 = #{CK01}
+		  </if>
+	  	  <if test="XSFS01 != null and XSFS01 != ''">
+			       AND A.FLFS01 = #{XSFS01}
+		  </if>
+		  JL{CZY|A.WLDW01|KH_CZ|inS}JL
+       	  JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+	  </if>
+	  
+    </select>
+    
+    <select id="DYDJ" parameterType="java.util.Map" resultType="java.util.Map">
+    <!-- 分销单 -->
+    <if test="DJLX == 8">
+	    SELECT  a.pfd01, S.SPXX02 SPBM,S.SPXX04 SPMC, S.JLDW01 JLDW, A.PFDI05 XSSL, A.PFDI02 FXDJ,A.PFDI06 XSJE,A.PFDI15 KL,(SELECT CK02 FROM CK WHERE CK01 = A.CK01) CK,(PFDI07/pfdi05) ZHDJ,PFDI07 SSJE,
+           S.SPXX68 TJ,TO_CHAR(A.PFDI11, 'YYYY-MM-DD') FHRQ,A.PFDI12 FHR
+        FROM PFDITEM A, SPXX S
+      WHERE A.SPXX01=S.SPXX01
+		   <if test="V9DH !=null and V9DH != ''">
+			   AND A.PFD01 = #{V9DH}
+		   </if>
+		   <if test="GSXX01 != null and GSXX01 != ''">
+			   AND A.GSXX01 = #{GSXX01}
+		   </if>
+    </if>
+    
+    <!-- 零售单 -->
+    <if test="DJLX == 10">
+	    SELECT S.SPXX04 SPMC,S.JLDW01 JLDW,A.LSDI05 LSSL,A.LSDI02 LSDJ,A.LSDI06 LSJE,(SELECT SPJG18 FROM SPJGB WHERE SPXX01 = A.SPXX01 AND WLDW01 = A.WLDW01 AND BM01 = A.BM01) KL,
+	    (SELECT CK02 FROM CK WHERE CK01 = A.CK01) THCK,(SELECT CK02 FROM CK WHERE CK01=A.CK01) CK,S.SPXX02 SPBM
+  		  FROM LSDITEM A, SPXX S
+ 		 WHERE A.SPXX01 = S.SPXX01
+		   <if test="V9DH !=null and V9DH != ''">
+			   AND A.LSD01 = #{V9DH}
+		   </if>
+		   <if test="GSXX01 != null and GSXX01 != ''">
+			   AND A.GSXX01 = #{GSXX01}
+		   </if>
+    </if>
+    
+    <!-- 入库单 -->
+    <if test="DJLX == 1">
+	    SELECT A.RKDI05 RKSL,A.RKDI13 MXBZ,S.SPXX02 SPBM,S.SPXX04 SPMC,S.JLDW01 JLDW
+	      FROM RKDITEM A,SPXX S 
+	     WHERE A.SPXX01 = S.SPXX01
+		   <if test="V9DH !=null and V9DH != ''">
+			   AND A.RKD01 = #{V9DH}
+		   </if>
+		   <if test="GSXX01 != null and GSXX01 != ''">
+			   AND A.GSXX01 = #{GSXX01}
+		   </if>
+    </if>
+    
+    <!-- 转仓单 -->
+    <if test="DJLX == 7">
+	    SELECT S.SPXX02 SPBM,S.SPXX04 SPMC,S.JLDW01 JLDW,S.SPXX34 SPGG,S.SPXX26 CD,A.ZCDI03 ZCSL
+	      FROM ZCDITEM A,SPXX S 
+	     WHERE A.SPXX01 = S.SPXX01
+		   <if test="V9DH !=null and V9DH != ''">
+			   AND A.ZCD01 = #{V9DH}
+		   </if>
+		   <if test="GSXX01 != null and GSXX01 != ''">
+			   AND A.GSXX01 = #{GSXX01}
+		   </if>
+    </if>
+    
+    <!-- 借还单 -->
+    <if test="DJLX == 51">
+	    SELECT S.SPXX02 SPBM,S.SPXX04 SPMC,S.JLDW01 JLDW,S.SPXX34 SPGG,A.JHDI02 ZCSL,
+       		   (SELECT CK02 FROM CK WHERE CK01=A.GHCK01)CKMC,(SELECT PPB02 FROM PPB WHERE PPB01=S.PPB01)SPPPMC,
+       		   S.SPXX68 TJ
+  		  FROM JHDITEM A, SPXX S
+ 		 WHERE A.SPXX01 = S.SPXX01
+		   <if test="V9DH !=null and V9DH != ''">
+			   AND A.JHD01 = #{V9DH}
+		   </if>
+		   <if test="GSXX01 != null and GSXX01 != ''">
+			   AND A.GSXX01 = #{GSXX01}
+		   </if>
+    </if>
+    
+    <!-- 赠品出库单 -->
+    <if test="DJLX == 0">
+	    SELECT S.SPXX02 ZPXX01,S.SPXX04 ZPMC,S.JLDW01 JLDW,S.SPXX34 SPGG,(S.SPXX09*S.SPXX10*S.SPXX11) TJ,A.ZPCKDI01 CKSL
+  		  FROM ZPCKDITEM A, SPXX S
+ 		 WHERE A.ZPXX01 = S.SPXX01
+		   <if test="V9DH !=null and V9DH != ''">
+			   AND A.ZPCK01 = #{V9DH}
+		   </if>
+		   <if test="GSXX01 != null and GSXX01 != ''">
+			   AND A.GSXX01 = #{GSXX01}
+		   </if>
+    </if>
+    
+    <!-- 延付单 -->
+    <if test="DJLX == 9">
+	    SELECT A.YFD01,S.SPXX04 SPMC,S.JLDW01 SPDW,A.YFDI05 SL,A.YFDI02 XSDJ,A.YFDI06 XSJE,A.YFDI08 KL,(SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,A.YFDI32 SSJE,S.SPXX68 TJ
+  	      FROM YFDITEM A, SPXX S
+ 	     WHERE A.SPXX01 = S.SPXX01
+		   <if test="V9DH !=null and V9DH != ''">
+			   AND A.YFD01 = #{V9DH}
+		   </if>
+		   <if test="GSXX01 != null and GSXX01 != ''">
+			   AND A.GSXX01 = #{GSXX01}
+		   </if>
+    </if>
+    </select>
+    
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fxgl.fxjs.fxjsskd">
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客户名称" />
+		<FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="客户代码" />
+        <FIELD attrname="JSRQQ"  allownull="N" name="结算日期起" />
+        <FIELD attrname="JSRQZ"  allownull="N" name="结算日期止" />
+        <FIELD attrname="BM01" fieldtype="string" allownull="N" name="销售部门代码" />
+        <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="销售部门名称" />
+		<Nested id="DJLB"  name="单据明细">
+        <!--     <FIELD attrname="PFSK01" fieldtype="string" allownull="N" name="收款单号" />
+            <FIELD attrname="DJLX" fieldtype="string" allownull="N" name="单据类型" />
+            <FIELD attrname="HSDJJE" fieldtype="string" allownull="N" name="含税单据金额" />
+            <FIELD attrname="HSJSJE" fieldtype="string" allownull="N" name="含税结算金额" />
+            <FIELD attrname="DJLX" fieldtype="string" allownull="N" name="发票号码" /> -->
+        </Nested>
+        <Nested id="YSKLB"  name="预收款明细">
+            <!-- <FIELD attrname="YSKD01" fieldtype="string" allownull="N" name="预收单号" />
+            <FIELD attrname="DJJE" fieldtype="string" allownull="N" name="单据金额" />
+            <FIELD attrname="WJSJE" fieldtype="string" allownull="N" name="未结算金额" />
+            <FIELD attrname="BCSJE" fieldtype="string" allownull="N" name="本次结算金额" /> -->
+        </Nested>
+        <Nested id="FLDLB"  name="返利单明细">
+         <!--    <FIELD attrname="FLD01" fieldtype="string" allownull="N" name="返利单号" />
+            <FIELD attrname="FLDXH" fieldtype="string" allownull="N" name="序号" />
+            <FIELD attrname="FLFS" fieldtype="string" allownull="N" name="返利方式" />
+            <FIELD attrname="DJLX" fieldtype="string" allownull="N" name="单据类型" />
+            <FIELD attrname="KYFLYE" fieldtype="string" allownull="N" name="可用返利余额" />
+            <FIELD attrname="BCJSJE" fieldtype="string" allownull="N" name="本次结算金额" /> -->
+        </Nested>
+       <!--  <Nested id="SKFS" allownull="N" name="收款方式">
+            <FIELD attrname="SKFS01" fieldtype="string" allownull="N" name="收款方式代码" />
+            <FIELD attrname="SKJE" fieldtype="string" allownull="N" name="收款金额" />
+            <FIELD attrname="DZRQ" fieldtype="string" allownull="N" name="到帐日期" />
+        </Nested> -->		
+	</JLConfig>	
+</root>

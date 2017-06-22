@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cggl.zbtzd">
+        <FIELD attrname="GCZBD01" fieldtype="string" allownull="N" name="工厂直拨单号" />
+        <Nested id="CGFS">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="采购方式" />
+            <FIELD attrname="value" fieldtype="String" allownull="N" name="采购方式" />
+        </Nested>
+        <Nested id="SPLB" allownull="N" name="商品明细">
+            <FIELD attrname="TZSL" fieldtype="double" allownull="N" name="调整数量" />
+            <FIELD attrname="XCKDJ" fieldtype="String" allownull="N" name="新出库单价" />
+    </Nested>
+	</JLConfig>
+</root>

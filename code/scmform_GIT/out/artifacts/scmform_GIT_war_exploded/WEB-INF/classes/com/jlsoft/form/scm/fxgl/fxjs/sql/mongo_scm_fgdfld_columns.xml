@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FGDFLD.SCM_FGDFLD">
+      
+        <FIELD attrname="WLDWMC" format='{"$or":[{"FLD01":{"$regex":"#WLDWMC#"}},{"WLDW01":{"$regex":"#WLDWMC#"}},{"WLDWMC":{"$regex":"#WLDWMC#"}},{"XS_BM01":{"$regex":"#WLDWMC#"}},{"XSBMMC":{"$regex":"#WLDWMC#"}},{"YWY02":{"$regex":"#WLDWMC#"}},{"BZ":{"$regex":"#WLDWMC#"}}]}' fieldtype="String" allownull="Y" name="客户名称" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="KPBJ" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+	<JLConfig id="FGDFLD.SCM_FGDFLD">
+		 <FIELD attrname="FLD01" format='{"FLD01":{"$regex":"#FLD01#"}}' fieldtype="String" allownull="Y" name="单号" />
+	     <FIELD attrname="GSXX01" format='{"GSXX01":{"$regex":"#GSXX01#"}}' fieldtype="String" allownull="Y" name="GSXX01" />
+	</JLConfig>
+</root>

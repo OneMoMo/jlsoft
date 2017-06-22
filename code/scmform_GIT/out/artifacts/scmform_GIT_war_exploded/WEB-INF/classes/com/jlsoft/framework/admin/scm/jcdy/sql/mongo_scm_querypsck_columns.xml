@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_PSCK.SCM_PSCK">  
+        <FIELD attrname="query" format='{"$or":[{"QXMC":{"$regex":"#query#"}},{"QXMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="权限名称" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

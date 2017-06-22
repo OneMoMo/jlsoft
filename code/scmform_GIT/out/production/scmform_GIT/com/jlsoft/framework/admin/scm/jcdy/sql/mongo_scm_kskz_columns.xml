@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_KSKZ.SCM_KSKZ">
+        <FIELD attrname="DMMC" format='{"$or":[{"WLDWMC":{"$regex":"#DMMC#"}},{"PYM":{"$regex":"#DMMC#"}},{"WLDW01":{"$regex":"#DMMC#"}}]}' fieldtype="String" allownull="Y" name="代码名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" /> 
+	</JLConfig>
+</root>   

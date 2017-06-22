@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/form/css/jl_pc_css.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/form/css/jl_pc_form.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/form/css/jl_pc_list.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/form/css/jl_pc_table.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/form/css/jl_pc_page.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/form/css/jl_pc_control.css" />
+<title>收银台</title>
+</head>
+
+<body>
+<div class="jl_cashier">
+  <div class="w12 jl_cashier_til">
+    <input type="text" placeholder="输入商品条码" class="w03" />
+    <span>上一单零售单号：42456464349898</span>
+    <a class="jl_btn"><i class="fa fa-arrows-alt mr5"></i>全屏</a>
+    <a class="jl_btn" id="message_ts"><i class="fa fa-edit mr5"></i>建档</a>
+    <a class="jl_btn"><i class="fa fa-users mr5"></i>会员</a>
+    <a class="jl_btn"><i class="fa fa-print mr5"></i>打印</a>
+  </div>
+  <div class="w09 jl_cashier_pro">
+    <div class="w12 jl_list">
+      <div class="jl_title">
+        <dl>
+          <dt><i class="fa fa-square-o"></i></dt>
+          <dd class="w07">商品信息</dd>
+          <dd class="w02">金额/数量</dd>
+          <dd class="w03">批号信息</dd>
+        </dl>
+      </div>
+      <div class="jl_list_01">
+        <div class="list_item_main">
+        <dl class="xuan">
+          <dt><i class="fa fa-square-o"></i></dt>
+          <dd class="w07">
+            <ul>
+              <li><h3>海力士冰箱BCD-180</h3><span>11702</span></li>
+              <li><span>规格：250g</span><span>类别：中药材</span><span>剂型：颗粒剂</span><span>生产厂商：泉利堂医药厂</span></li>
+            </ul>
+          </dd>
+          <dd class="w02">
+            <ul>
+              <li><span><b class="font_red">2,000.00</b>×</span></li>
+              <li>
+                <input type="text" class="w03" value="0">
+                <span><label>盒</label><i class="fa fa-pencil"></i>
+                  <div class="dropdown_menu">
+                    <span class="bot"></span>
+                    <span class="top"></span>
+                    <ul class="w12"><li>大包</li><li>中包</li><li>张</li></ul>
+                  </div>
+                </span>
+              </li>
+              <li><span> = <b class="font_red">0</b></span></li>
+            </ul>
+          </dd>
+          <dd class="w03">
+            <ul>
+             <li>
+               <span>批号：Z16266221<i class="fa fa-pencil"></i>
+                  <div class="dropdown_menu">
+                    <span class="bot"></span>
+                    <span class="top"></span>
+                    <ul class="w12"><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li></ul>
+                  </div>
+               </span>
+               <span>生成日期：2016/01/03</span>
+               <span>有效日期：2018/01/03</span>
+             </li>
+            </ul>
+          </dd>
+          <dd class="w12 more">
+            <ul>
+             <li><input type="text" placeholder="处方号" /><input type="text" placeholder="处方日期" /><input type="text" placeholder="处方医生" /><input type="text" placeholder="处方医院" /></li>
+            </ul>
+          </dd>
+        </dl>
+        <dl>
+          <dt><i class="fa fa-square-o"></i></dt>
+          <dd class="w07">
+            <ul>
+              <li><h3>海力士冰箱BCD-180</h3><span>11702</span></li>
+              <li><span>规格：250g</span><span>类别：中药材</span><span>剂型：颗粒剂</span><span>生产厂商：泉利堂医药厂</span></li>
+            </ul>
+          </dd>
+          <dd class="w02">
+            <ul>
+              <li><span><b class="font_red">2,000.00</b>×</span></li>
+              <li>
+                <input type="text" class="w03" value="0">
+                <span><label>盒</label><i class="fa fa-pencil"></i>
+                  <div class="dropdown_menu">
+                    <span class="bot"></span>
+                    <span class="top"></span>
+                    <ul class="w12"><li>大包</li><li>中包</li><li>张</li></ul>
+                  </div>
+                </span>
+              </li>
+              <li><span> = <b class="font_red">0</b></span></li>
+            </ul>
+          </dd>
+          <dd class="w03">
+            <ul>
+             <li>
+               <span>批号：Z16266221<i class="fa fa-pencil"></i>
+                  <div class="dropdown_menu">
+                    <span class="bot"></span>
+                    <span class="top"></span>
+                    <ul class="w12"><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li></ul>
+                  </div>
+               </span>
+               <span>生成日期：2016/01/03</span>
+               <span>有效日期：2018/01/03</span>
+             </li>
+            </ul>
+          </dd>
+          <dd class="w12 more">
+            <ul>
+             <li><input type="text" placeholder="处方号" /><input type="text" placeholder="处方日期" /><input type="text" placeholder="处方医生" /><input type="text" placeholder="处方医院" /></li>
+            </ul>
+          </dd>
+        </dl>
+        <dl>
+          <dt><i class="fa fa-square-o"></i></dt>
+          <dd class="w07">
+            <ul>
+              <li><h3>海力士冰箱BCD-180</h3><span>11702</span></li>
+              <li><span>规格：250g</span><span>类别：中药材</span><span>剂型：颗粒剂</span><span>生产厂商：泉利堂医药厂</span></li>
+            </ul>
+          </dd>
+          <dd class="w02">
+            <ul>
+              <li><span><b class="font_red">2,000.00</b>×</span></li>
+              <li>
+                <input type="text" class="w03" value="0">
+                <span><label>盒</label><i class="fa fa-pencil"></i>
+                  <div class="dropdown_menu">
+                    <span class="bot"></span>
+                    <span class="top"></span>
+                    <ul class="w12"><li>大包</li><li>中包</li><li>张</li></ul>
+                  </div>
+                </span>
+              </li>
+              <li><span> = <b class="font_red">0</b></span></li>
+            </ul>
+          </dd>
+          <dd class="w03">
+            <ul>
+             <li>
+               <span>批号：Z16266221<i class="fa fa-pencil"></i>
+                  <div class="dropdown_menu">
+                    <span class="bot"></span>
+                    <span class="top"></span>
+                    <ul class="w12"><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li><li>Z16266221</li></ul>
+                  </div>
+               </span>
+               <span>生成日期：2016/01/03</span>
+               <span>有效日期：2018/01/03</span>
+             </li>
+            </ul>
+          </dd>
+          <dd class="w12 more">
+            <ul>
+             <li><input type="text" placeholder="处方号" /><input type="text" placeholder="处方日期" /><input type="text" placeholder="处方医生" /><input type="text" placeholder="处方医院" /></li>
+            </ul>
+          </dd>
+        </dl>
+       </div>
+     </div>
+   </div>
+  </div>
+  <div class="w03 jl_cashier_set">
+    <ul class="w12 total bgcolor_blue">
+      <li>应收<b>2,8888.00</b>元</li>
+      <li>实收<b>2,8888.00</b>元</li>
+      <li>找零<b>2,8888.00</b>元</li>
+    </ul>
+    <div class="w12 jl_form">
+    <div class="jl_form_01">
+      <dl>
+        <dt class="w02" title="现金">现金</dt>
+        <dd class="w10"><input type="text" class="w12"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="医保卡">医保卡</dt>
+        <dd class="w10"><input type="text" class="w12"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="银联">银联</dt>
+        <dd class="w10"><input type="text" class="w12"></dd>
+      </dl>
+    </div>
+    </div>
+    <textarea class="w12" placeholder="备注信息"></textarea>
+    <a class="w12 jl_btn btn_red"><i class="fa fa-gavel"></i>确定(Enter)</a>
+</div>
+<div class="jl_cashier_bot">
+<span><i class="fa fa-user mr5"></i>张三</span>
+<span class="ml20"><i class="fa fa-phone mr5"></i>18571137535</span>
+<span class="ml20"><i class="fa fa-map-marker mr5"></i>湖北省武汉市江汉区新华路1210</span>
+<span class="fr">2016-08-24 16:03</span>
+<span class="fr mr20">导购员：李四</span>
+</div>
+
+<div class="jl_modal">
+ <div class="jl_message hide">
+  <div class="jl_message_close" title="关闭">×</div>
+  <div class="jl_message_main">
+    <h3>建档</h3>
+  </div>
+  <div class="jl_message_main mt20">
+    <div class="jl_form_02">
+      <ul>
+        <li class="w12">
+          <dl>
+            <dt class="w01" title="姓名">姓名</dt>
+            <dd class="w11">
+              <div class="delete_input w05">
+                <input type="text" placeholder="提示信息，默认值。">
+                <i title="清空">×</i>
+              </div>
+              <label class="message messcolor_yellow ml10"><i class="fa fa-info-circle mr5"></i>请输入信息，4位数字。</label>
+            </dd>
+          </dl>
+        </li>
+        <li class="w12">
+          <dl>
+            <dt class="w01" title="手机">手机</dt>
+            <dd class="w11">
+              <div class="delete_input w05">
+                <input type="text" placeholder="提示信息，默认值。">
+                <i title="清空">×</i>
+              </div>
+              <label class="message messcolor_yellow ml10"><i class="fa fa-info-circle mr5"></i>请输入信息，4位数字。</label>
+            </dd>
+          </dl>
+        </li>
+        <li class="w12">
+          <dl>
+            <dt class="w01" title="地址">地址</dt>
+            <dd class="w11">
+<div class="w05 jl_btn_group">
+              <div class="delete_input">
+              <input type="text" placeholder="湖北省武汉市江汉区" readonly class="jl_date">
+              <i title="清空">×</i>
+              </div>
+            <span class="jl_btn btn_white"><i class="fa fa-map-marker"></i></span>
+            <div class="jl_dropdown_menu">
+              <div class="jl_address">
+                <div class="w12">
+                <h3>历史选择</h3>
+                <div class="add_main"><a><i class="fa fa-map-marker font_red"></i>湖北省 - 武汉市 - 江汉区 - 新华路国际商会大厦1610</a></div>
+                <h3>选择省/直辖市</h3>
+                <div class="add_main">
+                  <span class="xuan">湖北省</span>
+                  <span>北京市</span>
+                  <span>上海市</span>
+                  <span>四川省</span>
+                  <span>湖南省</span>
+                </div>
+                </div>
+                <div class="w12">
+                <h3>选择市/区</h3>
+                <div class="add_main">
+                  <span class="xuan">武汉市</span>
+                  <span>孝感市</span>
+                  <span>黄冈市</span>
+                  <span>鄂州市</span>
+                  <span>襄樊市</span>
+                </div>
+                </div>
+                <div class="w12">
+                <h3>选择区/县（市）</h3>
+                <div class="add_main">
+                  <span class="xuan">江汉区</span>
+                  <span>江岸区</span>
+                  <span>东西湖区</span>
+                  <span>洪山区</span>
+                  <span>青山区</span>
+                </div>
+                </div>
+                <div class="w12">
+                <h3>填写街道</h3>
+                <div class="add_main">
+                  <input placeholder="填写街道/小区/门牌号等" type="text">
+                </div>
+                </div>
+                <div class="w12">
+                <h3>您选择的结果</h3>
+                <div class="add_main">
+                  <span><label>湖北省</label><i class="fa fa-times-circle" title="返回上级"></i></span>
+                  <span><label>武汉市</label><i class="fa fa-times-circle" title="返回上级"></i></span>
+                  <span><label>江汉区</label><i class="fa fa-times-circle" title="返回上级"></i></span>
+                  <input placeholder="填写街道/小区/门牌号等" type="text">
+                </div>
+                </div>
+                <a class="jl_btn btn_color"><i class="fa fa-gavel"></i><label>确定</label></a>
+                <a class="jl_btn btn_color"><i class="fa fa-reply-all"></i>重置</a>
+              </div>
+            </div>
+          </div>
+              <label class="message messcolor_yellow ml10"><i class="fa fa-info-circle mr5"></i>请输入信息，4位数字。</label>
+            </dd>
+          </dl>
+        </li>
+        <li class="w12">
+          <dl>
+            <dt class="w01" title="预约时间">预约时间</dt>
+            <dd class="w11">
+              <div class="w05 jl_btn_group">
+              <div class="delete_input">
+              <input type="text" placeholder="时间" readonly class="jl_date">
+              <i title="清空">×</i>
+              </div>
+              <span class="jl_btn btn_white"><i class="fa fa-calendar"></i></span>
+              </div>
+              <div class="jl_input_radio font_blue ml20"><i class="fa fa-dot-circle-o"></i><span>上午</span></div>
+              <div class="jl_input_radio ml10"><i class="fa fa-circle-o"></i><span>下午</span></div>
+              <label class="message messcolor_yellow ml10"><i class="fa fa-info-circle mr5"></i>请输入信息，4位数字。</label>
+            </dd>
+          </dl>
+        </li> 
+        <li class="w12">
+          <dl>
+            <dt class="w01">&nbsp;</dt>
+            <dd class="w11">
+            <div class="jl_input_checkbox checkbox_css font_blue"><i class="fa fa-check-square"></i><span>等库户通知</span></div>
+            </dd>
+          </dl>
+        </li> 
+        <li class="w12">
+          <dl>
+            <dt class="w01" title="服务类型">服务类型</dt>
+            <dd class="w11">
+<div class="w05 jl_btn_group">
+              <div class="delete_input">
+              <input type="text" readonly placeholder="请选择">
+              <i title="清空">×</i>
+              </div>
+            <span class="jl_btn btn_white"><i class="fa fa-angle-down"></i></span>
+            <div class="jl_dropdown_menu">
+              <div class="dataexchange_main">
+                <div class="jl_screen_a_z">
+                  <ul class="title"><li class="xuan font_blue">历史选择</li><li>ABCDE</li><li>FGHJK</li><li>LMNOP</li><li>QRSTU</li><li>VWSYZ</li></ul>
+                  <div class="main">
+                    <div class="jl_square_texe">
+                      <ul class="w12">
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                        <li><div class="jl_input_checkbox checkbox_text"><i class="fa fa-square-o"></i><span>下来多选</span></div></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+              <label class="message messcolor_yellow ml10"><i class="fa fa-info-circle mr5"></i>请输入信息，4位数字。</label>
+            </dd>
+          </dl>
+        </li> 
+      </ul>
+    </div>
+  </div>
+  <div class="jl_message_btn">
+    <a class="jl_btn btn_color"><i class="fa fa-gavel mr5"></i>确定</a>
+    <a class="jl_btn btn_color"><i class="fa fa-times mr5"></i>关闭</a>
+  </div>
+</div>
+</div>
+
+</body>
+<script type="text/javascript" src="/scripts/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="ui.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-time.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+</html>

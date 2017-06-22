@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_ZPXX.SCM_ZPXX">
+      
+        <FIELD attrname="WLDWMC" format='{"$or":[{"WLDWMC":{"$regex":"#WLDWMC#"}},{"WLDW01":{"$regex":"#WLDWMC#"}}]}' fieldtype="String" allownull="Y" name="供应商" />
+       <FIELD attrname="JLBH" format='{"JLBH":#JLBH#}' fieldtype="String" allownull="Y" name="记录编号" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        
+	</JLConfig>
+</root>

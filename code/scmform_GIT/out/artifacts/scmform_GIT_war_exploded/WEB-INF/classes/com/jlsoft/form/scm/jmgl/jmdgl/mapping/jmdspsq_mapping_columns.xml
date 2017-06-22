@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="o2o.authorizes.save">
+		<!-- <FIELD attrname="JMD01" fieldtype="string" allownull="N" name="加盟店编码" />
+		<FIELD attrname="JMDMC" fieldtype="string" allownull="N" name="加盟店名称" />	
+		<FIELD attrname="PTSMC" fieldtype="string" allownull="N" name="平台商名称" />
+		 -->
+		
+		<Nested id="JMDMC">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="加盟店名称" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="加盟店名称" />
+        </Nested>  
+        <Nested id="PTSMC">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="平台商名称" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="平台商名称" />
+        </Nested>  
+		
+		
+		
+		<!--<FIELD attrname="SPXX01" fieldtype="string" allownull="N" name="商品编码" />	
+		<FIELD attrname="SPPP01" fieldtype="string" allownull="N" name="商品品牌编码" />	
+		<FIELD attrname="SPFL01" fieldtype="string" allownull="N" name="商品分类编码" /> -->
+		<!-- <Nested id="SPLB" allownull="N" name="商品列表">
+            <FIELD attrname="PTS01" fieldtype="string" allownull="N" name="平台商编码" />
+            <FIELD attrname="SPMC" fieldtype="string" allownull="N" name="商品" />
+            <FIELD attrname="SPPP" fieldtype="string" allownull="N" name="商品品牌 " />
+            <FIELD attrname="SPGG" fieldtype="string" allownull="N" name="规格" />
+            <FIELD attrname="SPXH" fieldtype="string" allownull="N" name="型号 " />
+            <FIELD attrname="SPFLMC" fieldtype="string" allownull="N" name="商品分类" />
+            <FIELD attrname="ZT" fieldtype="string" allownull="N" name="状态" />
+    	</Nested> -->
+	</JLConfig>
+</root>

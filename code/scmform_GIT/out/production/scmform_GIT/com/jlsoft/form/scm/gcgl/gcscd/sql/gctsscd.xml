@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GCTSSCD">
+	<select id="TSSCDMX" parameterType="Map" resultType="java.util.Map">
+	 select A.PFDI01, A.SPXX01, B.SPXX02 , 
+	 B.SPXX04,A.AZDZMX AZDZ,A.LXRMX LXR,
+	 A.LXDHMX LXDH,C.KHYHD01 KHYHD,
+	 (A.PFDI05-A.PFDI09) THSL,A.GCJZLSL ZLSL,
+	  A.WBTDH, A.WTZLSL YYWTZLSL, A.GCSCSL,
+	  (SELECT GCSPBM FROM GCSPDZ WHERE SPXX01=A.SPXX01 and rownum=1) GCSPBM,
+	  A.PFDI02 PFDJ,C.JLWBDH, C.KHYHD01,A.DJTDH
+	  FROM PFDITEM A,  SPXX B,PFD C  
+	  WHERE A.SPXX01=B.SPXX01 
+	  AND A.PFDI05-A.WTZLSL-A.PFDI09>0
+	  AND A.PFD01=C.PFD01 
+	  AND A.PFDI12 is not null 
+	  AND A.GSXX01=C.GSXX01
+	  JL{CZY|C.WLDW01|WLDW_CZ|inS}JL
+  	<if test="GCDLD01 != null and GCDLD01 != ''">
+	  AND C.GCDJH=#{GCDLD01}
+    </if>
+	<if test="GSXX01 != null and GSXX01 != ''">
+	   AND A.GSXX01=#{GSXX01}
+    </if>
+    <if test="SPMC != null and SPMC != ''">
+	   AND (Upper(A.SPXX01) LIKE Upper('%'||#{SPMC}||'%') OR Upper(B.SPXX04) LIKE Upper('%'||#{SPMC}||'%') OR Upper(B.SPXX02) LIKE Upper('%'||#{SPMC}||'%'))
+    </if>
+  </select>
+</mapper>

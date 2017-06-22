@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="jl.scm.lsgl.lsd.selectLSSYT.getPrice" description="金力零售收银台商品查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.lsgl.lsd.lssyt" method="getPrice"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_JXSBHJH.SCM_JXSBHJH">
+		<FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"JXS01":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商" />
+        <FIELD qx='JXS01|WLDW_CX|in' />
+        <FIELD qx='BM01|BM_CX|LIKE' />
+	</JLConfig>
+	<JLConfig id="MONGO_JXSBHJH.SCM_JXSBHJHLSBSJ">
+	 	<FIELD attrname="ZDRQ_S" format='{"YJYHSJ":{"$gte":"#ZDRQ_S#"}}' fieldtype="Map" allownull="Y" name="预计要货时间起" />
+        <FIELD attrname="ZDRQ_E" format='{"$or":[{"YJYHSJ":{"$lte":"#ZDRQ_E#"}},{"YJYHSJ":{"$regex":"#ZDRQ_E#"}}]}' fieldtype="Map" allownull="Y" name="预计要货时间止" />
+	</JLConfig>
+	<JLConfig id="MONGO_JXSBHJH.SCM_JXSBHJHLSB">
+		 <FIELD attrname="SHRQ_S" format='{"SHRQ":{"$gte":"#SHRQ_S#"}}' fieldtype="Map" allownull="Y" name="审核时间起" />
+        <FIELD attrname="SHRQ_E" format='{"$or":[{"SHRQ":{"$lte":"#SHRQ_E#"}},{"SHRQ":{"$regex":"#SHRQ_E#"}}]}' fieldtype="Map" allownull="Y" name="审核时间止" />
+	</JLConfig>
+</root>

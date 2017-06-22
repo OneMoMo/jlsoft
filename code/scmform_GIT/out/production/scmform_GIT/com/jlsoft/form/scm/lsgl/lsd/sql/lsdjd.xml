@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LSDJD">
+	<select id="queryLSDJD" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.GSXX01, 
+        A.JLWBDH YSDH, 
+        A.BM01 XSBMDM, 
+        B.BM02 XSBMMC, 
+        DECODE(A.LSDJ02, 0, '订金', 1, '退订金', 7, '订金', 8, '退订金') DJLX, 
+        A.LSDJ03 YYYBH, 
+        A.LSDJ04 YYYMC, 
+        TO_CHAR(A.LSDJ05, 'yyyy-mm-dd') DHQX, 
+        A.LSDJ06 YSJE, 
+        A.LSDJ20 CXDH, 
+       get_jlwbdh(10, A.LSDJ21,a.gsxx01) XSDH,
+        A.LSDJ07 GKMC, 
+        A.LSDJ08 LXDH, 
+        A.LSDJ09 DZ, 
+        A.LSDJ10 SJHM, 
+        A.LSDJ11 ZJXX, 
+        A.LSDJ12 ZDR, 
+        TO_CHAR(A.LSDJ13, 'yyyy-mm-dd')  ZDRQ, 
+        A.LSDJ14 SHR, 
+        TO_CHAR(A.LSDJ15, 'yyyy-mm-dd')  SHRQ, 
+        A.LSDJ16 SKR, 
+        TO_CHAR(A.LSDJ17, 'yyyy-mm-dd') SKRQ,
+       TO_CHAR( A.LSDJ26, 'yyyy-mm-dd') KPRQ, 
+        A.LSDJ18 SYJH, 
+        (SELECT GSXX02 FROM GSXX WHERE GSXX01=A.GSXX01)GSMC, 
+        A.LSDJ23 BZ, 
+        (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSXX02 
+   FROM LSDJD A, BM B 
+  WHERE A.BM01 = B.BM01 
+ 
+    <if test="KHMC != null and KHMC !=''">
+     	 AND  A.LSDJ07 LIKE '%'||#{KHMC}||'%' 
+    </if>
+    
+    <if test="XSBM != null and XSBM  != ''">
+		 <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 LIKE #{item}||'%'
+		 </foreach> 
+	 </if>
+	 
+	  <if test="DJ != null and DJ  != ''">
+		 <foreach item="item" index="index" collection="DJ"  open=" AND (" separator=" or " close=")"> 
+		      A.LSDJ02= #{item}
+		 </foreach> 
+	  </if>
+	  
+       <if test="ZDRQ_Q != null and ZDRQ_Q != ''">
+       AND A.LSDJ13 &gt;= TO_DATE(#{ZDRQ_Q} , 'yyyy-mm-dd ')
+       </if>
+		<if test="ZDRQ_E != null and ZDRQ_E != ''">
+		AND A.LSDJ13 &lt;= TO_DATE(#{ZDRQ_E}, 'yyyy-mm-dd')
+	   </if>
+	      <if test="SKRQ_Q != null and SKRQ_Q != ''">
+       AND A.LSDJ17 &gt;= TO_DATE(#{SKRQ_Q} , 'yyyy-mm-dd ')
+       </if>
+		<if test="SKRQ_E != null and SKRQ_E != ''">
+		AND A.LSDJ17 &lt;= TO_DATE(#{SKRQ_E}, 'yyyy-mm-dd')
+	   </if>
+	   <!-- <if test="YS != null and YS  != ''">
+		 <foreach item="item" index="index" collection="YS"  open=" AND (" separator=" or " close=")"> 
+		      A.LSDJ02= #{item}
+		 </foreach> 
+	  </if> -->
+	  <if test="YYY != null and YYY !=''">
+     	 AND  A.LSDJ04 LIKE '%'||#{YYY}||'%' 
+     </if>
+	    <if test="YSDH != null and YSDH  != ''">
+		 <foreach item="item" index="index" collection="YSDH"  open=" AND (" separator=" or " close=")"> 
+		      A.JLWBDH= #{item}
+		 </foreach> 
+	  </if>
+	 JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+     JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+  </select>
+</mapper>

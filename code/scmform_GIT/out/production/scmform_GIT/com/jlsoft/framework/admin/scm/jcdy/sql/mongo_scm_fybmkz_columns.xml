@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FYBMKZ.CSS_FYBMKZ">   
+        <FIELD attrname="BMMC" format='{"$or":[{"FYBMMC":{"$regex":"#BMMC#"}},{"FYBM01":{"$regex":"#BMMC#"}}]}' fieldtype="String" allownull="Y" name="代码名称查询" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <!-- <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" /> -->
+	</JLConfig>
+</root>   

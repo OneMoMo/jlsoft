@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="JXSHFWDJ_TECNO.WXJL">
+       <FIELD attrname="VIP_HYXX01" format='{"VIP_HYXX01":"#VIP_HYXX01#"}' fieldtype="String" allownull="N" name="会员编号" />
+       <FIELD attrname="GSXX01" format='{"GSXX01":"#GSXX01#"}' fieldtype="String" allownull="N" name="公司代码" />
+	</JLConfig>
+</root>

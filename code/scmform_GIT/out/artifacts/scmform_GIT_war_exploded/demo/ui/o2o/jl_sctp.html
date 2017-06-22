@@ -1,0 +1,91 @@
+<div class="jl_pagetitle"><h2>上传图片</h2><span>上传图片</span></div>
+<div class="jl_breadcrumb">
+  <ul>
+    <li><i class="fa fa-home"></i><a href="index.html">首页</a></li>
+    <li><i class="fa fa-angle-right"></i><a href="#">FORM5模板</a></li>
+    <li><i class="fa fa-angle-right"></i><a href="#">上传图片</a></li>
+  </ul>
+  <div class="jl_process">
+    <ul>
+      <li class="before">上一步流程</li>
+      <li class="center">当前流程</li>
+      <li class="after">下一步流程</li>
+    </ul>
+    <i class="fa fa-sort-amount-asc" title="查看所有步骤"></i>
+    <div class="jl_process_menu hide">
+      <ul class="jl_dropdown_menu">
+        <li><a>张三/2016-01-11 14:41<label class="jl_btn btn_black">已完结的流程</label></a></li>
+        <li><a>李四/2016-01-11 14:41<label class="jl_btn btn_black">已完结的流程</label></a></li>
+        <li><a>王五/2016-01-11 14:41<label class="jl_btn btn_black">已完结的流程</label></a></li>
+        <li><a>刹那芳华/2016-01-11 14:41<label class="jl_btn btn_green">当前流程</label></a></li>
+        <li><a>赵六<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>孙七<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>刘八<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>李九<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>高十<label class="jl_btn btn_red">未走流程</label></a></li>
+        <li><a>胡十一<label class="jl_btn btn_red">未走流程</label></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="pagr_content">
+  <dl class="w12 sctp_main">
+     <dd class="w12">
+       <div class="jl_up_img">
+         <div class="w01 load_main">
+            <i class="fa fa-picture-o"></i>
+            <input type="file">
+         </div>
+         <div class="w10 img_main">
+           <div class="more_img w12">
+               <ul class="w12">
+                  <li>
+                    <img src="images/logo_jl_bottom.png">
+                    <div class="sctp_zgc hide">
+                      <i class="fa fa-trash-o" title="删除"></i>
+                      <i class="fa fa-link" title="复制链接"></i>
+                    </div>
+                  </li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                  <li><img src="images/logo_jl_bottom.png"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </dd>
+      </dl>
+</div>
+
+<script>
+  $('.jl_date').fdatepicker();
+  $('.jl_time').fdatepicker({format: 'yyyy-mm-dd hh:ii',pickTime: true});
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var checkin = $('.jl_time_01').fdatepicker({
+	  onRender: function (date) {return date.valueOf() < now.valueOf() ? 'disabled' : '';
+	  }}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+			}
+			checkin.hide();
+			$('.jl_time_02')[0].focus();
+		}).data('datepicker');
+		var checkout = $('.jl_time_02').fdatepicker({
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');
+</script>

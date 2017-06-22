@@ -1,0 +1,76 @@
+.jl_title{ width:100%; height:35px; line-height:35px; background:#00a2ca; border-bottom:0px; font-weight:bold; color:#fff;}
+.jl_title > dl{ width:100%; padding:0 10px;}
+.jl_title > dl > dt{ position:absolute; left:10px;}
+.jl_title > dl > dd{ height:35px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+.jl_bottom{ float:left; width:100%; padding:10px 0; background:#f5f5f5; border-top:1px solid #e1e1e1;}
+.jl_bottom > ul{ padding-right:10px; width:100%;}
+.jl_bottom > ul > li{ margin-left:20px;}
+.jl_bottom > ul > li > .jl_btn{ padding:4px 16px 5px;}
+.jl_bottom > ul > li > .jl_input_checkbox{ padding:0px !important;}
+.jl_bottom > ul > li > h3{ line-height:30px;}
+.jl_bottom > ul > li:first-child{ margin-left:10px;}
+.jl_bottom > .pad_load{ width:50%; text-align:center; height:30px; line-height:30px; margin-left:25%; color:#999; font-size:16px; cursor:pointer;}
+.jl_bottom > .pad_load > i{ margin-right:10px;}
+
+/***
+表单样式
+***/
+.jl_form{ position:relative;}
+h2.form_title{ line-height:30px; margin-bottom:10px; width:100%; font-size:20px; text-align:center;}
+.jl_form > dl.form_btn{ margin-top:20px; width:100%;}
+.jl_form > dl.form_btn > dd{ padding-left:20px;}
+.jl_form > dl.form_btn > dd > .jl_btn{ margin-right:20px;}
+.jl_form dd em.btx:before{ font-size:20px; position:absolute; font-style:normal; top:5px; left:5px; font-weight:bold; content:"*"}
+
+.jl_form_01{ float:left; width:100%; position:relative;}
+.jl_form_01 > dl{ width:100%;}
+.jl_form_01 > dl > dt{ text-align:right; line-height:30px; color:#666; padding:0 0 10px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.jl_form_01 > dl > dd{ padding:0 0 10px 20px;}
+.jl_form_01 > dl > dd label.message{ font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#fff; padding:6px 10px; margin:0px 0 0 10px; display:none; float:left;}
+.jl_form_01 > dl > dd label.message > i{ margin-right:5px;}
+.jl_form_01 > dl > dd > span{ line-height:30px; color:#000;}
+.jl_form_01 > dl > dd > span > img{ margin:0 10px 0 0; height:30px; width:100px; background:#000;}
+
+.jl_form_02{ float:left; width:100%; position:relative;}
+.jl_form_02 > ul{ width:100%;}
+.jl_form_02 > ul > li{ padding:0px;}
+.jl_form_02 > ul > li > dl{ width:100%; height:40px;}
+.jl_form_02 > ul > li > dl > dt{ text-align:right; line-height:30px; color:#000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.jl_form_02 > ul > li > dl > dd{ padding:0px 0 10px 20px; color:#000;}
+.jl_form_02 > ul > li > dl > dd > span{ line-height:30px;}
+.jl_form_02 > ul > li > dl > dd > span > img{ margin:0 10px 0 0; height:30px; width:100px; background:#000;}
+.jl_form_02 > ul > div{ background:#eee; padding-bottom:30px; margin-bottom:10px;}
+.jl_form_02 > ul > div > li > dl{ width:100%; height:40px;}
+.jl_form_02 > ul > div > li > dl > dt{ text-align:right; line-height:30px; color:#000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.jl_form_02 > ul > div > li > dl > dd{ padding:0px 0 10px 20px; color:#000;}
+.jl_form_02 > ul > div > li > dl > dd > span{ line-height:30px;}
+.jl_form_02 > ul > div > li > dl > dd > span > img{ margin:0 10px 0 0; height:30px; width:100px; background:#000;}
+
+.jl_form_02_oa{ padding:10px; background:#f5f5f5;}
+.jl_form_02_oa input{ border:1px solid #f5f5f5; background:#f5f5f5 !important; outline:none;}
+.jl_form_02_oa .jl_form_02 > ul{ border-top:1px solid #e1e1e1; border-left:1px solid #e1e1e1; margin-bottom:10px;}
+.jl_form_02_oa .jl_form_02 > ul > li{ border-bottom:1px solid #e1e1e1; border-right:1px solid #e1e1e1;}
+.jl_form_02_oa .jl_form_02 em{ display:none;}
+.jl_form_02_oa .jl_form_02 > ul > li > dl{ height:inherit !important;}
+.jl_form_02_oa .jl_form_02 > ul > li > dl > dd{ padding:0px !important;}
+.jl_form_02_oa .jl_form_02 > ul > li > dl > dt{ padding:0 10px 0 0 !important; border-right:1px solid #e1e1e1; color:#333; font-weight:bold;}
+
+.jl_form_03{ float:left; width:100%; position:relative;}
+.jl_form_03 > ul{ width:100%;}
+.jl_form_03 > ul > li{ padding:0px;}
+.jl_form_03 > ul > li > dl{ width:100%; height:55px;}
+.jl_form_03 > ul > li > dl > dt{ text-align:right; line-height:30px; color:#999; padding:6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jl_form_03 > ul > li > dl > dd{ padding:6px 0 6px 20px;}
+.jl_form_03 > ul > li > dl > dd > label.message{ font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#fff; padding:6px 8px 8px 8px ; margin:2px 0 0 10px; display:none; float:left;}
+.jl_form_03 > ul > li  dl > dd > label.message i{ margin-right:4px; width:12px;}
+.jl_form_03 > ul > li  dl > dd em.btx:before{ font-size:20px; position:absolute; font-style:normal; top:12px; left:5px; font-weight:bold; content:"*"}
+
+/*****
+制单样式.single
+*****/
+.single_title{ height:40px; line-height:30px; padding-bottom:9px; border-bottom:1px solid #e4e4e4; margin-bottom:20px;}
+.single_title > h2{ font-weight:500;}
+.single_title > span{ font-size:16px;}
+.single_title > .jl_btn{ height:30px; line-height:28px; padding:0px 10px;}
+

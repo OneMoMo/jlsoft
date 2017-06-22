@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<JLConfig id="momgo.webfzhsdm.scm.webfzhsdm">
+		<FIELD attrname="DM" fieldtype="string" allownull="N" name="代码" />
+        <FIELD attrname="DMBM" fieldtype="string" allownull="N" name="代码别名" />
+        <FIELD attrname="MC" fieldtype="string" allownull="N" name="名称" />
+        <FIELD attrname="MCBM" fieldtype="string" allownull="N" name="名称别名" />
+</JLConfig>
+
+</root>
+

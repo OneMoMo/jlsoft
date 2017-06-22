@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DSFHQK">
+	<select id="queryDSFHQK" parameterType="java.util.Map" resultType="java.util.Map">
+		select DISTINCT A.JLWBDH DJHM,A.GSXX01,S.SPFL01,S.SPXX68 SPTJ,A.WBTDH WBTDH,
+			A.DJLX DJLX01,
+			A.CZLX CZLX01,
+            GET_DJLX (A.DJLX) DJLX,
+            ((A.YSFSL - A.THSL - A.SSFSL - A.JSSL)-A.SSFSL-A.ZFSL-(CASE A.DJLX
+         WHEN 1 THEN
+          A.JSSL
+         WHEN 7 THEN
+          A.JSSL
+         ELSE
+          0
+       END)) DSFSL,
+	   A.YSFSL DJSL,
+       S.JLDW01 JLDW,S.SPXX02 SPBM,S.SPXX04 SPMC,S.SPXX01,(A.YSFSL-A.THSL-A.SSFSL-A.JSSL) YSFSL,A.SSFSL,A.THSL,
+       (CASE A.DJLX WHEN 1 THEN A.JSSL WHEN 7 THEN A.JSSL ELSE 0 END ) JSSL,get_spsx_v10(A.SPSX) SPSX,
+       A.WLDW01 WLDWBM,W.WLDW02 WLDWMC, A.CGBM01 CGBMBM,B.BM02 CGBMMC,
+       A.CK01 CKBM,C.CK02 CKMC,TO_CHAR(A.FSRQ, 'YYYY-MM-DD') ZDRQ,
+       S.SPFL02 SPFL,S.PPB02 PPMC,S.PPB01,
+       (CASE
+         WHEN A.DJLX = 1 THEN
+          (SELECT TO_CHAR(RKD13) FROM RKD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 3 THEN
+          (SELECT FCD12 FROM FCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 7 AND A.CZLX = 0 THEN
+          (SELECT ZCD09 FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 7 AND A.CZLX = 1 THEN
+          (SELECT ZCD07 FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 8 THEN
+          (SELECT TO_CHAR(PFDI12) FROM PFDITEM WHERE PFDI01 = A.THDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 9 THEN
+          (SELECT YFDI11 FROM YFDITEM WHERE YFDI01 = A.THDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 10 THEN
+          (SELECT TO_CHAR(LSDI12) FROM LSDITEM WHERE LSDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 51 AND A.CZLX = 0 THEN
+          (SELECT TO_CHAR(JHDI04) FROM JHDITEM WHERE JHDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 51 AND A.CZLX = 1 THEN
+          (SELECT TO_CHAR(JHDI13) FROM JHDITEM WHERE JHDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         ELSE
+          NULL
+       END) FHR,
+       (CASE
+         WHEN A.DJLX = 1 THEN
+          (SELECT to_char(RKD14,'yyyy-mm-dd') FROM RKD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 3 THEN
+          (SELECT to_char(FCD13,'yyyy-mm-dd') FROM FCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 7 AND A.CZLX = 0 THEN
+          (SELECT  to_char(ZCD10,'yyyy-mm-dd') FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 7 AND A.CZLX = 1 THEN
+          (SELECT  to_char(ZCD08,'yyyy-mm-dd') FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 8 THEN
+          (SELECT  to_char(PFDI11,'yyyy-mm-dd') FROM PFDITEM WHERE PFDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 9 THEN
+          (SELECT  to_char(YFDI12,'yyyy-mm-dd') FROM YFDITEM WHERE YFDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 10 THEN
+          (SELECT  to_char(LSDI11,'yyyy-mm-dd') FROM LSDITEM WHERE LSDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 51 AND A.CZLX = 0 THEN
+          (SELECT to_char(JHDI05,'yyyy-mm-dd') FROM JHDITEM WHERE JHDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 51 AND A.CZLX = 1 THEN
+          (SELECT to_char(JHDI14,'yyyy-mm-dd') FROM JHDITEM WHERE JHDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         ELSE
+          NULL
+       END) FHRQ,
+       (CASE
+         WHEN A.DJLX = 8 THEN
+          (SELECT WLDW01 FROM PFD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 9 THEN
+          (SELECT WLDW01 FROM YFD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         ELSE
+          NULL
+       END) KHXX01,
+       (CASE
+         WHEN A.DJLX = 8 THEN
+          (SELECT WLDW02
+             FROM WLDW
+            WHERE WLDW01 = (SELECT WLDW01 FROM PFD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1))
+         WHEN A.DJLX = 9 THEN
+          (SELECT WLDW02
+             FROM WLDW
+            WHERE WLDW01 = (SELECT WLDW01 FROM YFD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1))
+         ELSE
+          NULL
+       END) KHXX02,(CASE
+         WHEN A.DJLX = 1 THEN
+          (SELECT RKD03
+             FROM RKD
+            WHERE JLWBDH = A.JLWBDH
+              AND GSXX01 = A.GSXX01
+              AND ROWNUM = 1)
+         WHEN A.DJLX = 3 THEN
+          (SELECT TO_CHAR(SHDH01)
+             FROM FCD
+            WHERE JLWBDH = A.JLWBDH
+              AND GSXX01 = A.GSXX01
+              AND ROWNUM = 1)
+         ELSE
+          NULL
+       END) GCCKDH,
+            (CASE
+         WHEN A.DJLX = 1 THEN
+          (SELECT RKD03
+             FROM RKD
+            WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         ELSE
+          NULL
+       END) GCCKDH,
+       (CASE WHEN EXISTS 
+       (SELECT 1 FROM CSS_FWD WHERE JLWBDH=A.JLWBDH) THEN  '1' else '0' END) THFS,
+             (SELECT FWWD02 FROM CSS_FWWD WHERE FWWD01= (SELECT FWWD01 FROM CSS_SHGD WHERE DJHM=A.JLWBDH AND ROWNUM=1)) SHWD
+  from DSFHPSB A, SPXX S, WLDW W, BM B, CK C
+  WHERE A.SPXX01 = S.SPXX01
+   		AND A.WLDW01 = W.WLDW01
+   		AND A.CK01 = C.CK01
+   		AND A.CGBM01=B.BM01
+		 <if test="SFHJK==1"> 
+   		    AND A.SSFSL-A.YSFSL &lt;&gt; 0
+        	AND (A.YSFSL - A.THSL - A.SSFSL - A.ZFSL -(CASE A.DJLX WHEN 1 THEN A.JSSL WHEN 7 THEN A.JSSL ELSE 0 END)) &lt;&gt; 0
+		</if>
+		<if test="SFHJK==2"> 
+   		    AND A.SSFSL-A.YSFSL=0
+		</if>
+   		<!-- AND A.SSFSL+(CASE A.DJLX WHEN 1 THEN A.JSSL WHEN 7 THEN A.JSSL ELSE 0 END) &lt;&gt; (A.YSFSL - A.THSL - A.SSFSL - A.JSSL) -->
+		JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+       	 JL{CZY|A.CGBM01|BM_CX|LIKE%}JL
+         JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+         JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''"> 
+		   AND A.GSXX01 = #{GSXX01}
+		</if>  
+		 <if test="CZLX != null and CZLX != ''">
+	    	 <foreach item="item" index="index" collection="CZLX"  open=" AND (" separator=" or " close=")">
+	          A.CZLX= #{item}
+	         </foreach>
+	    </if>
+	    <if test="DJHM != null and DJHM != ''">
+	    	 <foreach item="item" index="index" collection="DJHM"  open=" AND (" separator=" or " close=")">
+	          A.JLWBDH =#{item}
+	         </foreach>
+	    </if>
+	    <if test="DJZT == 0">
+	    	<!--已完成  -->
+	       AND   A.YSFSL-A.THSL-A.SSFSL-A.JSSL=0
+	    </if>
+	    <if test="DJZT == 1">
+	     <![CDATA[  AND   A.YSFSL-A.THSL-A.SSFSL-A.JSSL<>0]]>
+	    </if>
+	    <if test="CK01 != null and CK01 != ''">
+		  <foreach item="item" index="index" collection="CK01"  open=" AND (" separator=" or " close=")"> 
+		      A.CK01 LIKE #{item}||'%'
+		   </foreach>
+	    </if>      
+	    <if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      S.SPXX02 LIKE '%'||#{item}||'%' OR REGEXP_LIKE(S.SPXX04, #{item}, 'i') 
+		     </foreach> 
+	    </if>
+	     <if test="WLDW != null and WLDW != ''">
+		     <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 
+		      W.WLDW01 LIKE '%'||#{item}||'%' OR REGEXP_LIKE(W.WLDW02, #{item}, 'i')
+		 </foreach> 
+	    </if>
+	     
+	   <if test="PP01 != null and PP01 != ''">
+	     <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+	       S.PPB01 = #{item}
+	    </foreach>
+	    </if>
+	     <if test="SPFL != null and SPFL != ''">
+	    	<foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	         S.SPFL01 LIKE #{item}||'%'
+	      </foreach>
+	    </if>
+	     
+	    <if test="CGBM!= null and CGBM != ''">
+		     <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      A.CGBM01 LIKE #{item}||'%'
+		     </foreach> 	         
+	    </if>
+	<if test="DJLX != null and DJLX != ''">
+			 <foreach item="item" index="index" collection="DJLX"  open=" AND (" separator=" or " close=")"> 
+	          A.DJLX = #{item}
+	    	 </foreach>
+	  </if>
+	<if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND A.FSRQ >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	<if test="ZDRQ_E !=null and ZDRQ_E != ''">
+	       <![CDATA[AND A.FSRQ <= TO_DATE(#{ZDRQ_E}|| '23:59:59','YYYY-MM-DD HH24:MI:SS')]]>
+	</if>
+	<if test="FHRQ_S !=null and FHRQ_S != ''">
+		<![CDATA[AND (CASE
+         WHEN A.DJLX = 1 THEN
+          (SELECT RKD14 FROM RKD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 3 THEN
+          (SELECT FCD13 FROM FCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 7 AND A.CZLX = 0 THEN
+          (SELECT  ZCD10 FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 7 AND A.CZLX = 1 THEN
+          (SELECT  ZCD08 FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 8 THEN
+          (SELECT  PFDI11 FROM PFDITEM WHERE PFDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 9 THEN
+          (SELECT  YFDI12 FROM YFDITEM WHERE YFDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 10 THEN
+          (SELECT  LSDI11 FROM LSDITEM WHERE LSDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         ELSE
+          NULL
+       END)>= TO_DATE(#{FHRQ_S},'YYYY-MM-DD')]]>
+	</if>  
+	<if test="FHRQ_E !=null and FHRQ_E != ''">
+		<![CDATA[AND (CASE
+         WHEN A.DJLX = 1 THEN
+          (SELECT RKD14 FROM RKD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01 AND ROWNUM=1)
+         WHEN A.DJLX = 3 THEN
+          (SELECT FCD13 FROM FCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 7 AND A.CZLX = 0 THEN
+          (SELECT  ZCD10 FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1) 
+         WHEN A.DJLX = 7 AND A.CZLX = 1 THEN
+          (SELECT  ZCD08 FROM ZCD WHERE JLWBDH = A.JLWBDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 8 THEN
+          (SELECT  PFDI11 FROM PFDITEM WHERE PFDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 9 THEN
+          (SELECT  YFDI12 FROM YFDITEM WHERE YFDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         WHEN A.DJLX = 10 THEN
+          (SELECT  LSDI11 FROM LSDITEM WHERE LSDI01 = A.THDH AND GSXX01=A.GSXX01  AND ROWNUM=1)
+         ELSE
+          NULL
+       END)<= TO_DATE(#{FHRQ_E}|| '23:59:59','YYYY-MM-DD HH24:MI:SS')]]>
+	</if>
+	<if test=" THFS != null and THFS != ''">
+	    	<foreach item="item" index="index" collection="THFS"  open=" AND (" separator=" or " close=")">
+	         (CASE WHEN EXISTS 
+       	(SELECT 1 FROM CSS_FWD WHERE JLWBDH=A.JLWBDH ) THEN  '1' else '0' END)= #{item}
+	      </foreach>
+	 </if>			 
+	</select>
+</mapper>

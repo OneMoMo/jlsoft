@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_ZCD.SCM_ZCD">
+      
+        <FIELD attrname="FHCKMC" format='{"$or":[{"FHCKMC":{"$regex":"#FHCKMC#"}},{"FH_CK01":{"$regex":"#FHCKMC#"}}]}' fieldtype="String" allownull="Y" name="发货仓库" />
+        <FIELD attrname="SHCKMC" format='{"$or":[{"SH_CK01":{"$regex":"#FHCKMC#"}},{"SHCKMC":{"$regex":"#FHCKMC#"}}]}' fieldtype="String" allownull="Y" name="收货仓库" />
+        <FIELD attrname="ZCD01" format='{"ZCD01":{"$regex":"#ZCD01#"}}' fieldtype="String" allownull="Y" name="转仓单号" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        
+	</JLConfig>
+</root>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root> 
+	<JLConfig id="form.scm.jcdy.kskz.kskz">
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客商名称" />
+		<FIELD attrname="DZBM" fieldtype="string" allownull="N" name="对照编码" />
+		<FIELD attrname="GSMC" fieldtype="string" allownull="N" name="公司信息" />
+		<!-- <Nested id="GSMC">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="公司信息" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="公司信息" />
+        </Nested> -->
+	</JLConfig>
+</root>

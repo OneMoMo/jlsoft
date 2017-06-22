@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_PDJH.SCM_PDJH"> 
+	 <FIELD attrname="JHDH" format='{"JHDH01":{"$regex":"#JHDH#"}}' fieldtype="String" allownull="Y" name="计划单号" />
+	  <FIELD attrname="CK" format='{"CKMC":{"$regex":"#CK#"}}' fieldtype="String" allownull="Y" name="仓库" />
+       <FIELD attrname="PDRQ" format='{"PDRQ":{"$gte":"#PDRQ#"}}' fieldtype="String" allownull="Y" name="审核时间" />
+       <FIELD attrname="PDRQ_E" format='{"PDRQ":{"$lte":"#PDRQ_E#"}}' fieldtype="String" allownull="Y" name="审核时间" />
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>

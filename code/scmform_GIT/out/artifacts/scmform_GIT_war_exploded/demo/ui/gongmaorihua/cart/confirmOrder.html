@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>确认订单</title>
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../css/o2o_phone_public.css" />
+<link rel="stylesheet" type="text/css" href="../css/cart.css" />
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="../js/ui.js"></script>
+</head>
+<body>
+<header class="hide">
+<div class="child_header">
+<i class="fh fa fa-angle-left"></i>
+<h2>确认订单</h2>
+</div>
+</header>
+
+<div class="main">
+<div class="jl_list jl_list_bottom" onClick="window.location.href='receiptAddress.html'">
+  <div class="jl_list_case bor_bottom">
+    <span class="w12">张三 - 18571137522</span>
+    <span class="w12 mt5 line_height1rem">湖北省武汉市江汉区新华路168号，福星国际商会大厦1610-1612</span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+</div>
+
+<div class="jl_line"></div>
+
+<div class="jl_list jl_list_bottom b_b">
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">配送方式</span>
+    <span class="w08 tr">顺丰快递</span>    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">预约送货时间</span>
+    <span class="w08 tr">工作日</span>    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">促销优惠</span>
+    <span class="w08 tr font_color">1</span>    <i class="fa fa-angle-right right_more"></i>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom b_b">
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">发票信息</span>
+    <span class="w08 tr">武汉金力软件有限公司</span>    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">备注</span>
+    <span class="w08 tr"></span>    <i class="fa fa-angle-right right_more"></i>
+  </div>
+</div>
+<!--  -->
+<div class="w12 cart_shop_pro">
+  <div class="w12 cart_shop bor_bottom">
+    <i class="fa fa-circle-thin fl"></i>
+    <h3 class="fl">工贸日化</h3>
+  </div>
+<!-- --> 
+  <div class="w12 cart_pro_list bor_bottom b_b">
+    <!--<i class="fa fa-check-circle font_color"></i>-->
+    <div class="pro_list_info w12 pl0">
+      <div class="w03"><img src="../images/sp.jpg" style="height:60px; width:60px;"/></div>
+      <div class="w09">
+       <div class="pro_list_name w12" onclick="window.location.href='../proMain.html'">Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机</div>
+       <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+       <div class="w12 mt5">
+        <div class="number fr cartNumberTool"><span class="cartNumberTool_span">-</span>
+         <input type="number" value="1" class="cartNumberTool_input"/><span class="cartNumberTool_span">+</span>
+        </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="jl_line"></div>
+
+<!--  -->
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case bor_bottom pr0">
+    <span class="w04">商品金额</span>
+    <span class="w08 tr">￥3000.00</span>
+    <span class="w04 mt10">优惠</span>
+    <span class="w08 mt10 tr">-￥20.00</span>
+    <span class="w04 mt10">实付款</span>
+    <span class="w08 mt10 tr font_color">￥2970.00</span>
+  </div>
+</div>
+ 
+</div>
+
+<footer>
+<div class="w12 jl_btn btn_color" onClick="window.location.href='pay.html'">去支付</div>
+</footer>
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

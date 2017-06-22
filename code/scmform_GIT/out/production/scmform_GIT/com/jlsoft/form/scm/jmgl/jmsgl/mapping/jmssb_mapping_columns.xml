@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>  
+     <JLConfig id="o2o.distributor.save" description="O2O加盟商">
+        <FIELD attrname="YHBM" target="EXTERNAL_ID" allownull="N" name="用户账号"/> 外部帐号
+        <FIELD attrname="JMSMC" target="PARTNER_NAME" allownull="N" name="加盟商名称"/> <!--加盟商名称-->
+        <FIELD attrname="DZ" target="ADDRESS" /> <!--地址-->
+        <FIELD attrname="KHYH" target="DEPOSIT_BANK" /> <!--开户银行-->
+        <FIELD attrname="YHZH" target="BANK_ACCOUNT" /> <!--银行账号-->
+        <FIELD attrname="SWDJH" target="TAX_ID" /> <!--税务登记号-->
+        <FIELD attrname="KPHT" target="BILLING_ACCOUNT" /> <!--开票户头-->
+        <FIELD attrname="" target="INVOICE_TYPE" defaultValue=""/>  <!--发票类型-->
+        <FIELD attrname="FRDB" target="LEGAL_ENTITY" /> <!--法人代表-->
+        <FIELD attrname="LXDH" target="TEL"/> <!--联系电话-->
+        <FIELD attrname="LXR" target="ATTN"/> <!--联系人-->
+        <FIELD attrname="YZBM" target="ZIP"/> <!--邮政编码-->
+        <FIELD attrname="CZHM" target="FAX"/> <!--传真号码-->
+        <FIELD attrname="JYPL" target="CATEGORY"/> <!--经营品类-->
+    </JLConfig>
+</root>

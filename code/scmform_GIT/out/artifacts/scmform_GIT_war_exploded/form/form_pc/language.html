@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" href="icon.ico">
+<title>JL SCM V10</title>
+</head>
+<body>
+</body>
+<script type="text/javascript" src="/scripts/lib/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript">
+var rid = 1;
+document.write("<script type='text/javascript' src='"+pubJson.getURL("FormUrl")+"/lib/JQuery/js/jquery.cookie.js?rid="+rid+"'><\/script>");
+document.write("<script type='text/javascript' src='"+pubJson.getURL("FormUrl")+"/lib/JQuery/js/jquery.md5.js?rid="+rid+"'><\/script>");
+document.write("<script type='text/javascript' src='"+pubJson.getURL("FormUrl")+"/jllib/form/js/jl-all.js?rid="+rid+"'><\/script>");
+$(document).ready(function(){
+	alert(language == "");
+	alert(pubJson.getURL("FormUrl") + "/login.html");
+	/* if(language == "_en"){
+		window.location.href = pubJson.getURL("FormUrl") + "/login.html";
+	} */
+});
+</script>
+</html>

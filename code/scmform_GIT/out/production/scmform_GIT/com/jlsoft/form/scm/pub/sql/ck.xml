@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CK">
+
+  <!-- 末级仓库（按可操作仓库权限过滤） -->
+  <select id="MJCK" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.CK01, A.CK02 CKMC, A.CK01 key, A.CK02 value, A.GSXX01, B.GSXX02 GSMC, A.CK03 CKJB,
+           A.CK04 MJBJ, GET_BOOL(A.CK04) MJBJMC,
+           A.CK05 ZDCKBJ, GET_BOOL(A.CK05) ZDCKBJMC,
+           A.CK06 CJCKBJ, GET_BOOL(A.CK06) CJCKBJMC,
+           A.CK09 CKSX, GET_CKSX(A.CK09) CKSXMC,
+           A.WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01)WLDWMC
+      FROM CK A, GSXX B
+     WHERE A.CK04 = 1
+     AND A.CK09=0
+       AND A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND A.CK01 = #{CK01}
+       </if>
+       <if test="CKMC != null and CKMC != ''">
+       AND (A.CK02 LIKE '%'||#{CKMC}||'%'  or A.CK01 LIKE '%'||#{CKMC}||'%')
+       </if>
+       <if test="CKJB != null">
+       AND A.CK03 = #{CKJB}
+       </if>
+       <if test="ZDCKBJ != null">
+       AND A.CK05 = #{ZDCKBJ}
+       </if>
+       <if test="CJCKBJ != null">
+       AND A.CK06 = #{CJCKBJ}
+       </if>
+       <if test="CJXNBJ != null">
+       	AND (A.CK06 = #{CJXNBJ}  OR A.CK11 =#{CJXNBJ})
+       </if>
+       <if test="CKSX != null">
+       AND A.CK09 = #{CKSX}
+       </if>
+       <if test="WCGYS != null and WCGYS != ''">
+       AND A.WLDW01 IS NOT NULL
+       </if>       
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+
+  <!-- 所有仓库（按可操作仓库权限过滤） -->
+  <select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.CK01, A.CK02 CKMC, A.GSXX01, B.GSXX02 GSMC, A.CK03 CKJB,
+           A.CK04 MJBJ, GET_BOOL(A.CK04) MJBJMC,
+           A.CK05 ZDCKBJ, GET_BOOL(A.CK05) ZDCKBJMC,
+           A.CK06 CJCKBJ, GET_BOOL(A.CK06) CJCKBJMC,
+           A.CK09 CKSX, GET_CKSX(A.CK09) CKSXMC
+      FROM CK A, GSXX B
+     WHERE A.GSXX01 = B.GSXX01
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND A.CK01 = #{CK01}
+       </if>
+       <if test="CKMC != null and CKMC != ''">
+       AND A.CK02 LIKE '%'||#{CKMC}||'%'
+       </if>
+       <if test="MJBJ != null">
+       AND A.CK04 = #{MJBJ}
+       </if>
+       <if test="CKJB != null">
+       AND A.CK03 = #{CKJB}
+       </if>
+       <if test="ZDCKBJ != null">
+       AND A.CK05 = #{ZDCKBJ}
+       </if>
+       <if test="CJCKBJ != null">
+       AND A.CK06 = #{CJCKBJ}
+       </if>
+       <if test="CKSX != null">
+       AND A.CK09 = #{CKSX}
+       </if>
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  <!--货架  -->
+  <select id="CK_HJ" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT CKHJ01 HJDM,CKHJ02 HJMC
+         FROM CKHJ 
+        WHERE 1=1
+	  <if test="CKHJ01 != null and CKHJ01 != ''">
+		       AND CKHJ01 = #{CKHJ01} 
+	  </if>	
+	  <if test="CK01 != null and CK01 != ''">
+		       AND CK01 = #{CK01} 
+	  </if>	
+	  <if test="CKHJ02 != null and CKHJ02 != ''">
+		       AND A.CKHJ02 LIKE '%'||#{HJMC}||'%'
+	  </if>	 
+    </select>
+    
+    <!-- 末级仓库（按可操作仓库权限过滤） -->
+  <select id="GCZBDCK" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.CK01, A.CK02 CKMC, A.CK01 key, A.CK02 value, A.GSXX01, B.GSXX02 GSMC, A.CK03 CKJB,
+           A.CK04 MJBJ, GET_BOOL(A.CK04) MJBJMC,
+           A.CK05 ZDCKBJ, GET_BOOL(A.CK05) ZDCKBJMC,
+           A.CK06 CJCKBJ, GET_BOOL(A.CK06) CJCKBJMC,
+           A.CK09 CKSX, GET_CKSX(A.CK09) CKSXMC,
+           A.WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01)WLDWMC
+      FROM CK A, GSXX B
+     WHERE A.CK04 = 1
+     AND A.CK09=0
+       AND A.GSXX01 = B.GSXX01
+       AND A.WLDW01 IS NOT NULL
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND A.CK01 = #{CK01}
+       </if>
+       <if test="CKMC != null and CKMC != ''">
+       AND (A.CK02 LIKE '%'||#{CKMC}||'%'  or A.CK01 LIKE '%'||#{CKMC}||'%')
+       </if>
+       <if test="CKJB != null">
+       AND A.CK03 = #{CKJB}
+       </if>
+       <if test="ZDCKBJ != null">
+       AND A.CK05 = #{ZDCKBJ}
+       </if>
+       <if test="CJCKBJ != null">
+       AND A.CK06 = #{CJCKBJ}
+       </if>
+       <if test="CKSX != null">
+       AND A.CK09 = #{CKSX}
+       </if>
+       <if test="WCGYS != null and WCGYS != ''">
+       AND A.WLDW01 IS NOT NULL
+       </if>       
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+  <!-- 末级仓库（按可操作仓库权限过滤） -->
+  <select id="GCZBDSHCK" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.CK01, A.CK02 CKMC, A.CK01 key, A.CK02 value, A.GSXX01, B.GSXX02 GSMC, A.CK03 CKJB,
+           A.CK04 MJBJ, GET_BOOL(A.CK04) MJBJMC,
+           A.CK05 ZDCKBJ, GET_BOOL(A.CK05) ZDCKBJMC,
+           A.CK06 CJCKBJ, GET_BOOL(A.CK06) CJCKBJMC,
+           A.CK09 CKSX, GET_CKSX(A.CK09) CKSXMC,
+           A.WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01)WLDWMC
+      FROM CK A, GSXX B
+     WHERE A.CK04 = 1
+     AND A.CK09=0
+       AND A.GSXX01 = B.GSXX01
+       AND A.WLDW01 IS NULL
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="CK01 != null and CK01 != ''">
+       AND A.CK01 = #{CK01}
+       </if>
+       <if test="CKMC != null and CKMC != ''">
+       AND (A.CK02 LIKE '%'||#{CKMC}||'%'  or A.CK01 LIKE '%'||#{CKMC}||'%')
+       </if>
+       <if test="CKJB != null">
+       AND A.CK03 = #{CKJB}
+       </if>
+       <if test="ZDCKBJ != null">
+       AND A.CK05 = #{ZDCKBJ}
+       </if>
+       <if test="CJCKBJ != null">
+       AND A.CK06 = #{CJCKBJ}
+       </if>
+       <if test="CKSX != null">
+       AND A.CK09 = #{CKSX}
+       </if>
+       <if test="WCGYS != null and WCGYS != ''">
+       AND A.WLDW01 IS NOT NULL
+       </if>       
+       JL{CZY|A.CK01|CK_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+    <!-- 查询要货仓库 -->
+	<select id="YHCK" parameterType="Map" resultType="java.util.Map">
+		select SHCK01 CK01,CK02 from DBHT a,CK C where
+		 CK01=SHCK01 
+		<!-- <if test="GSXX01!=null and GSXX01!=''">
+			AND B.GSXX01=#{GSXX01}
+		</if> -->
+	</select>
+	
+	<!-- 仓库树形控件   显示仓库属性为厂家仓库  -->
+	<select id="CJCK" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT DISTINCT CK01 KEY, CK02 VALUE, CK04 MJBJ, CK03-1 JB, CK_CK01 PARENT
+		FROM CK
+		WHERE 1=1 	
+		<if test="JB != null and JB != ''">
+			AND CK03 = #{JB}+1
+		</if>
+    <if test="PARENT != null and PARENT != ''">
+      AND CK01 LIKE #{PARENT}||'%' AND CK01 != #{PARENT}
+    </if>  
+    START WITH CK01 IN (
+      SELECT CK01
+            FROM CK
+            WHERE 1=1 AND CK06 = 1
+             <if test="GSXX01 != null and GSXX01 != ''">
+      AND GSXX01 = #{GSXX01}
+       </if>
+            JL{CZY|CK01|CK_CZ|LIKE%}JL
+            JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+        )
+    CONNECT BY NOCYCLE PRIOR CK_CK01 = CK01
+    ORDER BY JB
+  </select> 
+</mapper>

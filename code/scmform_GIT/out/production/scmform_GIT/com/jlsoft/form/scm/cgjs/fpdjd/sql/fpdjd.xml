@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FPDJD">
+	<select id="FPDJD_JXJH" parameterType="Map" resultType="java.util.Map">
+		    <![CDATA[SELECT A.SPXX01,A.JXSP15 GCCKDH,S.SPXX02 SPBM,S.SPXX04 SPMC,JLDW01 JLDW,S.GGB01 SPGG,A.JXSP17 BZ,
+		    				TO_CHAR(A.JXSP12,'YYYY-MM-DD') DJRQ,A.JXSP01 DJH01,GET_JLWBDH(A.JXSP02,A.JXSP01,A.GSXX01) DJHBH,
+		       				get_djlx(A.JXSP02) DJLX01,A.JXSP02 DJLX ,A.JXSP07 WSDJ,A.JXSP08 HSDJ,
+		       				A.JXSP08 HSFPDJ,A.JXSP14 KPSL,(A.JXSP05 - A.GYSFPGDSL01)WKPSL,
+		       				A.GYSFPGDSL01*A.JXSP07 WSFPJE,A.GYSFPGDSL01*A.JXSP08 HSFPJE,
+		       				(A.JXSP08-A.JXSP07)*GYSFPGDSL01 DJSE,A.JXSP05 DJSL,
+		       				(A.JXSP05 * A.JXSP08) DJJE,A.BM01 XS_BM01,(SELECT BM02 FROM BM WHERE BM.BM01 = A.BM01 )XSBMMC,A.JXSP03 PCH,
+		       				A.JXSP04 PCXH, NVL(A.JXSP15,0) SHDH,
+		      				0 DXKL,0 LYKL,A.CGXY01 CGXYH01,A.GHHT01,
+		      			 (SELECT DHFS02 FROM DHFS WHERE DHFS01 = 
+		      			 (SELECT (SELECT DHD02 FROM DHD WHERE DHD.DHD01 = RKD.DHD01 AND DHD.GSXX01 = RKD.GSXX01)
+                          FROM RKD WHERE GSXX01 = A.GSXX01 AND RKD01 = A.JXSP01)) CGFSMC,
+       					 (SELECT (SELECT DHD02 FROM DHD WHERE DHD.DHD01 = RKD.DHD01 AND DHD.GSXX01 = RKD.GSXX01)
+          				  FROM RKD WHERE GSXX01 = A.GSXX01 AND RKD01 = A.JXSP01) CGFSBM
+		               FROM JXSPJSB A, SPXX S,WLDW W
+		              WHERE A.SPXX01 = S.SPXX01 AND A.WLDW01 = W.WLDW01
+		                AND A.JXSP05 - A.GYSFPGDSL01 <> 0]]>
+		<if test="CGFS != null and CGFS != ''">
+			AND ((JXSP02 = 1 and (SELECT (SELECT DHD02 FROM DHD WHERE
+			DHD.DHD01 =
+			RKD.DHD01 AND DHD.GSXX01 = RKD.GSXX01)
+			FROM RKD WHERE
+			GSXX01 = A.GSXX01 AND RKD01 = A.JXSP01) = #{CGFS}))
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+			AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND A.BM01 = #{BM01}
+		</if>
+		<if test="DJJZRQ_S != null and DJJZRQ_S != ''"><![CDATA[ AND A.JXSP12 >= TO_DATE(#{DJJZRQ_S},'YYYY-MM-DD')]]></if>
+		<if test="DJJZRQ_E != null and DJJZRQ_E != ''"><![CDATA[ AND A.JXSP12 <= TO_DATE(#{DJJZRQ_E},'YYYY-MM-DD')]]></if>
+		<if test="JXSP13 != null and JXSP13 != ''"><![CDATA[ And A.JXSP13 <= TO_DATE(#{JXSP13},'YYYY-MM-DD')]]></if>
+		<if test="SHDH_S != null and SHDH_S != ''">
+			      	  <![CDATA[AND EXISTS (SELECT RKD03 FROM RKD WHERE RKD01=A.JXSP01 AND GSXX01=A.GSXX01 AND RKD03>=#{SHDH_S}]]>
+		</if>
+		<if test="SHDH_E != null and SHDH_E != ''">
+			          <![CDATA[AND EXISTS (SELECT RKD03 FROM RKD WHERE RKD01=A.JXSP01 AND GSXX01=A.GSXX01 AND RKD03<=#{SHDH_E}]]>
+		</if>
+		<if test="SPMC != null and SPMC != ''">
+			AND (REGEXP_LIKE(S.SPPYM, #{SPMC}, 'i') OR
+			REGEXP_LIKE(S.SPXX04,
+			#{SPMC}, 'i') OR REGEXP_LIKE(S.SPXX02, #{SPMC},
+			'i'))
+		</if>
+		<if test="DJH01 != null  and DJH01 != ''">
+			AND GET_JLWBDH(A.JXSP02,A.JXSP01,A.GSXX01) = #{DJH01}
+		</if>
+		<if test="PPB01 != null and PPB01 != ''">
+			AND S.PPB01 = #{PPB01}
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND get_djlx(A.JXSP02) = #{DJLX}
+		</if>
+		<if test="GCCKD1 != null and GCCKD1 != ''">
+			 <![CDATA[ AND A.JXSP15 >= #{GCCKD1}]]>
+		</if>
+		<if test="GCCKD2 != null and GCCKD2 != ''">
+			 <![CDATA[ AND A.JXSP15 <= #{GCCKD2}]]>
+		</if>
+		<if test="PCH != null and PCH != ''">
+			AND A.JXSP03 LIKE '%'||#{PCH}||'%'
+		</if>
+	</select>
+
+	<select id="FPDJD_XSJH" parameterType="Map" resultType="java.util.Map">
+		<![CDATA[SELECT  A.SPXX01,B.SPXX02 SPBM,B.SPXX04 SPMC,B.JLDW01 JLDW,B.GGB01 SPGG,
+				         '' BZ,TO_CHAR(A.SPPCXS01,'YYYY-MM-DD') DJRQ,A.DJBH DJH01,GET_JLWBDH_TD(A.DJLY,A.DJBH,A.GSXX01) DJHBH,get_djlx(A.SPPCXS14) DJLX01,
+				         A.SPPCXS14 DJLX,A.SPPCXS05 WSDJ, ROUND(A.SPPCXS05 * (1 + W.JXSL01),2)  HSDJ,
+				         ROUND(A.SPPCXS05+A.SPPCXS05*W.JXSL01,2)HSFPDJ,
+				         SUM(A.SPPCXS15) KPSL,sum(A.SPPCXS06 - A.GYSFPGDSL01)WKPSL,A.SPPCXS11 CGXYH01,
+				         ROUND(A.GYSFPGDSL01*(SUM(SPPCXS07)/SUM(A.SPPCXS06)-SUM(SPPCXS07)/SUM(A.SPPCXS06)*W.JXSL01),2) WSFPJE,
+				         ROUND(A.GYSFPGDSL01*SUM(SPPCXS07)/SUM(A.SPPCXS06),2) HSFPJE,A.SPPCXS12 LYKL,0 DXKL,
+				         ((SUM(SPPCXS07)/SUM(A.SPPCXS06))
+				         -((SUM(SPPCXS07)/SUM(A.SPPCXS06)-SUM(SPPCXS07)/SUM(A.SPPCXS06)*W.JXSL01)))*GYSFPGDSL01 DJSE,
+				         sum(SPPCXS06)DJSL,sum(SPPCXS07)DJJE,sum(SPPCXS08)WSXSCB,A.XSBM XS_BM01,
+				         (SELECT BM02 FROM BM WHERE BM.BM01 = A.XSBM )XSBMMC,SPPCXS02 PCH,SPPCXS03 PCXH,0 SHDH,
+				         A.GHHT01,get_djlx(A.DJLY) DJLYMC ,A.DJLY
+					FROM SPPCXSR A , SPXX B , BM C,WLDW W,SCCJ S 
+				   WHERE A.SPXX01 = B.SPXX01 
+				     AND A.XSBM = C.BM01 
+				     AND A.WLDW01 = W.WLDW01
+				     AND A.SPPCXS06 - A.GYSFPGDSL01 <> 0 
+				     AND B.SCCJ01=S.SCCJ01(+)]]>
+		<if test="WLDW01 != null">
+			AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="GSXX01 != null">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BM01 != null">
+			AND A.BM01 = #{BM01}
+		</if>
+		<if test="SPPCXS04 != null">
+			AND A.SPPCXS04 = #{SPPCXS04}
+		</if>
+		<if test="DJH01 != null  and DJH01 != ''">
+			AND A.DJBH = #{DJH01}
+		</if>
+		<if test="SPMC != null  and SPMC != ''">
+			AND (REGEXP_LIKE(B.SPPYM, #{SPMC}, 'i') OR
+			REGEXP_LIKE(B.SPXX04,
+			#{SPMC}, 'i') OR REGEXP_LIKE(B.SPXX02, #{SPMC},
+			'i'))
+		</if>
+		<if test="DJLY != null and DJLY != ''">
+			AND get_djlx(A.DJLY) = #{DJLY}
+		</if>
+		<if test="DJRQQ != null and DJRQQ != ''">
+				<![CDATA[ AND A.SPPCXS01 >= TO_DATE(#{DJRQQ},'YYYY-MM-DD')]]>
+		</if>
+		<if test="DJRQZ != null  and DJRQZ != ''">
+			     <![CDATA[ AND A.SPPCXS01 <= TO_DATE(#{DJRQZ},'YYYY-MM-DD')]]>
+		</if>
+		<if test="PCH != null and PCH != ''">
+			AND SPPCXS02 LIKE '%'||#{PCH}||'%'
+		</if>
+		    <![CDATA[ GROUP BY A.SPXX01,B.JLDW01,A.SPPCXS01,A.DJBH,A.DJLY,A.GYSFPGDSL01,A.BM01,
+							   A.WLDW01,A.SPPCXS02 , A.SPPCXS03, A.GHHT01,A.SPPCXS11,
+							   A.SPPCXS12 ,A.SPPCXS14, A.XSBM,A.SPPCXS05,B.SPXH01,A.GSXX01,
+							   B.GGB01,B.PPB02,B.SPXX33,B.SPXX02,B.SPXX04 ,C.BM02,
+							   W.JXSL01,B.SPXH01,B.GGB01,B.PPB02,B.SPXX33,B.SPXX19,S.SCCJ02
+						HAVING sum(A.SPPCXS06 - A.GYSFPGDSL01) <> 0]]>
+	</select>
+
+	<select id="FPDJD_FPZK" parameterType="Map" resultType="java.util.Map">
+    <![CDATA[SELECT A.JSSRD01 SRD01,B.JSSRDI01 SDRXH,B.JSSR01,(SELECT JSSR02 from JSSRDM where JSSR01 = B.JSSR01) JSSRMC,
+                    (B.JSSRDI10 + B.JSSRDI12 - B.GYSFPGDJE01 - B.JSSRDI22) KGDJE,B.JSSRDI13 FPZKBZ,
+                    (SELECT JXSL01 FROM WLDW WHERE WLDW01 = A.WLDW01)JXSL
+               FROM JSSRD A , JSSRDITEM B 
+              WHERE A.JSSRD01 = B.JSSRD01 AND A.GSXX01 = B.GSXX01
+                AND A.JSSRD07 IS NOT NULL
+                AND (B.JSSRDI10 + B.JSSRDI12 - B.GYSFPGDJE01 - B.JSSRDI22) <> 0
+                AND (B.JSSRDI10 + B.JSSRDI12 - B.GYSFPGDJE01 - B.JSSRDI22) * B.JSSRDI10 > 0]]>
+		<if test="WLDW01 != null and WLDW01 != ''">
+			AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND B.CGBM01 = #{BM01}
+		</if>
+		<if test="GHHT24 != null and GHHT24 != ''">
+			AND (CASE A.JSSRD11 WHEN 2 THEN B.JSSRDI21 ELSE A.JSSRD13
+			END) =
+			#{GHHT24}
+		</if>
+		<if test="SRBM01 != null and SRBM01 != ''">
+			AND B.SRBM01 = #{SRBM01}
+		</if>
+		<if test="SRD01 != null and SRD01 != ''">
+			AND A.JSSRD01 = #{SRD01}
+		</if>
+		<if test="JSSR01 != null and JSSR01 != ''">
+			AND B.JSSR01 = #{JSSR01}
+		</if>
+	</select>
+
+	<select id="queryFPDJD" parameterType="Map" resultType="java.util.Map">
+		<if test="CXFS == 0">
+			SELECT 0 CXFS,A.JLWBDH FPDJDH01,B.WLDW02 WLDWMC,ROUND(A.GYSFPDJD09,2)
+			FPSL,
+			A.WLDW01,A.BM01 CG_BM01,C.BM02 CGBMMC,A.GHHT24
+			HZFS,GET_HZFS(A.GHHT24) HZFSMC,
+			CASE WHEN GYSFPDJD20 IS NOT NULL THEN
+			'注销'
+			WHEN GYSFPDJD18 IS NOT NULL THEN '审核'
+			WHEN GYSFPDJD16 IS NOT NULL
+			THEN '登记'
+			END DJZT,GYSFPDJD22,GYSFPDJD20,GYSFPDJD18,GYSFPDJD16,
+			TO_CHAR(A.GYSFPDJD04,'YYYY-MM-DD') CGFPRQ,A.GYSFPDJD08 CGFPJE,
+			A.GYSFPDJD15 DJRMC,TO_CHAR(A.GYSFPDJD16,'YYYY-MM-DD')
+			ZDRQ,A.GYSFPDJD17 SHRMC,
+			TO_CHAR(A.GYSFPDJD18,'YYYY-MM-DD')
+			SHRQ,A.GYSFPDJD19 ZXRMC,
+			TO_CHAR(A.GYSFPDJD20,'YYYY-MM-DD')
+			ZXRQ,A.GYSFPDJD21 GDRMC,
+			TO_CHAR(A.GYSFPDJD22,'YYYY-MM-DD')
+			GDRQ,A.GSXX01,
+			ROUND(D.GYSFPGDJE01-D.GYSFPGDSE01, 2) WSGDJE,
+			(SELECT GSXX02 FROM GSXX WHERE GSXX01 =
+			A.GSXX01)GSMC,A.GYSFPDJD11 GDJE,
+			A.GYSFPDJD07 FPZK,A.GYSFPDJD23
+			BZ,A.GYSFPDJD01 V9DH,
+			CASE WHEN A.GYSFPDJD05 = 2 THEN '无发票'
+			WHEN
+			A.GYSFPDJD05 = 1 THEN '普通发票'
+			ELSE '增值税发票'
+			END CGFPLX,A.GYSFPDJD02
+			CGFPH,A.GYSFPDJD01,A.GYSFPDJD23 ZBBZ
+			FROM GYSFPDJD A, BM C, WLDW B,GYSFPJH D
+			WHERE A.WLDW01 = B.WLDW01
+			AND A.BM01 = C.BM01
+			AND A.GYSFPDJD01 =
+			D.GYSFPJH01
+			<if test="WLDW != null and WLDW != ''">
+				<foreach item="item" index="index" collection="WLDW" open=" AND ("
+					separator=" or " close=")">
+					B.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01
+					LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+			<if test="DJH01 != null  and DJH01 != ''">
+				AND GET_JLWBDH(A.JXSP02,A.JXSP01,A.GSXX01) = #{DJH01}
+			</if>
+			<if test="FPH != null and FPH != ''">
+				AND A.GYSFPDJD02 = #{FPH}
+			</if>
+			<if test="FPDJDH != null and FPDJDH != ''">
+				AND A.JLWBDH LIKE '%'||#{FPDJDH}||'%'
+			</if>
+			<if test="ZDRQS != null and ZDRQS != ''">
+	    <![CDATA[ AND A.GYSFPDJD16 >= TO_DATE(#{ZDRQS},'YYYY-MM-DD')]]>
+			</if>
+			<if test="ZDRQZ != null  and ZDRQZ != ''">
+	    <![CDATA[ AND A.GYSFPDJD16 <= TO_DATE(#{ZDRQZ},'YYYY-MM-DD')]]>
+			</if>
+			<if test="DJZT != null and DJZT != ''">
+				<if test="DJZT == 0">
+					AND A.GYSFPDJD20 IS NOT NULL
+				</if>
+				<if test="DJZT == 1">
+					AND A.GYSFPDJD18 IS NOT NULL
+				</if>
+				<if test="DJZT == 2">
+					AND A.GYSFPDJD16 IS NOT NULL
+					AND A.GYSFPDJD18 IS NULL
+					AND
+					A.GYSFPDJD20 IS NULL
+				</if>
+			</if>
+		</if>
+
+		<if test="CXFS == 1 and HZFS ==0">
+			SELECT 1 CXFS,0 HZFSBJ,A.JLWBDH FPDJDH01,B.SPXX01,S.SPXX02
+			SPBM,S.SPXX04 SPMC,S.JLDW01 JLDW,
+			ROUND(B.GYSFPGDJE01-B.GYSFPGDSE01, 2) WSGDJE,
+			S.GGB01 SPGG,A.GYSFPDJD23
+			BZ,TO_CHAR(B.GYSFPJH10,'YYYY-MM-DD') DJRQ,
+			GET_JLWBDH_TD(B.GYSFPJH03,B.GYSFPJH02,B.GSXX01)
+			DJH01,GET_DJLX(B.GYSFPJH03)DJLX,
+			B.GYSFPJH05 WSDJ,B.GYSFPJH06
+			HSDJ,ROUND(B.GYSFPJH13*(1+A.GYSFPDJD09),2) HSFPDJ,
+			B.GYSFPGDSL01
+			KPSL,(B.GYSFPJH04-B.GYSFPGDSL01)WKPSL,A.GYSFPDJD08
+			HSFPJE,
+			ROUND(A.GYSFPDJD08/(1+A.GYSFPDJD09),2)WSFPJE,A.GYSFPDJD10
+			DJSE,B.GYSFPJH04 DJSL,
+			B.GYSFPJH08 DJJE,A.BM01 CG_BM01,C.BM02
+			CGBMMC,B.SPPC01 PCH,B.SPPC02 PCXH,
+			TO_CHAR(A.GYSFPDJD18,'YYYY-MM-DD')
+			SHRQ,
+			(SELECT RKD03 FROM RKD WHERE RKD01
+			= B.GYSFPJH02 AND GSXX01 =
+			B.GSXX01 )SHDH,
+			0 DXKL,0 LYKL,(SELECT CGXY01
+			FROM JXSPJSB WHERE JXSP01 = B.GYSFPJH02
+			AND SPXX01 = B.SPXX01 AND
+			JXSP03 = B.SPPC01 AND JXSP04 = B.SPPC02
+			AND JXSP02 = GYSFPJH03 AND
+			GSXX01 = B.GSXX01)CGXYH01,
+			ROUND(B.GYSFPGDJE01,2)
+			GDJE,ROUND(B.GYSFPGDSE01,2) GDSE,
+			W.WLDW02 WLDWMC,A.WLDW01
+			,A.GYSFPDJD02 CGFPH
+			FROM GYSFPDJD A,GYSFPJH B, BM C, SPXX S, WLDW W
+			WHERE A.WLDW01 = W.WLDW01
+			AND A.BM01 = C.BM01
+			AND A.GYSFPDJD01 =
+			B.GYSFPJH01
+			AND A.GSXX01 = B.GSXX01
+			AND B.SPXX01 = S.SPXX01
+			<if test="DJRQS != null and DJRQS != ''">
+	    <![CDATA[ AND B.GYSFPJH10 >= TO_DATE(#{DJRQS},'YYYY-MM-DD')]]>
+			</if>
+			<if test="DJRQE != null  and DJRQE != ''">
+	    <![CDATA[ AND B.GYSFPJH10 <= TO_DATE(#{DJRQE},'YYYY-MM-DD')]]>
+			</if>
+			<if test="WLDW != null and WLDW != ''">
+				<foreach item="item" index="index" collection="WLDW" open=" AND ("
+					separator=" or " close=")">
+					W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01
+					LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+			<if test="DJH != null and DJH != ''">
+				AND GET_JLWBDH_TD(B.GYSFPJH03, B.GYSFPJH02, B.GSXX01) =
+				#{DJH}
+			</if>
+			<if test="FPDJDH != null and FPDJDH != ''">
+				AND A.JLWBDH LIKE '%'||#{FPDJDH}||'%'
+			</if>
+			<if test="SPMC != null and SPMC != ''">
+				<foreach item="item" index="index" collection="SPMC" open=" AND ("
+					separator=" or " close=")">
+					S.SPXX02 LIKE '%'||#{item}||'%' OR S.SPXX04
+					LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+		</if>
+
+		<if test="CXFS == 1 and HZFS!=0">
+			SELECT 1 CXFS,1 HZFSBJ,A.JLWBDH FPDJDH01,B.SPXX01,S.SPXX02
+			SPBM,S.SPXX04 SPMC,S.JLDW01 JLDW,
+			S.GGB01 SPGG,B.GYSFPXS11
+			BZ,TO_CHAR(B.FPRQ,'YYYY-MM-DD') DJRQ,
+			TO_CHAR(A.GYSFPDJD18,'YYYY-MM-DD')
+			SHRQ,
+			ROUND(D.GYSFPGDJE01-D.GYSFPGDSE01, 2) WSGDJE,
+			GET_JLWBDH_TD(B.DJLY,B.DJBH,B.GSXX01)
+			DJH01,GET_DJLX(B.DJLY)DJLX,DJLY,
+			ROUND(B.GYSFPXS09/B.GYSFPXS08/(1+A.GYSFPDJD09),2)
+			WSDJ,B.GYSFPXS09/B.GYSFPXS08 HSDJ,
+			B.GYSFPXS08,B.GYSFPXS09,
+			B.GYSFPGDSL01 KPSL,(B.GYSFPXS08-B.GYSFPGDSL01)WKPSL,A.GYSFPDJD08
+			HSFPJE,
+			ROUND(A.GYSFPDJD08/(1+A.GYSFPDJD09),2)WSFPJE,A.GYSFPDJD10
+			DJSE,B.GYSFPXS08 DJSL,
+			B.GYSFPXS09 DJJE,A.BM01 XS_BM01,C.BM02
+			XSBMMC,B.SPPC01 PCH,B.SPPC02 PCXH,
+			0 SHDH,W.WLDW02
+			WLDWMC,A.WLDW01,B.GYSFPXS05 HSFPDJ,A.GYSFPDJD11 GDJE,
+			(A.GYSFPDJD11/(1+W.JXSL01)*W.JXSL01) GDSE,
+			GYSFPXS03 DXKL,GYSFPXS03
+			LYKL,GYSFPXS02 CGXYH01 ,A.GYSFPDJD02 CGFPH
+			FROM GYSFPDJD A,GYSFPXS B,GYSFPJH D,
+			BM C, SPXX S, WLDW W
+			WHERE A.WLDW01 = W.WLDW01
+			AND A.BM01 = C.BM01
+			AND A.GYSFPDJD01 =
+			D.GYSFPJH01
+			AND
+			A.GYSFPDJD01 = B.GYSFPXS01
+			AND A.GSXX01 = B.GSXX01
+			AND B.SPXX01 =
+			S.SPXX01
+			<if test="DJRQS != null and DJRQS != ''">
+	    <![CDATA[ AND B.FPRQ >= TO_DATE(#{DJRQS},'YYYY-MM-DD')]]>
+			</if>
+			<if test="DJRQE != null  and DJRQE != ''">
+	    <![CDATA[ AND B.FPRQ <= TO_DATE(#{DJRQE},'YYYY-MM-DD')]]>
+			</if>
+			<if test="WLDW != null and WLDW != ''">
+				<foreach item="item" index="index" collection="WLDW" open=" AND ("
+					separator=" or " close=")">
+					W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01
+					LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+			<if test="DJH != null and DJH != ''">
+				AND GET_JLWBDH_TD(B.DJLY,B.DJBH,B.GSXX01) = #{DJH}
+			</if>
+			<if test="FPDJDH != null and FPDJDH != ''">
+				AND A.JLWBDH LIKE '%'||#{FPDJDH}||'%'
+			</if>
+			<if test="SPMC != null and SPMC != ''">
+				<foreach item="item" index="index" collection="SPMC" open=" AND ("
+					separator=" or " close=")">
+					S.SPXX02 LIKE '%'||#{item}||'%' OR S.SPXX04
+					LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+		</if>
+
+		<if test="CXFS == 2">
+			SELECT 2 CXFS,A.JLWBDH FPDJDH01,B.GYSFPSR02 SRD01,B.GYSFPSR03
+			SDRXH,B.JSSR01,
+			TO_CHAR(A.GYSFPDJD18,'YYYY-MM-DD')
+			SHRQ,
+			(SELECT JSSR02 FROM JSSRDM WHERE JSSRDM.JSSR01 =
+			B.JSSR01
+			AND JSSRDM.JSSR04 = 1)JSSRMC, ROUND(B.GYSFPGDJE01,2)GDJE,
+			ROUND((B.GYSFPGDJE01/(1+W.JXSL01)*W.JXSL01),2) GDSE,W.JXSL01,
+			ROUND(D.GYSFPGDJE01-D.GYSFPGDSE01, 2) WSGDJE,
+			B.GYSFPSR06 FPZKBZ,A.GYSFPDJD04 DJRQ,W.WLDW02 WLDWMC,
+			A.WLDW01,A.BM01
+			CG_BM01,C.BM02 CGBMMC
+			FROM GYSFPDJD A,GYSFPSR B, BM C, WLDW W,GYSFPJH D
+			WHERE
+			A.WLDW01 = W.WLDW01
+			AND A.GYSFPDJD01 =
+			D.GYSFPJH01
+			AND A.BM01 = C.BM01
+			AND A.GYSFPDJD01 = B.GYSFPSR01
+			AND A.GSXX01 = B.GSXX01
+			<if test="WLDW != null and WLDW != ''">
+				<foreach item="item" index="index" collection="WLDW" open=" AND ("
+					separator=" or " close=")">
+					W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01
+					LIKE '%'||#{item}||'%'
+				</foreach>
+			</if>
+			<if test="SRD01 != null and SRD01 != ''">
+				AND B.GYSFPSR02 = #{SRD01}
+			</if>
+			<if test="FPDJDH != null and FPDJDH != ''">
+				AND A.JLWBDH LIKE '%'||#{FPDJDH}||'%'
+			</if>
+		</if>
+
+		<if test="DJRQS != null and DJRQS != ''">
+	    <![CDATA[ AND A.GYSFPDJD04 >= TO_DATE(#{DJRQS},'YYYY-MM-DD')]]>
+		</if>
+		<if test="DJRQE != null  and DJRQE != ''">
+	    <![CDATA[ AND A.GYSFPDJD04 <= TO_DATE(#{DJRQE},'YYYY-MM-DD')]]>
+		</if>
+
+
+		<if test="CGBMMC!= null and CGBMMC != ''">
+			<foreach item="item" index="index" collection="CGBMMC" open=" AND ("
+				separator=" or " close=")">
+				A.BM01 = #{item}
+			</foreach>
+		</if>
+
+		<if test="HZFS != null and HZFS != ''">
+			AND A.GHHT24 = #{HZFS}
+		</if>
+
+		<if test="SHRQS != null and SHRQS != ''">
+	    <![CDATA[ AND A.GYSFPDJD18 >= TO_DATE(#{SHRQS},'YYYY-MM-DD')]]>
+		</if>
+		<if test="SHRQE != null  and SHRQE != ''">
+	    <![CDATA[ AND A.GYSFPDJD18 <= TO_DATE(#{SHRQE},'YYYY-MM-DD')]]>
+		</if>
+
+		<!-- <if test="DJZT != null and DJZT != ''"> <if test="DJZT == 0"> AND 
+			A.GYSFPDJD22 IS NOT NULL AND A.GYSFPDJD20 IS NULL </if> <if test="DJZT == 
+			1"> AND A.GYSFPDJD20 IS NOT NULL </if> <if test="DJZT == 2"> AND A.GYSFPDJD18 
+			IS NOT NULL </if> <if test="DJZT == 3"> AND A.GYSFPDJD16 IS NOT NULL </if> 
+			</if> -->
+
+		<if test="CGFPLX != null and CGFPLX != ''">
+			<if test="CGFPLX == 0">
+				AND A.GYSFPDJD05 = 0
+			</if>
+			<if test="CGFPLX == 1">
+				AND A.GYSFPDJD05 = 1
+			</if>
+		</if>
+
+		<if test="DJRMC != null and DJRMC != ''">
+			AND A.GYSFPDJD15 = #{ZDRMC}
+		</if>
+
+		JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+		JL{CZY|A.BM01|BM_CX|LIKE%}JL
+		JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+	</select>
+
+	<select id="queryFPDJDMX" parameterType="Map" resultType="java.util.Map">
+		<if test="HZFS == 0">
+			SELECT 0 HZFSBJ,B.SPXX01,S.SPXX02 SPBM,S.SPXX04
+			SPMC,S.JLDW01 JLDW,
+			S.GGB01 SPGG,A.GYSFPDJD23
+			BZ,TO_CHAR(B.GYSFPJH10,'YYYY-MM-DD') DJRQ,
+			GET_JLWBDH_TD(B.GYSFPJH03,B.GYSFPJH02,B.GSXX01)
+			DJH01,GET_DJLX(B.GYSFPJH03)DJLX,
+			B.GYSFPJH05 WSDJ,B.GYSFPJH06
+			HSDJ,ROUND(B.GYSFPJH13*(1+A.GYSFPDJD09),2) HSFPDJ,
+			B.GYSFPGDSL01
+			KPSL,(B.GYSFPJH04-B.GYSFPGDSL01)WKPSL,A.GYSFPDJD08
+			HSFPJE,
+			ROUND(A.GYSFPDJD08/(1+A.GYSFPDJD09),2)WSFPJE,A.GYSFPDJD10
+			DJSE,B.GYSFPJH04 DJSL,
+			B.GYSFPJH08 DJJE,A.BM01 CG_BM01,C.BM02
+			CGBMMC,B.SPPC01 PCH,B.SPPC02 PCXH,
+			(SELECT RKD03 FROM RKD WHERE RKD01
+			= B.GYSFPJH02 AND GSXX01 =
+			B.GSXX01 )SHDH,
+			0 DXKL,0 LYKL,(SELECT CGXY01
+			FROM JXSPJSB WHERE JXSP01 = B.GYSFPJH02
+			AND SPXX01 = B.SPXX01 AND
+			JXSP03 = B.SPPC01 AND JXSP04 = B.SPPC02
+			AND JXSP02 = GYSFPJH03 AND
+			GSXX01 = B.GSXX01)CGXYH01
+			FROM GYSFPDJD A,GYSFPJH B, BM C, SPXX S,
+			WLDW W
+			WHERE A.WLDW01 = W.WLDW01
+			AND A.BM01 = C.BM01
+			AND A.GYSFPDJD01 =
+			B.GYSFPJH01
+			AND A.GSXX01 = B.GSXX01
+			AND B.SPXX01 = S.SPXX01
+		</if>
+
+		<if test="HZFS!=0">
+			SELECT 1 HZFSBJ,B.SPXX01,S.SPXX02 SPBM,S.SPXX04
+			SPMC,S.JLDW01 JLDW,
+			S.GGB01 SPGG,B.GYSFPXS11
+			BZ,TO_CHAR(B.FPRQ,'YYYY-MM-DD') DJRQ,
+			GET_JLWBDH_TD(B.DJLY,B.DJBH,B.GSXX01)
+			DJH01,GET_DJLX(B.DJLY)DJLX,DJLY,
+			ROUND(B.GYSFPXS09/B.GYSFPXS08/(1+A.GYSFPDJD09),2)
+			WSDJ,B.GYSFPXS09/B.GYSFPXS08 HSDJ,
+			B.GYSFPXS08,B.GYSFPXS09,ROUND(A.GYSFPDJD08/B.GYSFPGDSL01*(1+A.GYSFPDJD09),2)
+			HSFPDJ,
+			B.GYSFPGDSL01
+			KPSL,(B.GYSFPXS08-B.GYSFPGDSL01)WKPSL,A.GYSFPDJD08 HSFPJE,
+			ROUND(A.GYSFPDJD08/(1+A.GYSFPDJD09),2)WSFPJE,A.GYSFPDJD10
+			DJSE,B.GYSFPXS08 DJSL,
+			B.GYSFPXS09 DJJE,A.BM01 XS_BM01,C.BM02
+			XSBMMC,B.SPPC01 PCH,B.SPPC02 PCXH,
+			0 SHDH,
+			GYSFPXS03 DXKL,GYSFPXS03
+			LYKL,GYSFPXS02 CGXYH01
+			FROM GYSFPDJD A,GYSFPXS B, BM C, SPXX S, WLDW W
+			WHERE A.WLDW01 = W.WLDW01
+			AND A.BM01 = C.BM01
+			AND A.GYSFPDJD01 =
+			B.GYSFPXS01
+			AND A.GSXX01 = B.GSXX01
+			AND B.SPXX01 = S.SPXX01
+		</if>
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="GYSFPDJD01 != null and GYSFPDJD01 != ''">
+			AND A.GYSFPDJD01 = #{GYSFPDJD01}
+		</if>
+	</select>
+</mapper>

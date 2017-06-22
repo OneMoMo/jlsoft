@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.ccgl.cksfh">
+	<FIELD attrname="DJLX" fieldtype="string" allownull="N" name="单据类型" />
+	<FIELD attrname="CK01" fieldtype="string" allownull="N" name="仓库名称" />
+	<FIELD attrname="CKMC" fieldtype="string" allownull="N" name="仓库名称" />
+	<Nested id="SPMXLB" allownull="N" name="商品明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="KPSL" fieldtype="double" allownull="N" name="收发货数量" />
+    </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.ccgl.cksfh.js">
+	<FIELD attrname="DJLX" fieldtype="string" allownull="N" name="单据类型" />
+	<FIELD attrname="CK01" fieldtype="string" allownull="N" name="仓库名称" />
+	<FIELD attrname="CKMC" fieldtype="string" allownull="N" name="仓库名称" />
+	<Nested id="SPMXLB" allownull="N" name="商品明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="KPSL" fieldtype="double" allownull="N" name="收发货数量" />
+            <!-- <FIELD attrname="JSSL" fieldtype="double" allownull="N" name="拒收数量" /> -->
+    </Nested>
+	</JLConfig>
+</root>

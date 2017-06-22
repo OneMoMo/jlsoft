@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gcdl.gcbzjfh">
+        <FIELD attrname="GCDLD01" fieldtype="String" allownull="N" name="工程登陆单号" />
+        <FIELD attrname="BMMC" fieldtype="String" allownull="N" name="部门名称" />
+        <!-- <Nested id="SPLB" allownull="N" name="工程保证金商品列表明细" >
+            <FIELD attrname="BCFHBZJ" fieldtype="String" allownull="N" name="返还保证金" />
+        </Nested> -->
+	</JLConfig>
+</root>

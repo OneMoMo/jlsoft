@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gcjs">
+        <FIELD attrname="GCDLD01" fieldtype="String" allownull="N" name="工程登陆单号" />
+	</JLConfig>
+</root>

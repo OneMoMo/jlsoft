@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WLDW">
+
+  <!-- 合同有效的有效供应商（按可操作往来单位和可操作部门权限过滤）-->
+  <!-- 采购部门，供应商，合作方式相同的有效合同取最大合同号 -->
+  <select id="GYS_HT_YX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT MAX(A.GHHT01) GHHT01, A.WLDW01, C.WLDW02 WLDWMC, C.WLDW03 WLDWPYM,
+           A.GSXX01, G.GSXX02 GSMC, A.BM01, E.BM02 BMMC, C.JXSL01 JXSL,
+           C.WLDW20 GXSX, GET_WLDW_GXSX(C.WLDW20) GXSXMC,
+           C.WLDW21 DWSX, GET_WLDWSX(C.WLDW21) DWSXMC,
+           A.GHHT24 HZFS, GET_HZFS(A.GHHT24) HZFSMC
+      FROM GHHT A, WLDW C, BM E, GSXX G
+     WHERE A.WLDW01 = C.WLDW01
+       AND A.BM01   = E.BM01
+       AND A.GSXX01 = G.GSXX01
+       AND A.GHHT22 = 3
+       AND A.GHHT21 IS NULL
+       <![CDATA[
+       AND A.GHHT04 <= GET_DATE
+       AND A.GHHT05 >= GET_DATE
+       ]]>
+       AND C.WLDW20 = 0
+       AND C.WLDW16 = 1
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND ( A.BM01 LIKE '%'|| #{BM01} ||'%' OR  E.BM02 LIKE '%'|| #{BM01} ||'%')
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND A.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (C.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="DWSX != null">
+       AND C.WLDW21 = #{DWSX}
+       </if>
+       <if test="HZFS != null">
+       AND A.GHHT24 = #{HZFS}
+       </if>
+       <if test="FLYBGKC != null">
+       <![CDATA[AND A.GHHT24 <> 2]]>
+       </if>
+       <if test="HZFSLB != null and HZFSLB != ''">
+       AND A.GHHT24 in ${HZFSLB}
+       </if>
+       JL{CZY|A.WLDW01|GYS_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+     GROUP BY A.WLDW01, WLDW02, WLDW03, A.GSXX01, G.GSXX02, A.BM01, E.BM02, C.JXSL01, C.WLDW20, C.WLDW21, A.GHHT24
+  </select>
+  
+  <!-- 有合同的供应商（按可操作往来单位和可操作部门权限过滤）-->
+  <select id="GYS_HT_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT MAX(A.GHHT01) GHHT01, A.WLDW01 WLDW01, C.WLDW02 WLDWMC, C.WLDW03 WLDWPYM,
+           A.GSXX01, G.GSXX02 GSMC, A.BM01, E.BM02 BMMC, C.JXSL01 JXSL,
+           C.WLDW20 GXSX, GET_WLDW_GXSX(C.WLDW20) GXSXMC,
+           C.WLDW21 DWSX, GET_WLDWSX(C.WLDW21) DWSXMC,
+           A.GHHT24 HZFS, GET_HZFS(A.GHHT24) HZFSMC
+      FROM GHHT A, WLDW C, BM E, GSXX G
+     WHERE A.WLDW01 = C.WLDW01
+       AND A.BM01 = E.BM01
+       AND A.GSXX01 = G.GSXX01
+       AND C.WLDW20 = 0
+       AND A.GHHT21 IS NULL
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BMMC != null and BMMC != ''">
+        AND (E.BM02 LIKE '%'||#{BMMC}||'%' OR A.BM01 = #{BMMC})
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND A.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (C.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="DWSX != null">
+       AND C.WLDW21 = #{DWSX}
+       </if>
+       <if test="GHHT01 != null">
+       AND A.GHHT01 = #{GHHT01}
+       </if>
+       <if test="HZFS != null">
+       AND A.GHHT24 = #{HZFS}
+       </if>
+       <if test="HZFSLB != null and HZFSLB != ''">
+       AND A.GHHT24 in ${HZFSLB}
+       </if>
+       JL{CZY|A.WLDW01|GYS_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+     GROUP BY A.WLDW01, C.WLDW02, C.WLDW03, A.GSXX01, G.GSXX02, A.BM01, E.BM02, C.JXSL01, C.WLDW20, C.WLDW21, A.GHHT24
+  </select>
+<!-- 有合同的供应商（按可操作往来单位和可操作部门权限过滤）经销合作方式-->
+  <select id="GYS_HT_ALL_JX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT MAX(A.GHHT01) GHHT01, A.WLDW01 WLDW01, C.WLDW02 WLDWMC, C.WLDW03 WLDWPYM,
+           A.GSXX01, G.GSXX02 GSMC, A.BM01, E.BM02 BMMC, C.JXSL01 JXSL,
+           C.WLDW20 GXSX, GET_WLDW_GXSX(C.WLDW20) GXSXMC,
+           C.WLDW21 DWSX, GET_WLDWSX(C.WLDW21) DWSXMC,
+           A.GHHT24 HZFS, GET_HZFS(A.GHHT24) HZFSMC
+      FROM GHHT A, WLDW C, BM E, GSXX G
+     WHERE A.WLDW01 = C.WLDW01
+       AND A.BM01 = E.BM01
+       AND A.GSXX01 = G.GSXX01
+       AND C.WLDW20 = 0
+       AND A.GHHT24 = 0
+       AND A.GHHT21 IS NULL
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BMMC != null and BMMC != ''">
+        AND (E.BM02 LIKE '%'||#{BMMC}||'%' OR A.BM01 = #{BMMC})
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND A.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (C.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="DWSX != null">
+       AND C.WLDW21 = #{DWSX}
+       </if>
+       <if test="GHHT01 != null">
+       AND A.GHHT01 = #{GHHT01}
+       </if>
+       <if test="HZFSLB != null and HZFSLB != ''">
+       AND A.GHHT24 in ${HZFSLB}
+       </if>
+       JL{CZY|A.WLDW01|GYS_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+     GROUP BY A.WLDW01, C.WLDW02, C.WLDW03, A.GSXX01, G.GSXX02, A.BM01, E.BM02, C.JXSL01, C.WLDW20, C.WLDW21, A.GHHT24
+  </select>
+  <!-- 有合同的供应商（按可操作往来单位和可操作部门权限过滤）-->
+  <select id="CGHT" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT MAX(A.GHHT01) GHHT01, A.WLDW01 WLDW01, C.WLDW02 WLDWMC, C.WLDW03 WLDWPYM,
+           A.GSXX01, G.GSXX02 GSMC, A.BM01, E.BM02 BMMC, C.JXSL01 JXSL,
+           C.WLDW20 GXSX, GET_WLDW_GXSX(C.WLDW20) GXSXMC,
+           C.WLDW21 DWSX, GET_WLDWSX(C.WLDW21) DWSXMC,
+           A.GHHT24 HZFS, GET_HZFS(A.GHHT24) HZFSMC
+      FROM GHHT A, WLDW C, BM E, GSXX G
+     WHERE A.WLDW01 = C.WLDW01
+       AND A.BM01 = E.BM01
+       AND A.GSXX01 = G.GSXX01
+       AND C.WLDW20 = 0
+       AND A.GHHT21 IS NULL
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BMMC != null and BMMC != ''">
+        AND (E.BM02 LIKE '%'||#{BMMC}||'%' OR A.BM01 = #{BMMC})
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND A.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (C.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR C.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="DWSX != null">
+       AND C.WLDW21 = #{DWSX}
+       </if>
+       <if test="GHHT01 != null">
+       AND A.GHHT01 = #{GHHT01}
+       </if>
+       <if test="HZFS != null">
+       AND A.GHHT24 = #{HZFS}
+       </if>
+       <if test="HZFSLB != null and HZFSLB != ''">
+       AND A.GHHT24 in ${HZFSLB}
+       </if>
+       JL{CZY|A.WLDW01|GYS_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+     GROUP BY A.WLDW01, C.WLDW02, C.WLDW03, A.GSXX01, G.GSXX02, A.BM01, E.BM02, C.JXSL01, C.WLDW20, C.WLDW21, A.GHHT24
+  </select>
+
+  <!-- 往来单位余额账查询（按可操作往来单位权限过滤）-->
+  <select id="DWYEZ" parameterType="Map" resultType="java.util.Map">
+    SELECT A.BM01, B.BM02 BMMC, A.WLDW01,A.LSED, W.WLDW02 WLDWMC,
+           W.WLDW20 GXSX, GET_WLDW_GXSX(W.WLDW20) GXSXMC,
+           W.WLDW21 DWSX, GET_WLDWSX(W.WLDW21) DWSXMC,
+           A.DWYE01 HUOKUAN_YE, A.DWYE02 YUFU_YE, (A.DWYE01 - A.DWYE02) YINGFU_YE,
+           A.DWYE03 YANFU_YE, A.DWYE04 YINGSHOU_YE, A.DWYE05 XINYONG_ED,
+           A.DWYE06 FANLI_YE, A.DWYE07 FAPIAO_YE, A.DWYE08 SHOURU_YE,
+           A.DWYE13 YUSHOU_YE, A.DWYE19 YANFU_SHIYONG_FANLI_JE,
+           A.DWYE20 YANFU_ZHIDAN_JE, A.DWYE21 FENXIAO_ZHIDAN_JE,
+           A.DWYE22 DINGDAN_ZAITU_JE, A.DWYE23 YAOHUO_ZHIDAN_JE, NVL(A.DWYE24,0) YAOHUO_FL_JE,
+           A.DWYE26 BAOZHENGJIN_YE, (A.DWYE06 - A.DWYE19) KEYONG_FANLI_YE,
+           (A.DWYE05 - (A.DWYE03 + A.DWYE04 + A.DWYE11 - A.DWYE13 - A.DWYE19 + A.DWYE20 +A.DWYE23 )) KEYONG_XINYONG_YE,
+           (A.DWYE05 + A.LSED - A.DWYE04 + A.DWYE13 - A.DWYE03)KYED,
+           NVL((A.DWYE13 - (A.DWYE23 - A.DWYE24 )  +  A.LSED   + A.DWYE05 - A.DWYE21 - A.DWYE03 - A.DWYE04),0) KYYE
+      FROM DWYEZ A, BM B, WLDW W
+     WHERE A.BM01 = B.BM01
+       AND A.WLDW01 = W.WLDW01
+       AND <![CDATA[
+       (((A.DWYE13 - (A.DWYE23 - A.DWYE24) + A.LSED + A.DWYE05 - A.DWYE21 - A.DWYE03 - A.DWYE04)<>0) or A.DWYE06<>0)
+       ]]>
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+       AND A.BM01 = #{BM01}
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND A.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="GXSX != null and GXSX != ''">
+       AND W.WLDW20 = #{GXSX}
+       </if>
+       <if test="DWSX != null and DWSX != ''">
+       AND W.WLDW21 = #{DWSX}
+       </if>
+       <if test="BMSX != null and BMSX != ''">
+       AND B.BM06 = #{BMSX}
+       </if>
+       JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+       JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+
+  <!-- 查找全部客户（按可操作往来单位权限过滤）-->
+  <select id="KH_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT W.WLDW01,GET_RYXX(W.WLDW01) DLZH,W.WLDW02 WLDWMC, W.WLDW10 LXDH, W.WLDW06 LXDZ,W.WLDW42 GKED,W.WLDW46 JGGK,
+    	  W.VIP_HYXX01,W.WBBM,
+    	  W.KSLX01,(SELECT KSLX02 FROM KSLX WHERE KSLX01=W.KSLX01) KSLX,
+    	  (CASE WHEN W.WLDW42 = 1 THEN '是' ELSE '否' END) GKEDMC, RYXX01, RYXX02,W.WLDW65 SKBJ
+      FROM WLDW W
+     WHERE W.WLDW20 = 1
+       AND W.WLDW16 = 1
+       <![CDATA[
+       AND WLDW01 <> '900001'
+       ]]>
+        <if test="WLDW01 != null and WLDW01 != ''">
+       AND W.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="KHMC != null and KHMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{KHMC}||'%' OR W.WLDW02 LIKE '%'||#{KHMC}||'%' OR W.WLDW03 LIKE '%'||#{KHMC}||'%')
+       </if>
+       <if test="KSLX != null and KSLX != ''">
+	       <foreach item="item" index="index" collection="KSLX"  open=" AND (" separator=" or " close=")"> 
+			      W.KSLX01 LIKE #{item}||'%'
+			 </foreach> 
+	   </if>
+       <if test="DWSX != null">
+       AND W.WLDW21 = #{DWSX}
+       </if>
+       JL{CZY|W.WLDW01|KH_CZ|inS}JL
+  </select>
+  
+    <!-- 查找全部供应商（按可操作往来单位权限过滤）-->
+  <select id="GYS_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT W.WLDW01, W.WLDW02 WLDWMC, W.WLDW10 LXDH, W.WLDW06 LXDZ
+      FROM WLDW W
+     WHERE W.WLDW20 = 0
+       AND W.WLDW16 = 1
+       <![CDATA[
+       AND WLDW01 <> '900001'
+       ]]>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND W.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="DWSX != null">
+       AND W.WLDW21 = #{DWSX}
+       </if>
+       JL{CZY|W.WLDW01|GYS_CZ|inS}JL
+  
+  </select>
+
+  <!-- 所有往来单位（按可操作往来单位权限过滤）-->
+  <select id="ALL" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT W.WLDW01, W.WLDW02 WLDWMC, W.WLDW03 WLDWPYM, W.JXSL01 JXSL,
+           W.WLDW20 GXSX, GET_WLDW_GXSX(W.WLDW20) GXSXMC,
+           W.WLDW21 DWSX, GET_WLDWSX(W.WLDW21) DWSXMC,W.GSXX01
+      FROM WLDW W
+     WHERE 1=1
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND W.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+	   <if test="GXSX != null and GXSX != ''">
+		AND W.WLDW20 = #{GXSX}
+		<if test="GXSX == 0">
+			JL{CZY|W.WLDW01|GYS_CZ|inS}JL
+		</if>
+		<if test="GXSX == 1">
+			JL{CZY|W.WLDW01|KH_CZ|inS}JL
+		</if>
+	   </if>
+        <if test="DWSX != null and DWSX != ''">
+       AND W.WLDW21 = #{DWSX}
+       </if>
+  </select>
+  
+   <!-- 查找客户销售网点（按可操作往来单位权限过滤）-->
+  <select id="KH_XSWD" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT X.XSWD01,X.XSWD02 XSWDMC
+      FROM XSWD X
+     WHERE X.XSWD17=1
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND X.WLDW01 = #{WLDW01}
+       </if>
+ 	   <if test="GSXX01 != null and GSXX01 != ''">
+       AND X.GSXX01 = #{GSXX01}
+       </if>
+       JL{CZY|X.WLDW01|KH_CZ|inS}JL
+  </select>
+  
+<!-- 定义客户业务员用  查找全部客户（按可操作往来单位权限过滤）-->
+  <select id="KH_YX" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT W.WLDW01,GET_RYXX(W.WLDW01) DLZH,W.WLDW02 WLDWMC, W.WLDW10 LXDH, W.WLDW06 LXDZ,W.WLDW42 GKED,W.WLDW46 JGGK,
+    	  W.KSLX01,(SELECT KSLX02 FROM KSLX WHERE KSLX01=W.KSLX01) KSLX,
+    	  W.HYXX01,(SELECT HYXX02 FROM HYXX WHERE HYXX01=W.HYXX01) HY,
+    	  (CASE WHEN W.WLDW16 = 1 THEN '是' ELSE '否' END) YXBJ, 
+    	  (CASE WHEN W.WLDW42 = 1 THEN '是' ELSE '否' END) GKEDMC, RYXX01, RYXX02,W.WLDW65 SKBJ
+      FROM WLDW W
+     WHERE W.WLDW20 = 1
+       AND W.WLDW16 = 1
+       <![CDATA[
+       AND WLDW01 <> '900001'
+       ]]>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND W.WLDW01 = #{WLDW01}
+       </if>
+       <if test="KSLX != null and KSLX != ''">
+	       <foreach item="item" index="index" collection="KSLX"  open=" AND (" separator=" or " close=")"> 
+			      W.KSLX01 LIKE #{item}||'%'
+			 </foreach> 
+		</if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="DWSX != null">
+       AND W.WLDW21 = #{DWSX}
+       </if>
+       JL{CZY|W.WLDW01|KH_CZ|inS}JL
+  </select>
+  
+  <!-- 定义客户业务员用  查找全部业务员的客户（按可操作往来单位权限过滤）-->
+  <select id="YWY_KH" parameterType="java.util.Map" resultType="java.util.Map">
+	   SELECT W.WLDW01,
+       GET_RYXX(W.WLDW01) DLZH,
+       W.WLDW02 WLDWMC,
+       W.WLDW10 LXDH,
+       W.WLDW06 LXDZ,
+       W.WLDW42 GKED,
+       W.WLDW46 JGGK,
+       W.KSLX01,
+       (SELECT KSLX02 FROM KSLX WHERE KSLX01 = W.KSLX01) KSLX,
+       W.HYXX01,
+       (SELECT HYXX02 FROM HYXX WHERE HYXX01 = W.HYXX01) HY,
+       (CASE
+         WHEN W.WLDW16 = 1 THEN
+          '是'
+         ELSE
+          '否'
+       END) YXBJ,
+       (CASE
+         WHEN W.WLDW42 = 1 THEN
+          '是'
+         ELSE
+          '否'
+       END) GKEDMC,
+       A.GSXX01,
+       A.RYXX01,
+       R.RYXX02 RY,
+       A.BM01,
+       B.BM02
+  FROM DWYWY A, BM B, WLDW W,RYXX R
+ WHERE A.WLDW01 = W.WLDW01
+   AND A.BM01 = B.BM01
+   AND W.WLDW20 = 1
+   AND W.WLDW16 = 1
+   AND A.RYXX01=R.RYXX01
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND W.WLDW01 = #{WLDW01}
+       </if>
+       <if test="RYXX01 != null and RYXX01 != ''">
+         AND A.RYXX01 = #{RYXX01}
+       </if>
+       <if test="BM01 != null and BM01 != ''">
+         AND A.BM01 = #{BM01}
+       </if>
+       <if test="GSXX01 != null and GSXX01 != ''">
+         AND A.GSXX01 = #{GSXX01}
+       </if>
+       <if test="KSLX != null and KSLX != ''">
+	       <foreach item="item" index="index" collection="KSLX"  open=" AND (" separator=" or " close=")"> 
+			      W.HYXX01 LIKE #{item}||'%'
+			 </foreach> 
+		</if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="DWSX != null">
+       AND W.WLDW21 = #{DWSX}
+       </if>
+       JL{CZY|W.WLDW01|KH_CZ|inS}JL
+  </select>
+  
+  	<!-- 查询往来单位的VIP_HYXX01 -->
+	<select id="HYXX01" parameterType="java.util.Map" resultType="java.util.Map">
+	    SELECT VIP_HYXX01 HYXX01
+	      FROM WLDW 
+	    WHERE 1=1
+        <if test="WLDW01 != null and WLDW01 != ''">
+		  AND WLDW01 = #{WLDW01}
+        </if>
+	</select>
+  
+</mapper>

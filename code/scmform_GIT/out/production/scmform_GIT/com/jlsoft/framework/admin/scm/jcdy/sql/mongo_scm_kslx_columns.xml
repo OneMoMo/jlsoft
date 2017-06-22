@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_KSLX.SCM_KSLX">  
+    	<FIELD attrname="query" format='{"$or":[{"KSBM":"#query#"},{"SJBM":{"$regex":"#query#"}},{"KSLXMC":{"$regex":"#query#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

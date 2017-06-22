@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LSJGWJ">
+	<!-- 查询零售价格文件 -->
+	<select id="query_LSJGWJ" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT A.JLWBDH LSWJH,S.SPXX02 SPBM,S.SPXX04 SPMC,XSJGWJI09 YLSDJ,XSJGWJI01
+		JYDJ,XSJGWJI02 LSXJ1,
+		XSJGWJI03 LSXJ2,XSJGWJI04 LSXJ3,XSJGWJI05 LSXJ4,XSJGWJI06 LSXJ5, DECODE(XSJGWJI13,0,'一级',1,'二级',3,'三级',4,'四级',5,'五级') YXJ,
+		XSJGWJI08 CXF1,XSJGWJI14 CXF2,XSJGWJI15 CXF3,XSJGWJI16 CXF4,XSJGWJI17
+		CXF5,
+		XSJGWJI11 TBTCBL,XSJGWJI12 XSETCBL,XSJGWJI18 XSMLTCBL,A.WLDW01 GYSBM,
+		 W.WLDW02 GYS,GET_HZFS(A.XSJGWJ02) HZFS,
+		(SELECT BM02 FROM BM WHERE BM01=A.CGBM01)CGBM,CGBM01 CGBMBM,
+	  TO_CHAR(A.XSJGWJ04,'YYYY-MM-DD')	 KSRQ,  TO_CHAR(A.XSJGWJ05,'YYYY-MM-DD') JSRQ,
+		XSJGWJ06 ZDR,  TO_CHAR(A.XSJGWJ07,'YYYY-MM-DD') ZDRQ,XSJGWJ08 SHR,  TO_CHAR(A.XSJGWJ09,'YYYY-MM-DD') SHRQ
+		FROM XSJGWJ a,xsJGWJITEM B,SPXX S,WLDW W
+		WHERE A.XSJGWJ01=B.XSJGWJ01 AND A.GSXX01=B.GSXX01 AND B.SPXX01=S.SPXX01
+		AND W.WLDW01=A.WLDW01
+		JL{CZY|A.CGBM01|BM_CX|LIKE%}JL
+		JL{CZY|A.WLDW01|WLDW_CX|LIKE%}JL 
+		JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="LSWJH != null and LSWJH != ''">
+			AND A.JLWBDH = #{LSWJH}
+		</if>
+		<if test="GYS != null and  GYS!= ''">
+		      <foreach item="item" index="index" collection="GYS"  open=" AND (" separator=" or " close=")"> 	      
+		      (W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 LIKE '%'||#{item}||'%')
+		    </foreach>       
+	    </if>
+	    
+	    <if test="BM01 != null and BM01 != ''">
+			<foreach item="item" index="index" collection="BM01" open=" AND ("
+				separator=" or " close=")">
+				A.CGBM01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(S.SPXX02) LIKE '%'|| Upper(#{item})||'%' OR  Upper(S.SPXX04) LIKE '%'|| Upper(#{item})||'%'  OR  Upper(S.SPPYM) LIKE '%'|| Upper(#{item})||'%' 
+		     </foreach> 
+	    </if>
+	    <if test="HZFS != null and HZFS != ''">
+      			   AND A.XSJGWJ02 = #{HZFS}
+        </if>
+	     <if test="BZ != null and BZ != ''">
+      			   AND A.XSJGWJ03 LIKE '%'||#{BZ}||'%'
+        </if>
+         <if test="ZDR != null and ZDR != ''">
+      			   AND A.XSJGWJ06 = #{ZDR}
+        </if>
+        <if test="ZDRQ_S != null and ZDRQ_S != ''">AND A.XSJGWJ07 &gt;= TO_DATE(#{ZDRQ_S} , 'yyyy-mm-dd ')</if>
+		   <if test="ZDRQ_E != null and ZDRQ_E != ''">AND A.XSJGWJ07 &lt;= TO_DATE(#{ZDRQ_E} , 'yyyy-mm-dd ')</if>
+        <if test="SHR != null and SHR != ''">
+      			   AND A.XSJGWJ08 = #{SHR}
+        </if>
+        <if test="SHRQ_S != null and SHRQ_S != ''">AND A.XSJGWJ09 &gt;= TO_DATE(#{SHRQ_S} , 'yyyy-mm-dd ')</if>
+		   <if test="SHRQ_E != null and SHRQ_E != ''">AND A.XSJGWJ09 &lt;= TO_DATE(#{SHRQ_E} , 'yyyy-mm-dd ')</if>
+	</select>
+</mapper>
+
+

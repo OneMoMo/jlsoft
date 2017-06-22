@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fxgl.fxjs.wldcd">
+		<FIELD attrname="CWRQ"  allownull="N" name="财务日期" />
+        <Nested id="DCMS" allownull="N" name="对冲模式">
+            <FIELD attrname="key"   fieldtype="string" allownull="N" name="对冲模式" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="对冲模式" />
+            <FIELD qx='WLDW01|WLDW_CX|in' />
+       		<FIELD qx='GSXX01|GYS_CX|LIKE%' />
+        </Nested>
+		<Nested id="SPLB" allownull="N" name="往来对冲明细">
+			<FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="往来单位编码" />
+            <FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="往来单位名称" />
+            <FIELD attrname="BM01" fieldtype="string" allownull="N" name="部门编码" />
+	        <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="部门名称" />
+            <FIELD attrname="DCJE" fieldtype="string" allownull="N" name="对冲金额" />
+            <FIELD qx='WLDW01|WLDW_CX|in' />
+       		<FIELD qx='GSXX01|GYS_CX|LIKE%' />
+        </Nested>		
+	</JLConfig>	
+</root>

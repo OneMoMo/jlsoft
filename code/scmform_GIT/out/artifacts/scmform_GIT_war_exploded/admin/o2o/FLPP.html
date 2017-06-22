@@ -1,0 +1,93 @@
+<dl class="jl_catalog_line">
+	<dt class="catalog_title">
+		<h3>定义分类品牌</h3>
+	</dt>
+	<dd class="w12"></dd>
+	<dt class="catalog_cz">
+		<i class="fa fa-angle-down" title="收起"></i>
+	</dt>
+</dl>
+<div class="w12 jl_form">
+	<div class="jl_form_02">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="选择分类">选择分类</dt>
+					<dd class="w06">
+						<div id="d_JLShowfl" class="w06"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="已绑定品牌">已绑定品牌</dt>
+					<dd class="w06">
+						<div class="jl_dataexchange" id="d_DYPP_BAND"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="未绑定品牌">未绑定品牌</dt>
+					<dd class="w06">
+						<div class="jl_dataexchange" id="d_DYPP"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title=""></dt>
+					<dd class="w06">
+						<div id="d_toolbar"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title=""></dt>
+					<dd class="w08">
+						<div id="d_toolbar2" ></div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+
+
+
+
+
+	</div>
+</div>
+<!-- 
+<script>
+  $('.jl_date').fdatepicker();
+  $('.jl_time').fdatepicker({format: 'yyyy-mm-dd hh:ii',pickTime: true});
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var checkin = $('.jl_time_01').fdatepicker({
+	  onRender: function (date) {return date.valueOf() < now.valueOf() ? 'disabled' : '';
+	  }}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+			}
+			checkin.hide();
+			$('.jl_time_02')[0].focus();
+		}).data('datepicker');
+		var checkout = $('.jl_time_02').fdatepicker({
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');
+</script>
+
+<script type="text/javascript" src="/jllib/pub/js/JLPym.js"></script>	
+<script type="text/javascript" src="/sysManager/o2o/js/FLPP.js"></script> -->
+
+</body>
+</html>

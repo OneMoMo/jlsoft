@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cggl.cgbjd">
+        <FIELD attrname="WLDWMC" fieldtype="String" allownull="N" name="供应商名称" />
+        <FIELD attrname="BMMC" fieldtype="String" allownull="N" name="采购部门" />
+        <FIELD attrname="HZFS" fieldtype="String" allownull="N" name="合作方式编码" />
+        <FIELD attrname="HZFSMC" fieldtype="String" allownull="N" name="合作方式" />
+        <Nested id="BJFS">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="变价方式代码" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="变价方式名称" />
+        </Nested>
+        
+        <Nested id="SPLB" allownull="N" name="采购变价明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="JLDW" fieldtype="String" allownull="N" name="单位" />
+            <FIELD attrname="BJSL" fieldtype="double" allownull="N" name="变价数量" />
+            <FIELD attrname="PCXH" fieldtype="String" allownull="N" name="批次顺序号" />
+        </Nested>
+	</JLConfig>
+</root>

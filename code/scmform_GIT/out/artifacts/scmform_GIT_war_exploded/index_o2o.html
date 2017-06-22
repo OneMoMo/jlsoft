@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" type="text/css" href="jllib/jllib_base/css/public.css" />
+<link rel='stylesheet' type='text/css' href="lib/JQuery/css/smartMenu.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kkPages.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/mobiscroll.custom-2.17.0.min.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kalendae.css" />
+<link rel="stylesheet" type="text/css" href="o2o/css/back_css/jl_o2o_back_public.css" />
+<link rel="stylesheet" type="text/css" href="o2o/css/back_css/jl_o2o_back_framestructure.css" />
+<link rel="stylesheet" type="text/css" href="o2o/css/back_css/jl_o2o_back_form5.css" />
+<link rel="stylesheet" type="text/css" href="o2o/css/back_css/jl_o2o_back_page.css" />
+<link rel="stylesheet" type="text/css" href="o2o/css/back_css/jl_o2o_back_control.css" />
+
+<link rel="icon" href="icon-o2o.ico">
+<title>多渠服务云 - 首页</title>
+</head>
+<body style="background-color:#f7f7f7">
+<!---头部截点--->
+<div id="shortcut" class="toper">
+</div>
+<div class="jl_header">
+</div>
+<div class="jl_main">
+  	<div class="jl_nav w01">
+	  	<ul class="nav_menu">
+		  	<li class="nav_seach" style="display:none;">
+				<div id="d_serchMenu" class="w12 jl_btn_group">
+            		<input type="text" placeholder="查询菜单">
+            		<span class="jl_btn btn_white"><i class="fa fa-arrow-circle-right" title="打开菜单"></i></span>
+            		<ul class="jl_dropdown_menu"></ul>
+          		</div>
+			</li>
+		</ul>
+	</div>
+  	<div class="page_main w11">
+  	<div class="jl_pageconfigure" style="display:none;">
+  		<i class="fa fa-cog" title="系统配置"></i>
+		<ul id="systemConfig"></ul>
+	</div>
+    	<div class="jl_content w12"><!---页面内容--->
+    		<div class="jl_huoye_title" style="display:none;">
+  				<ul></ul>
+			</div>
+			<div class="jl_huoye_main"></div>
+    	</div>    
+  	</div>
+</div>
+<div class="jl_catalog hide"><!---页面目录---></div>
+<div class="jl_quicnav">
+	<ul>
+  		<li title="返回顶部" onclick="$('html,body').animate({scrollTop:0}, 300);"><i class="fa fa-upload"></i></li>
+	</ul>
+</div>
+<div class="jl_modal"><!---弹出层---></div>
+<div id="foot"></div>
+</body>
+</html>
+<script type="text/javascript" src="/scripts/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-smartMenu.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/mobiscroll.custom-2.17.0.min.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/kalendae.standalone.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-pinyin.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-time.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="jllib/jllib_pc/o2oPub/js/JLPaging.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.Paging.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/json2.js"></script>
+<script type="text/javascript">
+	var rid = Math.random();
+	//var rid = 1;
+
+	document.write("<script type='text/javascript' src='jllib/form/js/ui.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/jl-all.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/JLForm.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/form/js/JLMessage.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='jllib/jllib_pc/pub/js/JLQuery.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='index_o2o.js?rid="+rid+"'><\/script>");
+	document.write("<script type='text/javascript' src='userConfig.js?rid="+rid+"'><\/script>");
+</script>

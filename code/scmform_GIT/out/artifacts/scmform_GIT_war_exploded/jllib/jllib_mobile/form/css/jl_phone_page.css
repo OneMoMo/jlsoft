@@ -1,0 +1,38 @@
+/***
+个人中心user
+***/
+.user_img{ width:100%; height:120px; position:relative;}
+.user_img > .user_img_main{ width:80px; height:80px; position:absolute; left:50%; top:20px; margin:0 0 0 -35px; background:#fff; border-radius:50%; line-height:80px; text-align:center; color:#2195c9; font-size:1.5em; overflow:hidden;}
+.user_img_main > img{ width:100%; height:100%;}
+
+.oa_main{ padding:5px 10px; border-bottom:1px solid #e4e4e4; width:100%; float:left;}
+.oa_main > h3{ margin-bottom:5px;}
+.oa_main > ul > li > dl{ float:left; width:100%; line-height:25px;}
+.oa_main > ul > li > dl > dt{ color:#999; padding-right:10px;}
+.oa_main > ul > li > dl > dd > .jl_btn{ text-align:left; padding:8px 10px;}
+
+/***
+流程/jl_process
+***/
+.jl_process_page{ position:relative; padding:5px 0; float:left; width:2000px; padding:10px; background:#fff; border-bottom:1px solid #e4e4e4;}
+.jl_process_page > ul > li{ padding:1px 0px 1px 20px; line-height:24px; color:#fff;}
+.jl_process_page > ul > li.before{ background:#aaa; padding-left:15px;}
+.jl_process_page > ul > li.center{ background:#28b779;}
+.jl_process_page > ul > li.after{ background:#fd464f; }
+.jl_process_page > ul > li.before:after{ position:absolute; top:0; right:0; display:inline-block !important; border-top:13px solid #ffffff; border-bottom:13px solid #aaa; border-left:13px solid #aaa; border-bottom-color:#ffffff; content:'';}
+.jl_process_page > ul > li.center:before{ position:absolute; top:0; left:0; display:inline-block !important; border-top:13px solid #28b779; border-bottom:13px solid #ffffff; border-left:13px solid #ffffff; border-bottom-color:#28b779; content:'';}
+.jl_process_page > ul > li.center:after{ position:absolute; top:0; right:0; display:inline-block !important; border-top:13px solid #ffffff; border-bottom:13px solid #28b779; border-left:13px solid #28b779; border-bottom-color:#ffffff; content:'';}
+.jl_process_page > ul > li.center01:before{ border:0px !important;}
+.jl_process_page > ul > li.center02:after{ border:0px !important;}
+.jl_process_page > ul > li.after:before{ position:absolute; top:0; left:0; display:inline-block !important; border-top:13px solid #fd464f; border-bottom:13px solid #ffffff; border-left:13px solid #ffffff; border-bottom-color:#fd464f; content:'';}
+
+/***
+批量操作/jl_edit_main
+***/
+.jl_edit_main{ position:fixed; width:100%; z-index:996; background:#f5f5f5; border-top:1px solid #ccc; bottom:0px; padding:20px 10px;}
+
+/***
+版权信息/jl_copyright
+***/
+.jl_copyright > .logo{ width:100%; height:100px; float:left; margin:20px;}
+.jl_copyright > .logo > img{ width:100px; height:100px; position:absolute; left:50%; margin-left:-50px;}

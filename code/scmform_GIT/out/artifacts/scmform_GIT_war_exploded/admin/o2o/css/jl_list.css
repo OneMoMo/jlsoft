@@ -1,0 +1,9 @@
+/***
+页面主体jl_list
+***/
+.jl_list{ float:left; position:relative; padding-right:20px;}
+.jl_list ul{ width:100%;}
+.jl_list ul > li{ height:100px; padding-right:20px;}
+.jl_list ul > li > dl{ width:100%; height:100px; background:#ffb848;}
+.jl_list ul > li > dl{}
+

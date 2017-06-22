@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CXGCFXD">
+  <select id="queryGCFXD" parameterType="Map" resultType="java.util.Map">
+		SELECT B.WBTDH,A.GSXX01,A.JLWBDH FXDH, nvl(B.BZJE,0) BZJE, nvl(B.BZJE,0)/B.PFDI05 BZJDJ,( SELECT A.CK02  FROM CK A WHERE A.CK01= B.CK01) CKMC,
+		 E.JLWBDH THDH,
+       S.SPXX02 SPBM,
+       S.SPXX04 SPMC,
+       B.PFDI02 FXDJ,
+       B.PFDI05 FXSL,
+       (B.PFDI02 * B.PFDI05) FXJE,B.KHBZJG,
+       ROUND((1 + W.JXSL01) * B.PFDI08, 2) FXCB,
+       CASE
+         WHEN A.PFD05 IS NOT NULL THEN
+	ROUND(B.PFDI06 - PFDI08 * (1 + W.JXSL01), 2)
+         ELSE
+	0
+       END ML,
+       ROUND(B.PFDI13, 2) SJ,
+       get_spsx_v10(B.PFDI21) SPSX,
+       S.JLDW01 JLDW,
+       A.WLDW01 KHBM,
+       (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) KHMC,
+       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) XSFS,
+       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) XSBM,
+       A.PFD06 YYY01,
+       A.PFD20 SKR,
+       TO_CHAR(A.PFD05, 'YYYY-MM-DD') SKRQ,
+       A.PFD19 YYY,
+       B.PFDI12 FHR,
+       TO_CHAR(B.PFDI11, 'YYYY-MM-DD') FHRQ,
+       (SELECT CK02 FROM CK WHERE CK01 = B.CK01) CKMC,
+       (SELECT BM02 FROM BM WHERE BM01 = B.BM01) CGBM,
+      B.PFDI45 BZ,
+       (SELECT PPB02 FROM PPB WHERE PPB01 = S.PPB01) PPMC,
+       S.SPFL02 SPFLMC,
+       (SELECT XSWD02 FROM XSWD WHERE XSWD01 = B.XSWD01) XSWDMC,
+       A.PFD29 SHR,
+       TO_CHAR(A.PFD30, 'YYYY-MM-DD') SHRQ,
+       A.PFD07 ZDR,
+       B.PFDI07 FLJE,
+       TO_CHAR(A.PFD04, 'YYYY-MM-DD HH24:MI:SS') ZDRQ,
+       B.PFDI12 FHR,
+       TO_CHAR(B.PFDI11, 'YYYY-MM-DD') FHRQ,
+       W.KSLX01,
+       (SELECT KSLX02 FROM KSLX WHERE KSLX01 = W.KSLX01) KSLXMC,
+       (CASE
+         WHEN NVL(D.SSFSL,0) = 0 THEN
+	'未发货'
+         WHEN ABS(D.YSFSL - D.SSFSL - D.ZFSL - D.JSSL) <![CDATA[>]]> 0 AND D.SSFSL <![CDATA[<>]]> 0 THEN
+	'部分发货'
+         WHEN ABS(D.YSFSL - D.SSFSL - D.ZFSL - D.JSSL) = 0 AND D.SSFSL <![CDATA[<>]]> 0 THEN
+	'全部发货'
+       END) FHZT,
+        A.HDZT01,
+       (SELECT HDZTMC FROM HDZT WHERE HDZT01=A.HDZT01 AND GSXX01=A.GSXX01) HDZTMC,
+       A.GCDJH,B.AZDZMX,
+			 (CASE
+			    WHEN NVL(A.THFS,0) = 0 THEN '自提'
+					WHEN NVL(A.THFS,0) = 1 THEN '配送'
+			 END) PSFS,
+			TO_CHAR(A.JHRQ, 'YYYY-MM-DD') JHRQ,
+			 S.PPB02 SPPPMC,(SELECT SQDJ FROM GCDLD  
+			 where WBTDH=B.DJTDH AND GSXX01=A.GSXX01 AND GCDLD01=A.GCDJH ) SQDJ,
+			 B.BZJE/B.PFDI05+PFDI02 KDDJ,B.BZJE+(B.PFDI02 * B.PFDI05) KDZJE
+   FROM PFD A, PFDITEM B, SPXX S, WLDW W, DSFHPSB D, PFD E
+ WHERE A.PFD01 = B.PFD01
+   AND A.WLDW01 = W.WLDW01
+   AND A.GSXX01 = B.GSXX01
+   AND B.SPXX01 = S.SPXX01
+   AND A.PFD14 IS NULL
+   AND D.DJLX(+)=8
+   AND B.GSXX01 = D.GSXX01(+)
+   AND B.PFD01 = D.DJHM(+)
+   AND B.PFDI01 = D.THDH(+)
+   AND A.PFD01 = E.PFD36(+)
+   AND A.GSXX01 = E.GSXX01(+)
+   AND A.GCDJH IS NOT NULL
+   AND A.GCDJH <![CDATA[<>]]> '0'
+   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+	       JL{CZY|A.BM01|BM_CX|LIKE%}JL
+	       JL{CZY|B.BM01|BM_CX|LIKE%}JL
+	       JL{CZY|B.CK01|CK_CX|LIKE%}JL
+	       JL{CZY|A.WLDW01|WLDW_CX|inS}JL
+		 <if test="GSXX01 != null and GSXX01 != ''"> 
+		   AND A.GSXX01=#{GSXX01} 
+		 </if>
+		 <if test="SYDW != null and SYDW != ''"> 
+		   AND A.GCMC LIKE '%'||#{SYDW}||'%' 
+		 </if>
+		 <if test="HDZT != null and HDZT != ''"> 
+		   AND A.HDZT01=#{HDZT} 
+		 </if>
+		 <if test="BZ != null and BZ != ''"> 
+		   AND B.PFDI45 LIKE '%'||#{BZ}||'%' 
+		 </if>
+		 <if test="DJZT != null and DJZT ==1"> 
+		   AND A.PFD07 IS NOT NULL
+		   AND A.PFD04 IS NOT NULL
+		   AND A.PFD29 IS NULL
+		   AND A.PFD30 IS NULL
+		 </if>
+			<if test="DJZT != null and DJZT ==2"> 
+		   AND A.PFD07 IS NOT NULL
+		   AND A.PFD04 IS NOT NULL
+		   AND A.PFD29 IS NOT NULL
+		   AND A.PFD30 IS NOT NULL
+		 </if> 
+		  <if test="KSLX != null and KSLX != ''"> 
+		   AND W.KSLX01=#{KSLX} 
+		 </if>
+		 <if test=" FHZT!= null and FHZT ==0 "> 
+		 AND B.PFDI12 IS NULL
+		   AND D.SSFSL=0
+		   AND D.CZLX = 1
+		 </if>
+		 <if test=" FHZT!= null and FHZT ==1 "> 
+		   AND ABS(D.YSFSL-D.SSFSL)>0 
+		   AND D.SSFSL>0
+		  AND  D.CZLX=1
+		 </if>
+		 <if test=" FHZT!= null and FHZT ==2 "> 
+		   AND ABS(D.YSFSL-D.SSFSL)=0 
+		    AND D.CZLX = 1
+		 </if>
+		 <if test="FXDH != null and FXDH != ''">
+		     <foreach item="item" index="index" collection="FXDH"  open=" AND (" separator=" or " close=")"> 
+		       A.JLWBDH LIKE #{item}
+		     </foreach> 	         
+	    </if>
+		<if test="SPMC != null and SPMC != ''">
+		      AND (Upper(S.SPXX02) LIKE Upper('%'||#{SPMC}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{SPMC}||'%')  OR Upper(S.SPPYM) LIKE Upper('%'||#{SPMC}||'%') )
+	    </if>
+	    <if test="XSBM != null and XSBM != ''">
+		     <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 = #{item}
+		     </foreach> 	         
+	    </if>
+	    <if test="CGBM != null and CGBM != ''">
+		     <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      B.BM01 = #{item}
+		     </foreach> 	         
+	    </if>
+	    <if test="XSWD != null and XSWD != ''">
+		     <foreach item="item" index="index" collection="XSWD"  open=" AND (" separator=" or " close=")"> 
+		      B.XSWD01 = #{item}
+		     </foreach> 	         
+	    </if>
+	    <if test="WLDW != null and WLDW != ''">		      
+		    AND (W.WLDW02 LIKE '%'||#{WLDW}||'%' OR A.WLDW01 = #{WLDW})
+	    </if>
+	    <if test="CK01 != null and CK01 != ''">
+		     <foreach item="item" index="index" collection="CK01"  open=" AND (" separator=" or " close=")"> 
+		      B.CK01 = #{item}
+		     </foreach>
+	    </if>
+	    <if test="PP01 != null and PP01 != ''">
+	         <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+	          S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	    <if test="YWY != null and YWY != ''">
+	         <foreach item="item" index="index" collection="YWY"  open=" AND (" separator=" or " close=")"> 
+	          A.PFD06 = #{item}
+	         </foreach>
+	    </if>
+	    <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          S.SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	    </if>
+	    <if test="SPSX != null and SPSX != ''">
+		     <foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")"> 
+		      B.PFDI21 = #{item}
+		     </foreach> 	         
+	    </if>
+	    <if test="XSFS != null and XSFS != ''">
+		    AND A.FLFS01 = #{XSFS}	         
+	    </if>	    
+	    <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND A.PFD04 >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD HH24:MI:SS')]]>
+	    </if> 
+	    <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+	       <![CDATA[AND A.PFD04 <= TO_DATE(#{ZDRQ_E},'YYYY-MM-DD HH24:MI:SS')]]>
+	    </if>
+	    <if test="SKRQ_S !=null and SKRQ_S != ''">
+	       <![CDATA[AND A.PFD05 >= TO_DATE(#{SKRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="SKRQ_E !=null and SKRQ_E != ''">
+	       <![CDATA[AND A.PFD05 <= TO_DATE(#{SKRQ_E},'YYYY-MM-DD')]]>
+	    </if>
+	    <if test="FHRQ_S !=null and FHRQ_S != ''">
+	       <![CDATA[AND B.PFDI11 >= TO_DATE(#{FHRQ_S},'YYYY-MM-DD')]]>
+	    </if> 
+	    <if test="FHRQ_E !=null and FHRQ_E != ''">
+	       <![CDATA[AND B.PFDI11 <= TO_DATE(#{FHRQ_E},'YYYY-MM-DD')]]>
+	    </if>
+	 <if test="GCDJH != null and GCDJH != ''"> 
+	 	<foreach item="item" index="index" collection="GCDJH"  open=" AND (" separator=" or " close=")"> 
+		       A.GCDJH LIKE '%'||#{item}||'%' 
+		   </foreach>
+     </if>
+	<if test="AZDZMX != null and AZDZMX != ''"> 
+		       AND B.AZDZMX LIKE '%'||#{AZDZMX}||'%' 
+     </if>
+	<if test="THFS != null and THFS != ''">  
+		 AND A.THFS = #{THFS}
+     </if>
+     <if test="ZDRMC != null and ZDRMC != ''"> 
+		   AND A.PFD07  LIKE '%'||#{ZDRMC}||'%' 
+     </if>
+	    ORDER BY A.JLWBDH
+    </select>
+    
+<!-- 查询分销单明细 -->
+<select id="queryGCFXDMX" parameterType="Map" resultType="java.util.Map">
+    SELECT A.JLWBDH DJBH,
+       THDH   TDH,
+       S.SPXX02 SPBM,
+       S.SPXX04 SPMC,
+       SSFSL  SL,
+       CZRMC  FHR,
+      TO_CHAR(CZRQ,'YYYY-MM-DD')    FHRQ
+  FROM SFHJL A, SPXX S
+ WHERE A.SPXX01 = S.SPXX01
+ <if test="GSXX01 != null and GSXX01 != ''">
+	       AND A.GSXX01 = #{GSXX01}
+	 </if>
+	 <if test="FXDH != null and FXDH != ''">
+	       AND  A.JLWBDH = #{FXDH}
+	</if>
+	<if test="SPXX!= null and SPXX!= ''">
+		<foreach item="item" index="index" collection="SPXX"  open=" AND (" separator=" or " close=")"> 
+		      S.SPXX02 LIKE '%'||#{item}||'%' OR S.SPXX04 LIKE '%'||#{item}
+		 </foreach> 
+	  </if>
+  </select>
+  
+<!-- 查询工程分销单送货明细 -->
+<select id="queryGCFXDSHMX" parameterType="Map" resultType="java.util.Map">
+SELECT A.GSXX01,B.FWWD01,
+       F.FWWD02 SHWD,
+       (SELECT FWRY02
+          FROM CSS_SHRYFY
+         WHERE GD01 = B.GD01
+           AND FWRYLX = 1
+           AND ROWNUM = 1) SHRY,
+       (SELECT LXDH
+          FROM CSS_SHRYFY S, CSS_FWRY R
+         WHERE GD01 = B.GD01
+           AND FWRYLX = 1
+           AND S.FWRY01 = R.FWRY01
+           AND ROWNUM = 1) SHLXFS,
+       (SELECT Z.ZCRQ
+          FROM CSS_GDRZ Z
+         WHERE Z.GDLC = 'PG'
+           AND Z.GD01 = B.GD01
+           AND Z.ZCRQ = (SELECT MAX(ZCRQ)
+                           FROM CSS_GDRZ Y
+                          WHERE Y.GD01 = B.GD01
+                            AND Y.GDLC = 'PG')
+           AND ROWNUM = 1) PGSJ,
+       (SELECT Z.ZCRQ
+          FROM CSS_GDRZ Z
+         WHERE Z.GDLC = 'HZ'
+           AND Z.GD01 = B.GD01
+           AND Z.ZCRQ = (SELECT MAX(ZCRQ)
+                           FROM CSS_GDRZ Y
+                          WHERE Y.GD01 = B.GD01
+                            AND Y.GDLC = 'HZ')
+           AND ROWNUM = 1) HZSJ,
+       B.XXDZ SHDZ,
+       B.LXR,
+       B.LXDH LXFS
+  FROM CSS_FWDITEM A, CSS_SHGD B, CSS_FWWD F
+ WHERE A.FWDI01 = B.FWDI01
+   AND B.FWWD01 = F.FWWD01(+)
+   	<if test="GSXX01 != null and GSXX01 != ''">
+	       AND A.GSXX01 = #{GSXX01}
+	 </if>
+	 <if test="FXDH != null and FXDH != ''">
+	       AND A.DJHM  = #{FXDH}
+	 </if>
+	 <if test="WBTDH != null and WBTDH != ''">
+	        AND A.DJTDH = #{WBTDH}
+	 </if>
+  </select>
+   <select id="queryFXTH" parameterType="Map" resultType="java.util.Map">
+SELECT (SELECT SPXX02 FROM SPXX WHERE SPXX01 = B.SPXX01) SPBM,
+       (SELECT SPXX04 FROM SPXX WHERE SPXX01 = B.SPXX01) SPMC,
+       A.WLDW01,
+       (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) WLDWMC,
+       b.CK01,
+       (SELECT CK02 FROM CK WHERE CK01 = b.CK01) CKMC,
+       B.PFDI05 XSSL,
+       B.PFDI06 XSJE,
+       B.PFDI02 FXDJ,
+       B.PFDI09 THSL,
+       TO_CHAR(b.pfdi11, 'YYYY-MM-DD') FHRQ,
+       B.PFDI12 FHR,
+       A.PFD07 ZDR,
+       TO_CHAR(A.PFD04, 'YYYY-MM-DD') ZDRQ,
+       A.PFD29 SHR,
+       TO_CHAR(A.PFD30, 'YYYY-MM-DD') SHRQ,
+       TO_CHAR(A.PFD32, 'YYYY-MM-DD') XSRQ,
+       A.PFD63 DJZT,
+       A.PFD05 SKSJ,
+       A.PFD20 SKY
+  FROM PFD A, PFDITEM B
+ WHERE A.PFD01 = B.PFD01
+   AND A.GSXX01 = B.GSXX01 
+   	<if test="GSXX01 != null and GSXX01 != ''">
+	       AND A.GSXX01 = #{GSXX01}
+	 </if>
+	 <if test="THDH != null and THDH != ''">
+	       AND A.JLWBDH  = #{THDH}
+	 </if>
+  </select>
+</mapper>

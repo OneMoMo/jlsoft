@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FLPPQX.SCM_FLPPQX">  
+     	<FIELD attrname="search" format='{"$or":[{"QX01":{"$regex":"#search#"}},{"QXMC":{"$regex":"#search#"}}]}' fieldtype="string" allownull="Y" name="状态" />
+     	<FIELD attrname="LX" format='{"QXLX.key":"#LX#"}' fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

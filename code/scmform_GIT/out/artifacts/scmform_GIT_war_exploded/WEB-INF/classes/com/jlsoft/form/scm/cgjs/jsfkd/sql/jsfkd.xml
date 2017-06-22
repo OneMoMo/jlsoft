@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JSFKD">
+   <select id="DJD" parameterType="Map" resultType="java.util.Map">
+		  Select A.GSXX01, A.JSPKD01, A.FPDJ01 JSDJD01, 
+		  		 (SELECT JLWBDH FROM JSDJD where JSDJ01 = A.FPDJ01 and GSXX01=A.GSXX01) JSDJDH,
+		  		 A.FPDJ06 FPSL, A.FPDJ11 BZ, A.PKJE, A.YFJE, A.PKJE SFJE
+		    From JSPKDITEM_FPDJ A,JSPKDWLDW W,JSPKD J
+		   Where A.WLDW01 = W.WLDW01
+             AND A.JSPKD01 = W.JSPKD01
+             AND A.GSXX01 = W.GSXX01
+             AND A.GSXX01 = J.GSXX01
+	         AND A.JSPKD01 = J.JSPKD01
+	         AND J.JSPKD04 IS NOT NULL
+             AND J.JSPKD07 IS NULL
+             AND W.JSPKDW13 = 0
+		<if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01=#{GSXX01}</if>
+		<if test="JSDJD01 != null and JSDJD01 != ''"> AND A.FPDJ01=#{JSDJD01}</if>
+		<if test="JSPKD01 != null and JSPKD01 != ''"> AND A.JSPKD01=#{JSPKD01}</if>
+		<if test="WLDW01 != null and WLDW01 != ''"> AND A.WLDW01=#{WLDW01}</if>
+	</select>
+	<select id="YFK" parameterType="Map" resultType="java.util.Map">
+		Select A.GSXX01, A.JSPKD01, B.YFKSQD01 YFKDH, B.JLWBDH YFKD01, A.HZFS01,
+           A.YFKSQD09 BZ, A.PPB01,
+           (Select PPB02 From PPB Where PPB01 = A.PPB01) PP, A.PKJE, A.YFJE,
+               A.PKJE SFJE,(A.PKJE - A.YFJE) WHXJE
+          From JSPKDITEM_YFK A,YFKSQD B,JSPKDWLDW W,JSPKD J
+         Where A.GSXX01 = B.GSXX01(+)
+           AND A.YFKSQD01 = B.YFKSQD01(+)
+           AND A.WLDW01 = W.WLDW01
+           AND A.JSPKD01 = W.JSPKD01
+           AND A.GSXX01 = W.GSXX01
+           AND A.GSXX01 = J.GSXX01
+           AND A.JSPKD01 = J.JSPKD01
+           AND J.JSPKD04 IS NOT NULL
+           AND J.JSPKD07 IS NULL
+           AND W.JSPKDW13 = 0
+		<if test="GSXX01 != null and GSXX01 != ''"> AND A.GSXX01=#{GSXX01}</if>
+		<if test="YFKD01 != null and YFKD01 != ''"> AND A.YFKSQD01=#{YFKD01}</if>
+		<if test="JSPKD01 != null and JSPKD01 != ''"> AND A.JSPKD01=#{JSPKD01}</if>
+		<if test="WLDW01 != null and WLDW01 != ''"> AND A.WLDW01=#{WLDW01}</if>
+	</select>
+	<select id="JSFKD_FPDJ" parameterType="Map" resultType="java.util.Map">
+		    Select D.FPDJ01 FPDJD01 ,B.BM01 ,(SELECT BM02 FROM BM WHERE BM01 = B.BM01)BMMC,
+		           C.WLDW02 WLDWMC,get_hzfs(A.HZFS01)HZFSMC,JSPKD02 ZDRMC,B.JSPKD03 ZDRQ,
+		           D.FPDJ11 BZ
+		      From JSPKDWLDW A, JSPKD B, WLDW C,JSPKDITEM_FPDJ D 
+		     Where A.GSXX01 = B.GSXX01
+		       And A.WLDW01 = C.WLDW01
+		       And A.JSPKD01 = B.JSPKD01
+		       AND D.JSPKD01 = B.JSPKD01
+		       AND D.GSXX01 = A.GSXX01
+		       AND B.JSPKD04 IS NOT NULL
+		       AND B.JSPKD07 IS NULL
+		       AND A.JSPKDW13 = 0
+		<if test="GSXX01 != null"> And B.GSXX01=#{GSXX01} </if>
+		<if test="BM != null">
+		   <foreach item="item" index="index" collection="BM"  open=" AND (" separator=" or " close=")"> 
+		      B.BM01 like CONCAT(#{item},'%')
+		   </foreach> 
+		</if>
+		<if test="JSPKD01 != null"> AND A.JSPKD01 = #{JSPKD01}</if>
+		<if test="JSPKD03_S != null">
+		   <![CDATA[ AND B.JSPKD03 >= TO_DATE(#{JSPKD03_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="JSPKD03_E != null">
+		   <![CDATA[ AND B.JSPKD03 <= TO_DATE(#{JSPKD03_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="JSPKD05_S != null">
+		   <![CDATA[ AND B.JSPKD05 >= TO_DATE(#{JSPKD05_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="JSPKD05_E != null">
+		   <![CDATA[ AND B.JSPKD05 <= TO_DATE(#{JSPKD05_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="BM01 != null"> AND B.BM01 = #{BM01}</if>
+		<if test="WLDW01 != null"> AND A.WLDW01 = #{WLDW01}</if>
+		<if test="JSPKD08_S != null">
+		   <![CDATA[ AND B.JSPKD08 >= TO_DATE(#{JSPKD08_S},'YYYY-MM-DD')]]>
+		</if>
+		<if test="JSPKD08_E != null">
+		   <![CDATA[ AND B.JSPKD08 <= TO_DATE(#{JSPKD08_E},'YYYY-MM-DD')]]>
+		</if>
+		<if test="ce_FKRQ != null">
+		    <if test="ce_FKRQ == 1">
+		       <![CDATA[ AND B.JSPKD08 < TO_DATE(sysdate,'YYYY-MM-DD')]]>
+		    </if>
+		</if>
+		<if test="YSH != null">
+		    <if test="YSH == 1"> AND A.JSPKDW06 is null AND A.JSPKDW14 = 1 AND B.JSPKD06 IS NULL</if>
+		</if>
+		<if test = "iCSSZ != null"> and C.WLDW16 = 1</if>
+        ORDER BY A.WLDW01, A.HZFS01, B.BM01
+	</select>
+	<select id="JSPKD" parameterType="Map" resultType="java.util.Map">
+		SELECT B.JLWBDH JSPKDH, A.JSPKD01, A.WLDW01, A.JSPKDW01 YFFPJE, A.JSPKDW02 YSSRJE, A.JSPKDW03 SFFPJE, A.JSPKDW04 SSSRJE,
+		       A.JSPKDW05 FKR, A.JSPKDW06 FKRQ, A.JSPKDW07 YFYE, A.JSPKDW08 YFYFYE, A.JSPKDW09 SFYFYE, B.JSPKD02 ZDR,
+		       B.JSPKD03 ZDRQ, B.JSPKD04 SHR, TO_CHAR(B.JSPKD05,'YYYY-MM-DD') SHRQ, TO_CHAR(B.JSPKD08,'YYYY-MM-DD') JHFKRQ, B.JSPKD10 SHF, B.JSPKD11 AZF,
+		       + (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) WLDWMC,
+		       (SELECT BM02 FROM BM WHERE BM01 = B.BM01) BMMC, C.WLDW11 KHYH, C.WLDW12 YHZH,
+            (SELECT WLDW01_R FROM KSJSBH WHERE WLDW01=A.WLDW01) WLDW01_R, GET_HZFS(A.HZFS01) HZFSMC, 
+            (SELECT WLDW.WLDW02 FROM KSJSBH,WLDW WHERE KSJSBH.WLDW01_R=WLDW.WLDW01
+             AND KSJSBH.WLDW01=A.WLDW01) WLDW02_R 
+		  FROM JSPKDWLDW A, JSPKD B, WLDW C
+		 WHERE A.GSXX01 = B.GSXX01
+		   AND A.WLDW01 = C.WLDW01
+		   AND A.JSPKD01 = B.JSPKD01
+		   AND A.JSPKDW06 IS NULL
+		   AND A.JSPKDW14 = 1
+		   AND B.JSPKD06 IS NULL
+		   AND C.WLDW16 = 1
+		<if test="GSXX01 != null and GSXX01 != ''"> And B.GSXX01=#{GSXX01} </if>
+		<if test="JSPKD01 != null and JSPKD01 != ''"> AND B.JLWBDH = #{JSPKD01}</if>
+		<if test="BM01 != null and BM01 != ''"> AND B.BM01 = #{BM01}</if>
+		<if test="WLDW01 != null and WLDW01 != ''"> AND A.WLDW01 = #{WLDW01}</if>
+		<if test="HZFS != null and HZFS != ''"> AND A.HZFS01 = #{HZFS}</if>
+        ORDER BY A.WLDW01, A.HZFS01, B.BM01
+	</select>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.fxgl.fxjs.sqbzj">
+	      <FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客户名称" />
+	      <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="销售部门名称" />
+	      <FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="客户代码" />
+	      <FIELD attrname="XS_BM01" fieldtype="string" allownull="N" name="销售部门代码" />
+		
+	</JLConfig>
+</root>

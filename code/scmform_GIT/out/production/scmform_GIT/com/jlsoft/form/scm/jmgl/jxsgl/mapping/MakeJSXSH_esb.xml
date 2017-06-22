@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	
+	<chain id ="MakeJSXSH.getCenterInfo" description= "ERP系统：获取中心信息" concurrency ="false" log="false">
+		<processor component ="jsonToMapConvertor"/>
+		<processor component="httpClientTransportor" url="{{BaofengTV_URL}}/Inbound/invoke.do"/>
+		<processor component ="jsonToListConvertor"/>
+	</chain>
+	
+	<chain id ="MakeJSXSH.getYWYXX" description= "ERP系统：获取业务员信息" concurrency ="false" log="false">
+		<processor component ="jsonToMapConvertor"/>
+		<processor component="httpClientTransportor" url="{{BaofengTV_URL}}/Inbound/invoke.do"/>
+		<processor component ="jsonToListConvertor"/>
+	</chain>
+	
+</root>

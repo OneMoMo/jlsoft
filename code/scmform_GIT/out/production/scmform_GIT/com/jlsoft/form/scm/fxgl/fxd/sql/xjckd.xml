@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="XJCKD">
+  <select id="YHZH" parameterType="Map" resultType="java.util.Map">
+	     SELECT A.GSXX01, A.YHZH01, A.YHZH02, A.YHZH03, A.YHZH04, B.YHXX01, B.YHXX02
+          From YHZH A, YHXX B
+          WHERE A.YHXX01 = B.YHXX01
+          And A.YHZH05 = 1
+          And A.GSXX01 = #{GSXX01}
+         ORDER BY A.YHZH01 
+  </select>
+  <select id="DTWJJE" parameterType="Map" resultType="java.util.Map">
+	    SeLECT sum(DTWJJE) DTWJJE FROM XJCKD
+	    WHERE CKRQ = TO_DATE(#{CKRQ},'YYYY-MM-DD')
+  </select>		
+  <select id="LJWJJE" parameterType="Map" resultType="java.util.Map">
+ SeLECT sum(LJWJJE) LJWJJE FROM XJCKD 
+	 WHERE 1=1 
+ <if test="CKRQ!=null and CKRQ != ''">
+	       <![CDATA[AND CKRQ <= TO_DATE(#{CKRQ},'YYYY-MM-DD')]]>
+	     </if>
+  </select>		
+    <select id="BM" parameterType="Map" resultType="java.util.Map">
+	    SELECT a.bm01 bm01,a.bm02 bm02 FROM bm a,RYXX b  where  a.bm01 =b.bm01 
+	  <if test="ZDY_RYXX01!=null and ZDY_RYXX01 != ''">
+	 AND b.ryxx01  = #{ZDY_RYXX01}
+	     </if>
+  </select>
+</mapper>

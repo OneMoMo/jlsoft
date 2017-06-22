@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>添加新地址</title>
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="../js/ui.js"></script>
+</head>
+<body>
+<div class="main">
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case pr0 bor_bottom">
+    <span class="w03">收货人</span>
+    <input jlui="ipt_czy_pwd" class="w09 sr tr" placeholder="收货人" />
+  </div>
+  <div class="jl_list_case pr0 bor_bottom">
+    <span class="w03">联系电话</span>
+    <input jlui="ipt_czy_pwd" class="w09 sr tr" placeholder="收货人" />
+  </div>
+  <div class="jl_list_case pr0 bor_bottom">
+    <span class="w03">所在地区</span>
+    <input jlui="ipt_czy_pwd" class="w09 sr tr" placeholder="收货人" />
+  </div>
+  <div class="jl_list_case pr0 bor_bottom">
+    <span class="w03">街道</span>
+    <input jlui="ipt_czy_pwd" class="w09 sr tr" placeholder="收货人" />
+  </div>
+  <div class="jl_list_case pr0 bor_bottom height100">
+    <span class="w03">小区/门牌号</span>
+    <textarea class="w09 sr tr"></textarea>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom">
+  <div jlui="btn_lang" class="jl_list_case bor_bottom xuan_JL{_xuan}JL">
+    <i class="fa fa-circle-thin mr10"></i>
+    <i class="fa fa-check-circle mr10 font_color"></i>
+    <span class="w08">设为默认地址</span>
+  </div>
+</div>
+<div class="w12 model hide">
+</div>
+</div>
+<footer>
+<div class="w12 jl_btn btn_color" jlui="btn_czy_pwd_update">确定</div>
+</footer>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+
+</script>
+</html>

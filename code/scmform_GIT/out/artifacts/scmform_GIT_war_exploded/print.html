@@ -1,0 +1,56 @@
+<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0 style="position:absolute;left:0px;top:-10px;"></object> 
+<object id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 style="position:absolute;left:0px;top:-10px;"></object>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" type="text/css" href="jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_css.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_form.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_list.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_table.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_page.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_control.css" />
+<link rel="stylesheet" type="text/css" href="jllib/form/css/jl_pc_table.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kkPages.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/mobiscroll.custom-2.17.0.min.css" />
+<link rel="stylesheet" type="text/css" href="lib/JQuery/css/kalendae.css" />
+<link rel="icon" href="icon.ico">
+<title>打印</title>
+</head>
+
+<body>
+<div class="w12 jl_form print_hide" style="position:fixed;z-index:10000;top:0;left:0;width:100%;background-color:#FFF;box-shadow: 0px 0px 10px #ccc;">
+	<div class="jl_form_02">
+		<ul class="step1">
+			<li class="w12">
+            	<dl>
+                	<dt class="w05"><b style="margin-top:5px;">选择模版:</b></dt>
+                	<dd class="w07"><select id="print_temp" style="margin-top:5px;"></select>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-print" title="打印" style="font-size: 22px; margin-top:5px;cursor: pointer;"></i></dd>
+            	</dl>
+        	</li>
+        </ul>
+	</div>
+</div>                   
+<div class="print_hide" style="height:51px;">&nbsp;</div>
+<div id="print_main" style="text-align: -webkit-center;"></div>
+<div class="print_hide" style="height:100px;">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="/scripts/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/json2.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/jquery-barcode.js"></script>
+<script type="text/javascript" src="lib/JQuery/js/LodopFuncs.js"></script>
+<script type="text/javascript" src="jllib/form/js/jl-all.js"></script>
+<script type="text/javascript">
+	var rid = Math.random();
+	document.write("<script type='text/javascript' src='print.js?rid="+rid+"'><\/script>");
+</script>

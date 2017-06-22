@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="../js/ui.js"></script>
+</head>
+<body>
+<div class="main">
+<div class="user_img" onClick="window.location.href='userInfo.html'">
+  <div class="user_img_main">
+    <div class="imgbox"><img class="w12" src="../images/user_tx.jpg"></div>
+    <span class="w08 pl20 mt10">张三</span>
+    <dl class="money w08 mt5 pl20">
+        <dt>余额：</dt>
+        <dd class="pl5"><span>2999.00</span></dd>
+    </dl>
+  </div>
+  <i class="fa fa-angle-right right_more"></i>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case" onClick="window.location.href='myorder.html'">
+    <span class="w04">我的订单</span>
+    <span class="w08 tr detail">查看全部订单</span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+</div>
+<div class="w12 userOrder_listP pl10 pr10 pt20 pb20">
+   <a href="myOrder.html" class="order w20">
+     <dl jlui>
+         <dt><i class="fa fa-credit-card"></i><span>10</span></dt>
+         <dd>待付款</dd>
+     </dl>
+   </a>
+    <a href="myOrder.html" class="order w20">
+     <dl jlui>
+         <dt><i class="fa fa-list-alt"></i><span>10</span></dt>
+         <dd>待发货</dd>
+     </dl>
+   </a>
+   <a href="myOrder.html" class="order w20">
+     <dl jlui>
+         <dt><i class="fa fa-truck"></i><span>10</span></dt>
+         <dd>待收货</dd>
+     </dl>
+   </a>
+   <a href="myOrder.html" class="order w20">
+     <dl jlui>
+         <dt><i class="fa fa-heart-o"></i><span>10</span></dt>
+         <dd>待评价</dd>
+     </dl>
+   </a>
+   <a href="myOrder.html" class="order w20">   
+     <dl jlui>
+         <dt><i class="fa fa-tasks"></i><span>10</span></dt>
+         <dd>退款/售后</dd>
+     </dl>
+   </a>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom">
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">收藏内容</span>
+    <span class="w08 tr font_gray">21</span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">我的卡券</span>
+    <span class="w08 tr">3</span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+  <div class="jl_list_case bor_bottom">
+    <span class="w04">历史足迹</span>
+    <span class="w08 tr">119</span>
+    <i class="fa fa-angle-right right_more"></i>
+  </div>
+</div>
+<div class="jl_line"></div>
+<div class="jl_list jl_list_bottom">
+  <a class="jl_list_case bor_bottom">
+    <span class="w04">关于我们</span>
+    <span class="w08 tr"></span>
+    <i class="fa fa-angle-right right_more"></i>
+  </a>
+  <a class="jl_list_case bor_bottom">
+    <span class="w04">版权</span>
+    <span class="w08 tr">多渠云</span>
+    <i class="fa fa-angle-right right_more"></i>
+  </a>
+</div>
+<div class="jl_line"></div>
+<div class="w12 pl20 pr20 mt20">
+  <div class="w12 mt20 jl_btn btn_color radius5" onClick="window.location.href='login.html'">退出登录</div>
+</div>
+
+</div>
+
+<footer>
+<dl class="w03" onClick="window.location.href='../index.html'">
+  <dt><i class="fa fa-home"></i></dt>
+  <dd>首页</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='../nav.html'">
+  <dt><i class="fa fa-navicon"></i></dt>
+  <dd>分类</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='../cart/cart.html'">
+  <dt><i class="fa fa-cart-plus"></i></dt>
+  <dd>购物车</dd>
+  <em>15</em>
+</dl>
+<dl class="w03 xuan" onClick="window.location.href='userIndex.html'">
+  <dt><i class="fa fa-user"></i></dt>
+  <dd>我的</dd>
+</dl>
+</footer>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

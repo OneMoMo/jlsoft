@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ORACLE_GCDLD">
+	<select id="SCM_CXGCJDGJ" parameterType="Map" resultType="java.util.Map">
+	select  GCDLD01,
+       SPXX01,
+      SPDM,
+      SPMC,
+       PFSL,
+       PFDJ,
+      GCZZSL,
+       YSZZSL,
+       THSL,
+       ZLSL,
+       JCSL,
+       SPPYM,
+     BZJYE,
+       BZJSQJE,
+       BZJTHJE from (
+		select A.GCDLD01,A.SPXX01,A.SPXX02 SPDM,A.SPXX04 SPMC,A.PFSL,A.PFDJ,A.GCZZSL,A.YSZZSL,A.THSL,A.ZLSL,A.JCSL,B.SPPYM
+		,(A.BZJSQJE - A.BZJTHJE)BZJYE,A.BZJSQJE,A.BZJTHJE
+       from GCDLD A,SPXX B
+        WHERE A.SPXX01 =B.SPXX01
+		<if test="GCDLD01 != null and GCDLD01 != ''">
+			AND A.GCDLD01=#{GCDLD01}
+	    </if>
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01=#{GSXX01}
+	    </if>)where 1= 1
+	   <if test="SPMC != null and SPMC != ''">
+            AND SPMC LIKE '%'||#{SPMC}||'%' OR SPPYM LIKE '%'||#{SPMC}||'%' OR SPDM LIKE '%'||#{SPMC}||'%'
+       </if>
+	</select>
+</mapper>

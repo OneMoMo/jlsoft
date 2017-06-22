@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="admin.workflow.jcdy.bm">  
+		<FIELD attrname="BM01" fieldtype="string" allownull="N" name="部门代码" />
+		<FIELD attrname="BM02" fieldtype="string" allownull="N" name="部门名称" /> 
+		<!-- <FIELD attrname="BMLX" fieldtype="Map" allownull="N" name="部门类型" />  -->
+		<!-- <FIELD attrname="MJBJ" fieldtype="Map" allownull="N" name="末级标记" />  -->
+	</JLConfig>
+</root>

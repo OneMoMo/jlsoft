@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE log4j:configuration SYSTEM "http://toolkit.alibaba-inc.com/dtd/log4j/log4j.dtd">  
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="debug">  
+    <!-- Console output -->  
+   
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern" value="%d %p [%c] - [%m] %n"/>  
+        </layout>  
+    </appender>  
+    
+<!--    <appender name="LOGFILE" class="org.apache.log4j.RollingFileAppender">  
+        <param name="File" value="${webapp.root}/WEB-INF/logs/v9.log"/> 
+        <param name="MaxFileSize" value="51200KB"/>  
+        <param name="MaxBackupIndex" value="3"/>
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern" value="%d %p [%c] - [%m] -%n"/>  
+        </layout>  
+    </appender>  -->
+    
+    
+
+    <logger name="org.springframework.jdbc.core.JdbcTemplate">  
+        <level value="DEBUG"/>  
+    </logger> 
+
+    <logger name="com.ibatis" additivity="true">    
+        <level value="DEBUG" />  
+    </logger>
+	   
+	
+    <logger name="java.sql.Connection">    
+        <level value="DEBUG" />   
+    </logger>
+	   
+    <logger name="java.sql.Statement">    
+        <level value="DEBUG" />   
+    </logger>
+	   
+    <logger name="java.sql.PreparedStatement">    
+        <level value="DEBUG" /> 
+    </logger>
+	 
+	    
+    <root>   
+        <level value="INFO" />    
+        <appender-ref ref="STDOUT" />   
+<!--        <appender-ref ref="LOGFILE" />-->
+    </root>
+
+       
+</log4j:configuration>  
+

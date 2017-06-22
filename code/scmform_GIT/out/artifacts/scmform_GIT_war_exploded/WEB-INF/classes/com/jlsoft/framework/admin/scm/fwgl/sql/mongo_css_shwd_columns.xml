@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SHWD.CSS_SHWD">
+		<FIELD attrname="search" format='{"$or":[{"FWWD01":{"$regex":"#search#"}},{"FWWD02":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="送货网点" />
+		<FIELD attrname="GSXX01" format='{"$or":[{"GSXX01.key":{ "$in" : [ "#GSXX01#"]}},{"GSXX01":{"$exists":false}},{"$and":[{"GSXX01":{"$exists":true}},{"GSXX01":{}}]}]}' fieldtype="String" allownull="Y" name="GSXX01" />
+		<!-- <FIELD qx='GSXX01.key|CZGS_CZ|inOrNull' />  -->
+	</JLConfig>
+</root>

@@ -1,0 +1,100 @@
+<script type="text/javascript">
+var formQuery = {};
+$(document).ready(function(){
+	var modal = $(".jl_banner1 .jl_modal_main:not(:hidden)");
+	formQuery = {};
+	formQuery.config = JLQuery.config;
+	formQuery.config.callback = function(data){
+		JLQuery.close([data]);
+	}
+	formQuery.config.query = function(){
+		var queryField = {};
+		var texts = modal.find(".jl_screening > ul > li").find(":text");
+		for(var i=0;i<texts.length;i++){
+			var text = $(texts[i]);
+			if(!JL.isNull(text.val()) && text.val()!="请选择"){
+				queryField[text.attr("name")] = text.val();
+			}
+		}
+		
+		if(!JL.isNull(formQuery.config.modalField)){
+			$.each(formQuery.config.modalField, function(key, value){
+				if(!JL.isNull(value)){
+					queryField[key] = value;
+				}
+			});
+		}
+		
+		var XmlData={};
+		XmlData["CX01"] = formQuery.config.querybh;
+		XmlData["queryField"] = $.extend(queryField,userInfo);
+	
+		var ajaxJson = {};
+		ajaxJson["src"] = pubJson.getURL("FormUrl")+"/scmform/jlquery/selectCustom.do?rid="+Math.random();
+		ajaxJson["data"] = {"XmlData":JSON.stringify(XmlData)};
+		ajaxJson["alert"] = true;
+		ajaxJson["async"] = true;
+		ajaxJson["callback"] = function(resultData){
+         console.log(resultData)
+			if(!JL.isNull(resultData)){
+				var data = resultData["data"];
+				var fileName = resultData["fileName"];
+				formQuery.querygrid.setData(data);
+				//formQuery.querygrid.setPaging(fileName);
+			}
+		};
+		var resultData = JL.ajax(ajaxJson,true);
+	};
+	formQuery.config.loadCondition = function(CXTJ,dl){
+	};
+	
+	var querybh = formQuery.config["querybh"];
+	var ajaxJson = {};
+	ajaxJson["src"] = pubJson.getURL("FormUrl")+"/scmform/FormQuery/getConfig.do?rid="+Math.random();
+	ajaxJson["data"] = {"XmlData":JSON.stringify({"CX01":querybh})};
+	var resultData = JL.ajax(ajaxJson);
+	if(!JL.isNull(resultData)){
+		resultData = resultData.data;
+		$(".jl_banner1 .max_modal_main .modal_title h3").html(resultData.CX02);
+		$.extend(formQuery.config, resultData);
+		
+		console.info(resultData.CX07);
+		if(!JL.isNull(resultData.CX07)){
+			$(".jl_banner1 .max_modal_main .jl_screening").empty();
+			$(".jl_banner1 .max_modal_main .jl_screening").load(resultData.CX07+"?rid="+rid,function(){
+				if(formQuery.config.queryGrid.jlid == "JLGrid"){
+					formQuery.querygrid.setHeight(modal.find(".modal_content").height() - 102 - modal.find(".jl_screening").height());
+				}
+			});
+		}else{
+			if(!JL.isNull(formQuery.config.CXTJ)){
+				formQuery.config.loadCondition(formQuery.config.CXTJ);
+			}else{
+				modal.find(".jl_screening").hide();
+			}
+		}
+	}
+	formQuery.config.queryGrid.listener={};
+	formQuery.config.queryGrid.listener.rowclick = function(data){
+		 formQuery.config.callback(data);
+	 };
+	 console.info(formQuery.config.queryGrid);
+	formQuery.querygrid = JL.initPlugIn($(".jl_banner1 .max_modal_main #d_querygrid"), "querygrid", formQuery.config.queryGrid);
+
+	if(formQuery.config.autoquery){
+		formQuery.config.query()
+	}
+});
+
+</script>
+<div class="max_modal_main">
+	<div class="modal_title"><h3>标题</h3><span>×</span></div>
+	<div class="modal_content">
+		<div id="queryField" class="w12 jl_screening">
+    		<ul><li class="w12"></li></ul>
+  		</div>
+        <!--主体内容-->         
+        <div id="d_querygrid" class="w12 jl_list_04"></div>
+	</div>
+</div>
+

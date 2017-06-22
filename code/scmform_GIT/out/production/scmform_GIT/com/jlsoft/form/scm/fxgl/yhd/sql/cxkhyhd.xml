@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CXKHYHD">
+   <select id="KHYHDBB" parameterType="Map" resultType="java.util.Map">
+	SELECT A.GSXX01, A.KHYHD01 KHYHD,A.JLWBDH KHYHD01,W.WLDW02, A.WLDW01, S.SPXX02, S.SPXX04 SPMC,S.SPPYM,
+      S.SPXX01,B.KHBZJG,B.YHSL-B.ZZSL-B.XSSL SYKDSL, B.FLDJ,B.FLBL,(B.YHDJ*B.YHSL*B.FLBL/100)FLJE,
+       B.YHDJ,B.YHSL, (B.YHDJ*B.YHSL) YHJE,B.ZZSL,B.XSSL FXSL, B.WBTDH,B.KHYHD01 KHYHDDH,
+       (select BM02 from BM WHERE BM01=A.BM01 ) XSBM,C.FLFS02 XSFS,
+       D.RYXX02 YWYMC,A.GCDJH,
+       A.YSKDH,TO_CHAR(A.ZDR) ZDR,
+       TO_CHAR(A.ZDRQ,'YYYY-MM-DD') ZDRQ,
+       TO_CHAR(A.SHR) SHR,
+       TO_CHAR(A.SHRQ,'YYYY-MM-DD') SHRQ,
+       TO_CHAR(A.ZZR) ZZR,
+       A.HDZT01,
+      (SELECT H.HDZTMC FROM HDZT H WHERE H.HDZT01=A.HDZT01 AND A.GSXX01=H.GSXX01) HDZTMC,
+       TO_CHAR(A.ZZRQ,'YYYY-MM-DD') ZZRQ,A.BZ,
+       (case
+         when A.SHR IS NOT NULL THEN
+          '已审核'
+         ELSE
+          '制单'
+       END)  DJZT,(select SPFL01 from SPFL where SPFL01=S.SPFL01 )SPFL01 ,S.PPB02 SPPPMC
+  	FROM KHYHD_NEW A, KHYHDITEM_NEW B, SPXX S, FLFS C,RYXX D,WLDW W
+  	WHERE A.KHYHD01 = B.KHYHD01
+  	AND A.GSXX01 = B.GSXX01
+  	AND B.SPXX02 = S.SPXX02
+  	AND A.FLFS01 = C.FLFS01
+  	AND A.YWYDM  = D.RYXX01
+  	AND A.WLDW01 = W.WLDW01
+    <!-- AND A.GCDJH is NULL  -->
+	<if test="KHYHD01 != null and KHYHD01 != ''">
+       AND A.JLWBDH LIKE '%'||#{KHYHD01}||'%'
+   		</if>
+	<if test="WLDW02 != null and WLDW02 != ''">
+ 		AND (W.WLDW02 LIKE '%'||#{WLDW02}||'%' OR a.wldw01 LIKE '%'||#{WLDW02}||'%')
+	</if>
+	<if test="HDZT != null and HDZT != ''">
+		AND A.HDZT01=#{HDZT}
+	</if>
+	<if test="DJZT != null and DJZT != ''">
+ 		AND (case
+         when A.SHR IS NOT NULL THEN
+          '已审核'
+         ELSE
+          '制单'
+       END)  =  #{DJZT}
+		</if>
+		
+	<if test="XSFS != null and XSFS != ''">
+		AND C.FLFS01 =  #{XSFS}
+		</if>
+	<if test="SPMC != null and SPMC != ''">
+       AND (S.SPPYM LIKE '%'||#{SPMC}||'%' OR S.SPXX04 LIKE '%'||#{SPMC}||'%' OR S.SPXX02 LIKE '%'||#{SPMC}||'%')
+     	</if>
+     <if test="SPFL != null and SPFL != ''">
+	           <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	               S.SPFL01 LIKE #{item}||'%'
+	           </foreach>
+	       </if>
+	 <if test="XSBM != null and XSBM != ''">
+	           <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")">
+	               A.BM01 LIKE #{item}||'%'
+	           </foreach>
+	       </if>
+   	<if test="PP01 != null and PP01 != ''">
+           <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+               S.PPB01 = #{item}
+           </foreach>
+       </if>
+	 <if test="ZDRQ_S != null and ZDRQ_S != ''">AND A.ZDRQ &gt;= TO_DATE(#{ZDRQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="ZDRQ_E != null and ZDRQ_E != ''">AND A.ZDRQ &lt;= TO_DATE(#{ZDRQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="SHRQ_S != null and SHRQ_S != ''">AND A.SHRQ &gt;= TO_DATE(#{SHRQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="SHRQ_E != null and SHRQ_E != ''">AND A.SHRQ &lt;= TO_DATE(#{SHRQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="ZZRQ_S != null and ZZRQ_S != ''">AND A.ZZRQ &gt;= TO_DATE(#{ZZRQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="ZZRQ_E != null and ZZRQ_E != ''">AND A.ZZRQ &lt;= TO_DATE(#{ZZRQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="YWYMC != null and YWYMC != ''">
+ 		AND D.RYXX02 LIKE '%'||#{YWYMC}||'%'
+		</if>
+	<if test="GCDJH != null and GCDJH != ''">
+		AND A.GCDJH LIKE '%'||#{GCDJH}||'%'
+		</if>
+	<if test="YSKDH != null and YSKDH != ''">
+		AND A.YSKDH LIKE '%'||#{YSKDH}||'%'
+		</if>
+	<if test="BZ != null and BZ != ''">
+		AND A.BZ LIKE '%'||#{BZ}||'%'
+		</if>
+	<if test="KDZT == 1"><!--开单状态 未开单-->
+		AND B.YHSL-B.ZZSL-B.XSSL>0
+		</if>
+	<if test="KDZT == 2"><!--开单状态 已开单-->
+		AND B.XSSL>0
+		</if>
+	<if test="KDZT == 3"><!--开单状态 终止-->
+		AND B.ZZSL>0
+		</if>
+	JL{CZY|A.BM01|BM_CX|LIKE%}JL
+	<!-- JL{CZY|A.CK01|CK_CZ|LIKE%}JL -->
+    JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+    JL{CZY|A.WLDW01|WLDW_CX|inS}JL 
+    
+   <!-- <if test="KDZT == 3">开单状态 终止 -->
+   UNION ALL 
+SELECT A.GSXX01, A.KHYHD01 KHYHD,(SELECT JLWBDH FROM KHYHD_NEW WHERE KHYHD01=A.KHYHD01 AND GSXX01=A.GSXX01) KHYHD01,W.WLDW02, TO_CHAR(A.WLDW01), S.SPXX02, S.SPXX04 SPMC,S.SPPYM,
+     S.SPXX01,0 KHBZJG,0 SYKDSL,       B.FLDJ,
+       0 FLBL,
+       (B.FLDJ * B.YHSL ) FLJE,
+       B.YHDJ,B.ZZSL*-1, (B.YHDJ*B.ZZSL*-1) YHJE,0,0 FXSL, B.WBTDH,B.KHYHD01 KHYHDDH,
+       (select BM02 from BM WHERE BM01=A.BM01 ) XSBM,C.FLFS02 XSFS,
+       D.RYXX02 YWYMC,A.gcdld01 GCDJH,
+       '' YSKDH,TO_CHAR(A.ZZR) ZDR,
+       TO_CHAR(A.ZZRQ,'YYYY-MM-DD') ZDRQ,
+       TO_CHAR(A.SHR) SHR,
+       TO_CHAR(A.SHRQ,'YYYY-MM-DD') SHRQ,
+       TO_CHAR(A.ZZR) ZZR,
+       (SELECT HDZT01 FROM KHYHD_NEW WHERE KHYHD01=A.KHYHD01 AND GSXX01=A.GSXX01) HDZT01,
+      (SELECT H.HDZTMC FROM HDZT H WHERE H.HDZT01=(SELECT HDZT01 FROM KHYHD_NEW WHERE KHYHD01=A.KHYHD01 AND GSXX01=A.GSXX01)) HDZTMC,
+       TO_CHAR(A.ZZRQ,'YYYY-MM-DD') ZZRQ,A.YHBZ BZ,
+       (case
+         when A.SHR IS NOT NULL THEN
+          '已审核'
+         ELSE
+          '制单'
+       END)  DJZT,(select SPFL01 from SPFL where SPFL01=S.SPFL01 )SPFL01 ,S.PPB02 SPPPMC
+  FROM KHYHD_ZZ A, KHYHDITEM_ZZ B, SPXX S, FLFS C,RYXX D,WLDW W
+  WHERE A.YHZZD01 = B.YHZZD01
+  AND A.GSXX01 = B.GSXX01
+  AND B.SPXX01 = S.SPXX01
+  AND A.FLFS01 = C.FLFS01
+  AND A.YWY01  = D.RYXX01
+  AND A.WLDW01 = W.WLDW01
+  <!-- AND A.gcdld01 is NULL  -->
+   <if test="KHYHD01 != null and KHYHD01 != ''">
+       AND A.JLWBDH LIKE '%'||#{KHYHD01}||'%'
+   		</if>
+	<if test="WLDW02 != null and WLDW02 != ''">
+ 		AND (W.WLDW02 LIKE '%'||#{WLDW02}||'%' OR a.wldw01 LIKE '%'||#{WLDW02}||'%')
+	</if>
+	<if test="HDZT != null and HDZT != ''">
+		AND (SELECT HDZT01 FROM KHYHD_NEW WHERE KHYHD01=A.KHYHD01 AND GSXX01=A.GSXX01)=#{HDZT}
+	</if>
+	<if test="DJZT != null and DJZT != ''">
+ 		AND (case
+         when A.SHR IS NOT NULL THEN
+          '已审核'
+         ELSE
+          '制单'
+       END)  =  #{DJZT}
+		</if>
+		
+	<if test="XSFS != null and XSFS != ''">
+		AND C.FLFS01 =  #{XSFS}
+		</if>
+	<if test="SPMC != null and SPMC != ''">
+       AND (S.SPPYM LIKE '%'||#{SPMC}||'%' OR S.SPXX04 LIKE '%'||#{SPMC}||'%' OR S.SPXX02 LIKE '%'||#{SPMC}||'%')
+     	</if>
+     <if test="SPFL != null and SPFL != ''">
+	           <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	               S.SPFL01 LIKE #{item}||'%'
+	           </foreach>
+	       </if>
+     <if test="XSBM != null and XSBM != ''">
+       <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	       	A.BM01 = #{item}
+	   		</foreach> 	         
+   		</if>
+   	<if test="PP01 != null and PP01 != ''">
+           <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+               S.PPB01 = #{item}
+           </foreach>
+       </if>
+     <if test="KDZT == 1"><!--开单状态 未开单-->
+		AND 0>0
+		</if>
+	<if test="KDZT == 2"><!--开单状态 已开单-->
+		AND 0>0
+		</if>
+	 <if test="ZDRQ_S != null and ZDRQ_S != ''">AND A.ZZRQ &gt;= TO_DATE(#{ZDRQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="ZDRQ_E != null and ZDRQ_E != ''">AND A.ZZRQ &lt;= TO_DATE(#{ZDRQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="SHRQ_S != null and SHRQ_S != ''">AND A.SHRQ &gt;= TO_DATE(#{SHRQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="SHRQ_E != null and SHRQ_E != ''">AND A.SHRQ &lt;= TO_DATE(#{SHRQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="ZZRQ_S != null and ZZRQ_S != ''">AND A.ZZRQ &gt;= TO_DATE(#{ZZRQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="ZZRQ_E != null and ZZRQ_E != ''">AND A.ZZRQ &lt;= TO_DATE(#{ZZRQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+   	 <if test="YWYMC != null and YWYMC != ''">
+ 		AND D.RYXX02 LIKE '%'||#{YWYMC}||'%'
+		</if>
+	<if test="GCDJH != null and GCDJH != ''">
+		AND A.GCDLD01 LIKE '%'||#{GCDJH}||'%'
+		</if>
+	<if test="YSKDH != null and YSKDH != ''">
+		AND A.YSKDH LIKE '%'||#{YSKDH}||'%'
+		</if>
+	<if test="BZ != null and BZ != ''">
+		AND A.YHBZ LIKE '%'||#{BZ}||'%'
+		</if>
+	JL{CZY|A.BM01|BM_CX|LIKE%}JL
+	<!-- JL{CZY|A.CK01|CK_CZ|LIKE%}JL -->
+    JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+    JL{CZY|A.WLDW01|WLDW_CX|inS}JL 
+   <!-- </if> -->
+</select>
+
+<select id="KHYHDMX" parameterType="Map" resultType="java.util.Map">
+      SELECT A.GSXX01,
+       A.JLWBDH FXDH,
+       A.KHYHD01,
+       A.PFD07 ZDR,
+       TO_CHAR(A.PFD04, 'YYYY-MM-DD') ZDRQ,
+       B.SPXX01,
+       S.SPXX02 SPBM,
+       S.SPXX04 SPMC,
+       B.PFDI05 XSSL,
+       B.PFDI12 FHR,
+       TO_CHAR(B.PFDI11, 'YYYY-MM-DD') FHRQ,
+       D.SSFSL FHSL
+  FROM PFD A, PFDITEM B, SPXX S, DSFHPSB D
+ WHERE A.PFD01 = B.PFD01
+   AND A.GSXX01 = B.GSXX01
+   AND B.SPXX01 = S.SPXX01
+   AND B.PFDI01 = D.THDH(+)
+   AND B.PFD01 = D.DJHM(+)
+   AND B.GSXX01 = D.GSXX01(+)
+   AND B.WBTDH = D.WBTDH(+)
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND A.GSXX01 = #{GSXX01}
+       </if>  
+       <if test="KHYHD != null and KHYHD != ''">
+       AND A.KHYHD01 = #{KHYHD}
+       </if>
+       <if test="SPXX01 != null and SPXX01 != ''">
+       AND B.SPXX01 = #{SPXX01}
+       </if>  
+       <if test="SPXX02 != null and SPXX02 != ''">
+       AND S.SPXX02 = #{SPXX02}
+       </if> 
+       <if test="KHYHD == null or KHYHD == ''">
+       AND 1=2
+       </if>    
+    </select>  
+
+
+<select id="KHYHDZZ_ZZSL" parameterType="Map" resultType="java.util.Map">
+	   select SUM(A.ZZSL)ZZSL,SPXX01 from KHYHDITEM_ZZ A,KHYHD_ZZ B WHERE A.YHZZD01=B.YHZZD01 AND ZZRQ IS NOT NULL AND SHRQ IS NULL
+
+       <if test="GSXX01 != null and GSXX01 != ''">
+       AND a.GSXX01 = #{GSXX01}
+       </if>  
+        <if test="KHYHD01 != null and KHYHD01 != ''">
+       AND a.KHYHD01 = #{KHYHD01}
+       </if>   
+	   GROUP BY SPXX01
+    </select>  
+</mapper>

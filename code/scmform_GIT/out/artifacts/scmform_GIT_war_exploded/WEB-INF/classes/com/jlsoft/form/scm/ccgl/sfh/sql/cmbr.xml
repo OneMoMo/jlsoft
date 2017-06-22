@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CMBR">
+	<select id="DJHM" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT V.CZLX CZLX01, DECODE(V.CZLX, 0, '收货', 1, '发货') CZLX, V.DJLX DJLX01,GET_DJLX(V.DJLX) DJLX,
+		(SUM(V.SMSL) - (SELECT NVL(COUNT(A.JQM01),0) FROM JQMBLJL A WHERE A.JLWBDH = V.JLWBDH
+		AND A.GSXX01=V.GSXX01 AND A.JQMK03=V.DJLX AND A.JQMK04=V.DJHM AND A.JQMK01=V.CZLX)) SMSL,
+		V.JLWBDH, V.DJHM, (CASE WHEN V.BM01 IS NULL THEN (SELECT BM01 FROM DSFHPSB A
+		WHERE A.JLWBDH = V.JLWBDH AND A.DJLX = V.DJLX AND A.CZLX = V.CZLX AND A.DJHM = V.DJHM
+		AND A.GSXX01 = V.GSXX01 AND ROWNUM = 1) ELSE V.BM01 END) BM01,
+		(CASE WHEN V.BM01 IS NULL THEN (SELECT B.BM02 FROM DSFHPSB A, BM B WHERE
+		A.JLWBDH = V.JLWBDH AND A.DJLX = V.DJLX
+		AND A.CZLX = V.CZLX AND A.DJHM = V.DJHM
+		AND A.GSXX01 = V.GSXX01 AND A.CGBM01 = B.BM01 AND ROWNUM = 1)
+		ELSE V.BMMC END) BMMC,
+		(CASE WHEN V.WLDW01 IS NULL THEN (SELECT A.WLDW01 FROM DSFHPSB A WHERE A.JLWBDH = V.JLWBDH
+		AND A.DJLX = V.DJLX AND A.CZLX = V.CZLX AND A.DJHM = V.DJHM AND A.GSXX01 =V.GSXX01
+		AND ROWNUM = 1) ELSE V.WLDW01 END) WLDW01,
+		(CASE WHEN V.WLDW01 IS NULL THEN (SELECT W.WLDW02 FROM DSFHPSB A, WLDW W
+		WHERE A.JLWBDH = V.JLWBDH AND A.DJLX =V.DJLX
+		AND A.CZLX = V.CZLX AND A.DJHM = V.DJHM 
+		AND A.GSXX01 = V.GSXX01 AND A.WLDW01 = W.WLDW01
+		AND ROWNUM = 1) ELSE V.WLDW02 END) WLDWMC, V.GSXX01, V.GSMC
+		FROM VIEW_DSFHPSB_JQMBL V
+		WHERE 1 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND V.GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJBH != null and DJBH != ''">
+			AND V.JLWBDH = #{DJBH}
+		</if>
+		<if test="CZLX != null and CZLX != ''">
+			AND V.CZLX = #{CZLX}
+		</if>
+		GROUP BY V.CZLX, V.DJLX, V.JLWBDH, V.DJHM, V.BM01, V.BMMC, V.WLDW01, V.WLDW02, V.GSXX01, V.GSMC
+		HAVING (SUM(V.SMSL) - (SELECT NVL(COUNT(A.JQM01),0) FROM JQMBLJL A WHERE A.JLWBDH = V.JLWBDH
+		AND A.GSXX01=V.GSXX01 AND A.JQMK03=V.DJLX AND A.JQMK04=V.DJHM AND A.JQMK01=V.CZLX)) > 0
+	</select>
+
+	<select id="SPMX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT SPXX01, SPBM, SPMC, JLDW, YCKSL, YRKSL, YSMSL, GLCM
+		FROM VIEW_DSFHPSB_JQMBL_SPMX
+		WHERE 1 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJBH != null and DJBH != ''">
+			AND JLWBDH = #{DJBH}
+		</if>
+		<if test="CZLX != null and CZLX != ''">
+			AND CZLX = #{CZLX}
+		</if>
+	</select>
+
+	<select id="JQMBLJL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT JQM01 JQM
+		FROM JQMBLJL
+		WHERE 1 = 1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJBH != null and DJBH != ''">
+			AND JLWBDH = #{DJBH}
+		</if>
+		<if test="CZLX != null and CZLX != ''">
+			AND JQMK01 = #{CZLX}
+		</if>
+	</select>
+	<select id="queryCMBR" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT TO_CHAR(DJRQ,'YYYY-MM-DD') DJRQ,
+		V.CZLX CZLX01,
+		DECODE(V.CZLX, 0,
+		'收货', 1, '发货') CZLX,
+		V.DJLX DJLX01,
+		GET_DJLX(V.DJLX) DJLX,
+		SUM(V.YUSMSL)
+		YSSL,
+		(SELECT NVL(COUNT(JQM01),0) FROM JQMBLJL WHERE JLWBDH = V.JLWBDH
+		AND GSXX01 =
+		V.GSXX01
+		AND JQMK03 = V.DJLX AND JQMK04 = V.DJHM AND JQMK01
+		= V.CZLX)
+		YISSL,
+		V.JLWBDH DJH,
+		V.DJHM,
+		V.BM01 BMBM,
+		V.BMMC,
+		V.WLDW01 KHBM,
+		V.WLDW02 KH,
+		V.GSXX01 GSXX01,
+		V.GSMC
+		FROM VIEW_JQMBL V
+		WHERE 1=1
+		AND (SELECT NVL(COUNT(JQM01), 0)
+		FROM JQMBLJL
+		WHERE JLWBDH = V.JLWBDH
+		AND GSXX01 = V.GSXX01
+		AND JQMK03 = V.DJLX
+		AND JQMK04 = V.DJHM
+		AND JQMK01 = V.CZLX) > 0
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND V.GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJRQ_Q != null and DJRQ_Q != ''">
+			AND TO_DATE(TO_CHAR(V.DJRQ,'YYYY-MM-DD'),'YYYY-MM-DD') &gt;= TO_DATE(#{DJRQ_Q} , 'YYYY-MM-DD')
+		</if>
+		<if test="DJRQ_E != null and DJRQ_E != ''">
+			AND TO_DATE(TO_CHAR(V.DJRQ,'YYYY-MM-DD'),'YYYY-MM-DD') &lt;= TO_DATE(#{DJRQ_E} , 'YYYY-MM-DD')
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			<foreach item="item" index="index" collection="KHMC" open=" AND ("
+				separator=" or " close=")">
+				(V.WLDW02 LIKE '%'||#{item}||'%' OR V.WLDW01 LIKE '%'||#{item}||'%')
+			</foreach>
+		</if>
+		<if test="DJH != null and DJH != ''">
+			AND V.JLWBDH = #{DJH}
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND V.DJLX = #{DJLX}
+		</if>
+		<if test="XSBM != null and XSBM != ''">
+			<foreach item="item" index="index" collection="XSBM" open=" AND ("
+				separator=" or " close=")">
+				V.BM01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="CZLX != null and CZLX != ''">
+			AND V.CZLX = #{CZLX}
+		</if>
+		<!--JL{CZY|V.BM01|BM_CX|LIKE%}JL
+		JL{CZY|V.WLDW01|WLDW_CX|LIKE%}JL-->
+		JL{CZY|V.GSXX01|CZGS_CX|LIKE%}JL
+		GROUP BY V.CZLX,
+		V.DJLX,
+		V.JLWBDH,
+		V.DJHM,
+		V.BM01,
+		V.BMMC,
+		V.WLDW01,
+		V.WLDW02,
+		V.GSXX01,
+		V.GSMC,
+		V.DJRQ
+		<if test="SMQK != null and SMQK != ''">
+			<if test="SMQK==0">
+				HAVING SUM(V.YUSMSL) > (SELECT NVL(COUNT(JQM01),0) FROM JQMBLJL WHERE JLWBDH =
+				V.JLWBDH AND GSXX01 = V.GSXX01
+				AND JQMK03 = V.DJLX AND JQMK04 = V.DJHM AND JQMK01 = V.CZLX)
+			</if>
+			<if test="SMQK==1">
+				HAVING SUM(V.YUSMSL) = (SELECT NVL(COUNT(JQM01),0) FROM JQMBLJL WHERE JLWBDH =
+				V.JLWBDH AND GSXX01 = V.GSXX01
+				AND JQMK03 = V.DJLX AND JQMK04 = V.DJHM AND JQMK01 = V.CZLX)
+			</if>
+		</if>
+	</select>
+	<select id="queryCMBRMX" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT TO_CHAR(A.JQMK02,'YYYY-MM-DD') CZRQ,
+		A.CZRDM CZRBM,
+		A.CZRMC CZR,
+		A.JQM01 CM,
+		A.JLWBDH DJHM,
+		A.GSXX01,
+		(SELECT GSXX02 FROM GSXX WHERE
+		GSXX01 = A.GSXX01) GSMC
+		FROM JQMBLJL A
+		WHERE 1=1
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJH != null and DJH != ''">
+			AND A.JLWBDH = #{DJH}
+		</if>
+
+	</select>
+<select id="queryCMMX" parameterType="java.util.Map"
+		resultType="java.util.Map">
+  SELECT DISTINCT JQM01 CM,GET_DJLX(JQMK03)DJLX,A.JLWBDH DJH,GET_CZLX(JQMK01)CZLX, 
+	     TO_CHAR(JQMK02,'YYYY-MM-DD')   DJRQ,B.CK01,C.CK02 CKMC,
+	     (CASE WHEN DJLX = 8 THEN (SELECT (SELECT WLDW02 FROM WLDW WHERE WLDW01 = P.WLDW01) 
+	     FROM PFD P WHERE P.GSXX01 = B.GSXX01 AND P.PFD01 = B.DJHM) 
+	     WHEN DJLX = 9 THEN (SELECT (SELECT WLDW02 FROM WLDW WHERE WLDW01 = Y.WLDW01) 
+	     FROM YFD Y WHERE Y.GSXX01 = B.GSXX01 AND Y.YFD01 = B.DJHM) 
+	     ELSE W.WLDW02 END) WLDWMC,
+	     (CASE WHEN DJLX = 8 THEN (SELECT P.WLDW01 FROM PFD P WHERE P.GSXX01 = B.GSXX01 AND P.PFD01 = B.DJHM) 
+	     	   WHEN DJLX = 9 THEN (SELECT Y.WLDW01 FROM YFD Y WHERE Y.GSXX01 = B.GSXX01 AND Y.YFD01 = B.DJHM)
+	          ELSE b.WLDW01 END) WLDW01
+	  from jqmbljl A,DSFHPSB B,WLDW W,CK C 
+	 WHERE A.JLWBDH = B.JLWBDH 
+	   AND A.GSXX01 = B.GSXX01 
+	   AND A.JQMK01 = B.CZLX 
+	   AND B.WLDW01 = W.WLDW01 
+	   AND B.CK01 = C.CK01 
+	   AND A.JQMK04 = B.DJHM
+    <if test="CM != null and CM != ''">
+			AND A.JQM01 = #{CM}
+		</if>
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJRQ_Q != null and DJRQ_Q != ''">
+			AND TO_DATE(TO_CHAR(A.JQMK02,'YYYY-MM-DD'),'YYYY-MM-DD') &gt;= TO_DATE(#{DJRQ_Q} , 'YYYY-MM-DD')
+		</if>
+		<if test="DJRQ_E != null and DJRQ_E != ''">
+			AND TO_DATE(TO_CHAR(A.JQMK02,'YYYY-MM-DD'),'YYYY-MM-DD') &lt;= TO_DATE(#{DJRQ_E} , 'YYYY-MM-DD')
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			<foreach item="item" index="index" collection="KHMC" open=" AND ("
+				separator=" or " close=")">
+				((CASE WHEN DJLX = 8 THEN (SELECT (SELECT WLDW02 FROM WLDW WHERE WLDW01 = P.WLDW01) 
+			     FROM PFD P WHERE P.GSXX01 = B.GSXX01 AND P.PFD01 = B.DJHM) 
+			     WHEN DJLX = 9 THEN (SELECT (SELECT WLDW02 FROM WLDW WHERE WLDW01 = Y.WLDW01) 
+			     FROM YFD Y WHERE Y.GSXX01 = B.GSXX01 AND Y.YFD01 = B.DJHM) 
+			     ELSE W.WLDW02 END) LIKE '%'||#{item}||'%' 
+			     OR  (CASE WHEN DJLX = 8 THEN (SELECT P.WLDW01 FROM PFD P WHERE P.GSXX01 = B.GSXX01 AND P.PFD01 = B.DJHM) 
+	     	   WHEN DJLX = 9 THEN (SELECT Y.WLDW01 FROM YFD Y WHERE Y.GSXX01 = B.GSXX01 AND Y.YFD01 = B.DJHM)
+	          ELSE b.WLDW01 END) LIKE '%'||#{item}||'%')
+			</foreach>
+		</if>
+		<if test="DJH != null and DJH != ''">
+			AND A.JLWBDH = #{DJH}
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND A.JQMK03 = #{DJLX}
+		</if>
+		<if test="CK != null and CK != ''">
+			<foreach item="item" index="index" collection="CK" open=" AND ("
+				separator=" or " close=")">
+				B.CK01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="CZLX != null and CZLX != ''">
+			AND A.JQMK01 = #{CZLX}
+		</if>
+      union all
+	     SELECT DISTINCT JQM01 CM,'预售单'DJLX,A.JLWBDH DJH,GET_CZLX(JQMK01)CZLX, 
+	       TO_CHAR(JQMK02,'YYYY-MM-DD')   DJRQ,B.CK01,C.CK02 CKMC,
+	        W.WLDW02 WLDWMC, D.WLDW01 
+	    from jqmbljl A,YSD B,YSDITEM D,WLDW W,CK C 
+	   WHERE A.JLWBDH = B.JLWBDH 
+	     AND A.GSXX01 = B.GSXX01  
+	     AND D.WLDW01 = W.WLDW01 
+	     AND B.CK01 = C.CK01 
+	     AND B.YSD01= D.YSD01
+	     AND B.GSXX01 = D.GSXX01
+	     AND A.JQMK04 = B.YSD01
+	     <if test="CM != null and CM != ''">
+			AND A.JQM01 = #{CM}
+		</if>
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJRQ_Q != null and DJRQ_Q != ''">
+			AND TO_DATE(TO_CHAR(A.JQMK02,'YYYY-MM-DD'),'YYYY-MM-DD') &gt;= TO_DATE(#{DJRQ_Q} , 'YYYY-MM-DD')
+		</if>
+		<if test="DJRQ_E != null and DJRQ_E != ''">
+			AND TO_DATE(TO_CHAR(A.JQMK02,'YYYY-MM-DD'),'YYYY-MM-DD') &lt;= TO_DATE(#{DJRQ_E} , 'YYYY-MM-DD')
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			<foreach item="item" index="index" collection="KHMC" open=" AND ("
+				separator=" or " close=")">
+				(W.WLDW02 LIKE '%'||#{item}||'%' OR  W.WLDW01 LIKE '%'||#{item}||'%')
+			</foreach>
+		</if>
+		<if test="DJH != null and DJH != ''">
+			AND A.JLWBDH = #{DJH}
+		</if>
+		<if test="DJLX != null and DJLX != ''">
+			AND A.JQMK03 = #{DJLX}
+		</if>
+		<if test="CK != null and CK != ''">
+			<foreach item="item" index="index" collection="CK" open=" AND ("
+				separator=" or " close=")">
+				B.CK01 LIKE #{item}||'%'
+			</foreach>
+		</if>
+		<if test="CZLX != null and CZLX != ''">
+			AND A.JQMK01 = #{CZLX}
+		</if>
+	</select>
+</mapper>

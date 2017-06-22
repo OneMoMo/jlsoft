@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FKD">
+   <select id="queryFKD" parameterType="Map" resultType="java.util.Map">
+	     <if test="CXFS == 1">
+	  		SELECT 1 CXFS, A.JLWBDH FKDH,C.BM02 CGBMMC,A.WLDW01 GYSDM,W.WLDW02 GYSMC,A.JSFKD02 FKJE,A.JSFKD03 FKR,
+       TO_CHAR(A.JSFKD04,'YYYY-MM-DD') FKRQ,A.JSFKD05 PKDH, A.JSFKD06 BZ,A.JSFKD07 FPJE,A.JSFKD08 SRJE,A.JSFKD09 YFKJE,B.JSPKD01 PKDH,
+       TO_CHAR(A.JSFKD10,'YYYY-MM-DD') CWRQ,A.JSFKD15 CYFKJE,A.JSFKD16 CSRJE,A.JSFKD13 HKJE
+  		FROM JSFKD A, JSPKDWLDW B, WLDW W, BM C
+ 		WHERE A.GSXX01 = B.GSXX01(+)
+   		AND A.JSFKD05 = B.JSPKD01(+)
+   		AND A.WLDW01 = B.WLDW01(+)
+  		 AND A.BM01 = C.BM01
+   		AND A.GSXX01 = C.GSXX01
+   		AND A.WLDW01 = W.WLDW01
+		 </if>
+		 <if test="CXFS== 2">
+		SELECT 2 CXFS ,A.JLWBDH FKDH,A.JSFKD03 FKR,TO_CHAR(A.JSFKD04,'YYYY-MM-DD') FKRQ,TO_CHAR(A.JSFKD10,'YYYY-MM-DD') CWRQ,C.BM02 CGBMMC,	A.WLDW01 GYSDM,
+       			W.WLDW02 GYSMC,B.JSFKDFK01 FKJE,B.JSFKDFK02 PKDH,B.JSFKDFK03 BZ,B.JSFKDFK06 CDR,B.JSFKDFK07 BSR,
+       			B.JSFKDFK10 PJHM,(SELECT FKFS02 FROM FKFS WHERE FKFS01 = B.FKFS01) FKFS,(SELECT YHZH02
+          FROM YHZH
+         WHERE YHZH01 = B.YHZH01
+           AND GSXX01 = B.GSXX01) YHZH
+  		FROM JSFKDFS B, JSFKD A, WLDW W, BM C
+ 		WHERE A.JSFKD01 = B.JSFKD01
+   		AND A.GSXX01 = B.GSXX01
+   		AND A.BM01 = C.BM01
+   		AND A.WLDW01 = W.WLDW01
+		 </if>
+		 <if test="CXFS == 3">
+		 SELECT 3 CXFS ,A.JSFKD03 FKR,TO_CHAR(A.JSFKD04,'YYYY-MM-DD') FKRQ,A.WLDW01 GYSDM,W.WLDW02 GYSMC,C.BM02 CGBMMC,A.JLWBDH FKDH,B.JSPKD01 PKDH,
+       			(SELECT JLWBDH FROM YFKSQD WHERE GSXX01 = B.GSXX01 AND YFKSQD01 = B.YFKSQD01) YFKDH,
+       			B.YFKSQD09 BZ,B.SFJE SFJE,(SELECT PPB02 FROM PPB WHERE PPB01 = B.PPB01) SPPP 
+  			FROM JSFKD A, JSFKDITEM_YFK B, WLDW W, BM C
+			 WHERE A.JSFKD01 = B.JSFKD01
+   			AND A.GSXX01 = B.GSXX01
+   			AND A.BM01 = C.BM01
+   			AND A.WLDW01 = W.WLDW01
+		 </if>
+		
+		 JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+		 JL{CZY|A.BM01|BM_CX|LIKE%}JL
+		 <if test="GSXX01!=null and GSXX01 !=''"> 
+		 AND A.GSXX01=#{GSXX01}
+		 </if> 
+		 <if test="FKFS!=null and FKFS !=''">
+		 	 AND B.FKFS01=#{FKFS}
+		 	 </if>
+		 <if test="WLDW != null and WLDW != ''">		      
+		    AND (W.WLDW02 LIKE '%'||#{WLDW}||'%' OR A.WLDW01 = #{WLDW})
+	      </if>
+	     <if test="FKDH !=null and FKDH !=''"> 
+	      <foreach item="item" index="index" collection="FKDH"  open=" AND (" separator=" or " close=")"> 
+		     A.JLWBDH LIKE '%'|| #{item}||'%'
+		     </foreach> 
+	     </if>
+		 <if test="BM != null and BM != ''">
+		     <foreach item="item" index="index" collection="BM"  open=" AND (" separator=" or " close=")"> 
+		      C.BM01 LIKE #{item}||'%'
+		     </foreach> 	         
+	    </if>
+		 <if test="FKRQ_S != null and FKRQ_S !=''">
+		   <![CDATA[ AND A.JSFKD04 >= TO_DATE(#{FKRQ_S},'YYYY-MM-DD')]]>
+		 </if>
+		 <if test="FKRQ_E != null and FKRQ_E !=''">
+		   <![CDATA[ AND A.JSFKD04 <= TO_DATE(#{FKRQ_E},'YYYY-MM-DD')]]>
+		 </if>
+		
+		<!--  ORDER BY A.JLWBDH -->
+	</select>
+	
+</mapper>

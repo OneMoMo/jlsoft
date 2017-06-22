@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>我要采购</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+<header>
+<div class="index_header">
+<a class="logo"><img src="images/user_tx.jpg" class="radius_circular" /></a>
+<div class="header_seach">
+  <div class="seach_main">
+    <i class="seach_icon fa fa-search"></i>
+    商品名称/代码可搜索
+  </div>
+</div>
+<i class="fa fa-comments-o"></i>
+</div>
+</header>
+
+<div class="main" style="padding-top:2.5rem;">
+  <div class="w12 jl_tab">
+    <ul class="w12">
+      <li class="xuan">综合</li>
+      <li>销量</li>
+    </ul>
+    <div class="fr"a style=" position:absolute; top:10px; right:10px;" id="pro_info_ui_title"><i class="fa fa-filter mr5"></i>筛选</div>
+  </div>
+  <div class="w12 pro_list">
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+    <div class="pro_list_case bor_bottom">
+      <div class="pro_list_img w04" onClick="window.location.href='proMain.html'"><img src="images/sp.jpg" /></div>
+      <div class="pro_list_info w08 pl10" onClick="window.location.href='proMain.html'">
+        <div class="pro_list_name">海信空调KFR-26GW/27BP内</div>
+        <div class="pro_list_pic w12 mt10"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+        <div class="pro_list_text w12 mt10"><i class="mr5">编</i>1235798456287</div>
+        <div class="pro_list_text w12 mt5"><i class="mr5">供</i>工贸日化</div>
+      </div>
+      <div class="pro_list_btn radius5"><i class="fa fa-cart-plus"></i></div>
+    </div>
+  </div>
+  
+</div>
+
+<footer>
+<dl class="w03" onClick="window.location.href='index.html'">
+  <dt><i class="fa fa-home"></i></dt>
+  <dd>首页</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='nav.html'">
+  <dt><i class="fa fa-navicon"></i></dt>
+  <dd>分类</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='cart/cart.html'">
+  <dt><i class="fa fa-cart-plus"></i></dt>
+  <dd>购物车</dd>
+  <em>15</em>
+</dl>
+<dl class="w03" onClick="window.location.href='user/userIndex.html'">
+  <dt><i class="fa fa-user"></i></dt>
+  <dd>我的</dd>
+</dl>
+</footer>
+
+<div class="model hide">
+  <div class="pro_info_sx">
+    <div class="w12 pro_info_header" id="model_close">
+      <i class="fh fa fa-angle-left ml10 mr10"></i><span>商品筛选</span>
+    </div>
+    <div class="w12 pro_info_main">
+      <dl class="w12">
+        <dt class="w12">价格区间</dt>
+        <dd class="w12">
+          <input type="number" class="w03"><font class="fl ml10 mr10">-</font><input type="number" class="w03">
+        </dd>
+      </dl>
+      <dl class="w12">
+        <dt class="w12">Key<i class="fr fa fa-angle-down font_gray"></i></dt>
+        <dd class="w12">
+          <span>Value</span>
+          <span>Value</span>
+          <span class="xuan">Value</span>
+        </dd>
+      </dl>
+      <dl class="w12">
+        <dt class="w12">Key<i class="fr fa fa-angle-down font_gray"></i></dt>
+        <dd class="w12">
+          <span>Value</span>
+          <span>Value</span>
+          <span class="xuan">Value</span>
+        </dd>
+      </dl>
+      <dl class="w12">
+        <dt class="w12">Key<i class="fr fa fa-angle-down font_gray"></i></dt>
+        <dd class="w12">
+          <span>Value</span>
+          <span>Value</span>
+          <span>Value</span>
+        </dd>
+      </dl>
+    </div>
+    <div class="w12 pro_info_footer">
+      <a class="w06">重置</a>
+      <a class="w06 btn_color">确定</a>
+    </div>
+  </div>
+</div>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

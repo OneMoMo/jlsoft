@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_JMSSB.SCM_JMSSB">
+      
+        <FIELD attrname="JMSMC" format='{"JMSMC":{"$regex":"#JMSMC#"}}' fieldtype="String" allownull="Y" name="供应商" />
+        </JLConfig>
+</root>

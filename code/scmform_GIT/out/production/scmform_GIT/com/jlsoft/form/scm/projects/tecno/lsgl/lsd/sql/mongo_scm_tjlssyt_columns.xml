@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="TJLSSYT.YWYMC">
+         <FIELD attrname="RYMC" format='{"$or":[{"RYXX01":{"$regex":"#RYMC#"}},{"RYXX02":{"$regex":"#RYMC#"}}]}' fieldtype="String" allownull="Y" name="人员名称" />
+	</JLConfig>
+	
+	<JLConfig id="TJLSSYT.SPXX">
+         <FIELD attrname="SPMC" format='{"$or":[{"SPXX02":{"$regex":"#SPMC#"}},{"SPXX04":{"$regex":"#SPMC#"}}]}' fieldtype="String" allownull="Y" name="商品名称" />
+         <FIELD attrname="XS_BM01" format='{"XS_BM01":{"$regex":"#XS_BM01#"}}' fieldtype="String" allownull="Y" name="部门代码" />
+	</JLConfig>
+	
+	<JLConfig id="TJLSSYT.SKFS">
+	</JLConfig>
+
+	<JLConfig id="TJLSSYT.TJLSD">
+         <FIELD attrname="LSDH" format='{"$or":[{"LSDH":{"$regex":"#LSDH#"}},{"KHXM":{"$regex":"#LSDH#"}},{"LXDH":{"$regex":"#LSDH#"}}]}' fieldtype="String" allownull="Y" name="部门代码" />
+         <FIELD attrname="FHBJ" format='{"FHBJ":{"$ne":#FHBJ#}}' fieldtype="String" allownull="Y" name="部门代码" />
+	</JLConfig>
+	<JLConfig id="TJLSSYT.QUERY_TJLSD">
+         <FIELD attrname="SKRQ_S" format='{"SKRQ":{"$gte":"#SKRQ_S# 00:00:00"}}' fieldtype="String" allownull="Y" name="部门代码" />
+         <FIELD attrname="SKRQ_E" format='{"SKRQ":{"$lte":"#SKRQ_E# 23:59:59"}}' fieldtype="String" allownull="Y" name="部门代码" />
+         <FIELD attrname="KHXM" format='{"KHXM":{"$regex":"#KHXM#"}}' fieldtype="String" allownull="Y" name="部门代码" />
+         <FIELD attrname="LXDH" format='{"LXDH":{"$regex":"#LXDH#"}}' fieldtype="String" allownull="Y" name="部门代码" />
+         <FIELD attrname="SPXX04" format='{"SPLB.SPXX04":{"$regex":"#SPXX04#"}}' fieldtype="String" allownull="Y" name="部门代码" />
+         <FIELD attrname="XSBMMC" format='{"XSBMMC":{"$regex":"#XSBMMC#"}}' fieldtype="String" allownull="Y" name="部门代码" />
+         <FIELD attrname="YWYMC" format='{"YWYMC":{"$regex":"#YWYMC#"}}' fieldtype="String" allownull="Y" name="部门代码" />
+	</JLConfig>
+</root>

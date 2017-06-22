@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <JLConfig id ="v7scm" description= "v7scm数据转换">
+      <FIELD attrname ="interfaceId" target="Type" allownull="N"/><!-- 接口 -->
+      <FIELD attrname ="data" target="JSONXML" allownull="N"/><!-- 数据 -->
+    </JLConfig>
+</root>

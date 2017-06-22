@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlsoft.framework.pcrm.CX">
+  <select id="queryGW" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.CZY01 USERID,A.CZY02 AS CZY01,A.CZY03,A.CZY04,A.CZY06,C.GW01,C.GW02,
+  	       D.BM01,D.BM02,D.BM_BM01,D.BM03,D.SCM_BM01,A.GSXX01,A.SKBJ,A.DCBJ,A.MRCD,
+  	       A.SCM_RYJS,E.SCM_GSXX01,A.KGSBJ,C.JXSJB
+      FROM W_CZY A,W_CZYGW B,W_GW C,W_BM D,W_GSXX E
+ 	 WHERE A.CZY01 = B.CZY01 
+  	   AND B.GW01 = C.GW01
+   	   AND A.BM01 = D.BM01
+   	   AND A.GSXX01 = E.GSXX01(+)
+       AND D.BM05 = 0 
+       AND A.CZY07 =0
+       AND C.GW03 = 0
+       AND A.CZY01=#{RYBH}
+  </select>
+  
+  <select id="queryBM" parameterType="Map" resultType="string">
+  	SELECT B.BM01 
+	  FROM W_RYSJQX A,W_SJQXBM B
+	 WHERE A.SJ01 = B.SJ01 
+	   AND A.CZY01 = #{RYBH}
+  </select>
+  
+  <select id="queryCHYZ" parameterType="Map" resultType="Map">
+  	SELECT C.BZ02 PBZ02,C.XW01 PXW01,C.TJCZY01 PTJCZY01
+	  FROM W_TASK A,W_TASKYWGL B,W_LOG C
+     WHERE A.PID = B.PID 
+       AND A.SK01 = C.NSK01(+)
+       <!-- AND NOT EXISTS (SELECT E.XW01 FROM W_LOG E WHERE E.NSK01 = A.SK01 AND E.XW01 IN (0,-1,-2))  -->
+       <if test="CZY01 != null">
+ 	  	  	AND A.TJCZY01 = #{CZY01} 
+ 	   </if>
+       <if test="TBLNAME != null">
+ 	  	  	AND B.TBLNAME = #{TBLNAME} 
+ 	   </if>
+ 	   <if test="JLBH != null">
+ 	  	  	AND B.JLBH = #{JLBH} 
+ 	   </if>
+ 	   <if test="SK01 != null">
+ 	  	  	AND A.SK01 = #{SK01} 
+ 	   </if>
+  </select>
+  
+  <resultMap id="result_queryCZY" type="java.util.Map">
+    <result property="RYBH" column="RYBH"/>
+    <result property="RYDM" column="RYDM"/>
+    <result property="RYMC" column="RYMC"/>
+    <result property="DZYJ" column="DZYJ"/>
+    <result property="LXDH" column="LXDH"/>
+    <result property="GSXX01" column="GSXX01"/>
+    <result property="BM01" column="BM01"/> 
+  </resultMap>
+  <select id="queryCZY" parameterType="Map" resultMap="result_queryCZY">
+  	SELECT A.CZY01 RYBH,A.CZY02 RYDM,A.CZY03 RYMC,A.CZY05 DZYJ,
+  	       A.CZY06 LXDH,A.GSXX01,A.BM01
+  	  FROM W_CZY A
+ 	 WHERE A.CZY07 = 0 
+ 	   <if test="CZY02 != null">
+ 	  	  	AND A.CZY02=#{CZY02}
+ 	   </if>
+ 	   <if test="CZY01 != null">
+ 	   		AND A.CZY01=#{CZY01}
+ 	   </if>
+  </select>
+   
+  <!--  流转部门      -->
+  <resultMap type="java.util.Map" id="result_queryLZBM"> 
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryLZBM" parameterType="Map" resultMap="result_queryLZBM">
+  	SELECT DISTINCT E.BM01 KEY,E.BM02 VALUE
+	  FROM W_GZLXW A,W_BZGW B,W_CZYGW C,W_CZY D,W_BM E
+	 WHERE A.NBZ01 = B.BZ01 
+	   AND B.GW01 = C.GW01
+	   AND C.CZY01 = D.CZY01
+	   AND D.BM01 = E.BM01
+	   AND A.XW01 = #{XW01}
+	   AND A.GZL01 = #{GZL01}
+	   AND A.BZ01 = #{BZ01} 
+  </select>
+  
+  <!--  流转人员      -->
+  <resultMap type="java.util.Map" id="result_queryLZRY"> 
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryLZRY" parameterType="Map" resultMap="result_queryLZRY">
+  	SELECT DISTINCT D.CZY01 KEY,D.CZY03 VALUE
+	  FROM W_GZLXW A,W_BZGW B,W_CZYGW C,W_CZY D
+	 WHERE A.NBZ01 = B.BZ01 
+	   AND B.GW01 = C.GW01
+	   AND C.CZY01 = D.CZY01 
+	   AND A.XW01 = #{XW01}
+	   AND A.GZL01 = #{GZL01}
+	   AND A.BZ01 = #{BZ01} 
+	   <if test="BM01 != null">
+ 	   		AND D.BM01=#{BM01}
+ 	   </if>
+  </select>
+  
+  <select id="queryMENU" parameterType="Map" resultType="java.util.Map">
+	 SELECT DISTINCT A.LX01,(SELECT CD02 FROM W_CZYCD WHERE CD01 = A.LX01) LX02,A.GZL01 CD01,A.GZL02 CD02,A.GZL04,'1' ISGZL
+	    FROM W_GZL A, W_GZLBZ C
+	   WHERE A.GZL01 = C.GZL01  
+	     AND A.GZL03 = 0 
+	     AND C.BZ04 = 0
+		 <if test="LX01 != null">
+	     	AND A.LX01 = #{LX01}
+	     </if>
+	     <if test="GZL05 != null">
+	     	AND A.GZL05 = #{GZL05}
+	     </if>
+	     <if test="GZL06 != null">
+	     	AND A.GZL06 = #{GZL06}
+	     </if>
+	     <if test="GZL07 != null">
+	     	AND A.GZL07 = #{GZL07}
+	     </if>
+	     <if test="GZL08 != null">
+	     	AND A.GZL08 = #{GZL08}
+	     </if>
+	     AND EXISTS (SELECT E.GW01
+	                   FROM W_BZGW E,W_CZYGW F
+	                  WHERE E.GW01 = F.GW01
+	                    AND E.BZ01 = C.BZ01
+	                    AND F.CZY01 = #{RYBH})
+	   ORDER BY GZL04 ASC
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryDBZSL"> 
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryDBZSL" parameterType="Map" resultMap="result_queryDBZSL">
+	  SELECT COUNT(1) NUM
+   	    FROM W_GZL A,W_TASK B
+       WHERE A.GZL01 = B.GZL01  
+         AND A.GZL03 = 0
+         AND EXISTS (SELECT E.GW01 
+                        FROM W_BZGW E,W_GZLBZ F,W_CZYGW H
+                       WHERE E.BZ01 = F.BZ01
+                         AND E.GW01 = H.GW01
+                         AND F.GZL01 = A.GZL01
+                         AND E.BZ01 = B.BZ01
+                         AND H.CZY01 = #{RYBH})
+         AND ((B.SK05 = 0) OR ((B.SK05 = 1) AND EXISTS (SELECT E.SK01 
+                                                          FROM W_TASKRY E 
+                                                         WHERE E.SK01 = B.SK01 
+                                                           AND E.CZY01 = #{RYBH}))) 
+         <if test="GSXX01 != null"> 
+ 	   		AND B.GSXX01 = #{GSXX01} 
+ 	 	 </if>                
+ 	 	 <if test="GZL06 != null"> 
+	 	    AND A.GZL06 = #{GZL06} 
+	 	 </if>
+	 	 <if test="GZL07 != null"> 
+	 	    AND A.GZL07 = #{GZL07} 
+	 	 </if>
+	 	 <if test="GZL08 != null"> 
+	 	    AND A.GZL08 = #{GZL08} 
+	 	 </if>                             
+         <if test="BM != null">
+         	<foreach collection="BM" index="index" item="bm01" open="AND ( " separator="or" close=")">
+     		  	B.BM01 like  #{bm01}||'%'
+   	     	</foreach> 
+   	     </if>
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryYBZSL"> 
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryYBZSL" parameterType="Map" resultMap="result_queryYBZSL">
+	  SELECT COUNT(1) NUM
+   	    FROM W_GZL A,W_LOG B
+       WHERE A.GZL01 = B.GZL01  
+         AND A.GZL03 = 0
+         AND EXISTS (SELECT E.GW01 
+                        FROM W_BZGW E,W_GZLBZ F,W_CZYGW H
+                       WHERE E.BZ01 = F.BZ01
+                         AND E.GW01 = H.GW01
+                         AND F.GZL01 = A.GZL01
+                         AND E.BZ01 = B.BZ01
+                         AND H.CZY01 = #{RYBH})
+         AND ((B.SK05 = 0) OR ((B.SK05 = 1) AND EXISTS (SELECT E.SK01 
+                                                          FROM W_TASKRY E 
+                                                         WHERE E.SK01 = B.SK01 
+                                                           AND E.CZY01 = #{RYBH}))) 
+         <if test="GSXX01 != null"> 
+ 	   		AND B.GSXX01 = #{GSXX01} 
+ 	 	 </if>                
+ 	 	 <if test="GZL06 != null"> 
+	 	    AND A.GZL06 = #{GZL06} 
+	 	 </if>
+	 	 <if test="GZL07 != null"> 
+	 	    AND A.GZL07 = #{GZL07} 
+	 	 </if>
+	 	 <if test="GZL08 != null"> 
+	 	    AND A.GZL08 = #{GZL08} 
+	 	 </if>  
+	 	 <if test="RYBH != null and RYBH != ''"> 
+ 	   		AND B.TJCZY01 = #{RYBH} 
+ 	 	 </if>                           
+         <!-- <if test="BM != null">
+         	<foreach collection="BM" index="index" item="bm01" open="AND ( " separator="or" close=")">
+     		  	B.BM01 like  #{bm01}||'%'
+   	     	</foreach> 
+   	     </if> -->
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryDBSL">
+	 <result property="XMBH" column="XMBH"/>
+	 <result property="GZLBH" column="GZLBH"/>
+	 <result property="GZLMC" column="GZLMC"/>
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryDBSL" parameterType="Map" resultMap="result_queryDBSL">
+	  SELECT A.GZL01,A.GZL02,COUNT(1) NUM
+   	    FROM W_GZL A,W_TASK B,W_BM C
+       WHERE A.GZL01 = B.GZL01  
+         AND B.BM01 = C.BM01
+         AND A.GZL03 = 0
+         AND EXISTS (SELECT E.GW01 
+                        FROM W_BZGW E,W_GZLBZ F,W_CZYGW H
+                       WHERE E.BZ01 = F.BZ01
+                         AND E.GW01 = H.GW01
+                         AND F.GZL01 = A.GZL01
+                         AND E.BZ01 = B.BZ01
+                         AND H.CZY01 = #{RYBH})
+         AND ((B.SK05 = 0) OR ((B.SK05 = 1) AND EXISTS (SELECT E.SK01 
+                                                          FROM W_TASKRY E 
+                                                         WHERE E.SK01 = B.SK01 
+                                                           AND E.CZY01 = #{RYBH}))) 
+         <if test="GSXX01 != null"> 
+ 	   		AND (B.GSXX01 = #{GSXX01} OR EXISTS (SELECT E.CZY01 FROM W_CZY E WHERE E.CZY01 = #{RYBH} AND E.KGSBJ = 1))
+ 	 	 </if>          
+ 	 	 <if test="GZL06 != null"> 
+	 	    AND A.GZL06 = #{GZL06} 
+	 	 </if>
+	 	 <if test="GZL07 != null"> 
+	 	    AND A.GZL07 = #{GZL07} 
+	 	 </if>
+	 	 <if test="GZL08 != null"> 
+	 	    AND A.GZL08 = #{GZL08} 
+	 	 </if>     
+         <if test="BM != null">
+         	<foreach collection="BM" index="index" item="bm01" open="AND ( " separator="or" close=")">
+     		  	<!-- B.BM01 like  #{bm01}||'%' -->
+     		  	(C.SCM_BM01 like  #{bm01}||'%' OR B.BM01 like  #{bm01}||'%')
+   	     	</foreach> 
+   	     </if>
+   	     
+    	<!-- 该流程只在部门内部使用，不跨部门流转（0：关闭；1：开启） -->
+    	 <if test="SCM_BM01 != null">
+   	     	AND ((A.GZL10 = 0) OR (A.GZL10 = 1 AND C.SCM_BM01 LIKE #{SCM_BM01}||'%'))
+   	     </if>
+   	    
+   	    <!-- 人员权限 -->
+   	     AND ((1=1 JL{CZY|B.QXBM01|BM_CZ|LIKE%}JL ) OR B.QXBM01 IS NULL)
+   	     AND ((1=1 JL{CZY|B.WLDW01|WLDW_CZ|inS}JL ) OR B.WLDW01 IS NULL)
+   	     AND ((1=1 JL{CZY|B.CK01|CK_CZ|LIKE%}JL ) OR B.CK01 IS NULL)
+   	     AND ((1=1 JL{CZY|B.QXCZY01|CZY_CZ|inS}JL ) OR B.QXCZY01 IS NULL)
+   	     AND ((1=1 JL{CZY|B.SSBM01|SSBM01|inS}JL ) OR B.SSBM01 IS NULL)
+   	     AND ((1=1 JL{CZY|B.QX02|QX02|inS}JL ) OR B.QX02 IS NULL)
+       GROUP BY A.GZL01,A.GZL02
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryYBSL">
+	 <result property="XMBH" column="XMBH"/>
+	 <result property="GZLBH" column="GZLBH"/>
+	 <result property="GZLMC" column="GZLMC"/>
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryYBSL" parameterType="Map" resultMap="result_queryYBSL">
+	  SELECT A.GZL01,A.GZL02,COUNT(1) NUM
+   	    FROM W_GZL A,W_LOG B,(SELECT MAX(E.rowid) num,E.PID FROM W_LOG E GROUP BY E.PID) C
+       WHERE A.GZL01 = B.GZL01  
+         AND B.rowid = C.num
+         AND B.PID = C.PID
+         AND A.GZL03 = 0
+         AND EXISTS (SELECT E.GW01 
+                        FROM W_BZGW E,W_GZLBZ F,W_CZYGW H
+                       WHERE E.BZ01 = F.BZ01
+                         AND E.GW01 = H.GW01
+                         AND F.GZL01 = A.GZL01
+                         AND E.BZ01 = B.BZ01
+                         AND H.CZY01 = #{RYBH})
+         AND ((B.SK05 = 0) OR ((B.SK05 = 1) AND EXISTS (SELECT E.SK01 
+                                                          FROM W_TASKRY E 
+                                                         WHERE E.SK01 = B.SK01 
+                                                           AND E.CZY01 = #{RYBH}))) 
+         <!-- AND B.SK01 IN (SELECT MAX(E.SK01)
+                  		  FROM W_LOG E 
+                 		 WHERE E.PID = B.PID
+                    	 GROUP BY E.PID,E.SK01) -->
+         <if test="GSXX01 != null"> 
+ 	   		AND B.GSXX01 = #{GSXX01} 
+ 	 	 </if>          
+ 	 	 <if test="GZL06 != null"> 
+	 	    AND A.GZL06 = #{GZL06} 
+	 	 </if>
+	 	 <if test="GZL07 != null"> 
+	 	    AND A.GZL07 = #{GZL07} 
+	 	 </if>
+	 	 <if test="GZL08 != null"> 
+	 	    AND A.GZL08 = #{GZL08} 
+	 	 </if>     
+         <if test="RYBH != null and RYBH != ''"> 
+ 	   		AND B.TJCZY01 = #{RYBH} 
+ 	 	 </if>
+       GROUP BY A.GZL01,A.GZL02
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryCHSL">
+	 <result property="XMBH" column="XMBH"/>
+	 <result property="GZLBH" column="GZLBH"/>
+	 <result property="GZLMC" column="GZLMC"/>
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryCHSL" parameterType="Map" resultMap="result_queryCHSL">
+	  SELECT A.GZL01,A.GZL02,COUNT(1) NUM
+   	    FROM W_GZL A,W_TASK B
+       WHERE A.GZL01 = B.GZL01  
+         AND A.GZL03 = 0 
+         AND B.BZ01 IN (SELECT E.BZ01 FROM W_GZLBZ E WHERE E.GZL01 = A.GZL01 AND E.BZ01 = B.BZ01 AND E.BZ06 = 0) 
+         AND NOT EXISTS (SELECT E.XW01 FROM W_LOG E WHERE E.NSK01 = B.SK01 AND E.XW01 IN (-1,-2,0)) <!-- 加0 不搜索保存草稿的单子 -->
+         AND B.TJCZY01 = #{RYBH}
+       GROUP BY A.GZL01,A.GZL02
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryCHZSL"> 
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryCHZSL" parameterType="Map" resultMap="result_queryCHZSL">
+	  SELECT COUNT(1) NUM
+   	    FROM W_GZL A,W_TASK B
+       WHERE A.GZL01 = B.GZL01  
+         AND A.GZL03 = 0 
+         AND B.BZ01 IN (SELECT E.BZ01 FROM W_GZLBZ E WHERE E.GZL01 = A.GZL01 AND E.BZ01 = B.BZ01 AND E.BZ06 = 0) 
+         AND NOT EXISTS (SELECT E.XW01 FROM W_LOG E WHERE E.NSK01 = B.SK01 AND E.XW01 IN (-1,-2,0))
+         AND B.TJCZY01 = #{RYBH}
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryDBSL_CC">
+	 <result property="XMBH" column="XMBH"/>
+	 <result property="GZLBH" column="GZLBH"/>
+	 <result property="GZLMC" column="GZLMC"/>
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryDBSL_CC" parameterType="Map" resultMap="result_queryDBSL_CC">
+	  SELECT A.GZL01,A.GZL02,COUNT(1) NUM
+   	    FROM W_GZL A,W_LOG B,W_CC C,W_TASKYWGL D
+       WHERE A.GZL01 = B.GZL01 
+         AND B.SK01 = C.SK01 
+         AND B.PID = D.PID
+         AND A.GZL03 = 0
+         <if test="GZL06 != null"> 
+	 	   AND A.GZL06 = #{GZL06} 
+	 	 </if>
+	 	 <if test="GZL07 != null"> 
+	 	   AND A.GZL07 = #{GZL07} 
+	 	 </if>
+	 	 <if test="GZL08 != null"> 
+	 	   AND A.GZL08 = #{GZL08} 
+	 	 </if> 
+         AND NOT EXISTS (SELECT E.CZY01 FROM W_CCHF E WHERE E.SK01 = B.SK01 AND E.CZY01 = #{RYBH})
+ 		 AND (C.CZY01 = #{RYBH}
+ 		  OR EXISTS (SELECT E.GW01 FROM W_CZYGW E WHERE E.GW01 = C.GW01 AND E.CZY01 = #{RYBH})) 
+       GROUP BY A.GZL01,A.GZL02
+  </select>
+  
+  <resultMap type="java.util.Map" id="result_queryCCZSL"> 
+	 <result property="NUM" column="NUM"/>
+  </resultMap>
+  <select id="queryCCZSL" parameterType="Map" resultMap="result_queryCCZSL">
+	  SELECT COUNT(1) NUM
+   	    FROM W_GZL A,W_LOG B,W_CC C,W_TASKYWGL D
+       WHERE A.GZL01 = B.GZL01 
+         AND B.SK01 = C.SK01 
+         AND B.PID = D.PID
+         AND A.GZL03 = 0
+         AND NOT EXISTS (SELECT E.CZY01 FROM W_CCHF E WHERE E.SK01 = B.SK01 AND E.CZY01 = #{RYBH})
+ 		 AND (C.CZY01 = #{RYBH}
+ 		  OR EXISTS (SELECT E.GW01 FROM W_CZYGW E WHERE E.GW01 = C.GW01 AND E.CZY01 = #{RYBH})) 
+  </select>
+	 
+  <!-- 通过业务系统传递的单据类型，查询对应项目编号 -->
+  <select id="queryJK" parameterType="Map" resultType="java.lang.String">
+	SELECT DISTINCT A.GZL01 FROM W_GZLXW A,W_JK B 
+	 WHERE A.JK01 = B.JK01
+	<if test="TBLNAME != null">
+       AND TBLNAME=#{TBLNAME}
+    </if>
+  </select>
+  
+  <!-- 查询代办事宜 -->
+  <select id="queryDBSY" parameterType="Map" resultType="java.util.Map">
+    SELECT (SELECT COUNT(1) FROM W_GZLXW F WHERE F.GZL01 = A.GZL01 AND F.BZ01 = A.BZ01) XWNUM,
+	 	   A.PID,A.SK01,A.GZL01,A.BM01,A.BZ01,A.TJCZY01,A.TJRYMC,A.GZL02,B.BZ02,D.GZL05,B.BZ03,
+           to_char(A.SK04,'yyyy-MM-dd HH24:MI:SS') SK04,A.SK02,A.SK03,A.GSXX01,C.TBLNAME,C.JLBH,
+           A.OALOG,A.DYZDRMC,
+		   CASE TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+           	    TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+           WHEN 0 THEN '今天'
+           WHEN 1 THEN '昨天'
+           ELSE TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+          		TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd') || '天前'
+       	   END SJZT,
+           ROUND((SYSDATE - A.SK04) * 24 * 60 - B.BZ05) CSZT,
+           (TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+           TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd')) SJC
+  	  FROM W_TASK A,W_GZLBZ B,W_TASKYWGL C,W_GZL D,W_BM E 
+ 	 WHERE A.BZ01 = B.BZ01
+ 	   AND A.PID = C.PID
+ 	   AND A.GZL01 = D.GZL01 
+ 	   AND A.BM01 = E.BM01
+ 	 <if test="GZL01 != null"> 
+ 	   AND A.GZL01 = #{GZL01} 
+ 	 </if>
+ 	 <if test="BZ01 != null"> 
+ 	   AND A.BZ01 = #{BZ01} 
+ 	 </if>
+ 	 <if test="GSXX01 != null">  
+ 	   AND (A.GSXX01 = #{GSXX01} OR EXISTS (SELECT E.CZY01 FROM W_CZY E WHERE E.CZY01 = #{RYBH} AND E.KGSBJ = 1))
+ 	 </if>
+ 	 <if test="GZL05 != null"> 
+ 	   AND D.GZL05 = #{GZL05} 
+ 	 </if>
+ 	 <if test="GZL06 != null"> 
+ 	   AND D.GZL06 = #{GZL06} 
+ 	 </if>
+ 	 <if test="GZL07 != null"> 
+ 	   AND D.GZL07 = #{GZL07} 
+ 	 </if>
+ 	 <if test="GZL08 != null"> 
+ 	   AND D.GZL08 = #{GZL08} 
+ 	 </if>
+ 	 <if test="SK01 != null"> 
+	   AND A.SK01 = #{SK01} 
+	 </if>
+ 	 <if test="JLBH != null and JLBH != ''"> 
+ 	   AND C.JLBH = #{JLBH} 
+ 	 </if>
+ 	 <if test="CXTJ != null">
+	     <foreach collection="CXTJ" index="index" item="item" open="AND ( " separator=") AND (" close=")">
+	    	A.SK02 LIKE '%${item}%' 
+ 	    	OR A.SK03  LIKE '%${item}%'
+ 	    	OR A.GZL02  LIKE '%${item}%'  
+ 	    	OR A.BZ02  LIKE '%${item}%' 
+ 	    	OR A.TJRYMC  LIKE '%${item}%'
+ 			OR TO_CHAR(A.SK04, 'yyyy-MM-dd HH24:MI:SS')  LIKE '%${item}%'
+		 </foreach> 
+     </if>    
+ 	   AND EXISTS (SELECT E.GW01 
+                     FROM W_BZGW E,W_GZLBZ F,W_CZYGW H
+                    WHERE E.BZ01 = F.BZ01
+                      AND E.GW01 = H.GW01
+                      AND F.GZL01 = A.GZL01
+                      AND E.BZ01 = B.BZ01
+                      AND H.CZY01 = #{RYBH})
+       AND ((A.SK05 = 0) OR ((A.SK05 = 1) AND EXISTS (SELECT E.SK01 
+                                                        FROM W_TASKRY E 
+                                                       WHERE E.SK01 = A.SK01 
+                                                         AND E.CZY01 = #{RYBH})))
+     <if test="BM != null">
+	     <foreach collection="BM" index="index" item="bm01" open="AND ( " separator="or" close=")">
+	    		  <!-- A.BM01 like  #{bm01}||'%' -->
+	    		  (E.SCM_BM01 like  #{bm01}||'%' OR A.BM01 like  #{bm01}||'%')
+		 </foreach> 
+     </if>     
+     
+     <!-- 该流程只在部门内部使用，不跨部门流转（0：关闭；1：开启） -->
+   	 <if test="SCM_BM01 != null">
+ 	   	AND ((D.GZL10 = 0) OR (D.GZL10 = 1 AND E.SCM_BM01 LIKE #{SCM_BM01}||'%'))
+ 	 </if>
+ 	 
+ 	 <!-- 步骤 -->
+   	 <if test="BZ01 != null">
+ 	   	AND A.BZ01 = #{BZ01}
+ 	 </if> 
+ 	 
+ 	 <!-- 人员权限-->
+ 	 <choose>
+        <when test="SQL !=null and SQL != ''">
+            ${SQL}
+        </when>
+        <otherwise>
+            AND ((1=1 JL{CZY|A.QXBM01|BM_CZ|LIKE%}JL ) OR A.QXBM01 IS NULL)
+   	 		AND ((1=1 JL{CZY|A.WLDW01|WLDW_CZ|=S}JL ) OR A.WLDW01 IS NULL)
+   	 		AND ((1=1 JL{CZY|A.CK01|CK_CZ|LIKE%}JL ) OR A.CK01 IS NULL)
+   	 		AND ((1=1 JL{CZY|A.QXCZY01|CZY_CZ|=S}JL ) OR A.QXCZY01 IS NULL)  
+   	 		AND ((1=1 JL{CZY|A.SSBM01|SSBM01|=S}JL ) OR A.SSBM01 IS NULL)
+   	 		AND ((1=1 JL{CZY|A.QX02|QX02|=S}JL ) OR A.QX02 IS NULL) 
+        </otherwise>
+     </choose>
+ 	  
+ 	 <choose>
+        <when test="ORDER !=null and ORDER != ''">
+            ORDER BY ${ORDER}
+        </when>
+        <otherwise>
+            ORDER BY SJC,SK04 ASC
+        </otherwise>
+     </choose>
+  </select>
+  
+  <!-- 查询已办事宜 -->
+  <select id="queryYBSY" parameterType="Map" resultType="java.util.Map">
+	SELECT A.PID,A.SK01,A.GZL01,A.BM01,A.TJCZY01,A.TJRYMC,A.GZL02,D.GZL05,A.BZ01,A.BZ02,B.BZ03,
+	       A.NBZ01,A.NBZ02,(SELECT F.BZ03 FROM W_GZLBZ F WHERE F.BZ01 = A.NBZ01) NBZ03,
+	       to_char(A.SK04,'yyyy-MM-dd HH24:MI:SS') SK04,A.SK02,A.SK03,A.GSXX01,C.TBLNAME,C.JLBH,
+		   CASE TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+           	    TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+           WHEN 0 THEN '今天'
+           WHEN 1 THEN '昨天'
+           ELSE TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+          		TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd') || '天前'
+       	   END SJZT,
+           ROUND((SYSDATE - A.SK04) * 24 * 60 - B.BZ05) CSZT,
+           (TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+           TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd')) SJC
+  	  FROM W_LOG A,W_GZLBZ B,W_TASKYWGL C,W_GZL D,
+  	       (SELECT MAX(E.rowid) num,E.PID FROM W_LOG E GROUP BY E.PID) E
+ 	 WHERE A.BZ01 = B.BZ01
+ 	   AND A.PID = C.PID
+ 	   AND A.GZL01 = D.GZL01 
+ 	   AND A.rowid = E.num
+ 	   AND A.PID = E.PID
+ 	 <if test="GZL01 != null"> 
+ 	    AND A.GZL01 = #{GZL01} 
+ 	 </if>
+ 	 <if test="BZ01 != null"> 
+ 	    AND A.BZ01 = #{BZ01} 
+ 	 </if>
+ 	 <if test="GSXX01 != null"> 
+ 	    AND A.GSXX01 = #{GSXX01} 
+ 	 </if>
+ 	 <if test="GZL06 != null"> 
+ 	    AND D.GZL06 = #{GZL06} 
+ 	 </if>
+ 	 <if test="GZL07 != null"> 
+ 	    AND D.GZL07 = #{GZL07} 
+ 	 </if>
+ 	 <if test="GZL08 != null"> 
+ 	    AND D.GZL08 = #{GZL08} 
+ 	 </if>  
+ 	 <if test="TJCZY01 != null and TJCZY01 != ''"> 
+ 	    AND A.TJCZY01 = #{TJCZY01} 
+ 	 </if>
+ 	 <if test="DAY != null and DAY != ''"> 
+ 	    AND A.SK04 &gt;= SYSDATE - #{DAY} 
+    	AND A.SK04 &lt;= SYSDATE
+ 	 </if>
+ 	 <if test="CXTJ != null">
+	     <foreach collection="CXTJ" index="index" item="item" open="AND ( " separator=") AND (" close=")">
+	    	A.SK02 LIKE '%${item}%' 
+ 	    	OR A.SK03  LIKE '%${item}%'
+ 	    	OR A.GZL02  LIKE '%${item}%'  
+ 	    	OR A.BZ02  LIKE '%${item}%' 
+ 	    	OR A.TJRYMC  LIKE '%${item}%'
+ 			OR TO_CHAR(A.SK04, 'yyyy-MM-dd HH24:MI:SS')  LIKE '%${item}%'
+		 </foreach> 
+     </if>    
+ 	   AND EXISTS (SELECT E.GW01 
+                     FROM W_BZGW E,W_GZLBZ F,W_CZYGW H
+                    WHERE E.BZ01 = F.BZ01
+                      AND E.GW01 = H.GW01
+                      AND F.GZL01 = A.GZL01
+                      AND E.BZ01 = B.BZ01
+                      AND H.CZY01 = #{RYBH})
+       AND ((A.SK05 = 0) OR ((A.SK05 = 1) AND EXISTS (SELECT E.SK01 
+                                                        FROM W_TASKRY E 
+                                                       WHERE E.SK01 = A.SK01 
+                                                         AND E.CZY01 = #{RYBH})))  
+ 	 ORDER BY SJC,SK04 ASC
+  </select>
+
+	<!-- 获取抄送消息 -->
+	<select id="queryDBSY_CC" parameterType="Map" resultType="java.util.Map">
+		SELECT A.PID,A.SK01,A.GZL01,A.BM01,A.TJCZY01,A.TJRYMC,A.GZL02,
+               to_char(A.SK04,'yyyy-MM-dd HH24:MI:SS') SK04,A.SK02,A.SK03,A.GSXX01,
+               C.BDBH,C.JLBH,C.HFID_CC,D.TBLNAME,D.JLBH,B.BZ01,B.BZ02
+  		  FROM W_LOG A,W_GZLBZ B,W_CC C,W_TASKYWGL D
+ 		 WHERE A.BZ01 = B.BZ01
+ 		   AND A.SK01 = C.SK01 
+ 		   AND A.PID = D.PID
+ 		   AND C.CC02 = 0
+ 		   AND NOT EXISTS (SELECT E.CZY01 FROM W_CCHF E WHERE E.SK01 = A.SK01 AND E.CZY01 = #{RYBH})
+ 		   AND (C.CZY01 = #{RYBH}
+ 		    OR EXISTS (SELECT E.GW01 FROM W_CZYGW E WHERE E.GW01 = C.GW01 AND E.CZY01 = #{RYBH}))
+ 		    <if test="GZL01 != null"> 
+ 	   			AND B.GZL01 = #{GZL01} 
+ 	 		</if>
+ 		 ORDER BY A.SK04 DESC
+	</select> 
+	
+    <select id="queryXW" parameterType="Map" resultType="java.util.Map">
+	  SELECT DISTINCT A.GZL01,A.BZ01,A.XW01,A.XW02,A.GZ01,B.JK03,C.BZ02,C.BZ03,
+	         B.TBLNAME, A.HFID, B.YMBH, A.XW01 KEY,A.XW02 VALUE,
+	         (SELECT H.GZ02 FROM W_YWGZ H 
+		   	   WHERE H.GZ01 = A.GZ01 AND H.GZ07 = 0) GZ02
+        FROM W_GZLXW A,W_JK B,W_GZLBZ C
+       WHERE A.JK01 = B.JK01 
+         AND A.BZ01 = C.BZ01
+         AND A.GZL01=#{GZL01} 
+         AND A.BZ01=#{BZ01} 
+      <if test="XW01 != null">
+         AND A.XW01 =#{XW01}
+      </if>
+       ORDER BY A.XW01
+    </select>
+    
+    <!-- 查询隐藏数据 -->
+  	<select id="queryHDAT" parameterType="Map" resultType="java.lang.String">
+		SELECT A.HDAT
+		  FROM W_GZLXW A 
+		 WHERE A.GZL01=#{GZL01} 
+		   AND A.BZ01=#{BZ01}
+		   AND A.XW01=#{XW01}
+  	</select>
+  	
+  	<!-- 查询抄送隐藏数据 -->
+  	<select id="queryHDAT_CC" parameterType="Map" resultType="java.lang.String">
+		SELECT A.HDAT_CC
+		  FROM W_CC A
+		 WHERE A.CZY01=#{CZY01} 
+		   AND A.SK01=#{SK01}  
+  	</select>
+  	
+  	<!-- 查询回退步骤 -->
+  	<select id="queryHTBZ" parameterType="Map" resultType="java.util.Map">
+		SELECT A.BZ01 KEY,A.BZ02 VALUE
+  		  FROM (SELECT A.BZ01,A.BZ02,MAX(A.LOG02) LOG02
+          		  FROM W_LOG A
+         		 WHERE A.PID = #{PID} AND A.SK01 != #{SK01}  
+         		 GROUP BY A.BZ01,A.BZ02) A
+ 		 ORDER BY A.LOG02 DESC
+  	</select>
+  	
+  	<!-- 查询抄送人员 -->
+  	<select id="queryCSRY" parameterType="Map" resultType="java.util.Map">
+		SELECT A.CZY01 KEY,A.CZY03 VALUE
+          FROM W_CZY A
+         WHERE A.CZY07 = 0
+         <if test="BM01 != null">
+           AND A.BM01 = #{BM01}
+         </if>
+  	</select>
+  	
+  	<!-- 查询抄送岗位-->
+  	<select id="queryCSGW" parameterType="Map" resultType="java.util.Map">
+		SELECT A.GW01 KEY,A.GW02 VALUE
+          FROM W_GW A
+         WHERE A.GW03 = 0 
+  	</select>
+  	
+  	<!-- 获取单据的历史走向 -->
+  	<select id="queryLOG" parameterType="Map" resultType="java.util.Map">
+		SELECT A.CLRYMC,to_char(A.LOG02,'yyyy-MM-dd HH24:MI:SS') LOG02,
+		       A.BZ02,A.ZT,A.SK01,A.GZL02,A.CLCZY01,A.TJCZY01
+  	      FROM VIEW_LC A 
+         WHERE A.PID = #{PID}  
+         ORDER BY A.LOG02
+  	</select>
+  	
+  	<!-- 获取单据的工作流走向 -->
+  	<select id="queryDBLC" parameterType="Map" resultType="java.util.Map">
+		SELECT A.RYMC,A.SJ,A.BZ02,A.BZ01
+  	      FROM VIEW_DBLC A 
+         WHERE A.PID = #{PID} 
+         ORDER BY A.SJ
+  	</select>
+  	
+  	<!-- 获取该人员的每个步骤的待办   -->
+  	<select id="queryGZLBZDB" parameterType="Map" resultType="java.util.Map">
+  		SELECT A.GZL01,A.BZ01,A.BZ02,A.BZ03,
+       		   (SELECT COUNT(1)
+          		  FROM W_TASK E
+                 WHERE E.BZ01 = A.BZ01
+                   AND ((E.SK05 = 0) OR ((E.SK05 = 1) AND EXISTS (SELECT F.SK01
+                                                                    FROM W_TASKRY F
+                                                                   WHERE F.SK01 = E.SK01
+                                                                     AND F.CZY01 = C.CZY01)))
+                  <if test="GSXX01 != null"> 
+ 	  		 		 AND (E.GSXX01 = #{GSXX01} OR EXISTS (SELECT G.CZY01 FROM W_CZY G WHERE G.CZY01 = #{RYBH} AND G.KGSBJ = 1))
+ 	 			  </if>                                            
+                  <if test="BM != null">
+				     <foreach collection="BM" index="index" item="bm01" open="AND ( " separator="or" close=")">
+				    		  E.BM01 like  #{bm01}||'%'
+					 </foreach> 
+	     		  </if> 
+	           ) NUM
+  		  FROM W_GZLBZ A,W_BZGW B,W_CZYGW C
+         WHERE A.BZ01 = B.BZ01
+           AND B.GW01 = C.GW01 
+           AND A.GZL01 = #{GZL01} 
+           AND C.CZY01 = #{RYBH} 
+  	</select>
+  	
+  	<!-- 获取需要撤回的工作流信息  -->
+  	<select id="queryGZLCH" parameterType="Map" resultType="java.util.Map">
+  	 	SELECT A.PID,A.SK01,A.GZL01,A.BM01,A.BZ01,A.TJCZY01,A.TJRYMC,A.GZL02,B.BZ02,C.JLBH,
+  	 		   to_char(A.SK04,'yyyy-MM-dd HH24:MI:SS') SK04,A.SK02,A.SK03,A.GSXX01,C.TBLNAME,
+  	 		   CASE TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+		        TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd')
+		         WHEN 0 THEN
+		          '今天'
+		         WHEN 1 THEN
+		          '昨天'
+		         ELSE
+		          TO_DATE(TO_CHAR(SYSDATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') -
+		          TO_DATE(TO_CHAR(A.SK04, 'yyyy-mm-dd'), 'yyyy-mm-dd') || '天前'
+		       END SJZT
+  	 	  FROM W_TASK A,W_GZLBZ B,W_TASKYWGL C,W_GZL D
+  	 	 WHERE A.GZL01 = B.GZL01
+  	 	   AND A.BZ01 = B.BZ01
+  	 	   AND A.PID = C.PID 
+  	 	   AND B.GZL01 = D.GZL01 
+ 		   AND B.BZ06 = 0
+  	 	   AND NOT EXISTS (SELECT E.XW01 FROM W_LOG E WHERE E.NSK01 = A.SK01 AND E.XW01 IN (-1,-2,0))
+  	 	   AND A.TJCZY01 = #{CZY01}  
+  	 	   <if test="GZL01 != null"> 
+  	 	   		AND A.GZL01 = #{GZL01}  
+ 	 	   </if>
+  	 	   <if test="CXTJ != null">
+		     <foreach collection="CXTJ" index="index" item="item" open="AND ( " separator=") AND (" close=")">
+		    	A.SK02 LIKE '%${item}%' 
+	 	    	OR A.SK03  LIKE '%${item}%'
+	 	    	OR A.GZL02  LIKE '%${item}%'  
+	 	    	OR A.BZ02  LIKE '%${item}%' 
+	 	    	OR A.TJRYMC  LIKE '%${item}%'
+	 			OR TO_CHAR(A.SK04, 'yyyy-MM-dd HH24:MI:SS')  LIKE '%${item}%'
+			 </foreach> 
+	      </if>    
+	      ORDER BY A.SK04 DESC
+  	</select> 
+  	
+  	<!-- 获取工作流对应的步骤 -->
+  	<select id="queryGZLBZ" parameterType="Map" resultType="java.util.Map">
+		SELECT A.GZL01,A.BZ01,A.BZ02,A.BZ03,A.BZ04,A.BZ05,A.HFID_CC,A.HDAT_CC,A.ZDCS_CC
+ 		  FROM W_GZLBZ A
+ 		 WHERE A.GZL01 = #{GZL01}
+  	</select>
+  	
+  	<!-- 获取工作流 -->
+  	<select id="queryGZL" parameterType="Map" resultType="java.util.Map"> 
+		SELECT A.GZL01,A.GZL02,A.GZL03,A.GZL04,A.LX01,B.LX02
+ 		  FROM W_GZL A,W_CDLX B
+ 		 WHERE A.LX01 = B.LX01(+) AND A.GZL01 = #{GZL01}
+  	</select>
+  	
+  	<!-- 获取工作流对应的行为 -->
+  	<select id="queryGZLXW" parameterType="Map" resultType="java.util.Map">
+		SELECT A.GZL01,A.BZ01,A.XW01,A.XW02,A.NBZ01,A.XW03,A.JK01,A.GZ01,A.ZYZH01,A.LZZH01,
+		       (SELECT E.BZ02 FROM W_GZLBZ E WHERE E.BZ01 = A.NBZ01) NBZ02
+ 		  FROM W_GZLXW A
+ 		 WHERE A.GZL01 = #{GZL01}
+ 		   AND A.BZ01 = #{BZ01}
+  	</select>
+  	
+  	<!-- 获取工作流步骤岗位 -->
+  	<select id="queryBZGW" parameterType="Map" resultType="java.util.Map"> 
+		SELECT A.BZGW01,A.GW01,A.BZGW02,A.BZ01,B.GW02
+ 		  FROM W_BZGW A,W_GW B
+ 		 WHERE A.GW01 = B.GW01 
+ 		   AND A.BZGW02 = 0 
+ 		   AND A.BZ01 = #{BZ01}
+  	</select>
+</mapper>

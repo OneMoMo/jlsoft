@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SPXX.SCM_SPXX">
+        <FIELD attrname="query" format='{"$or":[{"SPBM":{"$regex":"#query#"}},{"SPMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="品牌信息" />
+        <FIELD attrname="GLCM" format='{"GLCM":#GLCM#}' fieldtype="String" allownull="Y" name="管理串码" />
+        <FIELD attrname="YXBJ" format='{"YXBJ.key":{"$in":#YXBJ#}}' fieldtype="String" allownull="Y" name="管理串码" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        <FIELD attrname="TS_S"  format='{"ts":{"$gte":"#TS_S# 00:00:00"}}' fieldtype="String" allownull="Y" name="时间起" />
+        <FIELD attrname="TS_E"   format='{"ts":{"$lte":"#TS_E# 23:59:59"}}' fieldtype="String" allownull="Y" name="时间止" />
+	</JLConfig>
+</root>

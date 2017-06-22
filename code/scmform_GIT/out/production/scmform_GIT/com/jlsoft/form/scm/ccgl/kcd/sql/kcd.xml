@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPKC">
+      <!-- 查询商品库存 -->
+    <select id="querySPKC" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[
+		SELECT S.SPXX02 SPBM,S.SPXX04 SPMC,A.CKSP03 BGS,A.CKSP02 SJZ, A.CKSP05 YSS,
+		       A.CKSP10 YFS,A.CKSP07 ZCS,get_spsx_v10(A.CKSP12) SPSX,S.JLDW01 JLDW,
+		       A.CKSP20 DDZT,A.CKSP19 ZCZT,A.CKSP21 JCZT,A.CKSP18 JTZT,W.WLDW02 GYS,
+		       B.BM02 CGBM,(SELECT PPB02 FROM PPB WHERE PPB01 = S.PPB01)PP,
+		       S.SPFL02 SPFL,A.CKSP17 PJDJ,A.CKSP03*A.CKSP17 PJKCJE ,
+		       CASE WHEN A.CKSP04 < 0 THEN A.CKSP04*-1 ELSE 0 END YSS, A.CKSP04  KMS,
+		       C.CK02 CK, C.CK01 CK01, B.BM01 BM01, W.WLDW01 GYSBM,
+		       (select 
+                   (select spfl02
+                      from spfl
+                    where a.spfl01 like spfl01 || '%' and spfl03 = 1) sjflmc                    
+                   from spfl a
+                  where spfl01 =S.SPFL01 ) SPDL	       
+		  FROM CKSP A, BM B, CK C, SPXX S, WLDW W, CKXL D
+		 WHERE A.SPXX01 = S.SPXX01
+		   AND A.WLDW01 = W.WLDW01
+		   AND A.BM01 = B.BM01
+		   AND A.CK01 = C.CK01
+		   AND A.SPXX01 = D.SPXX01(+)
+		   AND A.CKSP12 = D.CKSP12(+)
+		   AND A.BM01 = D.BM01(+)
+		   AND A.CK01 = D.CK01(+)
+		]]>
+		   JL{CZY|A.CK01|CK_CX|LIKE%}JL
+		   JL{CZY|B.BM01|BM_CX|LIKE%}JL
+		   JL{CZY|W.WLDW01|WLDW_CX|LIKE%}JL
+		   JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+		<if test="GSXX01 != null and GSXX01 != ''">
+      			   AND A.GSXX01 = #{GSXX01}
+        </if>
+        <if test="BM01 != null and BM01 != ''">
+		     <foreach item="item" index="index" collection="BM01"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 LIKE #{item}||'%'
+		     </foreach> 	         
+	    </if>
+	    <if test="CK01 != null and CK01 != ''">
+		     <foreach item="item" index="index" collection="CK01"  open=" AND (" separator=" or " close=")"> 
+		      A.CK01 LIKE #{item}||'%'
+		     </foreach> 	         
+	    </if>
+	    <if test="SPSX != null and SPSX != ''">
+		     <foreach item="item" index="index" collection="SPSX"  open=" AND (" separator=" or " close=")"> 
+		      A.CKSP12 like #{item}||'%'
+		     </foreach> 	         
+	    </if>
+	    <if test="WLDW != null and WLDW != ''">
+		      <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 	      
+		      (W.WLDW02 LIKE '%'||#{item}||'%' OR A.WLDW01 = #{item})
+		    </foreach>       
+	    </if>
+	    <if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(S.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{item}||'%')  OR Upper(S.SPPYM) LIKE Upper('%'||#{item}||'%') 
+		     </foreach> 
+	    </if>
+	    <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          S.SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	    </if>
+	    <if test="PPMC != null and PPMC != ''">
+	         <foreach item="item" index="index" collection="PPMC"  open=" AND (" separator=" or " close=")"> 
+	          S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	    <if test="QTTJ != null and QTTJ != ''">
+	        <if test="QTTJ == 0">
+	         AND A.CKSP03 > 0
+	        </if>
+	        <if test="QTTJ == 1">
+	         AND A.CKSP07 > 0
+	        </if>
+	        <if test="QTTJ == 2">
+	         AND C.CK09 = 1
+	        </if>
+	        <if test="QTTJ == 3">
+	         AND C.CK09 = 0
+	        </if>
+	    </if>
+   </select>
+      <!-- 查询商品库存明显 -->
+   <select id="querySPKCMX" parameterType="java.util.Map" resultType="java.util.Map">
+	   <![CDATA[ SELECT A.GSXX01, 
+       A.JLWBDH DJHM, 
+       A.DJLX DJLX, 
+       A.SPXX01 , 
+       A.SPXX02 SPBM, 
+       A.SPXX04 SPMC, 
+       A.DJSL DJSL, 
+       A.KMSWD KMSWD, 
+       A.BGSWD BGSWD, 
+       A.SJZWD SJZWD, 
+       A.SPSX SPSX, 
+       A.WLDW01 , 
+       A.WLDW02 GYS, 
+       A.BM01 CGBMBM, 
+       A.BM02 CGBM, 
+       A.CK01 CKBM, 
+       A.CK02 CKMC, 
+       A.SPFL01 , 
+       A.SPFL02 SPFL, 
+       A.PPB01, 
+       A.PPB02 SPPP ,
+      TO_CHAR(A.DJRQ,'YYYY-MM-DD') DJRQ,
+       A.JSSL JSSL
+  FROM VIEW_SPWDZMX A ]]>
+				    WHERE 1=1
+		<if test="GSXX01 != null and GSXX01 != ''">
+      			   AND A.GSXX01 = #{GSXX01}
+        </if>
+        <if test="BM01 != null and BM01 != ''">
+		     
+		   AND   A.BM01 =#{BM01}
+		     	         
+	    </if>
+	    <if test="CK01 != null and CK01 != ''">
+		   
+		    AND  A.CK01 =#{CK01}
+		     	         
+	    </if>
+	    <if test="SPSX != null and SPSX != ''">
+		    
+		     AND  A.SPSX =#{SPSX}
+		              
+	    </if>
+	    <if test="SPBM != null and SPBM != ''">
+		    
+		    AND  A.SPXX02 =#{SPBM}
+		              
+	    </if>
+	    <if test="GYSBM != null and GYSBM != ''">
+		    AND  A.WLDW01=#{GYSBM}
+		</if>
+		 <if test="RQ_S != null and RQ_S != ''">AND A.DJRQ &gt;= TO_DATE(#{RQ_S} , 'yyyy-mm-dd ')</if>
+		   <if test="RQ_E != null and RQ_E != ''">AND A.DJRQ &lt;= TO_DATE(#{RQ_E} , 'yyyy-mm-dd ')</if>
+		 <if test="DJBH != null and DJBH != ''">
+		    AND  A.JLWBDH=#{DJBH}
+		</if> 
+		<if test="DJLX != null and DJLX != ''">
+	       AND  A.DJLX01 = #{DJLX}
+	    </if> 
+		ORDER BY DJRQ ASC
+	    </select>
+   <select id="querySPKCZT" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT GET_KMS(S.SPXX01,(SELECT SUM(CKSP04 + CKSP05)FROM CKSP WHERE SPXX01 = A.SPXX01 AND GSXX01 = A.GSXX01 AND CK01 IN (SELECT CK01 FROM CK WHERE CK19 = 1)
+	
+	JL{CZY|CKSP.CK01|CK_CX|LIKE%}JL)) KCZT
+	,S.SPXX02 SPBM,S.SPXX04 SPMC,S.PPB01,S.PPB02 SPPPMC,S.SPFL01,S.SPFL02 SPFLMC
+  	   FROM CKSP A,SPXX S 
+	WHERE A.SPXX01 = S.SPXX01 
+         JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+         JL{CZY|S.SPFL01|SPFL_CX|LIKE%}JL
+         JL{CZY|S.PPB01|PPB_CX|LIKE%}JL
+ 		<if test="SPMC != null and SPMC != ''">
+		     <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(S.SPXX02) LIKE Upper('%'||#{item}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{item}||'%') 
+		     </foreach> 
+	    </if> 
+	    <if test="SPPPMC != null and SPPPMC != ''">
+	         <foreach item="item" index="index" collection="SPPPMC"  open=" AND (" separator=" or " close=")"> 
+	          	S.PPB01 = #{item}
+	         </foreach>
+	    </if>
+	   <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          	S.SPFL01 LIKE #{item}||'%'
+	         </foreach>
+	    </if>
+	   <if test="KCZT != null and KCZT != ''">
+	    	 <foreach item="item" index="index" collection="KCZT"  open=" AND (" separator=" or " close=")">
+	         	GET_KMS(S.SPXX01)=#{item}
+	         </foreach>
+	    </if>  
+	     GROUP BY SPXX02,SPXX04,GGB01,JLDW01,S.SPXX01,S.PPB01,S.PPB02,S.SPFL01,S.SPFL02,A.SPXX01,A.GSXX01
+	    </select>
+    <!-- 查询商品未达账 -->
+  	<select id="querySPWDZ" parameterType="java.util.Map" resultType="java.util.Map">
+	   <![CDATA[ SELECT A.GSXX01, 
+       A.JLWBDH DJHM, 
+       A.DJLX DJLX, 
+       A.SPXX01 , 
+       A.SPXX02 SPBM, 
+       A.SPXX04 SPMC, 
+       A.DJSL DJSL, 
+       A.KMSWD KMSWD, 
+       A.BGSWD BGSWD, 
+       A.SJZWD SJZWD, 
+       A.SPSX SPSX, 
+       A.WLDW01 , 
+       A.WLDW02 GYS, 
+       A.BM01 CGBMBM, 
+       A.BM02 CGBM, 
+       A.CK01 CKBM, 
+       A.CK02 CKMC, 
+       A.SPFL01 , 
+       A.SPFL02 SPFL, 
+       A.PPB01, 
+       A.PPB02 SPPP ,
+      TO_CHAR(A.DJRQ,'YYYY-MM-DD') DJRQ,
+       A.JSSL JSSL
+       FROM VIEW_SPWDZMX A ]]>
+        WHERE 1=1
+		 <if test="SPMC != null and SPMC  != ''">
+	    	 <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")">
+	          	( REGEXP_LIKE(A.SPXX02, #{item}, 'i')  OR   REGEXP_LIKE(A.SPXX04, #{item}, 'i')  )
+	         </foreach>
+	    </if>
+		 <if test="WLDW != null and WLDW != ''">
+	    	 <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")">
+	          	(A.WLDW01 LIKE #{item}||'%' OR   REGEXP_LIKE(A.WLDW02, #{item}, 'i') )
+	         </foreach>
+	    </if>
+	    <if test="DJLX != null and DJLX != ''">
+		    AND  A.DJLX01=#{DJLX}
+		</if>
+		 <if test="WDQQ != null and WDQQ != ''">
+		 	<if test="WDQQ ==1">
+		 		AND A.KMSWD=0 
+       			AND A.BGSWD=0
+       			AND A.SJZWD=0
+		 	</if>
+		 	<if test="WDQQ ==2">
+		 		<![CDATA[AND (A.KMSWD<>0 OR A.BGSWD <> 0 OR A.SJZWD <>0)]]>
+		 	</if>
+		</if>
+		<if test="CK01 != null and CK01 != ''">
+	    	 <foreach item="item" index="index" collection="CK01"  open=" AND (" separator=" or " close=")">
+	          	A.CK01 like #{item} || '%'	 
+	         </foreach>
+	    </if>
+		<if test="PPMC != null and PPMC != ''">
+	    	 <foreach item="item" index="index" collection="PPMC"  open=" AND (" separator=" or " close=")">
+	          	A.PPB01  like #{item}  || '%'	 
+	         </foreach>
+	    </if>
+	    <if test="SPFL != null and SPFL != ''">
+	    	 <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	          	A.SPFL01 like #{item} || '%' 	 
+	         </foreach>
+	    </if>
+	     <if test="BM01 != null and BM01 != ''">
+	    	 <foreach item="item" index="index" collection="BM01"  open=" AND (" separator=" or " close=")">
+	          	A.BM01 like #{item} || '%' 	
+	         </foreach>
+	    </if>
+	    <if test="DJHM != null and DJHM != ''">
+	    	 <foreach item="item" index="index" collection="DJHM"  open=" AND (" separator=" or " close=")">
+	          	REGEXP_LIKE(A.JLWBDH, #{item}, 'i')  
+	         </foreach>
+	    </if>
+		 <if test="ZDRQQ != null and ZDRQQ != ''"><![CDATA[ AND TO_DATE(to_char(A.DJRQ,'yyyy-mm-dd'), 'yyyy-mm-dd') >=TO_DATE(#{ZDRQQ} , 'yyyy-mm-dd')]]></if>
+		 <if test="ZDRQS != null and ZDRQS != ''"><![CDATA[ AND TO_DATE(to_char(A.DJRQ,'yyyy-mm-dd'), 'yyyy-mm-dd') <= TO_DATE(#{ZDRQS} , 'yyyy-mm-dd')]]></if>
+		 JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+         JL{CZY|A.BM01|BM_CX|LIKE%}JL
+         JL{CZY|A.CK01|CK_CX|LIKE%}JL
+         JL{CZY|A.WLDW01|GYS_CX|LIKE%}JL
+         
+		 ORDER BY DJRQ ASC
+	    </select>
+</mapper>

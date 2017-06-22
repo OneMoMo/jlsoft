@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MDXJYEB">
+	<select id="queryMDXJYEB" parameterType="java.util.Map" resultType="java.util.Map">
+		select *
+  from (SELECT distinct A.GSXX01,
+                        TO_CHAR(A.BMXJ01, 'YYYY-MM-DD') RQ,
+                        A.BM01 BMBM,
+                        (SELECT BM02 FROM BM WHERE BM.BM01 = A.BM01) XSBM,
+                        A.BMXJ03 YJJE,
+                        NVL((SELECT SUM(CKJE) FROM XJCKD WHERE XSBM01=A.BM01 AND CKRQ=A.BMXJ01),0) SJJE,
+                        (A.BMXJ03 - NVL((SELECT SUM(CKJE) FROM XJCKD WHERE XSBM01=A.BM01 AND CKRQ=A.BMXJ01),0)) WJJE
+          FROM BMXJZ A) A
+ where 1 = 1
+       	   JL{CZY|A.BMBM|BM_CX|LIKE%}JL
+           JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+       	   <if test="RQ_S !=null and RQ_S != ''">
+	       AND A.RQ >= #{RQ_S}
+	    </if> 
+	    <if test="RQ_E !=null and RQ_E != ''">
+	       <![CDATA[AND A.RQ <= #{RQ_E}]]>
+	    </if>
+	    <if test="XSBM != null and XSBM != ''">
+			 <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+	          A.BMBM LIKE #{item}||'%'
+	    	 </foreach>
+	    </if>
+	    <if test="WJQK !=null and WJQK != ''">
+	       <![CDATA[AND A.WJJE<>0]]>
+	    </if>
+	    ORDER BY A.RQ ASC
+	</select>
+	<select id="queryMDXJYEBMX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT TO_CHAR(A.CKRQ, 'YYYY-MM-DD') CKRQ,
+       A.JLWBDH CKDH,
+       TO_CHAR(A.ZDRQ, 'YYYY-MM-DD') ZDRQ,
+       A.CKJE,
+       A.YHZH01 ,
+       (select YHZH02 FROM YHZH WHERE YHZH.YHZH01=A.YHZH01 ) YHZH,
+        (select YHZH02 FROM YHZH,YHXX WHERE YHZH.YHZH01 = A.YHZH01 AND YHZH.YHXX01=YHXX.YHXX01) YHZH,
+       (select YHXX.YHXX02 FROM YHZH,YHXX WHERE YHZH.YHZH01 = A.YHZH01 AND YHZH.YHXX01=YHXX.YHXX01 ) CKYH,
+       A.XSBM01 CKBMBM,
+       (SELECT BM02 FROM BM WHERE BM.BM01 = A.XSBM01) CKBM,
+       A.ZDRID CKRBM,
+       A.ZDRMC CKRMC,
+       TO_CHAR(A.SHRQ, 'YYYY-MM-DD') SHRQ
+  FROM XJCKD A
+  WHERE 1=1
+       	   JL{CZY|A.XSBM01|BM_CX|LIKE%}JL
+       	   <if test="BMBM !=null and BMBM != ''">
+	       		AND A.XSBM01=#{BMBM}
+	   		</if> 
+	   		<if test="RQ !=null and RQ != ''">
+	       		<![CDATA[AND A.CKRQ = TO_DATE(#{RQ},'YYYY-MM-DD')]]>
+	   		</if>
+	</select>
+</mapper>

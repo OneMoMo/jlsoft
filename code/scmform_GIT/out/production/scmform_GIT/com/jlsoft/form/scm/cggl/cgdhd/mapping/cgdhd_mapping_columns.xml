@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <JLConfig id="form.scm.cggl.cgdhd">
+    <FIELD attrname="GSXX01" fieldtype="String" allownull="N" name="公司编码" />
+    <FIELD attrname="WLDW01" fieldtype="String" allownull="N" name="供应商" />
+    <FIELD attrname="GHHT01" fieldtype="String" allownull="N" name="采购合同" />
+    <FIELD attrname="BM01" fieldtype="String" allownull="N" name="采购部门" />
+    <FIELD attrname="CK01" fieldtype="String" allownull="N" name="送达仓库" />
+    <FIELD attrname="HZFS" fieldtype="int" allownull="N" check="HZFS in (0,1,2,3)" name="合作方式" />
+    <FIELD attrname="CGXY01" fieldtype="String"  name="采购协议" />
+    <Nested id="SPLB" allownull="N" name="订单商品明细">
+      <FIELD attrname="SPXX01" fieldtype="int" allownull="N" name="商品内码"/>
+      <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+      <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+      <FIELD attrname="DHSL" fieldtype="double" allownull="N" name="订货数量" />
+      <FIELD attrname="HSJJ" fieldtype="double" allownull="N" name="含税进价" />
+      <FIELD attrname="DHJE" fieldtype="double" allownull="N" name="订货金额" />
+    </Nested>
+</JLConfig>
+</root>

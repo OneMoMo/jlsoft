@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LSTHD"> 
+
+  <select id="JK" parameterType="Map" resultType="java.util.Map">
+		SELECT A.LSDI25,E.LSD10 XSJE,E.LSD08 YWY_RYXX01,E.LSD16 YWYMC,E.BM01 XS_BM01,M.BM02 XSBMMC,E.FLFS01 XSFS01,
+       		   (SELECT FLFS02 FROM FLFS WHERE FLFS01 = E.FLFS01) XSFSMC,GET_LSCZLX(E.LSD03) CZLX,TO_CHAR(E.LSD07,'YYYY-MM-DD') SKRQ,
+       		   E.LSD25 VIP01,K.HYXX01 HYKH,K.LXR KHMC,K.LXDH LXDH,K.XXDZ LXDZ,E.JLWBDH JLWBDH
+          FROM LSDITEM A,SPXX B,CK C,LSDITEM_KHS D,LSD E,BM M,CSS_FWD K,SPJGB F
+         WHERE A.SPXX01 = B.SPXX01
+         AND A.SPXX01 = F.SPXX01
+         AND A.CK01 = C.CK01
+         AND A.GSXX01 = D.GSXX01(+)
+         AND E.JLWBDH = K.JLWBDH(+)
+         AND E.BM01 = M.BM01
+         AND A.LSDI01 = D.LSDI01(+)
+         AND (ABS(A.LSDI05) - ABS(A.LSDI09)) > 0
+         AND A.LSD01 = E.LSD01
+         AND F.WLDW01 = A.WLDW01
+         AND A.GSXX01 = E.GSXX01
+         AND A.GSXX01 = F.GSXX01
+         AND A.BM01 = F.BM01
+         AND NVL((SELECT YSFSL - SSFSL - ZFSL - ABS(NVL((SELECT SUM(T.THSPI05)
+                                                   FROM THSPITEM T, THSPD H
+                                                  WHERE A.LSDI01 = T.LSDI01
+                                                    AND T.THSP01 = H.THSP01
+                                                    AND T.GSXX01 = H.GSXX01
+                                                    AND H.THSP07 IS NULL
+                                                    AND A.GSXX01 = T.GSXX01
+                                                    AND T.THSPI04(+) = 1),
+                                                 0))
+                                               FROM DSFHPSB
+                                              WHERE DJHM = A.LSD01
+                                                AND THDH = A.LSDI01
+                                                AND CZLX = 1
+                                                AND GSXX01 = A.GSXX01
+                                                AND DJLX = 10),
+                                                0) > 0
+        <if test="GSXX01 != null and GSXX01 != ''">
+	       AND A.GSXX01=#{GSXX01}
+	    </if> 
+	    <if test="JLWBDH != null and JLWBDH != ''">
+	       AND E.JLWBDH=#{JLWBDH}
+	    </if> 
+	    <if test="SKRQ != null and SKRQ != ''">
+	       AND TO_CHAR(E.LSD07,'YYYY-MM-DD')=#{SKRQ}
+	    </if> 
+	    JL{CZY|E.BM01|BM_CZ|LIKE%}JL
+	     UNION 
+	    SELECT A.LSDI25,E.LSD10 XSJE,E.LSD08 YWY_RYXX01,E.LSD16 YWYMC,E.BM01 XS_BM01,M.BM02 XSBMMC,E.FLFS01 XSFS01,
+               (SELECT FLFS02 FROM FLFS WHERE FLFS01 = E.FLFS01) XSFSMC,GET_LSCZLX(E.LSD03) CZLX,TO_CHAR(E.LSD07,'YYYY-MM-DD') SKRQ,
+               E.LSD25 VIP01,K.HYXX01 HYKH,K.LXR KHMC,K.LXDH LXDH,K.XXDZ LXDZ,E.JLWBDH JLWBDH
+          FROM LSDITEM A,SPXX B,CK C,LSDITEM_KHS D,LSD E,BM M,CSS_FWD K,SPJGB F
+         WHERE A.SPXX01 = B.SPXX01
+           AND A.SPXX01 = F.SPXX01
+           AND A.CK01 = C.CK01
+           AND A.GSXX01 = D.GSXX01(+)
+           AND E.JLWBDH = K.JLWBDH(+)
+           AND E.BM01 = M.BM01
+           AND A.LSDI01 = D.LSDI01(+)
+           AND (A.LSDI05 - A.LSDI09) > 0
+           AND A.LSD01 = E.LSD01
+           AND F.WLDW01 = A.WLDW01
+           AND A.GSXX01 = E.GSXX01
+           AND A.GSXX01 = F.GSXX01
+           AND A.BM01 = F.BM01
+           AND NVL((SELECT SSFSL - THSL + ZFSL - ABS(NVL((SELECT SUM(T.THSPI05)
+                                                  FROM THSPITEM T, THSPD H
+                                                 WHERE A.LSDI01 = T.LSDI01
+                                                   AND A.GSXX01 = T.GSXX01
+                                                   AND T.THSP01 = H.THSP01
+                                                   AND T.GSXX01 = H.GSXX01
+                                                   AND H.THSP07 IS NULL
+                                                   AND T.THSPI04 = 2),
+                                                0))
+                                              FROM DSFHPSB
+                                             WHERE DJHM = A.LSD01
+                                               AND THDH = A.LSDI01
+                                               AND CZLX = 1
+                                               AND GSXX01 = A.GSXX01
+                                               AND DJLX = 10),
+                                               0) > 0
+	    <if test="GSXX01 != null and GSXX01 != ''">
+	       AND A.GSXX01=#{GSXX01}
+	    </if> 
+	    <if test="JLWBDH != null and JLWBDH != ''">
+	       AND E.JLWBDH=#{JLWBDH}
+	    </if> 
+	    <if test="SKRQ != null and SKRQ != ''">
+	   	   AND TO_CHAR(E.LSD07,'YYYY-MM-DD')=#{SKRQ}
+	    </if> 
+        JL{CZY|E.BM01|BM_CZ|LIKE%}JL
+  </select>
+ 
+  <select id="CK" parameterType="Map" resultType="java.util.Map">
+		SELECT CK01 CK01,CK02 CKMC 
+		   FROM CK 
+	    WHERE
+	    <if test="HZFS ==0 or HZFS==1 or HZFS==3">THCKBJ = 1</if>
+	    <if test="HZFS ==2">CK06=1</if>
+	    <if test="GSXX01 != null and GSXX01 != ''">
+	       AND GSXX01=#{GSXX01}
+	    </if> 
+	    JL{CZY|CK01|CK_CZ|LIKE%}JL
+        JL{CZY|GSXX01|CZGS_CZ|LIKE%}JL
+	</select>	
+	<select id="queryLSTHD" parameterType="Map" resultType="java.util.Map">
+        <![CDATA[SELECT DISTINCT A.JLWBDH THDH ,S.SPXX02 SPBM,S.SPXX04 SPMC,B.THSPI05 THSL,
+       		   (SELECT JLWBDH FROM LSD WHERE LSD01=A.THSP02 AND GSXX01=A.GSXX01) YLSDH,
+	           B.THSPI03 THDJ,B.THSPI06 THJE,get_spsx_v10(B.THSPI07)SPSXMC,S.JLDW01 JLDW,
+	           B.LSDI01 YTDH,(SELECT THYY02 FROM THYY WHERE (TO_CHAR(THYY01) = A.THSP34 OR TO_CHAR(THYY02)=a.thsp34)
+               AND  instr(djlx,'10')>0  AND DJCZLX = 0) THYY,(CASE WHEN B.THSPI04 = 1 THEN '提单冲红' when B.THSPI04 = 2
+               then '退货冲红' when B.THSPI04 = 3 then '商品冲红' end) THLX,B.THSPI16 WJJJ,
+	           B.THSPI15 LYKL,(SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01)FLFS,
+	           B.CK01,(SELECT CK02 FROM CK WHERE CK01 = B.CK01)CKMC,(CASE WHEN A.THSP23 = 1 THEN '正常退货' else '坏机退货' end) QTTJ,
+	           A.THSP19 YYYMC,D.BM01,D.BM02 XSBMMC,(SELECT BM02 FROM BM WHERE BM.BM01 = B.BM01)CGBMMC,B.WLDW01,
+	           A.THSP04  KHMC,A.THSP12 LXDZ,A.THSP13 LXFS,
+	           W.WLDW02  WLDWMC,A.THSP04 KHMC,A.THSP05 ZDR,to_char(A.THSP06,'YYYY-MM-DD') ZDRQ,A.THSP07 SHR,to_char(A.THSP08,'YYYY-MM-DD') SHRQ ,L.LSDI05 XSSL,L.LSDI06 XSJE,a.THSP09 BZ,S.SPXX34 SPXH
+	      FROM THSPD A, THSPITEM B, SPXX S, BM D,WLDW W,LSDITEM L
+       WHERE B.WLDW01=W.WLDW01
+         AND A.GSXX01=B.GSXX01 
+         AND A.THSP01=B.THSP01  
+         AND B.SPXX01=S.SPXX01 
+         AND A.BM01=D.BM01
+         AND A.THSP02=L.LSD01
+         AND A.GSXX01=L.GSXX01
+         AND B.LSDI01=L.LSDI01
+         ]]>
+	       JL{CZY|B.CK01|CK_CX|LIKE%}JL
+	       JL{CZY|B.BM01|BM_CX|LIKE%}JL
+	       JL{CZY|B.WLDW01|WLDW_CX|LIKE%}JL
+           JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL  
+    <!-- <if test="SP != null and SP != ''"> 
+		 AND (S.SPXX02 LIKE '%'||#{SP}||'%' OR S.SPXX04 LIKE '%'||#{SP}||'%' OR S.SPPYM LIKE '%'||#{SP}||'%')
+	</if> -->
+	 <if test="SP != null and SP != ''">
+		     <foreach item="item" index="index" collection="SP"  open=" AND (" separator=" or " close=")"> 
+		      REGEXP_LIKE(S.SPXX02, #{item}, 'i') OR REGEXP_LIKE(S.SPXX04, #{item}, 'i')  OR  REGEXP_LIKE(S.SPPYM, #{item}, 'i')  
+		     </foreach> 
+	    </if>
+        <if test="XSBM != null and XSBM != ''">
+            <foreach item="item" index="index" collection="XSBM"  open=" AND (" separator=" or " close=")"> 
+                A.BM01 like CONCAT(#{item},'%')
+            </foreach> 
+        </if>
+        <if test="CK != null and CK != ''">
+            <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+                B.CK01 like CONCAT(#{item},'%')
+            </foreach> 
+        </if>
+        <if test="THYY != null and THYY != ''">
+            <foreach item="item" index="index" collection="THYY"  open=" AND (" separator=" or " close=")"> 
+                A.THSP34 = (SELECT THYY02 FROM THYY WHERE THYY01 = #{item} )
+            </foreach> 
+        </if>
+	 <if test="ZDRQQ !=null and ZDRQQ != ''">
+	       <![CDATA[AND A.THSP06 >= TO_DATE(#{ZDRQQ},'YYYY-MM-DD')]]>
+	    </if> 
+	 <if test="ZDRQZ !=null and ZDRQZ != ''">
+	       <![CDATA[AND A.THSP06 <= TO_DATE(#{ZDRQZ},'YYYY-MM-DD')]]>
+	 </if>	
+	 <if test="SHRQQ !=null and SHRQQ != ''">
+	       <![CDATA[AND A.THSP08 >= TO_DATE(#{SHRQQ},'YYYY-MM-DD')]]>
+	    </if> 
+	 <if test="SHRQZ !=null and SHRQZ != ''">
+	       <![CDATA[AND A.THSP08 <= TO_DATE(#{SHRQZ},'YYYY-MM-DD')]]>
+	 </if>
+        <if test="ZDRMC != null and ZDRMC != ''">
+	          AND A.THSP05 LIKE '%'||#{ZDRMC}||'%'	
+	    </if>
+	    <if test="SHRMC != null and SHRMC != ''">
+	          AND A.THSP07 LIKE '%'||#{SHRMC}||'%'	
+	    </if>
+	    <if test="QTTJ != null and QTTJ != ''">
+	          <foreach item="item" index="index" collection="QTTJ"  open=" AND (" separator=" or " close=")"> 
+		       A.THSP23 = #{item}
+		      </foreach>	
+	    </if>
+	    <if test="DJZT != null and DJZT != ''">
+	    	<if test="DJZT == 0">
+	          AND A.THSP05 IS NOT NULL
+	          AND A.THSP07 IS NULL	
+	        </if>
+	        <if test="DJZT == 1">
+	          AND A.THSP07 IS NOT NULL	
+	        </if>
+	        <if test="DJZT != 0 and DJZT != 1">
+	          AND A.THSP07 IS NOT NULL	
+	        </if>
+	    </if>	    
+        ORDER BY A.JLWBDH 
+    </select>	
+</mapper>

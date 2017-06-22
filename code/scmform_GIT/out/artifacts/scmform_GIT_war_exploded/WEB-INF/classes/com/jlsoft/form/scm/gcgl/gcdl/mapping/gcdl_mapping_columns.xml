@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gcdl">
+        <FIELD attrname="SYDW" fieldtype="String" allownull="N" name="使用单位" />
+        <FIELD attrname="SYDWDZ" fieldtype="String" allownull="N" name="使用单位地址" />
+        <FIELD attrname="GMDW" fieldtype="String" allownull="N" name="购买单位" />
+        <FIELD attrname="JXSMC" fieldtype="String" allownull="N" name="经销商名称" />
+   
+        
+        <Nested id="LX" allownull="N" name="工程登录明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品代码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+                  <FIELD attrname="SQSL" fieldtype="String" allownull="N" name="申请数量" />
+            <FIELD attrname="SQDJ" fieldtype="String" allownull="N" name="申请价格" />
+          
+        </Nested>
+	</JLConfig>
+</root>

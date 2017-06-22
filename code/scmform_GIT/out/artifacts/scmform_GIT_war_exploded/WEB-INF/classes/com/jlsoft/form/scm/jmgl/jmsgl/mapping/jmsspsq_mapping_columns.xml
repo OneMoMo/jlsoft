@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jmgl.jmsgl.jmsspsq">
+		<FIELD attrname="PTS01" fieldtype="string" allownull="N" name="平台商编码" />	
+	</JLConfig>
+</root>

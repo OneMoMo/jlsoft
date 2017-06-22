@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.lsgl.lsdjd">
+        <FIELD attrname="YWYMC" fieldtype="String" allownull="N" name="营业员" />
+        <FIELD attrname="SFJE" fieldtype="String" allownull="N" name="收/付金额" />
+	</JLConfig>
+	
+	<JLConfig id="form.scm.lsgl.lsdjd.spxx">
+        <FIELD attrname="YWYMC" fieldtype="String" allownull="N" name="营业员" />
+        <FIELD attrname="SFJE" fieldtype="String" allownull="N" name="收/付金额" />
+        
+        <Nested id="SPLB" allownull="N" name="商品明细">
+           <FIELD attrname="SL" fieldtype="double" allownull="N" name="数量" />
+       </Nested>
+	</JLConfig>
+	
+	<JLConfig id="form.scm.lsgl.lsdjd.cxdj">
+		<FIELD attrname="DJDH01" fieldtype="String" allownull="N" name="订金单号" />
+        <FIELD attrname="YWYMC" fieldtype="String" allownull="N" name="营业员" />
+        <FIELD attrname="SFJE" fieldtype="String" allownull="N" name="收/付金额" />
+	</JLConfig>
+</root>

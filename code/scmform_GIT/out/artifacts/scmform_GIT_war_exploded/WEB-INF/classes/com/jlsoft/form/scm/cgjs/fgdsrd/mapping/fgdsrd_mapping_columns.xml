@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cgjs.fgdsrd">
+	<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="供应商名称" />
+	<FIELD attrname="BMMC" fieldtype="string" allownull="N" name="采购部门" />
+	<FIELD attrname="HZFS" fieldtype="string" allownull="N" name="合作方式" />
+	<FIELD attrname="CWRQ" fieldtype="string" allownull="N" name="财务日期" />
+	<Nested id="SPLB" allownull="N" name="商品列表">
+            <FIELD attrname="JSSR01" fieldtype="String" allownull="N" name="收入代码" />
+            <FIELD attrname="JSSRMC" fieldtype="String" allownull="N" name="收入名称" />
+            <FIELD attrname="YJJE" fieldtype="String" allownull="N" name="应结金额" />
+    </Nested>
+	</JLConfig>
+</root>

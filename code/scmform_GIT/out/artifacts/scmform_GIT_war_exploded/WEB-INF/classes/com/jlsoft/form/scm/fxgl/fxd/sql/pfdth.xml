@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PFDTH">
+ 
+  <!-- 查询SPXX关联CKSP和SPJGB表 -->
+  <select id="CKSP_SPJGB" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.GGB01  SPGG,
+       B.SPXX02 SPBM,
+       B.SPXX04 SPMC,
+       B.JLDW01 JLDW,
+       B.SPXX01 SPXX01,
+       C.CKSP12 SPSX,
+       C.CK01 CK01,
+       C.WLDW01 WLDW01,
+       C.BM01 BM01,
+       (C.CKSP04 + C.CKSP05) KMS,
+       A.SPJG07 FXDJ,
+       A.SPJG07 FXJE,
+       -1 ZCSL,
+       -1 SL
+       FROM SPJGB A, SPXX B, CKSP C
+       WHERE A.SPXX01 = B.SPXX01
+       AND A.BM01 = C.BM01
+       AND A.WLDW01 = C.WLDW01
+       AND A.SPXX01 = C.SPXX01
+       <![CDATA[
+       AND (CKSP04+CKSP05>0 OR CKSP13=1)
+       ]]>
+       AND A.GSXX01 = #{GSXX01}
+    <if test="SPMC != null">
+       AND (B.spxx04 like '%'||#{SPMC}||'%' or B.spxx02 like '%'||#{SPMC}||'%')
+    </if>
+  </select>
+  
+  <select id="PFDTH_DH" parameterType="java.util.Map" resultType="java.util.Map">
+  SELECT A.PFD01,A.PFD04 FROM  PFD A WHERE PFD02=3 
+   <if test="PFD36 != null">
+       AND A.PFD36 = #{PFD36}
+    </if>
+  </select>
+  <select id="PFDTH_ZBXX" parameterType="java.util.Map" resultType="java.util.Map">
+  SELECT DISTINCT A.PFD01 YPFD01, A.BM01 XS_BM01, (SELECT BM02 FROM BM WHERE A.BM01=BM01) XSBMMC,
+             A.WLDW01 KH_WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01=A.WLDW01) KHMC,
+             A.FLFS01 XSFS01,(SELECT FLFS02 FROM FLFS WHERE A.FLFS01=FLFS01) XSFSMC,
+              A.PFD02 THLX, A.PFD03, A.TGDH01,A.PFD06 YWY_RYXX01, A.PFD19 YWYMC
+             FROM PFD A, PFDITEM B, SPXX S
+             WHERE A.PFD05 IS NOT NULL AND (A.PFD53 = 0 OR A.PFD53 IS NULL) 
+               AND A.PFD01 = B.PFD01 AND A.GSXX01 = B.GSXX01 AND B.SPXX01 = S.SPXX01
+    <if test="PFD01 != null">
+       AND A.PFD01 = #{PFD01}
+    </if>
+    <if test="GSXX01 != null">
+       AND A.GSXX01 = #{GSXX01}
+    </if>
+  </select>      
+  <select id="PFDTH_KTTD" parameterType="Map" resultType="java.util.Map">
+             SELECT PFDI01 
+             FROM PFDITEM 
+             WHERE GSXX01 = #{GSXX01}
+		       AND PFD01 = #{PFD01}
+		       AND PFDI05-PFDI09>0
+		       order by PFDI01
+  </select>   
+  <select id="PFDTH_KTTDMX" parameterType="Map" resultType="java.util.Map">
+    <![CDATA[SELECT B.PFD01 YPFD01, B.BM01 XS_BM01, (SELECT BM02 FROM BM WHERE B.BM01=BM01) XSBMMC,
+             		B.WLDW01 KH_WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01=B.WLDW01) KHMC,
+             		B.FLFS01 XSFS01,(SELECT FLFS02 FROM FLFS WHERE B.FLFS01=FLFS01) XSFSMC,
+              		B.PFD02 THLX, B.PFD03, B.TGDH01,B.PFD06 YWY_RYXX01, B.PFD19 YWYMC ,substr(PFDI01,length(PFDI01)-1) XH,A.PFDI01,A.SPXX01,C.SPXX02 SPBM,C.SPXX04 SPMC
+       				,C.GGB01 SPGG ,C.JLDW01 SPDW,A.BM01 CG_BM01,
+       				DECODE(A.PFDI21, -1, '样品', 0, '普通', 1, '特价', 2, '包销', 3, '定制', 4, '工程', 5, '买断',
+	                6, '家电下乡', 7, '普通返利', 8, '一票机', 9, '高端机' , 10, '冲量机' , 11, '特供机', 12, '下乡特价机',
+	                13, '等级品', 14, '厂商', 15, '自购', 16, '赠品', 17, '奖励', 18, '小家电', 19, '小家电特卖', 20, '小家电买断',
+	                21, '商用正常机', 22, '商用工程机', 23, '商用特价机', 24, '二等品', 25, '三等品', 26, '四等品', 27, '一票买断',
+	                28, '一等品', 29, '合格品', 30, '处理品' )SPSX,-1*A.PFDI02 FXDJ,A.PFDI05 SL,A.PFDI45 MXBZ,A.CK01,A.WLDW01 GYS_WLDW01 
+               FROM PFDITEM A,PFD B,SPXX C,CK D 
+              WHERE A.GSXX01=B.GSXX01 AND A.PFD01=B.PFD01 AND B.PFD02 in (0,1)
+                AND B.PFD05 IS NOT NULL AND (B.PFD53 = 0 OR B.PFD53 IS NULL) 
+                AND A.SPXX01=C.SPXX01 AND A.CK01=D.CK01  ]]>
+                <if test="PFDI01 != null">
+            	AND A.PFDI01 = #{PFDI01}
+          		</if>
+          		<if test="GSXX01 != null">
+            	AND A.GSXX01 = #{GSXX01}
+          		</if>
+          		<if test="PFD01 != null">
+            	AND A.PFD01 = #{PFD01}
+          		</if>
+          		<if test="KH_WLDW01!=null"> AND B.WLDW01 = #{KH_WLDW01}</if>
+          		<if test="XS_BM01!=null"> AND B.BM01 = #{BM01}</if>
+          		<if test="XSFS01!=null"> AND B.FLFS01 = #{FLFS01}</if>
+          		<if test="PFD06!=null"> AND B.PFD06 = #{PFD06}</if>
+          		<if test="FH == 0"> AND A.PFDI11 IS NULL</if>
+          		<if test="FH == 1"> AND A.PFDI11 IS NOT NULL</if>
+    </select>                  
+</mapper>

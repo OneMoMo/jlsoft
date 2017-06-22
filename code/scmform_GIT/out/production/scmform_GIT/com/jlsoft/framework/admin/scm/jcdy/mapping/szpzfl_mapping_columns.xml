@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="mongo.szpzfl.scm.szpzfl">
+	  <Nested id="PZLX" allownull="N" name="凭证类型">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="凭证类型" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="凭证类型" />
+	  </Nested> 
+		<FIELD attrname="XH" fieldtype="string" allownull="N" name="序号" />
+        <FIELD attrname="FLMC" fieldtype="string" allownull="N" name="分录名称" />
+        <FIELD attrname="KMDM" fieldtype="string" allownull="N" name="科目代码" />
+        <FIELD attrname="KMMC" fieldtype="string" allownull="N" name="科目名称" />
+        <FIELD attrname="ZY" fieldtype="string" allownull="N" name="摘要" />
+        <Nested id="FX" allownull="N" name="方向">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="方向" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="方向" />
+	  </Nested> 
+	  <Nested id="FH" allownull="N" name="符号">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="符号" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="符号" />
+	  </Nested> 
+	    <Nested id="SFQY" allownull="N" name="是否启用">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="是否启用" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="是否启用" />
+	  </Nested> 
+     </JLConfig>
+    
+</root>

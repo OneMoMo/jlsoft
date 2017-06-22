@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fwgl.fwlx">
+	<FIELD attrname="FWLX" fieldtype="string" allownull="N" name="服务类型" />
+	</JLConfig>	 
+</root>

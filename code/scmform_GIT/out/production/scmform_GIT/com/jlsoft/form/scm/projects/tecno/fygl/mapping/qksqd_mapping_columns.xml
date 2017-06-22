@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.projects.tecno.fygl.qksqd">
+      <FIELD attrname="SQRMC" fieldtype="string" allownull="N" name="申请人" />
+      <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="所属部门" />
+      <FIELD attrname="SQYY" fieldtype="string" allownull="N" name="申请原因" />
+      <Nested id="SPLB" allownull="N" name="请款明细">
+        <!-- <Nested id="HBBZMC" allownull="N" name="币种">
+          <FIELD attrname="key" fieldtype="String" allownull="N" name="币种" />
+          <FIELD attrname="value" fieldtype="String" allownull="N" name="币种" />
+        </Nested> -->
+         <FIELD attrname="HBBZMC" fieldtype="String" allownull="N" name="币种" />
+         <FIELD attrname="QKJE" fieldtype="double" allownull="N" name="请款金额" />
+      </Nested>
+	</JLConfig>	 
+</root>

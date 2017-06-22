@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>订单</title>
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../css/o2o_phone_public.css" />
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="../js/ui.js"></script>
+</head>
+<body>
+
+<div class="main">
+  <div class="w12 searchbox" onClick="window.location.href='seachPro.html'">
+     <input class="w12 pr30 bor_bottom" type="search" placeholder="搜索全部订单" style="font-size:0.7rem !important; border:none"/>
+     <i class="fa fa-search font-gray" style="position:absolute; right:10px; top:6px;font-size:0.9rem;"></i>
+  </div>
+  <div class="w12 jl_tab">
+    <ul class="w12">
+      <li>全部</li>
+      <li class="xuan">待付款</li>
+      <li>待发货</li>
+      <li>待收货</li>
+      <li>待评价</li>
+    </ul>
+  </div>
+  <div class="w12 pro_list" jlui="">
+    <a class="order_list w12">
+      <div class="store_title w12">
+          <div class="store w08">
+            <img src="../images/yfk_zf_ico.png"/>
+            <span>真诚百货</span>
+            <i class="fa fa-angle-right right_more"></i>
+          </div> 
+          <p class="w04">等待买家付款</p>
+      </div>
+      <div class="w12">
+        <ul class="order_detail">
+           <li class="imgbox"><img src="../images/sp.jpg"/></li>
+           <li class="w09 discrib">
+              <p class="w12">产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</p>
+              <dl class="w12">
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+              </dl>
+           </li>
+           <li class="order_price w03">
+              <span class="curprice w12"><i>￥</i><em>2999.00</em></span>
+              <span class="oriprice w12"><i>￥</i><em>3299.00</em></span>
+              <p class="w12">x1</p>
+           </li>
+        </ul>
+      </div>
+    </a>
+    <div class="w12 bor_bottom">
+      <dl class="sum_price">
+         <dt class="pr10">合计</dt>
+         <dd><i>￥</i><em>2999.00</em></dd>
+      </dl>
+    </div>
+    <ul class="contrl w12">
+       <li><a class="pay">付款</a></li>
+       <li><a>取消订单</a></li>
+    </ul>
+  </div>
+  <div class="jl_line"></div>
+  <div class="w12 pro_list" jlui="">
+    <a class="order_list w12">
+      <div class="store_title w12">
+          <div class="store w08">
+            <img src="../images/yfk_zf_ico.png"/>
+            <span>真诚百货</span>
+            <i class="fa fa-angle-right right_more"></i>
+          </div> 
+          <p class="w04">交易成功</p>
+      </div>
+      <div class="w12">
+        <ul class="order_detail">
+           <li class="imgbox"><img src="../images/sp.jpg"/></li>
+           <li class="w09 discrib">
+              <p class="w12">产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</p>
+              <dl class="w12">
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+              </dl>
+           </li>
+           <li class="order_price w03">
+              <span class="curprice w12"><i>￥</i><em>2999.00</em></span>
+              <span class="oriprice w12"><i>￥</i><em>3299.00</em></span>
+              <p class="w12">x1</p>
+           </li>
+        </ul>
+      </div>
+    </a>
+    <div class="w12 bor_bottom">
+      <dl class="sum_price">
+         <dt class="pr10">合计</dt>
+         <dd><i>￥</i><em>2999.00</em></dd>
+      </dl>
+    </div>
+    <ul class="contrl w12">
+       <li><a>评价</a></li>
+       <li><a>查看物流</a></li>
+       <li><a>删除订单</a></li>
+    </ul>
+  </div>
+  <div class="jl_line"></div>
+  <div class="w12 pro_list" jlui="">
+    <a class="order_list w12">
+      <div class="store_title w12">
+          <div class="store w08">
+            <img src="../images/yfk_zf_ico.png"/>
+            <span>工贸日化</span>
+            <i class="fa fa-angle-right right_more"></i>
+          </div> 
+          <p class="w03">买家已付款</p>
+      </div>
+      <div class="w12">
+        <ul class="order_detail">
+           <li class="imgbox"><img src="../images/sp.jpg"/></li>
+           <li class="w09 discrib">
+              <p class="w12">产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</p>
+              <dl class="w12">
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+              </dl>
+           </li>
+           <li class="order_price w03">
+              <span class="curprice w12"><i>￥</i><em>2999.00</em></span>
+              <span class="oriprice w12"><i>￥</i><em>3299.00</em></span>
+              <p class="w12">x1</p>
+           </li>
+        </ul>
+
+      </div>
+    </a>
+    <div class="w12 bor_bottom">
+      <dl class="sum_price">
+         <dt class="pr10">合计</dt>
+         <dd><i>￥</i><em>2999.00</em></dd>
+      </dl>
+    </div>
+    <ul class="contrl w12">
+       <li><a>提醒发货</a></li>
+    </ul>
+  </div>
+  <div class="jl_line"></div>
+  <div class="w12 pro_list" jlui="">
+    <a class="order_list w12">
+      <div class="store_title w12">
+          <div class="store w08">
+            <img src="../images/yfk_zf_ico.png"/>
+            <span>工贸日化</span>
+            <i class="fa fa-angle-right right_more"></i>
+          </div> 
+          <p class="w03">卖家已发货</p>
+      </div>
+      <div>
+         <ul class="order_detail">
+           <li class="imgbox"><img src="../images/sp.jpg"/></li>
+           <li class="w09 discrib">
+              <p class="w12">产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</p>
+              <dl class="w12">
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+              </dl>
+           </li>
+           <li class="order_price w03">
+              <span class="curprice w12"><i>￥</i><em>2999.00</em></span>
+              <span class="oriprice w12"><i>￥</i><em>3299.00</em></span>
+              <p class="w12">x1</p>
+           </li>
+        </ul>
+         <ul class="order_detail"> 
+           <li class="imgbox"><img src="../images/sp.jpg"/></li>
+           <li class="w09 discrib">
+              <p class="w12">产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述产品描述</p>
+              <dl class="w12">
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+                 <dt>颜色分类:</dt>
+                 <dd>红色;</dd>
+                 <dt>尺寸:</dt>
+                 <dd>300cm*300cm</dd>
+              </dl>
+           </li>
+           <li class="order_price w03">
+              <span class="curprice w12"><i>￥</i><em>2999.00</em></span>
+              <span class="oriprice w12"><i>￥</i><em>3299.00</em></span>
+              <p class="w12">x1</p>
+           </li>
+        </ul>
+     </div>
+    </a>
+    <div class="w12 bor_bottom">
+      <dl class="sum_price">
+         <dt class="pr10">合计</dt>
+         <dd><i>￥</i><em>2999.00</em></dd>
+      </dl>
+    </div>
+    <ul class="contrl w12">
+       <li><a>确认收货</a></li>
+       <li><a>查看物流</a></li>
+       <li><a>延长收货</a></li>
+       <li><a>删除订单</a></li>
+    </ul>
+  </div>
+</div>
+<footer>
+<div class="w12 jl_btn btn_color">导出订单</div>
+</footer>
+</footer>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

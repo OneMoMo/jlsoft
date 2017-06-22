@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.xsgl.xsfpsqd">
+        <FIELD attrname="WLDWMC" fieldtype="String" allownull="N" name="客户" />
+        <!-- <FIELD attrname="XSBMMC" fieldtype="String" allownull="N" name="销售部门" /> -->
+        <Nested id="DJLX">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="单据类型" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="单据类型" />
+        </Nested>
+        <Nested id="FPSL">
+            <FIELD attrname="key" fieldtype="int" allownull="N" name="发票税率" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="发票税率" />
+        </Nested>
+        
+        <!-- <Nested id="XSMXLB" allownull="N" name="发票明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="DJLX" fieldtype="String" allownull="N" name="单据类型" />
+            <FIELD attrname="KPSL" fieldtype="double" allownull="N" name="开票数量" />
+        </Nested> -->
+	</JLConfig>
+	
+	<JLConfig id="form.scm.xsgl.xsfpsqd.null">
+        
+        <Nested id="XSMXLB" allownull="N" name="开票明细">
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+            <FIELD attrname="DJLX" fieldtype="String" allownull="N" name="单据类型" />
+            <FIELD attrname="KPSL" fieldtype="double" allownull="N" name="开票数量" />
+        </Nested>
+	</JLConfig>
+	
+</root>

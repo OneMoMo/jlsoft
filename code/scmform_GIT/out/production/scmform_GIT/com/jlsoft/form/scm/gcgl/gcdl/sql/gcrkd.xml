@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GCRKD">
+	<select id="queryGCRKD" parameterType="Map" resultType="java.util.Map">
+	SELECT * FROM(select A.GSXX01,A.JLWBDH GCRKDH01,
+       B.SPXX01,
+       (SELECT SPXX02 from SPXX WHERE SPXX01 = B.SPXX01) SPBM,
+       (SELECT SPXX04 from SPXX WHERE b.spxx01 = spxx01) SPMC,
+       (SELECT SPXX68 from SPXX WHERE b.spxx01 = spxx01) SPXX68,
+       A.CK01,
+       (SELECT CK02 from CK WHERE A.CK01 = CK01) CKMC,
+       B.WLDW01 WLDWBM,
+       (SELECT WLDW02 from WLDW WHERE WLDW01 = B.wldw01) WLDWMC,
+       A.BM01 CGBMBM,
+       (SELECT BM02 FROM BM WHERE A.BM01 = BM01) CGBMMC,
+       A.YSD09 MXBZ,
+       A.YSD03 ZDRMC,
+       TO_CHAR(A.YSD04, 'YYYY-MM-DD') ZDRQ,
+       A.ysd05 SHRMC,
+       TO_CHAR(A.YSD06, 'YYYY-MM-DD') SHRQ,
+       B. YSDI02 RKSL,
+       (SELECT JLDW01 FROM SPXX WHERE SPXX01 = B.SPXX01) JLDW
+  from YSD A, YSDITEM B
+ WHERE A.YSD01 = B.YSD01
+   AND A.JLWBDH LIKE 'RC%') A
+   WHERE 1=1
+    JL{CZY|A.WLDWBM|WLDW_CX|inS}JL
+     JL{CZY|A.CGBMBM|BM_CX|LIKE%}JL
+     JL{CZY|A.GSXX01|CZGS_CX|LIKE%}JL
+     JL{CZY|A.CK01|CK_CX|LIKE%}JL
+ 	<if test="GCRKDH01 != null and GCRKDH01 != ''">
+		  <foreach item="item" index="index" collection="GCRKDH01"  open=" AND (" separator=" or " close=")"> 
+		   A.GCRKDH01 LIKE '%'||#{item}||'%'
+		  </foreach> 
+	</if>
+	 <if test="CKMC != null and CKMC != ''">
+		  <foreach item="item" index="index" collection="CKMC"  open=" AND (" separator=" or " close=")"> 
+		      A.CK01 LIKE #{item}||'%'
+		   </foreach> 	         
+	 </if>
+	  <if test="CGBM != null and CGBM != ''">
+		     <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      A.CGBMBM LIKE #{item}||'%'
+		     </foreach> 	         
+	  </if>
+	<if test="SPMC != null and SPMC != ''">
+		  <foreach item="item" index="index" collection="SPMC"  open=" AND (" separator=" or " close=")"> 
+		      Upper(A.SPBM) LIKE Upper('%'||#{item}||'%') OR Upper(A.SPMC) LIKE Upper('%'||#{item}||'%') 
+		  </foreach> 
+	  </if>
+	 <if test="WLDWMC != null and WLDWMC != ''">
+		 <foreach item="item" index="index" collection="WLDWMC"  open=" AND (" separator=" or " close=")"> 
+		      A.WLDWBM LIKE '%'||#{item}||'%' OR A.WLDWMC LIKE '%'||#{item}||'%'
+		 </foreach> 
+	  </if>
+	 <if test="ZDRMC != null and ZDRMC != ''">
+	 		 <foreach item="item" index="index" collection="ZDRMC"  open=" AND (" separator=" or " close=")"> 
+		    A.ZDRMC=#{item}
+		 </foreach>
+	  </if> 
+	<if test="SHRMC != null and SHRMC != ''">
+		  <foreach item="item" index="index" collection="SHRMC"  open=" AND (" separator=" or " close=")"> 
+		 		 A.SHRMC=#{item}
+		 </foreach>
+	</if>
+	 <if test="SHRQ_S !=null and SHRQ_S != ''">
+	       <![CDATA[AND A.SHRQ >=#{SHRQ_S}]]>
+	    </if> 
+	    <if test="SHRQ_E !=null and SHRQ_E != ''">
+	       <![CDATA[AND A.SHRQ <=#{SHRQ_E}]]>
+	    </if>
+	    <if test="ZDRQ_S !=null and ZDRQ_S != ''">
+	       <![CDATA[AND A.ZDRQ >= #{ZDRQ_S}]]>
+	    </if> 
+	    <if test="ZDRQ_E !=null and ZDRQ_E != ''">
+	       <![CDATA[AND A.ZDRQ <=#{ZDRQ_E}]]>
+	    </if>        
+  </select>
+</mapper>

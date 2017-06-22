@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_KHYHI.SCM_KHYHI">
+        <FIELD attrname="BZ02" fieldtype="String" allownull="Y" name="步骤名称" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+        <FIELD attrname="SPMC" format='{"$or":[{"SPLB.SPMC":{"$regex":"#SPMC#"}},{"SPLB.SPXX01":{"$regex":"#SPMC#"}},{"SPLB.SPBM":{"$regex":"#SPMC#"}}]}' fieldtype="String" allownull="Y" name="商品" />
+        <FIELD attrname="KHYHD" format='{"KHYHDH":{"$regex":"#KHYHD#"}}' fieldtype="Map" allownull="Y" name="优惠单" />
+        <FIELD attrname="ZDR" format='{"ZDRMC":{"$regex":"#ZDR#"}}' fieldtype="Map" allownull="Y" name="制单人" />
+        <FIELD attrname="SHR" format='{"SHRMC":{"$regex":"#SHR#"}}' fieldtype="Map" allownull="Y" name="审核人" />
+        <FIELD attrname="ZDRQ_S" format='{"ZDRQ":{"$gte":"#ZDRQ_S#"}}' fieldtype="Map" allownull="Y" name="制单时间起" />
+        <FIELD attrname="ZDRQ_E" format='{"$or":[{"ZDRQ":{"$lte":"#ZDRQ_E#"}},{"ZDRQ":{"$regex":"#ZDRQ_E#"}}]}' fieldtype="Map" allownull="Y" name="制单时间止" />
+         <FIELD attrname="SHRQ_S" format='{"SHRQ":{"$gte":"#SHRQ_S#"}}' fieldtype="Map" allownull="Y" name="审核时间起" />
+        <FIELD attrname="SHRQ_E" format='{"$or":[{"SHRQ":{"$lte":"#SHRQ_E#"}},{"SHRQ":{"$regex":"#SHRQ_E#"}}]}' fieldtype="Map" allownull="Y" name="审核时间止" />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_KHYHI.SCM_KHYHILSB">
+        <FIELD qx='KHDM|WLDW_CX|in' />
+	</JLConfig>
+</root>

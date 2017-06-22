@@ -1,0 +1,30 @@
+.jl_form{ background:#fff; }
+
+.jl_form > .jl_form_01{ width:100%; float:left;}
+
+.jl_form_01 > dl{ float:left; width:100%; background:#fff; padding:8px 0; border:none; background-image:-webkit-linear-gradient(#eee 50%,transparent 50%); background-image:-moz-linear-gradient(#eee 50%,transparent 50%); background-image:-o-linear-gradient(#eee 50%,transparent 50%); background-image:linear-gradient(#eee 50%,transparent 50%); background-size:100% 1px; background-repeat:no-repeat;
+background-position:bottom;}
+.jl_form_01 > dl:last-child{background-image:-webkit-linear-gradient(#eee 0,transparent 0); background-image:-moz-linear-gradient(#eee 50%,transparent 0%); background-image:-o-linear-gradient(#eee 0%,transparent 0%); background-image:linear-gradient(#eee 0%,transparent 0%); background-size:0% 0px; background-repeat:no-repeat;
+background-position:bottom;}
+.jl_form_01 > dl > dt{ line-height:30px; padding-left:10px; color:#333;}
+.jl_form_01 > dl > dt i{ margin-right:5px;}
+.jl_form_01 > dl > dd{ padding-right:10px;}
+.jl_form_01 > dl > dd > ul{ width:100%;}
+.jl_form_01 > dl > dd > ul > li > span{ line-height:20px; padding:5px 0;}
+.jl_form_01 > dl > dd > ul > li > input[type=text]{ border:0px; width:100%; height:30px; color:#000;}
+.jl_form_01 > dl > dd > ul > li > input[type=password]{ border:0px; width:100%; height:30px; color:#000;}
+.jl_form_01 > dl > dd > ul > li > .jl_btn{ height:30px; line-height:30px; padding:0px 10px;}
+.jl_form_01 > dl > dd input{ width:100%; color:#000; border:0px;}
+.jl_form_01 > dl > dd textarea{ width:100%; min-height:60px; color:#000; border:0px;}
+.jl_form_01 > dl > dd > ul > li > img{ width:50px; height:50px; border-radius:50%;}
+.jl_form_01 > dl > dd .form_icon{ text-align:right; color:#ccc;}
+.jl_form_01 > dl > dd .jl_btn{ padding:0px 15px !important; height:30px; line-height:28px;}
+.form_img{ float:left;}
+.form_img > .img{ float:left; width:70px; height:70px; position:relative; padding:5px;}
+.form_img > .img > div{ float:left; width:60px; height:60px; overflow:hidden; background:#000;}
+.form_img > .img > div > img{ width:100%;}
+.form_img > .img > i{ position:absolute; z-index:1; top:-0; right:-0; background:#fff; width:12px; height:12px; border-radius:50%;}
+
+
+.form_btn{ width:100%; padding:0 10px;}
+.form_btn .jl_btn{ width:100%; padding:10px 0; margin:10px 0;}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>	
+	<!-- 查询客户要货单 -->
+    <chain id="scm.fxgl.yhd.queryZZKHYHD" description="查询客户要货单" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="queryZZKHYHD" method="getqueryZZKHYHD"/>
+        <processor component="logProcessor"/>
+    </chain>
+	
+</root>

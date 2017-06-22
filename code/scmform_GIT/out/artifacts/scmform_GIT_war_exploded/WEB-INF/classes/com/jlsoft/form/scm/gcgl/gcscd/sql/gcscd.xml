@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GCSCD">
+	<!-- 查询资料明细 -->
+ <select id="ZLMX" parameterType="java.util.Map" resultType="java.util.Map">
+	<![CDATA[SELECT A.PFD01 FXDH01,SPXX02 SPBM,SPXX04 SPMC,PFDI05 FXSL,S.SPXX01,PFDI01,KHYHD01,
+	       PFDI02 FXDJ,GCJZLSL BCZLSL,A.GCSCSL  YSCSL,(PFDI05-GCJZLSL-GCSCSL) SCSL,
+           NVL((SELECT BZJE/SQSL FROM KHBZJ,KHBZJSP WHERE KHBZJ.KHBZJ01=KHBZJSP.KHBZJ01 
+           AND KHBZJ.GSXX01=KHBZJSP.GSXX01 AND KHBZJ.GSXX01=A.GSXX01 
+           AND KHBZJSP.WBTDH=A.WBTDH AND A.SPXX01=KHBZJSP.SPXX01 
+           AND KHBZJ.KHYHD01=C.KHYHD01 AND SQSL<>0),0) BZJDJ]]>
+    FROM PFDITEM A, SPXX S ,PFD C
+    WHERE A.PFD01 = C.PFD01 
+          AND A.GSXX01 = C.GSXX01 
+          AND A.SPXX01 = S.SPXX01 
+          AND C.GCDJH=#{GCDLD01}
+    <if test="SPMC != null and SPMC != ''">
+       AND (S.SPXX04 LIKE '%'||#{SPMC}||'%' OR S.SPXX02 LIKE '%'||#{SPMC}||'%')
+	</if>
+  </select>
+</mapper>

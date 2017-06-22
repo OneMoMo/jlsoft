@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_css.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_form.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_list.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_table.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_control.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/form/css/jl_phone_page.css" />
+<title>请假</title>
+</head>
+<body>
+<header class="jl_header">
+<div class="header_nav nav_left" onclick="javascript:history.go(-1)">
+  <i class="fa fa-angle-left"></i>
+  <span>请假</span>
+</div>
+<div class="header_nav nav_right">
+  <i class="fa fa-sort-amount-asc jl_process_open" title="查看所有步骤"></i>
+</div>
+</header>
+<div class="jl_main">
+ <div class="jl_process_page">
+    <ul>
+      <li class="center center01" jl_lage="">申请</li>
+      <li class="after" jl_lage="">部门经理审核</li>
+    </ul>
+  </div>
+<div class="jl_form">
+  <div class="jl_form_01">
+    <dl>
+      <dt class="w03">请假类型</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr font_gray">请选择</span></li>
+          <li class="w01 form_icon"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">请假事由</dt>
+      <dd class="w09">
+        <ul><li class="w12"><textarea placeholder="请假事由"></textarea></li></ul>
+      </dd>
+    </dl>
+  </div>
+  <div class="jl_form_01 mt10">
+    <dl>
+      <dt class="w03">开始时间</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr font_gray">请选择</span></li>
+          <li class="w01 form_icon"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">结束时间</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr font_gray">请选择</span></li>
+          <li class="w01 form_icon"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">总天数</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w12"><input type="text" placeholder="实际请假天数"></li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <div class="jl_form_01 mt10">
+    <dl>
+      <dt class="w03">抄送人员</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr font_gray">请选择</span></li>
+          <li class="w01 form_icon" onClick="pageContainerShow()" id="oa_people_seach"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">抄送岗位</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w11"><span class="w12 tr font_gray">请选择</span></li>
+          <li class="w01 form_icon"><i class="fa fa-angle-right"></i></li>
+        </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">上传附件</dt>
+      <dd class="w09">
+        <ul>
+          <li class="w10">&nbsp;</li>
+          <li class="w02 form_icon"><i class="fa fa-camera"></i></li>
+        </ul>
+      </dd>
+      <dd class="w12">
+       <ul>
+          <li class="w12 form_img">
+            <div class="img">
+              <div><img src="" /></div>
+              <i class="fa fa-times-circle font_red"></i>
+            </div>
+          </li>
+       </ul>
+      </dd>
+    </dl>
+    <dl>
+      <dt class="w03">备注</dt>
+      <dd class="w09">
+        <ul><li class="w12"><textarea placeholder="备注信息"></textarea></li></ul>
+      </dd>
+    </dl>
+  </div>
+</div>
+<div class="w12 form_btn">
+  <a class="w12 jl_btn btn_red">提交</a>
+</div>
+</div>
+<div class="jl_page_container"><!--加载页面--></div>
+</div>
+
+</div>
+<footer class="jl_footer">
+<ul>
+  <li class="w04" onclick="window.location.href='message.html'">
+    <a>
+      <i class="fa fa-bell"></i>
+      <span>消息</span>
+      <label class="bgcolor_red" id="messageId">36</label>
+    </a>
+  </li>
+  <li class="w04" onclick="window.location.href='index.html'">
+    <a>
+      <i class="fa fa-home"></i>
+      <span>金力软件</span>
+    </a>
+  </li>
+  <li class="w04" onclick="window.location.href='user.html'">
+    <a>
+      <i class="fa fa-user"></i>
+      <span>我的</span>
+    </a>
+  </li> 
+</ul>
+</footer>
+<div class="jl_process" style="display: none;">
+  <div class="jl_process_close"></div>
+  <ul style="right: -100%;">
+    <li>娜娜<label class="jl_btn bgcolor_green" jl_lage="">申请</label></li>
+    <li>张三<label class="jl_btn bgcolor_red" jl_lage="">部门经理审核</label></li>
+    <li>王五<label class="jl_btn bgcolor_red" jl_lage="">总经理审核</label></li>
+  </ul>
+</div>
+</body>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/jquery.mobile-1.3.2.min.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/ui.js"></script>
+<script src="../../../jllib/jllib_mobile/form/js/control.js"></script>
+</html>

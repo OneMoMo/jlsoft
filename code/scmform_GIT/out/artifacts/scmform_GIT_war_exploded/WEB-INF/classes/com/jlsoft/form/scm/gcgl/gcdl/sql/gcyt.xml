@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GCYT">
+	 <select id="XLK" parameterType="Map" resultType="java.util.Map">
+	 	SELECT A.XLK01 key,A.XLK02 value 
+	 	FROM GCXLK A
+	    <if test="GCYT != null and GCYT != ''">
+			WHERE A.XLK03 = #{GCYT}
+	    </if>
+	</select>
+</mapper>

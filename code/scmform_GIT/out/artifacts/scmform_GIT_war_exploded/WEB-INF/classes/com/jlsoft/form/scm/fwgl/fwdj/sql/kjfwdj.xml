@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KJFWDJ">
+	<!-- 查询客户信息 -->
+  <!--<select id="FWRYXX" parameterType="java.util.Map" resultType="java.util.Map">-->
+      <!--SELECT A.HYXX01 HYXX01 , A.HYMC HYMC ,B.LXDH SJHM,B.XXDZ LXDZ FROM vip_hyxx A, vip_hylxfs B WHERE  1=1 and A.HYXX01=B.HYXX01-->
+    <!--<if test="LXDH != null and LXDH != ''">-->
+       <!--AND (A.HYXX01 LIKE '%'||#{LXDH}||'%' OR A.HYMC LIKE '%'||#{LXDH}||'%'   OR B.XXDZ LIKE '%'||#{LXDH}||'%'    OR B.LXDH  LIKE '%'||#{LXDH}||'%')-->
+    <!--</if>-->
+    <!--<if test="RYMC != null and RYMC != ''">-->
+       <!--AND (A.HYXX01 LIKE '%'||#{RYMC}||'%' OR A.HYMC LIKE '%'||#{RYMC}||'%'   OR B.LXDH  LIKE '%'||#{RYMC}||'%')-->
+    <!--</if>-->
+    <!--<if test="HYXX01 != null and HYXX01 != ''">-->
+       <!--AND A.HYXX01 = #{HYXX01}-->
+    <!--</if>-->
+  <!--</select>-->
+  	<!-- 查询客户信息 -->
+  <select id="FWRY" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT A.JLWBDH,A.SPXX01,A.SPBM,A.SPMC,A.XSSL,A.SPLX,A.CK01,A.CKMC,A.WBDH,
+	            A.DJLX,get_djlx(A.DJLX)DJLXMC,A.YSSL,A.JLDW,A.DJHM,BM01,
+	            NVL(A.WBTDH,0)DJTDH,NVL(B.YSFSL,0) YSFSL,NVL(B.SSFSL,0)SSFSL,
+	            NVL((B.YSFSL - B.SSFSL - B.ZFSL),0)WFHSL,A.GSXX01
+	       FROM VIEW_FWDXSDJ A,DSFHPSB B 
+	      WHERE A.JLWBDH = B.JLWBDH(+)
+	        AND A.DJLX = B.DJLX(+)
+	        AND A.WBTDH = B.WBTDH(+)
+	        AND A.GSXX01 = B.GSXX01(+)
+	        AND B.CZLX(+) = 1
+	        AND NOT EXISTS (SELECT F.FWD01
+					          FROM CSS_FWD F, CSS_FWDITEM W
+					         WHERE F.FWD01 = W.FWD01
+					           AND W.DJHM = A.JLWBDH
+					           AND W.DJTDH = A.WBTDH)
+            AND A.GSXX01 =#{GSXX01}
+       <if test="JLWBDH != null and JLWBDH != ''">
+         AND A.JLWBDH LIKE '%'||#{JLWBDH}||'%'
+       </if>
+  </select>
+
+
+    <!-- 联系人修改成下拉框后  重新查询联系人 -->
+    <select id="FWRYXX" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT V.HYXX01 HYXX01 , V.LXR HYMC ,V.LXDH SJHM,V.XXDZ LXDZ FROM WLDW W ,VIP_HYLXFS V WHERE W.VIP_HYXX01 = V.HYXX01
+        <if test="WLDW01 != null and WLDW01 != ''">
+            AND W.WLDW01 = #{WLDW01}
+        </if>
+        <if test="GSXX01 != null and GSXX01 != ''">
+            AND W.GSXX01 = #{GSXX01}
+        </if>
+        <if test="LXDH != null and LXDH != ''">
+            AND W.WLDW10 = #{LXDH}
+        </if>
+    </select>
+</mapper>

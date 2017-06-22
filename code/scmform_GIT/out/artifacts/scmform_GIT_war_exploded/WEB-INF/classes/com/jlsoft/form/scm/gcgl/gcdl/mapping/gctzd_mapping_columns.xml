@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gctzd">
+        <FIELD attrname="GCDLD01" fieldtype="String" allownull="N" name="工程登陆单号" />
+        <FIELD attrname="SYDW" fieldtype="String" allownull="N" name="使用单位" />
+        <FIELD attrname="YHDH" fieldtype="String" allownull="N" name="用户电话" />
+        <FIELD attrname="GMDW" fieldtype="String" allownull="N" name="购买单位" />
+ </JLConfig>
+</root>

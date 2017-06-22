@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.hygl.hyzljk">
+		 <FIELD attrname="HYMC" fieldtype="string" allownull="N" name="会员名称" />
+		<FIELD attrname="SJHM" fieldtype="string" allownull="N" name="手机号码" />
+		<Nested id="XB" allownull="N" name="性别">
+	            <FIELD attrname="key" fieldtype="String" allownull="N" name="性别" />
+	            <FIELD attrname="value" fieldtype="String" allownull="N" name="性别" />
+	  </Nested>
+		<FIELD attrname="EMAIL" fieldtype="string" allownull="N" name="email" />
+		<FIELD attrname="CSRQ" fieldtype="string" allownull="N" name="出生日期" /> 
+	</JLConfig>	
+	<JLConfig id="form.scm.hygl.hylxrlb">
+		<Nested id="CYLXRLB" allownull="N" name="常用联系人">
+	            <FIELD attrname="LXR" fieldtype="String" allownull="N" name="联系人" />
+	            <FIELD attrname="LXDH" fieldtype="String" allownull="N" name="联系电话" />
+	            <FIELD attrname="LXDZ" fieldtype="String" allownull="N" name="联系地址" />
+	  </Nested>
+	</JLConfig>	
+	<JLConfig id="form.scm.hygl.zjhm">
+		<FIELD attrname="ZJHM" fieldtype="string" allownull="N" name="证件号码" />
+	</JLConfig>	
+</root>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GCZZTHSQ">
+	<select id="YYHZHMX" parameterType="Map" resultType="java.util.Map">
+		SELECT A.KHYHD01, A.JLWBDH, B.WBTDH, S.SPXX01, B.SPXX02 SPBM, S.SPXX04 SPMC, B.YHSL, nvl(B.XSSL, 0) FXSL, 
+         (B.YHSL - nvl(XSSL, 0)-ZZSL) ZZSL, A.BZ BZ, A.KHYHD01, B.AZDZMX AZDZ, B.LXRMX LXR, B.LXDHMX LXDH, 
+          B.XH, E.GCSPBM, E.GCSPMC,B.DJTDH
+      FROM KHYHD_NEW A, KHYHDITEM_NEW B, SPXX S, GCDLD E
+    WHERE A.KHYHD01 = B.KHYHD01
+      	AND A.GSXX01 = B.GSXX01
+      	AND B.SPXX02 = S.SPXX02
+      	AND A.GCDJH = E.GCDLD01
+        AND A.GSXX01 = E.GSXX01
+        AND B.DJTDH = E.WBTDH
+      	AND B.YHSL - nvl(B.XSSL, 0) - nvl(B.ZZSL, 0) > 0
+      	AND A.SHR IS NOT NULL
+      	AND A.SHRQ IS NOT NULL
+     	AND A.GCDJH IS NOT NULL
+		<if test="GCDLD01 != null and GCDLD01 != ''">
+		   AND A.GCDJH=#{GCDLD01}
+	    </if>
+		<if test="GSXX01 != null and GSXX01 != ''">
+		   AND A.GSXX01=#{GSXX01}
+	    </if>
+	    <if test="SPMC != null and SPMC != ''">
+		   AND (Upper(S.SPXX01) LIKE Upper('%'||#{SPMC}||'%') OR Upper(S.SPXX04) LIKE Upper('%'||#{SPMC}||'%') OR Upper(S.SPXX02) LIKE Upper('%'||#{SPMC}||'%'))
+	    </if>
+	    <!-- <if test="SPMC != null and SPMC != ''">
+		   AND (S.SPXX01 LIKE '%'||#{SPMC}||'%' OR S.SPXX04 LIKE '%'||#{SPMC}||'%' OR S.SPXX02 LIKE '%'||#{SPMC}||'%')
+	    </if> -->
+	</select>
+</mapper>

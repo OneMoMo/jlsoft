@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <chain id="jl.scm.fwgl.shd.selectSHGD.selectSHGD" description="金力送货工单查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fwgl.shd.shgd" method="selectSHGD"/>
+        <processor component="logProcessor"/>
+    </chain>
+    <chain id="jl.scm.fwgl.shd.selectSHGDFY.selectSHGDFY" description="金力送货工单查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fwgl.shd.shgd" method="selectSHGDFY"/>
+        <processor component="logProcessor"/>
+    </chain>
+    <chain id="jl.scm.fwgl.shd.selectTCDQ.selectTCDQ" description="金力送货工单查询接口" concurrency="ture" log="false">
+        <processor component="logProcessor"/>
+        <action component="scm.fwgl.shd.shgd" method="selectTCDQ"/>
+        <processor component="logProcessor"/>
+    </chain>
+</root>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cxgl.hdzt">
+		<FIELD attrname="HDZT" allownull="N" name="活动主题"/>
+	</JLConfig>
+	
+</root>

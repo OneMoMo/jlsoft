@@ -1,0 +1,135 @@
+<script charset="utf-8" src="lib/keditor/kindeditor-all.js"></script>  
+<script charset="utf-8" src="lib/keditor/lang/zh_CN.js"></script>  
+
+<div class="w12 jl_form">
+	<dl class="jl_catalog_line">
+		<dt class="catalog_title">制单</dt>
+		<dd class="w12"></dd>
+		<dt class="catalog_cz">
+			<i class="fa fa-angle-down" title="收起"></i>
+		</dt>
+	</dl>
+	<div class="jl_form_02">
+	    <div class="hide" id="d_GSXX01"></div>  
+        <div class="hide" id="d_jlbh"></div>  
+		<div class="hide" id="d_ZDRDM"></div>
+		<div class="hide" id="d_SHRDM"></div>
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="选择报表">选择报表</dt>
+					<dd class="w05">
+						<em class="btx font_red"></em>
+						<div class="w12" id="d_BB"></div>
+					</dd> 
+					<dt class="w01" title="选择模板">选择模板</dt>
+					<dd class="w05">
+						<em class="btx font_red"></em>
+						<div class="w12" id="d_MB"></div>
+					</dd> 
+				</dl>
+				
+				<!-- <dl> 
+					<dt class="w01" title="接收公司">接收公司</dt>
+					<dd class="w11"> 
+						<div class="w12" id="d_JSGS"></div>
+					</dd> 
+				</dl> 
+				<dl> 
+					<dt class="w01" title="接收部门">接收部门</dt>
+					<dd class="w11"> 
+						<div class="w12" id="d_JSBM"></div>
+					</dd> 
+				</dl> 
+				<dl>  
+					<dt class="w01" title="接收岗位">接收岗位</dt>
+					<dd class="w05"> 
+						<div class="w12" id="d_JSGW"></div>
+					</dd>
+					<dt class="w01" title="接收人员">接收人员</dt>
+					<dd class="w05"> 
+						<div class="w12" id="d_JSRY"></div>
+					</dd> 
+				</dl>  -->
+				
+			</li> 
+		</ul>
+	</div>
+</div>
+
+<div class="step1">
+    <dl class="jl_catalog_line">
+      <dt class="catalog_title">制单</dt>
+      <dd class="w12"></dd>
+      <dt class="catalog_cz"><i class="fa fa-angle-down" title="收起"></i></dt>
+    </dl>
+	   
+	<div class="jl_form_02">
+	   <ul>
+		   <li class="w04">
+		       <dl>
+		           <dt class="w03" title="制单人" >制单人</dt>
+		           <dd class="w09"><input class="w12" type="text" name="ZDRMC" readonly="readonly"/></dd>
+		       </dl>
+		   </li>
+		   <li class="w04">
+		       <dl>
+		           <dt class="w03" title="制单日期" >制单日期</dt>
+		           <dd class="w09"><input class="w12" type="text" name="ZDRQ" readonly="readonly"/></dd>
+		       </dl>
+		    </li>
+	   </ul>
+	</div>
+</div>
+
+<div class="step2">
+	<dl class="jl_catalog_line">
+		<dt class="catalog_title">审核</dt>
+		<dd class="w12"></dd>
+		<dt class="catalog_cz">
+			<i class="fa fa-angle-down" title="收起"></i>
+		</dt>
+	</dl>
+
+	<div class="jl_form_02">
+		<ul>
+			<li class="w04">
+				<dl>
+					<dt class="w03" title="采购部长审核">审核</dt>
+					<dd class="w09">
+						<div id="d_SH"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w03" title="审核人">审核人</dt>
+					<dd class="w09">
+						<input class="w12" name="SHRMC" type="text" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w03" title="审核时间">审核日期</dt>
+					<dd class="w09">
+						<input class="w12" name="SHRQ" type="text" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="意见">意见</dt>
+					<dd class="w11">
+						<input class="w12" name="YJ" type="text" />
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="jl_operation" style="bottom: 0px; margin-bottom: 0px;">
+	<div class="oper_line"></div>
+	<div class="oper_main" id="d_toolbar"></div>
+</div>

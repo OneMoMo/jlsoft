@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>表单系统 - 首页(手机版)</title>
+<script type="text/javascript" src="/scripts/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript">
+pubJson.writeCss("FormUrl", "/jllib/jllib_base/css/public.css");
+pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_css.css");
+pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_form.css");
+pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_list.css");
+pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_table.css");
+pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_control.css");
+pubJson.writeCss("FormUrl", "/jllib/jllib_mobile/form/css/jl_phone_page.css");
+</script>
+</head>
+<body page="message">
+	<header class="jl_header"></header>
+	<div class="jl_main">
+		<div class="w12 jl_seach">
+			<input class="w12" type="search" placeholder="搜索">
+		</div>
+		<div class="w12 jl_form">
+			<div id="d_massage">
+				<div class="jl_title">
+					待办
+					<span class="font_red ml10" id="daiBanSize">(0条)</span>
+					<i class="fa fa-angle-down"></i>
+				</div>
+				<div id="d_daiBan" class="jl_list ui-mobile-viewport ui-overlay-c">
+
+				</div>
+
+
+				<div class="jl_title">
+					抄送
+					<span class="font_red ml10" id="chaoSong">(0条)</span>
+					<i class="fa fa-angle-down"></i>
+				</div>
+
+				<div id="d_chaosong"></div>
+
+			</div>
+			<div id="d_dabanDetail"></div>
+			<div id="d_chaosongDetail"></div>
+		</div>
+	</div>
+	<div class="jl_edit_main hide" style="display: none;">
+		<span>
+			<i class="fa fa-square-o"></i>
+			全选
+		</span>
+		<a class="jl_btn btn_red ml10">通过</a>
+		<a class="jl_btn btn_red ml10">驳回</a>
+	</div>
+	
+	<footer class="jl_footer"></footer>
+</body>
+<script type="text/javascript">
+pubJson.writeJs("FormUrl","/lib/JQuery/js/jquery.mobile-1.3.2.min.js");
+pubJson.writeJs("FormUrl","/lib/JQuery/js/jquery.cookie.js");
+pubJson.writeJs("FormUrl","/lib/JQuery/js/jquery.md5.js");
+pubJson.writeJs("FormUrl","/jllib/form/js/jl-all.js");
+pubJson.writeJs("FormUrl","/jllib/form/js/JLForm.js");
+pubJson.writeJs("FormUrl","/form/form_mobile/js/message.js");
+</script>

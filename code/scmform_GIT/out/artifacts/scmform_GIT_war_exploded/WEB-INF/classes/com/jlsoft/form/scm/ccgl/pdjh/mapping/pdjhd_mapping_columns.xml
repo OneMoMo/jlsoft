@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.pdjh.pdjhd">
+	<!--必填项为控制点制定的   -->
+	<FIELD attrname="PDRQ" fieldtype="string" allownull="N" name="盘点日期" />
+	<FIELD attrname="CKMC" fieldtype="string" allownull="N" name="仓库" />
+	
+	</JLConfig>
+</root>

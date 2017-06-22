@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_BMCKQX.SCM_BMCKQX">  
+        <FIELD attrname="query" format='{"$or":[{"QXMC":{"$regex":"#query#"}},{"QXMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="权限名称" />
+        <FIELD attrname="GSXX01" format='{"GSXX01.key":"#GSXX01#"}' fieldtype="String" allownull="Y" name="公司信息" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_BMCKQX.SCM_BMCKQX1">  
+        <FIELD attrname="query" format='{"$or":[{"QXMC":{"$regex":"#query#"}},{"QXMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="权限名称" />
+         <FIELD qx='GSXX01.key|CZGS_CZ|in' />
+         <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+	
+	<JLConfig id="MONGO_BMCKQX.SCM_BMCKQX2">  
+        <FIELD attrname="query" format='{"$or":[{"QXMC":{"$regex":"#query#"}},{"QXMC":{"$regex":"#query#"}}]}' fieldtype="String" allownull="Y" name="权限名称" />
+         <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+    </JLConfig>
+</root>   

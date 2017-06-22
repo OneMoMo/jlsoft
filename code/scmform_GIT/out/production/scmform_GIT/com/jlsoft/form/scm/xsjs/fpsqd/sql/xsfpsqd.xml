@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="XSFPSQD"> 
+	<select id="KHCX" parameterType="Map" resultType="java.util.Map">
+  		SELECT W.WLDW01,GET_RYXX(W.WLDW01) DLZH,W.WLDW02 WLDWMC, W.WLDW10 LXDH, W.WLDW06 LXDZ,W.WLDW42 GKED,W.WLDW46 JGGK,
+    	  (CASE WHEN W.WLDW42 = 1 THEN '是' ELSE '否' END) GKEDMC, RYXX01, RYXX02,W.WLDW65 SKBJ,DECODE(W.FLKPFS,0,'红字发票',1,'票折')FLKPFS
+      FROM WLDW W
+     WHERE W.WLDW20 = 1
+       AND W.WLDW16 = 1
+       <![CDATA[
+       AND WLDW01 <> '900001'
+       ]]>
+       <if test="FPLX01 != null and FPLX01 != ''">
+       AND W.FPLX = #{FPLX01}
+       </if>
+       <if test="WLDW01 != null and WLDW01 != ''">
+       AND W.WLDW01 = #{WLDW01}
+       </if>
+       <if test="WLDWMC != null and WLDWMC != ''">
+       AND (W.WLDW01 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR W.WLDW03 LIKE '%'||#{WLDWMC}||'%')
+       </if>
+       <if test="FLKPFS != null and FLKPFS != ''">
+       AND DECODE(W.FLKPFS,0,'红字发票',1,'票折')=#{FLKPFS}
+       </if>
+       JL{CZY|W.WLDW01|WLDW_CZ|LIKE}JL
+  </select>
+   
+   <select id="ZBXX" parameterType="Map" resultType="java.util.Map">
+        SELECT DISTINCT DJLX01,DJH01,WLDW01,WLDWMC,XS_BM01,XSBMMC,PFD01,DJLX,YDH,GCMC,XSFS01,
+               GSXX01,YWYDM,XSDBZ,YFJSDH,ZDRQ,SKRQ,XSFS,CWRQ,SUM(XSJE)XSJE,SUM(WKPSL)WKPSL
+        FROM VIEW_XSFPSQD
+        WHERE 1=1
+        <if test="GCMC != null and GCMC != ''">
+		   AND (GCMC LIKE '%'||#{GCMC}||'%') 
+		</if> 
+		<if test="DJLX01 != null and DJLX01 != ''">
+		   AND DJLX01  in  ${DJLX01} 
+		</if> 
+		<if test="YDH != null and YDH != ''">
+		   AND YDH = #{YDH} 
+		</if>
+	    <if test="GSXX01 != null and GSXX01 != ''">
+		   AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="DJH01 != null and DJH01 != ''">
+		   AND DJH01 not in (${DJH01})
+		</if>
+		<if test="XSDH != null and XSDH != ''">
+		   AND (DJH01 LIKE '%'||#{XSDH}||'%')
+		</if>
+		<if test="YWY != null and YWY != ''">
+		   AND (YWYDM LIKE '%'||#{YWY}||'%' OR YWYDM IN (SELECT RYXX01 FROM RYXX WHERE RYXX02 LIKE '%'||#{YWY}||'%'))
+		</if>
+		<if test="ZDRQ_S != null and ZDRQ_S != ''">
+		   AND TO_DATE(ZDRQ,'YYYY-MM-DD') >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')
+		</if>
+		<if test="ZDRQ_Z != null and ZDRQ_Z != ''">
+		<![CDATA[
+		   AND TO_DATE(ZDRQ,'YYYY-MM-DD') <= TO_DATE(#{ZDRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+		<if test="CWRQ_S != null and CWRQ_S != ''">
+		 <![CDATA[  
+		   AND TO_DATE(CWRQ,'YYYY-MM-DD') >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD')
+		 ]]>
+		</if>
+		<if test="CWRQ_Z != null and CWRQ_Z != ''">
+		<![CDATA[
+		   AND TO_DATE(CWRQ,'YYYY-MM-DD') <= TO_DATE(#{CWRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+		   AND WLDW01 = #{WLDW01}
+		</if>
+		<if test="XS_BM01 != null and XS_BM01 != ''">
+		   AND XS_BM01 = #{XS_BM01}
+		</if>
+		<if test="V9DH != null and V9DH != ''">
+		   AND PFD01 = #{V9DH}
+		</if>
+		GROUP BY DJLX01, WLDW01,WLDWMC,XS_BM01,XSBMMC,PFD01,DJH01,DJLX,YDH,GCMC,XSFS01,GSXX01,
+             YWYDM, XSDBZ,YFJSDH,ZDRQ,SKRQ,XSFS,CWRQ order by DJH01 asc
+  </select>	
+   
+  <select id="FPMX" parameterType="Map" resultType="java.util.Map">
+        SELECT DJLX01, WLDW01,WLDWMC,XS_BM01,XSBMMC,THDH,SPXX01,SPBM,SPMC,JLDW,
+               XXSL,KPSL,PFD01,DJH01,DJLX,XSDJ,WKPSL,YDH,GCMC,
+               <if test="FLKPFS != null and FLKPFS != ''">
+               (CASE WHEN '票折' = #{FLKPFS} THEN XSFPJE_PZ ELSE XSFPJE END) XSFPJE, 
+               </if>
+               <if test="FLKPFS == null or FLKPFS == ''">
+               XSFPJE, 
+               </if>
+               XSJE,FLJE,KFLJE,
+                SBKPSE,XSSL,KPSE,XSDBZ,YFJSDH,PFDI16,ZDRQ,SKRQ,XSFS01,FLL,SJ,XSFS,CWRQ
+        FROM VIEW_XSFPSQD
+        WHERE 1=1
+		<if test="GCMC != null and GCMC != ''">
+		   AND (GCMC LIKE '%'||#{GCMC}||'%') 
+		</if> 
+        <if test="THDH != null and THDH != ''">
+		   AND THDH not in (${THDH})
+		</if> 
+		<if test="DJLX01 != null and DJLX01 != ''">
+		   AND DJLX01  in  ${DJLX01} 
+		</if> 
+		<if test="YDH != null and YDH != ''">
+		   AND YDH = #{YDH} 
+		</if>
+          <![CDATA[AND ABS(KPSL) > 0]]>
+        <if test="V9DH == null or V9DH == ''">
+  		   AND SKRQ IS NOT NULL
+        </if>
+	    <if test="GSXX01 != null and GSXX01 != ''">
+		   AND GSXX01 = #{GSXX01}
+		</if>
+		<if test="FPLX01 != null and FPLX01 != ''">
+	       AND FPLX = #{FPLX01}
+	    </if>
+	    <if test="FLKPFS != null and FLKPFS != ''">
+	       AND DECODE(FLKPFS,0,'红字发票',1,'票折') = #{FLKPFS}
+	    </if>
+		<if test="SPMC != null and SPMC != ''">
+		   AND (SPXX01 LIKE '%'||#{SPMC}||'%' OR SPBM LIKE '%'||#{SPMC}||'%' OR SPMC LIKE '%'||#{SPMC}||'%')
+		</if>
+		<if test="XSDH != null and XSDH != ''">
+		   AND (DJH01 LIKE '%'||#{XSDH}||'%')
+		</if>
+		<if test="YWY != null and YWY != ''">
+		   AND (YWYDM LIKE '%'||#{YWY}||'%' OR YWYDM IN (SELECT RYXX01 FROM RYXX WHERE RYXX02 LIKE '%'||#{YWY}||'%'))
+		</if>
+		<if test="ZDRQ_S != null and ZDRQ_S != ''">
+		   AND TO_DATE(ZDRQ,'YYYY-MM-DD') >= TO_DATE(#{ZDRQ_S},'YYYY-MM-DD')
+		</if>
+		<if test="ZDRQ_Z != null and ZDRQ_Z != ''">
+		<![CDATA[
+		   AND TO_DATE(ZDRQ,'YYYY-MM-DD') <= TO_DATE(#{ZDRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+		<if test="CWRQ_S != null and CWRQ_S != ''">
+		 <![CDATA[  
+		   AND TO_DATE(CWRQ,'YYYY-MM-DD') >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD')
+		 ]]>
+		</if>
+		<if test="CWRQ_Z != null and CWRQ_Z != ''">
+		<![CDATA[
+		   AND TO_DATE(CWRQ,'YYYY-MM-DD') <= TO_DATE(#{CWRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+		<if test="SKRQ_S != null and SKRQ_S != ''">
+		   AND TO_DATE(SKRQ,'YYYY-MM-DD') >= TO_DATE(#{SKRQ_S},'YYYY-MM-DD')
+		</if>
+		<if test="SKRQ_Z != null and SKRQ_Z != ''">
+		<![CDATA[
+		   AND TO_DATE(SKRQ,'YYYY-MM-DD') <= TO_DATE(#{SKRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+		   AND WLDW01 = #{WLDW01}
+		</if>
+		<if test="XS_BM01 != null and XS_BM01 != ''">
+		   AND XS_BM01 = #{XS_BM01}
+		</if>
+		<if test="V9DH != null and V9DH != ''">
+		   AND V9DH = #{V9DH}
+		</if>
+  </select>	
+  
+  <select id="FPZK" parameterType="Map" resultType="java.util.Map">
+  		SELECT A.JLWBDH,A.FLD01,B.FLFS01,(SELECT FLFS02 FROM FLFS WHERE FLFS01 = B.FLFS01) XSFS,
+         	   B.FLDM01,(SELECT FLDM02 FROM FLDM WHERE FLDM01 = B.FLDM01) FLMC,A.BM01 XS_BM01,
+       		   (SELECT BM02 FROM BM WHERE BM01=A.BM01)BMMC,A.WLDW01 WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01=A.WLDW01)WLDWMC,
+        	   (B.FLDI03 + B.FLDI06 - B.YKPJE) KKPJE,(B.FLDI03 + B.FLDI06 - B.YKPJE) KPJE,B.FLDI04 FLDBZ,
+        	   TO_CHAR(A.FLD19, 'YYYY-MM-DD') CWRQ
+   		  FROM FLD A, FLDITEM B,FLDM C
+  	     WHERE A.GSXX01 = B.GSXX01 
+    	   AND A.FLD01 = B.FLD01
+    	   AND A.FLD16 IS NULL
+    	   AND A.FLD06 IS NOT NULL
+    	   AND B.FLDM01=C.FLDM01
+    	   AND C.KPBJ=0
+    	   <![CDATA[
+    	   AND (B.FLDI03 + B.FLDI06 - B.YKPJE) <> 0
+    	   ]]>
+		<if test="GSXX01 != null and GSXX01 != ''">
+		   AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="FLDH != null and FLDH != ''">
+		   AND A.JLWBDH = #{FLDH}
+		</if>
+		<if test="FLMC != null and FLMC != ''">
+		   AND (B.FLDM01 LIKE '%'||#{FLMC}||'%' OR B.FLDM01 IN (SELECT FLDM01 FROM FLDM WHERE FLDM02 LIKE '%'||#{FLMC}||'%'))
+		</if>
+		<if test="XSFS != null and XSFS != ''">
+		   AND (B.FLFS01 LIKE '%'||#{XSFS}||'%' OR B.FLFS01 IN (SELECT FLFS01 FROM FLFS WHERE FLFS02 LIKE '%'||#{XSFS}||'%'))
+		</if>
+		<if test="SHRQ_S != null and SHRQ_S != ''">
+		   AND A.FLD06 >= TO_DATE(#{SHRQ_S},'YYYY-MM-DD')
+		</if>
+		<if test="SHRQ_Z != null and SHRQ_Z != ''">
+		<![CDATA[
+		   AND A.FLD06 <= TO_DATE(#{SHRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+		   AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="XS_BM01 != null and XS_BM01 != ''">
+		   AND A.BM01 = #{XS_BM01}
+		</if>
+		<if test="CWRQ_S != null and CWRQ_S != ''">
+		 <![CDATA[  
+		   AND A.FLD19 >= TO_DATE(#{CWRQ_S},'YYYY-MM-DD')
+		 ]]>
+		</if>
+		<if test="CWRQ_Z != null and CWRQ_Z != ''">
+		<![CDATA[
+		   AND A.FLD19 <= TO_DATE(#{CWRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+  </select>	
+  <select id="SELFPXX" parameterType="Map" resultType="java.util.Map">
+  		SELECT DISTINCT A.JLWBDH FPSQDH,A.WLDW01,W.WLDW02 WLDWMC,DECODE(A.FPDC17, 1, '增值税发票', 0, '普通发票') FPLX,DECODE(A.FPDC02, 0, '17%', 1, '6%', 2, '13%') FPSL,
+               SUM(A.FPDC15) XSFPJE,SUM((SELECT SUM(FPDCI04)FROM FPDCITEM M, FPDCB B WHERE M.FPDC01 = B.FPDC01 AND M.GSXX01 = B.GSXX01 AND B.GSXX01 = A.GSXX01
+               AND B.JLWBDH = A.JLWBDH)) XSJE,NVL(A.FPDC30, 0) XSFPZK,A.FPDC12 XSDBZ
+          FROM FPDCB A, WLDW W, GSXX G, DWQTXX Q
+         WHERE A.WLDW01 = W.WLDW01
+   	       AND A.GSXX01 = G.GSXX01
+   	       AND W.WLDW01 = Q.WLDW01(+)
+   	       AND A.FPDC19 IS NULL
+   	       AND A.FPDC33 IS NOT NULL
+   		<if test="GSXX01 != null and GSXX01 != ''">
+		   AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="JLWBDH != null and JLWBDH != ''">
+		   AND A.JLWBDH = #{JLWBDH}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+		   AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="XS_BM01 != null and XS_BM01 != ''">
+		   <foreach item="item" index="index" collection="XS_BM01"  open=" AND (" separator=" or " close=")"> 
+	       A.BM01 = #{item}
+	      </foreach>
+		</if>
+		<if test="FPSQDH != null and FPSQDH != ''">
+	      <foreach item="item" index="index" collection="FPSQDH"  open=" AND (" separator=" or " close=")"> 
+	       A.JLWBDH = #{item}
+	      </foreach>
+		</if>
+		<if test="SHRQ_S != null and SHRQ_S != ''">
+		   AND A.FPDC07 >= TO_DATE(#{SHRQ_S},'YYYY-MM-DD')
+		</if>
+		<if test="SHRQ_Z != null and SHRQ_Z != ''">
+		<![CDATA[
+		   AND A.FPDC07 <= TO_DATE(#{SHRQ_Z},'YYYY-MM-DD')
+		]]>
+		</if>
+		<if test="FPZT != null and FPZT != ''">
+		   AND A.DJZT in ${FPZT}
+		</if>
+		<if test="FPLX != null and FPLX != ''">
+		   AND A.FPDC17 = #{FPLX}
+		</if>
+		JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+ 		GROUP BY A.JLWBDH,A.WLDW01,W.WLDW02,A.FPDC17,A.FPDC02,A.FPDC30,A.FPDC12,A.GSXX01
+  </select>
+  <select id="FPXX" parameterType="Map" resultType="java.util.Map">
+  		SELECT DISTINCT A.FPDC01,A.JLWBDH FPSQDH,A.WLDW01,W.WLDW02 WLDWMC,DECODE(A.FPDC17, 1, '增值税发票', 0, '普通发票') FPLX,
+               DECODE(A.DJZT,0,'未导出',1,'未导出',2,'已导出',3,'已补登',4,'已作废') FPZT,A.FPDC03 XSFPH,TO_CHAR(A.FPDC23,'YYYY-MM-DD') XSFPRQ,A.FPDC12 ZFYY,A.FPDC08 BDRMC,
+               TO_CHAR(A.FPDC09,'YYYY-MM-DD') DBRQ,A.FPDC19 ZFRMC,TO_CHAR(A.FPDC20,'YYYY-MM-DD') ZFRQ,A.GSXX01,G.GSXX02 GSMC,DECODE(A.FPDC02,0,'17%',1,'6%',2,'13%') FPSL,
+               A.FPDC15 XSFPJE,(SELECT SUM(FPDCI04) FROM FPDCITEM M,FPDCB B WHERE M.FPDC01 = B.FPDC01 AND M.GSXX01 = B.GSXX01 AND B.GSXX01 = A.GSXX01 AND B.JLWBDH=A.JLWBDH AND B.WLDW01=A.WLDW01) XSJE,
+               NVL(A.FPDC30,0) XSFPZK,A.FPDC12 XSDBZ,A.FPDC06 SQRMC,TO_CHAR(A.FPDC33,'YYYY-MM-DD') SQRQ,DECODE(W.FLKPFS,0,'红字发票',1,'票折')FLKPFS
+  		  FROM FPDCB A, WLDW W, GSXX G,DWQTXX Q
+ 	     WHERE A.WLDW01 = W.WLDW01
+   		   AND A.GSXX01 = G.GSXX01
+   		   AND W.WLDW01 = Q.WLDW01(+)
+   		   AND A.FPDC19 IS NULL
+   		   AND A.FPDC33 IS NOT NULL
+   		<if test="FPDC01 != null and FPDC01 != ''">
+		   AND A.FPDC01 not in (${FPDC01})
+		</if> 
+   		<if test="ZDRMC != null and ZDRMC != ''">
+		   AND A.FPDC06 LIKE '%'||#{ZDRMC}||'%'
+		</if>   
+   		<if test="GSXX01 != null and GSXX01 != ''">
+		   AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="JLWBDH != null and JLWBDH != ''">
+		   AND A.JLWBDH = #{JLWBDH}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+		   AND A.WLDW01 = #{WLDW01}
+		</if>
+		<if test="XS_BM01 != null and XS_BM01 != ''">
+		   <foreach item="item" index="index" collection="XS_BM01"  open=" AND (" separator=" or " close=")"> 
+	       A.BM01 = #{item}
+	      </foreach>
+		</if>
+		<if test="FPSQDH != null and FPSQDH != ''">
+	      <foreach item="item" index="index" collection="FPSQDH"  open=" AND (" separator=" or " close=")"> 
+	       A.JLWBDH = #{item}
+	      </foreach>
+		</if>
+		<if test="SHRQ_S != null and SHRQ_S != ''">
+		   AND A.FPDC07 >= TO_DATE(#{SHRQ_S} ||'00:00:00','YYYY-MM-DD HH24:mi:ss')
+		</if>
+		<if test="SHRQ_Z != null and SHRQ_Z != ''">
+		<![CDATA[
+		   AND A.FPDC07 <= TO_DATE(#{SHRQ_Z} ||'23:59:59','YYYY-MM-DD HH24:mi:ss')
+		]]>
+		</if>
+		<if test="FPZT != null and FPZT != ''">
+		   AND A.DJZT in ${FPZT}
+		</if>
+		<if test="FPLX != null and FPLX != ''">
+		   AND A.FPDC17 = #{FPLX}
+		</if>
+		JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+ 		ORDER BY A.JLWBDH
+  </select>
+  <!-- 查询销售发票明细 -->
+  <select id="QUERYXSFPSQD" parameterType="Map" resultType="java.util.Map">
+  <![CDATA[
+  		SELECT A.DJH01,A.WLDW01,A.WLDWMC,A.SPBM,A.SPMC,A.JLDW,A.KPSL,A.XSDJ,A.XXSL,A.ZKJE,A.SE,A.XSFS,A.FLL,A.FLJE,TO_CHAR(A.SHRQ,'YYYY-MM-DD') SHRQ,A.CK01,(SELECT C.CK02 FROM CK C WHERE C.CK01=A.CK01)CKMC,A.LX,A.WSJE
+          FROM VIEW_QUERYXSFPSQD A
+         WHERE 1=1
+           ]]>
+		<if test="GSXX01 != null and GSXX01 != ''">
+		   AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="JLWBDH != null and JLWBDH != ''">
+		   AND A.JLWBDH = #{JLWBDH}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+		   AND A.WLDW01 = #{WLDW01}
+		</if>
+  </select>
+  <!-- 查询销售发票返利明细 -->
+  <select id="QUERYFLMX" parameterType="Map" resultType="java.util.Map">
+  		SELECT S.FLDM01,(SELECT FLDM02 FROM FLDM WHERE FLDM01 = S.FLDM01) FLMC,(SELECT FLFS02 FROM FLFS WHERE FLFS01 = S.FLFS01) XSFS,S.KPJE,
+  		(SELECT JLWBDH FROM FLD WHERE FLD01=S.FLD01 AND GSXX01=S.GSXX01)DJH01,C.JLDW01 JLDW,S.FLDBZ BZ
+  	      FROM FPDCB A,FPDCITEM B,SPXX C,FPDCFLITEM S
+  	     WHERE A.FPDC01=S.FPDC01(+)
+  		   AND A.GSXX01=S.GSXX01(+)
+  		   AND A.FPDC01=B.FPDC01(+)
+  		   AND A.GSXX01=B.GSXX01(+)
+  		   AND B.SPXX01=C.SPXX01(+)
+		<if test="GSXX01 != null and GSXX01 != ''">
+		   AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="JLWBDH != null and JLWBDH != ''">
+		   AND A.JLWBDH = #{JLWBDH}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+		   AND A.WLDW01 = #{WLDW01}
+		</if>
+  </select>
+</mapper>

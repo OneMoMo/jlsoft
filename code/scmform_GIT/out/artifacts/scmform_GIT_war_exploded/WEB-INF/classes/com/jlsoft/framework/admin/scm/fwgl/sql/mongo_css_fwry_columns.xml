@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FWRY.CSS_FWRY">
+		<FIELD attrname="search" format='{"$or":[{"FWRY01":{"$regex":"#search#"}},{"FWRY02":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="服务人员" />
+		<FIELD qx='FWWD01.key|AZWD_CZ|in' /> 
+	</JLConfig>
+</root>

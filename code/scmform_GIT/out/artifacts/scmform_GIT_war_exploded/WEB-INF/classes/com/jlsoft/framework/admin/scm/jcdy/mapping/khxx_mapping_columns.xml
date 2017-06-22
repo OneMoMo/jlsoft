@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.ksxx.null">
+	
+		<Nested id="DWLB">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="单位类别" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="单位类别" />
+        </Nested>
+        
+	</JLConfig>
+
+	<JLConfig id="form.scm.jcdy.ksxx.dwlb01">
+	
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客商名称" />
+		<Nested id="JSBZ">
+			<FIELD attrname="key" fieldtype="string" allownull="N" name="结算币种" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="结算币种" />
+        </Nested>
+        
+	</JLConfig>
+	
+	<JLConfig id="form.scm.jcdy.ksxx.dwlb02">
+	
+		<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="客商名称" />
+        <FIELD attrname="DZ" fieldtype="string" allownull="N" name="地址" />
+        <FIELD attrname="LXR" fieldtype="string" allownull="N" name="联系人" />
+        <FIELD attrname="LXDH" fieldtype="string" allownull="N" name="联系电话" />
+        <FIELD attrname="JXSL" fieldtype="string" allownull="N" name="进项税率" />
+        
+	</JLConfig>
+</root>

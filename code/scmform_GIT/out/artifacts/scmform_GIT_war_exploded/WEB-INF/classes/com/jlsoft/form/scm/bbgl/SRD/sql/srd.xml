@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SRD">
+   
+<select id="querySRD" parameterType="Map" resultType="java.util.Map">
+	 Select A.GSXX01, 
+      (Select GSXX02 From GSXX Where GSXX01 = A.GSXX01) GSXX02, 
+       A.BM01 CGBMDM, 
+       B.BM02 CGBMMC, 
+       A.JLWBDH SRDH, 
+      DECODE(A.JSSRD11,0,'返利',1,'固定',2,'非固定') SRLX, 
+       A.WLDW01 GYSDM, 
+       W.WLDW02 GYSMC, 
+       S.SRBM02 SRBM, 
+       J.JSSR02 SRMC, 
+       I.JSSRDI02 JSJS, 
+       I.JSSRDI03 WCSL, 
+       I.JSSRDI04 WCJE, 
+       I.JSSRDI07 JSDJJE, 
+       I.JSSRDI10 YSJE, 
+       I.JSSRDI11 SSJE, 
+       I.JSSRDI12 TZJE, 
+       I.JSSRDI13 MXBZ, 
+       I.JSSRDI14 BDJE, 
+       I.JSSRDI15 FDJE, 
+       I.JSSRDI17 FLL, 
+       (I.JSSRDI10 + I.JSSRDI12) SJYSJE, 
+       (I.JSSRDI10 + I.JSSRDI12 - I.JSSRDI11) YSYE, 
+       I.PKJE, 
+       I.GYSFPGDJE01 FPGDJE, 
+       A.JSSRD20 CHYDH, 
+       A.JSSRD21 YCH, 
+       (CASE 
+         When (I.JSSRDI11 = 0) Then 
+                       '未完全付款' 
+         When (abs(I.JSSRDI10 + I.JSSRDI12) - abs(I.JSSRDI11) > 0) Then 
+                     '排款单付款'
+         When ((I.JSSRDI10 + I.JSSRDI12 - I.JSSRDI11) = 0) Then 
+                    '完全付款 '
+       End) FKZT, 
+       (Select BM02 From BM Where BM01 = I.CGBM01) MXCGBM, 
+       A.GHHT01 HTH, 
+       DECODE(A.JSSRD13,0,'经销',1,'代销',2,'联营不管库存',3,'联营管库存') HZFS, 	
+       I.CGXY02 SPSX, 
+       A.JSSRD05 ZDR, 
+       TO_CHAR(A.JSSRD06,'YYYY-MM-DD') ZDRQ, 
+       A.JSSRD07 SHR, 
+       TO_CHAR(A.JSSRD08,'YYYY-MM-DD') SHRQ, 
+       TO_CHAR(A.JSSRD12,'YYYY-MM-DD') JSRQ, 
+       TO_CHAR(A.JSSRD14,'YYYY-MM-DD') QSRQ, 
+       TO_CHAR(A.JSSRD15,'YYYY-MM-DD') ZZRQ, 
+       TO_CHAR(I.JSSRDI06,'YYYY-MM-DD') DZRQ, 
+       A.JSSRD10 BZ, 
+      TO_CHAR(A.JSSRD23,'YYYY-MM-DD') CWRQ, 
+       (Select SPFL02 From SPFL Where SPFL01 = A.SPFL01) SPFL, 
+       (Select PPB02 From PPB Where PPB01 = A.PPB01) SPPP, 
+       J.JSSR10 SRFLDM, 
+       (SELECT SRFL02 FROM JSSRFL WHERE SRFL01 = J.JSSR10) SRFLMC 
+From JSSRDITEM I, 
+       JSSRD A, 
+       WLDW W, 
+       BM B, 
+       JSSRDM J, 
+       SRBM S 
+ Where A.GSXX01 = I.GSXX01 
+   And A.JSSRD01 = I.JSSRD01 
+   And A.WLDW01 = W.WLDW01 
+   And A.BM01 = B.BM01 
+   And I.JSSR01 = J.JSSR01 
+   And I.SRBM01 = S.SRBM01 
+    And A.GSXX01 = S.GSXX01  
+    <if test="GYS != null and GYS != ''"> 
+		AND (W.WLDW01 LIKE '%'||#{GYS}||'%' OR W.WLDW02 LIKE '%'||#{GYS}||'%' OR W.WLDW03 LIKE '%'||#{GYS}||'%')
+	</if> 
+	 <if test="CGBM != null and CGBM != ''">
+		     <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+		      A.BM01 = #{item}
+		     </foreach> 	         
+	 </if>  
+	  <if test="SRDM != null and SRDM != ''">
+		     <foreach item="item" index="index" collection="SRDM"  open=" AND (" separator=" or " close=")"> 
+		       J.JSSR01 = #{item}
+		     </foreach> 	         
+	 </if>                   
+    <if test="ZDRQQ !=null and ZDRQQ != ''">
+    	AND ((A.JSSRD06 = TO_DATE(#{ZDRQQ}, 'YYYY-MM-DD') - 1 AND A.JSSRD06 IS NULL) OR 
+      <![CDATA[ 
+        A.JSSRD06 >= TO_DATE(#{ZDRQQ}, 'YYYY-MM-DD'))
+      ]]>
+    </if>
+    <if test="ZDRQE !=null and ZDRQE != ''">
+      <![CDATA[ 
+       AND (A.JSSRD06 <= TO_DATE(#{ZDRQE}, 'YYYY-MM-DD') OR 
+      ]]>
+        (A.JSSRD06 IS NULL AND A.JSSRD06 = TO_DATE(#{ZDRQE}, 'YYYY-MM-DD'))) 
+    </if>  
+    <if test="HZFS != null and HZFS != ''">		      
+		    AND A.JSSRD13 = #{HZFS}
+	    </if>  
+	    <if test="PP != null and PP != ''">
+    	 <foreach item="item" index="index" collection="PP"  open=" AND (" separator=" or " close=")">
+          A.PPB01 = #{item}
+         </foreach>
+    </if>   
+           <if test="SRDH != null and SRDH != ''"> 
+		
+	 <foreach item="item" index="index" collection="SRDH"  open=" AND (" separator=" or " close=")"> 
+		      A.JLWBDH = #{item}
+		     </foreach>
+	</if>   
+	 <if test="SHRQQ !=null and SHRQQ != ''">
+    	AND ((A.JSSRD08 = TO_DATE(#{SHRQQ}, 'YYYY-MM-DD') - 1 AND A.JSSRD08 IS NULL) OR 
+      <![CDATA[ 
+        A.JSSRD08 >= TO_DATE(#{SHRQQ}, 'YYYY-MM-DD'))
+      ]]>
+    </if>
+    <if test="SHRQE !=null and SHRQE != ''">
+      <![CDATA[ 
+       AND (A.JSSRD08 <= TO_DATE(#{SHRQE}, 'YYYY-MM-DD') OR 
+      ]]>
+        (A.JSSRD08 IS NULL AND A.JSSRD08 = TO_DATE(#{SHRQE}, 'YYYY-MM-DD'))) 
+    </if>    
+	<if test="ZDR != null and ZDR != ''">		      
+		    AND A.JSSRD05 = #{ZDR}
+	    </if>  
+	JL{CZY|A.WLDW01|WLDW_CZ|inS}JL
+    JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+    JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  
+	</select>
+</mapper>   

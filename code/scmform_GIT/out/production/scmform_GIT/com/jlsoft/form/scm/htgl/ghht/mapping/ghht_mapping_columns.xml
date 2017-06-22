@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+	<JLConfig id="form.scm.htgl.ghht">
+	
+	<FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="供应商编码" />
+	<FIELD attrname="WLDWMC" fieldtype="string" allownull="N" name="供应商" />
+	 <Nested id="BM01" allownull="N" name="采购部门">
+     
+      <FIELD attrname="key" fieldtype="string" allownull="N" name="采购部门" />
+      <FIELD attrname="value" fieldtype="string" allownull="N" name="采购部门" />
+    </Nested>
+    <Nested id="HZFS" allownull="N" name="合作方式">
+     
+      <FIELD attrname="key" fieldtype="string" allownull="N" name="合作方式" />
+      <FIELD attrname="value" fieldtype="string" allownull="N" name="合作方式名称" />
+    </Nested>
+	<!-- <FIELD attrname="BMMC" fieldtype="string" allownull="N" name="采购部门" /> -->
+	<!-- <FIELD attrname="HZFS" fieldtype="string" allownull="N" name="合作方式" /> -->
+	<!-- <FIELD attrname="HZFSMC" fieldtype="string" allownull="N" name="合作方式" />
+	<FIELD attrname="FMCKMC" fieldtype="string" allownull="N" name="负卖仓库名称" /> -->
+	
+	
+	<!-- <Nested id="SPLB" allownull="N" name="商品价格明细">
+            <FIELD attrname="SPXX01" fieldtype="String" allownull="N" name="商品内码" />
+            <FIELD attrname="SPBM" fieldtype="String" allownull="N" name="商品编码" />
+            <FIELD attrname="SPMC" fieldtype="String" allownull="N" name="商品名称" />
+    </Nested> -->
+	</JLConfig>
+</root>

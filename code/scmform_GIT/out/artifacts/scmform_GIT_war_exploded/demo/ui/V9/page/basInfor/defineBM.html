@@ -1,0 +1,156 @@
+   <div class="w12 jl_defSee">
+    <div class="w12 jl_screening">
+      <div class="w09 scr_seach">
+        <ul>
+          <li>
+            <dl>
+              <dd class="w12">
+                <div class="jl_btn_group">
+              <input type="text" placeholder="代码/名称">
+              <span class="jl_btn btn_blue_or"><i class="fa fa-search"></i></span>
+            </div>
+            </dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+      <div class="scr_btn">
+        <a class="jl_btn btn_blue" onclick="jl_defCarShow()"><i class="fa fa-plus-square"></i>新增</a>
+      </div>
+    </div>
+    <div class="w12 jl_title">
+      <dl>
+        <dd class="w09">代码/名称</dd>
+        <dd class="w03">操作</dd>
+      </dl>
+    </div>
+    <div class="jl_tree_02">
+        <dl>
+          <dd class="w09"><i class="fa fa-minus-square-o"></i><i class="fa fa-folder"></i><label>01 - 金力软件</label></dd>
+          <dd class="w03"><a onclick="jl_defCarShow()">新增子级</a><a onclick="jl_defCarShow()">编辑</a><a>删除</a></dd>
+        </dl>
+        <div class="jl_tree_02">
+          <dl>
+            <dd class="w09"><i class="fa fa-minus-square-o" style="margin-left:30px;"></i><i class="fa fa-folder-open"></i><label>0101 - 基利伟软件</label></dd>
+            <dd class="w03"><a onclick="jl_defCarShow()">新增子级</a><a onclick="jl_defCarShow()">编辑</a><a>删除</a></dd>
+          </dl>
+          <div class="jl_tree_02">
+            <dl>
+              <dd class="w09"><i class="fa fa-plus-square-o" style="margin-left:60px;"></i><i class="fa fa-folder"></i><label>010101 - 基利伟软件</label></dd>
+              <dd class="w03"><a onclick="jl_defCarShow()">新增子级</a><a onclick="jl_defCarShow()">编辑</a><a>删除</a></dd>
+            </dl>
+            <dl>
+              <dd class="w09"><i class="fa fa-minus-square-o" style="margin-left:60px;"></i><i class="fa fa-folder-open"></i><label>010102 - 基利伟软件</label></dd>
+              <dd class="w03"><a onclick="jl_defCarShow()">新增子级</a><a onclick="jl_defCarShow()">编辑</a><a>删除</a></dd>
+            </dl>
+            <div class="jl_tree_02">
+              <dl>
+                <dd class="w09"><i class="fa fa-hospital-o"  style="margin-left:110px;"></i><label>01010201 - 基利伟软件</label></dd>
+                <dd class="w03"><a onclick="jl_defCarShow()">新增子级</a><a onclick="jl_defCarShow()">编辑</a><a>删除</a></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <dl>
+          <dd class="w09"><i class="fa fa-plus-square-o"></i><i class="fa fa-folder"></i><label>01 - 金力软件</label></dd>
+          <dd class="w03"><a onclick="jl_defCarShow()">新增子级</a><a onclick="jl_defCarShow()">编辑</a><a>删除</a></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="w12 jl_footer mt10 ml10">
+        <a class="jl_btn btn_blue_or" onclick="jl_defCarShow()"><i class="fa fa-plus-square"></i>新增部门</a>
+    </div>
+  </div>
+</div>
+</div>
+<!--    -->
+<div class="w05 jl_defCar">
+  <div class="jl_defCar_header">
+    <h3>定义部门</h3>
+    <span class="close" onclick="jl_defCarHide()">×</span>
+  </div>
+  <div class="jl_defCar_main">
+    <div class="jl_form">
+      <div class="jl_form_01">
+      <dl>
+        <dt class="w02" title="部门代码">部门代码</dt>
+        <dd class="w10"><em class="btx font_red"></em><input type="number" class="w05" placeholder="请输入当前代码"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="部门名称">部门名称</dt>
+        <dd class="w10">
+          <em class="btx font_red"></em>
+          <input type="text" class="w08" placeholder="请输入部门名称">
+          <div class="checkbox_css jl_input_checkbox w03 pl10"><i class="fa fa-square-o"></i><span>末级</span></div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="部门级别">部门级别</dt>
+        <dd class="w10"><input type="text" class="w03" ></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="部门类型">部门类型</dt>
+        <dd class="w10">
+          <div class="w08 jl_btn_group">
+            <div class="btn_group_text">部门类型</div>
+            <span class="jl_btn btn_white"><i class="fa fa-angle-down"></i></span>
+            <ul class="jl_dropdown_menu">
+              <li><a>新华店</a></li>
+              <li><a>国贸店</a></li>
+              <li><a>三亚店</a></li>
+            </ul>
+          </div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="所属公司账套">所属公司账套</dt>
+        <dd class="w10">
+          <div class="w08 jl_btn_group">
+          <input type="text" placeholder="所属公司" style="box-shadow: rgb(225, 225, 225) 0px 0px 0px inset;">
+          <span class="jl_btn btn_white"><i class="fa fa-angle-up"></i></span>
+          <ul class="jl_dropdown_menu" style="display:none;">
+            <li>
+              <a>武汉金立软件<span class="bgcolor_blue"><i class="fa fa-angle-right"></i></span></a>
+              <ul class="jl_dropdown_menu jl_dropleft_menu" style="display: none;">
+                <li>
+                  <a>基利伟软件<span class="bgcolor_blue"><i class="fa fa-angle-right"></i></span></a>
+                  <ul class="jl_dropdown_menu jl_dropleft_menu" style="display: none;">
+                    <li><a>基利伟软件</a></li>
+                    <li><a>基利伟软件</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="部门负责人">部门负责人</dt>
+		<dd class="w10"><input type="text" class="w08" ></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="部门属性">部门属性</dt>
+        <dd class="w10">
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>采购</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>直营店</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>加盟店</span></div>
+          <div class="checkbox_css jl_input_checkbox w03"><i class="fa fa-square-o"></i><span>行政</span></div>
+        </dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="银行账号">银行账号</dt>
+		<dd class="w10"><input type="text" class="w08" placeholder="请输入银行账号"></dd>
+      </dl>
+      <dl>
+        <dt class="w02" title="对应仓库">对应仓库</dt>
+		<dd class="w10"><input type="text" class="w08" ></dd>
+      </dl>  
+    </div>
+    </div>
+  </div>
+  <div class="jl_defCar_footer">
+    <a class="jl_btn btn_blue_or"><i class="fa fa-floppy-o"></i>保存</a>
+    <a class="jl_btn btn_blue_or"><i class="fa fa-reply-all"></i>清空</a>
+  </div>
+</div>

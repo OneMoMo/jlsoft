@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.cgjs.yfkd">
+	
+	    <FIELD attrname="WLDW01" fieldtype="string" allownull="N" name="供应商编码" />
+	    <FIELD attrname="YFKJE" fieldtype="string" allownull="N" name="预付款金额" />
+	    <Nested id="SPLB">
+            <FIELD attrname="SL" fieldtype="string" allownull="N" name="数量" />
+       </Nested>
+	</JLConfig>
+</root>

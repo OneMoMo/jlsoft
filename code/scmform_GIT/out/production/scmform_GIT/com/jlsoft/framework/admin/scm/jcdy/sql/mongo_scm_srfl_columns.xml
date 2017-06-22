@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_SRFL.SCM_DYFLSR">   
+        <FIELD attrname="CXTJ" format='{"$or":[{"FLSRBM":{"$regex":"#CXTJ#"}},{"FLSRMC":{"$regex":"#CXTJ#"}}]}' fieldtype="String" allownull="Y" name="查询" />
+	 <FIELD attrname="S_VALUE" format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="String" allownull="Y" name="状态" />
+	</JLConfig>
+</root>   

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_KHYHD.SCM_KHMD">
+		<FIELD attrname="MDMC" format='{"$or":[{"MDMC":{"$regex":"#MDMC#"}},{"MDBM":{"$regex":"#MDMC#"}}]}' fieldtype="String" allownull="Y" name="门店" />
+        <FIELD attrname="WLDW01" fieldtype="String" allownull="Y" name="经销商" />
+        <FIELD attrname="YXBJ" format='{"YXBJ.key":"#YXBJ#"}'  fieldtype="Map" allownull="Y" name="有效标记" />
+        <FIELD attrname="S_VALUE" format='{"S_VALUE":{"$ne":"#S_VALUE#"}}' fieldtype="String" allownull="Y" name="状态" />
+        <FIELD attrname="GSXX01" fieldtype="String" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>

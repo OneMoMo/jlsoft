@@ -1,0 +1,53 @@
+<div class="w1200 userHeader">
+	<a id="jl_logo" class="w03">
+		<img src="jllib/form/images/logo.png" class="logo" />
+	</a>
+	<ul class="w06">
+	    <li class="back_index">
+	    	<a>
+	    	  <i class="fa fa-home"></i><span id="forward_index">返回首页 &gt;</span>
+	    	</a>
+	    </li>
+  	</ul>
+	<div class="w03"><input type="text" class="w09"><input type="button" class="w03" value="搜索"></div>
+	
+	<ul class="jl_navbar">
+		<li id="daiBan">
+		  <a href="#"><i class="fa fa-edit"></i>待办<span class="bgcolor_red">0</span></a>
+		</li>
+		<li id="chaoSong" class="hide">
+		  <a href="#"><i class="fa fa-edit"></i>抄送<span class="bgcolor_red">0</span></a>
+		</li>
+		<li id="cheHui">
+		  <a href="#"><i class="fa fa-edit"></i>可撤回<span class="bgcolor_red">0</span></a>
+		</li>
+		<li id="systemMenu">
+		  <a href="#"><i class="fa fa-user"></i></a>
+		  <ul class="jl_dropdown_menu">
+		    <li id="settings"><a><i class="fa fa-cog"></i>设置</a></li>
+		    <li id="resetPassWord"><a><i class="fa fa-lock"></i>修改密码</a></li>
+		    <li id="logout"><a><i class="fa fa-sign-out"></i>退出</a></li>
+		  </ul>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var resourceId = JL.getUrlParam("resourceId");
+	var url = pubJson.getURL("FormUrl")+"/o2o/shopJL/page/index.html"
+	if(!JL.isNull(resourceId)){
+		url = pubJson.getURL("FormUrl")+"/o2o/shop"+resourceId+"/page/index.html";
+	}
+	$("#jl_logo img").click(function(){
+		window.location.href = url;
+	});
+	$("#forward_index").click(function(){
+		window.location.href = url;
+	});
+	$("#enterBack a").text("进入前台");
+	$("#enterBack a").removeAttr("href");
+	$("#enterBack a").click(function(){
+		window.location.href = url;
+	});
+});
+</script>

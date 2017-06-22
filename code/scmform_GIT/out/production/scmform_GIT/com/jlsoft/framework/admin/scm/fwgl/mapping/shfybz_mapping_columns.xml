@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.fwgl.shfyzb">
+	<FIELD attrname="FYBZMC" fieldtype="string" allownull="N" name="费用标准名称" />
+	<!-- <FIELD attrname="SZDJ" fieldtype="string" allownull="N" name="设置单价" /> -->
+	<Nested id="JFFS" allownull="N" name="计费方式">
+            <FIELD attrname="key" fieldtype="string" allownull="N" name="计费方式" />
+            <FIELD attrname="value" fieldtype="string" allownull="N" name="计费方式" />
+     </Nested>
+	</JLConfig>	 
+</root>

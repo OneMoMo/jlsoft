@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_JK.FORM_JK">  
+        <FIELD attrname="JK" format='{"$or":[{"JKLX01":{"$regex":"#JK#"}},{"JKSJ04":{"$regex":"#JK#"}}]}' fieldtype="String" allownull="Y" name="JK" />
+        <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" /> 
+	</JLConfig>
+</root>   

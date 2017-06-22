@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WLDCD">
+	<select id="SPLB" parameterType="java.util.Map" resultType="java.util.Map">
+	select BM01 BM01, 
+       WLDW01 WLDW01, 
+       WLDCI01 DCJE, 
+       RYXX01 YWY_RYXX01, 
+       (SELECT BM02 FROM BM WHERE BM01 = A.BM01) BMMC, 
+       (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) WLDWMC, 
+       (SELECT RYXX02 FROM RYXX WHERE RYXX01 = A.RYXX01) YWY_RYXXMC, 
+       A.WLDCI02 LX, 
+       A.FLDM01 FL, 
+       A.KHYHD01 KHYHD01, 
+       A.GCDJH GCDLD01, 
+       A.WLDCI06 KZXS 
+   from WLDCDITEM A,WLDCD B 
+   where 1 = 1 
+   AND A.WLDC01 = B.WLDC01 
+   AND A.GSXX01 = B.GSXX01 
+	</select>
+	
+	<select id="SKFS" parameterType="Map" resultType="java.util.Map">
+		SELECT distinct A.SKFS01 key, A.SKFS02 value
+		FROM SKFS A
+		WHERE 1=1
+		<if test="SKFS06 != null">
+		  AND  A.SKFS06 in (${SKFS06})
+   		</if> 
+		JL{CZY|A.SKFS01|SKFS_CZ|LIKE%}JL 
+	</select>
+
+</mapper>

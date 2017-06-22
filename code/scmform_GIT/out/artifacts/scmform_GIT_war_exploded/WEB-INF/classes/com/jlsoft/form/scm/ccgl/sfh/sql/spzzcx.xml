@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPZZCX">
+	<select id="BOMSP" parameterType="java.util.Map" resultType="java.util.Map">
+		<if test="CZLX01 != null and CZLX01 != ''">
+			<!-- 拆卸 -->
+			<if test="CZLX01==1">
+				SELECT A.SPXX01,
+				A.BOM01 BOM01,
+				S.SPXX02 SPBM,
+				S.SPXX04 SPMC,
+				CKSP04
+				KMSL,
+				(SELECT SPSXMC FROM SPSX WHERE SPSX01 = B.CKSP12) SPSXMC,
+				B.CKSP12 SPSX01,0 CXSL,B.BM01,B.CK01,B.WLDW01,
+				(select CKSP04 from
+				CKSP where
+				(CKSP04 ,spxx01) in
+				(SELECT min(CKSP04),A.SPXX01
+				FROM
+				CKSP,BOMITEM WHERE
+				BOMITEM.BOM01=A.BOM01
+				AND
+				BOMITEM.SPXX01=CKSP.SPXX01
+				<if test="CK01 != null and CK01 != ''">
+					AND CKSP.CK01 = #{CK01}
+				</if>
+				<if test="BM01 != null and BM01 != ''">
+					AND CKSP.BM01=#{BM01}
+				</if>
+				<if test="WLDW01 != null and WLDW01 != ''">
+					AND CKSP.WLDW01=#{WLDW01}
+				</if>
+				group by BOM01) and rownum=1) KZZS
+				FROM BOM A,CKSP B, SPXX S
+				WHERE
+				 CKSP04 > 0
+				AND A.SPXX01 = S.SPXX01
+				AND A.SPXX01 = B.SPXX01
+				AND A.GSXX01 = B.GSXX01
+				AND
+				(A.BM01 IS NULL OR A.BM01=B.BM01)
+				AND (A.WLDW01 IS NULL OR
+				A.WLDW01=B.WLDW01)
+				<if test="GSXX01 != null and GSXX01 != ''">
+					AND A.GSXX01 = #{GSXX01}
+				</if>
+				<if test="BM01 != null and BM01 != ''">
+					AND B.BM01 = #{BM01}
+				</if>
+				<if test="WLDW01 != null and WLDW01 != ''">
+					AND B.WLDW01 = #{WLDW01}
+				</if>
+				<if test="CK01 != null and CK01 != ''">
+					AND B.CK01 = #{CK01}
+				</if>
+				GROUP BY A.SPXX01, S.SPXX02, S.SPXX04,
+				B.CKSP12,A.BOM01,B.BM01,B.CK01,B.WLDW01,CKSP04
+			</if>
+			<if test="CZLX01==0">
+select a.bom01, a.gsxx01, b.spxx01,S.SPXX02 SPBM,
+     (SELECT
+        min(floor(CKSP04 /BOMI01))
+        FROM CKSP, BOMITEM
+        WHERE BOMITEM.BOM01 =
+        A.BOM01
+        AND BOMITEM.GSXX01 = B.GSXX01
+        AND BOMITEM.GSXX01 = CKSP.GSXX01
+        AND BOMITEM.SPXX01 = CKSP.SPXX01
+      <if test="CK01 != null and CK01 != ''">
+          AND CKSP.CK01 = #{CK01}
+        </if>
+        <if test="BM01 != null and BM01 != ''">
+          AND CKSP.BM01=#{BM01}
+        </if>
+        <if test="WLDW01 != null and WLDW01 != ''">
+					AND CKSP.WLDW01=#{WLDW01}
+				</if>
+				)KZZS,
+				S.SPXX04 SPMC
+  from (select bom01, gsxx01, count(1) SL
+          from bomitem
+         where 1=1
+         <if test="GSXX01 != null and GSXX01 != ''">
+					AND GSXX01 = #{GSXX01}
+		</if>
+         group by bom01, gsxx01) a,
+       bom b,SPXX S
+ where a.bom01 = b.bom01
+   and a.gsxx01 = b.gsxx01
+   AND B.SPXX01 = S.SPXX01
+   and (a.bom01, a.gsxx01, SL) in
+       (select bom01, gsxx01, count(1)
+          from bomitem
+         where 1=1 
+          <if test="SPXX01 != null and SPXX01 != ''">
+					AND SPXX01  IN  #{SPXX01}
+				</if>
+          <if test="GSXX01 != null and GSXX01 != ''">
+					AND GSXX01 = #{GSXX01}
+				</if>
+         group by bom01, gsxx01)
+         AND EXISTS (select 1
+				from CKSP
+				where (CKSP04 , spxx01) in
+				(SELECT min(CKSP04), CKSP.SPXX01
+				FROM CKSP, BOMITEM
+				WHERE BOMITEM.BOM01 = A.BOM01
+				AND BOMITEM.GSXX01 =
+				A.GSXX01
+				AND BOMITEM.GSXX01 = CKSP.GSXX01
+				AND BOMITEM.SPXX01 =
+				CKSP.SPXX01
+				group by CKSP.SPXX01)
+				AND CKSP04 >= 0)
+				
+
+			</if>
+		</if>
+	</select>
+	<!-- 组装查询主商品 -->
+	<select id="BOMSP1" parameterType="java.util.Map" resultType="java.util.Map">
+	select a.bom01, a.gsxx01, b.spxx01,S.SPXX02 SPBM,
+     (SELECT
+        min(floor(CKSP04 /BOMI01))
+        FROM CKSP, BOMITEM
+        WHERE BOMITEM.BOM01 =
+        A.BOM01
+        AND BOMITEM.GSXX01 = B.GSXX01
+        AND BOMITEM.GSXX01 = CKSP.GSXX01
+        AND BOMITEM.SPXX01 = CKSP.SPXX01
+      <if test="CK01 != null and CK01 != ''">
+          AND CKSP.CK01 = #{CK01}
+        </if>
+        <if test="BM01 != null and BM01 != ''">
+          AND CKSP.BM01=#{BM01}
+        </if>
+        <if test="WLDW01 != null and WLDW01 != ''">
+					AND CKSP.WLDW01=#{WLDW01}
+				</if>
+				)KZZS,
+				S.SPXX04 SPMC
+  from (select bom01, gsxx01, count(1) SL
+          from bomitem
+         where 1=1
+         <if test="GSXX01 != null and GSXX01 != ''">
+					AND GSXX01 = #{GSXX01}
+		</if>
+         group by bom01, gsxx01) a,
+       bom b,SPXX S
+ where a.bom01 = b.bom01
+   and a.gsxx01 = b.gsxx01
+   AND B.SPXX01 = S.SPXX01
+   and (a.bom01, a.gsxx01, SL) in
+       (select bom01, gsxx01, count(1)
+          from bomitem
+         where 1=1 
+          <if test="SPXX01 != null and SPXX01 != ''">
+					AND SPXX01  IN  ${SPXX01}
+				</if>
+          <if test="GSXX01 != null and GSXX01 != ''">
+					AND GSXX01 = #{GSXX01}
+				</if>
+         group by bom01, gsxx01)
+	</select>
+	<select id="BOMSPMX" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.BOM01 BOM01,
+		A.BOMI01,
+		A.SPXX01,
+		S.SPXX02 SPBM,
+		S.SPXX04 SPMC,
+		(SELECT
+		CKSP04 FROM CKSP WHERE SPXX01=A.SPXX01
+		<if test="BM01 != null and BM01 != ''">
+			AND CKSP.BM01 = #{BM01}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+			AND CKSP.WLDW01 = #{WLDW01}
+		</if>
+		<if test="CK01 != null and CK01 != ''">
+			AND CKSP.CK01 = #{CK01}
+		</if>
+		)KMS ,
+		(SELECT SPSXMC FROM SPSX WHERE SPSX01 = A.CGXY02) SPSXMC,
+		A.CGXY02 SPSX01,
+		CBBL
+		FROM BOMITEM A ,SPXX S
+		WHERE A.SPXX01 = S.SPXX01
+		<if test="GSXX01 != null and GSXX01 != ''">
+			AND A.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BOM01 != null and BOM01 != ''">
+			AND A.BOM01 = #{BOM01}
+		</if>
+	</select>
+	<select id="BOMSPMX1" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT distinct
+		b.SPXX01,
+		S.SPXX02 SPBM,
+		S.SPXX04 SPMC,
+		CKSP04 KMS,
+		(SELECT SPSXMC FROM SPSX WHERE SPSX01 = c.CKSP12) SPSXMC,
+		CKSP12 SPSX01,
+		B.BOMI01
+		FROM SPXX S , CKSP C,bomitem b
+		WHERE S.SPXX01=C.SPXX01
+          and b.spxx01=c.spxx01
+         and b.gsxx01=c.gsxx01
+		AND CKSP04 > 0
+        <if test="GSXX01 != null and GSXX01 != ''">
+			AND B.GSXX01 = #{GSXX01}
+		</if>
+		<if test="BM01 != null and BM01 != ''">
+			AND C.BM01 = #{BM01}
+		</if>
+		<if test="BOM01 != null and BOM01 != ''">
+			AND B.BOM01 = #{BOM01}
+		</if>
+		<if test="WLDW01 != null and WLDW01 != ''">
+			AND C.WLDW01 = #{WLDW01}
+		</if>
+		<if test="CK01 != null and CK01 != ''">
+			AND C.CK01 = #{CK01}
+		</if>
+	</select>
+</mapper>

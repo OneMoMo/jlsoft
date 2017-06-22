@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_ZD.SCM_ZD">
+		<FIELD attrname="search" format='{"$or":[{"ID":"#search#"},{"NAME":"#search#"}]}' fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="GSXX01" fieldtype="string" allownull="Y" name="状态" />
+    	<FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

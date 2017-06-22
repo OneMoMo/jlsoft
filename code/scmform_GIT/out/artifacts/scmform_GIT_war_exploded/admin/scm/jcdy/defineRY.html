@@ -1,0 +1,307 @@
+<div class="w12 jl_form">
+	<div class="jl_form_03">
+		<div class="w12 jl_screening">
+	      <div class="w09 scr_seach">
+	        <ul>
+	          <li>
+	            <dl>
+	              <dd class="w12">
+                     <div class="jl_btn_group">
+	                   <input type="text" placeholder="人员代码/名称" name = "DMMC" >
+	                  <!--  <span class="jl_btn btn_white" id="search"><i class="fa fa-search"></i></span> -->
+	                 </div>
+	                 <div id="d_SSBM" ></div>
+	                  <div id="d_CXRYJS" ></div>
+                  </dd>
+	            </dl>
+	          </li>
+	          
+	        </ul>
+	      </div>
+	      <a id="query" class="jl_btn btn_color fr">
+							<i class="fa fa-search mr5"></i>查询
+						</a>
+	       <div id="d_import" class="fr"></div>
+	    </div>
+	  <div class="jl_form_02 hide mb10" id="import">
+	<ul class="w12">
+	<li class="w12">
+	<dl class="w09">
+		<dt class="w01" title="EXCEL导入" jlang><b>EXCEL导入</b></dt>
+		<dd class="w11"><div id="d_EXCEL" class="w04"></div></dd>
+	</dl>
+	<dl class="w03 hide"  name="BUTTON">
+		 <dd class="w08"><div class="w12" id="d_DRCM"></div></dd>
+	</dl>
+	</li>
+	<li class="w12 height_inherit ">
+	<dl class="w12 pt10 hide height_inherit" name="MESSAGE">
+		<dd class="w12"><div id="d_MESSAGE" class="w12"></div></dd>
+	</dl>
+	</li>
+	</ul>
+	</div>
+		<div id="d_LIST" class="w12"></div>
+	</div>
+</div>
+<div class="jl_form addCarShow hide">
+	<div class="w12 jl_tab_title pl30 mb10"></div>
+	<div class="jl_form_02" id="RYXX"> 
+		<ul> 
+			<li style="list-style:none;display:none;">
+				<div id="d_jlbh"/>
+				<div id="d_userid"/>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="人员编号">人员编号</dt>
+					<dd class="w10">
+						<div class="w06" id="d_RYXX01"></div>
+						<em class="btx font_red"></em>
+						<!-- <a class="font_blue" title="粘贴已复制人员信息" id="ztsj">粘贴已复制人员信息</a> -->
+					</dd>  
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="人员类型">人员类型</dt>
+					<dd class="w10">
+						<div class="w06" id="d_RYLX"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="人员状态">人员状态</dt>
+					<dd class="w10">
+						<div class="w06" id="d_RYZT"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="人员姓名" jlang>人员姓名</dt>
+					<dd class="w10">
+						<div class="w06" id="d_RYMC"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="联系电话">联系电话</dt>
+					<dd class="w10">
+						<div class="w06" id="d_LXDH"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="入职日期">入职日期</dt>
+					<dd class="w10">
+						<div class="w06" id="d_RZRQ"></div> 
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="附件上传">附件上传</dt>
+					<dd class="w10">
+						<div class="w06" id="d_FJSC"></div> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="所属公司">所属公司</dt>
+					<dd class="w10">
+						<div class="w06" id="d_SSGS"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="工作部门">工作部门</dt>
+					<dd class="w10">
+						<div class="w06" id="d_GZBM"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>  
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="身份证">身份证</dt>
+					<dd class="w10">
+						<div class="w06" id="d_SFZH"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="银行卡号">银行卡号</dt>
+					<dd class="w10">
+						<div class="w06" id="d_YHKH"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="操作员">操作员类型</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CZY"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="人员角色">人员角色</dt>
+					<dd class="w10">
+						<div id="d_RYJS"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li> 
+			
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="受控标记">受控标记</dt>
+					<dd class="w10">
+						<div id="d_SKBJ"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>该标记控制是否显示成本、毛利字段
+						</label> 
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="导出标记">导出标记</dt>
+					<dd class="w10">
+						<div id="d_DCBJ"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>该标记控制是否允许导出
+						</label> 
+					</dd>
+				</dl>
+			</li> 
+			<!-- <li class="w12">
+				<dl style="height: inherit">
+					<dt class="w02" title="查询人员" >查询人员</dt>
+					<dd class="w10">
+						<div id=d_CXRY></div>
+					</dd>
+				</dl>
+			</li> -->
+		</ul>
+	</div>
+	<div class="jl_form_02" id="QTXX">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="销售方式">销售方式</dt>
+					<dd class="w10">
+						<div class="w06" id="d_XSFS"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="收款方式" jlang>收款方式</dt>
+					<dd class="w10">
+						<div class="w06" id="d_SKFS"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="授权级别">授权级别</dt>
+					<dd class="w10">
+						<div class="w06" id="d_RYJB"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="登录密码">登录密码</dt>
+					<dd class="w10">
+						<div class="w06" id="d_DLMM"></div>
+						<div class="hide" id="d_OLDDLMM"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="工作岗位">工作岗位</dt>
+					<dd class="w10">
+						<div class="w06" id="d_GZGW"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12" name="gsli">
+				<dl>
+					<dt class="w02" title="操作公司权限">操作公司权限</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CZGSQX"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="品牌分类权限">品牌分类权限</dt>
+					<dd class="w10">
+						<div class="w06" id="d_PPFL"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w02" title="操作部门仓库权限">操作部门仓库权限</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CZBMCK"></div>
+					</dd>
+				</dl>
+			</li>
+			 <li class="w12">
+				<dl>
+					<dt class="w02" title="查询部门仓库权限">查询部门仓库权限</dt>
+					<dd class="w10">
+						<div class="w06" id="d_CXBMCK"></div>
+					</dd>
+				</dl>
+			</li> 
+		    <li class="w12">
+				<dl>
+					<dt class="w02" title="往来单位权限">往来单位权限</dt>
+					<dd class="w10">
+						<div class="w06" id="d_WLDWQX"></div>
+					</dd>
+				</dl>
+			</li>
+		<!--  <li class="w12">
+				<dl>
+					<dt class="w02" title="网点权限">网点权限</dt>
+					<dd class="w10">
+						<div class="w06" id="d_WDQX"></div>
+					</dd>
+				</dl>
+			</li> -->
+		</ul>
+	</div>
+	<div class="jl_form_02">
+		<ul>
+			<li class="w12">
+				<dl>
+					<dt class="w02"></dt>
+					<dd class="w10">
+						<div id="d_footer"></div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KHXYED">
+	<!-- 查询单据明细 -->
+	<select id="queryKHXYED" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<if test="QT == 1">
+			Select
+			1 QT,
+			A.GSXX01,
+			A.HYXX01,
+			A.DQXX01,
+			A.WLDW01 KHDM,
+			A.WLDW02 KHMC,
+			A.BM01 XSBMDM,
+			A.BM02 XSBMMC,
+			A.LSED,
+			A.YSYE YSYE,
+			A.XYED XYED,
+			(A.XYED + A.LSED - A.YSYE + A.YUSYE - A.YFYE)KYED,
+			A.KYYE,
+			A.FLYE FLYE,
+			A.YFYE YFYE,
+			A.QPYE QPYE,
+			A.YFFL YFSYFL,
+			A.YUSYE YUSYE,
+			A.KYYEHYS KYYEHYS,
+			(Select GSXX02 From
+			GSXX Where GSXX01 = A.GSXX01) GSXX02,
+			(select WLDW30 from wldw where
+			wldw01=A.wldw01) XSZQ,
+			(select WLDW27 from wldw where wldw01=a.wldw01)
+			YFZQ,
+			A.WLDW42 XYEDBJ,
+			A.DWYE20 YFZDJE,
+			A.DWYE21 FXZDJE,
+			A.BZJYE BZJYE,
+			A.YHJE YHJE,
+			A.LSED LSED
+			From VIEW_XYED A
+			Where 1 = 1
+			JL{CZY|A.BM01|BM_CX|LIKE%}JL
+			<if test="KH != null and KH !=''">
+				AND (A.WLDW01 LIKE '%'||#{KH}||'%' OR A.WlDW02 LIKE
+				'%'||#{KH}||'%')
+			</if>
+			<if test="XS != null and XS !=''"> 
+              <![CDATA[
+               AND ( A.YSYE <> 0
+                OR A.FLYE <> 0
+                OR A.YFYE <> 0
+                OR A.QPYE <> 0
+                OR A.YUSYE <> 0
+                OR A.BZJYE <> 0
+                 OR A.LSED <> 0
+                  OR A.YFFL <> 0
+                   OR A.DWYE20 <> 0
+                    OR A.KYYE <> 0
+                    OR A.DWYE21 <> 0 
+                    OR A.YHJE <> 0  )
+              ]]>
+			</if>
+			<if test="ED != null and ED !=''">
+			 <![CDATA[AND (A.LSED <>0 OR A.XYED<>0)]]>
+			</if>
+		</if>
+		<if test="QT == 0">
+			Select
+			0 QT,
+			A.WLDW01 KHDM,
+			W.WLDW02 KHMC,
+			A.JLWBDH,
+			A.KHXYED02 TZJE,
+			A.KHXYED03 ZDR,
+			to_char(A.KHXYED04,'YYYY-MM-DD') TZRQ,
+			A.KHXYED05 SHR,
+			to_char(A.KHXYED06,'YYYY-MM-DD') SHRQ,
+			A.KHXYED07 BZ,
+			W.WLDW30 FXZQ,
+			W.WLDW27 YFZQ,
+			to_char(A.KHXYED11,'YYYY-MM-DD') HSRQ,
+			to_char(A.KHXYED12,'YYYY-MM-DD') DQRQ,
+			BM01 XSBMDM,
+			(Select BM02 From
+			BM Where A.BM01 = BM01) XSBMMC,
+			(Select DQXX02
+			From DQXX Where DQXX01 =
+			W.DQXX01) DQXX02,
+			(Select HYXX02 From HYXX
+			Where HYXX01 = W.HYXX01)
+			HYXX02
+			From KHXYED A, WLDW W
+			Where A.WLDW01 = W.WLDW01
+			JL{CZY|A.BM01|BM_CX|LIKE%}JL
+			<if test="TZRQ_S != null and TZRQ_S !=''"> <![CDATA[AND A.KHXYED04 >=TO_DATE(#{TZRQ_S},'YYYY-MM-DD')]]></if>
+			<if test="TZRQ_E != null and TZRQ_E != ''"><![CDATA[  AND A.KHXYED04 <=TO_DATE(#{TZRQ_E},'YYYY-MM-DD') ]]></if>
+			<if test="SHRQ_S != null and  SHRQ_S !='' "> <![CDATA[AND A.KHXYED06 >=TO_DATE(#{SHRQ_S},'YYYY-MM-DD')]]></if>
+			<if test="SHRQ_E != null and SHRQ_E !=''"><![CDATA[  AND A.KHXYED06 <=TO_DATE(#{SHRQ_E},'YYYY-MM-DD') ]]></if>
+			<if test="DJBH != null and DJBH !=''"> AND A.JLWBDH =#{DJBH}</if>
+			<if test="KH != null and KH !=''">
+				AND (A.WLDW01 LIKE '%'||#{KH}||'%' OR W.WlDW02 LIKE
+				'%'||#{KH}||'%')
+			</if>
+		</if>
+		JL{CZY|A.WLDW01|WLDW_CX|LIKE%}JL
+
+		<if test="XSBM != null and XSBM != ''">
+			<foreach item="item" index="index" collection="XSBM" open=" AND ("
+				separator=" or " close=")">
+				A.BM01 = #{item}
+			</foreach>
+		</if>
+		<if test="GSXX01!=null and GSXX01 !=''"> AND A.GSXX01=#{GSXX01}</if>
+	</select>
+	<!-- 查找全部客户（按可操作往来单位权限过滤） -->
+	<select id="KH_ALL" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT W.WLDW01,GET_RYXX(W.WLDW01) DLZH,W.WLDW02 WLDWMC, W.WLDW10
+		LXDH, W.WLDW06 LXDZ,W.WLDW42 GKED,W.WLDW46 JGGK,
+		(CASE WHEN W.WLDW42 =
+		1 THEN '是' ELSE '否' END) GKEDMC, RYXX01,
+		RYXX02,W.WLDW65 SKBJ
+		FROM WLDW
+		W
+		WHERE W.WLDW20 = 1
+		AND W.WLDW16 = 1
+       <![CDATA[
+       AND WLDW01 <> '900001'
+       ]]>
+		<if test="WLDW01 != null and WLDW01 != ''">
+			AND W.WLDW01 = #{WLDW01}
+		</if>
+		<if test="KHMC != null and KHMC != ''">
+			AND (W.WLDW01 LIKE '%'||#{KHMC}||'%' OR W.WLDW02 LIKE
+			'%'||#{KHMC}||'%'
+			OR W.WLDW03 LIKE '%'||#{KHMC}||'%')
+		</if>
+		<if test="DWSX != null">
+			AND W.WLDW21 = #{DWSX}
+		</if>
+		JL{CZY|W.WLDW01|WLDW_CZ|inS}JL
+	</select>
+
+</mapper>

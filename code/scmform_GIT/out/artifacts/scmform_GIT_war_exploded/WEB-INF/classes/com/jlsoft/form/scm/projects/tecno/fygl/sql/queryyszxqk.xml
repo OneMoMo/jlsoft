@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="queryYSZXQK">
+<!-- 查询SPXX关联SPPCJC表(报表) -->
+	<select id="ZB" parameterType="java.util.Map" resultType="java.util.Map">
+SELECT a.gsxx01,
+       A.FYBM01 BM01,
+       max(b.fybm02) BMMC,
+       A.FYLX01 FYBM,
+       MAX(C.FYLX02) FYXM,
+       A.KMDM,
+       MAX(A.YSQJ) YSQJ,
+       SUM(A.YSJE) YSJE,
+       SUM(A.FSJE) FSJE,
+       SUM(YSJE-FSJE-
+       (           
+			SELECT NVL(SUM(QKJE), 0) QKZE
+			  FROM QKSQD A, QKSQDITEM B
+			 WHERE A.GSXX01 = B.GSXX01
+			   AND A.QKSQD01 = B.QKSQD01
+			   AND A.SHRQ IS NOT NULL
+			   AND B.YSQJ = TO_CHAR(SYSDATE, 'YYYY-MM')
+			 <if test="GSXX01 != null and GSXX01 != ''">
+				AND A.GSXX01 = #{GSXX01}
+		    </if>
+			<if test="CWKM != null and CWKM != ''">
+				AND B.KMDM = #{CWKM}
+			</if>
+			<if test="FYBM != null and FYBM != ''">
+				AND B.FYLX01 = #{FYBM}
+			</if>
+			  )
+       ) SYJE
+  FROM FYZXB A, FYBM B, FYLX C
+ WHERE 1 = 1
+  	   <if test="FYXM != null and FYXM != ''">
+           AND A.FYLX01 = #{FYXM}
+       </if>
+	   <if test="BMMC != null and BMMC !=''">
+	       AND A.FYBM01 = #{BMMC}
+	   </if>
+       <if test="YSQJ_S != null and YSQJ_S !=''">
+		    <![CDATA[AND TO_DATE(A.YSQJ,'YYYY-MM') >= TO_DATE(#{YSQJ_S}, 'YYYY-MM')]]>
+	   </if>
+	   <if test="YSQJ_E != null and YSQJ_E !=''">
+		    <![CDATA[AND TO_DATE(A.YSQJ,'YYYY-MM') <= TO_DATE(#{YSQJ_E},'YYYY-MM')]]>
+	   </if>
+ 
+   AND B.FYBM01 = A.FYBM01
+   AND A.FYLX01 = C.FYLX01
+   GROUP BY A.GSXX01, A.FYBM01, A.FYLX01, A.KMDM
+      
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  
+
+<!-- 
+  	<select id="ZB" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT A.GSXX01,A.FYBM01 BM01,(SELECT FYBM02 FROM FYBM WHERE FYBM01 = A.FYBM01) BMMC,
+	       A.FYLX01 FYBM,(SELECT FYLX02 FROM FYLX WHERE FYLX01 = A.FYLX01) FYXM,
+	       A.KMDM,A.YSQJ, A.YSJE, A.FSJE, (A.YSJE - A.FSJE) SYJE
+	 FROM FYZXB A
+   WHERE 1 =1
+       <if test="FYXM != null and FYXM != ''">
+           AND A.FYLX01 = #{FYXM}
+       </if>
+	   <if test="BMMC != null and BMMC !=''">
+	       AND A.FYBM01 = #{BMMC}
+	   </if>
+       <if test="YSQJ_S != null and YSQJ_S !=''">
+		    <![CDATA[AND TO_DATE(A.YSQJ,'YYYY-MM') >= TO_DATE(#{YSQJ_S}, 'YYYY-MM')]]>
+	   </if>
+	   <if test="YSQJ_E != null and YSQJ_E !=''">
+		    <![CDATA[AND TO_DATE(A.YSQJ,'YYYY-MM') <= TO_DATE(#{YSQJ_E},'YYYY-MM')]]>
+	   </if>
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+  -->
+  	<select id="MX" parameterType="java.util.Map" resultType="java.util.Map">
+	 SELECT A.BXRQ,A.BXRMC,B.FYBM01 BM01,
+         (SELECT FYBM02 FROM FYBM WHERE FYBM01 = B.FYBM01) BMMC,
+         B.FYLX01 FYBM,(SELECT FYLX02 FROM FYLX WHERE FYLX01 = B.FYLX01) FYXM,
+         B.YSQJ, B.BXJE,B.BZ
+    FROM FYBXD A, FYBXDITEM B
+   WHERE A.GSXX01 = B.GSXX01
+     AND A.FYBXD01 = B.FYBXD01
+     AND A.SHRQ IS NOT NULL
+      <if test="BM01 != null and BM01 !=''">
+			AND B.FYBM01 = #{BM01}
+	   </if>
+       <if test="FYBM != null and FYBM != ''">
+            AND B.FYLX01 = #{FYBM}
+       </if>
+       <if test="YSQJ_S != null and YSQJ_S !=''">
+		    <![CDATA[AND TO_DATE(A.YSQJ,'YYYY-MM') >= TO_DATE(#{YSQJ_S}, 'YYYY-MM')]]>
+	   </if>
+	   
+	   <if test="YSQJ_E != null and YSQJ_E !=''">
+		    <![CDATA[AND TO_DATE(A.YSQJ,'YYYY-MM') <= TO_DATE(#{YSQJ_E},'YYYY-MM')]]>
+	   </if>
+       JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+  </select>
+</mapper>

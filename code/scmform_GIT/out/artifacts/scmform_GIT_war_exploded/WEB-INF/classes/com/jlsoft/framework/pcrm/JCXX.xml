@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlsoft.framework.pcrm.JCXX">
+  <select id="queryCZY" parameterType="Map" resultType="java.util.Map">
+  	SELECT DISTINCT A.CZY01,A.CZY02,A.CZY03,B.BM01,B.BM02,A.GSXX01,
+  	       C.GSXX02,D.GW01,E.GW02,
+  	       (SELECT G.SJ01
+              FROM W_SJQX G,W_RYSJQX I
+             WHERE G.SJ01 = I.SJ01
+               AND I.CZY01 = A.CZY01) SJ01,
+           (SELECT G.SJ02
+              FROM W_SJQX G,W_RYSJQX I
+             WHERE G.SJ01 = I.SJ01
+               AND I.CZY01 = A.CZY01) SJ02
+      FROM W_CZY A,W_BM B,W_GSXX C,W_CZYGW D,W_GW E 
+     WHERE A.BM01 = B.BM01 
+       AND A.GSXX01 = C.GSXX01 
+       AND D.GW01 = E.GW01(+)
+       AND A.CZY01 = D.CZY01(+)
+       AND A.GSXX01 = #{GSXX01}
+     <if test="CXTJ != null">
+       AND (A.CZY02 LIKE '%'||#{CXTJ}||'%' OR 
+            B.BM02 LIKE '%'||#{CXTJ}||'%' OR 
+            A.CZY03 LIKE '%'||#{CXTJ}||'%')
+     </if>
+  </select>
+   
+  <select id="queryGWCDQX" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.VIEW01, A.GW01 FROM W_CZYMENU A WHERE A.GW01 = #{GW01}
+  </select>
+
+  <select id="queryGWXX" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.GW01,A.GW02,A.GW03,A.GSXX01,B.GSXX02
+      FROM W_GW A,W_GSXX B
+     WHERE A.GSXX01 = B.GSXX01(+)
+      <![CDATA[ AND A.GW01 >= 0 ]]>
+     <if test="GSXX01 != null">
+	   AND (A.GSXX01 = #{GSXX01} OR A.GSXX01 IS NULL)
+	 </if>
+     <if test="GW02 != null">AND (A.GW01 LIKE '%' || #{GW02} || '%' OR A.GW02 LIKE '%' || #{GW02} || '%' OR B.GSXX01 LIKE '%' || #{GW02} || '%' OR B.GSXX02 LIKE '%' || #{GW02} || '%')</if>
+     <if test="GW != null">
+       	<foreach collection="GW" index="index" item="GW01" open="AND ( " separator="or" close=")">
+  		  	A.GW01 = ${GW01}
+     	</foreach> 
+     </if>
+     AND (A.GSXX01 IS NULL OR (1=1
+     	JL{CZY|A.GSXX01|CZGS_CZ|inS}JL
+     ))
+     order by A.GW01 ASC
+  </select>
+  
+  <select id="queryBZGW" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.BZ01 
+  	  FROM W_BZGW A,W_GW B
+  	 WHERE A.GW01 = B.GW01 
+  	   AND B.GW03 = 0
+       AND A.GW01 = #{GW01}
+  </select>
+  
+  <select id="queryBM" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.BM01,A.BM02,A.BM03,A.BM_BM01
+      FROM W_BM A
+     WHERE A.BM05 = 0
+       AND A.GSXX01 = #{GSXX01}
+     ORDER BY A.BM01
+  </select>
+  
+  <select id="querySPPP" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.PPB01 SPPP01,A.PPB02 SPPPMC,A.PPB03,A.PPB04
+      FROM PPB A 
+     WHERE 1=1
+     ORDER BY A.PPB01
+  </select>
+  
+  <select id="querySJQXBM" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.SJ01,B.BM01,B.BM02
+      FROM W_SJQXBM A,W_BM B
+     WHERE A.BM01 = B.BM01
+       AND A.SJ01 = #{SJ01}
+  </select>
+  
+  <select id="queryGZL" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.GZL01,A.GZL02
+      FROM W_GZL A
+     WHERE A.GZL03 = 0 
+  </select>
+  
+  <select id="queryGZLBZ" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.BZ01,A.BZ02
+      FROM W_GZLBZ A
+     WHERE A.BZ04 = 0 
+       AND A.GZL01 = #{GZL01}
+  </select>
+  
+  <select id="querySJQX" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.SJ01,A.SJ02
+      FROM W_SJQX A 
+     WHERE A.GSXX01 = #{GSXX01}
+  </select>
+  
+  <select id="queryCZYXX" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.CZY01,A.CZY02,A.CZY03,A.CZY04,A.CZY05,A.CZY06,
+  	       A.CZY07,A.CZY08,A.GSXX01,B.GSXX02,A.BM01,C.BM02
+	  FROM W_CZY A,W_GSXX B,W_BM C
+	 WHERE A.GSXX01 = B.GSXX01 
+	   AND A.BM01 = C.BM01
+	   AND A.CZY07 = 0
+	 <if test="GSXX01 != null">
+	   AND A.GSXX01 = #{GSXX01}
+	 </if>
+	 <if test="BM01 != null">
+	   AND A.BM01 = #{BM01}
+	 </if>
+	 <if test="CZY01 != null">
+	   AND A.CZY01 = #{CZY01}
+	 </if>
+	 <if test="CZY02 != null">
+	   AND A.CZY02 = #{CZY02}
+	 </if>
+	 <if test="CZY03 != null">
+	   AND A.CZY03 = #{CZY03}
+	 </if>
+  </select>
+  
+  <select id="queryMENU" parameterType="Map" resultType="java.util.Map">
+  	SELECT A.MENU01,A.MENU02,B.VIEW01,B.VIEW02,B.VIEW03,B.VIEW04,B.VIEW05,
+  	       B.VIEW06,B.VIEW07,B.VIEW08,B.VIEW09,B.VIEW10,B.VIEW11,B.YXBJ
+      FROM W_MENU A,W_MENUVIEW B
+	 WHERE B.MENU01 = A.MENU01(+)
+	 <if test="MENU01 != null">
+	   AND A.MENU01 = #{MENU01}
+	 </if>
+	 <if test="VIEW01 != null">
+	   AND A.VIEW01 = #{VIEW01}
+	 </if>
+	 <if test="MENU02 != null">
+	   AND A.MENU02 = #{MENU02}
+	 </if>
+	 ORDER BY B.VIEW04,B.VIEW11
+  </select>
+</mapper>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FWFY.CSS_FWFY">
+	  <FIELD attrname="search" format='{"$or":[{"FYBM01":{"$regex":"#search#"}},{"FYMC":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="服务类型" />
+      <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
+ 

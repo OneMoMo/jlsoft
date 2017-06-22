@@ -1,0 +1,63 @@
+<div class="pagr_content">
+  <div class="w12 jl_form">
+    <div class="jl_form_02">
+     <ul>
+     	<li class="w12">
+	     	<dl>
+	        	<dt class="w02" title="品牌名称">品牌名称</dt>
+	        	<dd class="w06">
+	         		 <div id="d_dypp"></div>
+	         	 	<em class="btx font_red"></em>
+	        	</dd>
+	     	 </dl>
+     	</li>
+     	<li class="w12">
+	     	  <dl>
+		        <dt class="w02" title=""></dt>
+		        <dd class="w06">
+	         		 <div id="d_toolbar"></div>      
+	        	</dd>
+      		</dl>
+     	</li>
+     </ul>
+    
+      <!-- 
+      <dl>
+        <dt class="w01" title="所有品牌">所有品牌</dt>
+        <dd class="w11">
+          <div id="d_dypp"></div> 
+          <em class="btx font_red"></em>
+        </dd> 
+      </dl> 
+      -->
+    
+    </div>   
+  </div>
+</div>
+<!-- 
+<script type="text/javascript" src="/lib/JQuery/js/JLPym.js" charset="gbk"></script> 
+<script type="text/javascript" src="/sysManager/o2o/js/DYPP.js" charset="utf-8"></script>
+ -->
+<script>
+
+/***
+方格文字平铺jl_square_texe
+***/
+$(document).on("mouseover",".jl_square_texe > ul > li > span",function(){
+  $(this).siblings(".jl_masklayer").fadeIn(1);
+})
+$(document).on("click",".jl_square_texe > ul > li > .jl_masklayer > div > i",function(){
+  var this_i_class = $(this).attr("class");
+  if(this_i_class == "fa fa-pencil"){
+    $(this).parent("div").parent(".jl_masklayer").fadeOut(50);
+    $(this).parent("div").parent(".jl_masklayer").siblings("span").css({"display":"none"})
+	$(this).parent("div").parent(".jl_masklayer").siblings(".jl_btn_group").removeClass("hide")
+  }
+})
+
+$(document).on("mouseleave",".jl_square_texe > ul > li",function(){
+  $(this).children(".jl_masklayer").fadeOut(1);
+})
+</script>
+
+

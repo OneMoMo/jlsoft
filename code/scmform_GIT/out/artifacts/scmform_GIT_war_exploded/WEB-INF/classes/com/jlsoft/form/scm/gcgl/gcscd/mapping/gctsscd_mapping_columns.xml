@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.gcgl.gctsscd">
+        <FIELD attrname="GCDLD01" fieldtype="String" allownull="N" name="工程登录单号" />
+         <Nested id="SPLB" allownull="N" name="资料明细">
+            <FIELD attrname="WTZLSL" fieldtype="double" allownull="N" name="问题资料数量" />
+            <FIELD attrname="WTCE" fieldtype="double" allownull="N" name="问题资料数量" />
+        </Nested>
+	</JLConfig>
+</root>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CKSM">
+    <select id="CKSM_SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT JLWBDH, DJHM, WBTDH, DJLX DJLX01,GET_DJLX(DJLX) DJLX, CZLX,DECODE(CZLX,0,'入库',1,'出库') CZLX01,
+          		GSXX01, GSMC,XH THDH,BZ,SPXX01,SPBM,SPMC,JLDW,DJSL,SMSPNM,SMSPBM,SMSPMC,DJSL YSMSL,YSFSL,THSL,0 SSSL,
+          		GLCM,CK01,CKMC,CG_BM01,CGBMMC,GYS_WLDW01,GYSMC,YSSL,BOMBJ,GSSL,SLBL,GSSL YSSLZFPD
+ 		   FROM VIEW_DSFHPSB_SPMX 
+ 		  WHERE GLCM=1
+ 		    AND SMBJ = 0
+ 		  <![CDATA[
+ 		    AND (CASE WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = #{GSXX01} AND JLCO01 = 387) = 0 AND DJLX = 7 THEN TO_CHAR(0)
+               WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = #{GSXX01} AND JLCO01 = 387) = 1 AND DJLX = 7 
+               AND (SELECT JLCO04 FROM JLCONF_GSXX WHERE JLCO01=100 AND GSXX01 = #{GSXX01})<>2 THEN
+               TO_CHAR(1) ELSE TO_CHAR(GET_100CSZT(DJLX, #{GSXX01})) END) = 1
+          ]]>
+ 	  <if test="DJSL == 1">
+ 		  <![CDATA[
+       	 	   AND ABS(DJSL)>0
+       	 ]]> 
+      </if>
+      <if test="DJSL == -1">
+       	 	   AND ABS(DJSL)=0
+      </if>
+      <if test="JLWBDH != null and JLWBDH != ''">
+		       AND JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(DJLX) = #{DJLX}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  <if test="CZLX01 != null and CZLX01 != ''">
+		       AND CZLX = #{CZLX01}
+	  </if>
+  	  <if test="WLDWMC != null and WLDWMC != ''">
+		       AND (GYSMC LIKE '%'||#{WLDWMC}||'%' OR GYS_WLDW01 LIKE '%'||#{WLDWMC}||'%')
+	  </if>
+	  <if test="CG_BM01 != null and CG_BM01 != ''">
+		       AND (CGBMMC LIKE '%'||#{CG_BM01}||'%' OR CG_BM01 LIKE '%'||#{CG_BM01}||'%')
+	  </if>
+	  <if test="CKMC != null and CKMC != ''">
+		       AND (CKMC LIKE '%'||#{CKMC}||'%' OR CK01 LIKE '%'||#{CKMC}||'%')
+	  </if>
+	  		   JL{CZY|CK01|CK_CZ|LIKE%}JL
+	  ORDER BY XH
+    </select>
+    
+    <select id="Query_CKSM_SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT TO_CHAR(A.FSRQ,'YYYY-MM-DD') ZDSJ,A.JLWBDH, A.DJHM, A.WBTDH, A.DJLX DJLX01,GET_DJLX(A.DJLX) DJLX, A.CZLX,DECODE(A.CZLX,0,'入库',1,'出库') CZLX01,
+          		A.BZ,A.SPXX01,S.SPXX02 SPBM,S.SPXX04 SPMC,S.JLDW01 JLDW,YSFSL DJSL,YSFSL YSMSL,(A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL) SSSL,
+          		S.SPXX28,A.CK01,C.CK02 CKMC,A.CGBM01 CG_BM01,B.BM02 CGBMMC,A.WLDW01 GYS_WLDW01,W.WLDW02 GYSMC
+ 		 FROM DSFHPSB A, SPXX S, CK C, BM B, WLDW W
+ 		 WHERE A.SPXX01 = S.SPXX01
+           AND A.CGBM01=B.BM01
+           AND A.CK01=C.CK01
+           AND A.WLDW01 = W.WLDW01
+ 		   AND S.SPXX28=1
+ 		   AND C.SMBJ = 0
+ 		  <![CDATA[
+       	   AND ABS(A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL)>0
+       	   AND (CASE WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = #{GSXX01} AND JLCO01 = 387) = 0 AND DJLX = 7 THEN TO_CHAR(0)
+               WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = #{GSXX01} AND JLCO01 = 387) = 1 AND DJLX = 7 
+               AND (SELECT JLCO04 FROM JLCONF_GSXX WHERE JLCO01=100 AND GSXX01=#{GSXX01})<>2 THEN
+               TO_CHAR(1) ELSE TO_CHAR(GET_100CSZT(DJLX, #{GSXX01})) END) = 1
+           ]]>
+      <if test="DJSJQ != null and DJSJQ != ''">
+		<![CDATA[    
+			AND A.FSRQ >= TO_DATE(#{DJSJQ},'YYYY-MM-DD')
+		]]>
+	  </if>
+	  <if test="DJSJZ != null and DJSJZ != ''">
+		<![CDATA[ 
+			AND A.FSRQ <= TO_DATE(#{DJSJZ},'YYYY-MM-DD') + 1
+		]]>
+	  </if>
+      <if test="JLWBDH != null and JLWBDH != ''">
+		       AND A.JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND A.GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(A.DJLX) = #{DJLX}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(A.CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  <if test="CZLX01 != null and CZLX01 != ''">
+		       AND A.CZLX = #{CZLX01}
+	  </if>
+  	  <if test="WLDWMC != null and WLDWMC != ''">
+		       AND (W.WLDW02 LIKE '%'||#{WLDWMC}||'%' OR A.WLDW01 LIKE '%'||#{WLDWMC}||'%')
+	  </if>
+	  <if test="CG_BM01 != null and CG_BM01 != ''">
+		       AND (B.BM02 LIKE '%'||#{CG_BM01}||'%' OR A.CGBM01 LIKE '%'||#{CG_BM01}||'%')
+	  </if>
+	  <if test="CKMC != null and CKMC != ''">
+		       AND (C.CK02 LIKE '%'||#{CKMC}||'%' OR A.CK01 LIKE '%'||#{CKMC}||'%')
+	  </if>
+	  		   JL{CZY|C.CK01|CK_CZ|LIKE%}JL
+    </select>
+    <!--借还单机器码查询  -->
+    <select id="JHDJQM_CKSM_SPXX" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT B.JHDI03 JQM01,B.SPXX01
+    	  FROM JHD A, JHDITEM B
+    	 WHERE A.GSXX01 = B.GSXX01
+    	   AND A.JHD01 = B.JHD01
+    	   AND B.JHDI03 IS NOT NULL
+    	   AND A.JLWBDH=#{JLWBDH}
+    	   AND A.GSXX01=#{GSXX01}
+    </select>
+    <!--转仓单  -->
+    <select id="ZCD" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT DISTINCT JLWBDH,DECODE(CZLX, 0, '入库', 1, '出库') CZLX01,CZLX,CK01,CKMC
+ 		   FROM VIEW_DSFHPSB_SPMX 
+ 		  WHERE GLCM=1
+ 		  <![CDATA[
+     	 	AND ABS(DJSL)>0
+     	 	AND (CASE WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = #{GSXX01} AND JLCO01 = 387) = 0 AND DJLX = 7 THEN TO_CHAR(0)
+            WHEN (SELECT JLCO04 FROM JLCONF_GSXX WHERE GSXX01 = #{GSXX01} AND JLCO01 = 387) = 1 AND DJLX = 7 
+            AND (SELECT JLCO04 FROM JLCONF_GSXX WHERE JLCO01=100 AND GSXX01=#{GSXX01})<>2 THEN
+            TO_CHAR(1) ELSE TO_CHAR(GET_100CSZT(DJLX, #{GSXX01})) END) = 1
+       	 ]]>
+      <if test="JLWBDH != null and JLWBDH != ''">
+		       AND JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(DJLX) = #{DJLX}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  		   JL{CZY|CK01|CK_CZ|LIKE%}JL
+    </select>
+    
+    <select id="QTXX" parameterType="java.util.Map" resultType="java.util.Map">
+    	<if test="DJLX01 == 8">
+			SELECT WLDW01,
+			       (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) WLDW02,
+			       TO_CHAR(PFD04, 'YYYY-MM-DD') KDRQ,
+			       PFD29 SHR,
+			       FLFS01,
+			       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) FLFS02
+			  FROM PFD A
+			 WHERE JLWBDH = #{JLWBDH}
+	  	</if>
+		<if test="DJLX01 == 9">
+			SELECT WLDW01,
+			       (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) WLDW02,
+			       TO_CHAR(YFD03, 'YYYY-MM-DD') KDRQ,
+			       YFD07 SHR,
+			       FLFS01,
+			       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) FLFS02
+			  FROM YFD A
+			 WHERE JLWBDH = #{JLWBDH}
+		</if>
+    	<if test="DJLX01 == 10">
+			SELECT LSD04 WLDW02,
+			       TO_CHAR(LSD06, 'YYYY-MM-DD') KDRQ,
+			       LSD37 SHR,
+			       FLFS01,
+			       (SELECT FLFS02 FROM FLFS WHERE FLFS01 = A.FLFS01) FLFS02
+			  FROM LSD A
+			 WHERE JLWBDH = #{JLWBDH}
+	  	</if>
+	  	<if test="DJLX01 == 51">
+			SELECT WLDW01,
+				   (SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.WLDW01) WLDW02,
+			       TO_CHAR(JHD02, 'YYYY-MM-DD') KDSJ,
+			       JHD09 SHR
+			  FROM JHD A
+			 WHERE JLWBDH = #{JLWBDH}
+	  	</if>
+    </select>
+    
+    <!-- 收发货扫码筛选单条数据 -->
+    <select id="SFHSM" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT DISTINCT A.DJLX DJLX01,GET_DJLX(A.DJLX) DJLX,(SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,A.CK01,DECODE(A.CZLX, 0, '入库', 1, '出库') CZLX01,
+           A.CZLX,A.GYS_WLDW01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.GYS_WLDW01) GYSMC,(SELECT BM02 FROM BM WHERE BM01 = A.CG_BM01) CGBMMC,A.BZ BZ,
+           A.CG_BM01,A.JLWBDH
+      FROM VIEW_DSFHPSB_SPMX A, CKSP C, SPXX S
+     WHERE A.SPXX01 = S.SPXX01
+       AND A.SPXX01 = C.SPXX01(+)
+       AND A.CK01 = C.CK01(+)
+       AND A.SPSX = C.CKSP12(+)
+       AND A.GYS_WLDW01 = C.WLDW01(+)
+       AND A.GSXX01 = C.GSXX01(+)
+       AND A.CG_BM01 = C.BM01(+)
+       AND A.BZHL = C.CKSP01(+)
+       <![CDATA[
+       	 	   AND ABS(A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL)>0
+       	 ]]>
+      <if test="JLWBDH != null and JLWBDH != ''">
+		       AND A.JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND A.GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(A.DJLX) = #{DJLX}
+	  </if>
+	  <if test="DJLX01 != null and DJLX01 != ''">
+		       AND A.DJLX = #{DJLX01}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(A.CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  <if test="CZLX01 != null and CZLX01 != ''">
+		       AND A.CZLX = #{CZLX01}
+	  </if>
+  	  <if test="WLDWMC != null and WLDWMC != ''">
+		       AND (A.GYSMC LIKE '%'||#{WLDWMC}||'%' OR A.GYS_WLDW01 LIKE '%'||#{WLDWMC}||'%')
+	  </if>
+	  <if test="CG_BM01 != null and CG_BM01 != ''">
+		       AND (A.CGBMMC LIKE '%'||#{CG_BM01}||'%' OR A.CG_BM01 LIKE '%'||#{CG_BM01}||'%')
+	  </if>
+	  <if test="CKMC != null and CKMC != ''">
+		       AND (A.CKMC LIKE '%'||#{CKMC}||'%' OR A.CK01 LIKE '%'||#{CKMC}||'%')
+	  </if>
+	  <if test="DJSJQ != null and DJSJQ != ''">
+		<![CDATA[    
+			AND A.FSRQ >= TO_DATE(#{DJSJQ},'YYYY-MM-DD')
+		]]>
+	  </if>
+	  <if test="DJSJZ != null and DJSJZ != ''">
+		<![CDATA[ 
+			AND A.FSRQ <= TO_DATE(#{DJSJZ},'YYYY-MM-DD') + 1
+		]]>
+	  </if>
+	  JL{CZY|CK01|A.CK01|LIKE%}JL
+    </select>
+    <!-- 收发货扫码 -->
+    <select id="CKSFH_CKSM" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT A.JLWBDH,A.YTDH,TO_CHAR(A.FSRQ, 'YYYY-MM-DD') FSRQ,(CASE WHEN GLCM = 0 THEN -1 WHEN BOMBJ=0 THEN 0 ELSE A.XH END) THDH,(CASE WHEN GLCM = 0 THEN A.XH WHEN BOMBJ=0 THEN A.XH ELSE -1 END) SFXH,
+           A.DJLX DJLX01,GET_DJLX(A.DJLX) DJLX,A.CZLX CZLX,DECODE(A.CZLX, 0, '入库', 1, '出库') CZLX01,A.YSFSL,A.DJHM,A.CK01,(SELECT CK11 FROM CK WHERE CK01 = A.CK01) XLCKBJ,
+           S.JLDW01 JLDW,(case when CZLX = 0 AND DJLX = 7 THEN ((SELECT SSFSL FROM DSFHPSB WHERE DJHM = A.DJHM AND THDH = A.XH AND GSXX01 = A.GSXX01 AND DJLX = A.DJLX AND CZLX = 1) - A.SSFSL)
+           ELSE (A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL) END) DJSL,A.THSL,A.WBTDH,(case when CZLX = 0 AND DJLX = 7 THEN (SELECT SSFSL FROM DSFHPSB WHERE DJHM = A.DJHM
+           AND THDH = A.XH AND GSXX01 = A.GSXX01 AND DJLX = A.DJLX AND CZLX = 1) ELSE 0 END) YDFHSL,GET_SPSX_V10(A.SPSX) SPSXMC,A.SPSX,A.HSDJ,A.BZHL,
+           (CASE WHEN A.GLCM = 0 THEN (case when CZLX = 0 AND DJLX = 7 THEN ((SELECT SSFSL FROM DSFHPSB WHERE DJHM = A.DJHM AND THDH = A.XH AND GSXX01 = A.GSXX01 AND DJLX = A.DJLX
+           AND CZLX = 1) - A.SSFSL) ELSE (A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL) END) ELSE 0 END)KPSL,0 JSSL,A.SSFSL WKPSL,A.ZFSL,A.JSSL YJSSL,(SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,
+           (SELECT WLDW01 FROM CK WHERE CK01 = A.CK01) WCGYS,A.BZ BZ,S.SPXX28 GLCM,A.CG_BM01,A.GYS_WLDW01,A.XSBM01,(SELECT WLDW02 FROM WLDW WHERE WLDW01 = A.GYS_WLDW01) GYSMC,
+           (SELECT BM02 FROM BM WHERE BM01 = A.CG_BM01) CGBMMC,(SELECT BM02 FROM BM WHERE BM01 = A.XSBM01) XSBMMC,A.SMSPNM,GET_JLCONF_F(100, A.GSXX01) CS100,
+           C.CKSP03 BGS,S.PPB02 SPPPMC,A.GLCM,A.BOMBJ,(CASE WHEN A.GLCM = 0 THEN -1 WHEN A.BOMBJ=0 THEN 0 ELSE A.SPXX01 END)SPXX01,(CASE WHEN A.GLCM = 0 THEN A.SPXX01 WHEN A.BOMBJ=0 THEN A.SPXX01 ELSE -1 END) SFSPXX01,
+           A.SMSPBM SPBM,A.SMSPMC SPMC,CASE WHEN (SELECT COUNT(FWDI01) FROM CSS_FWDITEM WHERE DJHM = A.JLWBDH AND DJLX = A.DJLX AND GSXX01 = A.GSXX01) > 0 THEN
+           '配送' ELSE '自提' END PSFS,(CASE WHEN A.GLCM = 0 THEN -1 WHEN A.BOMBJ=0 THEN 0 ELSE A.GSSL END)GSSL, (CASE WHEN A.GLCM = 0 THEN -1 WHEN A.BOMBJ=0 THEN 0 ELSE A.GSSL END) YSSLZFPD,
+           (CASE WHEN A.GLCM = 0 THEN -1 WHEN A.BOMBJ=0 THEN 0 ELSE A.SLBL END) SLBL, (CASE WHEN A.GLCM = 0 THEN '普通商品' WHEN A.BOMBJ=0 THEN '串码商品' ELSE to_char(A.SPBM) END) SUMSPBM,
+           (CASE WHEN A.GLCM = 0 THEN '' WHEN A.BOMBJ=0 THEN '' ELSE to_char(A.SPMC) END) SUMSPMC,0 SSSL,0 YSSL
+      FROM VIEW_DSFHPSB_SPMX A, CKSP C, SPXX S
+     WHERE A.SPXX01 = S.SPXX01
+       AND A.SPXX01 = C.SPXX01(+)
+       AND A.CK01 = C.CK01(+)
+       AND A.SPSX = C.CKSP12(+)
+       AND A.GYS_WLDW01 = C.WLDW01(+)
+       AND A.GSXX01 = C.GSXX01(+)
+       AND A.CG_BM01 = C.BM01(+)
+       AND A.BZHL = C.CKSP01(+)
+      <![CDATA[
+       	 	   AND ABS(A.YSFSL - A.SSFSL - A.ZFSL - A.JSSL)>0
+       	 ]]>
+      <if test="JLWBDH != null and JLWBDH != ''">
+		       AND A.JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND A.GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(A.DJLX) = #{DJLX}
+	  </if>
+	  <if test="DJLX01 != null and DJLX01 != ''">
+		       AND A.DJLX = #{DJLX01}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(A.CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  <if test="CZLX01 != null and CZLX01 != ''">
+		       AND A.CZLX = #{CZLX01}
+	  </if>
+  	  <if test="WLDWMC != null and WLDWMC != ''">
+		       AND (A.GYSMC LIKE '%'||#{WLDWMC}||'%' OR A.GYS_WLDW01 LIKE '%'||#{WLDWMC}||'%')
+	  </if>
+	  <if test="CG_BM01 != null and CG_BM01 != ''">
+		       AND (A.CGBMMC LIKE '%'||#{CG_BM01}||'%' OR A.CG_BM01 LIKE '%'||#{CG_BM01}||'%')
+	  </if>
+	  <if test="CKMC != null and CKMC != ''">
+		       AND (A.CKMC LIKE '%'||#{CKMC}||'%' OR A.CK01 LIKE '%'||#{CKMC}||'%')
+	  </if>
+	  ORDER BY A.GLCM,A.XH
+	  JL{CZY|CK01|A.CK01|LIKE%}JL
+    </select>
+    <!-- 收发货扫码查询转仓单区分收发货 -->
+    <select id="CKSFH_ZCD" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT DISTINCT JLWBDH,DECODE(CZLX, 0, '入库', 1, '出库') CZLX01,CZLX,CK01,CKMC
+ 		   FROM VIEW_DSFHPSB_SPMX 
+ 		  WHERE 1=1
+ 		  <![CDATA[
+       	 	   AND ABS(DJSL)>0
+       	 ]]>
+      <if test="JLWBDH != null and JLWBDH != ''">
+		       AND JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(DJLX) = #{DJLX}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  <if test="DJLX01 != null and DJLX01 != ''">
+		       AND DJLX01 = #{DJLX01}
+	  </if>
+	  <if test="CZLX01 != null and CZLX01 != ''">
+		       AND CZLX = #{CZLX01}
+	  </if>
+	  		   JL{CZY|CK01|CK_CZ|LIKE%}JL
+    </select>
+    <!--收发货扫码配货单  -->
+    <select id="CKSFH_PHD" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT DISTINCT JLWBDH,DECODE(CZLX, 0, '入库', 1, '出库') CZLX01,CZLX,CK01,CKMC
+ 		   FROM VIEW_DSFHPSB_SPMX 
+ 		  WHERE 1=1
+ 		  <![CDATA[
+       	 	   AND ABS(DJSL)>0
+       	 ]]>
+      <if test="JLWBDH != null and JLWBDH != ''">
+		       AND JLWBDH = #{JLWBDH}
+	  </if>
+	  <if test="GSXX01 != null and GSXX01 != ''">
+		       AND GSXX01 = #{GSXX01}
+	  </if>
+	  <if test="DJLX != null and DJLX != ''">
+		       AND GET_DJLX(DJLX) = #{DJLX}
+	  </if>
+	  <if test="CZLX != null and CZLX != ''">
+		       AND DECODE(CZLX,0,'入库',1,'出库') = #{CZLX}
+	  </if>
+	  		   JL{CZY|CK01|CK_CZ|LIKE%}JL
+    </select>
+</mapper>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="form.scm.jcdy.dycgfs">
+	<FIELD attrname="CGFSMC" fieldtype="string" allownull="N" name="采购方式名称" />
+	</JLConfig>	 
+</root>

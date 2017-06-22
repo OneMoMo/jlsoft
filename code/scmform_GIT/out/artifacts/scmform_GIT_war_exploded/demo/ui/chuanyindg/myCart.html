@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>购物车</title>
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_base/css/public.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/jl_o2o_phone.css" />
+<link rel="stylesheet" type="text/css" href="../../../jllib/jllib_mobile/o2o/css/mobiscroll.custom-2.17.0.min.css" />
+<link rel="stylesheet" type="text/css" href="css/CYCSS.css" />
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/pubConfig.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../lib/JQuery/js/jquery.md5.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/jl-all.js"></script>
+<script type="text/javascript" src="../../../jllib/form/js/JLForm.js"></script>
+<script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body>
+
+<div class="main" style="padding-bottom:2.7rem;">
+<div class="cart_title bor_bottom">
+<span class="font_gray">共有<b class="ml2 mr5 font_color">15</b>件商品。</span>
+<a class="fr" id="bg_ui_title">编辑</a>
+</div>
+<div class="w12 cart_shop_pro">
+  <div class="w12 cart_pro_list bor_bottom">
+    <i class="fa fa-check-circle font_color"></i>
+    <div class="pro_list_info w12">
+      <div class="pro_list_name" onclick="window.location.href='proMain.html'">海信空调KFR-26GW/27BP内海信空调KFR-26GW/27BP内海信空调KFR-26GW/27BP内</div>
+      <div class="pro_list_pic w06 mt20"><span class="w12 pro_pic"><font>￥</font><b>2999</b><label>.00</label></span></div>
+      <div class="fr mt10 number"><span>-</span><input type="number" value="1"><span>+</span></div>
+    </div>
+  </div>
+</div>
+<div class="cart_footer" id="footer_yi_main01">
+  <i class="fa fa-circle-thin fl ml10"></i>
+  <span class="fl">全选</span>
+  <span class="fl ml20 font_color">合计：￥29999.00</span>
+  <div class="fr w03 jl_btn btn_color" onClick="window.location.href='confirmOrder.html'">去结算</div>
+</div>
+<div class="cart_footer hide" id="footer_yi_main02">
+  <i class="fa fa-circle-thin fl ml10"></i>
+  <span class="fl">全选</span>
+  <div class="btn ml20">删 除</div>
+  <div class="btn">关 注</div>
+  <div class="btn">收 藏</div>
+</div>
+</div>
+
+<footer>
+<dl class="w03" onClick="window.location.href='index.html'">
+  <dt><i class="fa fa-home"></i></dt>
+  <dd>首页</dd>
+</dl>
+<dl class="w03 xuan" onClick="window.location.href='myCart.html'">
+  <dt><i class="fa fa-cart-plus"></i></dt>
+  <dd>购物车</dd>
+  <em>15</em>
+</dl>
+<dl class="w03" onClick="window.location.href='myOrder.html'">
+  <dt><i class="fa fa-file-text"></i></dt>
+  <dd>订单</dd>
+</dl>
+<dl class="w03" onClick="window.location.href='userIndex.html'">
+  <dt><i class="fa fa-user"></i></dt>
+  <dd>我的</dd>
+</dl>
+</footer>
+
+</body>
+<script>
+var a = new JLForm();
+a.setTab(document);
+a.initForm();
+</script>
+</html>

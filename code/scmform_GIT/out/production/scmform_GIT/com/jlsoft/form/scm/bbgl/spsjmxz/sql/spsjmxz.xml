@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SPSJMXZ">
+	<select id="querySPSJZ" parameterType="Map" resultType="java.util.Map">
+	   SELECT A.SPXX01 SPNM, 
+       B.SPXX02 SPBM, 
+       B.SPXX04 SPMC, 
+       B.SPFL01 FLBM, 
+       B.SPFL02 FLMC, 
+       B.PPB01 PPBM, 
+       B.PPB02 PPMC, 
+       A.GSXX01, 
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC, 
+       B.JLDW01, 
+       A.BM01 BMBM, 
+       C.BM02 BMMC, 
+       A.WLDW01 GYSBM,  
+       D.WLDW02 GYSMC, 
+       A.BMSP05 SPSXBM,
+        get_spsx_v10(A.BMSP05) SPSX,  
+      <!-- (SELECT SPSXMC FROM SPSX WHERE SPSX01 = A.BMSP05) SPSX, -->
+       A.BMSP01 SJZ, 
+       A.BMSP02 BGS, 
+       A.BMSP03 KMS, 
+       A.BMSP04 YFZ ,
+       B.PPB02 SPPPMC,
+       B.PPB01 PPB01,
+       GET_SPFLDL(B.SPFL01) SPDL
+  FROM BMSP A, SPXX B, BM C, WLDW D 
+ WHERE A.SPXX01 = B.SPXX01 
+   AND A.BM01 = C.BM01 
+   AND A.WLDW01 = D.WLDW01  
+		   <if test="SP != null and SP != ''">
+		       <foreach item="item" index="index" collection="SP"  open=" AND (" separator=" or " close=")"> 
+		           UPPER(B.SPXX02) LIKE  UPPER('%'|| #{item} ||'%') OR  UPPER(B.SPXX04) LIKE UPPER('%'||#{item}||'%') OR(B.SPPYM) LIKE  UPPER('%'||#{item}||'%') 
+		       </foreach> 
+	 	   </if>
+		   
+		   <if test="WLDW != null and WLDW != ''">
+		       <foreach item="item" index="index" collection="WLDW"  open=" AND (" separator=" or " close=")"> 		      
+		           D.WLDW02 LIKE '%'||#{item}||'%' OR D.WLDW01 LIKE '%'||#{item}||'%' OR D.WLDW03 LIKE '%'||#{item}||'%'
+		       </foreach> 
+		   </if>
+		  <!--  <if test="CK != null and CK != ''">
+		       <foreach item="item" index="index" collection="CK"  open=" AND (" separator=" or " close=")"> 
+		           CKSP.CK01 = #{item}
+		       </foreach>
+		   </if> -->
+		   <if test="SPSX != null and SPSX != ''">
+    	 AND A.BMSP05 = #{SPSX}
+    </if>
+		   <if test="CGBM != null and CGBM != ''">
+		       <foreach item="item" index="index" collection="CGBM"  open=" AND (" separator=" or " close=")"> 
+			       C.BM01 = #{item}
+			   </foreach> 	         
+		   </if>
+		   <if test="PP01 != null and PP01 != ''">
+	           <foreach item="item" index="index" collection="PP01"  open=" AND (" separator=" or " close=")"> 
+	               B.PPB01 = #{item}
+	           </foreach>
+	       </if>
+	        <if test="SPFL != null and SPFL != ''">
+	           <foreach item="item" index="index" collection="SPFL"  open=" AND (" separator=" or " close=")">
+	               B.SPFL01 LIKE #{item}||'%'
+	           </foreach>
+	       </if>
+	        JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+            JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+            JL{CZY|D.WLDW01|WLDW_CZ|inS}JL
+	</select>
+	
+	<select id="querySPSJMXZ" parameterType="Map" resultType="java.util.Map">
+		SELECT TO_CHAR(A.BMSPK01, 'yyyy-mm-dd HH24:mi:ss') RQ,
+       DECODE(substr(get_jlwbdh_td(A.BMSPK02, A.BMSPK03, a.gsxx01),0,5),'GCZBD','直拨单',get_djlx(A.BMSPK02))DJLX,
+       A.BMSPK03 DJBH,
+       get_jlwbdh_td(A.BMSPK02, A.BMSPK03, a.gsxx01) DJHM,
+       CONCAT(TO_CHAR(A.BMSPK04), CONCAT('-', TO_CHAR(A.BMSPK05))) AS PCH,
+       A.BMSPK08 BQFSSL,
+       ROUND(A.BMSPK09 *
+             (1 + (SELECT JXSL01 FROM WLDW WHERE WLDW01 = A.BMSPK17)),
+             2) HSBQCBJE,
+       A.BMSPK11 BMJCSL,
+       A.BMSPK12 WSBMJCJE,
+       A.BMSPK15 YFJCS,
+       A.BMSPK20 BZ,
+       ROUND(A.BMSPK06 *
+             (1 + (SELECT JXSL01 FROM WLDW WHERE WLDW01 = A.BMSPK17)),
+             4) HSCBDJ,
+       A.BMSPK07 HSXSDJ,
+       A.BMSPK13 HSXSJE,
+       A.CK01,
+       (SELECT CK02 FROM CK WHERE CK01 = A.CK01) CKMC,
+       R.RKD03 GCCKDH
+  FROM BMSPKPZ A, SPXX B, BM C,RKD R
+ WHERE A.SPXX01 = B.SPXX01
+   AND A.BM01 = C.BM01
+   AND get_jlwbdh_td(A.BMSPK02, A.BMSPK03, a.gsxx01)=R.JLWBDH
+   AND A.BMSPK21 = #{SPSXBM}
+     JL{CZY|A.GSXX01|CZGS_CZ|LIKE%}JL
+     JL{CZY|A.BM01|BM_CZ|LIKE%}JL
+		     <if test="SPNM != null and SPNM != ''">AND A.SPXX01 = #{SPNM}</if> 
+		   <if test="DJLX != null and DJLX != ''">AND A.BMSPK02 = #{DJLX}</if>
+		    <if test="BMBM != null and BMBM != ''">AND A.BM01 = #{BMBM}</if>
+		    <if test="GYSBM != null and GYSBM != ''">AND A.BMSPK17 = #{GYSBM}</if>
+		    
+		   <if test="RQ_S != null and RQ_S != ''">AND A.BMSPK01 &gt;= TO_DATE(#{RQ_S} || '00:00:00', 'yyyy-mm-dd HH24:mi:ss')</if>
+		   <if test="RQ_E != null and RQ_E != ''">AND A.BMSPK01 &lt;= TO_DATE(#{RQ_E} || '23:59:59', 'yyyy-mm-dd HH24:mi:ss')</if>
+	ORDER BY RQ ASC, DJLX ASC
+	</select>
+</mapper>

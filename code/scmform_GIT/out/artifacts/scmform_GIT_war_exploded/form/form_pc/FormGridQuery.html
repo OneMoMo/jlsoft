@@ -1,0 +1,181 @@
+<script type="text/javascript">
+
+var formGridQuery = {};
+
+
+$(document).ready(function(){
+	var modal = $(".jl_poplayer:not(:hidden)");
+
+	formGridQuery = {};
+	formGridQuery.config = JLQuery.config;
+	var queryGridWidth = JL.isNull(formGridQuery.config.queryGridWidth)? 800: formGridQuery.config.queryGridWidth;
+	modal.find("#modal_search").css("width", queryGridWidth+"px");
+	modal.find("#d_querygrid").css("width", queryGridWidth+"px");
+	console.info(formGridQuery.config);
+	formGridQuery.config.callback = function(){
+		var list = formGridQuery.querygrid.getSelected();
+		if(!JL.isNull(formGridQuery.detailgrid)){
+	  		var listItem = formGridQuery.detailgrid.getSelected();
+	  		$.extend(list[0], {"item":listItem});
+		}
+		$(".jl_poplayer:not(:hidden)").parent().remove();
+		JLQuery.close(list);
+	}
+	formGridQuery.config.query = function(){
+		var queryField = {};
+		
+		var texts = modal.find("#modal_search").find(":text");
+		for(var i=0;i<texts.length;i++){
+			var text = $(texts[i]);
+			if(!JL.isNull(text.val()) && text.val()!="请选择"){
+				queryField[text.attr("name")] = text.val();
+			}
+		}
+		
+		if(!JL.isNull(formGridQuery.config.modalField)){
+			$.each(formGridQuery.config.modalField, function(key, value){
+				if(!JL.isNull(value)){
+					queryField[key] = value;
+				}
+			});
+		}
+		
+		var XmlData={};
+		XmlData["CX01"] = formGridQuery.config.querybh;
+		XmlData["queryField"] = $.extend(queryField,userInfo);
+		
+		var ajaxJson = {};
+		ajaxJson["src"] = "jlquery/selectCustom.do?rid="+Math.random();
+		ajaxJson["data"] = {"XmlData":JSON.stringify(XmlData)};
+		var resultData = JL.ajax(ajaxJson);
+		if(!JL.isNull(resultData)){
+			var data = resultData["data"];
+			if(typeof resultData == "string"){
+				JL.tip(resultData);
+				return false;
+			}else if(data.length <= 0){
+				JL.tip("未查到任何信息");
+				return false;
+			}
+			formGridQuery.querygrid.removeAll();
+			formGridQuery.querygrid.loadData(data);
+		}
+	}
+	
+	var querybh = formGridQuery.config["querybh"];
+	var ajaxJson = {};
+	ajaxJson["src"] = "FormQuery/getConfig.do?rid="+Math.random();
+	ajaxJson["data"] = {"XmlData":JSON.stringify({"CX01":querybh})};
+	var resultData = JL.ajax(ajaxJson);
+	if(!JL.isNull(resultData)){
+		resultData = resultData.data;
+		$.extend(formGridQuery.config, resultData);
+	}
+	
+	if(!JL.isNull(resultData)){
+		var CXTJ = resultData["CXTJ"];
+		var CXJG = resultData["CXJG"];
+		var headers = [];
+		$.each(CXJG, function(i,val){
+			var header = {};
+			header["id"] = val["JG01"];
+			header["name"] = val["JG02"];
+			if(val["JG03"] > 0){
+				header["width"] = val["JG03"];
+			}
+			if(val["JG04"] != 0){
+				header["hidden"] = true;
+			}
+			headers.push(header);
+		});
+		
+		var buttons = [{
+			text:"确定",
+			func:function(){
+				formGridQuery.config.callback();
+			}
+		}];
+		
+		var queryGrid = {
+			"jlid": "JLGrid",
+			"obj": modal.find("#querygrid"),
+			"headers": headers,
+			"buttons": buttons,
+			"radio": true,
+			"multi": false,
+			"height": 250,
+			"listener":{
+				"rowdblclick":function(grid, data, rowindex){
+					formGridQuery.config.callback();
+				}
+			}
+		};
+		
+		if(!JL.isNull(formGridQuery.config.multi)){
+			queryGrid.multi = formGridQuery.config.multi;
+		}
+		console.info($(".jl_poplayer #d_querygrid"));
+		formGridQuery.querygrid = JL.initPlugIn($(".jl_poplayer #d_querygrid"), "querygrid", queryGrid);
+
+
+		var modal_search = $(".jl_poplayer:not(:hidden) > [data-querypage-index]");
+		if(!JL.isNull(resultData["CX07"])){
+			modal_search.load(resultData["CX07"]+"?rid="+Math.random(),function(){
+				var obj = $(this);
+				var modalField = JLQuery["config"]["modalField"];
+				if(!JL.isNull(modalField)){
+			    	$.each(modalField,function(key,value){
+			    		obj.find("[name='"+key+"']").val(value);
+			    	});
+				}
+				if(!JL.isNull(formGridQuery.config.autoquery)){
+		    		formGridQuery.config.query();
+		    	}
+		    });
+		}else{
+			var jl_page = $("<div class='jl_page'><div class='page_title'><h2>"+resultData["CX02"]+"</h2></div></div>")
+			jl_page.appendTo(modal_search);
+			var jl_form = $("<div class='jl_form'></div>");
+			jl_form.appendTo(modal_search);
+			var dl = $("<dl class='form'></dl>");
+			dl.appendTo(jl_form);
+			
+			for(var i=0; i<CXTJ.length; i++){
+				var TJ = CXTJ[i];
+				var dt = $("<dt>");
+				dt.addClass("width_10");
+				dt.append("<b>"+TJ["TJ03"]+"</b>");
+				dt.appendTo(dl);
+				var dd = $("<dd>");
+				dd.addClass("width_20");
+				dd.appendTo(dl);
+				var input = $("<input type='text' name='"+TJ["TJ02"]+"' />"); 
+				input.appendTo(dd);
+			}
+			
+	    	if(!JL.isNull(formGridQuery.config.autoquery)){
+	    		formGridQuery.config.query();
+	    	}
+		}
+		modal_search.hide();
+	}
+	
+	$(".jl_poplayer:not(:hidden)").parent().find(".fa-ellipsis-h").click(function(event){
+		var data_name = $(this).prev().attr("data-name");
+		var name = JLQuery["config"]["init"][data_name];
+		var value = $(".jl_poplayer:not(:hidden)").parent().find(":text").val();
+		formGridQuery.config.modalField[name] = value;
+		formGridQuery.config.query();
+	});
+	$(".jl_poplayer:not(:hidden)").parent().find("> :text").keydown(function(event){
+		var data_name=$(this).attr("data-name");
+		if(event.keyCode == 13){
+			var name = JLQuery["config"]["init"][data_name];
+			formGridQuery.config.modalField[name] = this.value;
+			formGridQuery.config.query();
+		}
+	});
+});
+</script>
+<div id="modal_search" data-querypage-index="" ></div>
+<div class="modal_body" id="d_querygrid" style="float: left;"></div>

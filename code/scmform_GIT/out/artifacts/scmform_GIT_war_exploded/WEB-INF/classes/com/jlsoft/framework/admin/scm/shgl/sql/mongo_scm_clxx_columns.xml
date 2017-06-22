@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_CLXX.CSS_CLXX">
+	  <FIELD attrname="search" format='{"$or":[{"CLXX":{"$regex":"#search#"}},{"HYGSMC":{"$regex":"#search#"}},{"CLMC":{"$regex":"#search#"}},{"CPH":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="车辆" />
+      <FIELD attrname="S_VALUE" fieldtype="Map" allownull="Y" name="状态" />
+	</JLConfig>
+</root>
