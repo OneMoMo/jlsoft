@@ -1,0 +1,6 @@
+MDKZSQ.getPluginObj("MDLX").disabled(false);
+				MDKZSQ.getPluginObj("SJBM").disabled(true);
+				//将上级部门禁用
+				//MDKZSQ.getTab().find("[name='SJBM']").attr("readonly","readonly");
+				//隐藏掉搜索图标
+				//MDKZSQ.getTab().find("[name='ddsjbm'] > div > span").hide();

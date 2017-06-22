@@ -1,0 +1,8 @@
+海南正式库
+
+
+//家用保护期调整JYBHQTZ_HN
+http://127.0.0.1:8084/scmform/AutoZFDLD/JYBHQTZ_HN.do
+
+//商用用保护期调整SYBHQTZ_HN
+http://127.0.0.1:8084/scmform/AutoZFDLD/SYBHQTZ_HN.do

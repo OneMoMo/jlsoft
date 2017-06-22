@@ -1,0 +1,6 @@
+       (SELECT 
+         (SELECT SPFL02
+            FROM SPFL
+          WHERE A.SPFL01 LIKE SPFL01 || '%' AND SPFL03 = 1) SJFLMC                    
+         FROM SPFL A
+        WHERE SPFL01 =S.SPFL01 ) SPDL,

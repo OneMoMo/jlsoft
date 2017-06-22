@@ -1,0 +1,5063 @@
+﻿/* 0 */
+{
+  "_id" : ObjectId("58c276e002d09cfc2e064535"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "23423432",
+  "SWDJH" : "4214234",
+  "HYXX01" : "",
+  "JLBH" : 1,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "FXZQ" : "2421",
+  "SHRMC1" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "fsfsdfsdf",
+  "WLDWMC" : "王定福",
+  "HY" : { },
+  "jlbh" : 1,
+  "ZDRQ" : "2017-03-10 17:46:03",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "",
+  "EDKZ01" : [],
+  "JSBZ" : {
+    "value" : "CNY",
+    "key" : "01"
+  },
+  "JGGK01" : [],
+  "CJBM" : "324321432432",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "",
+  "YFJZFS" : { },
+  "YHZH" : "1231321421",
+  "SMTP" : "2134234213",
+  "ZFFS" : {
+    "value" : "冲预收款",
+    "key" : "1"
+  },
+  "JC" : "sss",
+  "CZHM" : "2142413",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "EDKZ" : { },
+  "LXDH" : "13423342134",
+  "KHYH" : "sfsafsdf23",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "13242134",
+  "YWY" : [],
+  "SHRQ1" : "",
+  "KSLX" : { },
+  "_ts" : "2017-03-10 17:50:24",
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "天津市",
+      "LAST" : "120000",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "和平区",
+      "LAST" : "120100",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "DJRMC" : "",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "WDF",
+  "YZBM" : "23424",
+  "SHYJ1" : "",
+  "ts" : "2017-03-10 17:50:24"
+}
+
+/* 1 */
+{
+  "_id" : ObjectId("58c2771702d09cfc2e064536"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "23423432",
+  "SWDJH" : "4214234",
+  "HYXX01" : "",
+  "JLBH" : 2,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "FXZQ" : "2421",
+  "SHRMC1" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "fsfsdfsdf",
+  "WLDWMC" : "王定福",
+  "HY" : { },
+  "jlbh" : 2,
+  "ZDRQ" : "2017-03-10 17:46:03",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "",
+  "EDKZ01" : [],
+  "JSBZ" : {
+    "value" : "CNY",
+    "key" : "01"
+  },
+  "JGGK01" : [],
+  "CJBM" : "324321432432",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "",
+  "YFJZFS" : { },
+  "YHZH" : "1231321421",
+  "SMTP" : "2134234213",
+  "ZFFS" : {
+    "value" : "冲预收款",
+    "key" : "1"
+  },
+  "JC" : "sss",
+  "CZHM" : "2142413",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "EDKZ" : { },
+  "LXDH" : "13423342134",
+  "KHYH" : "sfsafsdf23",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "13242134",
+  "YWY" : [],
+  "SHRQ1" : "",
+  "KSLX" : { },
+  "_ts" : "2017-03-10 17:51:19",
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "天津市",
+      "LAST" : "120000",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "和平区",
+      "LAST" : "120100",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "DJRMC" : "",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "WDF",
+  "YZBM" : "23424",
+  "SHYJ1" : "",
+  "ts" : "2017-03-10 17:51:19"
+}
+
+/* 2 */
+{
+  "_id" : ObjectId("58c2774302d09cfc2e064537"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "23423432",
+  "SWDJH" : "4214234",
+  "HYXX01" : "",
+  "JLBH" : 3,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "FXZQ" : "2421",
+  "SHRMC1" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "fsfsdfsdf",
+  "WLDWMC" : "王定福",
+  "HY" : { },
+  "jlbh" : 3,
+  "ZDRQ" : "2017-03-10 17:46:03",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "",
+  "EDKZ01" : [],
+  "JSBZ" : {
+    "value" : "CNY",
+    "key" : "01"
+  },
+  "JGGK01" : [],
+  "CJBM" : "324321432432",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "",
+  "YFJZFS" : { },
+  "YHZH" : "1231321421",
+  "SMTP" : "2134234213",
+  "ZFFS" : {
+    "value" : "冲预收款",
+    "key" : "1"
+  },
+  "JC" : "sss",
+  "CZHM" : "2142413",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "EDKZ" : { },
+  "LXDH" : "13423342134",
+  "KHYH" : "sfsafsdf23",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "13242134",
+  "YWY" : [],
+  "SHRQ1" : "",
+  "KSLX" : { },
+  "_ts" : "2017-03-10 17:52:03",
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "天津市",
+      "LAST" : "120000",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "和平区",
+      "LAST" : "120100",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "DJRMC" : "",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "WDF",
+  "YZBM" : "23424",
+  "SHYJ1" : "",
+  "ts" : "2017-03-10 17:52:03"
+}
+
+/* 3 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "afadsf",
+  "CWXTBM" : "300011",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "sdfas",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "sadfasd",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 7,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "asdf",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "214234",
+  "LXR" : "21431234",
+  "PYM" : "hfasjkf",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "110000",
+      "VALUE" : "北京市",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "110100",
+      "VALUE" : "东城区",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "143",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRMC1" : "",
+  "SHRQ" : "2017-03-10 19:57:28",
+  "SHRQ1" : "",
+  "SHYJ" : "EE",
+  "SHYJ1" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "fasdf",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "hfasjkf",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "2141243124",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 17:56:11",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c27cf502d03e2f027dac78"),
+  "_ts" : "2017-03-10 18:16:15",
+  "bdbh" : "1169",
+  "jlbh" : 7,
+  "ts" : "2017-03-10 19:57:32"
+}
+
+/* 4 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300012",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "sdfsdf",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "sdfsd",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 8,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "sdfsdf",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "243324",
+  "LXR" : "23423",
+  "PYM" : "HFJKSFKSJ",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "110000",
+      "VALUE" : "北京市",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "110100",
+      "VALUE" : "东城区",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "243",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRMC1" : "",
+  "SHRQ" : "2017-03-10 19:54:45",
+  "SHRQ1" : "",
+  "SHYJ" : "SS",
+  "SHYJ1" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "合法就开始疯狂世界",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "sdfsdf",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 18:16:23",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c27d2a02d03e2f027dac7a"),
+  "_ts" : "2017-03-10 18:17:11",
+  "bdbh" : "1169",
+  "jlbh" : 8,
+  "ts" : "2017-03-10 19:54:49"
+}
+
+/* 5 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300013",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 9,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "12312312",
+  "LXR" : "12312312",
+  "PYM" : "sfsdf",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "110000",
+      "VALUE" : "北京市",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "110100",
+      "VALUE" : "东城区",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "132123123",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRMC1" : "",
+  "SHRQ" : "2017-03-10 19:59:16",
+  "SHRQ1" : "",
+  "SHYJ" : "DD",
+  "SHYJ1" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "sfsdf",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 18:17:14",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c2892702d085a5a9ec27e8"),
+  "_ts" : "2017-03-10 19:08:13",
+  "bdbh" : "1169",
+  "jlbh" : 9,
+  "ts" : "2017-03-10 19:59:24"
+}
+
+/* 6 */
+{
+  "_id" : ObjectId("58c28c5c02d085a5a9ec27ec"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "423423",
+  "SWDJH" : "324234",
+  "HYXX01" : "",
+  "JLBH" : 10,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "FXZQ" : "",
+  "SHRMC1" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "但我认为",
+  "WLDWMC" : "32432432",
+  "HY" : { },
+  "jlbh" : 10,
+  "ZDRQ" : "2017-03-10 19:21:21",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [],
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "JGGK01" : [],
+  "CJBM" : "234234",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300014",
+  "YFJZFS" : { },
+  "YHZH" : "2432432432",
+  "SMTP" : "",
+  "CZY" : "00019999",
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "JC" : "全额委屈委屈",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "2423432",
+  "KHYH" : "sfsf",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "SHRQ1" : "",
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "北京市",
+      "LAST" : "110000",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "东城区",
+      "LAST" : "110100",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "2342",
+      "KEY" : "0"
+    }],
+  "_ts" : "2017-03-10 19:22:01",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "32432432",
+  "YZBM" : "",
+  "SHYJ1" : "",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-10 19:22:04"
+}
+
+/* 7 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300015",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "qweqwe",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "qweqwe",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 12,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "323423",
+  "LXR" : "423423",
+  "PYM" : "wqewqe",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "110000",
+      "VALUE" : "北京市",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "110100",
+      "VALUE" : "东城区",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "243",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRMC1" : "",
+  "SHRQ" : "2017-03-10 20:03:14",
+  "SHRQ1" : "",
+  "SHYJ" : "SDFSD",
+  "SHYJ1" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "wqewqe",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 19:25:20",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c28d5602d085a5a9ec27ee"),
+  "_ts" : "2017-03-10 19:26:14",
+  "bdbh" : "1169",
+  "jlbh" : 12,
+  "ts" : "2017-03-10 20:03:18"
+}
+
+/* 8 */
+{
+  "_id" : ObjectId("58c28dba02d085a5a9ec27f0"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "wqeqwe",
+  "SWDJH" : "",
+  "HYXX01" : "",
+  "JLBH" : 13,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "FXZQ" : "",
+  "SHRMC1" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "",
+  "WLDWMC" : "sfdsf",
+  "HY" : { },
+  "jlbh" : 13,
+  "ZDRQ" : "2017-03-10 19:26:15",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [],
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "JGGK01" : [],
+  "CJBM" : "",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300016",
+  "YFJZFS" : { },
+  "YHZH" : "",
+  "SMTP" : "",
+  "CZY" : "00019999",
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "JC" : "sdfsdf",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "eweq",
+  "KHYH" : "",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "SHRQ1" : "",
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "天津市",
+      "LAST" : "120000",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "和平区",
+      "LAST" : "120100",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "qwe",
+      "KEY" : "0"
+    }],
+  "_ts" : "2017-03-10 19:27:50",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "sfdsf",
+  "YZBM" : "",
+  "SHYJ1" : "",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-10 19:27:54"
+}
+
+/* 9 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300017",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 14,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "2342342",
+  "LXR" : "32442",
+  "PYM" : "FSD",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "243",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 19:47:56",
+  "SHYJ" : "DDD",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "FSD",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 19:47:25",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "冲预收款",
+    "key" : "1"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c2926702d085a5a9ec2800"),
+  "_ts" : "2017-03-10 19:47:46",
+  "bdbh" : "1169",
+  "jlbh" : 14,
+  "ts" : "2017-03-10 19:51:17"
+}
+
+/* 10 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300018",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "234",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 15,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "234234",
+  "LXR" : "23423",
+  "PYM" : "SFSD",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 19:52:06",
+  "SHYJ" : "werwv",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "所发生的",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 19:51:36",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c2936302d085a5a9ec2803"),
+  "_ts" : "2017-03-10 19:51:59",
+  "bdbh" : "1169",
+  "jlbh" : 15,
+  "ts" : "2017-03-10 19:52:15"
+}
+
+/* 11 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300019",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 16,
+  "JSBZ" : {
+    "value" : "CNY",
+    "key" : "01"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "13123",
+  "LXR" : "123123",
+  "PYM" : "213123",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "110000",
+      "VALUE" : "北京市",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "110100",
+      "VALUE" : "东城区",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "123",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 20:03:49",
+  "SHYJ" : "31231",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "213123",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 20:03:28",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c2962202d06d0eb0336a07"),
+  "_ts" : "2017-03-10 20:03:46",
+  "bdbh" : "1169",
+  "jlbh" : 16,
+  "ts" : "2017-03-10 20:03:58"
+}
+
+/* 12 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300020",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 17,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "4565456",
+  "LXR" : "45646",
+  "PYM" : "45646",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "678",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 20:13:01",
+  "SHYJ" : "㔿",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "45646",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 20:12:38",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c2984a02d06d0eb0336a0a"),
+  "_ts" : "2017-03-10 20:12:57",
+  "bdbh" : "1169",
+  "jlbh" : 17,
+  "ts" : "2017-03-10 20:13:07"
+}
+
+/* 13 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300021",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "阿士大夫撒旦",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "发生的发生",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 18,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "是大法师",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "423423",
+  "LXR" : "423423",
+  "PYM" : "567567",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "243",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 20:15:20",
+  "SHYJ" : "2334",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "567567",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "4324334",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 20:14:55",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c298d502d06d0eb0336a0d"),
+  "_ts" : "2017-03-10 20:15:17",
+  "bdbh" : "1169",
+  "jlbh" : 18,
+  "ts" : "2017-03-10 20:15:24"
+}
+
+/* 14 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300022",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "沙发斯蒂芬",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "胜多负少的",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 19,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "所发生的",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "32442",
+  "LXR" : "234234",
+  "PYM" : "SDFF",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 130000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "河北省",
+      "LEVELS" : 1,
+      "KEY" : "130000"
+    }, {
+      "id" : 130200,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "130000",
+      "VALUE" : "唐山市",
+      "LEVELS" : 2,
+      "KEY" : "130200"
+    }, {
+      "id" : 130203,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "130200",
+      "VALUE" : "路北区",
+      "LEVELS" : 3,
+      "KEY" : "130203"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 20:19:56",
+  "SHYJ" : "我rev",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "水电费费",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 20:15:26",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c299e902d06d0eb0336a10"),
+  "_ts" : "2017-03-10 20:19:53",
+  "bdbh" : "1169",
+  "jlbh" : 19,
+  "ts" : "2017-03-10 20:21:18"
+}
+
+/* 15 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300023",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "水电费水电费",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "胜多负少的",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 21,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "3423",
+  "LXR" : "24234",
+  "PYM" : "SFD",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 20:22:37",
+  "SHYJ" : "234",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "双方都",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 20:21:20",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c29a8a02d06d0eb0336a16"),
+  "_ts" : "2017-03-10 20:22:34",
+  "bdbh" : "1169",
+  "jlbh" : 21,
+  "ts" : "2017-03-10 20:22:45"
+}
+
+/* 16 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300024",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "2334234",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "24343",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [],
+  "JLBH" : 22,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "234234",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "234234",
+  "LXR" : "234234",
+  "PYM" : "234234",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-10 20:28:18",
+  "SHYJ" : "243234",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "234234",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 20:27:55",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c29bde02d06d0eb0336a19"),
+  "_ts" : "2017-03-10 20:28:11",
+  "bdbh" : "1169",
+  "jlbh" : 22,
+  "ts" : "2017-03-10 20:28:27"
+}
+
+/* 17 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300025",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "sdf",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "sdf",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 23,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "43243",
+  "LXR" : "234234",
+  "PYM" : "sdfsdf",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-13 17:49:06",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "sdfsdf",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-10 20:30:09",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c29c6202d06d0eb0336a1c"),
+  "_ts" : "2017-03-10 20:30:26",
+  "bdbh" : "1169",
+  "jlbh" : 23,
+  "ts" : "2017-03-13 17:49:45"
+}
+
+/* 18 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "111",
+  "CWXTBM" : "",
+  "CZHM" : "",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "111",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "111",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 26,
+  "JSBZ" : {
+    "value" : "CNY",
+    "key" : "01"
+  },
+  "KHYH" : "111",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "123123",
+  "LXR" : "123123",
+  "PYM" : "2222",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 220000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "吉林省",
+      "LEVELS" : 1,
+      "KEY" : "220000"
+    }, {
+      "id" : 220700,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "220000",
+      "VALUE" : "松原市",
+      "LEVELS" : 2,
+      "KEY" : "220700"
+    }, {
+      "id" : 220725,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "220700",
+      "VALUE" : "其它区",
+      "LEVELS" : 3,
+      "KEY" : "220725"
+    }, {
+      "VALUE" : "1212",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "wmt01",
+  "SHRQ" : "2017-03-14 11:37:17",
+  "SHYJ" : "而威尔",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "111",
+  "WLDW01" : "",
+  "WLDWMC" : "2222",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "111",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "wmt01",
+  "ZDRQ" : "2017-03-14 11:23:18",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "_id" : ObjectId("58c75e9ae4b09a5812e15e4a"),
+  "_ts" : "2017-03-14 11:08:10",
+  "bdbh" : "1169",
+  "jlbh" : 26,
+  "ts" : "2017-03-14 12:53:28"
+}
+
+/* 19 */
+{
+  "BZ02" : "制单",
+  "CJBM" : "",
+  "CWXTBM" : "",
+  "CZHM" : "",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 27,
+  "JSBZ" : { },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "",
+  "LXR" : "",
+  "PYM" : "31231",
+  "QY" : "",
+  "SH" : {
+    "value" : "驳回",
+    "key" : "N"
+  },
+  "SHDZ" : [],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "wmt01",
+  "SHRQ" : "2017-03-14 13:07:19",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "31231",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "wmt01",
+  "ZDRQ" : "2017-03-14 13:05:50",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "_id" : ObjectId("58c7782be4b09a5812e15eba"),
+  "_ts" : "2017-03-14 12:57:15",
+  "bdbh" : "1169",
+  "jlbh" : 27,
+  "ts" : "2017-03-14 12:57:39"
+}
+
+/* 20 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "",
+  "CZHM" : "",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 32,
+  "JSBZ" : { },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "",
+  "LXR" : "",
+  "PYM" : "",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 13:18:25",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 13:18:21",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "_id" : ObjectId("58c77af0e4b09a5812e15f17"),
+  "_ts" : "2017-03-14 13:09:04",
+  "bdbh" : "1169",
+  "jlbh" : 32,
+  "ts" : "2017-03-14 13:27:37"
+}
+
+/* 21 */
+{
+  "_id" : ObjectId("58c77c0602d0692aa31e204d"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "123123",
+  "SWDJH" : "",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 31,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "123",
+  "WLDWMC" : "123",
+  "HY" : { },
+  "jlbh" : 31,
+  "ZDRQ" : "2017-03-14 13:13:01",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [],
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "JGGK01" : [],
+  "CJBM" : "",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300027",
+  "YFJZFS" : { },
+  "YHZH" : "",
+  "SMTP" : "",
+  "CZY" : "00019999",
+  "ZFFS" : { },
+  "JC" : "123123",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "123123",
+  "KHYH" : "",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "北京市",
+      "LAST" : "110000",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "东城区",
+      "LAST" : "110100",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "123",
+      "KEY" : "0"
+    }],
+  "_ts" : "2017-03-14 13:13:42",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "123",
+  "YZBM" : "",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-14 13:13:42"
+}
+
+/* 22 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "132132",
+  "CWXTBM" : "",
+  "CZHM" : "",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "123",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "123",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 36,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "123",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "132123",
+  "LXR" : "123123",
+  "PYM" : "WRW",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "110000",
+      "VALUE" : "北京市",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "110100",
+      "VALUE" : "东城区",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "123",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 13:37:24",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "132",
+  "WLDW01" : "",
+  "WLDWMC" : "我认为",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 13:37:00",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "_id" : ObjectId("58c77f63e4b0da2bd12aa763"),
+  "_ts" : "2017-03-14 13:28:03",
+  "bdbh" : "1169",
+  "jlbh" : 36,
+  "ts" : "2017-03-14 14:04:31"
+}
+
+/* 23 */
+{
+  "_id" : ObjectId("58c7827002d0f91db81be623"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "123123",
+  "SWDJH" : "123",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 38,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "123",
+  "WLDWMC" : "谁发的所发生的",
+  "HY" : { },
+  "jlbh" : 38,
+  "ZDRQ" : "2017-03-14 13:32:56",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [],
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "JGGK01" : [],
+  "CJBM" : "123123",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300028",
+  "YFJZFS" : { },
+  "YHZH" : "123",
+  "SMTP" : "",
+  "CZY" : "00019999",
+  "ZFFS" : { },
+  "JC" : "123",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "123123",
+  "KHYH" : "123",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "北京市",
+      "LAST" : "110000",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "东城区",
+      "LAST" : "110100",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "123",
+      "KEY" : "0"
+    }],
+  "_ts" : "2017-03-14 13:41:03",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "SFDSFSD",
+  "YZBM" : "",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-14 13:41:04"
+}
+
+/* 24 */
+{
+  "_id" : ObjectId("58c7835202d0f91db81be625"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "23423432",
+  "SWDJH" : "4214234",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 41,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "2421",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "fsfsdfsdf",
+  "WLDWMC" : "123123",
+  "HY" : { },
+  "jlbh" : 41,
+  "ZDRQ" : "2017-03-14 13:44:10",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "JSBZ" : {
+    "value" : "CNY",
+    "key" : "01"
+  },
+  "JGGK01" : [],
+  "CJBM" : "12313212",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300029",
+  "YFJZFS" : { },
+  "YHZH" : "1231321421",
+  "SMTP" : "2134234213",
+  "CZY" : "00019999",
+  "ZFFS" : {
+    "value" : "冲预收款",
+    "key" : "1"
+  },
+  "JC" : "sss",
+  "CZHM" : "2142413",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "13423342134",
+  "KHYH" : "sfsafsdf23",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "13242134",
+  "YWY" : [],
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "_ts" : "2017-03-14 13:44:50",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "123123",
+  "YZBM" : "23424",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-14 13:44:50"
+}
+
+/* 25 */
+{
+  "_id" : ObjectId("58c7843b02d0f91db81be627"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "23423423",
+  "SWDJH" : "23423423",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 42,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "234234",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "是范德萨范德萨",
+  "WLDWMC" : "沙发斯蒂芬",
+  "HY" : { },
+  "jlbh" : 42,
+  "ZDRQ" : "2017-03-14 13:48:03",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "CJBM" : "23432423",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300030",
+  "YFJZFS" : {
+    "value" : "延付发货后记账",
+    "key" : "1"
+  },
+  "YHZH" : "234234",
+  "SMTP" : "234234234",
+  "CZY" : "00019999",
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "JC" : "水电费水电费",
+  "CZHM" : "234234",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "234234",
+  "KHYH" : "24234234",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "234",
+  "YWY" : [],
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "北京市",
+      "LAST" : "110000",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "东城区",
+      "LAST" : "110100",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "234234",
+      "KEY" : "0"
+    }],
+  "_ts" : "2017-03-14 13:48:43",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "SFSDF",
+  "YZBM" : "23234234",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-14 13:48:43"
+}
+
+/* 26 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300032",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "sdfsdf",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "234",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "水电费",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 43,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "sf",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "234242",
+  "LXR" : "4234",
+  "PYM" : "SFSDF",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "243",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 14:06:42",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "沙发斯蒂芬",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "234234",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 14:06:19",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7886f02d0f91db81be62a"),
+  "_ts" : "2017-03-14 14:06:39",
+  "bdbh" : "1169",
+  "jlbh" : 43,
+  "ts" : "2017-03-14 14:10:07"
+}
+
+/* 27 */
+{
+  "BZ02" : "制单",
+  "CJBM" : "",
+  "CWXTBM" : "",
+  "CZHM" : "",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 49,
+  "JSBZ" : { },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "",
+  "LXR" : "",
+  "PYM" : "FGHGH",
+  "QY" : "",
+  "SH" : {
+    "value" : "驳回",
+    "key" : "N"
+  },
+  "SHDZ" : [],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 14:16:18",
+  "SHYJ" : "99",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "放工会公会",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 14:13:52",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "_id" : ObjectId("58c78881e4b0b7864484b4a9"),
+  "_ts" : "2017-03-14 14:06:57",
+  "bdbh" : "1169",
+  "jlbh" : 49,
+  "ts" : "2017-03-14 14:36:08"
+}
+
+/* 28 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300033",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "sfsfd",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "示范点",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 44,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "3242342",
+  "LXR" : "34234",
+  "PYM" : "vHGFGH",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 130000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "河北省",
+      "LEVELS" : 1,
+      "KEY" : "130000"
+    }, {
+      "id" : 130200,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "130000",
+      "VALUE" : "唐山市",
+      "LEVELS" : 2,
+      "KEY" : "130200"
+    }, {
+      "id" : 130203,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "130200",
+      "VALUE" : "路北区",
+      "LEVELS" : 3,
+      "KEY" : "130203"
+    }, {
+      "VALUE" : "243",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 14:10:53",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "v换个风格和",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "234",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 14:10:29",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7896b02d0f91db81be62d"),
+  "_ts" : "2017-03-14 14:10:51",
+  "bdbh" : "1169",
+  "jlbh" : 44,
+  "ts" : "2017-03-14 14:11:05"
+}
+
+/* 29 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "234242",
+  "CWXTBM" : "300034",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "432432",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "2432",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 45,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "234234",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "23423",
+  "LXR" : "42342",
+  "PYM" : "2423423",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 120000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "天津",
+      "LEVELS" : 1,
+      "KEY" : "120000"
+    }, {
+      "id" : 120100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "120000",
+      "VALUE" : "天津市",
+      "LEVELS" : 2,
+      "KEY" : "120100"
+    }, {
+      "id" : 120101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "120100",
+      "VALUE" : "和平区",
+      "LEVELS" : 3,
+      "KEY" : "120101"
+    }, {
+      "VALUE" : "234",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 14:11:47",
+  "SHYJ" : "234234",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "234",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "2423423",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "23423",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "234",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 14:11:07",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c789a002d0f91db81be630"),
+  "_ts" : "2017-03-14 14:11:44",
+  "bdbh" : "1169",
+  "jlbh" : 45,
+  "ts" : "2017-03-14 14:12:29"
+}
+
+/* 30 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300035",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "234234",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 51,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "23424",
+  "LXR" : "234234",
+  "PYM" : "24234234",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"234\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 14:20:30",
+  "SHYJ" : "3223",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "24234234",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 14:20:04",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c78bab02d0be131c535ab2"),
+  "_ts" : "2017-03-14 14:20:20",
+  "bdbh" : "1169",
+  "jlbh" : 51,
+  "ts" : "2017-03-14 14:20:44"
+}
+
+/* 31 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300036",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "hjkhjk",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "tyutyu",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 52,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "23431243",
+  "LXR" : "1341234",
+  "PYM" : "fgfg",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"1432\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 14:35:07",
+  "SHYJ" : "xdd",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "fgfg",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 14:34:42",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c78f1902d0be131c535ab5"),
+  "_ts" : "2017-03-14 14:35:05",
+  "bdbh" : "1169",
+  "jlbh" : 52,
+  "ts" : "2017-03-14 14:39:42"
+}
+
+/* 32 */
+{
+  "_id" : ObjectId("58c78f65e4b0aa3cfdf3afba"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "",
+  "SWDJH" : "",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 53,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "",
+  "WLDWMC" : "撒发射点发生",
+  "HY" : { },
+  "jlbh" : 53,
+  "ZDRQ" : "2017-03-14 14:45:29",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "",
+  "EDKZ01" : [],
+  "JSBZ" : { },
+  "JGGK01" : [],
+  "CJBM" : "",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "",
+  "YFJZFS" : { },
+  "YHZH" : "",
+  "SMTP" : "",
+  "ZFFS" : { },
+  "JC" : "士大夫士大夫",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "EDKZ" : { },
+  "LXDH" : "",
+  "KHYH" : "",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "KSLX" : { },
+  "_ts" : "2017-03-14 14:36:21",
+  "SHDZ" : [],
+  "DJRMC" : "",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "SFSDFS",
+  "YZBM" : "",
+  "ts" : "2017-03-14 14:36:21"
+}
+
+/* 33 */
+{
+  "_id" : ObjectId("58c795f902d0be131c535ab8"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "2131231",
+  "SWDJH" : "",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 54,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "",
+  "WLDWMC" : "SDFDS",
+  "HY" : { },
+  "jlbh" : 54,
+  "ZDRQ" : "2017-03-14 15:04:10",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "CJBM" : "",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300037",
+  "YFJZFS" : { },
+  "YHZH" : "",
+  "SMTP" : "",
+  "CZY" : "00019999",
+  "ZFFS" : { },
+  "JC" : "",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "231231",
+  "KHYH" : "",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"123\"}]",
+  "_ts" : "2017-03-14 15:04:24",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "SDFDS",
+  "YZBM" : "",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-14 15:04:25"
+}
+
+/* 34 */
+{
+  "BZ02" : "制单",
+  "CJBM" : "",
+  "CWXTBM" : "300038",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 55,
+  "JSBZ" : {
+    "value" : "TWB",
+    "key" : "07"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "234234",
+  "LXR" : "2342",
+  "PYM" : "4242342",
+  "QY" : "",
+  "SH" : {
+    "value" : "驳回",
+    "key" : "N"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"234\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 15:11:00",
+  "SHYJ" : "234",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "4242342",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 15:10:38",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7978202d062b7e6ad4495"),
+  "_ts" : "2017-03-14 15:10:57",
+  "bdbh" : "1169",
+  "jlbh" : 55,
+  "ts" : "2017-03-14 15:15:50"
+}
+
+/* 35 */
+{
+  "BZ02" : "制单",
+  "CJBM" : "",
+  "CWXTBM" : "300039",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 56,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "324234",
+  "LXR" : "234234",
+  "PYM" : "SS",
+  "QY" : "",
+  "SH" : {
+    "value" : "驳回",
+    "key" : "N"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"234\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 15:18:08",
+  "SHYJ" : "243",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "SS",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 15:17:55",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7992e02d062b7e6ad4498"),
+  "_ts" : "2017-03-14 15:18:06",
+  "bdbh" : "1169",
+  "jlbh" : 56,
+  "ts" : "2017-03-14 15:18:12"
+}
+
+/* 36 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300040",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 57,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "2342",
+  "LXR" : "4233423",
+  "PYM" : "234234",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"234\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 15:18:32",
+  "SHYJ" : "234234",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "234234",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 15:18:14",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7994602d062b7e6ad449b"),
+  "_ts" : "2017-03-14 15:18:30",
+  "bdbh" : "1169",
+  "jlbh" : 57,
+  "ts" : "2017-03-14 15:18:37"
+}
+
+/* 37 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300041",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 58,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "234234",
+  "LXR" : "234234",
+  "PYM" : "234234",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"234\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 15:20:33",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "234234",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 15:20:17",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c799bf02d062b7e6ad449e"),
+  "_ts" : "2017-03-14 15:20:31",
+  "bdbh" : "1169",
+  "jlbh" : 58,
+  "ts" : "2017-03-14 15:22:54"
+}
+
+/* 38 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300042",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 59,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "12312312312",
+  "LXR" : "31231231231231",
+  "PYM" : "qiuynces",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"天津\" , \"LEVELS\" : 1 , \"KEY\" : \"120000\" , \"id\" : 120000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"120000\" , \"VALUE\" : \"天津市\" , \"LEVELS\" : 2 , \"KEY\" : \"120100\" , \"id\" : 120100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"120100\" , \"VALUE\" : \"津南区\" , \"LEVELS\" : 3 , \"KEY\" : \"120112\" , \"id\" : 120112 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"123123\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 15:41:04",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "qiuynces",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 15:39:10",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c79e4702d062b7e6ad44a1"),
+  "_ts" : "2017-03-14 15:39:51",
+  "bdbh" : "1169",
+  "jlbh" : 59,
+  "ts" : "2017-03-14 15:41:21"
+}
+
+/* 39 */
+{
+  "_id" : ObjectId("58c79fd902d062b7e6ad44a6"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "123123123123",
+  "SWDJH" : "",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 60,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "",
+  "WLDWMC" : "12312312312",
+  "HY" : { },
+  "jlbh" : 60,
+  "ZDRQ" : "2017-03-14 15:45:20",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "JSBZ" : {
+    "value" : "CNY",
+    "key" : "01"
+  },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "CJBM" : "",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300043",
+  "YFJZFS" : { },
+  "YHZH" : "",
+  "SMTP" : "",
+  "CZY" : "00019999",
+  "ZFFS" : { },
+  "JC" : "",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "12312312",
+  "KHYH" : "",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"内蒙古自治区\" , \"LEVELS\" : 1 , \"KEY\" : \"150000\" , \"id\" : 150000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"150000\" , \"VALUE\" : \"通辽市\" , \"LEVELS\" : 2 , \"KEY\" : \"150500\" , \"id\" : 150500 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"150500\" , \"VALUE\" : \"开鲁县\" , \"LEVELS\" : 3 , \"KEY\" : \"150523\" , \"id\" : 150523 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"123123\"}]",
+  "_ts" : "2017-03-14 15:46:33",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "12312312312",
+  "YZBM" : "",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-14 15:46:33"
+}
+
+/* 40 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300044",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 61,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "2131231",
+  "LXR" : "12312313",
+  "PYM" : "qiuyunces",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"天津\" , \"LEVELS\" : 1 , \"KEY\" : \"120000\" , \"id\" : 120000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"120000\" , \"VALUE\" : \"天津市\" , \"LEVELS\" : 2 , \"KEY\" : \"120100\" , \"id\" : 120100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"120100\" , \"VALUE\" : \"津南区\" , \"LEVELS\" : 3 , \"KEY\" : \"120112\" , \"id\" : 120112 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"123123\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 15:53:35",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "qiuyunces",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 15:49:57",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7a0be02d062b7e6ad44a8"),
+  "_ts" : "2017-03-14 15:50:22",
+  "bdbh" : "1169",
+  "jlbh" : 61,
+  "ts" : "2017-03-14 15:53:46"
+}
+
+/* 41 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300045",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 62,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "123123123123",
+  "LXR" : "123123123123123",
+  "PYM" : "qiuyunces2",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"河北省\" , \"LEVELS\" : 1 , \"KEY\" : \"130000\" , \"id\" : 130000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"130000\" , \"VALUE\" : \"秦皇岛市\" , \"LEVELS\" : 2 , \"KEY\" : \"130300\" , \"id\" : 130300 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"130300\" , \"VALUE\" : \"青龙满族自治县\" , \"LEVELS\" : 3 , \"KEY\" : \"130321\" , \"id\" : 130321 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"123\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 16:01:49",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "qiuyunces2",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 16:01:26",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7a36902d062b7e6ad44ab"),
+  "_ts" : "2017-03-14 16:01:45",
+  "bdbh" : "1169",
+  "jlbh" : 62,
+  "ts" : "2017-03-14 16:01:51"
+}
+
+/* 42 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300046",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 63,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "1231231",
+  "LXR" : "2123123123",
+  "PYM" : "123123123",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"天津\" , \"LEVELS\" : 1 , \"KEY\" : \"120000\" , \"id\" : 120000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"120000\" , \"VALUE\" : \"天津市\" , \"LEVELS\" : 2 , \"KEY\" : \"120100\" , \"id\" : 120100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"120100\" , \"VALUE\" : \"河西区\" , \"LEVELS\" : 3 , \"KEY\" : \"120103\" , \"id\" : 120103 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"123123123\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 16:02:42",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "123123123",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 16:02:26",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7a3a002d062b7e6ad44ae"),
+  "_ts" : "2017-03-14 16:02:40",
+  "bdbh" : "1169",
+  "jlbh" : 63,
+  "ts" : "2017-03-14 16:02:43"
+}
+
+/* 43 */
+{
+  "BZ02" : "制单",
+  "CJBM" : "",
+  "CWXTBM" : "300047",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "qweqwe",
+  "EDKZ" : {
+    "value" : "额度控制",
+    "key" : "0"
+  },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "qweqwe",
+  "JGGK" : {
+    "value" : "价格管控",
+    "key" : "0"
+  },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 64,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "323423",
+  "LXR" : "423423",
+  "PYM" : "wqewqe",
+  "QY" : "",
+  "SH" : {
+    "value" : "驳回",
+    "key" : "N"
+  },
+  "SHDZ" : "[ { \"id\" : 110000 , \"MJBJ\" : 0 , \"index\" : 1 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\"} , { \"id\" : 110100 , \"MJBJ\" : 0 , \"index\" : 2 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\"} , { \"id\" : 110101 , \"MJBJ\" : 1 , \"index\" : 3 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\"} , { \"VALUE\" : \"243\" , \"KEY\" : \"0\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 16:03:50",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "wqewqe",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 16:03:26",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : {
+    "value" : "单位应收",
+    "key" : "0"
+  },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7a3c802d062b7e6ad44b1"),
+  "_ts" : "2017-03-14 16:03:20",
+  "bdbh" : "1169",
+  "jlbh" : 64,
+  "ts" : "2017-03-14 16:03:52"
+}
+
+/* 44 */
+{
+  "_id" : ObjectId("58c7a3fb02d062b7e6ad44b6"),
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "LXR" : "123123123123123",
+  "SWDJH" : "",
+  "HYXX01" : "",
+  "SHYJ" : "",
+  "JLBH" : 65,
+  "FRDB" : "",
+  "BZ02" : "审核",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "SHRQ" : "",
+  "FXZQ" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : true
+  },
+  "DZ" : "",
+  "WLDWMC" : "qiuyunces2",
+  "HY" : { },
+  "jlbh" : 65,
+  "ZDRQ" : "2017-03-14 16:04:00",
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "ZDRMC" : "测试",
+  "GSXX01" : "0001",
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "CJBM" : "",
+  "QY" : "",
+  "SJKS" : [],
+  "DJR_RYXX01" : "",
+  "CWXTBM" : "300048",
+  "YFJZFS" : { },
+  "YHZH" : "",
+  "SMTP" : "",
+  "CZY" : "00019999",
+  "ZFFS" : { },
+  "JC" : "",
+  "CZHM" : "",
+  "FLKPFS" : { },
+  "YFZDSK" : [],
+  "WLDW01" : "",
+  "SXGSDJ" : "",
+  "EDKZ" : { },
+  "LXDH" : "123123123123",
+  "KHYH" : "",
+  "GSMC" : "",
+  "LBZ02" : "制单",
+  "YFZQ" : "",
+  "YWY" : [],
+  "KSLX" : { },
+  "DJRMC" : "",
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"河北省\" , \"LEVELS\" : 1 , \"KEY\" : \"130000\" , \"id\" : 130000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"130000\" , \"VALUE\" : \"秦皇岛市\" , \"LEVELS\" : 2 , \"KEY\" : \"130300\" , \"id\" : 130300 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"130300\" , \"VALUE\" : \"青龙满族自治县\" , \"LEVELS\" : 3 , \"KEY\" : \"130321\" , \"id\" : 130321 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"123\"}]",
+  "_ts" : "2017-03-14 16:04:11",
+  "bdbh" : "1169",
+  "YXBJ" : [],
+  "SHRMC" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHR1_RYXX01" : "",
+  "DJRQ" : "",
+  "ZDSK" : [],
+  "KPHT" : "",
+  "ZDR_RYXX01" : "",
+  "JGGK" : { },
+  "PYM" : "qiuyunces2",
+  "YZBM" : "",
+  "ZGSDJ" : "",
+  "ts" : "2017-03-14 16:04:11"
+}
+
+/* 45 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "300049",
+  "CZHM" : "",
+  "CZY" : "00019999",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [{
+      "value" : "额度控制",
+      "key" : "1"
+    }],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "0001",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [{
+      "value" : "价格管控",
+      "key" : "1"
+    }],
+  "JLBH" : 66,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "2323",
+  "LXR" : "2323",
+  "PYM" : "2323",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : "[ { \"MJBJ\" : 0 , \"VALUE\" : \"北京\" , \"LEVELS\" : 1 , \"KEY\" : \"110000\" , \"id\" : 110000 , \"index\" : 1} , { \"MJBJ\" : 0 , \"LAST\" : \"110000\" , \"VALUE\" : \"北京市\" , \"LEVELS\" : 2 , \"KEY\" : \"110100\" , \"id\" : 110100 , \"index\" : 2} , { \"MJBJ\" : 1 , \"LAST\" : \"110100\" , \"VALUE\" : \"东城区\" , \"LEVELS\" : 3 , \"KEY\" : \"110101\" , \"id\" : 110101 , \"index\" : 3} , { \"KEY\" : \"0\" , \"VALUE\" : \"23\"}]",
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 16:07:49",
+  "SHYJ" : "23",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "SXGSDJ" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "2323",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 16:07:35",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "ZGSDJ" : "",
+  "_id" : ObjectId("58c7a4d302d062b7e6ad44b8"),
+  "_ts" : "2017-03-14 16:07:47",
+  "bdbh" : "1169",
+  "jlbh" : 66,
+  "ts" : "2017-03-14 16:07:52"
+}
+
+/* 46 */
+{
+  "BZ02" : "制单",
+  "CJBM" : "",
+  "CWXTBM" : "",
+  "CZHM" : "",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 67,
+  "JSBZ" : { },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "",
+  "LXR" : "",
+  "PYM" : "",
+  "QY" : "",
+  "SH" : {
+    "value" : "驳回",
+    "key" : "N"
+  },
+  "SHDZ" : [],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "wmt01",
+  "SHRQ" : "2017-03-14 16:31:18",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "wmt01",
+  "ZDRQ" : "2017-03-14 16:31:08",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "_id" : ObjectId("58c7a7f9e4b0c5c05592e3a9"),
+  "_ts" : "2017-03-14 16:21:13",
+  "bdbh" : "1169",
+  "jlbh" : 67,
+  "ts" : "2017-03-14 16:21:19"
+}
+
+/* 47 */
+{
+  "BZ02" : "封单",
+  "CJBM" : "",
+  "CWXTBM" : "",
+  "CZHM" : "",
+  "DJRMC" : "",
+  "DJRQ" : "",
+  "DJR_RYXX01" : "",
+  "DWLB" : {
+    "value" : "客户",
+    "key" : "1"
+  },
+  "DZ" : "",
+  "EDKZ" : { },
+  "EDKZ01" : [],
+  "FLKPFS" : { },
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "FPLX" : {
+    "value" : "增值税发票",
+    "key" : "1"
+  },
+  "FRDB" : "",
+  "FXZQ" : "",
+  "GSMC" : "",
+  "GSXX01" : "",
+  "HY" : { },
+  "HYXX01" : "",
+  "JC" : "",
+  "JGGK" : { },
+  "JGGK01" : [],
+  "JLBH" : 68,
+  "JSBZ" : {
+    "value" : "NBB",
+    "key" : "06"
+  },
+  "KHYH" : "",
+  "KPHT" : "",
+  "KSLX" : { },
+  "LBZ02" : "审核",
+  "LXDH" : "123123",
+  "LXR" : "1231",
+  "PYM" : "123123",
+  "QY" : "",
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHDZ" : [{
+      "id" : 110000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "北京",
+      "LEVELS" : 1,
+      "KEY" : "110000"
+    }, {
+      "id" : 110100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "LAST" : "110000",
+      "VALUE" : "北京市",
+      "LEVELS" : 2,
+      "KEY" : "110100"
+    }, {
+      "id" : 110101,
+      "MJBJ" : 1,
+      "index" : 3,
+      "LAST" : "110100",
+      "VALUE" : "东城区",
+      "LEVELS" : 3,
+      "KEY" : "110101"
+    }, {
+      "VALUE" : "123",
+      "KEY" : "0"
+    }],
+  "SHR1_RYXX01" : "",
+  "SHRMC" : "测试",
+  "SHRQ" : "2017-03-14 16:40:51",
+  "SHYJ" : "",
+  "SJKS" : [],
+  "SMTP" : "",
+  "SWDJH" : "",
+  "WLDW01" : "",
+  "WLDWMC" : "123123",
+  "YFJZFS" : { },
+  "YFZDSK" : [],
+  "YFZQ" : "",
+  "YHZH" : "",
+  "YWY" : [],
+  "YXBJ" : [],
+  "YXBJ01" : [{
+      "value" : "有效",
+      "key" : "1"
+    }],
+  "YZBM" : "",
+  "ZDRMC" : "测试",
+  "ZDRQ" : "2017-03-14 16:40:34",
+  "ZDR_RYXX01" : "",
+  "ZDSK" : [],
+  "ZFFS" : { },
+  "_id" : ObjectId("58c7aa62e4b0c5c05592e3b6"),
+  "_ts" : "2017-03-14 16:31:30",
+  "bdbh" : "1169",
+  "jlbh" : 68,
+  "ts" : "2017-03-14 16:31:35"
+}

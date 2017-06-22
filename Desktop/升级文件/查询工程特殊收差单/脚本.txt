@@ -1,0 +1,9 @@
+
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('0823', '查询工程特殊收差单', '08', 2, 1, 1, 0, 0, null, 0, 27, '0823', 0);
+
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('0823', -1, null);
+
+insert into w_menu (MENU01, MENU02)
+values ('0823', '{"namespace":"MONGO_CXGCTSSCD","sqlid":"queryGCTSSCD","dir":"scm/gcgl/gcdl/search"}');

@@ -1,0 +1,7 @@
+工程合同：
+makeGCHT.js - scmform/WebContent/scm/gcgl/gcdl/js
+makeGCHT.html - scmform/WebContent/scm/gcgl/gcdl
+
+jl-all.js - scmform/WebContent/jllib/form/js
+
+D:\apache-tomcat-7.0.52-x64\webapps\scmform\WEB-INF\classes\com\jlsoft\framework\util

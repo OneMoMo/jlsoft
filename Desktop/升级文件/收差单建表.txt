@@ -1,0 +1,15 @@
+create table GC_SCDITEM
+(
+  gsxx01 VARCHAR2(4) not null,
+  dld01  NUMBER(16) not null 
+);
+-- Add comments to the table 
+comment on table GC_SCD
+  is '工程收差单';
+-- Add comments to the columns 
+comment on column GC_DLDAZLB.gsxx01
+  is '公司代码--GSXX01 --制单';
+comment on column GC_DLDAZLB.dld01
+  is '登录单号--GCDLD01 --制单'; 
+alter table GC_SCD
+  add constraint PK_GC_SCD primary key (GSXX01, DLD01);

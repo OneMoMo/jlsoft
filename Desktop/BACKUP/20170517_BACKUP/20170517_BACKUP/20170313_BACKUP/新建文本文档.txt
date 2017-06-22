@@ -1,0 +1,251 @@
+
+{
+  "AZDZ1" : [],
+  "AZDZ2" : [],
+  "AZDZLB" : [{
+      "LXR" : "季先生",
+      "LXDH" : "13681625226",
+      "AZDZ" : [{
+          "id" : 310000,
+          "MJBJ" : 0,
+          "index" : 1,
+          "VALUE" : "上海",
+          "LEVELS" : 1,
+          "KEY" : "310000"
+        }, {
+          "id" : 310100,
+          "MJBJ" : 0,
+          "index" : 2,
+          "VALUE" : "上海市",
+          "LAST" : "310000",
+          "LEVELS" : 2,
+          "KEY" : "310100"
+        }, {
+          "id" : 310117,
+          "MJBJ" : 1,
+          "index" : 3,
+          "VALUE" : "松江区",
+          "LAST" : "310100",
+          "LEVELS" : 3,
+          "KEY" : "310117"
+        }, {
+          "VALUE" : "沪松路999号",
+          "KEY" : "0"
+        }]
+    }, {
+      "LXR" : "季先生",
+      "LXDH" : "13681625226",
+      "AZDZ" : [{
+          "id" : 310000,
+          "MJBJ" : 0,
+          "index" : 1,
+          "VALUE" : "上海",
+          "LEVELS" : 1,
+          "KEY" : "310000"
+        }, {
+          "id" : 310100,
+          "MJBJ" : 0,
+          "index" : 2,
+          "VALUE" : "上海市",
+          "LAST" : "310000",
+          "LEVELS" : 2,
+          "KEY" : "310100"
+        }, {
+          "id" : 310117,
+          "MJBJ" : 1,
+          "index" : 3,
+          "VALUE" : "松江区",
+          "LAST" : "310100",
+          "LEVELS" : 3,
+          "KEY" : "310117"
+        }, {
+          "VALUE" : "茸平路19号",
+          "KEY" : "0"
+        }]
+    }],
+  "AZDZLB_0_AZDZ" : [{
+      "id" : 310000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "上海",
+      "LEVELS" : 1,
+      "KEY" : "310000"
+    }, {
+      "id" : 310100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "上海市",
+      "LAST" : "310000",
+      "LEVELS" : 2,
+      "KEY" : "310100"
+    }, {
+      "id" : 310117,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "松江区",
+      "LAST" : "310100",
+      "LEVELS" : 3,
+      "KEY" : "310117"
+    }, {
+      "VALUE" : "沪松路999号",
+      "KEY" : "0"
+    }],
+  "AZDZLB_1_AZDZ" : [{
+      "id" : 310000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "上海",
+      "LEVELS" : 1,
+      "KEY" : "310000"
+    }, {
+      "id" : 310100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "上海市",
+      "LAST" : "310000",
+      "LEVELS" : 2,
+      "KEY" : "310100"
+    }, {
+      "id" : 310117,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "松江区",
+      "LAST" : "310100",
+      "LEVELS" : 3,
+      "KEY" : "310117"
+    }, {
+      "VALUE" : "茸平路19号",
+      "KEY" : "0"
+    }],
+  "BHQ" : "56",
+  "BM01" : "34",
+  "BZ02" : "封单",
+  "DDDLDH" : "",
+  "DLD" : {
+    "value" : "",
+    "key" : ""
+  },
+  "DLXH" : "1",
+  "DQR" : "2017-05-08",
+  "DYDLBJ" : {
+    "value" : "是",
+    "key" : "0"
+  },
+  "EJJSXDH" : "",
+  "EJJSXMC" : "",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "GCBH" : "",
+  "GCBJ" : "2",
+  "GCDLD01" : "DL803-000183",
+  "GCGZR" : "鲍盛文",
+  "GCJL" : [],
+  "GCLX" : {
+    "value" : "商用",
+    "key" : "2"
+  },
+  "GCMS" : "",
+  "GCYT" : {
+    "value" : "商务办公",
+    "key" : "8"
+  },
+  "GC_DJZT" : {
+    "value" : "合同已审核",
+    "key" : "合同已审核"
+  },
+  "GC_GJQK" : "",
+  "GC_GJR" : "",
+  "GC_GJSJ" : "",
+  "GC_HFR" : "",
+  "GC_HFSJ" : "",
+  "GC_HFYJ" : "",
+  "GC_LOG" : [{
+      "GC_CZSJ" : "2017-03-07 18:35:02",
+      "GC_XGJL" : "",
+      "GC_CZY" : "系统自动生成代办使用账号",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }],
+  "GC_SCZP" : [],
+  "GMDW" : "柴火空间（亚洲）青年创客中心",
+  "GSXX01" : "0001",
+  "GZRDH" : "13816652569",
+  "HTDBBH" : "",
+  "HTSCFJ" : [],
+  "HTXSFS" : { },
+  "JDGJ" : [],
+  "JLBH" : 4656,
+  "JLLZB" : "",
+  "JXRLXR" : "",
+  "JXSDH" : "13801722612",
+  "JXSLXDH" : "",
+  "JXSMC" : "3上海东玮翔盛电器有限公司",
+  "KQBH" : "",
+  "KQBJ" : {
+    "value" : "否",
+    "key" : "1"
+  },
+  "LBZ02" : "跟进",
+  "LXDH" : "13681625226",
+  "LXR" : "季先生",
+  "PFR" : "虞音菲",
+  "PFR02" : "00010034",
+  "PFSJ" : "2016-11-09 14:31:49",
+  "QXCZY01" : "901281",
+  "QY" : "",
+  "SBR" : "东玮翔盛",
+  "SBR02" : "901281",
+  "SBSJ" : "2016-11-09 13:04:26",
+  "SCTP" : [],
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHSJ" : "",
+  "SPLB" : [{
+      "SQSL" : "2",
+      "ZZSL" : 0,
+      "SPXX01" : 2042,
+      "SPMC" : "GMV-900W/A",
+      "WBTDH" : "18346",
+      "FXSL" : 0,
+      "GCSPBM" : 687,
+      "JLDW" : "台",
+      "BZ" : "乐保",
+      "SPDM" : "KN850W1420",
+      "GCSPMC" : "GMV-900W/A",
+      "YHSL" : 0
+    }],
+  "SYDW" : "柴火空间（亚洲）青年创客中心",
+  "SYDWDZ" : "上海上海市松江区沪松路999号;上海上海市松江区茸平路19号;",
+  "SYDWDZ1" : "",
+  "WLDW01" : "901281",
+  "XSBM01" : "0001030201",
+  "YGMDW" : "柴火空间（亚洲）青年创客中心",
+  "YHDH" : "13681625226",
+  "YHXM" : "季先生",
+  "YJAZRQ" : "",
+  "YJNR" : "",
+  "YS" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "YSYDW" : "柴火空间（亚洲）青年创客中心",
+  "YSYDWDZ" : "上海上海市松江区沪松路999号;上海上海市松江区茸平路19号;",
+  "YXBJ" : "有效",
+  "YXDH" : "",
+"YQCS":"1"
+  "ZFBJ" : "",
+  "_id" : "5822aea7e4b0dcfad6147519",
+  "_ts" : "2016-11-09 13:05:43",
+  "bdbh" : "1096",
+  "jlbh" : 4656,
+  "ts" : "2017-03-07 18:35:02"
+}

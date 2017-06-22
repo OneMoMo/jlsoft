@@ -1,0 +1,22 @@
+<div class="jl_screening_main"> 
+<ul id="FYBX_BXMX">
+	<li class="w12">
+	  <dl class="w12">
+	    <dt class="w01" title="费用名称"><b>费用名称</b></dt>
+	    <dd class="w03">
+	      	<input type="text" name="FYXM" class="w12"/>
+	    </dd>
+	  </dl>
+	</li>
+</ul>
+</div>
+<script type="text/javascript">
+
+  $("ul#FYBX_BXMX").delegate("[name='FYXM']", "keydown", function (event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode == 13) {
+      commonQuery.query();
+    }
+  });
+
+</script>

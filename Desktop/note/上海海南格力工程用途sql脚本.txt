@@ -1,0 +1,37 @@
+-- 上海海南格力
+-- Create table
+create table GCXLK
+(
+  XLK01 VARCHAR2(45) not null,
+  XLK02 VARCHAR2(255) not null,
+  XLK03 NUMBER(16) not null
+);
+-- Add comments to the columns 
+comment on column GCXLK.XLK01
+  is '编号';
+comment on column GCXLK.XLK02
+  is '名称';
+comment on column GCXLK.XLK03
+  is '类型(0工程用途;)';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table GCXLK
+  add constraint PK_GCXLK primary key (XLK01,XLK03);
+
+
+insert into GCXLK values('gcyt001','市政机关','0');
+insert into GCXLK values('gcyt002','医疗卫生','0');
+insert into GCXLK values('gcyt003','酒店餐饮','0');
+insert into GCXLK values('gcyt004','金融通讯','0');
+insert into GCXLK values('gcyt005','交通运输','0');
+insert into GCXLK values('gcyt006','地产住宅','0');
+insert into GCXLK values('gcyt007','教育科研','0');
+insert into GCXLK values('gcyt008','商务办公','0');
+insert into GCXLK values('gcyt009','商场超市','0');
+insert into GCXLK values('gcyt010','休闲娱乐','0');
+insert into GCXLK values('gcyt011','工业生产','0');
+insert into GCXLK values('gcyt012','文体会馆','0');
+insert into GCXLK values('gcyt013','沿街商铺','0');
+insert into GCXLK values('gcyt014','小区','0');
+insert into GCXLK values('gcyt015','监狱部队','0');
+insert into GCXLK values('gcyt016','家装工程','0');
+insert into GCXLK values('gcyt017','其他','0');

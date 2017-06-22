@@ -1,0 +1,9 @@
+
+
+--接口
+
+insert into w_jk (JK01, JK02, JK03, TBLNAME, YMBH)
+values (912401, '制单', '{"name":"1169","field":["jlbh","WLDWMC","bdbh","PYM","CWXTBM","JC","DZ","KHYH","YHZH","SWDJH","CJBM","FPLX","FLKPFS","KPHT","FRDB","HY","KSLX","YWY","SJKS","QY","YXBJ01","LXDH","LXR","SHDZ","YZBM","CZHM","SMTP","FXZQ","YFZQ","JSBZ","ZFFS","YFJZFS","JGGK01","EDKZ01","ZDSK","YFZDSK","ZDRMC","ZDRQ"]}', '1169', null);
+
+insert into w_jk (JK01, JK02, JK03, TBLNAME, YMBH)
+values (912402, '审核', '{"name":"1169","field":["bdbh","jlbh","SH","SHRMC","SHRQ","SHYJ"]}', '1169', null);

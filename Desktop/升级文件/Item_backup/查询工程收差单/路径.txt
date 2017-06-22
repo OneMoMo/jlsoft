@@ -1,0 +1,7 @@
+scmform_git/WebContent/scm/gcgl/gcdl/search/CXGCSCD.html
+
+WEB-INF\classes\com\jlsoft\form\scm\gcgl\gcdl\interfaceQuery\queryGCSCD.class
+
+scmform_git/WebContent/scm/gcgl/gcdl/search/MONGO_CXGCSCD.js
+
+scmform_git/src/com/jlsoft/form/scm/gcgl/gcdl/sql/mongo_scm_cxgcscd_columns.xml

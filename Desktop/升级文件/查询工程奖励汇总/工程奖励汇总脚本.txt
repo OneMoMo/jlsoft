@@ -1,0 +1,9 @@
+
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('0817', '查询工程奖励汇总表', '08', 2, 1, 1, 0, 0, null, 0, 24, '0817', 0);
+
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('0817', -1, null);
+
+insert into w_menu (MENU01, MENU02)
+values ('0817', '{"namespace":"GCJLHZB","sqlid":"CXGCJLHZ","dir":"scm/gcgl/gcdl/search"}');

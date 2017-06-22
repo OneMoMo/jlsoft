@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="GCJLHZB.CXGCJLHZ">
+        <FIELD attrname="JXSMC" format='{"$or":[{"JXSMC":{"$regex":"#JXSMC#"}},{"JXS01":{"$regex":"#JXSMC#"}},{"EJJSXMC":{"$regex":"#JXSMC#"}}]}' fieldtype="String" allownull="Y" name="经销商名称" />
+       	<FIELD attrname="SHRQ_S" format='{"SHSJ":{"$gte":"#SHRQ_S#"}}' fieldtype="String" allownull="Y" name="审核时间" />
+       	<FIELD attrname="SHRQ_E" format='{"SHSJ":{"$lte":"#SHRQ_E# 23:59:59"}}' fieldtype="String" allownull="Y" name="审核时间" />
+		<FIELD qx='WLDW01|WLDW_CX|in' />
+		<FIELD qx='GSXX01|CZGS_CX|in' />
+	</JLConfig>
+
+</root>

@@ -1,0 +1,2 @@
+mong地址  http://59.50.104.198:253/rockmongo/index.php?action=login.index&host=0
+用户名scm 密码：zHllb4Q2d2436mY8

@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- The contents of this file will be loaded for each web application -->
+<Context>
+
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+
+    <!-- Uncomment this to enable Comet connection tacking (provides events
+         on session expiration as well as webapp lifecycle) -->
+    <!--
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+    -->
+	
+	<Resource
+        name="jms/FailoverConnectionFactory"
+        auth="Container"
+        type="org.apache.activemq.ActiveMQConnectionFactory"
+        description="JMS Connection Factory"
+        factory="org.apache.activemq.jndi.JNDIReferenceFactory"
+        brokerURL="failover:(tcp://localhost:61616)?initialReconnectDelay=100&amp;maxReconnectAttempts=5"
+        brokerName="localhost"
+        useEmbeddedBroker="false"/>
+
+	<Resource
+        name="jms/NormalConnectionFactory"
+        auth="Container"
+        type="org.apache.activemq.ActiveMQConnectionFactory"
+        description="JMS Connection Factory"
+        factory="org.apache.activemq.jndi.JNDIReferenceFactory"
+        brokerURL="tcp://localhost:61616"
+        brokerName="localhost"
+        useEmbeddedBroker="false"/>
+
+<!--    leTV Resource    -->
+
+	<Resource  
+        name="jdbc/workflow"  
+        type="javax.sql.DataSource"  
+        driverClassName="oracle.jdbc.driver.OracleDriver"  
+        maxIdle="2"  
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:oracle:thin:@10.176.29.184:1521:letv"  
+        username="lepcrm"  
+        password="aaaa"   
+        />  
+
+	<Resource  
+        name="jdbc/scm"  
+        type="javax.sql.DataSource"  
+        driverClassName="oracle.jdbc.driver.OracleDriver"  
+        maxIdle="2"  
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:oracle:thin:@10.176.29.184:1521:letv"  
+        username="lescm"  
+        password="aaaa"   
+        />
+
+	<Resource  
+        name="jdbc/vip"  
+        type="javax.sql.DataSource"  
+        driverClassName="oracle.jdbc.driver.OracleDriver"  
+        maxIdle="2"  
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:oracle:thin:@10.176.29.184:1521:letv"
+        username="JLVIP"  
+        password="aaaa"  />
+
+	<Resource  
+        name="jdbc/platform"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"
+        maxActive="20"
+        url="jdbc:oracle:thin:@10.176.29.184:1521:letv"
+        username="lepcrm"
+        password="aaaa"
+        />
+ 
+ 
+<!-- GS Resource  
+	<Resource  
+        name="jdbc/workflow"  
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.118:6789:web"
+        username="dev_workflow"
+        password="v9dev_crm_2015"
+       />
+
+	<Resource  
+        name="jdbc/platform"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.118:6789:web"
+        username="dev_platform"
+        password="v9dev_crm_2015"
+        />
+
+	<Resource  
+        name="jdbc/scm"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.118:6789:web"
+        username="dev_scm"
+        password="v9dev_centos_2015"
+        />
+
+	<Resource  
+        name="jdbc/vip"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.118:6789:web"
+        username="dev_vip"
+        password="v9dev_centos_2015"
+		/>
+-->
+<!--  V9 Test Resource
+	<Resource  
+        name="jdbc/workflow"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.115:9010:web"  
+        username="v9cs_workflow"  
+        password="aaaa"   
+        />
+
+	<Resource  
+        name="jdbc/szcw"  
+        type="javax.sql.DataSource"  
+        driverClassName="oracle.jdbc.driver.OracleDriver"  
+        maxIdle="2"  
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.115:9010:web"  
+        username="v9cs_workflow"  
+        password="aaaa"   
+        />
+ -->
+
+<!-- JinHui Resource
+	<Resource
+        name="jdbc/workflow"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"
+        maxActive="20"
+        url="jdbc:oracle:thin:@115.28.242.223:1521:orcl"
+        username="workflow"
+        password="jinhui_2015"
+    />	  
+
+    <Resource
+        name="jdbc/platform"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        maxIdle="2"
+        maxWait="5000"
+        maxActive="20"
+        url="jdbc:oracle:thin:@115.28.242.223:1521:orcl"
+        username="platform"
+        password="jinhui_2015"
+    />  
+-->
+<!--	
+	<Resource  
+        name="jdbc/gongmao"  
+        type="javax.sql.DataSource"  
+        driverClassName="oracle.jdbc.driver.OracleDriver"  
+        maxIdle="2"  
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.115:9010:V9"  
+        username="v9cs_workflow"  
+        password="aaaa"   
+        /> 
+
+     <Resource  
+        name="jdbc/form"  
+        type="javax.sql.DataSource"  
+        driverClassName="oracle.jdbc.driver.OracleDriver"  
+        maxIdle="2"  
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:oracle:thin:@119.79.224.115:9010:V9"  
+        username="V9CSSCM"  
+        password="aaaa"  />
+	
+    <Resource  
+        name="jdbc/dsjk"  
+        type="javax.sql.DataSource"  
+        driverClassName="com.mysql.jdbc.Driver"  
+        maxIdle="2"  
+        maxWait="5000"  
+        maxActive="20"
+        url="jdbc:mysql://192.13.4.195:3306/jlecsv8"  
+        username="root"  
+        password="123456"  />
+-->
+	<Resource
+        name="jdbc/sh"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="10"
+        maxIdle="10"
+        maxWait="-1"
+        username="dev_scm"
+        password="v9dev_centos_2015"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="jdbc:oracle:thin:@119.79.224.118:6789:WEB"
+    />
+
+</Context>

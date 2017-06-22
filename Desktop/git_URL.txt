@@ -1,0 +1,12 @@
+webContent
+ssh://git@59.172.6.146:203/gree_fw_www.git
+
+form/scm
+ssh://git@59.172.6.146:203/gree_form_src.git
+
+
+framwork
+ssh://git@59.172.6.146:203/gree_fw_src.git
+
+webContent/scm
+ssh://git@59.172.6.146:203/gree_form_www.git

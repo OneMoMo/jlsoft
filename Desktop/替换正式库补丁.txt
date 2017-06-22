@@ -1,0 +1,18 @@
+
+上海格力应用服务器:
+
+IP:123.206.201.155
+jlsoft/m38KH6x9XRh0V9SP
+
+
+qfpsJUVgWUvL
+
+
+常用命令：
+form19081
+kill XXXX
+./start.sh
+
+操作路径：
+
+/home/jlsoft/app/form/19081

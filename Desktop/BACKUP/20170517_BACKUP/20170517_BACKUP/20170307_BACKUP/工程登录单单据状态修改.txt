@@ -1,0 +1,4 @@
+oracle修改：
+select * from w_task where sk02 like '%工程登录单号%' for update
+
+mongo修改

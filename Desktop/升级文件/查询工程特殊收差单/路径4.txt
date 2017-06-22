@@ -1,0 +1,3 @@
+com\jlsoft\form\scm\gcgl\gcdl\interfaceQuery
+
+scmform_git/WebContent/scm/gcgl/gcdl/search/MONGO_CXGCTSSCD.js

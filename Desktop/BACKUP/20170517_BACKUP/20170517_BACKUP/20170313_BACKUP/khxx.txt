@@ -1,0 +1,414 @@
+<div class="w12 jl_form">
+	<div class="jl_form_02">
+		<div class="jl_form_02" id="KSXX">
+		<ul>
+		<li style="list-style:none;display:none;">
+				  <div id="d_CZJM"></div>
+			      <div id="d_jlbh"></div>
+			      <div id="d_JGGK"></div>
+			      <div id="d_EDKZ"></div>
+			      <div id="d_YXBJ"></div>
+			      <div id="d_WLDW01"></div>
+			      <div id="d_GSXX01"></div>
+			      <div id="d_GSMC"></div>
+			      <div id="d_DJR_RYXX01"></div>
+			      <div id="d_DJRMC"></div>
+			      <div id="d_DJRQ"></div>
+			      <div id="d_HYXX01"></div>
+			      <div id="d_DWLB"></div>
+			</li>  
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="客户名称">客户名称</dt>
+					<dd class="w11">
+						<div class="w06" id="d_WLDWMC"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="拼音码">拼音码</dt>
+					<dd class="w11">
+						<div class="w06" id="d_PYM"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="财务系统编码">财务系统编码</dt>
+					<dd class="w11">
+						<div class="w06" id="d_CWXTBM"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="简称">简称</dt>
+					<dd class="w11">
+						<div class="w06" id="d_JC"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="地址">地址</dt>
+					<dd class="w11">
+						<div class="w06" id="d_DZ"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="开户银行">开户银行</dt>
+					<dd class="w11">
+						<div class="w06" id="d_KHYH"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="银行账号">银行账号</dt>
+					<dd class="w11">
+						<div class="w06" id="d_YHZH"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="税务登记号">税务登记号</dt>
+					<dd class="w11">
+						<div class="w06" id="d_SWDJH"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="厂家编码">厂家编码</dt>
+					<dd class="w11">
+						<div class="w06" id="d_CJBM"></div>
+					</dd>
+				</dl>
+			</li> 
+		</ul>
+	</div>
+	<div class="jl_form_02" id="LXFS">
+		<ul>
+		 	<li class="w12">
+				<dl>
+					<dt class="w01" title="发票类型">发票类型</dt>
+					<dd class="w11">
+						<div class="w06" id="d_FPLX"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="返利开票方式">返利开票方式</dt>
+					<dd class="w11">
+						<div class="w06" id="d_FLKPFS"></div> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="开票户头">开票户头</dt>
+					<dd class="w11">
+						<div class="w06" id="d_KPHT"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="法人代表">法人代表</dt>
+					<dd class="w11">
+						<div class="w06" id="d_FRDB"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="行业">行业</dt>
+					<dd class="w11">
+						<div class="w06" id="d_HY"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="客商类型">客户类型</dt>
+					<dd class="w11">
+						<div class="w06" id="d_KSLX"></div>
+					</dd>
+				</dl>
+			</li>  
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="对应业务员">对应业务员</dt>
+					<dd class="w11">
+						<div class="w06" id="d_YWY"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>分销、延付制单时，选择客户后业务员自动带出
+						</label> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="上级客商">上级客户</dt>
+					<dd class="w11">
+						<div class="w06" id="d_SJKS"></div>
+					</dd>
+				</dl>
+			</li>  
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="区域">区域</dt>
+					<dd class="w11">
+						<div class="w06" id="d_QY"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="有效标记">有效标记</dt>
+					<dd class="w11">
+						<div class="w06" id="d_YXBJ01"></div>
+					</dd>
+				</dl>
+			</li> 
+			<!-- <li class="w12">
+				<dl>
+					<dt class="w01" title="总公司冻结标记">总公司冻结标记</dt>
+					<dd class="w11">
+						<div class="w06" id="d_ZGSDJ"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="所选公司冻结标记">所选公司冻结标记</dt>
+					<dd class="w11">
+						<div class="w06" id="d_SXGSDJ"></div>
+					</dd>
+				</dl>
+			</li>  -->
+		</ul>
+	</div>
+	<div class="jl_form_02" id="LXFS">
+		<ul>
+		 <li class="w12">
+				<dl>
+					<dt class="w01" title="联系电话">联系电话</dt>
+					<dd class="w11">
+						<div class="w06" id="d_LXDH"></div>
+						<em class="btx font_red" ></em>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>服务登记时使用
+						</label> 
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="联系人">联系人</dt>
+					<dd class="w11">
+						<div class="w06" id="d_LXR"></div>
+						<em class="btx font_red"></em>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>服务登记时使用
+						</label> 
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="送货地址">送货地址</dt>
+					<dd class="w11">
+						<div class="w06" id="d_SHDZ"></div>
+						<em class="btx font_red"></em>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>服务登记时使用
+						</label> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="邮政编码">邮政编码</dt>
+					<dd class="w11">
+						<div class="w06" id="d_YZBM"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="传真号码">传真号码</dt>
+					<dd class="w11">
+						<div class="w06" id="d_CZHM"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="电子邮箱">电子邮箱</dt>
+					<dd class="w11">
+						<div class="w06" id="d_SMTP"></div>
+					</dd>
+				</dl>
+			</li>  
+		</ul>
+	</div>
+	<div class="jl_form_02" id="QTXX">
+		<ul>  
+		
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="分销账期">分销账期</dt>
+					<dd class="w11">
+						<div class="w06" id="d_FXZQ"></div>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="延付账期">延付账期</dt>
+					<dd class="w11">
+						<div class="w06" id="d_YFZQ"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>影响客户往来账里的延付余额记账时间
+						</label> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="结算币种">结算币种</dt>
+					<dd class="w11">
+						<div class="w06" id="d_JSBZ"></div>
+						<em class="btx font_red" name="JSBZ"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="支付方式">支付方式</dt>
+					<dd class="w11">
+						<div class="w06" id="d_ZFFS"></div>
+						<em class="btx font_red" name="emZFFS"></em>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>对客户收款时会默认显示指定的支付方式
+						</label>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="延付记账方式">延付记账方式</dt>
+					<dd class="w11">
+						<div class="w06" id="d_YFJZFS"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>影响客户往来账里的延付余额记账时间
+						</label>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="价格管控">价格管控</dt>
+					<dd class="w11">
+						<div class="w02" id="d_JGGK01"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>勾选价格管控，分销、延付制单时则不准许修改价格
+						</label>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="额度控制">额度控制</dt>
+					<dd class="w11">
+						<div class="w02" id="d_EDKZ01"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>勾选后，要货单、分销单、延付制单时受到可用余额控制，余额不够不准许制单
+						</label>
+					</dd>
+				</dl>
+			</li> 
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="自动收款">自动收款</dt>
+					<dd class="w11">
+						<div class="w02" id="d_ZDSK"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>勾选后，分销单审核自动收款，收款方式默认为支付方式
+						</label> 
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title=""></dt>
+					<dd class="w11">
+						<div class="w02" id="d_YFZDSK"></div>
+						<label class="message messcolor_red ml10 show fl">
+							<i class="fa fa-info-circle mr5"></i>勾选后，延付结算单审核自动收款，收款方式默认为支付方式
+						</label> 
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div> 
+	</div>
+<div class="jl_form_02">
+	<div class="step2">
+    <dl class="jl_catalog_line">
+      <dt class="catalog_title" jlang="">审核1</dt>
+      <dd class="w12"></dd>
+      <dt class="catalog_cz"><i class="fa fa-angle-down" title="收起"></i></dt>
+    </dl>
+
+    <div class="jl_form_02">
+      <ul>
+        <li class="w04">
+          <dl>
+            <dt class="w03" title="结论" jlang="">结论</dt>
+            <dd class="w09">
+              <div id="d_SH1"></div>
+            </dd>
+          </dl>
+        </li>
+
+        <li class="w04">
+          <dl>
+            <dt class="w03" title="审核人" jlang="">审核人</dt>
+            <dd class="w09">
+            <input class="w12 hide" name="SHR1_RYXX01" type="text" readonly="readonly">
+            <input class="w12" name="SHRMC1" type="text" readonly="readonly"></dd>
+          </dl>
+        </li>
+
+        <li class="w04">
+          <dl>
+            <dt class="w03" title="审核时间" jlang="">审核日期</dt>
+            <dd class="w09"><input class="w12" name="SHRQ1" type="text" readonly="readonly"></dd>
+          </dl>
+        </li>
+
+        <li class="w12">
+          <dl>
+            <dt class="w01" title="意见" jlang="">意见</dt>
+            <dd class="w11"><input class="w12" name="SHYJ1" type="text"></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+<div class="jl_operation" style="bottom: 0px; margin-bottom: 0px;">
+	<div class="oper_line"></div>
+	<div class="oper_main" id="d_toolbar"></div>
+</div>

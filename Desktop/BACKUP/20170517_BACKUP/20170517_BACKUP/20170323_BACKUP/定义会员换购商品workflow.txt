@@ -1,0 +1,51 @@
+-- WN-13095 定义会员换购商品 亓淑功 
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('0615', 'hjy', '定义会员换购商品', 2, 1, 1, 0, 0, null, 0, 15, '', 0);
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('061501', '制单', '6015', 3, 1, 1, 0, 0, null, 0, 1, '601501', 0);
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('061502', '审核', '6015', 3, 1, 1, 0, 0, null, 0, 2, '601502', 0);
+
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('061501', -1, null);
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('061502', -1, null);
+
+insert into w_gzl (GZL01, GZL02, GZL03, GZL04, LX01, GSXX01, GZL05, GZL06, GZL07, GZL08, GZL09)
+values (9126, '定义会员换购商品', 0, 1, null, '0001', 0, 1, 0, 0, 0);
+
+
+insert into w_gzlbz (GZL01, BZ04, BZ02, BZ01, BZ03, BZGW01, HFID_CC, HDAT_CC, ZDCS_CC, BZ05)
+values (9126, 0, '制单', 912601, 1, null, '[]', '[]', 1, null);
+
+insert into w_gzlbz (GZL01, BZ04, BZ02, BZ01, BZ03, BZGW01, HFID_CC, HDAT_CC, ZDCS_CC, BZ05)
+values (9126, 0, '审核', 912602, 0, null, '[]', '[]', 1, null);
+
+insert into w_gzlbz (GZL01, BZ04, BZ02, BZ01, BZ03, BZGW01, HFID_CC, HDAT_CC, ZDCS_CC, BZ05)
+values (9126, 0, '封单', 912603, 2, null, '[]', '[]', 1, null);
+
+
+insert into W_MENU (MENU01, MENU02)
+values ('061501', '{"GZL01":"9126","BZ01":"912601","BZ03":"1"}');
+
+insert into W_MENU (MENU01, MENU02)
+values ('061502', '{"GZL01":"9126","BZ01":"912602","BZ03":"0"}');
+
+
+insert into w_jk (JK01, JK02, JK03, TBLNAME, YMBH)
+values (912601, '制单', '{"name":"1174","field":["bdbh","jlbh","V9DH","ZDRMC","ZDRQ"]}', '1174', null);
+
+insert into w_jk (JK01, JK02, JK03, TBLNAME, YMBH)
+values (912602, '审核', '{"name":"1174","field":["bdbh","jlbh","V9DH","SHRMC","SHRQ"]}', '1174', null);
+
+
+
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01,HDAT,HFID,INTERFACEIDS,JYL)
+values (9126, 912601, 1, '制单', 912602, 0, 912601, 1, '9',null, '1','[]','[]',null,null);
+
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01,HDAT,HFID,INTERFACEIDS,JYL)
+values (9126, 912602, 1, '审核', 912603, 0, 912602, 1, '17', null, 1,'[]','[]',null,null);
+
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01,HDAT,HFID,INTERFACEIDS,JYL)
+values (9126, 912602, 2, '不同意',912601, 0, 912602, 1, '18', null, 1,'[]','[]',null,null);
+

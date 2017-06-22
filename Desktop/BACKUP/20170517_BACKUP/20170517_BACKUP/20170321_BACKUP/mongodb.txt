@@ -1,0 +1,13 @@
+--   WN-12581  王定福    新增定义客户审批流  2017-03-13
+
+{
+  "bdbh" : 1169,
+  "bdmc" : "定义客户",
+  "collection" : "SCM_DYKH",
+  "jyl" : "makeKHXX",
+  "oabj" : true,
+  "pad" : "",
+  "pc" : "admin/scm/jcsp/makeKHXX.html",
+  "phone" : "",
+  "template" : ""
+}

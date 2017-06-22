@@ -1,0 +1,23 @@
+--新增   定义费用部门       周泽 
+
+insert into W_MENUVIEW (VIEW01,VIEW02,VIEW03,VIEW04,VIEW05,VIEW06,VIEW07,VIEW08,VIEW10,VIEW11,MENU01,YXBJ) 
+values ('2202','定义费用部门','22','2','1','1','0','0','0','2','2202','0');
+
+insert into w_CZYMENU (VIEW01,GW01) values ('2202','-1');
+
+insert into W_MENU (MENU01,MENU02) values ('2202','{"bdbh":"1114"}');
+
+insert into w_workflow_control (SENDER, YXBJ, DYBJ,BZBJ) values ('1114','1', '0','0');
+
+--Mongo新增  周泽 2016年10月8日
+db.form.insert({
+  "bdbh": 1114,
+  "bdmc": "定义费用部门",
+  "collection": "SCM_FYBM",
+  "jyl": "scmDefineFYBM",
+  "oabj": false,
+  "pad": "",
+  "pc": "/scm/projects/tecno/fygl/defineFYBM.html",
+  "phone": "",
+  "template": ""
+});

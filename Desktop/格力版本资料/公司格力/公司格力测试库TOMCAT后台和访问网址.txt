@@ -1,0 +1,13 @@
+FORM的前后台： 
+格力日志：http://211.161.120.132:8087/probe_scmform/logs/index.htm 
+格力日志：http://211.161.120.132:8087/probe_scm/logs/index.htm 
+用户：jlsoft   密码： jlsoft_app_2016
+
+scm的前后台：
+http://123.206.201.155:8086/SCM/
+http://123.206.201.155:8086/probe_scm/
+
+登录名和密码:
+probe:
+jlsoft
+jlsoft_app_2016

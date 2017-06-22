@@ -1,0 +1,4 @@
+/HOME  2G
+/boot  200M
+swarp 1G
+/     Ыљга

@@ -1,0 +1,109 @@
+-- Create table
+create table GC_SCDITEM
+(
+  scdi01 VARCHAR2(50) not null,
+  scdh01 VARCHAR2(16) not null,
+  dld01  VARCHAR2(50) not null,
+  wbtdh  VARCHAR2(16) not null,
+  jlwbdh VARCHAR2(20) not null,
+  gsxx01 VARCHAR2(4) not null,
+  spxx01 NUMBER(16) not null,
+  splb01 NUMBER(16,4) default 0,
+  splb02 NUMBER(16,4) default 0,
+  splb03 NUMBER(16,4) default 0,
+  splb04 VARCHAR2(225),
+  splb05 VARCHAR2(225),
+  splb06 NUMBER(16,4),
+  splb07 NUMBER(16,4),
+  splb08 NUMBER(16,4),
+  splb09 NUMBER(16,4),
+  splb10 NUMBER(16,4),
+  splb11 NUMBER(16,4),
+  splb12 NUMBER(16,4),
+  splb13 NUMBER(16,4),
+  splb14 VARCHAR2(225),
+  splb15 VARCHAR2(20),
+  splb16 VARCHAR2(15),
+  splb17 VARCHAR2(15),
+  splb18 VARCHAR2(30)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table GC_SCDITEM
+  is '工程收差单';
+-- Add comments to the columns 
+comment on column GC_SCDITEM.scdi01
+  is '收差单号  商品列表--SCDI01 --';
+comment on column GC_SCDITEM.scdh01
+  is '收差单号  主表--SCDH01--WBTDH';
+comment on column GC_SCDITEM.dld01
+  is '登录单号--GCDLD01 --制单';
+comment on column GC_SCDITEM.wbtdh
+  is '单据提单号--DJTDH--WBTDH';
+comment on column GC_SCDITEM.jlwbdh
+  is '分销单号--JLWBDH';
+comment on column GC_SCDITEM.gsxx01
+  is '公司代码--GSXX01 --制单';
+comment on column GC_SCDITEM.spxx01
+  is '商品内码 > SPXX01 ';
+comment on column GC_SCDITEM.splb01
+  is '收差单价 --SCDJ';
+comment on column GC_SCDITEM.splb02
+  is '收差差额 --SCCE';
+comment on column GC_SCDITEM.splb03
+  is '收差数量--SCSL';
+comment on column GC_SCDITEM.splb04
+  is '收差原因 --SCYY';
+comment on column GC_SCDITEM.splb05
+  is '收差备注 --SCBZ';
+comment on column GC_SCDITEM.splb06
+  is '分销数量 -- FXSL';
+comment on column GC_SCDITEM.splb07
+  is '分销单价 -- FXDJ';
+comment on column GC_SCDITEM.splb08
+  is '问题收差单价  -- WTSCDJ';
+comment on column GC_SCDITEM.splb09
+  is '问题差额单价  -- WTCE';
+comment on column GC_SCDITEM.splb10
+  is '问题资料数量  -- WTZLSL';
+comment on column GC_SCDITEM.splb11
+  is '已有问题资料数量 -- YYWTZLSL';
+comment on column GC_SCDITEM.splb12
+  is '资料数量 -- ZLSL';
+comment on column GC_SCDITEM.splb13
+  is '问题收差金额 -- WTSCJE';
+comment on column GC_SCDITEM.splb14
+  is '安装地址 -- AZDZ';
+comment on column GC_SCDITEM.splb15
+  is '联系人 -- LXR';
+comment on column GC_SCDITEM.splb16
+  is '联系电话 -- LXDH';
+comment on column GC_SCDITEM.splb17
+  is '批发单号  -- PFDI01';
+comment on column GC_SCDITEM.splb18
+  is '客户要货单 -- KHYHD01';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table GC_SCDITEM
+  add constraint PK_GC_SCDITEM primary key (SCDI01, GSXX01)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

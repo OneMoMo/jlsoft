@@ -1,0 +1,82 @@
+SELECT A.JQM01 CM01, 
+    a.SPXX02 SPBM, 
+    a.SPXX04 SPMC, 
+    a.CK02 CKMC, 
+    A.SPXX46 CMT, 
+    A.KHDM, 
+    A.KHMC, 
+    get_jlwbdh(A.JQMK06, A.JQMK07, A.GSXX01) DJHM, 
+    a.SPFL02 SPFL, 
+    a.PPB02 SPPPMC, 
+    SHRQ, 
+    FHRQ 
+    from (select A.JQM01, 
+               A.GSXX01, 
+               S.SPXX02, 
+               S.SPXX04, 
+               S.SPXX46, 
+               A.JQMK01, 
+               A.CK01, 
+               C.CK02, 
+               get_spsx_v10(NVL(A.CGXY02, -99)) SPSX, 
+               A.JQMK08, 
+               A.WLDW01, 
+               W.WLDW02, 
+               A.BM01, 
+               B.BM02, 
+               A.JQMK05, 
+               A.JQMK06, 
+               A.JQMK07, 
+               S.SPXX01, 
+               S.SPFL01, 
+               S.SPFL02, 
+               S.PPB01, 
+               S.PPB02, 
+               A.KHDM, 
+               (SELECT WLDW02 FROM WLDW WHERE WLDW01=A.KHDM) KHMC, 
+               decode(A.JQMK06,8,(SELECT TO_CHAR(PFD30,'YYYY-MM-DD') FROM PFD WHERE 
+               PFD01=SUBSTR(JQMK07,0,LENGTH(JQMK07)-2) AND GSXX01=A.GSXX01),NULL)SHRQ, 
+               decode(A.JQMK06,8,(SELECT TO_CHAR(PFDI11,'YYYY-MM-DD') FROM PFDITEM WHERE 
+               PFDI01=JQMK07 AND GSXX01=A.GSXX01),NULL)FHRQ 
+          from JQMKC A, SPXX S, CK C, WLDW W, BM B 
+         WHERE A.SPXX01 = S.SPXX01 
+           AND A.CK01 = C.CK01 
+           AND A.WLDW01 = W.WLDW01 
+           AND A.BM01 = B.BM01 
+           AND A.JQMK06=8 
+        union all 
+        select A.JQM01, 
+               A.GSXX01, 
+               S.SPXX02, 
+               S.SPXX04, 
+               S.SPXX46, 
+               A.JQMK01, 
+               A.CK01, 
+               C.CK02, 
+           get_spsx_v10(NVL(A.CGXY02, -99)) SPSX, 
+               A.JQMK08, 
+               A.WLDW01, 
+               W.WLDW02, 
+               A.BM01, 
+               B.BM02, 
+               A.JQMK05, 
+               A.JQMK06, 
+               A.JQMK07, 
+               S.SPXX01, 
+               S.SPFL01, 
+               S.SPFL02, 
+               S.PPB01, 
+               S.PPB02, 
+               A.KHDM, 
+               (SELECT WLDW02 FROM WLDW WHERE WLDW01=A.KHDM)KHMC, 
+               decode(A.JQMK06,8,(SELECT TO_CHAR(PFD30,'YYYY-MM-DD') FROM PFD WHERE 
+               PFD01=SUBSTR(JQMK07,0,LENGTH(JQMK07)-2) AND GSXX01=A.GSXX01),NULL)SHRQ, 
+               decode(A.JQMK06,8,(SELECT TO_CHAR(PFDI11,'YYYY-MM-DD') FROM PFDITEM WHERE 
+               PFDI01=JQMK07 AND GSXX01=A.GSXX01),NULL)FHRQ 
+          from JQMCK A, SPXX S, CK C, WLDW W, BM B 
+         WHERE A.SPXX01 = S.SPXX01 
+           AND A.CK01 = C.CK01 
+           AND A.WLDW01 = W.WLDW01 
+           AND A.BM01 = B.BM01 
+           AND A.JQMK06=8) A 
+    WHERE 1=1 

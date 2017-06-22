@@ -1,0 +1,28 @@
+本地调试：
+http://127.0.0.1:8788/scmform_git/AutoZFDLD/BFBHQCW_GCDLD.do
+
+本地海南正式库调试
+http://127.0.0.1:8788/scmform_git/AutoZFDLD/SYBHQTZ_HN.do
+
+备份工程登录单的数据
+http://127.0.0.1:8788/scmform_git/AutoZFDLD/BF_SCM_GCDLD.do
+
+查询需要调整的保护期
+http://127.0.0.1:8788/scmform_git/GCBHQTZ/selTZBHQ.do
+
+调整保护期次数等
+http://127.0.0.1:8788/scmform_git/GCBHQTZ/getTZBHQ.do
+
+查询保护期为0 的单据
+http://127.0.0.1:8788/scmform_git/GCBHQTZ/selTZBHQ_AUTO.do
+
+
+自动延期保护期为0 的单据
+http://127.0.0.1:8788/scmform_git/GCBHQTZ/getTZBHQ_AUTO.do
+
+
+//家用保护期调整JYBHQTZ_HN
+http://127.0.0.1:8788/scmform_git/AutoZFDLD/JYBHQTZ_HN.do
+
+//商用用保护期调整SYBHQTZ_HN
+http://127.0.0.1:8788/scmform_git/AutoZFDLD/SYBHQTZ_HN.do

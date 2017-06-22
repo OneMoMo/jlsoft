@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<JLConfig id="MONGO_FYXM.SCM_FYXM">
+	  <FIELD attrname="search" format='{"$or":[{"FYBM":{"$regex":"#search#"}},{"FYXM":{"$regex":"#search#"}}]}' fieldtype="String" allownull="Y" name="费用名称" />
+      <FIELD attrname="S_VALUE" fieldtype="string" allownull="Y" name="状态" />
+      <FIELD attrname="GSXX01" fieldtype="Map" allownull="Y" name="公司信息" />
+	</JLConfig>
+</root>
+ 

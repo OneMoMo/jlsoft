@@ -1,0 +1,78 @@
+<div class="jl_screening_main">
+	<ul id="queryQKSQD">
+	 <li class="w04">
+			<dl class="w12">
+				<dt class="w03" title="申请单号" align=right>申请单号</dt>
+				<dd class="w09">
+					<div id="d_QKSQD01" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+	  <li class="w04">
+			<dl class="w12">
+				<dt class="w03" title="预算期间" align=right>预算期间</dt>
+				<dd class="w09">
+					<div id="d_YSQJ_S" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+		<li class="w04">
+			<dl class="w12">
+				<dt class="w03" align=right>————</dt>
+				<dd class="w09">
+					<div id="d_YSQJ_E" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+		<li class="w04">
+			<dl class="w12">
+				<dt class="w03" title="请款状态" align=right>请款状态</dt>
+				<dd class="w09">
+					<div id="d_DJZT" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+		<li class="w04">
+			<dl class="w12">
+				<dt class="w03" title="申请人" align=right>申请人</dt>
+				<dd class="w09">
+					<div id="d_SQRMC" class="w12"></div>
+				</dd>
+			</dl>
+		</li>		
+	</ul>
+</div>
+<script type="text/javascript">
+	JL.initQueryPlugin($("ul#queryQKSQD"), {
+		 "QKSQD01": {
+	    	 "jlid" : "JLInput",
+	    	 "css": "w12"
+	     },
+	     
+	    "DJZT": {
+	    	"jlid" : "JLSelect",
+	    	"placeholder" : "请选择单据状态",
+			"options" : {
+				"0" : "请款申请",
+				"1" : "请款审核",
+				"2" : "请款出纳",
+				"3" : "报销申请",
+				"4" : "报销审核",
+				"5" : "报销出纳"
+			}
+	    } , 
+		"SQRMC" : {
+			"jlid" : "JLInput",
+	    	 "css": "w12"
+		}
+    });
+	JL.initPlugIn($("ul#queryQKSQD #d_YSQJ_S"), "YSQJ_S", {
+		"jlid" : "JLDate",
+		"format": "yyyy-mm"
+	});
+	JL.initPlugIn($("ul#queryQKSQD #d_YSQJ_E"), "YSQJ_E", {
+		"jlid" : "JLDate",
+		"format": "yyyy-mm"
+	});
+		
+</script>

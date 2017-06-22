@@ -1,0 +1,374 @@
+保护期时间  延期次数
+海南格力 商用家用 保护期时间 30天   延期次数6
+上海格力 商用 保护期90天   延期次数1次（家用没有延期）
+湖南格力  家用  保护期30天  延期次数2次
+
+
+1	321460	0001	{ "经销商名称" : "1上海永全电器有限公司" , "使用单位" : "一道棋牌室" , "工程登录单号" : "DL930-000025" , "工程合同号" : "GT17040500000026" , "工程合同提交日期" : "2017-04-05 14:31:48" , "客户编码" : "901312"}	90922	{ "bdbh" : "1095" , "jlbh" : 6928}	87691	9092	工程合同	审核	-1	系统管理员	2017/4/5 14:32:16	1058	0	901312		90131204	0001030101		系统管理员
+
+
+
+/* 0 */
+{
+  "AZDZ1" : [{
+      "id" : 310000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "上海",
+      "LEVELS" : 1,
+      "KEY" : "310000"
+    }, {
+      "id" : 310100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "上海市",
+      "LAST" : "310000",
+      "LEVELS" : 2,
+      "KEY" : "310100"
+    }, {
+      "id" : 310115,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "浦东新区",
+      "LAST" : "310100",
+      "LEVELS" : 3,
+      "KEY" : "310115"
+    }, {
+      "VALUE" : "崂山路633号2楼",
+      "KEY" : "0"
+    }],
+  "AZDZ2" : [],
+  "AZDZLB" : [{
+      "LXR" : "潘先生",
+      "LXDH" : "18702180282",
+      "AZDZ" : [{
+          "id" : 310000,
+          "MJBJ" : 0,
+          "index" : 1,
+          "VALUE" : "上海",
+          "LEVELS" : 1,
+          "KEY" : "310000"
+        }, {
+          "id" : 310100,
+          "MJBJ" : 0,
+          "index" : 2,
+          "VALUE" : "上海市",
+          "LAST" : "310000",
+          "LEVELS" : 2,
+          "KEY" : "310100"
+        }, {
+          "id" : 310115,
+          "MJBJ" : 1,
+          "index" : 3,
+          "VALUE" : "浦东新区",
+          "LAST" : "310100",
+          "LEVELS" : 3,
+          "KEY" : "310115"
+        }, {
+          "VALUE" : "崂山路633号2楼",
+          "KEY" : "0"
+        }]
+    }],
+  "AZDZLB_0_AZDZ" : [{
+      "id" : 310000,
+      "MJBJ" : 0,
+      "index" : 1,
+      "VALUE" : "上海",
+      "LEVELS" : 1,
+      "KEY" : "310000"
+    }, {
+      "id" : 310100,
+      "MJBJ" : 0,
+      "index" : 2,
+      "VALUE" : "上海市",
+      "LAST" : "310000",
+      "LEVELS" : 2,
+      "KEY" : "310100"
+    }, {
+      "id" : 310115,
+      "MJBJ" : 1,
+      "index" : 3,
+      "VALUE" : "浦东新区",
+      "LAST" : "310100",
+      "LEVELS" : 3,
+      "KEY" : "310115"
+    }, {
+      "VALUE" : "崂山路633号2楼",
+      "KEY" : "0"
+    }],
+  "BHQ" : "",
+  "BM01" : "34",
+  "BZ02" : "封单",
+  "DDDLDH" : "",
+  "DLD" : {
+    "value" : "合同",
+    "key" : "合同"
+  },
+  "DLXH" : "1",
+  "DQR" : "",
+  "DYDLBJ" : {
+    "value" : "是",
+    "key" : "0"
+  },
+  "EJJSXDH" : "18930988193",
+  "EJJSXMC" : "上海越格冷暖工程有限公司",
+  "FORM_SYSTEM" : {
+    "SAVE_STATE" : false
+  },
+  "GCBH" : "",
+  "GCBJ" : "1",
+  "GCDLD01" : "DL930-000025",
+  "GCGZR" : "越格（侯梅）",
+  "GCGZRDM" : "",
+  "GCJL" : [],
+  "GCLX" : {
+    "value" : "家用",
+    "key" : "1"
+  },
+  "GCMS" : "",
+  "GCYT" : {
+    "value" : "休闲娱乐",
+    "key" : "10"
+  },
+  "GC_DJZT" : {
+    "value" : "合同待审核",
+    "key" : "合同待审核"
+  },
+  "GC_GJQK" : "",
+  "GC_GJR" : "越格",
+  "GC_GJSJ" : "2016-11-22 16:51:27",
+  "GC_HFR" : "",
+  "GC_HFSJ" : "",
+  "GC_HFYJ" : "",
+  "GC_LOG" : [{
+      "GC_CZSJ" : "2017-04-05 14:32:12",
+      "GC_XGJL" : "",
+      "GC_CZY" : "系统管理员",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2017-04-05 09:02:53",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "甲方现场有所改动还需进一步确定 数量 继续跟进",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2017-03-22 09:50:33",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "一直在跟进 在跟甲方确认台数及价格 最近一段时间会签定",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2017-03-07 14:17:26",
+      "GC_XGJL" : "",
+      "GC_CZY" : "系统自动生成代办使用账号",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2017-02-22 10:29:13",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "室内重新装修 还要先装排风 排气扇 空调可能要晚一点签定  已经在进一步跟踪  继续跟进",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2017-02-07 10:19:34",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "项目跟进中",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2017-01-22 16:49:58",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "洽谈中  继续跟进",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2017-01-12 10:50:16",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "价格已报 继续跟进",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2016-12-23 12:54:08",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "价格已报 继续跟进",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2016-12-06 08:29:20",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "价格已报 还在交谈中 机器是12台挂机 2台50天井机 继续跟进",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }, {
+      "GC_CZSJ" : "2016-11-22 16:55:46",
+      "GC_XGJL" : "",
+      "GC_CZY" : "越格",
+      "GC_CZYJ_TITLE" : "跟进情况",
+      "GC_CZYJ" : "价格已报  还在交谈中  继续是12台挂机  2台50天井机  继续跟进",
+      "GC_XGJL_TITLE" : "修改记录",
+      "GC_SCZP_TITLE" : "上传照片",
+      "GC_CZBJ" : "GJ",
+      "GC_CZY_TITLE" : "跟进人",
+      "GC_CZSJ_TITLE" : "跟进时间",
+      "GC_SCZP" : []
+    }],
+  "GC_SCZP" : [],
+  "GMDW" : "一道棋牌室",
+  "GSXX01" : "0001",
+  "GZRDH" : "越格（侯梅）",
+  "HTDBBH" : 6928,
+  "HTSCFJ" : [{
+      "FILE_NAME" : "3070a5274e1facde7b9f3bd7a9dea991",
+      "HD_HOST" : "scmform-fs",
+      "STATE" : 1,
+      "FILE_DESC" : "QQ截图20170306094110.png",
+      "HD_DATE" : "2017-04-05",
+      "VD_HOME" : "fs/scmform/attachments",
+      "HD_SIZE" : "M001",
+      "FILE_URL" : "http://123.206.201.155:8084/fs/scmform/attachments/2017-04-05/M001/3070a5274e1facde7b9f3bd7a9dea991",
+      "VD_HOST" : "123.206.201.155:8084",
+      "FILEID" : "file_HTSCFJ",
+      "FILE_SIZE" : 885991,
+      "HD_HOME" : "/home/jlsoft/web/nginx/html/8082/fs/scmform/attachments"
+    }],
+  "HTXSFS" : { },
+  "JDGJ" : [],
+  "JLBH" : 3759,
+  "JLLZB" : "",
+  "JXRLXR" : "",
+  "JXSDH" : "",
+  "JXSLXDH" : "",
+  "JXSMC" : "1上海永全电器有限公司",
+  "KQBH" : "",
+  "KQBJ" : {
+    "value" : "否",
+    "key" : "1"
+  },
+  "LBZ02" : "跟进",
+  "LXDH" : "18702180282",
+  "LXR" : "潘先生",
+  "MJ" : "",
+  "PCRM_CH" : false,
+  "PFR" : "邓颖婧",
+  "PFR02" : "00010063",
+  "PFSJ" : "2016-11-08 11:04:02",
+  "PS" : "",
+  "QXCZY01" : "90131204",
+  "QY" : "",
+  "SBR" : "越格",
+  "SBR02" : "90131204",
+  "SBSJ" : "2016-11-08 08:46:45",
+  "SCTP" : [],
+  "SH" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "SHSJ" : "",
+  "SPLB" : [{
+      "LXR" : "潘先生",
+      "SQSL" : "12",
+      "ZZSL" : 0,
+      "SPXX01" : 403,
+      "LXDH" : "18702180282",
+      "PFSL" : "12.00",
+      "SPDM" : "KA299043200",
+      "BZ" : "",
+      "DZ" : "否",
+      "GCSPMC" : "35品悦3定频挂机",
+      "SPGG" : "1063002",
+      "SPMC" : "白KFR-35GW/(35592)NhAa-3(含管) 空调",
+      "WBTDH" : "14799",
+      "AZDZ" : "上海上海市浦东新区崂山路633号2楼",
+      "FXSL" : 0,
+      "JLDW" : "套",
+      "GCSPBM" : 67,
+      "SQDJ" : "3.00",
+      "SQJE" : "36.00",
+      "YHSL" : 0
+    }],
+  "SYDW" : "一道棋牌室",
+  "SYDWDZ" : "上海上海市浦东新区崂山路633号2楼",
+  "SYDWDZ1" : "",
+  "WLDW01" : "901312",
+  "XSBM01" : "0001030101",
+  "YGMDW" : "一道棋牌室",
+  "YHDH" : "18702180282",
+  "YHXM" : "潘先生",
+  "YJAZRQ" : "",
+  "YJNR" : "578-000296",
+  "YS" : {
+    "value" : "同意",
+    "key" : "Y"
+  },
+  "YSJXS" : "",
+  "YSYDW" : "一道棋牌室",
+  "YSYDWDZ" : "上海上海市浦东新区崂山路633号2楼",
+  "YXBJ" : "有效",
+  "YXDH" : "",
+  "_id" : ObjectId("58212196e4b09eb254440e9f"),
+  "_ts" : "2016-11-08 08:51:34",
+  "bdbh" : "1042",
+  "jlbh" : 3759,
+  "ts" : "2017-04-05 14:32:12"
+}

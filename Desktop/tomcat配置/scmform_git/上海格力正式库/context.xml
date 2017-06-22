@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The contents of this file will be loaded for each web application -->
+<Context>
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+    <!-- Uncomment this to enable Comet connection tacking (provides events on session expiration as well as webapp lifecycle) -->
+    <!--
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+    -->
+    <Resource
+        name="jdbc/workflow"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="10"
+        maxIdle="10"
+        maxWait="-1"
+        username="JLWORKFLOW"
+        password="kWkeuAioePClRdLk"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="jdbc:oracle:thin:@123.206.208.122:11522:ORCL"
+    />
+    <Resource
+        name="jdbc/scm"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="10"
+        maxIdle="10"
+        maxWait="-1"
+        username="JLSCM"
+        password="kWkeuAioePClRdLk"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="jdbc:oracle:thin:@123.206.208.122:11522:ORCL"
+    />
+    <Resource
+        name="jdbc/vip"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="10"
+        maxIdle="10"
+        maxWait="-1"
+        username="JLSCM"
+        password="necMk89kuDz1669N"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="jdbc:oracle:thin:@123.206.208.122:11522:ORCL"
+    />
+    <Resource
+        name="jdbc/sh"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="10"
+        maxIdle="10"
+        maxWait="-1"
+        username="JLSCM"
+        password="necMk89kuDz1669N"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="jdbc:oracle:thin:@123.206.208.122:11522:ORCL"
+    />
+</Context>

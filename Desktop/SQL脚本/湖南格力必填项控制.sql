@@ -1,0 +1,49 @@
+prompt Importing table JLCONF...
+set feedback off
+set define off
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90020, 'GCDLD', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'SFTSGC', null, 0, '0;显示;1;显示并必填;2;不显示', '是否特殊工程', '20170220161320854335', 'AAAekXAAEAABXcQAAY');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90021, 'GCDLD', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'SYDW', null, 0, '0;显示;1;显示并必填;2;不显示
+', '使用单位', '20170220161320854336', 'AAAekXAAEAABXcQAAZ');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90022, 'GCDLD', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'YHXM', null, 0, '0;显示;1;显示并必填;2;不显示
+', '用户姓名', '20170221161320854337', 'AAAekXAAEAABXcQAAa');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90023, 'GCDLD', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'JXSLXDH', null, 0, '0;显示;1;显示并必填;2;不显示
+', '经销商联系电话', '20170221161320854338', 'AAAekXAAEAABXcQAAb');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90024, 'GCDLD', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'JXRLXR', null, 0, '0;显示;1;显示并必填;2;不显示
+', '经销商联系人', '20170221161320854339', 'AAAekXAAEAABXcQAAc');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90025, 'GCDLD', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'GCGZR', null, 0, '0;显示;1;显示并必填;2;不显示
+', '工程跟踪人员', '20170221161320854340', 'AAAekXAAEAABXcQAAd');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90026, 'GCDLD', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'YJAZRQ', null, 0, '0;显示;1;显示并必填;2;不显示
+', '预计安装日期', '20170221161320854341', 'AAAekXAAEAABXcQAAe');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90027, 'GCHT', 0, 0, 0, 0, '0;显示;1;显示并必填;2;不显示
+', 'YJWGRQ', null, 0, '0;显示;1;显示并必填;2;不显示
+', '预计完工日期', '20170221161320854342', 'AAAekXAAEAABXcQAAf');
+
+insert into JLCONF (JLCO01, JLCO02, JLCO03, JLCO04, JLCO05, JLCO06, JLCO07, JLCO08, JLCO09, JLCO10, JLCO11, JLCO12, TS01, ROWID)
+values (90028, 'GCDLD_1', 0, 0, 0, 0, '"0;显示;1;显示并必填;2;不显示
+"
+', 'SCCTHFJ', null, 0, '0;显示;1;显示并必填;2;不显示
+', '承诺函附件', '20170221161320854343', null);
+
+prompt Done.

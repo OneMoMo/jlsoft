@@ -1,0 +1,367 @@
+<div class="w12 jl_form">
+	<dl class="jl_catalog_line">
+		<dt class="catalog_title">
+			<span>工程合同</span>
+		</dt>
+		<dd class="w12"></dd>
+		<dt class="catalog_cz">
+			<i class="fa fa-angle-down" title="收起"></i>
+		</dt>
+	</dl>
+	<div class="jl_form_02">
+
+		<ul>
+			<li class="hide">
+				<input type="text" name="BM01" /> 
+				<input type="text" name="GSXX01" /> 
+				<input type="text" name="jlbh" /> 
+				<input type="text" name="SYDWDZ1" />
+				<input type="text" name="JXS01" />
+				<div id="d_WLDW01"></div>
+				<div id="d_QXCZY01"></div>
+				<div id="d_XSBM01"></div></li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="工程登录单号">工程登录单号</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="GCDLD01" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="经销商电话">经销商电话</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="JXSDH" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="工程合同号">工程合同号</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="GCHTH01" readonly="readonly" /><em
+							class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w08">
+				<dl>
+					<dt class="w02" title="经销商">经销商</dt>
+					<dd class="w10">
+						<input type="text" class="w12" name="JXSMC" readonly="readonly"
+							placeholder="点击选择经销商" /><em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="工程用途">工程用途</dt>
+					<dd class="w08">
+						<div class="w12" id="d_GCYT"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04" id="ejjsxmc">
+				<dl>
+					<dt class="w04" title="二级经销商名称">二级经销商名称</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="EJJSXMC" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04" id="ejjsxdh">
+				<dl>
+					<dt class="w04" title="二级经销商电话">二级经销商电话</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="EJJSXDH" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04" id="kong">
+				<dl>
+					<dt class="w04"></dt>
+					<dd class="w08"></dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="使用单位">使用单位</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="SYDW" readonly="readonly" /><em
+							class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="用户姓名">用户姓名</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="YHXM" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="用户电话">用户电话</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="YHDH" /><em
+							class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w08">
+				<dl>
+					<dt class="w02" title="使用单位地址">使用单位地址</dt>
+					<dd class="w10">
+						<input type="text" class="w12" name="SYDWDZ" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="工程类型">工程类型</dt>
+					<dd class="w08">
+						<div class="w12 jl_btn_group" id="d_GCLX"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="购买单位">购买单位</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="GMDW" readonly="readonly" /><em
+							class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="联系人">联系人</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="LXR" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="联系电话">联系电话</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="LXDH" />
+					</dd>
+				</dl>
+			</li>
+
+			<li class="w08 hide">
+				<dl>
+					<dt class="w02" title="购买单位地址">购买单位地址</dt>
+					<dd class="w10">
+						<div class="w12" id="d_AZDZ1"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="合同签订日期">合同签订日期</dt>
+					<dd class="w08">
+						<div class="w12" id="d_HTQDRQ"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="预计安装日期">预计安装日期</dt>
+					<dd class="w08">
+						<div class="w12" id="d_YJAZRQ"></div>
+					</dd>
+				</dl>
+			</li>
+				<li class="w04" hidden="hidden" name="li_YJWGRQ">
+				<dl>
+					<dt class="w04" title="预计安装日期">预计完工日期</dt>
+					<dd class="w08">
+						<div class="w12" id="d_YJWGRQ"></div><em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li>
+			<li class="w08">
+				<dl>
+					<dt class="w02" title="上传附件">上传附件</dt>
+					<dd class="w10">
+						<div class="w12" id="d_HTSCFJ"></div>
+						<em class="btx font_red"></em>
+					</dd>
+				</dl>
+			</li><li class="w04">
+				<dl>
+					<dt class="w04" title="面积">面积</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="MJ" readonly="readonly"/>
+					</dd>
+				</dl>
+			</li>
+			<li class="w08">
+				<dl>
+					<dt class="w02" title="补充现场图片">补充现场图片</dt>
+					<dd class="w10">
+						<div class="w12" id="d_BCXCTP"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w04" title="匹数">匹数</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="PS" readonly="readonly"/>
+					</dd>
+				</dl>
+			</li>
+				<li class="w04" id="sfjl">
+				<dl>
+					<dt class="w04" title="是否奖励">是否奖励</dt>
+					<dd class="w08">
+						<div class="w12" id="d_SFJL"></div>
+				</dl>
+			</li>
+				<li class="w04" id="spdj">
+				<dl>
+					<dt class="w04" title="审批等级">审批等级</dt>
+					<dd class="w08">
+						<div class="w12 " id="d_SPDJ"></div>
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<dl>
+					<dt class="w01" title="帐号">工程描述</dt>
+					<dd class="w11">
+						<input type="text" class="w12" name="GCMS" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w12">
+				<div id="d_SPLB" class="w12"></div>
+				<div id="d_JDGJ" style="display:none"></div>
+			</li>
+			<li class="w12">
+				<div id="d_SPLBTEMP" class="w12 hide"></div>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w03" title="制单人">制单人</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="ZDR" readonly="readonly" /> <input
+							type="text" class="w12" name="ZDRDM" readonly="readonly"
+							style="display:none" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04">
+				<dl>
+					<dt class="w03" title="合同时间">合同时间</dt>
+					<dd class="w08">
+						<input type="text" class="w12" name="HTSJ" readonly="readonly" />
+					</dd>
+				</dl>
+			</li>
+			<li class="w04" id="fhdld">
+				<dl>
+					<dt class="w04" title="返回登陆单">返回登陆单</dt>
+					<dd class="w8">
+						<em class="btx font_red"></em><div class="w12" id="d_FHDLD"></div>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<div class="step2">
+		<dl class="jl_catalog_line">
+			<dt class="catalog_title">
+				<span>审核信息</span>
+			</dt>
+			<dd class="w12"></dd>
+			<dt class="catalog_cz">
+				<i class="fa fa-angle-down" title="收起"></i>
+			</dt>
+		</dl>
+		<div class="jl_form_02">
+			<ul>
+				<li class="w04">
+					<dl>
+						<dt class="w03" title="审核意见">审核意见</dt>
+						<dd class="w08">
+							<div id="d_SH"></div>
+						</dd>
+					</dl>
+				</li>
+				<li class="w04">
+					<dl>
+						<dt class="w03" title="销售方式">销售方式</dt>
+						<dd class="w08">
+							<div class="w12" id="d_HTXSFS"></div>
+							<em class="btx font_red"></em>
+						</dd>
+					</dl>
+				</li>
+				<li class="w04" name="li_gcxz" hidden="hidden">
+					<dl>
+						<dt class="w03" title="工程性质">工程性质</dt>
+						<dd class="w08">
+							<div class="w12" id="d_GCXZ"></div>
+							<em class="btx font_red"></em>
+						</dd>
+					</dl>
+				</li>
+			<!-- 	<li class="w04">
+					<dl>
+						<dt class="w04" title=""></dt>
+						<dd class="w08"></dd>
+					</dl>
+				</li> -->
+				<li class="w04">
+					<dl>
+						<dt class="w03" title="审核人">审核人</dt>
+						<dd class="w08">
+							<input type="text" class="w12" name="SHR" readonly="readonly" />
+						</dd>
+					</dl>
+				</li>
+				<li class="w04">
+					<dl>
+						<dt class="w03" title="审核时间">审核时间</dt>
+						<dd class="w08">
+							<input type="text" class="w12" name="SHSJ" readonly="readonly" />
+						</dd>
+					</dl>
+				</li>
+				<li class="w04">
+					<dl>
+						<dt class="w04" title=""></dt>
+						<dd class="w08"></dd>
+					</dl>
+				</li>
+				<li class="w12">
+					<dl>
+						<dt class="w01" title="意见内容">意见内容</dt>
+						<dd class="w11">
+							<input type="text" class="w12" name="YJNR" />
+						</dd>
+					</dl>
+				</li>
+				<li class="w12" >
+					<dl>
+						<dt class="w01">商品修改记录</dt>
+						<dd class="w11">
+							<textarea rows="10" cols="120" name="SPXGJL"></textarea>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="jl_operation" style="bottom: 0px; margin-bottom: 0px;">
+	<div class="oper_line"></div>
+	<div class="oper_main" id="d_toolbar"></div>
+</div>

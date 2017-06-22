@@ -1,0 +1,52 @@
+--新增·费用报销    周泽    2016-10-21 17:25:05
+insert into W_MENUVIEW (VIEW01,VIEW02,VIEW03,VIEW04,VIEW05,VIEW06,VIEW07,VIEW08,VIEW10,VIEW11,YXBJ) 
+values ('2205','费用报销','22','2','0','1','0','0','0','5','0');
+insert into W_MENUVIEW (VIEW01,VIEW02,VIEW03,VIEW04,VIEW05,VIEW06,VIEW07,VIEW08,VIEW10,VIEW11,MENU01,YXBJ) 
+values ('22051','报销申请','2205','3','1','1','0','0','0','1','22051','0');
+insert into W_MENUVIEW (VIEW01,VIEW02,VIEW03,VIEW04,VIEW05,VIEW06,VIEW07,VIEW08,VIEW10,VIEW11,MENU01,YXBJ) 
+values ('22052','部门审核','2205','3','1','1','0','0','0','2','22052','0');
+insert into W_MENUVIEW (VIEW01,VIEW02,VIEW03,VIEW04,VIEW05,VIEW06,VIEW07,VIEW08,VIEW10,VIEW11,MENU01,YXBJ) 
+values ('22053','出纳付款','2205','3','1','1','0','0','0','3','22053','0');
+insert into w_CZYMENU (VIEW01,GW01) values ('22051','-1');   
+insert into w_CZYMENU (VIEW01,GW01) values ('22052','-1');
+insert into w_CZYMENU (VIEW01,GW01) values ('22053','-1');
+insert into W_MENU (MENU01,MENU02) values ('22051','{"GZL01":"2205","BZ01":"22051","BZ03":"1"}');
+insert into W_MENU (MENU01,MENU02) values ('22052','{"GZL01":"2205","BZ01":"22052","BZ03":"0"}');
+insert into W_MENU (MENU01,MENU02) values ('22053','{"GZL01":"2205","BZ01":"22053","BZ03":"2"}');
+
+insert into w_gzl (GZL01,GZL02,GZL03,GZL04,GSXX01,GZL05,GZL06,GZL07,GZL08,GZL09,GZL10) 
+values ('2205','费用报销','0','5','0001','0','1','0','0','0','1');
+
+insert into w_jk (JK01,JK02,JK03,TBLNAME) values ('22051','报销申请','{"name":"1118","field":["bdbh","jlbh","GSXX01","BXR01","BXRMC","BMMC","BM01","BXDH01","BXRQ","SCFJ","CXQKSQ","BZ","ZDR_RYXX01","ZDRMC","ZDRQ","SPLB.FYBMMC","SPLB.BXJE","SPLB.PJSL","SPLB.HBBZMC","SPLB.BZ","SPLB.YYDM"]}','1118');
+insert into w_jk (JK01,JK02,JK03,TBLNAME) values ('22052','部门审核','{"name":"1118","field":["bdbh","jlbh","SH","SHRQ","SHR_RYXX01","SHYJ","SHRMC"]}','1118');  
+insert into w_jk (JK01,JK02,JK03,TBLNAME) values ('22053','出纳付款','{"name":"1118","field":["bdbh","jlbh","CNRMC","CNR_RYXX01","FKRQ","SPLB.ZFFS","SPLB.YHZH"]}','1118');
+
+insert into w_gzlbz (GZL01,BZ04,BZ02,BZ01,BZ03,HFID_CC,HDAT_CC,ZDCS_CC) values ('2205','0','申请','22051','1','[]','[]','1');
+insert into w_gzlbz (GZL01,BZ04,BZ02,BZ01,BZ03,HFID_CC,HDAT_CC,ZDCS_CC) values ('2205','0','审核','22052','0','[]','[]','1');
+insert into w_gzlbz (GZL01,BZ04,BZ02,BZ01,BZ03,HFID_CC,HDAT_CC,ZDCS_CC) values ('2205','0','付款','22053','0','[]','[]','1');
+insert into w_gzlbz (GZL01,BZ04,BZ02,BZ01,BZ03,HFID_CC,HDAT_CC,ZDCS_CC) values ('2205','0','封单','22054','2','[]','[]','1');
+
+insert into w_gzlxw (GZL01,BZ01,XW01,XW02,NBZ01,XW03 ,JK01 ,XW04,GZ01,ZYZH01,LZZH01,HFID,HDAT) values ('2205','22051','1','申请','22052','0','22051','1','9','2','1','[]','[]');
+insert into w_gzlxw (GZL01,BZ01,XW01,XW02,NBZ01,XW03 ,JK01 ,XW04,GZ01,LZZH01,HFID,HDAT) values ('2205','22051','2','删除','22054','0','22051','1','10','1','[]','[]');
+insert into w_gzlxw (GZL01,BZ01,XW01,XW02,NBZ01,XW03 ,JK01 ,XW04,GZ01,ZYZH01,LZZH01,HFID,HDAT) values ('2205','22052','1','审核','22053','0','22052','1','17','2','1','[]','[]');
+insert into w_gzlxw (GZL01,BZ01,XW01,XW02,NBZ01,XW03 ,JK01 ,XW04,GZ01,ZYZH01,LZZH01,HFID,HDAT) values ('2205','22052','2','审核(不同意)','22051','0','22052','1','18','2','1','[]','[]');
+insert into w_gzlxw (GZL01,BZ01,XW01,XW02,NBZ01,XW03 ,JK01 ,XW04,GZ01,LZZH01,HFID,HDAT) values ('2205','22052','3','删除','22054','0','22052','1','10','1','[]','[]');
+insert into w_gzlxw (GZL01,BZ01,XW01,XW02,NBZ01,XW03 ,JK01 ,XW04,GZ01,ZYZH01,LZZH01,HFID,HDAT) values ('2205','22053','1','付款','22054','0','22053','1','9','2','1','[]','[]');
+
+insert into W_BZGW (BZGW01,GW01,BZGW02,BZ01) values ('100','-1','0','22051');
+insert into W_BZGW (BZGW01,GW01,BZGW02,BZ01) values ('100','-1','0','22052');
+insert into W_BZGW (BZGW01,GW01,BZGW02,BZ01) values ('100','-1','0','22053');
+
+
+//form表增加一行记录
+db.form.insert({
+  "bdbh": 1118,
+  "bdmc": "费用报销",
+  "collection": "SCM_FYBX",
+  "jyl": "scmMakeFYBX",
+  "oabj": false,
+  "pad": "",
+  "pc": "/scm/projects/tecno/fygl/makeFYBX.html",
+  "phone": "",
+  "template": ""
+});

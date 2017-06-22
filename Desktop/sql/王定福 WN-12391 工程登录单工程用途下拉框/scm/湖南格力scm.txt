@@ -1,0 +1,59 @@
+-- WN-12391 王定福   将工程登录单中的工程用途下拉框中的值存入gcxlk表中  解决不同地区的格力版本的差异化
+
+-- 仅限在湖南格力库中插入
+
+-- Create table
+create table GCXLK
+(
+  XLK01 VARCHAR2(20) not null,
+  XLK02 VARCHAR2(1023) not null,
+  XLK03 NUMBER(16) not null
+);
+-- Add comments to the columns 
+comment on column GCXLK.XLK01
+  is '编号';
+comment on column GCXLK.XLK02
+  is '名称';
+comment on column GCXLK.XLK03
+  is '类型(0工程用途;)';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table GCXLK
+  add constraint PK_GCXLK primary key (XLK01,XLK03);
+  
+  
+  
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt001', '政府采购', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt002', '特殊机构', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt003', '交通运输', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt004', '医疗卫生', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt005', '教育系统', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt006', '金融保险', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt007', '传媒通讯', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt008', '地产系统', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt009', '餐饮酒店娱乐', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt010', '生产制造', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt011', '商业连锁', 0);
+
+insert into GCXLK (XLK01, XLK02, XLK03)
+values ('gcyt012', '能源矿产', 0);

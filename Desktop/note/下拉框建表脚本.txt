@@ -1,0 +1,17 @@
+-- Create table
+create table GCXLK
+(
+  XLK01 NUMBER(16) not null,
+  XLK02 VARCHAR2(255) not null,
+  XLK03 NUMBER(16) not null
+);
+-- Add comments to the columns 
+comment on column GCXLK.XLK01
+  is '编号';
+comment on column GCXLK.XLK02
+  is '名称';
+comment on column GCXLK.XLK03
+  is '类型(0工程用途;)';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table GCXLK
+  add constraint PK_GCXLK primary key (XLK01,XLK03);

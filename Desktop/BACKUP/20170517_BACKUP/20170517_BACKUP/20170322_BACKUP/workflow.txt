@@ -1,0 +1,69 @@
+--   WN-12581  王定福    新增定义客户审批流  2017-03-13
+
+
+--定义客户流程
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('990507', '定义客户(流程)', '9905', 3, 0, 1, 0, 0, null, 0, 1, '', 0);
+
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('99050701', '制单', '990507', 4, 1, 1, 0, 0, '', 0, 1, '99050701', 0);
+
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('99050702', '审核', '990507', 4, 1, 1, 0, 0, '', 0, 2, '99050702', 0);
+
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('990507', -1, null);
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('99050701', -1, null);
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('99050702', -1, null);
+
+
+
+-- 定义工作流
+insert into w_gzl (GZL01,gzl02,gzl03,gzl04,lx01,gsxx01,gzl05,gzl06,gzl07,gzl08,gzl09) values 
+('9124','定义客户','0','1','','0001','0','1','0','0','0');
+
+
+--工作流步骤
+insert into w_gzlbz (gzl01,bz04,bz02,bz01,bz03,Bzgw01,hfid_cc,hdat_cc,zdcs_cc,bz05) values 
+('9124','0','制单','912401','1','','[]','[]',1,'');
+insert into w_gzlbz (gzl01,bz04,bz02,bz01,bz03,Bzgw01,hfid_cc,hdat_cc,zdcs_cc,bz05) values 
+('9124','0','审核','912402','0','','[]','[]',1,'');
+insert into w_gzlbz (gzl01,bz04,bz02,bz01,bz03,Bzgw01,hfid_cc,hdat_cc,zdcs_cc,bz05) values 
+('9124','0','封单','912403','2','','[]','[]',1,'');
+
+-- 定义接口
+insert into w_jk (JK01, JK02, JK03, TBLNAME, YMBH)
+values (912401, '制单', '{"name":"1169","field":["jlbh","WLDWMC","bdbh","PYM","CWXTBM","JC","DZ","KHYH","YHZH","SWDJH","CJBM","FPLX","FLKPFS","KPHT","FRDB","HY","KSLX","YWY","SJKS","QY","YXBJ01","LXDH","LXR","SHDZ","YZBM","CZHM","SMTP","FXZQ","YFZQ","JSBZ","ZFFS","YFJZFS","JGGK01","EDKZ01","ZDSK","YFZDSK","ZDRMC","ZDRQ"]}', '1169', null);
+
+insert into w_jk (JK01, JK02, JK03, TBLNAME, YMBH)
+values (912402, '审核', '{"name":"1169","field":["bdbh","jlbh","SH","SHRMC","SHRQ","SHYJ"]}', '1169', null);
+
+
+-- 工作流行为
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01, HFID, HDAT, INTERFACEIDS, JYL)
+values (9124, 912401, 1, '制单', 912402, 0, 912401, 1, '9', 2, 1, '[]', '[]', null, null);
+
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01, HFID, HDAT, INTERFACEIDS, JYL)
+values (9124, 912401, 2, '删除', 912403, 0, 912401, 1, '10', 2, 1, '[]', '[]', null, null);
+
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01, HFID, HDAT, INTERFACEIDS, JYL)
+values (9124, 912402, 1, '审核', 912403, 0, 912402, 1, '17', 2, 1, '[]', '[]', null, null);
+
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01, HFID, HDAT, INTERFACEIDS, JYL)
+values (9124, 912402, 2, '不同意', 912401, 0, 912402, 1, '18', 2, 1, '[]', '[]', null, null);
+
+
+insert into w_menu (MENU01, MENU02)
+values ('99050701', '{"GZL01":"9124","BZ01":"912401","BZ03":"1"}');
+
+insert into w_menu (MENU01, MENU02)
+values ('99050702', '{"GZL01":"9124","BZ01":"912402","BZ03":"0"}');
+
+
+
+-- 步骤岗位
+insert into W_BZGW values('100','-1','0','912401');
+insert into W_BZGW values('100','-1','0','912402');
+

@@ -1,0 +1,38 @@
+SELECT A.JZL08  资料审核编号,--ZLSHBH
+       A.JZL12   资料审核日期,--PFSJ 
+       C.JSD09    工程结算审核日期,--JSSJ
+       E.    使用单位,--SYDW
+       B.PFDI01    分销单号,--FXDH
+       S.SPXX02  商品编码,--SPXX02
+       S.SPXX04 商品名称, --SPXX04
+       B.JZLI03 分销数量,  -- THSL
+       B.JZLI04 分销单价,  --  PFDJ
+       B.JZLI05 销售金额,   -- XSJE
+       A.JZL15 分销单开单日期,  -- FXRQ 
+       A.JZL02 竣工时间,  --  JGSJ
+       A.JZL03 收单时间,--    SDSJ
+       B.JZLI08 资料数量, -- BCZLSL
+       C.JSD01 奖励金额,   -- JLJE
+       A.JZL18 资料状态,   -- ZLZT
+       A.JZL06 交资料备注,  -- JZLBZ
+       D.SPLB04 问题资料数量, -- WTZLSL
+       D.SPLB02 问题收差单价,--  WTSCDJ
+       D.SPLB08 问题收差金额, -- WTSCJE
+       D.SPLB03 问题差额单价, --  WTCE 
+       J. 收差原因,   -- SCYY
+       J.  收差备注, -- SCBZ
+       C.JXSJS01 经销商结算单号,-- JXSJSDH
+       E. 工程描述,--   GCMS 
+       E. 面积,  --  MJ  
+       E. 匹数,   --    PS
+       C.JSD07  经销商结算备注,-- JXSJSBZ
+       B.SFDZ -- 是否搭载
+       
+       FROM GC_JZL A,GC_JZLSPLB B,GC_JSD C,GC_JSDSPLB D,GC_DLD E,SPXX S,WLDW W
+       
+       WHERE A.JZL01 = B.GCZLDH
+       AND A.GCZLDH = C.GCZLDH 
+       AND C.JSD01 = D.JSD01 
+       AND A.DLD01 = E.DLD01 
+       AND A.SPXX01 = S.SPXX01 
+       AND E.WLDW01 = W.WLDW01

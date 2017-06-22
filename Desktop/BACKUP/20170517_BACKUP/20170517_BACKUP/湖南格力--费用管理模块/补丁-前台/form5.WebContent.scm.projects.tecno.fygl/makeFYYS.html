@@ -1,0 +1,126 @@
+<div class="w12 jl_form">
+   	<div class="step1">
+      <dl class="jl_catalog_line">
+      	<dt class="catalog_title" >制单</dt>
+      	<dd class="w12"></dd>
+      	<dt class="catalog_cz"><i class="fa fa-angle-down" title="收起"></i></dt>
+      </dl>
+   
+   	  <div class="jl_form_02">
+   	  	<input type="text" name="JLWBDH"  style="display:none" readonly="readonly"/>
+   		<input type="text" name="jlbh" readonly="readonly" style="display:none" />
+   		<input type="text" name="GSXX01" readonly="readonly" style="display:none" />
+   		<input type="text" name="FYBM01" readonly="readonly"  style="display:none"/>
+        <input type="text" name="ZDR_RYXX01" readonly="readonly" style="display:none" />
+        <input type="text" name="SHR_RYXX01" readonly="readonly" style="display:none" />
+        <input type="text" name="BMMC" readonly="readonly"  style="display:none"/>
+        <div id="d_BM01" style="display:none"></div>
+	  <ul>
+				<li class="w12">
+					<dl>
+						<dt class="w01" title="预算期间">预算期间</dt>
+						<dd class="w03">
+							<div class="w12" id="d_YSQJ"></div><em class="btx font_red"></em>
+						</dd>
+				
+						<dt class="w01" title="费用部门">费用部门</dt>
+						<dd class="w03">
+							<div class="w12" id="d_FYBMMC"></div><em class="btx font_red"></em>
+						</dd>
+						
+						<dt class="w01" title="费用预算单号">费用预算单号</dt>
+						<dd class="w03">
+							<input class="w12" type="text"  name="FYYSD01" readonly="readonly"/>
+						</dd>
+					</dl>
+				</li>
+				
+	        <li class="w12">
+	           <dl>
+	          	<dt class="w01" title="EXCEL导入">导入</dt>
+				<dd class="w03">
+					<div class="w12" id="d_EXCEL"></div>
+				</dd>
+				
+	            <dt class="w01" title="备注">备注</dt>
+	            <dd class="w07">
+	                <input class="w12" type="text"  name="BZ" />
+	            </dd>
+	          </dl>
+	        </li>
+	        
+	       <li class="w12" id="BUTTON"  style="display:none">
+		    <dl>
+			 <dt class="w01" title="查看错误信息" ></dt>
+	         <dd class="w03"><div class="w12" id="d_DRCM"></div></dd>
+	        </dl>
+		  </li>
+		 
+		  <li class="w12" id="MESSAGE" style="display:none">
+			<div class="w12" id="d_MESSAGE" ></div>
+		  </li>
+	        
+	        <li class="w12">
+	          <div id="d_SPLB"></div>
+	        </li>
+	
+		 	<li class="w04 mt10">
+	          <dl>
+	            <dt class="w03" title="制单人" >制单人</dt>
+	            <dd class="w09"><input class="w12" type="text" name="ZDRMC" readonly="readonly"/></dd>
+	          </dl>
+	        </li>
+	        <li class="w04 mt10">
+	          <dl>
+	            <dt class="w03" title="制单时间" >制单时间</dt>
+	            <dd class="w09"><input class="w12" type="text" name="ZDRQ" readonly="readonly"/></dd>
+	          </dl>
+	        </li>
+	     </ul>
+   		</div>
+  	</div>
+
+	<div class="step2">
+	    <dl class="jl_catalog_line">
+	      <dt class="catalog_title" >审核</dt>
+	      <dd class="w12"></dd>
+	      <dt class="catalog_cz"><i class="fa fa-angle-down" title="收起"></i></dt>
+	    </dl>
+	   	<div class="jl_form_02">
+	      <ul>
+	       	<li class="w04">
+	          <dl>
+	            <dt class="w03" title="审核" >审核</dt>
+	            <dd class="w09"><div id="d_SH" ></div></dd>
+	          </dl>
+	        </li>
+	        <li class="w04">
+	          <dl>
+	            <dt class="w03" title="审核人" >审核人</dt>
+	            <dd class="w09"><input class="w12" name="SHRMC" type="text" readonly="readonly"/>
+	            </dd>
+	          </dl>
+	        </li>
+	        <li class="w04">
+	          <dl>
+	            <dt class="w03" title="审核时间" >审核时间</dt>
+	            <dd class="w09">
+	            <input class="w12" name="SHRQ" type="text" readonly="readonly"/>
+	            </dd>
+	          </dl>
+	        </li>
+			<li class="w12">
+	          <dl>
+	            <dt class="w01" title="意见内容" >意见内容</dt>
+	            <dd class="w11"><input class="w12"  name="SHYJ" type="text" /></dd>
+	          </dl>
+	        </li>
+	   	  </ul>
+		</div>
+	</div>
+</div>
+<div class="jl_operation" style="bottom: 0px; margin-bottom: 0px;">
+	<div class="oper_line"></div>
+	<div class="oper_main" id="d_toolbar"></div>
+</div>
+

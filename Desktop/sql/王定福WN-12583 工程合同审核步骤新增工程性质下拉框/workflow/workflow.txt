@@ -1,0 +1,6 @@
+-- WN-12583 王定福  工程合同增加工程性质字段
+-- workfolw库执行 
+ update w_jk set
+ jk03 =
+       '{"name":"1095","field":["bdbh","jlbh","SPLB.BZ","SH","SHR","SHSJ","YJNR","HTXSFS","GCXZ","SPLB.PFDJ","HTQDRQ","SPLB.GCSPBM"]}'
+ where jk01 = '90922'

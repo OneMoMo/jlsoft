@@ -1,0 +1,5 @@
+--查询预算执行情况     周泽     2016-10-27 17:35:13
+insert into W_MENUVIEW (VIEW01,VIEW02,VIEW03,VIEW04,VIEW05,VIEW06,VIEW07,VIEW08,VIEW10,VIEW11,MENU01,YXBJ) 
+values ('2206','查询预算执行情况','22','2','1','1','0','0','0','6','2206','0');
+insert into w_CZYMENU (VIEW01,GW01) values ('2206','-1'); 
+insert into W_MENU (MENU01,MENU02) values ('2206','{"namespace":"queryYSZXQK","sqlid":"ZB","dir":"scm/projects/tecno/fygl/search"}');

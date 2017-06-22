@@ -1,0 +1,18 @@
+
+
+第一步   进入mysql安装路径bin目录下
+
+第二步   mysql -hlocalhost -uroot -p
+
+第三步   输入密码
+
+第四步   use mysql
+
+第五步   select user ,password ,host from user 查看有没有权限
+
+第六步   grant all privileges on *.* to root@"211.161.120.58" identified by "root";
+
+第七步   flush privileges;
+
+
+211.161.120.58

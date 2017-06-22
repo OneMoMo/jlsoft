@@ -1,0 +1,23 @@
+//新增合同制单步骤
+insert into w_gzlbz (GZL01, BZ04, BZ02, BZ01, BZ03, BZGW01, HFID_CC, HDAT_CC, ZDCS_CC, BZ05)
+values (9040, 0, '合同制单', 90406, 0, null, '[]', '[]', 1, null);
+
+//修改跟进签合同后进入合同制单步骤
+update w_gzlxw set NBZ01 = '90406' WHERE GZL01 = '9040' AND XW01 = 6;
+
+//新增业务规则
+insert into W_YWGZ (GZ01, GZ02, GZ03, GZ04, GSXX01, GZ05, GZ06, GZ07)
+values ('904061', '(S_VALUE != ''D1'')&&(DLD.key==''合同制单'')', '合同制单', '1', '0001', to_date('01-01-2017', 'dd-mm-yyyy'), to_date('01-12-2050', 'dd-mm-yyyy'), 0);
+
+insert into W_YWGZ (GZ01, GZ02, GZ03, GZ04, GSXX01, GZ05, GZ06, GZ07)
+values ('904063', '(S_VALUE != ''D1'')&&(DLD.key==''跟进'')', '跟进', '1', '0001', to_date('01-01-2017', 'dd-mm-yyyy'), to_date('01-12-2050', 'dd-mm-yyyy'), 0);
+
+insert into W_YWGZ (GZ01, GZ02, GZ03, GZ04, GSXX01, GZ05, GZ06, GZ07)
+values ('904062', '(S_VALUE != ''D1'')&&(DLD.key==''合同审核'')', '合同审核', '1', '0001', to_date('01-01-2017', 'dd-mm-yyyy'), to_date('01-12-2050', 'dd-mm-yyyy'), 0);
+
+//新增行为
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01, HFID, HDAT, INTERFACEIDS, JYL)
+values (9040, 90406, 7, '合同审核', 90403, 0, 90404, 1, '904062', 9, 1, '[]', '[]', null, null);
+
+insert into w_gzlxw (GZL01, BZ01, XW01, XW02, NBZ01, XW03, JK01, XW04, GZ01, ZYZH01, LZZH01, HFID, HDAT, INTERFACEIDS, JYL)
+values (9040, 90406, 8, '合同返回登录单', 90404, 0, 90404, 1, '904063', 9, 1, '[]', '[]', null, null);

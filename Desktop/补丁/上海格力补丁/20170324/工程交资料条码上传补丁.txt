@@ -1,0 +1,33 @@
+		List mongoList;
+		DBObject query = new BasicDBObject();
+		JSONArray QUERY_TJ = new JSONArray();
+		JSONObject JO1 = new JSONObject();
+		JSONObject JO2 = new JSONObject();
+		JSONArray FJTMSC = Json.toJA((json.get("SCLB")));
+		DBCollection DBSCM_GCJZLTM = MongodbHandler.getDB().getCollection("SCM_JZLTM");
+		if(FJTMSC.size()>0){
+			for(int i = 0;i<FJTMSC.size();i++){
+				JSONObject TM = Json.toJO(FJTMSC.get(i));
+				String SNJ = TM.get("SNJ").toString();
+				String SWJ = TM.get("SWJ").toString();
+				JO1.put("_id", SNJ);
+				JO2.put("_id", SWJ);
+				QUERY_TJ.add(JO1);
+				QUERY_TJ.add(JO2);
+				query.put("$or",QUERY_TJ);
+				mongoList = DBSCM_GCJZLTM.find(query).toArray();
+				if(mongoList.size()>0){
+					System.out.println(mongoList);
+					JSONObject error = Json.toJO(mongoList.get(0));
+					if(SNJ.equals(error.get("_id"))){
+						throw new RuntimeException("室内机条码【"+error.get("_id")+"】已上传");
+					}else if(SWJ.equals(error.get("_id"))){
+						throw new RuntimeException("室外机条码【"+error.get("_id")+"】已上传");
+					}else{
+						throw new RuntimeException("条码【"+error.get("_id")+"】已上传");
+					}
+				}
+				//String SNJ = 
+			}
+		}
+		

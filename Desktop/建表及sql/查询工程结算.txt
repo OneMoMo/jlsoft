@@ -1,0 +1,33 @@
+ SELECT ZLSHBH, --资料审核编号,--ZLSHBH
+       PFSJ, --资料审核日期,--PFSJ 
+       JSSJ, -- 工程结算审核日期,--JSSJ
+       SYDW, -- 使用单位,--SYDW
+       FXDH, --   分销单号,--FXDH
+       SPXX02, -- 商品编码,--SPXX02
+       SPXX04, -- 商品名称, --SPXX04
+       THSL, -- 分销数量,  -- THSL
+       PFDJ, -- 分销单价,  --  PFDJ
+       XSJE, -- 销售金额,   -- XSJE
+       FXRQ, --  分销单开单日期,  -- FXRQ 
+       JGSJ, -- 竣工时间,  --  JGSJ
+       SDSJ, -- 收单时间,--    SDSJ
+       BCZLSL, -- 资料数量, -- BCZLSL
+       JLJE, -- 奖励金额,   -- JLJE
+       CASE  WHEN ZLZT =  '1' THEN '正常' 
+          WHEN ZLZT = '2' THEN '迟交' 
+        ELSE '逾期' END ZLZT,
+       --ZLZT, -- 资料状态,   -- ZLZT
+       JZLBZ, -- 交资料备注,  -- JZLBZ
+       WTZLSL, -- 问题资料数量, -- WTZLSL
+       WTSCDJ, -- 问题收差单价,--  WTSCDJ
+       WTSCJE, -- 问题收差金额, -- WTSCJE
+       WTCE, --  问题差额单价, --  WTCE 
+       JXSJS01, --  JXSJSDH经销商结算单号,-- JXSJSDH
+       GCMS, --  工程描述,--   GCMS 
+       MJ, --  面积,  --  MJ  
+       PS, -- 匹数,   --    PS
+       JXSJSBZ, -- 经销商结算备注,-- JXSJSBZ
+       SFDZ, -- -- 是否搭载
+       DLD01 
+       FROM VIEW_GCJS_SFJS
+       WHERE JZL = '已结算'

@@ -1,0 +1,5 @@
+--查询请款申请单     周泽     2016-10-27 17:35:13
+insert into W_MENUVIEW (VIEW01,VIEW02,VIEW03,VIEW04,VIEW05,VIEW06,VIEW07,VIEW08,VIEW10,VIEW11,MENU01,YXBJ) 
+values ('2207','查询请款申请单','22','2','1','1','0','0','0','7','2207','0');
+insert into w_CZYMENU (VIEW01,GW01) values ('2207','-1'); 
+insert into W_MENU (MENU01,MENU02) values ('2207','{"namespace":"QKSQD","sqlid":"queryQKSQD","dir":"scm/projects/tecno/fygl/search"}');

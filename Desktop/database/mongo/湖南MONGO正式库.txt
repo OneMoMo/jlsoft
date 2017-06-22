@@ -1,0 +1,5 @@
+MongodbЕижЗ 
+  192.168.2.84
+  admin  УмТы QyQPDJJdPSgu
+  hnscm_zs  УмТы   PCWAvnParwjr
+  mongodb   ВтЪдеЪКХ  hnscm_test   УмТы    QEqFNVJJOdPk

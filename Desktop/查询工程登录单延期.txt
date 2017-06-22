@@ -1,0 +1,23 @@
+
+
+
+insert into W_MENUVIEW (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ, VIEW12)
+values ('0829', '查询工程登录单延期', '08', 2, 1, 1, 0, 0, null, 0, 29, '0829', 0, 0);
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('0829', -1, null);
+
+insert into W_MENU (MENU01, MENU02)
+values ('0829', '{"bdbh":"9066"}');
+
+
+{
+  "bdbh" : 9066,
+  "bdmc" : "查询工程登录单延期",
+  "collection" : "SCM_GCDLDYQ",
+  "jyl" : "DLDYQ",
+  "oabj" : false,
+  "pad" : "",
+  "pc" : "scm/gcgl/gcdl/makeDLDYQ.html",
+  "phone" : "",
+  "template" : ""
+}

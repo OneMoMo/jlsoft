@@ -1,0 +1,18 @@
+上海格力
+
+正式库网页地址
+http://123.206.201.155:8084/scmform/index.html
+
+正式库后台log
+
+模拟库网页地址
+http://123.206.201.155:8086/scmform/index.html
+
+模拟库后台log    8086
+http://123.206.201.155:8086/probe_scmform/logs/follow.htm?logType=jdk&logName=org.apache.catalina.core.ContainerBase.%5bCatalina%5d.%5blocalhost%5d&logIndex=0
+
+格力测试库后台log
+http://211.161.120.132:8087/probe_scmform/logs/follow.htm?logType=jdk&root=true&logIndex=1
+
+湖南测试库后台log
+http://222.240.240.141:8085/probe_scmform/logs/follow.htm?logType=jdk&root=true&logIndex=1

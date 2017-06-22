@@ -1,0 +1,88 @@
+-- Create table
+create table GC_HTTZDSPLB
+(
+  dld01  VARCHAR2(50),
+  tzd01  VARCHAR2(30) not null,
+  gsxx01 VARCHAR2(4) not null,
+  spxx01 VARCHAR2(10) not null,
+  splb01 VARCHAR2(20),
+  splb02 VARCHAR2(100),
+  splb03 NUMBER(16,4),
+  splb04 NUMBER(16,4),
+  splb05 NUMBER(16,4),
+  splb06 NUMBER(16,4),
+  splb07 NUMBER(16,4),
+  splb08 NUMBER(16,4),
+  splb09 NUMBER(16,4),
+  splb10 VARCHAR2(50),
+  splb11 VARCHAR2(500),
+  splb12 VARCHAR2(20),
+  splb13 VARCHAR2(500),
+  splb14 VARCHAR2(50)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table GC_HTTZDSPLB
+  is '合同调整单';
+-- Add comments to the columns 
+comment on column GC_HTTZDSPLB.dld01
+  is '工程登录单号 -- GCDLD01';
+comment on column GC_HTTZDSPLB.tzd01
+  is '调整单号--TZD01';
+comment on column GC_HTTZDSPLB.gsxx01
+  is '公司代码--GSXX01 --制单';
+comment on column GC_HTTZDSPLB.spxx01
+  is '登录单号--spxx01 --制单';
+comment on column GC_HTTZDSPLB.splb01
+  is '工程商品编码--GCSPBM';
+comment on column GC_HTTZDSPLB.splb02
+  is '工程商品名称 -- GCSPMC';
+comment on column GC_HTTZDSPLB.splb03
+  is '要货数量 -- YHSL';
+comment on column GC_HTTZDSPLB.splb04
+  is '调整数量--TZSL';
+comment on column GC_HTTZDSPLB.splb05
+  is '合同数量 -- HTSL';
+comment on column GC_HTTZDSPLB.splb06
+  is '合同单价--SQDJ';
+comment on column GC_HTTZDSPLB.splb07
+  is '合同金额 -- HTJE';
+comment on column GC_HTTZDSPLB.splb08
+  is '批复单价--PFDJ';
+comment on column GC_HTTZDSPLB.splb09
+  is '批复金额 -- PFJE';
+comment on column GC_HTTZDSPLB.splb10
+  is '是否搭载 -- SFDZ';
+comment on column GC_HTTZDSPLB.splb11
+  is '安装地址--AZDZ';
+comment on column GC_HTTZDSPLB.splb12
+  is '联系电话--LXDH';
+comment on column GC_HTTZDSPLB.splb13
+  is '备注--BZ';
+comment on column GC_HTTZDSPLB.splb14
+  is '联系人--LXR';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table GC_HTTZDSPLB
+  add constraint PK_GC_HTTZDSPLB primary key (TZD01, SPXX01, GSXX01)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

@@ -1,0 +1,65 @@
+<div class="jl_screening_main"> 
+<ul id="CXDYEJJXS">
+<li class="w04">
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>二级经销商</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="ERJXS"/>
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>经销商</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="JXS"/>
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+		<dl class="w12">
+	    <dt class="w04"><b>人员名称</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="RYMC" />
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+		<dl class="w12">
+	    <dt class="w04"><b>区域</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="QY" />
+	    </dd>
+	  </dl>
+	</li>
+</ul>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	var form = JL.getCurrentForm();
+	JL.initQueryPlugin($("ul#CXDYEJJXS"), {
+	});
+	
+	$("ul#CXDYEJJXS").delegate("[name='ERJXS']", "keydown", function (event) {
+	    var e = event || window.event || arguments.callee.caller.arguments[0];
+	    if (e && e.keyCode == 13) {
+	      commonQuery.query();
+	    }
+	  });
+	$("ul#CXDYEJJXS").delegate("[name='JXS']", "keydown", function (event) {
+	    var e = event || window.event || arguments.callee.caller.arguments[0];
+	    if (e && e.keyCode == 13) {
+	      commonQuery.query();
+	    }
+	  });
+	$("ul#CXDYEJJXS").delegate("[name='RYMC']", "keydown", function (event) {
+	    var e = event || window.event || arguments.callee.caller.arguments[0];
+	    if (e && e.keyCode == 13) {
+	      commonQuery.query();
+	    }
+	  });
+	commonQuery.query();
+});
+</script>

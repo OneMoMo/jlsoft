@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="localCacheScope" value="STATEMENT"/>
+    </settings>
+
+    <plugins>
+        <plugin interceptor="com.jlsoft.framework.JLSQLInterceptor">
+        </plugin>
+    </plugins>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:comp/env/jdbc/scm" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/jlsoft/framework/admin/form/sql/FormQuery.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/spxx.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/xsfs.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/gs.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/wldw.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/ck.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/ryxx.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/flfs.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/fwxx.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/skfs.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/bm.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/sppp.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/zpxx.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/spsx.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/spfl.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/mdsbbx.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/pdb/sql/pdb.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/fkfs.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/shfy.xml"/>
+        <mapper resource="com/jlsoft/form/scm/pub/sql/pub.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/yfd/sql/yfd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxd/sql/xjckd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxd/sql/fxd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxd/sql/fxskd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxd/sql/pfdth.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxjs/sql/khxyed.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxjs/sql/fgdfld.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cggl/cgdhd/sql/cgdhd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cggl/cgthd/sql/cgthd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cggl/sprkd/sql/sprkd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/zcd/sql/zcd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/pdjh/sql/pdjh.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxjs/sql/tzqcwl.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/kcd/sql/kcd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/jhd/sql/jhd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cwgl/jzpz/sql/jzpz.xml"/>
+        <mapper resource="com/jlsoft/form/scm/lsgl/lsd/sql/lssyt.xml"/>
+        <mapper resource="com/jlsoft/form/scm/lsgl/xjckd/sql/mdxjyeb.xml"/>
+        <mapper resource="com/jlsoft/form/scm/lsgl/lsd/sql/syk.xml"/>
+        <mapper resource="com/jlsoft/form/scm/lsgl/lsd/sql/lsthd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/lsgl/lsd/sql/lsdjd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cggl/cgbjd/sql/cgbjd.xml"/>    
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxjs/sql/fxbjd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxjs/sql/fxjsskd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/htgl/jgwj/sql/jgwj.xml"/>
+        <mapper resource="com/jlsoft/form/scm/htgl/cgxy/sql/cgxy.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/fxd/sql/fxthch.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/fgdsrd/sql/fgdsrd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/jsfkd/sql/jsfkd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/yskd/sql/yskd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/fpdjd/sql/fpdjd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/yhd/sql/khyhd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/yfjs/sql/yfjsd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/fpdjd/sql/fpdjd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/cgjsd/sql/cgjsd.xml"/>
+        <mapper resource="com/jlsoft/framework/admin/scm/jcdy/sql/ryxx.xml"/> 
+		<mapper resource="com/jlsoft/framework/admin/scm/jcdy/sql/khmd.xml"/>
+        <mapper resource="com/jlsoft/framework/admin/scm/jcdy/sql/defineszkcslzt.xml"/> 
+        <mapper resource="com/jlsoft/form/scm/jmgl/pub/sql/pub.xml"/> 
+        <mapper resource="com/jlsoft/form/scm/ccgl/sfh/sql/cksfh.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/sfh/sql/cksm.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cggl/ysd/sql/ysd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fwgl/fwdj/sql/kjfwdj.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/sppc/sql/sppc.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/spjxc/sql/spjxc.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/gysdzd/sql/gysdzd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/fkd/sql/fkd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/gczzthsq.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/gcrkd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/bzjmx.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/oracle_scm_cxgcdldej.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/oracle_scm_cxgcjdgj.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/khwlmxz/sql/khwlmxz.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/SRD/sql/srd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/spmxz/sql/spbgmxz.xml"/>
+         <mapper resource="com/jlsoft/form/scm/bbgl/spsjmxz/sql/spsjmxz.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/yfkd/sql/yfkd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/zpgl/zprk/sql/zprk.xml"/>
+        <mapper resource="com/jlsoft/form/scm/zpgl/zpck/sql/zpck.xml"/>
+        <mapper resource="com/jlsoft/form/scm/htgl/ghht/sql/ghht.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cxgl/cxzc/sql/cxzc.xml"/>
+		<mapper resource="com/jlsoft/form/scm/bbgl/spjxc/sql/spxxbl.xml"/>
+		<mapper resource="com/jlsoft/form/scm/bbgl/cmkl/sql/cmkl.xml"/>
+		<mapper resource="com/jlsoft/form/scm/fxgl/fxjs/sql/wldcd.xml"/>
+	
+        <mapper resource="com/jlsoft/form/scm/cgjs/jxwjs/sql/jxwjs.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/jsdjd/sql/jsdjd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/gysmxz/sql/gyswlmxz.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cxgl/khyhd/sql/khyhi.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fwgl/fwd/sql/fwd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fwgl/fwd/sql/shdj.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fwgl/shd/sql/shgd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/sfh/sql/cmbr.xml"/> 
+        <mapper resource="com/jlsoft/form/scm/ccgl/sfh/sql/dsfhqk.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/kcd/sql/cmkc.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/yhd/sql/cxkhyhd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/pdjh/sql/pdqk.xml"/>
+        <mapper resource="com/jlsoft/form/scm/lsgl/lsdjd/sql/lsdjd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/syd/sql/syd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/projects/tecno/ccgl/syd/sql/cgfydj.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cgjs/jspkd/sql/jspkd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/fxgl/grwlz/sql/grwlz.xml"/>
+        <mapper resource="com/jlsoft/form/scm/lsgl/khcyd/sql/khcyd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/xsjs/whfxd/sql/whfxd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/xsjs/fpsqd/sql/xsfpsqd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/xsjs/fpsqd/sql/xsfp.xml"/>
+	<mapper resource="com/jlsoft/form/scm/xsjs/fpsqd/sql/cxfpkpqk.xml"/>
+        <mapper resource="com/jlsoft/framework/admin/scm/jcdy/sql/defineszkcslzt.xml"/>
+        <mapper resource="com/jlsoft/form/scm/ccgl/sfh/sql/djdy.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/gcyhd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/ythwjzl.xml"/>
+        <mapper resource="com/jlsoft/form/scm/cxgl/cxzc/sql/lsjgwj.xml"/>
+        <mapper resource="com/jlsoft/form/scm/bbgl/GYSWJ/sql/gyswj.xml"/>
+        <mapper resource="com/jlsoft/form/scm/xsjs/szphb/sql/szphb.xml"/>
+        <mapper resource="com/jlsoft/form/scm/gcgl/gcscd/sql/gcscd.xml"/>
+	<mapper resource="com/jlsoft/form/scm/gcgl/gcscd/sql/gctsscd.xml"/>
+        <mapper resource="com/jlsoft/framework/admin/scm/jcdy/sql/defineJK.xml"/>
+        
+        <mapper resource="com/jlsoft/form/scm/cggl/tgdhd/sql/tgdhd.xml"/>
+        <mapper resource="com/jlsoft/form/scm/projects/tecno/cxgl/mdjgxxcjb/sql/mdjgxxcjb.xml"/>
+        <mapper resource="com/jlsoft/form/scm/projects/tecno/fwgl/jxshfwdj/sql/jxshfwdj_tecno.xml"/>
+		
+		<mapper resource="com/jlsoft/form/scm/cxgl/hdzt/sql/hdzt.xml"/>
+		<mapper resource="com/jlsoft/form/scm/projects/tecno/fygl/sql/fyys.xml"/>
+		<mapper resource="com/jlsoft/form/scm/projects/tecno/fygl/sql/fybx.xml"/>
+		<mapper resource="com/jlsoft/form/scm/projects/tecno/fygl/sql/qksqd.xml"/>
+		<mapper resource="com/jlsoft/form/scm/ccgl/sfh/sql/spzzcx.xml"/>
+		<mapper resource="com/jlsoft/form/scm/gcgl/gcfxd/sql/gcfxd.xml"/>
+		<mapper resource="com/jlsoft/form/scm/bbgl/ywsjtqbj/sql/ywsjtqbj.xml"/>
+		<mapper resource="com/jlsoft/form/scm/bbgl/spsfc/sql/spsfc.xml"/>
+		<mapper resource="com/jlsoft/form/scm/cggl/gcrkd/sql/gcrkd1.xml"/>
+	<mapper resource="com/jlsoft/form/scm/cggl/gcrkd/sql/gcrkd1.xml"/>
+	<mapper resource="com/jlsoft/form/scm/gcgl/gcdl/sql/gcyt.xml"/>
+	   
+	   <mapper resource="com/jlsoft/form/scm/cggl/cgjh/sql/jsckaqkc.xml"/>
+	   <mapper resource="com/jlsoft/form/scm/bbgl/khwlzz/sql/khwlzz.xml"/>
+	   <mapper resource="com/jlsoft/framework/admin/scm/jcdy/sql/jcdy.xml"/> 
+    </mappers>
+</configuration>

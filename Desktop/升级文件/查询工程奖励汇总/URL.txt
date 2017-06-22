@@ -1,0 +1,7 @@
+D:\project\scmform\src\com\jlsoft\form\scm\gcgl\gcdl\sql\mongo_scm_gcjlhz_columns.xml
+
+D:\project\scmform\src\com\jlsoft\form\scm\gcgl\gcdl\interfaceQuery\queryGCJLHZ.java
+
+D:\project\scmform\web\scm\gcgl\gcdl\search\CXGCJLHZB.html
+
+D:\project\scmform\web\scm\gcgl\gcdl\search\GCJLHZB.js

@@ -1,0 +1,37 @@
+SELECT *
+-- 备份格力正式库的表
+
+   --创建备份表  W_TASK_20170307_0001
+       CREATE TABLE W_TASK_20170307_0001    AS     SELECT * FROM W_TASK WHERE ROWNUM =1  
+     
+     --查询表中的数据条数
+    SELECT count(*) FROM W_LOG_20170307_0002
+     
+    --备份表 W_TASK_20170307_0002
+     CREATE TABLE W_TASK_20170307_0002 as  SELECT * FROM W_TASK
+     
+     
+     
+        --创建备份表  W_LOG_20170307_0001
+       CREATE TABLE W_LOG_20170307_0001    AS   SELECT * FROM W_LOG WHERE ROWNUM =1 ; 
+       
+         --备份表 W_LOG_20170307_0002
+      CREATE TABLE W_LOG_20170307_0002 as  SELECT * FROM W_LOG
+        
+      
+      
+      --创建备份表    W_TASKYWGL_20170307_0001
+       CREATE TABLE W_TASKYWGL_20170307_0001    AS       SELECT * FROM W_TASKYWGL WHERE ROWNUM =1  
+     
+     --备份表 W_TASKYWGL_20170307_0002
+      CREATE TABLE W_TASKYWGL_20170307_0002 as  SELECT * FROM W_TASKYWGL
+   
+   
+   
+   --删除表中的数据   
+       DELETE W_TASK_20170307_0001 
+       
+       
+       select * from W_TASK_20170307_0001
+      
+     

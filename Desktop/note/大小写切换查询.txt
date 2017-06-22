@@ -1,0 +1,10 @@
+ 
+oracle≤È—Ø
+<if test="SPMC != null">
+      
+     	 AND (Upper(B.spxx04) like Upper('%'||#{SPMC}||'%') or Upper(B.spxx02) like Upper('%'||#{SPMC}||'%') or Upper(B.SPPYM) like Upper('%'||#{SPMC}||'%'))  
+      </if>
+
+
+mongo≤È—Ø
+format='{ "$or" : [ {"SPMC" : { "$regex" : "#SPMC#","$options":"i"}}, {"SPBM" : { "$regex" : "#SPMC#","$options":"i"}}]}'

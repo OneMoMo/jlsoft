@@ -1,0 +1,15 @@
+<dt class="width_10"><b>流转人员：</b></dt>
+    	<dd class="width_30"><div id="d_RY" class="select width_20"></div></dd></li>
+
+
+
+
+"RY" : {
+        "jlid" : "JLMultiSelect",
+        "sqlid" : "GCLZRY.selectLZRY",
+        "resource" : "scmworkflow",
+        "param" : "",
+        "workflow" : {
+            "lzry" : true
+        }
+    },

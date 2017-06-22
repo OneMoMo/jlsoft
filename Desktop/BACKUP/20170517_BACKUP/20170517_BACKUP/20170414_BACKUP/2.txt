@@ -1,0 +1,199 @@
+CREATE OR REPLACE VIEW VIEW_CXFPKPQK AS
+SELECT A.GSXX01,
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC,
+       8 DJLX,
+       A.WLDW01,
+       W.WLDW02 KHMC,
+       A.BM01 XS_BM01,
+       B.BM02 XSBMMC,
+       A.PFD30 KSRQ,
+       A.PFD30 JSRZ,
+       A.PFD51 CWRQ,
+       (CASE
+         WHEN W.FLKPFS = 1 THEN
+          A.PFD09
+         ELSE
+          (A.PFD09 + A.PFD10)
+       END) YKFPJE,
+       (CASE
+         WHEN (SELECT SUM(PFDI02 * PFDI41)
+                 FROM PFDITEM
+                WHERE PFD01 = A.PFD01
+                  AND GSXX01 = A.GSXX01) = 0 THEN
+          0
+         ELSE
+          (CASEVIEW_CXFPKPQK
+         WHEN W.FLKPFS = 1 THEN
+          (SELECT SUM(PFDI02 * PFDI41 * (1 - PFDI15) - PFDI07)
+             FROM PFDITEM
+            WHERE PFD01 = A.PFD01
+              AND GSXX01 = A.GSXX01)
+         ELSE
+          (SELECT SUM(PFDI02 * PFDI41 * (1 - PFDI15))
+             FROM PFDITEM
+            WHERE PFD01 = A.PFD01
+              AND GSXX01 = A.GSXX01)
+       END) END) YKFP,
+
+       (CASE
+          WHEN (SELECT SUM(PFDI02 * PFDI41)
+                  FROM PFDITEM
+                 WHERE PFD01 = A.PFD01
+                   AND GSXX01 = A.GSXX01) = 0 THEN
+           (CASE
+          WHEN W.FLKPFS = 1 THEN
+           A.PFD09
+          ELSE
+           A.PFD09 + A.PFD10
+        END) ELSE(CASE
+         WHEN W.FLKPFS = 1 THEN
+          (A.PFD09 -
+          (SELECT SUM(PFDI02 * PFDI41 * (1 - PFDI15) - PFDI07)
+              FROM PFDITEM
+             WHERE PFD01 = A.PFD01
+               AND GSXX01 = A.GSXX01))
+         ELSE
+          (A.PFD09 + A.PFD10 -
+          (SELECT SUM(PFDI02 * PFDI41 * (1 - PFDI15))
+              FROM PFDITEM
+             WHERE PFD01 = A.PFD01
+               AND GSXX01 = A.GSXX01))
+       END) END) WKFP,
+      (SELECT SUM(FPDCI03)
+              FROM PFDITEM P,FPDCITEM F
+             WHERE P.PFD01 = A.PFD01
+               AND P.PFDI01 = F.SKI01
+               AND P.GSXX01 = F.GSXX01
+               AND P.GSXX01 = A.GSXX01
+               AND F.DJLX = 8) KPSL,
+       (SELECT SUM(PFDI08)/SUM(PFDI05)*SUM(FPDCI03)
+              FROM PFDITEM P,FPDCITEM F
+             WHERE P.PFD01 = A.PFD01
+               AND P.PFDI01 = F.SKI01
+               AND P.GSXX01 = F.GSXX01
+               AND P.GSXX01 = A.GSXX01
+               AND F.DJLX = 8) FPCBJE
+  FROM PFD A, WLDW W, BM B
+ WHERE A.WLDW01 = W.WLDW01
+   AND A.BM01 = B.BM01
+   AND A.PFD30 IS NOT NULL
+UNION ALL
+SELECT A.GSXX01,
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC,
+       68 DJLX,
+       A.WLDW01,
+       W.WLDW02 KHMC,
+       A.BM01 XS_BM01,
+       B.BM02 XSBMMC,
+       A.PFBJD05 KSRQ,
+       A.PFBJD05 JSRZ,
+       A.PFBJD05 CWRQ,
+       A.PFBJD10 YKFPJE,
+       (SELECT SUM(PFBJDI04 * FPDCSL)
+          FROM PFBJDITEM
+         WHERE PFBJD01 = A.PFBJD01
+           AND GSXX01 = A.GSXX01) YKFP,
+       (A.PFBJD10 - (SELECT SUM(PFBJDI04 * FPDCSL)
+                       FROM PFBJDITEM
+                      WHERE PFBJD01 = A.PFBJD01
+                        AND GSXX01 = A.GSXX01)) WKFP,
+       (SELECT SUM(FPDCI03)
+              FROM FPDCITEM F,PFBJDITEM J
+             WHERE J.PFBJDI01 = F.SKI01
+               AND J.PFBJD01 = A.PFBJD01
+               AND J.GSXX01 = A.GSXX01
+               AND F.GSXX01 = A.GSXX01
+               AND F.DJLX = 68) KPSL,
+       0 FPCBJE
+  FROM PFBJD A, WLDW W, BM B
+ WHERE A.WLDW01 = W.WLDW01
+   AND A.BM01 = B.BM01
+   AND A.PFBJD05 IS NOT NULL
+UNION ALL
+   SELECT A.GSXX01,
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC,
+       24 DJLX,
+       A.WLDW01,
+       W.WLDW02 KHMC,
+       A.BM01 XS_BM01,
+       B.BM02 XSBMMC,
+       A.FLD06 KSRQ,
+       A.FLD06 JSRZ,
+       A.FLD19 CWRQ,
+       (CASE
+         WHEN W.FLKPFS = 1 THEN
+          0
+         ELSE
+          -1 * (SELECT SUM(FLDI03)
+                   FROM FLDITEM
+                  WHERE FLD01 = A.FLD01
+                    AND GSXX01 = A.GSXX01
+                    AND FLDM01 NOT IN (SELECT FLDM01 FROM FLDM WHERE KPBJ = 1))
+       END) YKFPJE,
+       (CASE
+         WHEN W.FLKPFS = 1 THEN
+          0
+         ELSE
+          -1 * (SELECT SUM(YKPJE)
+                  FROM FLDITEM
+                 WHERE FLD01 = A.FLD01
+                   AND GSXX01 = A.GSXX01
+                   AND FLDM01 NOT IN (SELECT FLDM01 FROM FLDM WHERE KPBJ = 1))
+       END) YKFP,
+       (CASE
+         WHEN W.FLKPFS = 1 THEN
+          0
+         ELSE
+          -1 * (SELECT SUM(FLDI03 - YKPJE)
+                FROM FLDITEM
+                 WHERE FLD01 = A.FLD01
+                   AND GSXX01 = A.GSXX01
+                   AND FLDM01 NOT IN (SELECT FLDM01 FROM FLDM WHERE KPBJ = 1))
+       END) WKFP,0 KPSL,0 FPCBJE
+  FROM FLD A, WLDW W, BM B
+ WHERE A.WLDW01 = W.WLDW01
+   AND A.BM01 = B.BM01
+   AND A.FLD06 IS NOT NULL
+   AND EXISTS
+ (SELECT 1
+          FROM FLDITEM
+         WHERE FLD01 = A.FLD01
+           AND GSXX01 = A.GSXX01
+           AND FLDM01 NOT IN (SELECT FLDM01 FROM FLDM WHERE KPBJ = 1))
+UNION ALL
+SELECT A.GSXX01,
+       (SELECT GSXX02 FROM GSXX WHERE GSXX01 = A.GSXX01) GSMC,
+       10 DJLX,
+       NULL WLDW01,
+       NULL WLDW02,
+       A.BM01 XS_BM01,
+       B.BM02 XSBMMC,
+       A.LSD07 KSRQ,
+       A.LSD07 JSRZ,
+       A.LSD07 CWRQ,
+       A.LSD10 YKFPJE,
+       (SELECT SUM(LSDI02 * FPDCSL)
+          FROM LSDITEM
+         WHERE GSXX01 = A.GSXX01
+           AND LSD01 = A.LSD01) YKFP,
+       (A.LSD10 - (SELECT SUM(LSDI02 * FPDCSL)
+                     FROM LSDITEM
+                    WHERE GSXX01 = A.GSXX01
+                      AND LSD01 = A.LSD01)) WKFP,
+       (SELECT SUM(FPDCI03)
+              FROM LSDITEM P,FPDCITEM F
+             WHERE P.LSD01 = A.LSD01
+               AND P.LSDI01 = F.SKI01
+               AND P.GSXX01 = F.GSXX01
+               AND P.GSXX01 = A.GSXX01
+               AND F.DJLX = 10) KPSL,
+       (SELECT SUM(LSDI08)/SUM(LSDI05)*SUM(FPDCI03)
+              FROM LSDITEM P,FPDCITEM F
+             WHERE P.LSD01 = A.LSD01
+               AND P.LSDI01 = F.SKI01
+               AND P.GSXX01 = F.GSXX01
+               AND P.GSXX01 = A.GSXX01
+               AND F.DJLX = 10) FPCBJE
+  FROM LSD A, BM B
+ WHERE A.BM01 = B.BM01
+   AND A.LSD07 IS NOT NULL;

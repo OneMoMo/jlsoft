@@ -1,0 +1,125 @@
+<div class="jl_screening_main"> 
+<ul id="MONGO_GCDLD_DLXH">
+<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>使用单位</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="SYDW" />
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>工程登录单号</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="GCDLD"/>
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>用户姓名</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="YHXM" />
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>用户电话</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="YHDH"/>
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+			<dl class="w12">
+				<dt class="w04"><b>申报时间</b></dt>
+				<dd class="w08">
+					<div id="d_SBRQQ" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+	<li class="w04">
+		<dl class="w12">
+			<dt class="w04">————</dt>
+			<dd class="w08">
+				<div id="d_SBRQE" class="w12"></div>
+			</dd>
+		</dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>使用单位地址</b></dt>
+	    <dd class="w08">
+	      	<input type="text" class="w12" name="SYDWDZ"/>
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>距离日期</b></dt>
+	    <dd class="w07">
+	      	<div class="w12" id="d_SHRQ"/>
+	      	<dt class="w01 tl" title="天" jlang>天</dt>
+	    </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>条件类型</b></dt>
+	    <dd class="w08">
+	      	<div class="w12" id="d_TJLX"/>
+	    </dd>
+	  </dl>
+	</li>
+</ul>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	var form = JL.getCurrentForm();
+	var configData = JL.getJLconf({"DJLX":"GCDLD_XH"});
+	var flag = "0";
+	$(configData).each(function(i,n){
+		if(n.JLCO08 == "DLXH_XS"){
+			//ExtensionDays 延期天数
+			flag = n.JLCO04;
+		}
+	});
+	
+	
+	//DLXH_XS
+	$("ul#MONGO_GCDLD_DLXH input[name='SYDW']").val(form.find("input[name='SYDW']").val());
+	$("ul#MONGO_GCDLD_DLXH input[name='YHDH']").val(form.find("input[name='YHDH']").val());
+	$("ul#MONGO_GCDLD_DLXH input[name='SYDWDZ']").val(form.find("input[name='SYDWDZ']").val());
+	
+	
+	if("0" == flag){
+		//用户电话和使用单位地址不自动带出
+		$("ul#MONGO_GCDLD_DLXH input[name='YHDH']").val("");
+		$("ul#MONGO_GCDLD_DLXH input[name='SYDWDZ']").val("");
+	}
+	JL.initQueryPlugin($("ul#MONGO_GCDLD_DLXH"), {
+		"SBRQQ" : {
+			"jlid" : "JLDate"
+		},
+		"SBRQE" : {
+			"jlid" : "JLDate"
+		},
+		/* 差异化需求 */
+		"SHRQ" : {
+		      "jlid":"JLSelect",
+		      /* "default" : "90", */
+			  "options":{"365":"365","90":"90"}
+		 },
+		"TJLX" : {
+			"jlid" : "JLRadio",
+			"default" : "0",
+			"options": {"0":"或者","1":"并且"}
+		}
+	});
+	
+	commonQuery.query();
+});
+</script>

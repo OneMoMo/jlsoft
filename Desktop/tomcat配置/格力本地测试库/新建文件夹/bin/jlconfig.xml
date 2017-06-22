@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JLDATA>
+<PARAMDATA parameter_name="DB_NAME" parameter_value="ORACLE"/>
+<PARAMDATA parameter_name="CN_IP" parameter_value="127.0.0.1"/>
+<PARAMDATA parameter_name="CN_PORT" parameter_value="1521"/>
+<PARAMDATA parameter_name="CN_SERVER_NAME" parameter_value="v9_new"/>
+<PARAMDATA parameter_name="CN_USER" parameter_value="SCMZC_JLSOFT"/>
+<PARAMDATA parameter_name="CN_PWD" parameter_value="AAAA"/>
+<!--<PARAMDATA parameter_name="CURRENT_CONNECTION_POOL_LX" parameter_value="JBOSS_POOL"/>-->
+<PARAMDATA parameter_name="CURRENT_CONNECTION_POOL_LX" parameter_value="NO_POOL"/>
+<PARAMDATA parameter_name="POOL_JNDI" parameter_value="JLSERV"/>
+<PARAMDATA parameter_name="OTHER_CN_URL" parameter_value=""/>
+<PARAMDATA parameter_name="OTHER_CN_CLS_NAME" parameter_value=""/>
+<PARAMDATA parameter_name="OTHER_CN_USER" parameter_value=""/>
+<PARAMDATA parameter_name="OTHER_CN_PWD" parameter_value=""/>
+<PARAMDATA parameter_name="RCL_TIME" parameter_value="01:30"/>
+<PARAMDATA parameter_name="CN_ROW_SIZE" parameter_value="0"/>
+<PARAMDATA parameter_name="QUERY_LOG" parameter_value=""/>
+<PARAMDATA parameter_name="QUERY_CONDITION" parameter_value=""/>
+<PARAMDATA parameter_name="CHECK_HALF_WORD" parameter_value="1"/>
+</JLDATA>

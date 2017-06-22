@@ -1,0 +1,79 @@
+-- Create table
+create table GC_HTTZD
+(
+  gsxx01 VARCHAR2(8) not null,
+  dld01  VARCHAR2(50) not null,
+  tzd01  VARCHAR2(50) not null,
+  tzd02  VARCHAR2(50) not null,
+  tzd03  VARCHAR2(30) not null,
+  tzd04  DATE,
+  tzd05  VARCHAR2(500),
+  tzd06  VARCHAR2(500),
+  tzd07  VARCHAR2(20) not null,
+  tzd08  VARCHAR2(50) not null,
+  tzd09  DATE not null,
+  tzd10  VARCHAR2(200),
+  tzd11  VARCHAR2(50),
+  tzd12  VARCHAR2(200) not null,
+  tzd13  VARCHAR2(50)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table GC_HTTZD
+  is '合同调整单';
+-- Add comments to the columns 
+comment on column GC_HTTZD.gsxx01
+  is '公司代码--GSXX01 --制单';
+comment on column GC_HTTZD.dld01
+  is '登录单号--GCDLD01 --制单';
+comment on column GC_HTTZD.tzd01
+  is '合同调整单号--HTTZD01 -- 制单';
+comment on column GC_HTTZD.tzd02
+  is '制单人--ZDR--制单';
+comment on column GC_HTTZD.tzd03
+  is '制单人编号--ZDRDM--制单';
+comment on column GC_HTTZD.tzd04
+  is '合同时间--HTSJ--制单';
+comment on column GC_HTTZD.tzd05
+  is '使用单位--SYDW';
+comment on column GC_HTTZD.tzd06
+  is '使用单位详细地址--SYDWDZ--审核';
+comment on column GC_HTTZD.tzd07
+  is '销售方式--HTXSFS';
+comment on column GC_HTTZD.tzd08
+  is '审核人--SHR--审核';
+comment on column GC_HTTZD.tzd09
+  is '审核时间--SHSJ--审核';
+comment on column GC_HTTZD.tzd10
+  is '意见内容--YJNR--审核';
+comment on column GC_HTTZD.tzd11
+  is '单据状态--DJZT--审核';
+comment on column GC_HTTZD.tzd12
+  is '经销商名称--JXSMC ';
+comment on column GC_HTTZD.tzd13
+  is '工程用途 -- GCYT';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table GC_HTTZD
+  add constraint PK_GC_HTTZD primary key (GSXX01, TZD01)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

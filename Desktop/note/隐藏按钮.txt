@@ -1,0 +1,2 @@
+	 //Òþ²ØÉ¾³ý°´Å¥
+	makeGCJDGJ.hideButton("jlDeleteForm");

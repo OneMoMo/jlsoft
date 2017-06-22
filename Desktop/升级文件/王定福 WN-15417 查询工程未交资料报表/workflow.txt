@@ -1,0 +1,11 @@
+--workflow修改   WN-15417 工程管理模块增加查询工程未交资料  王定福 2017-05-15
+
+insert into w_menuview (VIEW01, VIEW02, VIEW03, VIEW04, VIEW05, VIEW06, VIEW07, VIEW08, VIEW09, VIEW10, VIEW11, MENU01, YXBJ)
+values ('0824', '查询工程未交资料报表', '08', 2, 1, 1, 0, 0, null, 0, 28, '0824', 0);
+
+insert into w_czymenu (VIEW01, GW01, CZY01)
+values ('0824', -1, null);
+
+insert into w_menu (MENU01, MENU02)
+values ('0824', '{"namespace":"MONGO_CXGCWJZL","sqlid":"queryGCWJZL","dir":"scm/gcgl/gcdl/search"}');
+

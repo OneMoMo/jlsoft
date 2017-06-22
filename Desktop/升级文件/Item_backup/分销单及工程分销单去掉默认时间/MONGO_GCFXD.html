@@ -1,0 +1,83 @@
+<div class="jl_screening_main"> 
+<ul id="MONGO_GCFXD">
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>工程登陆单号</b></dt>
+	    <dd class="w08">
+	      	<input type="text" name="GCDLD01" class="w12" />
+	      </dd>
+	  </dl>
+	</li>
+	<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>工程要货单号</b></dt>
+	    <dd class="w08">
+	      	<input type="text" name="GCYHD01" class="w12" />
+	      </dd>
+	  </dl>
+	</li>
+<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>使用单位</b></dt>
+	    <dd class="w08">
+	      	<input type="text" name="SYDW"  class="w12"/>
+	    </dd>
+	  </dl>
+	</li>
+<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>经销商</b></dt>
+	    <dd class="w08">
+	      	<input type="text" name="JXSMC" class="w12" />
+	      </dd>
+	  </dl>
+	</li>
+<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>购买单位</b></dt>
+	    <dd class="w08">
+	      	<input type="text" name="GMDW" class="w12" />
+	    </dd>
+	  </dl>
+	</li>
+<li class="w04">
+	  <dl class="w12">
+	    <dt class="w04"><b>用户电话</b></dt>
+	    <dd class="w08">
+	      	<input type="text" name="YHDH"  class="w12"/>
+	    </dd>
+	  </dl>
+	</li>
+<li class="w04">
+			<dl class="w12">
+				<dt class="w04"><b>审核日期</b></dt>
+				<dd class="w08">
+					<div id="d_PFRQQ" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+	<li class="w04">
+		<dl class="w12">
+			<dt class="w04">————</dt>
+			<dd class="w08">
+				<div id="d_PFRQE" class="w12"></div>
+			</dd>
+		</dl>
+	</li>
+</ul>
+<script type="text/javascript">
+	JL.initQueryPlugin($("ul#MONGO_GCFXD"), {
+		"PFRQQ" : {
+			"jlid" : "JLDate",
+			//"format" : "yyyy-mm-dd hh:ii:ss",
+			//"startDate" : "ZDRQ",
+			//"defaultDate" : JL.formatDate(0, 1)+" 00:00:00"
+		},
+		"PFRQE" : {
+			"jlid" : "JLDate",
+			//"format" : "yyyy-mm-dd hh:ii:ss",
+			//"startDate" : "ZDRQ",
+			//"defaultDate" : JL.formatDate(0, 1)+" 23:59:59"
+		},
+	});
+</script>

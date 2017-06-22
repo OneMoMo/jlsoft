@@ -1,0 +1,70 @@
+<div class="jl_screening_main">
+<ul id="FXD_KHYHDH">
+	<li class="w12">
+	  <dl class="w12">
+	    <dt class="w01"><b>客户要货单</b></dt>
+	    <dd class="w03">
+	      	<input type="text" name="KHYHDH" class="w12"/>
+	    </dd>
+	    <dt class="w01" title="审核时间起" align=right>审核时间</dt>
+         <dd class="w03"><div class="w12" id="d_ZDSJQ"></div></dd>
+         <dt class="w01" title="审核时间止" align=right>——</dt>
+         <dd class="w03"><div class="w12" id="d_ZDSJZ"></div></dd>
+       </dl>
+     </li>
+        <li class="w04">
+	  <dl class="w12">
+	     <dt class="w03"><b>客户</b></dt>
+	    <dd class="w09">
+	      	 <input type="text" name="KH" class="w12"/>
+	    </dd>
+	  </dl>
+	</li>
+	 <li class="w04">
+	  <dl class="w12">
+	     <dt class="w03"><b>销售方式</b></dt>
+	    <dd class="w09">
+	      	<div class="w12" id="d_FLFS" class="w12"></div>·
+	    </dd>
+	  </dl>
+	</li>
+</ul>
+</div>
+
+<script type="text/javascript">
+  $("ul#FXD_KHYHDH").delegate("[name='KHYHDH']", "keydown", function (event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode == 13) {
+      commonQuery.query();
+    }
+  });
+  $("ul#FXD_KHYHDH").delegate("[name='KH']", "keydown", function (event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode == 13) {
+      commonQuery.query();
+    }
+  });
+  JL.initQueryPlugin($("ul#FXD_KHYHDH"), {
+    "ZDSJQ":{
+    	"jlid" : "JLDate",
+    	//"defaultDate" : 0
+
+   },
+    "ZDSJZ":{
+    	"jlid" : "JLDate",
+    	//"defaultDate" : 0
+
+    },
+    
+    "FLFS":{"jlid" : "JLSelect",
+		"placeholder" : "请选择销售方式",
+        "param" : {"XSLX_F":"1,3"},
+    	"sqlid" : "FLFS.FLFSXX",
+		"resource": "scmform",
+		"readonly":false,
+		"listener" : {
+			"click" : function(data){
+			}
+		}}
+    });
+</script>

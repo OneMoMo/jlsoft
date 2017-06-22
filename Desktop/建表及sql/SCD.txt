@@ -1,0 +1,94 @@
+-- Create table
+create table GC_SCD
+(
+  scdh01 VARCHAR2(50) not null,
+  gsxx01 VARCHAR2(4) not null,
+  dld01  VARCHAR2(50) not null,
+  scd01  VARCHAR2(20) not null,
+  scd02  VARCHAR2(50) not null,
+  scd03  VARCHAR2(200),
+  scd04  VARCHAR2(500),
+  scd05  VARCHAR2(500),
+  scd06  NUMBER(16,4),
+  scd07  NUMBER(16,4) not null,
+  scd08  VARCHAR2(20),
+  scd09  VARCHAR2(50),
+  scd10  VARCHAR2(500),
+  scd11  VARCHAR2(20) not null,
+  scd12  VARCHAR2(20) not null,
+  scd13  DATE not null,
+  scd14  VARCHAR2(20) not null,
+  scd15  VARCHAR2(20) not null,
+  scd16  DATE not null,
+  scdbj  NUMBER(4) not null
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table GC_SCD
+  is '工程收差单';
+-- Add comments to the columns 
+comment on column GC_SCD.scdh01
+  is '收差单号  唯一标识符';
+comment on column GC_SCD.gsxx01
+  is '公司信息';
+comment on column GC_SCD.dld01
+  is '工程登录单号';
+comment on column GC_SCD.scd01
+  is '经销商结算单号 -- JXSJSD01';
+comment on column GC_SCD.scd02
+  is '经销商名称 -- JXSMC';
+comment on column GC_SCD.scd03
+  is '使用单位--SYDW';
+comment on column GC_SCD.scd04
+  is '工程描述--GCMS';
+comment on column GC_SCD.scd05
+  is '意见--SHYJ';
+comment on column GC_SCD.scd06
+  is '返还金额-- FHJE';
+comment on column GC_SCD.scd07
+  is '收差金额-- SCJE';
+comment on column GC_SCD.scd08
+  is '工程类型 -- GCLX';
+comment on column GC_SCD.scd09
+  is '工程用途 -- GCYT';
+comment on column GC_SCD.scd10
+  is '备注 >JSBZ>制单';
+comment on column GC_SCD.scd11
+  is '申报人--SBR';
+comment on column GC_SCD.scd12
+  is '申报人编码--SBRDM';
+comment on column GC_SCD.scd13
+  is '申报日期--SBSJ';
+comment on column GC_SCD.scd14
+  is '批复人--PFR';
+comment on column GC_SCD.scd15
+  is '批复人编码--PFRDM';
+comment on column GC_SCD.scd16
+  is '批复时间--PFSJ';
+comment on column GC_SCD.scdbj
+  is '收差单标记   0 收差单 1 特殊收差';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table GC_SCD
+  add constraint PK_GC_SCD primary key (SCDH01)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

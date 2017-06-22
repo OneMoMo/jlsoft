@@ -1,0 +1,23 @@
+
+
+{
+  "bdbh" : 1239,
+  "bdmc" : "´®ÂëËø¶¨/½âËø",
+  "collection" : "SCM_CMSDJS",
+  "jyl" : "makeCMSDJS",
+  "oabj" : true,
+  "pad" : "",
+  "pc" : "scm/ccgl/cmgl/makeCMSDJS.html",
+  "phone" : "",
+  "template" : ""
+}
+
+
+
+{
+  "detail" : "{}",
+  "jlbh" : 41,
+  "key" : "",
+  "mainkeys" : "[\"CM\",\"SDBJ\"]",
+  "mainsheet" : "Sheet1"
+}

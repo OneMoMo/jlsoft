@@ -1,0 +1,1 @@
+update  w_jk set jk03 = '{"name":"1024","field":["bdbh","jlbh","WLDW01","XS_BM01","GSXX01","YSLX","WLDWMC","BMMC","CWRQ","BZ","BZ01","ZDRMC","ZDRQ","SPLB.SKJE","SPLB.PJHM","SPLB.YHZH01","SPLB.YHZH","SPLB.CDR","SPLB.BSR","SPLB.CPRQ","SPLB.CPRQC","SPLB.CPRZH","FKYH"]}}' WHERE JK01 = '90491'

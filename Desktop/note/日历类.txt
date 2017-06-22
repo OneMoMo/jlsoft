@@ -1,0 +1,8 @@
+ Calendar cal=Calendar.getInstance();//使用日历类
+  int year=cal.get(Calendar.YEAR);//得到年
+  int month=cal.get(Calendar.MONTH)+1;//得到月，因为从0开始的，所以要加1
+  int day=cal.get(Calendar.DAY_OF_MONTH);//得到天
+  int hour=cal.get(Calendar.HOUR);//得到小时
+  int minute=cal.get(Calendar.MINUTE);//得到分钟
+  int second=cal.get(Calendar.SECOND);//得到秒
+  System.out.println("结果："+year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second);

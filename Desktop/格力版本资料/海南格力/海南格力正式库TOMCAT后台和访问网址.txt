@@ -1,0 +1,5 @@
+海南正式环境的监控程序，可以查看日志
+http://59.50.104.198:253/probe_scm/
+http://59.50.104.198:253/probe_scmform/
+jlsoft
+jlsoft_app_2016

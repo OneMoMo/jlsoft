@@ -1,0 +1,61 @@
+<div class="jl_screening_main">
+	<ul id="queryYSZXQK">
+	  <li class="w04">
+			<dl class="w12">
+				<dt class="w03" title="预算期间" align=right>预算期间</dt>
+				<dd class="w09">
+					<div id="d_YSQJ_S" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+		<li class="w04">
+			<dl class="w12">
+				<dt class="w03" align=right>————</dt>
+				<dd class="w09">
+					<div id="d_YSQJ_E" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+		<li class="w04">
+			<dl class="w12">
+				<dt class="w03" title="费用项目" align=right>费用项目</dt>
+				<dd class="w09">
+					<div id="d_FYXM" class="w12"></div>
+				</dd>
+			</dl>
+		</li>
+		<li class="w04">
+			<dl class="w12">
+				<dt class="w03" title="费用部门" align=right>费用部门</dt>
+				<dd class="w09">
+					<div id="d_BMMC" class="w12"></div>
+				</dd>
+			</dl>
+		</li>		
+	</ul>
+</div>
+<script type="text/javascript">
+	JL.initQueryPlugin($("ul#queryYSZXQK"), {
+	    "FYXM": {
+	    	"jlid" : "JLSelect",
+			"sqlid" : "FYYS.FYYS_FYLX",
+			"resource" : "scmform",
+			"param" : { "GSXX01" : userInfo["PCRM_GSXX01"]}
+	    } , 
+		"BMMC" : {
+			"jlid" : "JLSelect",
+			"sqlid" : "FYYS.FYYS_FYBM",
+			"resource" : "scmform",
+			"param" : { "GSXX01" : userInfo["PCRM_GSXX01"]}
+		}
+    });
+	JL.initPlugIn($("ul#queryYSZXQK #d_YSQJ_S"), "YSQJ_S", {
+		"jlid" : "JLDate",
+		"format": "yyyy-mm"
+	});
+	JL.initPlugIn($("ul#queryYSZXQK #d_YSQJ_E"), "YSQJ_E", {
+		"jlid" : "JLDate",
+		"format": "yyyy-mm"
+	});
+		
+</script>
